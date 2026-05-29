@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://amatsuzero.github.io/LastStand/'
 locale = 'zh-cn'
 title = 'Last Stand'
 theme = 'PaperMod'
