@@ -1,0 +1,7 @@
+baseURL = 'https://example.org/'
+locale = 'zh-cn'
+title = 'Last Stand'
+theme = 'PaperMod'
+
+[markup.goldmark.renderer]
+unsafe = true
