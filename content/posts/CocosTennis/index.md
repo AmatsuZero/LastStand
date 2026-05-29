@@ -44,15 +44,19 @@ categories = ['iOS 开发']
 1. 腾讯体育是釆买了 WTA 以及澳网 OPTA 数据的版权，相比原来的图文直播，3D 直播显然能给用户提供更好的临场感；
 2. 与篮球、足球相比，网球球员较少，场面没有那么复杂，不需要投入很多的额外精力进行性能优化（虽然我们后面还是做了一些）；
 
-实际上国外已经有这种动画直播了，类似澳网的：
+实际上国外已经有这种动画直播了：
 
-![澳网3D动画直播效果展示](australian-open-3d-broadcast.webp)
+**澳网 3D 动画直播：**
 
-{{youtube bSfcTeEvDpc}}
+{{< youtube bSfcTeEvDpc >}}
 
-索尼体育[直播方案](https://www.sony.com/en/SonyInfo/technology/stories/entries/20240411/beyondsports/)：
+**索尼体育 [NFL 直播方案](https://www.sony.com/en/SonyInfo/technology/stories/entries/20240411/beyondsports/)：**
 
-![索尼体育NFL赛事3D直播方案](sony-sports-nfl-broadcast.webp)
+{{< youtube AM3wlgaFSmU >}}
+
+**ESPN：**
+
+{{< youtube UQLmOWNUpK0 >}}
 
 但是上述方案成本是很高的，先不说 3D 建模是单独找到团队做的，根据他们[介绍](https://www.theverge.com/2025/1/15/24344285/australian-open-livestreaming-wii-sports-style-tennis-matches)，他们的动作都是使用专业摄像头捕捉的，成本上我们这个创新项目就无法接受。
 
@@ -135,7 +139,7 @@ categories = ['iOS 开发']
 
 绑定完成后，我们把任务模型导出，这个模型就已经预置了绑定的动作了。
 
-![绑定动作后的模型导出流程](model-export-process.webp)
+![绑定动作后的模型导出流程](model-export-process.gif)
 
 但是有些动作这个网站没提供，像是网球挥拍、发球等等，我们从哪里搞呢。
 
@@ -151,6 +155,8 @@ categories = ['iOS 开发']
 所以我们还是决定，预生成一些专业动作，而不是即时生成。
 
 我们探索了一些，发现可以利用机器学习来理解视频，进而生成专业的动作，比如这个[项目](https://github.com/TLILIFIRAS/Tennis-Video-Analysis-System-With-YOLO-Pytorch-and-CNN/tree/main)。
+
+{{<youtube NypyFoQc-EE>}}
 
 我们也跟混元和 IEG 的一些专业团队也咨询过，了解到混元内部已经有了数字人（HunYuan-MoCap）项目，他们直接上传视频，然后直接就能导出模型动作。他们识别的精度很高，我们利用油管上一些网球的专业比赛视频，生成了一些列的动作。HunYuan-MoCap 支持更精细的识别，带上手部识别。我们最后决定使用这个项目来创建我们的动作库。
 
