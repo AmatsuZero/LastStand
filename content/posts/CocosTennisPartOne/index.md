@@ -1,9 +1,9 @@
 +++
 date = '2026-05-29T08:54:50+08:00'
 draft = true
-title = '3D球场项目'
-tags = ['3D', 'SceneKit', 'Cocos']
-categories = ['iOS 开发']
+title = '3D球场项目 (一)'
+tags = ['3D', 'SceneKit', 'Cocos', 'Three.js', 'WebGPU']
+categories = ['iOS 开发', '3D']
 +++
 ## 介绍
 
@@ -168,14 +168,75 @@ categories = ['iOS 开发']
 
 这就意味着我们从网站导出动作模型后，还要在 Blender 中进行微调。完整的流程如下：
 
-![动作资产从视频到模型的完整工作流程](motion-asset-workflow.webp)
+![flow](motion-asset-workflow.webp)
 
 ### 3D 引擎方案
 
-项目探索阶段我们一直使用的是 iOS 的 SceneKit，考虑到这个项目最后还是要在双端落地。我们需要探索一下需要使用什么框架。
+项目探索阶段我们一直使用的是 iOS 的 **SceneKit**，考虑到这个项目最后还是要在双端落地。我们需要探索一下需要使用什么框架。
 
-我们看了一下蔚来汽车 app，他们的换电站是 3D 展示的。通过拆包，发现他们用的是 Unity。
+我们看了一下其他 APP，比如蔚来汽车 app，他们的换电站是 3D 展示的：
 
 ![蔚来汽车App使用Unity展示3D换电站](nio-app-3d-unity.webp)
 
-## 项目实施
+通过抓包，我们发现他们使用的是 Unity：
+
+![网络抓包分析](network-packet-capture.png)
+
+内部拆包，发现他们内部打包了 ab 包, 更加印证了我们的猜测：
+
+![AB包拆包分析](ab-bundle-unpack.png)
+
+>  AB 包 （Unity AssetBundle）， 是 Unity 游戏引擎的一种资源打包格式，用于将游戏内的各种资源（如模型、贴图、音频等）打包成一个独立的文件。
+>>
+> **特点**
+>>
+> • 可以高效地管理和分发游戏资源，减小包体大小，并实现动态加载和卸载。
+>>
+> • 允许开发者进行资源的热更新。
+>>
+> •通常在Unity 编辑器中创建和使用
+
+我们当然来调研了其他团队的方案，像是手Q 那边使用的虚幻方案，但是考虑到包体积、授权成本、学习成本、项目期限，我们放弃了使用 UE 或者 Unity 的方案，转而在想使用不需要额外增加包体积，我们又很快能上手的方案。
+
+视频团队之前研究过 WebGL，在 iOS 26 上，我们还能开启 WebGPU 的支持，性能更好。我们可以使用 WebView 来引入，对客户端本身来说，不需要引入额外的代码和库，开箱即用。但是也不是完全没有限制因素，根据视频团队的调要，WebGPU 方案有以下限制：
+
+1. GPU不支持对应OpenGL的版本;
+2. Android4.0以下默认不支持;
+3. 厂商定制限制;
+
+检测当前 WebGPU 是否支持 WebGPU 的方式：
+
+1. 浏览器直接访问这个[链接](https://webglreport.com/?v=13 1const)
+2. 通过 JS 检测
+```javascript
+ canvas = document.createElement('canvas');
+ const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+ const gl2 = canvas.getContext('webgl2');
+```
+通过让 WebView 打开测试链接: https://webglsamples.org/aquarium/aquarium.html，视频团队也进行了一下性能测试
+
+| 端 | 设备 | 设备等级 | 测试包版本 | 渲染数量 | 最低FPS |
+| --- | --- | --- | --- | --- | --- |
+| iOS | iPad air 2 | 低端机 | 蓝盾包：9.00.60 build：35509 | 1000 / 3750 / 050 | 50 |
+| iOS | iPhone XS pro max | 中低端机 | 蓝盾包：9.00.55 build：10593 | 4500 | 30 |
+| Andoird | VIVO S1 Pro | 低端机 3档 | release包 | 500 / 1000 | 45~57 / 35~42 |
+| Andoird | 多个机器表现一致 | 超低端 | release包 | 500 | 加载不出来 |
+
+看上面的性能数据，WebView 方案表现尚可。Three.js 是基于 WebGL/WebGPU 的开源 JavaScript 3D 库，这个方案似乎不错。
+
+但我们还有一个选择，就是使用 Cocos。我们之前因为引入视频弹幕功能的原因，已经引入了这一引擎（关于这部分，我们下一部分再讲），只不过由于弹幕只是用到了 2D 能力，把 3D 相关功能给阉割掉了，引擎本身是支持 3D 的。我们如果使用 Cocos，只需要把 3D 功能加回来，至于带来的包大小变更，由于只有点纯代码变化，几乎可以忽略不计。
+
+这两个方案都是写 JS，好在我们的前端和客户端同学都有一些这方面的技术储备，切这个方案
+
+这样备选方案就剩下了两个，一个是 ** Three.js **，另一个是 ** Cocos **。我们需要在这两个方案里面做出选择，我们把这两个方案各做了一个 Demo，简单做了一个对比：
+
+| | Three.js（iphone 12） | Cocos 3D（iphone 12） |
+| --- | --- | --- |
+| 演示视频 | ![Three.js Demo](threejs-demo.gif) | ![Cocos 3D Demo](cocos-demo.gif) |
+| 页面创建->模型组件开始加载 | 1337.21ms | 1179ms |
+| 模型组件开始加载->第一帧绘制完成 | 387.00ms | 214ms |
+| FPS | 30 | 60 |
+| 平均内存占用 | 73 MB | 58 MB |
+| 是否支持实时预览、编辑 | 否 | 是 |
+
+从以上对比结果来看，Cocos 在性能、IDE 支持方面都更胜一筹，我们最后决定使用 Cocos 引擎。但是 Cocos 是作为弹幕引擎的一部分导入的，我们势必会有一番修改，这方面我们在下一篇再展开讲了。
