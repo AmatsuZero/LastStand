@@ -1,0 +1,38 @@
+{{- if lt hugo.Version "0.146.0" }}
+{{- errorf "=> hugo v0.146.0 or greater is required for hugo-PaperMod to build " }}
+{{- end -}}
+
+<!DOCTYPE html>
+{{- $theme := site.Params.defaultTheme | default "auto" }}
+{{- if eq $theme "dark" }}
+<html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}" data-theme="dark">
+{{- else if eq $theme "light" }}
+<html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}" data-theme="light">
+{{- else }}
+<html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}" data-theme="auto">
+{{- end }}
+
+<head>
+    {{- partial "head.html" . }}
+</head>
+
+{{- if (or (ne .Kind `page` ) (eq .Layout `archives`) (eq .Layout `search`)) }}
+<body class="list" id="top">
+{{- else }}
+<body id="top">
+{{- end }}
+    {{ partialCached "header.html" . .Page -}}
+    <main class="main">
+        {{- block "main" . }}{{ end }}
+    </main>
+    {{/*
+        本地覆盖：把 hasMermaid 加入 partialCached 的 variant key。
+        原因：PaperMod 默认的 cache key 不包含 page 维度，会让所有相同 layout/kind 的 single page
+        共享同一份 footer 缓存。如果第一个被渲染的 page 不带 mermaid，extend_footer.html 里
+        `{{ if .Store.Get "hasMermaid" }}` 整段会被跳过并写进缓存，后续含 mermaid 的页面就拿不到
+        加载脚本，导致 `<pre class="mermaid">` 永远不会被渲染成 SVG。
+    */}}
+    {{ partialCached "footer.html" . .Layout .Kind (.Param "hideFooter") (.Param "ShowCodeCopyButtons") (.Page.Store.Get "hasMermaid") -}}
+</body>
+
+</html>
