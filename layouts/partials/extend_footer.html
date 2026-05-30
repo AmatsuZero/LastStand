@@ -1,9 +1,190 @@
 {{- if .Store.Get "hasMermaid" }}
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   mermaid.initialize({
     startOnLoad: true,
-    theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+    theme: isDark ? 'dark' : 'default',
   });
+
+  // 轮询等待 mermaid 渲染出 SVG，再注入放大按钮
+  const tryInjectZoom = () => {
+    document.querySelectorAll('pre.mermaid').forEach(el => {
+      if (el.dataset.zoomReady) return;
+      const svg = el.querySelector('svg');
+      if (!svg) return;
+      el.dataset.zoomReady = '1';
+
+      const btn = document.createElement('button');
+      btn.className = 'mermaid-zoom-btn';
+      btn.type = 'button';
+      btn.title = '放大查看';
+      btn.setAttribute('aria-label', '放大查看');
+      btn.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>';
+      el.appendChild(btn);
+      btn.addEventListener('click', () => openMermaidLightbox(el.querySelector('svg')));
+      el.addEventListener('dblclick', e => {
+        if (e.target.closest('.mermaid-zoom-btn')) return;
+        openMermaidLightbox(el.querySelector('svg'));
+      });
+    });
+  };
+
+  const startZoom = () => {
+    const total = document.querySelectorAll('pre.mermaid').length;
+    if (total === 0) return;
+    let waited = 0;
+    const timer = setInterval(() => {
+      tryInjectZoom();
+      const ready = document.querySelectorAll('pre.mermaid[data-zoom-ready="1"]').length;
+      waited += 200;
+      if (ready >= total || waited >= 10000) clearInterval(timer);
+    }, 200);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startZoom);
+  } else {
+    startZoom();
+  }
+
+  function openMermaidLightbox(svg) {
+    if (!svg) return;
+    const overlay = document.createElement('div');
+    overlay.className = 'mermaid-lightbox';
+    overlay.innerHTML = `
+      <div class="mermaid-lightbox-toolbar">
+        <button data-action="zoom-out" title="缩小">−</button>
+        <button data-action="reset" title="重置">⟲</button>
+        <button data-action="zoom-in" title="放大">+</button>
+        <button data-action="close" title="关闭 (Esc)">×</button>
+      </div>
+      <div class="mermaid-lightbox-stage">
+        <div class="mermaid-lightbox-content"></div>
+      </div>
+      <div class="mermaid-lightbox-hint">滚轮 / 双指缩放 · 拖动平移 · 双击或 Esc 关闭</div>
+    `;
+    const content = overlay.querySelector('.mermaid-lightbox-content');
+    const stage = overlay.querySelector('.mermaid-lightbox-stage');
+
+    // 计算原图实际尺寸（用于 lightbox 中保持初始 1:1 显示）
+    const rect = svg.getBoundingClientRect();
+    let baseW = rect.width || svg.clientWidth || 800;
+    let baseH = rect.height || svg.clientHeight || 600;
+
+    // 兜底：如果 SVG 没 viewBox 就根据原始尺寸生成一个
+    const clone = svg.cloneNode(true);
+    if (!clone.getAttribute('viewBox')) {
+      clone.setAttribute('viewBox', `0 0 ${baseW} ${baseH}`);
+    }
+    clone.removeAttribute('width');
+    clone.removeAttribute('height');
+    clone.removeAttribute('style');
+    clone.style.display = 'block';
+    clone.style.width = baseW + 'px';
+    clone.style.height = baseH + 'px';
+    clone.style.maxWidth = 'none';
+    clone.style.maxHeight = 'none';
+    content.appendChild(clone);
+    document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
+
+    // 初始缩放：让图填满约 90% 视口
+    const vw = window.innerWidth;
+    const vh = window.innerHeight - 80;
+    let scale = Math.min(vw * 0.9 / baseW, vh * 0.9 / baseH, 1.5);
+    if (!isFinite(scale) || scale <= 0) scale = 1;
+    let tx = 0, ty = 0;
+    const apply = () => {
+      content.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+    };
+
+    stage.addEventListener('wheel', e => {
+      e.preventDefault();
+      const sRect = stage.getBoundingClientRect();
+      const cx = e.clientX - sRect.left - sRect.width / 2;
+      const cy = e.clientY - sRect.top - sRect.height / 2;
+      const factor = e.deltaY < 0 ? 1.15 : 0.87;
+      const newScale = Math.max(0.2, Math.min(10, scale * factor));
+      const ratio = newScale / scale;
+      tx = cx - (cx - tx) * ratio;
+      ty = cy - (cy - ty) * ratio;
+      scale = newScale;
+      apply();
+    }, { passive: false });
+
+    let dragging = false, lx = 0, ly = 0;
+    stage.addEventListener('mousedown', e => {
+      if (e.button !== 0) return;
+      dragging = true; lx = e.clientX; ly = e.clientY;
+      stage.classList.add('grabbing');
+    });
+    window.addEventListener('mousemove', e => {
+      if (!dragging) return;
+      tx += e.clientX - lx; ty += e.clientY - ly;
+      lx = e.clientX; ly = e.clientY;
+      apply();
+    });
+    window.addEventListener('mouseup', () => {
+      dragging = false; stage.classList.remove('grabbing');
+    });
+
+    let lastDist = 0, tlx = 0, tly = 0;
+    stage.addEventListener('touchstart', e => {
+      if (e.touches.length === 1) {
+        tlx = e.touches[0].clientX;
+        tly = e.touches[0].clientY;
+      } else if (e.touches.length === 2) {
+        lastDist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+      }
+    }, { passive: true });
+    stage.addEventListener('touchmove', e => {
+      e.preventDefault();
+      if (e.touches.length === 1) {
+        tx += e.touches[0].clientX - tlx;
+        ty += e.touches[0].clientY - tly;
+        tlx = e.touches[0].clientX;
+        tly = e.touches[0].clientY;
+        apply();
+      } else if (e.touches.length === 2) {
+        const d = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        if (lastDist) {
+          scale = Math.max(0.2, Math.min(10, scale * (d / lastDist)));
+          apply();
+        }
+        lastDist = d;
+      }
+    }, { passive: false });
+    stage.addEventListener('touchend', () => { lastDist = 0; }, { passive: true });
+
+    overlay.addEventListener('click', e => {
+      const action = e.target.closest('button')?.dataset.action;
+      if (action === 'zoom-in') { scale = Math.min(10, scale * 1.25); apply(); }
+      else if (action === 'zoom-out') { scale = Math.max(0.2, scale / 1.25); apply(); }
+      else if (action === 'reset') { scale = 1; tx = 0; ty = 0; apply(); }
+      else if (action === 'close') close();
+      else if (e.target === overlay || e.target === stage) close();
+    });
+    stage.addEventListener('dblclick', close);
+
+    function close() {
+      overlay.remove();
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKey);
+    }
+    function onKey(e) {
+      if (e.key === 'Escape') close();
+      else if (e.key === '+' || e.key === '=') { scale = Math.min(10, scale * 1.25); apply(); }
+      else if (e.key === '-') { scale = Math.max(0.2, scale / 1.25); apply(); }
+      else if (e.key === '0') { scale = 1; tx = 0; ty = 0; apply(); }
+    }
+    document.addEventListener('keydown', onKey);
+  }
 </script>
 {{- end }}

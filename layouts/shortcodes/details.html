@@ -1,0 +1,8 @@
+{{- $summary := .Get "summary" | default (.Get 0) | default "展开/收起" -}}
+{{- $open := or (eq (.Get "open") "true") (eq (.Get "open") true) -}}
+<details class="md-details"{{ if $open }} open{{ end }}>
+  <summary>{{ $summary }}</summary>
+  <div class="md-details-body">
+{{ .Inner | .Page.RenderString (dict "display" "block") }}
+  </div>
+</details>
