@@ -1820,297 +1820,57 @@ private func cleanUp() {
 
 把上面所有片段串起来，业务层从入口到关闭的完整时序：
 
-<div class="arch-diagram seqdiag">
-  <style>
-    .seqdiag { font-size: 12.5px; color: #222; margin: 1.4em 0; max-width: 100%; overflow-x: auto; }
-    .seqdiag .actors {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 8px;
-      padding: 0 8px;
-      position: sticky;
-      top: 0;
-      background: inherit;
-      z-index: 2;
-    }
-    .seqdiag .actor {
-      background: #fff;
-      border: 1.5px solid #94a3b8;
-      border-radius: 8px;
-      padding: 8px 6px;
-      text-align: center;
-      font-weight: 600;
-      color: #1e293b;
-      font-size: 12px;
-      line-height: 1.3;
-    }
-    .seqdiag .actor.app    { background: #fef3c7; border-color: #d97706; color: #78350f; }
-    .seqdiag .actor.brk    { background: #ede9fe; border-color: #7c3aed; color: #4c1d95; }
-    .seqdiag .actor.vc     { background: #dbeafe; border-color: #2563eb; color: #1e3a8a; }
-    .seqdiag .actor.engine { background: #dcfce7; border-color: #16a34a; color: #14532d; }
-    .seqdiag .actor.cocos  { background: #fee2e2; border-color: #dc2626; color: #7f1d1d; }
+```mermaid
+sequenceDiagram
+    autonumber
+    participant App as SwiftUI 视图
+    participant Brk as QS3DCourtEventBroker
+    participant VC as QS3DCourtViewController
+    participant Eng as cocos-engine
+    participant Cocos as MagicDanmaku 业务脚本
 
-    .seqdiag .stage {
-      margin-top: 14px;
-      padding: 10px 12px;
-      background: #fafbfc;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-    }
-    .seqdiag .stage-title {
-      font-weight: 600;
-      color: #334155;
-      font-size: 13px;
-      margin-bottom: 8px;
-    }
-    .seqdiag .step {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 8px;
-      align-items: center;
-      padding: 4px 0;
-    }
-    .seqdiag .lane { position: relative; min-height: 22px; }
-    .seqdiag .lane::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 1px;
-      height: 100%;
-      background: #cbd5e1;
-      transform: translate(-50%, -50%);
-    }
-    /* 横向消息条占用多列：用 grid-column 跨列 */
-    .seqdiag .msg {
-      grid-column: span 1;
-      background: #fff;
-      border: 1px solid #94a3b8;
-      border-radius: 4px;
-      padding: 4px 8px;
-      font-size: 11.5px;
-      color: #334155;
-      text-align: center;
-      line-height: 1.4;
-      position: relative;
-      z-index: 1;
-    }
-    .seqdiag .msg.solid::before { content: "→ "; color: #2563eb; font-weight: 600; }
-    .seqdiag .msg.dashed { background: #f0f9ff; border-style: dashed; border-color: #38bdf8; color: #075985; }
-    .seqdiag .msg.dashed::before { content: "⇠ "; color: #0284c7; font-weight: 600; }
-    .seqdiag .msg.self {
-      background: #fef9c3;
-      border-color: #ca8a04;
-      color: #713f12;
-    }
-    .seqdiag .msg.self::before { content: "↻ "; color: #ca8a04; font-weight: 600; }
-    .seqdiag .msg code {
-      background: #e2e8f0;
-      padding: 0 4px;
-      border-radius: 2px;
-      font-size: 11px;
-    }
+    Note over App,Cocos: ① 初始化阶段
 
-    .seqdiag .note-block {
-      margin: 8px 0;
-      padding: 8px 12px;
-      background: #fff7ed;
-      border: 1px dashed #f97316;
-      border-radius: 6px;
-      color: #7c2d12;
-      font-size: 12px;
-      text-align: center;
-      line-height: 1.5;
-    }
+    App->>App: @StateObject 与 EnvironmentObject 注入
+    App->>VC: makeUIViewController(params)
+    VC->>Brk: bind(to:) 双向引用与配置同步
+    VC->>Eng: CocosCreator.create(view, SceneConfig)
+    Eng->>Cocos: SceneManager.load(name, bundle, paramsJSON)
 
-    @media (max-width: 720px) {
-      .seqdiag { font-size: 11.5px; }
-      .seqdiag .actors { grid-template-columns: repeat(5, 1fr); gap: 4px; padding: 0 4px; }
-      .seqdiag .actor { padding: 6px 2px; font-size: 11px; }
-      .seqdiag .step { grid-template-columns: repeat(5, 1fr); gap: 4px; }
-      .seqdiag .msg { padding: 3px 4px; font-size: 11px; }
-    }
+    Note over App,Cocos: ② 场景加载回调（4 阶段代理）
 
-    @media (prefers-color-scheme: dark) {
-      .seqdiag { color: #e2e8f0; }
-      .seqdiag .actor { background: #1e293b; border-color: #94a3b8; color: #e2e8f0; }
-      .seqdiag .actor.app    { background: #78350f; border-color: #fbbf24; color: #fef3c7; }
-      .seqdiag .actor.brk    { background: #4c1d95; border-color: #a78bfa; color: #ede9fe; }
-      .seqdiag .actor.vc     { background: #1e3a8a; border-color: #60a5fa; color: #dbeafe; }
-      .seqdiag .actor.engine { background: #14532d; border-color: #4ade80; color: #dcfce7; }
-      .seqdiag .actor.cocos  { background: #7f1d1d; border-color: #f87171; color: #fee2e2; }
-      .seqdiag .stage { background: #0f172a; border-color: #475569; }
-      .seqdiag .stage-title { color: #cbd5e1; }
-      .seqdiag .lane::before { background: #475569; }
-      .seqdiag .msg { background: #1e293b; border-color: #94a3b8; color: #cbd5e1; }
-      .seqdiag .msg.dashed { background: #082f49; border-color: #38bdf8; color: #bae6fd; }
-      .seqdiag .msg.self { background: #713f12; border-color: #facc15; color: #fef9c3; }
-      .seqdiag .msg code { background: #334155; color: #e2e8f0; }
-      .seqdiag .note-block { background: #431407; border-color: #f97316; color: #fed7aa; }
-    }
-  </style>
-  <div class="actors">
-    <div class="actor app">SwiftUI 视图</div>
-    <div class="actor brk">QS3DCourtEventBroker</div>
-    <div class="actor vc">QS3DCourtViewController</div>
-    <div class="actor engine">cocos-engine</div>
-    <div class="actor cocos">MagicDanmaku 业务脚本</div>
-  </div>
-  <div class="stage">
-    <div class="stage-title">① 初始化阶段</div>
-    <div class="step">
-      <div class="msg self">@StateObject + EnvironmentObject 注入</div>
-      <div class="lane"></div><div class="lane"></div><div class="lane"></div><div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="lane"></div><div class="lane"></div>
-      <div class="msg solid">makeUIViewController(params)</div>
-      <div class="lane"></div><div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="lane"></div>
-      <div class="msg solid">bind(to:) 双向引用 + 配置同步</div>
-      <div class="lane"></div><div class="lane"></div><div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="lane"></div><div class="lane"></div>
-      <div class="lane"></div>
-      <div class="msg solid">CocosCreator.create(view, SceneConfig)</div>
-      <div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="lane"></div><div class="lane"></div><div class="lane"></div>
-      <div class="lane"></div>
-      <div class="msg solid"><code>SceneManager.load(name, bundle, paramsJSON)</code></div>
-    </div>
-  </div>
-  <div class="stage">
-    <div class="stage-title">② 场景加载回调（4 阶段代理）</div>
-    <div class="step">
-      <div class="lane"></div><div class="lane"></div>
-      <div class="msg dashed">willLoadScene</div>
-      <div class="lane"></div><div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="lane"></div><div class="lane"></div>
-      <div class="msg dashed">sceneLoadProgress(finished, total)</div>
-      <div class="lane"></div><div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="lane"></div>
-      <div class="msg dashed">loadingStatus = loading(progress)</div>
-      <div class="lane"></div><div class="lane"></div><div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="msg dashed"><code>$loadingStatus</code> 推动 progress bar</div>
-      <div class="lane"></div><div class="lane"></div><div class="lane"></div><div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="lane"></div><div class="lane"></div>
-      <div class="msg dashed">didLoadScene</div>
-      <div class="lane"></div><div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="lane"></div><div class="lane"></div>
-      <div class="msg self">isSceneHasBeenLoaded = true; setupPerfTimer</div>
-      <div class="lane"></div><div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="lane"></div>
-      <div class="msg dashed">viewController(sceneLoadedWithError: nil)</div>
-      <div class="lane"></div><div class="lane"></div><div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="msg dashed">loadingStatus = .completed</div>
-      <div class="lane"></div><div class="lane"></div><div class="lane"></div><div class="lane"></div>
-    </div>
-  </div>
-  <div class="stage">
-    <div class="stage-title">③ 首帧渲染完成</div>
-    <div class="step">
-      <div class="lane"></div><div class="lane"></div>
-      <div class="msg dashed"><code>jsb.triggerEvent("onFirstFrameRendered", ...)</code></div>
-      <div class="lane"></div><div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="lane"></div>
-      <div class="msg dashed">onReceiveEvent("onFirstFrameRendered", params)</div>
-      <div class="lane"></div><div class="lane"></div><div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="msg dashed">receivedEvent → isLoadCompleted = true</div>
-      <div class="lane"></div><div class="lane"></div><div class="lane"></div><div class="lane"></div>
-    </div>
-    <div class="note-block">
-      此后 <code>onScriptMessage</code> / <code>onRoundStart</code> /
-      <code>loadingStart</code> … 双向自由通信
-    </div>
-  </div>
-  <div class="stage">
-    <div class="stage-title">④ 运行期典型调用：业务推数据到 Cocos</div>
-    <div class="step">
-      <div class="lane"></div>
-      <div class="msg solid">dispatch(.onScriptMessage, params)</div>
-      <div class="lane"></div><div class="lane"></div><div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="lane"></div><div class="lane"></div>
-      <div class="msg solid">dispatchEvent("onScriptMessage", arg)</div>
-      <div class="lane"></div><div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="lane"></div><div class="lane"></div>
-      <div class="lane"></div>
-      <div class="msg solid"><code>jsb.dispatchEvent(toScript, jsonString)</code></div>
-      <div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="lane"></div><div class="lane"></div><div class="lane"></div>
-      <div class="lane"></div>
-      <div class="msg solid"><code>DataManager.receiveRawData()</code></div>
-    </div>
-  </div>
-  <div class="stage">
-    <div class="stage-title">⑤ 关闭阶段</div>
-    <div class="step">
-      <div class="msg self">onDisappear</div>
-      <div class="lane"></div><div class="lane"></div><div class="lane"></div><div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="lane"></div><div class="lane"></div>
-      <div class="msg solid">viewWillDisappear → pauseRenderView</div>
-      <div class="lane"></div><div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="lane"></div><div class="lane"></div>
-      <div class="msg solid">dismantle → vc.delegate = nil</div>
-      <div class="lane"></div><div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="lane"></div><div class="lane"></div>
-      <div class="msg self">deinit → cleanUp()</div>
-      <div class="lane"></div><div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="lane"></div><div class="lane"></div>
-      <div class="lane"></div>
-      <div class="msg solid">removeScriptEventListener × N</div>
-      <div class="lane"></div>
-    </div>
-    <div class="step">
-      <div class="lane"></div><div class="lane"></div>
-      <div class="lane"></div>
-      <div class="msg solid">pause + close</div>
-      <div class="lane"></div>
-    </div>
-  </div>
-  <div style="margin-top:10px; font-size:11.5px; color:#64748b; text-align:center;">
-    图例：
-    <span style="border:1px solid #94a3b8; border-radius:3px; padding:1px 6px; margin: 0 4px;">→ 实线 = 调用</span>
-    <span style="border:1px dashed #38bdf8; border-radius:3px; padding:1px 6px; margin: 0 4px; color:#075985;">⇠ 虚线 = 回调 / 事件</span>
-    <span style="border:1px solid #ca8a04; border-radius:3px; padding:1px 6px; margin: 0 4px; color:#713f12; background:#fef9c3;">↻ 自调用</span>
-  </div>
-</div>
+    Eng-->>VC: willLoadScene
+    Eng-->>VC: sceneLoadProgress(finished, total)
+    VC-->>Brk: loadingStatus = loading(progress)
+    Brk-->>App: loadingStatus 推动 progress bar
+    Eng-->>VC: didLoadScene
+    VC->>VC: isSceneHasBeenLoaded = true，setupPerfTimer
+    VC-->>Brk: viewController(sceneLoadedWithError nil)
+    Brk-->>App: loadingStatus = .completed
+
+    Note over App,Cocos: ③ 首帧渲染完成
+
+    Cocos-->>Eng: jsb.triggerEvent("onFirstFrameRendered", ...)
+    Eng-->>VC: onReceiveEvent("onFirstFrameRendered", params)
+    VC-->>Brk: receivedEvent，isLoadCompleted = true
+    Note over App,Cocos: 此后 onScriptMessage / onRoundStart / loadingStart 双向自由通信
+
+    Note over App,Cocos: ④ 运行期典型调用：业务推数据到 Cocos
+
+    App->>Brk: dispatch(.onScriptMessage, params)
+    Brk->>VC: dispatchEvent("onScriptMessage", arg)
+    VC->>Eng: jsb.dispatchEvent(toScript, jsonString)
+    Eng->>Cocos: DataManager.receiveRawData()
+
+    Note over App,Cocos: ⑤ 关闭阶段
+
+    App->>App: onDisappear
+    Brk->>VC: viewWillDisappear，pauseRenderView
+    Brk->>VC: dismantle，vc.delegate = nil
+    VC->>VC: deinit，cleanUp()
+    VC->>Eng: removeScriptEventListener N 次
+    VC->>Eng: pause 与 close
+```
 
 ### 4.8 `MagicDanmakuViewController`：弹幕场景的特化
 
