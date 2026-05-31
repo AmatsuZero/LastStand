@@ -1,5 +1,6 @@
 .claude/
 .omc/
+.codebuddy/
 
 # Hugo build output
 public/
