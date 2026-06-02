@@ -6,6 +6,9 @@ theme = 'PaperMod'
 [markup.goldmark.renderer]
 unsafe = true
 
+[markup.highlight]
+guessSyntax = true
+
 [taxonomies]
 tag = 'tags'
 category = 'categories'
