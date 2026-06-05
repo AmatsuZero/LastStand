@@ -1,6 +1,7 @@
 .claude/
 .omc/
 .codebuddy/
+.superpowers/
 
 # Hugo build output
 public/
