@@ -1,6 +1,6 @@
 +++
 date = '2026-06-02T20:30:00+08:00'
-draft = true
+draft = false
 title = 'AIRead 实战拆解：KMM 语音播报 SDK 从 start 到双端播放链路'
 tags = ['KMM实践', 'Kotlin Multiplatform', '语音播报', 'WebSocket', 'ExoPlayer', 'AVPlayer']
 categories = ['iOS 开发']

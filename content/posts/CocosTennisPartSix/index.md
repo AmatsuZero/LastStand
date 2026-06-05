@@ -1,6 +1,6 @@
 +++
 date = '2026-05-31T09:00:00+08:00'
-draft = true
+draft = false
 title = '3D球场项目 (六)：客户端工程化与优化'
 tags = ['3D', 'Cocos', 'WebGPU', 'VAT', 'GPU Instancing', 'Shader', '性能优化', 'iOS', '工程化']
 categories = ['iOS 开发', '前端开发']

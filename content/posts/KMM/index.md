@@ -1,6 +1,6 @@
 +++
 date = '2026-06-01T16:14:41+08:00'
-draft = true
+draft = false
 title = 'KMM 跨平台落地：从基础认知到 ovCompose iOS/鸿蒙实践'
 tags = ['KMM踩坑笔记']
 categories = ['iOS 开发']

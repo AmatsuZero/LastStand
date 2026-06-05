@@ -1,6 +1,6 @@
 +++
 date = '2026-05-30T20:23:44+08:00'
-draft = true
+draft = false
 title = '3D球场项目 (四)'
 tags = ['Cocos', 'tRPC-Go', 'LLM', 'Opta']
 categories = ['iOS 开发', '前端开发']

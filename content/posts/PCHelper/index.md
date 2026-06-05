@@ -1,6 +1,6 @@
 +++
 date = '2026-06-01T12:00:21+08:00'
-draft = true
+draft = false
 title = 'PCHelper'
 tags = ['Electron', 'Typescript', 'OBS', 'NodeJS']
 categories = ['前端开发']
