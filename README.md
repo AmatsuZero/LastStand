@@ -60,7 +60,7 @@ categories = ['前端开发']
 ```
 
 - `tags`、`categories` 写中文或英文都可以，会自动生成索引页
-- 文章目录名建议用 PascalCase（如 `CocosTennisPartTwo/`），URL 会变小写
+- 单篇文章目录名建议用 PascalCase；系列文章建议使用父目录 + kebab-case 子目录（如 `CocosTennis/part-two/`）
 
 ### 2. 图片与本地资源
 
@@ -115,7 +115,7 @@ flowchart TD
 - `layouts/partials/extend_footer.html` 在使用了 mermaid 的页面动态加载 `mermaid.esm.min.mjs`（CDN）
 - 主题感知：`document.documentElement[data-theme]` 切换 dark/default 主题
 
-⚠️ Mermaid 对**深度嵌套子图 + 多个 LR direction**布局不稳定，遇到这种"分层架构图"时建议改用纯 HTML/CSS 静态卡片（参考 `CocosTennisPartTwo/index.md` 的 `.arch-diagram` 和 `.flow-timeline` 实现）。
+⚠️ Mermaid 对**深度嵌套子图 + 多个 LR direction**布局不稳定，遇到这种"分层架构图"时建议改用纯 HTML/CSS 静态卡片（参考 `CocosTennis/part-two/index.md` 的 `.arch-diagram` 和 `.flow-timeline` 实现）。
 
 ### 5. 内联 HTML / CSS
 
@@ -139,7 +139,7 @@ flowchart TD
 ### 7. 文章间相对链接
 
 ```markdown
-[前文]({{</* relref "/posts/CocosTennisPartOne" */>}})
+[前文](../part-one/)
 ```
 
 ---
