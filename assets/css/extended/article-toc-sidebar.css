@@ -1,0 +1,179 @@
+.post-toc-shell {
+    display: block;
+}
+
+.post-toc-sidebar {
+    position: fixed;
+    top: calc(var(--header-height) + var(--gap));
+    left: max(var(--gap), calc((100vw - (var(--main-width) + var(--gap) * 2)) / 2 - 252px));
+    z-index: 110;
+    width: 220px;
+    max-height: calc(100vh - var(--header-height) - var(--gap) * 2);
+    overflow: auto;
+    overscroll-behavior: contain;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
+}
+
+.post-toc-sidebar details.toc {
+    margin-bottom: 0;
+    background: var(--theme);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .post-toc-sidebar details.toc {
+    background: var(--entry);
+}
+
+.post-toc-sidebar details.toc summary {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: inherit;
+}
+
+.post-toc-sidebar details .inner {
+    margin: 0 1rem;
+    padding: 0 0 0.8rem;
+}
+
+.post-toc-sidebar details ul {
+    padding-inline-start: 0;
+}
+
+.post-toc-sidebar details li {
+    margin: 0.35rem 0;
+    list-style: none;
+}
+
+.post-toc-sidebar details li ul {
+    margin-inline-start: 0.85rem;
+}
+
+.post-toc-sidebar a {
+    display: block;
+    border-radius: calc(var(--radius) / 2);
+    padding: 0.18rem 0.35rem;
+    color: var(--secondary);
+    font-size: 0.86rem;
+    line-height: 1.45;
+    text-decoration: none;
+}
+
+.post-toc-sidebar a:hover,
+.post-toc-sidebar a.is-active {
+    color: var(--primary);
+    background: var(--code-bg);
+    text-decoration: none;
+}
+
+.post-toc-sidebar a.is-active {
+    font-weight: 600;
+}
+
+.post-toc-toggle {
+    position: fixed;
+    top: calc(var(--header-height) + var(--gap));
+    left: max(var(--gap), calc((100vw - (var(--main-width) + var(--gap) * 2)) / 2 - 296px));
+    z-index: 111;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 34px;
+    padding: 0 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--primary);
+    background: var(--theme);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+}
+
+[data-theme="dark"] .post-toc-toggle {
+    background: var(--entry);
+}
+
+.post-toc-toggle:hover {
+    background: var(--code-bg);
+}
+
+.post-single.has-page-toc.is-toc-collapsed .post-toc-sidebar {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-12px);
+}
+
+.post-single.has-page-toc.is-toc-collapsed .post-toc-toggle-icon {
+    transform: rotate(180deg);
+}
+
+.post-toc-backdrop {
+    display: none;
+}
+
+@media (max-width: 1199px) {
+    .post-toc-sidebar {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: min(82vw, 320px);
+        max-height: none;
+        padding: var(--gap);
+        background: var(--theme);
+        box-shadow: 18px 0 40px rgba(0, 0, 0, 0.18);
+        transform: translateX(-100%);
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    [data-theme="dark"] .post-toc-sidebar {
+        background: var(--theme);
+    }
+
+    .post-toc-sidebar details.toc {
+        box-shadow: none;
+    }
+
+    .post-toc-toggle {
+        top: calc(var(--header-height) + 10px);
+        left: var(--gap);
+    }
+
+    .post-single.has-page-toc.is-toc-open .post-toc-sidebar {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+    }
+
+    .post-toc-backdrop:not([hidden]) {
+        position: fixed;
+        inset: 0;
+        z-index: 109;
+        display: block;
+        border: 0;
+        background: rgba(0, 0, 0, 0.32);
+    }
+
+    .post-single.has-page-toc.is-toc-collapsed .post-toc-sidebar {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateX(-100%);
+    }
+}
+
+@media (max-width: 768px) {
+    .post-toc-toggle {
+        min-height: 32px;
+        padding: 0 0.55rem;
+        font-size: 0.86rem;
+    }
+
+    .post-toc-sidebar {
+        width: min(86vw, 300px);
+        padding: calc(var(--gap) * 0.75);
+    }
+}

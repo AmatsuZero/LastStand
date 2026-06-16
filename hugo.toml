@@ -3,6 +3,10 @@ locale = 'zh-cn'
 title = 'Last Stand'
 theme = 'PaperMod'
 
+[params]
+ShowToc = true
+TocOpen = true
+
 [params.assets]
 favicon = 'favicon.svg'
 theme_color = '#111827'

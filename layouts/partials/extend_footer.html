@@ -188,3 +188,114 @@
   }
 </script>
 {{- end }}
+
+{{- $headers := findRE "<h[1-6].*?>(.|\n])+?</h[1-6]>" .Content -}}
+{{- $hasToc := (and (.Param "ShowToc") (gt (len $headers) 0)) -}}
+{{- if $hasToc }}
+<script>
+  (() => {
+    const article = document.querySelector('.post-single.has-page-toc');
+    if (!article) return;
+
+    const button = article.querySelector('[data-toc-toggle]');
+    const sidebar = article.querySelector('[data-toc-sidebar]');
+    const backdrop = article.querySelector('[data-toc-backdrop]');
+    const links = Array.from(article.querySelectorAll('.post-toc-sidebar a[href^="#"]'));
+    const desktopQuery = window.matchMedia('(min-width: 1200px)');
+    let open = desktopQuery.matches;
+
+    const decodeHash = hash => {
+      try {
+        return decodeURIComponent(hash.slice(1));
+      } catch {
+        return hash.slice(1);
+      }
+    };
+
+    const setOpen = nextOpen => {
+      open = nextOpen;
+      article.classList.toggle('is-toc-open', open);
+      article.classList.toggle('is-toc-collapsed', !open);
+      if (button) {
+        button.setAttribute('aria-expanded', String(open));
+        button.setAttribute('aria-label', open ? '隐藏目录' : '显示目录');
+        const text = button.querySelector('.post-toc-toggle-text');
+        if (text) text.textContent = open ? '隐藏目录' : '目录';
+      }
+      if (backdrop) {
+        backdrop.hidden = !open || desktopQuery.matches;
+      }
+      if (sidebar && open && !desktopQuery.matches) {
+        sidebar.focus({ preventScroll: true });
+      } else if (sidebar && !open && !desktopQuery.matches && sidebar.contains(document.activeElement)) {
+        button?.focus({ preventScroll: true });
+      }
+    };
+
+    if (sidebar) sidebar.tabIndex = -1;
+    setOpen(open);
+
+    button?.addEventListener('click', () => setOpen(!open));
+    backdrop?.addEventListener('click', () => setOpen(false));
+    const handleViewportChange = event => setOpen(event.matches);
+    if (desktopQuery.addEventListener) {
+      desktopQuery.addEventListener('change', handleViewportChange);
+    } else {
+      desktopQuery.addListener(handleViewportChange);
+    }
+
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        if (!desktopQuery.matches) setOpen(false);
+      });
+    });
+
+    const headingById = new Map();
+    links.forEach(link => {
+      const id = decodeHash(link.hash);
+      const heading = id ? document.getElementById(id) : null;
+      if (heading) headingById.set(id, heading);
+    });
+
+    if (!headingById.size) return;
+
+    const setActive = id => {
+      links.forEach(link => {
+        const active = decodeHash(link.hash) === id;
+        link.classList.toggle('is-active', active);
+        if (active) {
+          link.setAttribute('aria-current', 'location');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      setActive(headingById.keys().next().value);
+      return;
+    }
+
+    const visibleHeadings = new Map();
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          visibleHeadings.set(entry.target.id, entry.boundingClientRect.top);
+        } else {
+          visibleHeadings.delete(entry.target.id);
+        }
+      });
+
+      if (visibleHeadings.size) {
+        const [id] = Array.from(visibleHeadings.entries()).sort((a, b) => a[1] - b[1])[0];
+        setActive(id);
+      }
+    }, {
+      rootMargin: '-20% 0px -65% 0px',
+      threshold: [0, 1]
+    });
+
+    headingById.forEach(heading => observer.observe(heading));
+  })();
+</script>
+{{- end }}
