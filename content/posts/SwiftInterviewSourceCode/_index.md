@@ -17,7 +17,7 @@ weight = -90
 
 [**1** **ARC 与内存管理** 理解 Swift 对象生命周期、引用计数、weak/unowned 与 ARC 优化。](./arc-memory-management/)
 
-[**2** **泛型、协议与派发** 串起 Generic Signature、Protocol Witness Table、Existential 与动态派发。](./generics-protocol-dispatch/)
+[**2** **泛型、协议与派发** 串起 Generic Signature、函数派发、Protocol Witness Table、Existential 与动态派发。](./generics-protocol-dispatch/)
 
 [**3** **值语义、COW 与集合** 解释 struct 为什么可以高效复制，以及 Array/String/Dictionary 的存储策略。](./value-semantics-cow-collections/)
 
