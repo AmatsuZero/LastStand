@@ -1225,7 +1225,7 @@ CocoaPods支持多种链接配置，主要通过Podfile中的选项控制：
 <summary><b>Q: 实例对象、类对象、元类对象之间的isa和继承关系是怎样的？</b></summary>
 
 
-![isa指向图]({{< relref "ios-basics/load与initialize的区别/images/isa_graph.png" >}})
+![isa指向图](ios-basics/load与initialize的区别/images/isa_graph.png)
 
 **isa链：**
 - 实例对象的isa指向类对象（查找实例方法）
