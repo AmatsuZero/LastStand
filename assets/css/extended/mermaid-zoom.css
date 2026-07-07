@@ -39,13 +39,13 @@ pre.mermaid:focus-within .mermaid-zoom-btn,
   transform: scale(1.05);
 }
 
-.dark .mermaid-zoom-btn {
+[data-theme="dark"] .mermaid-zoom-btn {
   background: rgba(30, 41, 59, 0.92);
   border-color: #475569;
   color: #e2e8f0;
 }
 
-.dark .mermaid-zoom-btn:hover {
+[data-theme="dark"] .mermaid-zoom-btn:hover {
   background: #0f172a;
   color: #fff;
   border-color: #94a3b8;
@@ -70,7 +70,7 @@ pre.mermaid:focus-within .mermaid-zoom-btn,
   animation: mermaid-lightbox-fade 0.18s ease;
 }
 
-.dark .mermaid-lightbox {
+[data-theme="dark"] .mermaid-lightbox {
   background: #0f172a;
 }
 
@@ -127,13 +127,13 @@ pre.mermaid:focus-within .mermaid-zoom-btn,
   background: #e11d48;
 }
 
-.dark .mermaid-lightbox-toolbar button {
+[data-theme="dark"] .mermaid-lightbox-toolbar button {
   background: #1e293b;
   color: #e2e8f0;
   border-color: #475569;
 }
 
-.dark .mermaid-lightbox-toolbar button:hover {
+[data-theme="dark"] .mermaid-lightbox-toolbar button:hover {
   background: #334155;
 }
 
@@ -181,7 +181,7 @@ pre.mermaid:focus-within .mermaid-zoom-btn,
   white-space: nowrap;
 }
 
-.dark .mermaid-lightbox-hint {
+[data-theme="dark"] .mermaid-lightbox-hint {
   color: #cbd5e1;
   background: rgba(30, 41, 59, 0.92);
   border-color: rgba(71, 85, 105, 0.6);

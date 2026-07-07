@@ -299,3 +299,19 @@
   })();
 </script>
 {{- end }}
+
+{{- /* 监听系统主题变化，自动切换暗色/亮色模式 */}}
+<script>
+  (() => {
+    const mql = window.matchMedia('(prefers-color-scheme: dark)');
+    const setTheme = (isDark) => {
+      document.documentElement.dataset.theme = isDark ? 'dark' : 'light';
+    };
+    mql.addEventListener('change', (e) => {
+      // 仅在用户未手动选择主题时跟随系统
+      if (!localStorage.getItem('pref-theme')) {
+        setTheme(e.matches);
+      }
+    });
+  })();
+</script>

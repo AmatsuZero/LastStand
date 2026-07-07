@@ -69,24 +69,24 @@
 }
 
 /* Dark theme adjustments via PaperMod's data-theme */
-.dark .md-details {
+[data-theme="dark"] .md-details {
   border-color: #475569;
   background: #1e293b;
 }
 
-.dark .md-details > summary {
+[data-theme="dark"] .md-details > summary {
   background: #0f172a;
   color: #e2e8f0;
 }
 
-.dark .md-details > summary:hover {
+[data-theme="dark"] .md-details > summary:hover {
   background: #1e293b;
 }
 
-.dark .md-details > summary::before {
+[data-theme="dark"] .md-details > summary::before {
   color: #94a3b8;
 }
 
-.dark .md-details[open] > summary {
+[data-theme="dark"] .md-details[open] > summary {
   border-bottom-color: #475569;
 }
