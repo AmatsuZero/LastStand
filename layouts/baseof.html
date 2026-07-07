@@ -5,11 +5,11 @@
 <!DOCTYPE html>
 {{- $theme := site.Params.defaultTheme | default "auto" }}
 {{- if eq $theme "dark" }}
-<html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}" data-theme="dark">
+<html lang="{{ site.Language }}" dir="{{ .Language.Direction | default "auto" }}" data-theme="dark">
 {{- else if eq $theme "light" }}
-<html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}" data-theme="light">
+<html lang="{{ site.Language }}" dir="{{ .Language.Direction | default "auto" }}" data-theme="light">
 {{- else }}
-<html lang="{{ site.Language }}" dir="{{ .Language.LanguageDirection | default "auto" }}" data-theme="auto">
+<html lang="{{ site.Language }}" dir="{{ .Language.Direction | default "auto" }}" data-theme="auto">
 {{- end }}
 
 <head>
@@ -25,17 +25,7 @@
     <main class="main">
         {{- block "main" . }}{{ end }}
     </main>
-    {{- $headers := findRE "<h[1-6].*?>(.|\n])+?</h[1-6]>" .Content -}}
-    {{- $hasToc := (and (.Param "ShowToc") (gt (len $headers) 0)) -}}
-    {{/*
-        本地覆盖：把 hasMermaid 和 hasToc 加入 partialCached 的 variant key。
-        原因：PaperMod 默认的 cache key 不包含 page 维度，会让所有相同 layout/kind 的 single page
-        共享同一份 footer 缓存。如果第一个被渲染的 page 不带 mermaid，extend_footer.html 里
-        `{{ if .Store.Get "hasMermaid" }}` 整段会被跳过并写进缓存，后续含 mermaid 的页面就拿不到
-        加载脚本，导致 `<pre class="mermaid">` 永远不会被渲染成 SVG。hasToc 也依赖单页是否实际
-        有标题，否则无标题页和有标题页会互相复用 TOC footer 脚本缓存。
-    */}}
-    {{ partialCached "footer.html" . .Layout .Kind (.Param "hideFooter") (.Param "ShowCodeCopyButtons") (.Page.Store.Get "hasMermaid") $hasToc -}}
+    {{ partialCached "footer.html" . .Layout .Kind (.Param "hideFooter") (.Param "ShowCodeCopyButtons") -}}
 </body>
 
 </html>
