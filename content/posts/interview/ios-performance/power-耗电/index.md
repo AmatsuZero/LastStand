@@ -5,6 +5,7 @@ draft = false
 weight = 16
 tags = ["iOS", "性能优化", "耗电"]
 categories = ["iOS开发", "性能优化"]
+math = true
 +++
 耗电（Energy Consumption）是移动应用质量的重要指标之一。一款耗电过快的App会直接影响用户的续航体验，轻则被用户吐槽，重则被系统标记为"耗电大户"（在iOS的"设置 → 电池"中显示），最终被用户卸载。
 

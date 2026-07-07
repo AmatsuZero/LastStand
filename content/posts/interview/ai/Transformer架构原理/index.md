@@ -5,6 +5,7 @@ draft = false
 weight = 10
 tags = ["AI", "LLM", "面试"]
 categories = ["AI", "面试"]
+math = true
 +++
 ChatGPT、Claude、Gemini——这些模型的核心都是同一个架构：**Transformer**。它在2017年由Google的论文"Attention Is All You Need"提出，彻底改变了自然语言处理（NLP）领域，随后席卷了计算机视觉、语音、蛋白质折叠等几乎所有AI领域。
 

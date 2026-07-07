@@ -14,6 +14,13 @@ theme_color = '#111827'
 [markup.goldmark.renderer]
 unsafe = true
 
+[markup.goldmark.extensions.passthrough]
+enable = true
+
+[markup.goldmark.extensions.passthrough.delimiters]
+block = [['\\[', '\\]'], ['$$', '$$']]
+inline = [['\\(', '\\)'], ['$', '$']]
+
 [markup.highlight]
 guessSyntax = true
 

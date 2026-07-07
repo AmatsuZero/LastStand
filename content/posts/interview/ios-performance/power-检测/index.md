@@ -5,6 +5,7 @@ draft = false
 weight = 13
 tags = ["iOS", "性能优化", "耗电"]
 categories = ["iOS开发", "性能优化"]
+math = true
 +++
 本文介绍iOS耗电问题的检测手段，从开发阶段的本地工具，到线上的监控体系，帮助团队形成一套完整的耗电可观测能力。
 

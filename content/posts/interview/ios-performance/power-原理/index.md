@@ -5,6 +5,7 @@ draft = false
 weight = 11
 tags = ["iOS", "性能优化", "耗电"]
 categories = ["iOS开发", "性能优化"]
+math = true
 +++
 本文从硬件功耗模型、iOS系统的能效调度机制、以及各个硬件模块的功耗特性三个维度，系统性地讲解iOS App耗电的底层原理。
 
