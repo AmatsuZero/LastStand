@@ -328,4 +328,4 @@ flowchart TB
 | 优化原则 | Race to Sleep、Coalesce、Defer and Batch                             |
 | 分析方法 | 时间 × 功率 = 能量                                                       |
 
-理解了原理，接下来就可以进入 [耗电-检测](./耗电-检测.md) 和后续的优化篇。
+理解了原理，接下来就可以进入 [耗电-检测]({{< relref "/posts/interview/ios-performance/power-检测" >}}) 和后续的优化篇。

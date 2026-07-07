@@ -252,10 +252,10 @@ flowchart TD
 
 实际项目里推荐的落地路径：
 
-1. 先用 [编译优化-观测](./编译优化-观测.md) 里的 `-ftime-trace` 看头文件解析耗时
+1. 先用 [编译优化-观测]({{< relref "/posts/interview/ios-build/观测" >}}) 里的 `-ftime-trace` 看头文件解析耗时
 2. 若 Pod 数量 > 100，优先评估 `cocoapods-hmap-prebuilt` 或自研 HMap 插件
 3. 开启 Clang Modules（`CLANG_ENABLE_MODULES=YES`）让高频头复用解析
-4. 进一步开启 Explicit Modules（见 [编译优化-Explicit Modules](./编译优化-Explicit Modules.md)）
+4. 进一步开启 Explicit Modules（见 [编译优化-Explicit Modules]({{< relref "/posts/interview/ios-build/Explicit-Modules" >}})）
 5. 配合 `filelist` / OTHER_LDFLAGS 优化解决 Arguments Too Long
 
 头文件优化的本质是**把一次构建中的"重复 IO + 重复解析"替换为一次性的预计算**，这在超大工程的收益往往比 Swift 侧的微观优化更明显。

@@ -8,7 +8,7 @@ categories = ["iOS开发", "工程化"]
 +++
 本文结合 [cocoapods-bin](https://github.com/tripleCC/cocoapods-bin)（社区最成熟的二进制化插件）拆解"Pod 二进制化"背后的工程机制：集成时如何透明替换 spec、打包时如何还原 Xcode 产物、调试时如何跳回源码。文末给出"自研一套二进制系统"的落地 checklist。
 
-想先了解二进制化的整体背景、坑点和适用场景，可以先看 [编译优化-二进制化](./编译优化-二进制化.md)；想了解 pod install 阶段本身的优化（HMap、并发下载等）见 [编译优化-CocoaPods优化](./编译优化-CocoaPods优化.md)。
+想先了解二进制化的整体背景、坑点和适用场景，可以先看 [编译优化-二进制化]({{< relref "/posts/interview/ios-build/二进制化" >}})；想了解 pod install 阶段本身的优化（HMap、并发下载等）见 [编译优化-CocoaPods优化]({{< relref "/posts/interview/ios-build/CocoaPods优化" >}})。
 
 ---
 
@@ -808,8 +808,8 @@ Grab 团队的 [cocoapods-binary-cache](https://github.com/grab/cocoapods-binary
 ### 抖音 Seer + BinaryPod
 
 字节 Seer（内部系统）融合了多种优化：
-- HMap 预生成（见 [编译优化-头文件与HMap](./编译优化-头文件与HMap.md)）
-- Pod Install 并行化（见 [编译优化-CocoaPods优化](./编译优化-CocoaPods优化.md)）
+- HMap 预生成（见 [编译优化-头文件与HMap]({{< relref "/posts/interview/ios-build/头文件与HMap" >}})）
+- Pod Install 并行化（见 [编译优化-CocoaPods优化]({{< relref "/posts/interview/ios-build/CocoaPods优化" >}})）
 - 二进制化 + 远程缓存
 - 基于 Bazel 的模块化（可选）
 
@@ -880,10 +880,10 @@ Grab 团队的 [cocoapods-binary-cache](https://github.com/grab/cocoapods-binary
 但凡是"社区反复踩坑后沉淀下来"的设计——`WholeBinary`、dummy 源文件、Lockfile 还原、DW_AT_comp_dir 软链——都是用生产事故换来的。搭自己的二进制系统时，即使不用现成方案，也强烈建议把相关开源代码通读一遍，把每一行"看起来有点莫名其妙"的处理都理解清楚：你迟早会遇到同样的场景。
 
 参考资料：
-- 具体坑点 → [编译优化-二进制化](./编译优化-二进制化.md)
-- CocoaPods 整体优化 → [编译优化-CocoaPods优化](./编译优化-CocoaPods优化.md)
-- HMap 预生成 → [编译优化-头文件与HMap](./编译优化-头文件与HMap.md)
-- Bazel 远程缓存 → [编译优化-Bazel方案](./编译优化-Bazel方案.md)
+- 具体坑点 → [编译优化-二进制化]({{< relref "/posts/interview/ios-build/二进制化" >}})
+- CocoaPods 整体优化 → [编译优化-CocoaPods优化]({{< relref "/posts/interview/ios-build/CocoaPods优化" >}})
+- HMap 预生成 → [编译优化-头文件与HMap]({{< relref "/posts/interview/ios-build/头文件与HMap" >}})
+- Bazel 远程缓存 → [编译优化-Bazel方案]({{< relref "/posts/interview/ios-build/Bazel方案" >}})
 - [tripleCC/cocoapods-bin](https://github.com/tripleCC/cocoapods-bin)
 - [swiftyfinch/Rugby](https://github.com/swiftyfinch/Rugby)
 - [grab/cocoapods-binary-cache](https://github.com/grab/cocoapods-binary-cache)

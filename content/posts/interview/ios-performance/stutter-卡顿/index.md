@@ -10,7 +10,7 @@ categories = ["iOS开发", "性能优化"]
 
 本系列文章从渲染原理入手，系统性地介绍iOS卡顿的检测与优化方法。
 
-> 卡顿监控是 APM 流畅性子系的核心能力，线上指标体系、检测采集、上报策略请参考 [APM 系列](../APM/APM.md)：[指标体系](../APM/APM-指标体系.md)、[数据采集](../APM/APM-数据采集.md)、[业界方案（微信 Matrix / 字节 Slardar 卡死监控）](../APM/APM-业界方案.md)。
+> 卡顿监控是 APM 流畅性子系的核心能力，线上指标体系、检测采集、上报策略请参考 [APM 系列]({{< relref "/posts/interview/ios-apm/APM" >}})：[指标体系]({{< relref "/posts/interview/ios-apm/指标体系" >}})、[数据采集]({{< relref "/posts/interview/ios-apm/数据采集" >}})、[业界方案（微信 Matrix / 字节 Slardar 卡死监控）]({{< relref "/posts/interview/ios-apm/业界方案" >}})。
 
 ---
 
@@ -94,13 +94,13 @@ flowchart TB
 
 在优化之前，首先需要理解卡顿的原理并准确检测卡顿。
 
-- [卡顿-原理](./卡顿-原理.md)
+- [卡顿-原理]({{< relref "/posts/interview/ios-performance/stutter-原理" >}})
   - iOS渲染流程详解
   - VSync与双缓冲机制
   - 卡顿的本质分析
   - CPU与GPU瓶颈识别
 
-- [卡顿-检测](./卡顿-检测.md)
+- [卡顿-检测]({{< relref "/posts/interview/ios-performance/stutter-检测" >}})
   - FPS监控（CADisplayLink）
   - RunLoop监控方案
   - 主线程卡顿堆栈采集
@@ -113,7 +113,7 @@ CPU阶段的优化主要从减少主线程工作量入手。
 
 #### 2.1 主线程优化
 
-- [卡顿-主线程优化](./卡顿-主线程优化.md)
+- [卡顿-主线程优化]({{< relref "/posts/interview/ios-performance/stutter-主线程优化" >}})
   - 耗时任务异步化
   - 任务拆分与调度
   - 减少锁竞争
@@ -121,7 +121,7 @@ CPU阶段的优化主要从减少主线程工作量入手。
 
 #### 2.2 图片优化
 
-- [卡顿-图片优化](./卡顿-图片优化.md)
+- [卡顿-图片优化]({{< relref "/posts/interview/ios-performance/stutter-图片优化" >}})
   - 图片解码原理
   - 异步解码方案
   - 图片降采样
@@ -131,7 +131,7 @@ CPU阶段的优化主要从减少主线程工作量入手。
 
 GPU阶段的优化主要从减少渲染复杂度入手。
 
-- [卡顿-离屏渲染](./卡顿-离屏渲染.md)
+- [卡顿-离屏渲染]({{< relref "/posts/interview/ios-performance/stutter-离屏渲染" >}})
   - 离屏渲染触发条件
   - 圆角优化方案
   - 阴影优化方案
@@ -142,7 +142,7 @@ GPU阶段的优化主要从减少渲染复杂度入手。
 
 针对常见场景的专项优化。
 
-- [卡顿-TableView优化](./卡顿-TableView优化.md)
+- [卡顿-TableView优化]({{< relref "/posts/interview/ios-performance/stutter-TableView优化" >}})
   - Cell复用机制
   - 高度缓存
   - 异步渲染

@@ -106,7 +106,7 @@ flowchart LR
 
 内核使用 `mmap()` 系统调用将 Mach-O 文件**映射**到进程的虚拟地址空间。这里是映射而非直接读取，是**惰性加载**的基础——只有实际访问到的页面才会被加载到物理内存。
 
-> 关于 mmap 的详细原理和应用，请参考：[mmap详解](./mmap详解.md)
+> 关于 mmap 的详细原理和应用，请参考：[mmap详解]({{< relref "/posts/interview/ios-basics/mmap详解" >}})
 
 **解析 Mach-O Header**
 
@@ -155,7 +155,7 @@ flowchart LR
 - `__TEXT` 段：可读、可执行，不可写（防止代码被篡改）
 - `__DATA` 段：可读、可写，不可执行
 
-> 关于 Mach-O 文件格式的详细介绍，请参考：[Mach-O的链接、装载与库](./Mach-O的链接、装载与库.md)
+> 关于 Mach-O 文件格式的详细介绍，请参考：[Mach-O的链接、装载与库]({{< relref "/posts/interview/ios-basics/Mach-O的链接-装载与库" >}})
 
 #### 1.3 验证代码签名
 
@@ -365,7 +365,7 @@ flowchart LR
     A2 -->|Bind| B2
 ```
 
-> 关于Rebase和Bind的详细原理及优化方法，请参考：[启动优化-Rebase与Bind](../ios-advanced/启动优化/启动优化-Rebase与Bind.md)
+> 关于Rebase和Bind的详细原理及优化方法，请参考：[启动优化-Rebase与Bind]({{< relref "/posts/interview/ios-performance/launch-Rebase与Bind" >}})
 
 ### 4. ObjC Runtime 初始化
 
@@ -597,7 +597,7 @@ static void call_class_loads(void) {
 - **阻塞启动**：所有 `+load` 在 main 函数之前同步执行，会直接影响启动时间
 - **线程安全**：在主线程串行调用，无需加锁
 
-> 关于 `+load` 和 `+initialize` 的详细对比，请参考：[+load与+initialize的区别](./load与initialize的区别.md)
+> 关于 `+load` 和 `+initialize` 的详细对比，请参考：[+load与+initialize的区别]({{< relref "/posts/interview/ios-basics/load与initialize的区别" >}})
 
 ### 7. 执行 Initializers
 
@@ -900,7 +900,7 @@ flowchart TD
     I --> J[显示首帧]
 ```
 
-> 关于iOS渲染流程的详细原理，请参考：[卡顿-原理](../ios-advanced/卡顿/卡顿-原理.md)
+> 关于iOS渲染流程的详细原理，请参考：[卡顿-原理]({{< relref "/posts/interview/ios-performance/stutter-原理" >}})
 
 ---
 

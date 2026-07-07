@@ -1500,7 +1500,7 @@ size_t async_safe_itoa(long value, char *buffer, size_t buffer_size) {
 
 ### 使用mmap实现崩溃安全写入
 
-mmap（内存映射文件）是崩溃采集中的关键技术，它可以将文件映射到内存，写入内存即写入文件，避免了传统文件IO的诸多问题。关于mmap的详细介绍，请参考[mmap详解](../../ios-basics/mmap详解.md)。
+mmap（内存映射文件）是崩溃采集中的关键技术，它可以将文件映射到内存，写入内存即写入文件，避免了传统文件IO的诸多问题。关于mmap的详细介绍，请参考[mmap详解]({{< relref "/posts/interview/ios-basics/mmap详解" >}})。
 
 **为什么崩溃采集需要mmap？**
 

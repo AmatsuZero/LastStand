@@ -504,5 +504,5 @@ Plugin CLI 命令是**懒加载**的——只有当用户实际输入的 `primar
 - OpenClaw 官方文档：<https://docs.openclaw.ai>
 - Peter Steinberger 个人博客：<https://steipete.me>
 - pi-mono（Harness 基础）：<https://github.com/badlogic/pi-mono>
-- Anthropic 的 Harness Engineering：见系列文章 [`Harness Engineering`](../Harness%20Engineering.md)
-- 可对照阅读的 CLI Agent：[`Claude Code 源码导读`](../Claude%20Code%20源码导读.md)
+- Anthropic 的 Harness Engineering：见系列文章 [`Harness Engineering`]({{< relref "/posts/interview/ai/Harness-Engineering" >}})
+- 可对照阅读的 CLI Agent：[`Claude Code 源码导读`]({{< relref "/posts/interview/ai/Claude-Code-源码导读" >}})

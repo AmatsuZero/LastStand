@@ -260,4 +260,4 @@ array2.append(6)              // array2 触发拷贝，获得独立副本
 
 ## 底层内存布局
 
-详见[Objective-C底层原理-NSObject](./Objective-C底层原理-NSObject.md)以及[Swift底层原理-结构体、类和协议](./Swift底层原理-结构体、类和协议.md)
+详见[Objective-C底层原理-NSObject]({{< relref "/posts/interview/ios-basics/Objective-C底层原理-NSObject" >}})以及[Swift底层原理-结构体、类和协议]({{< relref "/posts/interview/ios-basics/Swift底层原理-结构体-类和协议" >}})

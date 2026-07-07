@@ -14,7 +14,7 @@ categories = ["iOS开发", "工程化"]
 
 ## 编译流程概述
 
-理解[iOS编译原理](../../ios-basics/iOS编译原理.md)是编译优化的前提。一次典型的 iOS 编译流程可以划分为以下阶段：
+理解[iOS编译原理]({{< relref "/posts/interview/ios-basics/iOS编译原理" >}})是编译优化的前提。一次典型的 iOS 编译流程可以划分为以下阶段：
 
 ```mermaid
 flowchart TD
@@ -73,7 +73,7 @@ flowchart LR
 
 优化之前必须能量化，否则无法验证收益。
 
-- [编译优化-观测](./编译优化-观测.md)
+- [编译优化-观测]({{< relref "/posts/interview/ios-build/观测" >}})
   - Build With Timing Summary、-debug-time-compilation
   - -driver-show-incremental、-driver-show-job-lifecycle
   - -warn-long-expression-type-checking、-warn-long-function-bodies
@@ -84,7 +84,7 @@ flowchart LR
 
 理解 Xcode 构建系统才能针对性优化。
 
-- [编译优化-Xcode构建系统](./编译优化-Xcode构建系统.md)
+- [编译优化-Xcode构建系统]({{< relref "/posts/interview/ios-build/Xcode构建系统" >}})
   - llbuild、XCBBuildService、SwiftDriver 架构
   - 任务图、并行度与关键路径
   - 增量编译原理、swift-driver 的 incremental build
@@ -95,7 +95,7 @@ flowchart LR
 
 Xcode 16/17 最重要的构建变革。
 
-- [编译优化-Explicit Modules](./编译优化-Explicit Modules.md)
+- [编译优化-Explicit Modules]({{< relref "/posts/interview/ios-build/Explicit-Modules" >}})
   - Clang/Swift Module 基础
   - Implicit vs Explicit Module Build
   - Scan → Build Module → Compile Source 三阶段
@@ -106,7 +106,7 @@ Xcode 16/17 最重要的构建变革。
 
 针对 Objective-C / 混编工程的头文件查找优化。
 
-- [编译优化-头文件与HMap](./编译优化-头文件与HMap.md)
+- [编译优化-头文件与HMap]({{< relref "/posts/interview/ios-build/头文件与HMap" >}})
   - HEADER_SEARCH_PATHS 的 IO 开销
   - HMap 二进制映射表格式
   - 美团 cocoapods-hmap-prebuilt 原理
@@ -116,7 +116,7 @@ Xcode 16/17 最重要的构建变革。
 
 源码层能做到的加速。
 
-- [编译优化-Swift编译优化](./编译优化-Swift编译优化.md)
+- [编译优化-Swift编译优化]({{< relref "/posts/interview/ios-build/Swift编译优化" >}})
   - 类型推导与 "expression too complex" 的根因
   - Whole Module Optimization (WMO)
   - Cross Module Optimization (CMO)
@@ -127,7 +127,7 @@ Xcode 16/17 最重要的构建变革。
 
 链接阶段的大块耗时优化。
 
-- [编译优化-链接优化](./编译优化-链接优化.md)
+- [编译优化-链接优化]({{< relref "/posts/interview/ios-build/链接优化" >}})
   - ld64 / ld-prime（Xcode 15+） / lld 对比
   - ThinLTO 原理与参数调优
   - filelist 方式解决 Arguments Too Long
@@ -138,7 +138,7 @@ Xcode 16/17 最重要的构建变革。
 
 把源码编译换成产物链接。
 
-- [编译优化-二进制化](./编译优化-二进制化.md)
+- [编译优化-二进制化]({{< relref "/posts/interview/ios-build/二进制化" >}})
   - 静态库、动态库、Framework、XCFramework
   - BUILD_LIBRARY_FOR_DISTRIBUTION 与 ABI 稳定
   - CocoaPods 二进制化方案（cocoapods-bin、imy-bin）
@@ -149,7 +149,7 @@ Xcode 16/17 最重要的构建变革。
 
 依赖管理阶段的加速。
 
-- [编译优化-CocoaPods优化](./编译优化-CocoaPods优化.md)
+- [编译优化-CocoaPods优化]({{< relref "/posts/interview/ios-build/CocoaPods优化" >}})
   - Pod Install 六阶段耗时分析
   - 按需更新 Source / 文件锁同步
   - Specification / FileAccessors / SandboxAnalyzer 缓存
@@ -160,7 +160,7 @@ Xcode 16/17 最重要的构建变革。
 
 做过的工作不再重复做。
 
-- [编译优化-编译缓存](./编译优化-编译缓存.md)
+- [编译优化-编译缓存]({{< relref "/posts/interview/ios-build/编译缓存" >}})
   - ccache 的 direct / preprocessor 模式
   - Clang modules cache / Swift module cache
   - XCRemoteCache（Spotify）：Xcode 原生兼容的 Target 级远程缓存
@@ -171,7 +171,7 @@ Xcode 16/17 最重要的构建变革。
 
 Monorepo 与下一代构建系统。
 
-- [编译优化-Bazel方案](./编译优化-Bazel方案.md)
+- [编译优化-Bazel方案]({{< relref "/posts/interview/ios-build/Bazel方案" >}})
   - Bazel 核心概念与 sandbox/remote execution
   - rules_apple / rules_swift / rules_xcodeproj
   - 字节 BitSky、Bilibili、Airbnb 实践

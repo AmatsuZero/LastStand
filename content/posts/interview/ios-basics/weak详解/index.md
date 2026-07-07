@@ -32,7 +32,7 @@ weak var weakObj = strongObj
 
 ### SideTable
 
-`SideTable`是Runtime中非常重要的数据结构。关于SideTable在引用计数存储中的作用，请参考[iOS中的内存管理-侧表存储](iOS中的内存管理.md#侧表存储sidetable)。
+`SideTable`是Runtime中非常重要的数据结构。关于SideTable在引用计数存储中的作用，请参考[iOS中的内存管理-侧表存储]({{< relref "/posts/interview/ios-basics/iOS中的内存管理" >}}#侧表存储sidetable)。
 
 ```c
 struct SideTable {
@@ -456,7 +456,7 @@ table.unlock();
 
 `weak`操作通常非常快速（仅涉及哈希表操作），使用 `os_unfair_lock` 可以在保证线程安全的同时获得最佳性能。
 
-> 关于各种锁的详细对比和使用场景，请参阅 [iOS多线程编程 - 锁](../ios-basics/多线程.md#os_unfair_lockios-10)。
+> 关于各种锁的详细对比和使用场景，请参阅 [iOS多线程编程 - 锁]({{< relref "/posts/interview/ios-basics/多线程" >}}#os_unfair_lockios-10)。
 
 ### weak操作的线程安全总结
 

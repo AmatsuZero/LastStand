@@ -78,7 +78,7 @@ graph LR
 
 #### 与Transformer中Embedding的对比
 
-在[Transformer架构](Transformer架构原理.md)中也有Embedding层，两者的目的和特性有显著区别：
+在[Transformer架构]({{< relref "/posts/interview/ai/Transformer架构原理" >}})中也有Embedding层，两者的目的和特性有显著区别：
 
 | 维度 | Transformer词嵌入 | RAG文本嵌入 |
 |------|-------------------|-------------|

@@ -203,13 +203,13 @@ OTHER_LDFLAGS[arch=*] = $(inherited) \
 
 ### HEADER_SEARCH_PATHS 收敛
 
-见 [编译优化-头文件与HMap](./编译优化-头文件与HMap.md)，用 HMap 把几百条 Header Search Path 压缩成一个 `.hmap`，同样缓解 Arguments Too Long。
+见 [编译优化-头文件与HMap]({{< relref "/posts/interview/ios-build/头文件与HMap" >}})，用 HMap 把几百条 Header Search Path 压缩成一个 `.hmap`，同样缓解 Arguments Too Long。
 
 ---
 
 ## Order File 与启动/链接的关系
 
-Order File 不是链接阶段的"加速"手段，但它是链接器的一个重要能力，直接影响启动速度。见 [启动优化-二进制重排](../启动优化/启动优化-二进制重排.md)。
+Order File 不是链接阶段的"加速"手段，但它是链接器的一个重要能力，直接影响启动速度。见 [启动优化-二进制重排]({{< relref "/posts/interview/ios-performance/launch-二进制重排" >}})。
 
 ```text
 ORDER_FILE = $(SRCROOT)/MyApp.order
@@ -233,7 +233,7 @@ Order File 会让链接器按给定顺序排列函数，让启动期用到的函
 - 绝大多数业务代码：**静态库**
 - 跨 App 复用（Today Extension、Watch App）：**动态库**
 - 内部复用很多的 framework：**Mergeable Library**（见上）
-- 详见 [启动优化-减少动态库](../启动优化/启动优化-减少动态库.md)
+- 详见 [启动优化-减少动态库]({{< relref "/posts/interview/ios-performance/launch-减少动态库" >}})
 
 ---
 
@@ -242,7 +242,7 @@ Order File 会让链接器按给定顺序排列函数，让启动期用到的函
 ObjC 链接期有一步"Runtime Fixup"：合并分散在各 `.o` 里的 `__objc_classlist`、`__objc_catlist` 等 section，填充 VMAddr。大工程这个步骤会占链接时间的 20–40%。ld-prime 已经对它做了并行化。
 
 优化方向：
-- 减少 Category（[启动优化-Rebase与Bind](../启动优化/启动优化-Rebase与Bind.md)）
+- 减少 Category（[启动优化-Rebase与Bind]({{< relref "/posts/interview/ios-performance/launch-Rebase与Bind" >}})）
 - 减少不必要的 `@objc` 暴露
 - 合并分散的 Category
 

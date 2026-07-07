@@ -369,7 +369,7 @@ GPU瓶颈通常出现在：
 
 ## RunLoop如何驱动渲染
 
-> 关于RunLoop的详细介绍，请参考：[RunLoop](../../ios-basics/runloop.md)
+> 关于RunLoop的详细介绍，请参考：[RunLoop]({{< relref "/posts/interview/ios-basics/runloop" >}})
 
 Core Animation的渲染提交并不是随时发生的，它依赖主线程RunLoop的调度。理解这个关系是理解卡顿产生机制的关键。
 

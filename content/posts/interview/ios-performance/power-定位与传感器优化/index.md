@@ -241,7 +241,7 @@ override func viewWillDisappear(_ animated: Bool) {
 
 ## 五、屏幕功耗优化
 
-屏幕是iOS设备最持续的耗电模块。根据 [耗电-原理](./耗电-原理.md)，OLED的功耗和像素颜色直接相关。
+屏幕是iOS设备最持续的耗电模块。根据 [耗电-原理]({{< relref "/posts/interview/ios-performance/power-原理" >}})，OLED的功耗和像素颜色直接相关。
 
 ### OLED友好UI
 
@@ -388,4 +388,4 @@ NotificationCenter.default.addObserver(
 | Haptic | 仅用于关键反馈，低电量模式下降级                                                      |
 | Low Power Mode | 动态降级预加载/自动播放/后台同步                                                |
 
-下一篇进入 [耗电-治理](./耗电-治理.md)，把前面的知识整合成完整的工程化治理体系。
+下一篇进入 [耗电-治理]({{< relref "/posts/interview/ios-performance/power-治理" >}})，把前面的知识整合成完整的工程化治理体系。

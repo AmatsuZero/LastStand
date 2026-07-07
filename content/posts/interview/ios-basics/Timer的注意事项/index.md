@@ -175,7 +175,7 @@ NSProxy 比 NSObject 更适合做代理，因为：
 [proxy respondsToSelector:@selector(tick)];  // 转发给 target，返回 YES
 ```
 
-更多关于 NSProxy 消息转发机制的详细介绍，请参考 [Runtime - NSProxy 的消息转发](./runtime.md#nsproxy-的消息转发)。
+更多关于 NSProxy 消息转发机制的详细介绍，请参考 [Runtime - NSProxy 的消息转发]({{< relref "/posts/interview/ios-basics/runtime" >}}#nsproxy-的消息转发)。
 
 **方案三：使用 GCD Timer**
 

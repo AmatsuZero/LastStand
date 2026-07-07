@@ -8,7 +8,7 @@ categories = ["iOS开发", "源码分析"]
 +++
 > 本文是系列第二篇，基于 CocoaPods 1.16.2 源码。我们从 `bin/pod` 进场，走完 CLAide 的命令分发、`Podfile` 的 DSL 求值、`Analyzer` 的七步分析、`Resolver + Molinillo` 的回溯求解，最后交付 `AggregateTarget`/`PodTarget` 给下一篇讲的下载与集成。
 >
-> 上一篇：[架构总览](./CocoaPods源码导读-架构总览.md) · 下一篇：[从下载到工程集成](./CocoaPods源码导读-从下载到工程集成.md)
+> 上一篇：[架构总览]({{< relref "/posts/interview/ios-source-analysis/cocoapods-架构总览" >}}) · 下一篇：[从下载到工程集成]({{< relref "/posts/interview/ios-source-analysis/cocoapods-从下载到工程集成" >}})
 >
 > 运行示例贯穿全文：`pod install --repo-update`
 

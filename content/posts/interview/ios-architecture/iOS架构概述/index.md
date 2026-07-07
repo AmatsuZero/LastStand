@@ -271,15 +271,15 @@ flowchart LR
 
 ## 相关文章
 
-- [MVC架构详解](MVC.md)
-- [MVP架构详解](MVP.md)
-- [MVVM架构详解](MVVM.md)
-- [MVI架构详解](MVI.md)
-- [TCA架构详解](TCA.md)
-- [VIPER架构详解](VIPER.md)
-- [组件化架构详解](组件化.md)
-- [插件化架构详解](插件化.md)
-- [微服务化架构详解](微服务化.md)
+- [MVC架构详解]({{< relref "/posts/interview/ios-architecture/MVC" >}})
+- [MVP架构详解]({{< relref "/posts/interview/ios-architecture/MVP" >}})
+- [MVVM架构详解]({{< relref "/posts/interview/ios-architecture/MVVM" >}})
+- [MVI架构详解]({{< relref "/posts/interview/ios-architecture/MVI" >}})
+- [TCA架构详解]({{< relref "/posts/interview/ios-architecture/TCA" >}})
+- [VIPER架构详解]({{< relref "/posts/interview/ios-architecture/VIPER" >}})
+- [组件化架构详解]({{< relref "/posts/interview/ios-architecture/组件化" >}})
+- [插件化架构详解]({{< relref "/posts/interview/ios-architecture/插件化" >}})
+- [微服务化架构详解]({{< relref "/posts/interview/ios-architecture/微服务化" >}})
 
 ## 高频面试问题
 

@@ -655,7 +655,7 @@ __DATA   __la_symbol_ptr  0x100008100    Foundation  _NSLog
 
 ### 4.4 dyld 加载流程
 
-现在我们可以完整理解App启动时dyld的工作流程（更详细的启动流程分析请参考[App启动流程](./App启动流程.md)）：
+现在我们可以完整理解App启动时dyld的工作流程（更详细的启动流程分析请参考[App启动流程]({{< relref "/posts/interview/ios-basics/App启动流程" >}})）：
 
 ```mermaid
 flowchart TD
@@ -1259,7 +1259,7 @@ flowchart LR
 
 **什么是Module？**
 
-Module是Clang引入的模块化头文件机制，通过`module.modulemap`文件定义模块的公开接口（更详细的介绍请参考[Objective-C中import详解](./Objective-C中import详解.md)）：
+Module是Clang引入的模块化头文件机制，通过`module.modulemap`文件定义模块的公开接口（更详细的介绍请参考[Objective-C中import详解]({{< relref "/posts/interview/ios-basics/Objective-C中import详解" >}})）：
 
 ```mermaid
 flowchart LR
@@ -1410,7 +1410,7 @@ MyFramework.xcframework/
 
 #### XCFramework最佳实践
 
-1. **始终启用BUILD_LIBRARY_FOR_DISTRIBUTION**：确保Swift ABI稳定性（详见[Swift二进制兼容性](./Swift二进制兼容性.md)）
+1. **始终启用BUILD_LIBRARY_FOR_DISTRIBUTION**：确保Swift ABI稳定性（详见[Swift二进制兼容性]({{< relref "/posts/interview/ios-basics/Swift二进制兼容性" >}})）
 
 2. **包含所有需要的平台变体**：
    - iOS真机：`ios-arm64`

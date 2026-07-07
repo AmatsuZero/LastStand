@@ -87,7 +87,7 @@ flowchart TB
 
 ### 1. 原理篇
 
-- [耗电-原理](./耗电-原理.md)
+- [耗电-原理]({{< relref "/posts/interview/ios-performance/power-原理" >}})
   - iOS功耗模型
   - CPU/GPU的P-State与C-State
   - 网络模块的能效状态机
@@ -96,7 +96,7 @@ flowchart TB
 
 ### 2. 检测篇
 
-- [耗电-检测](./耗电-检测.md)
+- [耗电-检测]({{< relref "/posts/interview/ios-performance/power-检测" >}})
   - Xcode Energy Gauge
   - Instruments Energy Log
   - MetricKit线上功耗数据
@@ -107,7 +107,7 @@ flowchart TB
 
 #### 3.1 CPU与后台优化
 
-- [耗电-CPU与后台优化](./耗电-CPU与后台优化.md)
+- [耗电-CPU与后台优化]({{< relref "/posts/interview/ios-performance/power-CPU与后台优化" >}})
   - 减少CPU空转与轮询
   - Timer与RunLoop优化
   - GCD QoS合理使用
@@ -116,7 +116,7 @@ flowchart TB
 
 #### 3.2 网络优化
 
-- [耗电-网络优化](./耗电-网络优化.md)
+- [耗电-网络优化]({{< relref "/posts/interview/ios-performance/power-网络优化" >}})
   - 无线电能效状态机
   - 请求合并与延后
   - 后台下载与NSURLSession
@@ -125,7 +125,7 @@ flowchart TB
 
 #### 3.3 定位与传感器优化
 
-- [耗电-定位与传感器优化](./耗电-定位与传感器优化.md)
+- [耗电-定位与传感器优化]({{< relref "/posts/interview/ios-performance/power-定位与传感器优化" >}})
   - CLLocationManager精度与频率
   - SignificantLocationChange与Region Monitoring
   - 传感器采样频率控制
@@ -134,7 +134,7 @@ flowchart TB
 
 ### 4. 治理篇
 
-- [耗电-治理](./耗电-治理.md)
+- [耗电-治理]({{< relref "/posts/interview/ios-performance/power-治理" >}})
   - 研发阶段的能效规范
   - 线上耗电监控指标体系
   - 常见耗电问题排查手册

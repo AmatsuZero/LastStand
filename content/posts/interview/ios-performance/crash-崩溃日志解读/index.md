@@ -8,7 +8,7 @@ categories = ["iOS开发", "性能优化", "稳定性"]
 +++
 iOS 崩溃日志（`.ips` / 老版 `.crash`）是排查线上问题的一手证据。它不仅记录了"谁崩了"，更隐藏着**异常类型、终止命名空间、寄存器现场、线程堆栈、二进制映射、资源限额**等多维度事实。看懂每一个字段，才能把"不能复现"的崩溃拆成"寄存器 x0 是 nil 的后果"这种可复现假设。
 
-本文聚焦系统生成的崩溃日志本身：格式演变、`bug_type` 全景、Header/Body 逐字段、Exception Type / Termination Namespace 深度解读、寄存器视角、符号化工具链、实战案例库、自动化脚本。OOM 专用的 JetsamEvent 日志见 [JetsamEvent 日志解读](./JetsamEvent日志解读.md)；崩溃采集与治理方法论见 [崩溃-采集](./崩溃-采集.md)、[崩溃-治理](./崩溃-治理.md)。
+本文聚焦系统生成的崩溃日志本身：格式演变、`bug_type` 全景、Header/Body 逐字段、Exception Type / Termination Namespace 深度解读、寄存器视角、符号化工具链、实战案例库、自动化脚本。OOM 专用的 JetsamEvent 日志见 [JetsamEvent 日志解读]({{< relref "/posts/interview/ios-performance/crash-JetsamEvent日志解读" >}})；崩溃采集与治理方法论见 [崩溃-采集]({{< relref "/posts/interview/ios-performance/crash-采集" >}})、[崩溃-治理]({{< relref "/posts/interview/ios-performance/crash-治理" >}})。
 
 ---
 
@@ -42,7 +42,7 @@ iOS 的崩溃日志格式几经迭代：
 | `bug_type` | 含义 | Body 特征 | 对应文章 |
 |-----------|------|-----------|---------|
 | `109` | **普通崩溃**（Mach 异常 / Unix 信号 / NSException） | 有 `exception`、`threads`、`usedImages` | 本文 |
-| `298` | **JetsamEvent**（内存相关强杀） | 无线程堆栈，有 `memoryStatus`、`processes` | [JetsamEvent 日志解读](./JetsamEvent日志解读.md) |
+| `298` | **JetsamEvent**（内存相关强杀） | 无线程堆栈，有 `memoryStatus`、`processes` | [JetsamEvent 日志解读]({{< relref "/posts/interview/ios-performance/crash-JetsamEvent日志解读" >}}) |
 | `288` | CPU Resource Limit（CPU 超限警告，非崩溃） | `EXC_RESOURCE` 子类为 `CPU` | 本文 §5.5 |
 | `211` | **109-fold**：同一 App 多个 `109` 聚合 | 多个崩溃合并 | 解析时拆分成多个 109 处理 |
 | `309` | **Watchdog 超时** | 有 `reason`，含 `0x8BADF00D` 字样 | 本文 §6 |
@@ -138,7 +138,7 @@ iOS 的崩溃日志格式几经迭代：
 |------|------|
 | `pid` / `parentPid` | 进程/父进程 ID |
 | `procRole` | `Foreground` / `Background` / `Non-UI` / `Daemon`；判断 FOOM vs BOOM 的依据 |
-| `coalitionID` / `coalitionName` | coalition 组，主 App 与 WebContent、扩展通常同组（见 [JetsamEvent §6.3](./JetsamEvent日志解读.md)） |
+| `coalitionID` / `coalitionName` | coalition 组，主 App 与 WebContent、扩展通常同组（见 [JetsamEvent §6.3]({{< relref "/posts/interview/ios-performance/crash-JetsamEvent日志解读" >}})） |
 | `uptime` | 设备开机到崩溃的秒数 |
 | `procLaunch` | 进程启动时刻，`captureTime - procLaunch` 即进程存活时长；≤ 20s 强相关启动崩溃 |
 | `responsiblePid` | 真正"负责"这次崩溃的进程，XPC 场景下可能指向调用方 |
@@ -594,7 +594,7 @@ iOS 14 之前 App Store 曾要求 Bitcode 上传，真实线上二进制由 Appl
 
 - `bug_type = 309` + `termination.namespace = FRONTBOARD` + `code = 0x8BADF00D`（十进制 2343432205）→ **Watchdog 超时**
 - `subtype = LAUNCH_HANG` → 启动阶段 20s 内未完成
-- 主线程堆栈常停在 `CFRunLoopServiceMachPort` 或业务同步网络调用；治理见 [崩溃-治理 §场景 4](./崩溃-治理.md#场景4无堆栈记录oom--watchdog--低电量等)
+- 主线程堆栈常停在 `CFRunLoopServiceMachPort` 或业务同步网络调用；治理见 [崩溃-治理 §场景 4]({{< relref "/posts/interview/ios-performance/crash-治理" >}}#场景4无堆栈记录oom--watchdog--低电量等)
 
 ### 案例 5：OOM（EXC_RESOURCE + JetsamEvent 并发）
 
@@ -603,7 +603,7 @@ iOS 14 之前 App Store 曾要求 Bitcode 上传，真实线上二进制由 Appl
 1. `bug_type = 109`，`exception.type = EXC_RESOURCE`，`subtype = "MEMORY (Fatal) Footprint: ..."` → 有堆栈
 2. `bug_type = 298`，JetsamEvent → 无堆栈，但有整机内存画像
 
-实战价值在于把两者按 `incident_id` / `timestamp` 串起来：堆栈从 109 拿，整机归因从 298 拿。详见 [JetsamEvent 日志解读](./JetsamEvent日志解读.md)。
+实战价值在于把两者按 `incident_id` / `timestamp` 串起来：堆栈从 109 拿，整机归因从 298 拿。详见 [JetsamEvent 日志解读]({{< relref "/posts/interview/ios-performance/crash-JetsamEvent日志解读" >}})。
 
 ### 案例 6：用户强杀误报
 

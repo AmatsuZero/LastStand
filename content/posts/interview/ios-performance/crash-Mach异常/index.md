@@ -8,7 +8,7 @@ categories = ["iOS开发", "性能优化", "稳定性"]
 +++
 本文深入介绍Mach异常的底层实现细节，包括端口操作、消息机制以及如何实现自定义的Mach异常处理器。
 
-> 关于Mach异常的基础概念（Task、Thread、Port、Message）和异常端口的查找顺序，请参考 [崩溃-原理](崩溃-原理.md)。
+> 关于Mach异常的基础概念（Task、Thread、Port、Message）和异常端口的查找顺序，请参考 [崩溃-原理]({{< relref "/posts/interview/ios-performance/crash-原理" >}})。
 
 ---
 

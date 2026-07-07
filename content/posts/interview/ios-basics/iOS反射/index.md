@@ -12,7 +12,7 @@ categories = ["iOS开发", "面试"]
 
 Objective-C 的反射能力完全建立在 Runtime 之上。Runtime 在运行时维护了完整的类型元数据（类对象、元类对象、方法列表、属性列表、成员变量列表、协议列表等），并通过一系列 C 函数 API 暴露给开发者，使得程序可以在运行时动态地查询和修改几乎所有类型信息。
 
-关于 Runtime 的消息发送、消息转发、Method Swizzling、关联对象等核心能力，请参考 [runtime](./runtime.md)。本节聚焦于 Runtime 中与"反射"直接相关的能力——即运行时的类型内省和动态操作。
+关于 Runtime 的消息发送、消息转发、Method Swizzling、关联对象等核心能力，请参考 [runtime]({{< relref "/posts/interview/ios-basics/runtime" >}})。本节聚焦于 Runtime 中与"反射"直接相关的能力——即运行时的类型内省和动态操作。
 
 ### 类型内省
 

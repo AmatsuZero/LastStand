@@ -10,8 +10,8 @@ categories = ["iOS开发", "源码分析"]
 >
 > 系列目录：
 > - **架构总览**（本文）
-> - [从命令到依赖求解](./CocoaPods源码导读-从命令到依赖求解.md)
-> - [从下载到工程集成](./CocoaPods源码导读-从下载到工程集成.md)
+> - [从命令到依赖求解]({{< relref "/posts/interview/ios-source-analysis/cocoapods-从命令到依赖求解" >}})
+> - [从下载到工程集成]({{< relref "/posts/interview/ios-source-analysis/cocoapods-从下载到工程集成" >}})
 
 ---
 
@@ -507,8 +507,8 @@ Podfile 里写的 `post_install do |installer| ... end` 本质上就是一段 bl
 
 ## 八、下文预告
 
-- **[从命令到依赖求解](./CocoaPods源码导读-从命令到依赖求解.md)**：从 `Pod::Command.run` 切入，讲 CLAide 的子命令 DSL、`Podfile.from_ruby` 的 `instance_eval` 机制、`Analyzer` 的七步走、Molinillo 的回溯算法与 `Resolver` 适配层，最后看 `generate_targets` 是怎么产出 `AggregateTarget`/`PodTarget` 的。
-- **[从下载到工程集成](./CocoaPods源码导读-从下载到工程集成.md)**：跟进 `PodSourceInstaller` 的下载与缓存、`Sandbox` 的目录分层、`Xcode::PodsProjectGenerator` 如何生成 `Pods.xcodeproj` / xcconfig / modulemap / dummy.m、`UserProjectIntegrator` 如何把这些产物塞进用户工程，最后讨论 Incremental Install 的 `project_cache` 设计。
+- **[从命令到依赖求解]({{< relref "/posts/interview/ios-source-analysis/cocoapods-从命令到依赖求解" >}})**：从 `Pod::Command.run` 切入，讲 CLAide 的子命令 DSL、`Podfile.from_ruby` 的 `instance_eval` 机制、`Analyzer` 的七步走、Molinillo 的回溯算法与 `Resolver` 适配层，最后看 `generate_targets` 是怎么产出 `AggregateTarget`/`PodTarget` 的。
+- **[从下载到工程集成]({{< relref "/posts/interview/ios-source-analysis/cocoapods-从下载到工程集成" >}})**：跟进 `PodSourceInstaller` 的下载与缓存、`Sandbox` 的目录分层、`Xcode::PodsProjectGenerator` 如何生成 `Pods.xcodeproj` / xcconfig / modulemap / dummy.m、`UserProjectIntegrator` 如何把这些产物塞进用户工程，最后讨论 Incremental Install 的 `project_cache` 设计。
 
 读完三篇你应该能做到：
 

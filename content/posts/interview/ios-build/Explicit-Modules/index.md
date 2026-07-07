@@ -227,6 +227,6 @@ flowchart TD
 2. **统一宏**：`grep -r "GCC_PREPROCESSOR_DEFINITIONS" ./Pods` 找出差异
 3. **统一 SDK/Deployment**：保证所有 Pod 的 `IPHONEOS_DEPLOYMENT_TARGET` 一致
 4. **持久化缓存**：CI 将 `DerivedData/ModuleCache.noindex` 纳入缓存（GitHub Actions `actions/cache`、Bitrise Cache Pull 等）
-5. **观测**：用 [编译优化-观测](./编译优化-观测.md) 中的方法对比开启前后的 clean / incremental 耗时
+5. **观测**：用 [编译优化-观测]({{< relref "/posts/interview/ios-build/观测" >}}) 中的方法对比开启前后的 clean / incremental 耗时
 
 Explicit Modules 是一个需要综合评估的优化——在本地开发机、CI 冷启动、CI 带缓存三种场景下表现截然不同，不能跟风默认打开，务必先量化再决定。

@@ -1122,7 +1122,7 @@ err_module_import_in_implementation: "@import of module '%0' in implementation o
 > - Swift 类需要继承自 `NSObject` 或标记为 `@objc` 才能被 Objective-C 调用
 > - 如果 Target 名称包含特殊字符（如 `-`、`.`），会被替换为 `_`
 
-关于 `-Swift.h` 头文件的生成原理，涉及 Swift 编译器的 PrintAsClang 模块，详见：[Swift中import详解](./Swift中import详解.md)
+关于 `-Swift.h` 头文件的生成原理，涉及 Swift 编译器的 PrintAsClang 模块，详见：[Swift中import详解]({{< relref "/posts/interview/ios-basics/Swift中import详解" >}})
 
 ### Swift 调用 Objective-C 代码
 

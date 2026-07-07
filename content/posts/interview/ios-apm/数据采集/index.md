@@ -51,7 +51,7 @@ graph TB
 
 ## 二、崩溃采集
 
-> 原理文章：[崩溃-原理](../崩溃/崩溃-原理.md) · [崩溃-Mach异常](../崩溃/崩溃-Mach异常.md) · [崩溃-信号处理](../崩溃/崩溃-信号处理.md) · [崩溃-采集](../崩溃/崩溃-采集.md)
+> 原理文章：[崩溃-原理]({{< relref "/posts/interview/ios-performance/crash-原理" >}}) · [崩溃-Mach异常]({{< relref "/posts/interview/ios-performance/crash-Mach异常" >}}) · [崩溃-信号处理]({{< relref "/posts/interview/ios-performance/crash-信号处理" >}}) · [崩溃-采集]({{< relref "/posts/interview/ios-performance/crash-采集" >}})
 
 本节只给出 APM SDK 集成视角的关键点。
 
@@ -174,7 +174,7 @@ Signal handler 中只能调用 **async-signal-safe** 函数。常见错误：
 
 ## 三、卡死监控
 
-> 原理文章：[卡顿-原理](../卡顿/卡顿-原理.md) · [卡顿-检测](../卡顿/卡顿-检测.md)
+> 原理文章：[卡顿-原理]({{< relref "/posts/interview/ios-performance/stutter-原理" >}}) · [卡顿-检测]({{< relref "/posts/interview/ios-performance/stutter-检测" >}})
 
 卡顿与卡死技术同源但采集策略不同：**卡顿关心频次+堆栈，卡死关心能否捕获最后一秒**。
 
@@ -282,7 +282,7 @@ void backtrace_thread(thread_t thread, uintptr_t *buffer, int max_depth) {
 
 ## 四、内存 / OOM 监控
 
-> 相关文章：[崩溃-治理](../崩溃/崩溃-治理.md) · [JetsamEvent日志解读](../崩溃/JetsamEvent日志解读.md)
+> 相关文章：[崩溃-治理]({{< relref "/posts/interview/ios-performance/crash-治理" >}}) · [JetsamEvent日志解读]({{< relref "/posts/interview/ios-performance/crash-JetsamEvent日志解读" >}})
 
 ### 4.1 内存水位采集
 
@@ -430,7 +430,7 @@ MXMetricManager.shared.add(APMMetricSubscriber())
 
 ## 五、FPS 与卡顿采集
 
-> 详见 [卡顿-检测](../卡顿/卡顿-检测.md)。
+> 详见 [卡顿-检测]({{< relref "/posts/interview/ios-performance/stutter-检测" >}})。
 
 要点：
 
@@ -443,7 +443,7 @@ MXMetricManager.shared.add(APMMetricSubscriber())
 
 ## 六、启动采集
 
-> 详见 [启动优化-观测](../启动优化/启动优化-观测.md)。
+> 详见 [启动优化-观测]({{< relref "/posts/interview/ios-performance/launch-观测" >}})。
 
 ### 6.1 Pre-main 阶段
 

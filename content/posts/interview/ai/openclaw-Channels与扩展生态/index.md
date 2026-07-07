@@ -554,9 +554,9 @@ Browser sandbox 有**独立的 security hash**——只要 upstream 的安全补
 
 ## 系列索引
 
-- **（一）** [OpenClaw 源码导读：架构总览](./OpenClaw源码导读-架构总览.md)
-- **（二）** [OpenClaw 源码导读：Gateway 控制平面 — 一条 WebSocket 连上所有人](./OpenClaw源码导读-Gateway控制平面.md)
-- **（三）** [OpenClaw 源码导读：Agent Harness — 为"每一家 LLM 都能兜住"而生的执行管线](./OpenClaw源码导读-Agent%20Harness.md)
+- **（一）** [OpenClaw 源码导读：架构总览]({{< relref "/posts/interview/ai/openclaw-架构总览" >}})
+- **（二）** [OpenClaw 源码导读：Gateway 控制平面 — 一条 WebSocket 连上所有人]({{< relref "/posts/interview/ai/openclaw-Gateway控制平面" >}})
+- **（三）** [OpenClaw 源码导读：Agent Harness — 为"每一家 LLM 都能兜住"而生的执行管线]({{< relref "/posts/interview/ai/openclaw-Agent-Harness" >}})
 - **（四）** OpenClaw 源码导读：Channels、Nodes 与扩展生态（本文）
 
 ## 参考资料

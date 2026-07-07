@@ -267,7 +267,7 @@ Sentry的[Insights功能](https://docs.sentry.io/platforms/apple/guides/ios/size
 
 理解Mach-O文件结构是进行二进制优化的基础。Mach-O（Mach Object）是macOS/iOS上的可执行文件格式。
 
-> 更详细的Mach-O介绍请参考：[Mach-O的链接、装载与库](../../ios-basics/Mach-O的链接、装载与库.md)
+> 更详细的Mach-O介绍请参考：[Mach-O的链接、装载与库]({{< relref "/posts/interview/ios-basics/Mach-O的链接-装载与库" >}})
 
 ### 基本结构
 

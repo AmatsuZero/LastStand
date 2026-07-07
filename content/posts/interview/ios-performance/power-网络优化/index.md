@@ -428,4 +428,4 @@ func canPrefetch() -> Bool {
 | 压缩/裁剪    | gzip/brotli、Protobuf、图片尺寸适配        |
 | 预加载      | WiFi + 电量 + 热状态多重gating            |
 
-下一篇进入 [耗电-定位与传感器优化](./耗电-定位与传感器优化.md)。
+下一篇进入 [耗电-定位与传感器优化]({{< relref "/posts/interview/ios-performance/power-定位与传感器优化" >}})。

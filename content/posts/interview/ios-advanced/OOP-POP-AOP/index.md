@@ -869,7 +869,7 @@ flowchart TB
     F --> F2["纯Swift类型不支持"]
 ```
 
-> 💡 关于为什么要在 `+load` 而非 `+initialize` 中执行 Swizzling，请参考 [+load与+initialize的区别](../ios-basics/load与initialize的区别.md)。简单来说：`+load` 在类加载时立即调用，确保 Swizzling 在任何方法调用之前完成；而 `+initialize` 是懒加载的，可能导致 Swizzling 时机不确定。
+> 💡 关于为什么要在 `+load` 而非 `+initialize` 中执行 Swizzling，请参考 [+load与+initialize的区别]({{< relref "/posts/interview/ios-basics/load与initialize的区别" >}})。简单来说：`+load` 在类加载时立即调用，确保 Swizzling 在任何方法调用之前完成；而 `+initialize` 是懒加载的，可能导致 Swizzling 时机不确定。
 
 ---
 

@@ -932,7 +932,7 @@ static void runLoopObserverCallback(CFRunLoopObserverRef observer, CFRunLoopActi
 @end
 ```
 
-上面的方案是网上流传最广的 RunLoop 卡顿监控实现，但它存在一个 `kCFRunLoopBeforeWaiting` 阶段的监控盲区——UI 布局/绘制、手势回调等系统 Observer 的耗时无法被捕获。微信 Matrix 通过注册两个 Observer（order 分别为 `LONG_MIN` 和 `LONG_MAX`）来包裹所有系统 Observer 的执行，从而覆盖这个阶段。详见 [卡顿-检测](../../ios-advanced/卡顿/卡顿-检测.md#beforewaiting阶段的监控盲区)。
+上面的方案是网上流传最广的 RunLoop 卡顿监控实现，但它存在一个 `kCFRunLoopBeforeWaiting` 阶段的监控盲区——UI 布局/绘制、手势回调等系统 Observer 的耗时无法被捕获。微信 Matrix 通过注册两个 Observer（order 分别为 `LONG_MIN` 和 `LONG_MAX`）来包裹所有系统 Observer 的执行，从而覆盖这个阶段。详见 [卡顿-检测]({{< relref "/posts/interview/ios-performance/stutter-检测" >}}#beforewaiting阶段的监控盲区)。
 
 ### 4. 利用 RunLoop 空闲时执行低优先级任务
 
@@ -1213,7 +1213,7 @@ _thread = [[NSThread alloc] initWithBlock:^{
 
 利用 RunLoop Observer 监控主线程的运行状态。原理是：在子线程中用信号量等待主线程 RunLoop 的状态变化通知，如果等待超时（比如超过 50ms），且主线程处于 `kCFRunLoopBeforeSources` 或 `kCFRunLoopAfterWaiting` 状态，说明主线程在处理事件或刚唤醒后被阻塞，此时可以抓取堆栈进行分析。
 
-需要注意的是，简单方案（单个 Observer，order=0）存在 `kCFRunLoopBeforeWaiting` 阶段的监控盲区——UI 布局/绘制、手势回调等系统 Observer 的耗时无法被捕获。微信 Matrix 通过注册两个 Observer（order 分别为 `LONG_MIN` 和 `LONG_MAX`）来包裹所有系统 Observer 的执行，从而完整覆盖这个阶段。详见 [卡顿-检测](../../ios-advanced/卡顿/卡顿-检测.md#beforewaiting阶段的监控盲区)。
+需要注意的是，简单方案（单个 Observer，order=0）存在 `kCFRunLoopBeforeWaiting` 阶段的监控盲区——UI 布局/绘制、手势回调等系统 Observer 的耗时无法被捕获。微信 Matrix 通过注册两个 Observer（order 分别为 `LONG_MIN` 和 `LONG_MAX`）来包裹所有系统 Observer 的执行，从而完整覆盖这个阶段。详见 [卡顿-检测]({{< relref "/posts/interview/ios-performance/stutter-检测" >}}#beforewaiting阶段的监控盲区)。
 
 ```objc
 // 创建 Observer 监听所有状态变化

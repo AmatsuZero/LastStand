@@ -8,7 +8,7 @@ categories = ["iOS开发", "性能优化"]
 +++
 准确测量启动时间是优化的前提。启动时间是用户体验的关键指标之一，研究表明，应用性能直接影响用户留存：页面加载时间每增加1秒，用户流失率会显著上升。对于iOS应用，需要在20秒内完成启动，否则可能会被watchdog强制终止。
 
-本文介绍如何测量和监控iOS应用的启动时间。关于启动流程的详细介绍，请参考 [App启动流程](../../ios-basics/App启动流程.md)。
+本文介绍如何测量和监控iOS应用的启动时间。关于启动流程的详细介绍，请参考 [App启动流程]({{< relref "/posts/interview/ios-basics/App启动流程" >}})。
 
 ---
 
@@ -158,7 +158,7 @@ MetricKit 的优势：
 
 ### 4.1 Pre-main 阶段的可埋点时机
 
-在编写埋点代码之前，需要理解 Pre-main 阶段的执行顺序和可埋点时机（详见 [App启动流程 - Pre-main阶段](../../ios-basics/App启动流程.md#pre-main-阶段)）：
+在编写埋点代码之前，需要理解 Pre-main 阶段的执行顺序和可埋点时机（详见 [App启动流程 - Pre-main阶段]({{< relref "/posts/interview/ios-basics/App启动流程" >}}#pre-main-阶段)）：
 
 ```mermaid
 flowchart TD
@@ -640,7 +640,7 @@ class HomeViewController: UIViewController {
 
 ## 五、预热启动的识别（iOS 15+）
 
-iOS 15 引入预热启动（Pre-warm Launch），系统会预测用户可能启动的 App 并提前执行部分启动流程。这会影响启动时间的统计准确性。关于预热启动的详细介绍，请参考 [App启动流程 - 预热启动](../../ios-basics/App启动流程.md#三预热启动pre-warm-launch)。
+iOS 15 引入预热启动（Pre-warm Launch），系统会预测用户可能启动的 App 并提前执行部分启动流程。这会影响启动时间的统计准确性。关于预热启动的详细介绍，请参考 [App启动流程 - 预热启动]({{< relref "/posts/interview/ios-basics/App启动流程" >}}#三预热启动pre-warm-launch)。
 
 ### 5.1 预热启动流程
 

@@ -8,7 +8,7 @@ categories = ["iOS开发", "源码分析"]
 +++
 > 本文是系列第三篇，基于 CocoaPods 1.16.2 源码。上一篇我们停在 `Analyzer` 产出 `AnalysisResult`，本文继续走完 `download_dependencies` → `validate_targets` → `generate_pods_project` → `integrate_user_project` → `write_lockfiles` 这五个阶段。
 >
-> 上一篇：[从命令到依赖求解](./CocoaPods源码导读-从命令到依赖求解.md) · 首篇：[架构总览](./CocoaPods源码导读-架构总览.md)
+> 上一篇：[从命令到依赖求解]({{< relref "/posts/interview/ios-source-analysis/cocoapods-从命令到依赖求解" >}}) · 首篇：[架构总览]({{< relref "/posts/interview/ios-source-analysis/cocoapods-架构总览" >}})
 
 ---
 

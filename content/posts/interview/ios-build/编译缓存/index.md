@@ -51,7 +51,7 @@ DerivedData/<project>/Build/ModuleCache.noindex/
 
 ### 优化点
 
-- **减少变体**：module cache 命中率的关键是 `context-hash` 稳定。见 [编译优化-Explicit Modules](./编译优化-Explicit Modules.md) 的"减少模块变体"部分
+- **减少变体**：module cache 命中率的关键是 `context-hash` 稳定。见 [编译优化-Explicit Modules]({{< relref "/posts/interview/ios-build/Explicit-Modules" >}}) 的"减少模块变体"部分
 - **持久化到 CI 缓存**：CI 上把 `ModuleCache.noindex` 目录纳入 cache step
 - **清理策略**：module cache 默认 7 天 LRU。大工程可适当增加 size 上限
 
@@ -149,7 +149,7 @@ ccache 在 iOS 工程上命中率通常远低于 Linux/C 工程：
 
 ### 收益
 
-对 OC 为主的工程，ccache 在**多用户共享缓存 + 稳定参数**时能提供 30–60% 的加速。Swift 工程收益有限，最好配合 [编译优化-二进制化](./编译优化-二进制化.md) 一起使用。
+对 OC 为主的工程，ccache 在**多用户共享缓存 + 稳定参数**时能提供 30–60% 的加速。Swift 工程收益有限，最好配合 [编译优化-二进制化]({{< relref "/posts/interview/ios-build/二进制化" >}}) 一起使用。
 
 ---
 
@@ -230,7 +230,7 @@ XCRemoteCache 支持 **Focused Targets** 优化：
 - **Focused Target**：开发者可能会改动的 Target，正常做 fingerprint 比对
 - **Thin Target**：开发者不改的依赖（典型如 Pod），产物直接走缓存，不算 fingerprint
 
-Thin Target 只保留一个 `standin.swift` / `standin.m` 占位源码，编译时直接把远端产物挪过去。大工程里绝大多数 Pod 都可以设为 Thin，本地只为业务 Target 跑 fingerprint，大幅降低开销。这和 [编译优化-二进制化](./编译优化-二进制化.md) 里 Rugby 的思路在目标上相似，但 XCRemoteCache 更贴近 Xcode 原生构建。
+Thin Target 只保留一个 `standin.swift` / `standin.m` 占位源码，编译时直接把远端产物挪过去。大工程里绝大多数 Pod 都可以设为 Thin，本地只为业务 Target 跑 fingerprint，大幅降低开销。这和 [编译优化-二进制化]({{< relref "/posts/interview/ios-build/二进制化" >}}) 里 Rugby 的思路在目标上相似，但 XCRemoteCache 更贴近 Xcode 原生构建。
 
 ### Debug Symbols 与源码路径
 
@@ -338,7 +338,7 @@ flowchart LR
 - 混合 Bazel + Xcode：搭配 `rules_xcodeproj`
 - 传统 Xcode 工程：需要通过 XCBBuildServiceProxy 改造才能利用 Bazel Remote Cache
 
-详见 [编译优化-Bazel方案](./编译优化-Bazel方案.md)。
+详见 [编译优化-Bazel方案]({{< relref "/posts/interview/ios-build/Bazel方案" >}})。
 
 ### 命中率陷阱
 
@@ -391,7 +391,7 @@ OTHER_LDFLAGS = -Wl,-prune_after_lto,259200  # 3 天
 
 效果：Thin LTO 的 Release 构建从数分钟降到数十秒增量。
 
-见 [编译优化-链接优化](./编译优化-链接优化.md)。
+见 [编译优化-链接优化]({{< relref "/posts/interview/ios-build/链接优化" >}})。
 
 ---
 
@@ -444,9 +444,9 @@ COMPILER_INDEX_STORE_ENABLE = NO     # CI 关闭，省 15% 左右时间
 
 1. CI 缓存 `DerivedData` / `Pods` / `CocoaPods Cache`
 2. 本地 / CI 共享 Clang + Swift Module Cache
-3. 二进制化依赖（[编译优化-二进制化](./编译优化-二进制化.md)）
+3. 二进制化依赖（[编译优化-二进制化]({{< relref "/posts/interview/ios-build/二进制化" >}})）
 4. 引入 ccache（对 OC 为主的工程）
 5. 接入 XCRemoteCache，获得 Xcode 原生兼容的 Target 级远程缓存
-6. 切 Bazel，接入 Remote Cache & Remote Execution（[编译优化-Bazel方案](./编译优化-Bazel方案.md)）
+6. 切 Bazel，接入 Remote Cache & Remote Execution（[编译优化-Bazel方案]({{< relref "/posts/interview/ios-build/Bazel方案" >}})）
 
-每一步都应通过 [编译优化-观测](./编译优化-观测.md) 的指标体系验证收益。
+每一步都应通过 [编译优化-观测]({{< relref "/posts/interview/ios-build/观测" >}}) 的指标体系验证收益。

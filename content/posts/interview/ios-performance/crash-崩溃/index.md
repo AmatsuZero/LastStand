@@ -97,19 +97,19 @@ categories = ["iOS开发", "性能优化", "稳定性"]
 
 理解崩溃的底层原理是有效治理的基础。
 
-- [崩溃-原理](./崩溃-原理.md)
+- [崩溃-原理]({{< relref "/posts/interview/ios-performance/crash-原理" >}})
   - iOS异常处理机制
   - Mach异常与Unix信号的关系
   - NSException处理流程
   - 崩溃的传递链路
 
-- [崩溃-Mach异常](./崩溃-Mach异常.md)
+- [崩溃-Mach异常]({{< relref "/posts/interview/ios-performance/crash-Mach异常" >}})
   - Mach内核基础
   - 异常端口机制
   - 常见Mach异常类型
   - 异常处理流程
 
-- [崩溃-信号处理](./崩溃-信号处理.md)
+- [崩溃-信号处理]({{< relref "/posts/interview/ios-performance/crash-信号处理" >}})
   - Unix信号机制
   - 常见崩溃信号
   - Signal Handler注册
@@ -119,7 +119,7 @@ categories = ["iOS开发", "性能优化", "稳定性"]
 
 准确采集崩溃信息是分析和修复的前提。
 
-- [崩溃-采集](./崩溃-采集.md)
+- [崩溃-采集]({{< relref "/posts/interview/ios-performance/crash-采集" >}})
   - 崩溃捕获方案
   - 堆栈回溯技术
   - 符号化原理
@@ -129,19 +129,19 @@ categories = ["iOS开发", "性能优化", "稳定性"]
 
 系统性的治理策略帮助持续降低崩溃率。
 
-- [崩溃-治理](./崩溃-治理.md)
+- [崩溃-治理]({{< relref "/posts/interview/ios-performance/crash-治理" >}})
   - 常见崩溃类型及修复
   - 防崩溃保护机制
   - 线上监控体系
   - 崩溃分析方法论
 
-- [崩溃日志解读](./崩溃日志解读.md)
+- [崩溃日志解读]({{< relref "/posts/interview/ios-performance/crash-崩溃日志解读" >}})
   - `.ips` 双段 JSON 格式与 `bug_type` 全景
   - `exception` / `termination` / `threads` / `usedImages` 逐字段详解
   - Exception Type 与 Termination Namespace 深度解读
   - 寄存器视角、符号化工具链与实战案例库
 
-- [JetsamEvent 日志解读](./JetsamEvent日志解读.md)
+- [JetsamEvent 日志解读]({{< relref "/posts/interview/ios-performance/crash-JetsamEvent日志解读" >}})
   - Jetsam 机制与 `.ips` 文件结构
   - `memoryStatus` / `processes` 字段逐项详解
   - `reason` 类型深度解读与排查方向

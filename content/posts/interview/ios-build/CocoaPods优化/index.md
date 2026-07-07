@@ -8,7 +8,7 @@ categories = ["iOS开发", "工程化"]
 +++
 在 iOS 生态中，CocoaPods 依然是大多数中大型工程的依赖管理工具。当 Pod 数量达到几百个子组件上千个时，`pod install` 的耗时会变成研发流程里的硬性卡点。抖音在其 `seer-optimize` 项目中系统化地优化了 CocoaPods 的整个生命周期，全量 Pod Install 耗时减少 50%、增量减少 65%。本文系统介绍这些优化背后的原理。
 
-关于 CocoaPods 整体架构的深度介绍可以参考 [CocoaPods源码导读-架构总览](../CocoaPods/CocoaPods源码导读-架构总览.md)。
+关于 CocoaPods 整体架构的深度介绍可以参考 [CocoaPods源码导读-架构总览]({{< relref "/posts/interview/ios-source-analysis/cocoapods-架构总览" >}})。
 
 ---
 
@@ -290,8 +290,8 @@ end
 超大工程链接失败的经典错误 `Arguments Too Long` 根因是 `Build Settings` 里的 `HEADER_SEARCH_PATHS` / `FRAMEWORK_SEARCH_PATHS` / `LIBRARY_SEARCH_PATHS` / `OTHER_LDFLAGS` 累积超过 Unix `ARG_MAX`。
 
 解决参见：
-- [编译优化-头文件与HMap](./编译优化-头文件与HMap.md)：用 HMap 合并 Header Search Path
-- [编译优化-链接优化](./编译优化-链接优化.md)：用 filelist 合并链接参数
+- [编译优化-头文件与HMap]({{< relref "/posts/interview/ios-build/头文件与HMap" >}})：用 HMap 合并 Header Search Path
+- [编译优化-链接优化]({{< relref "/posts/interview/ios-build/链接优化" >}})：用 filelist 合并链接参数
 
 ### 新增文件免 pod install
 
@@ -352,7 +352,7 @@ install! consume              : 5.376132s
 - 异常告警（耗时陡增）
 - 稳定性（失败率与错误日志）
 
-详见 [编译优化-观测](./编译优化-观测.md)。
+详见 [编译优化-观测]({{< relref "/posts/interview/ios-build/观测" >}})。
 
 ---
 

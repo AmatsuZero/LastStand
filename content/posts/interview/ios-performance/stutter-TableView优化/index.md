@@ -844,7 +844,7 @@ class PaginatedTableViewController: UITableViewController {
 
 ### Texture (AsyncDisplayKit)
 
-> 源码导读：[Texture源码导读](../三方库源码/Texture源码导读.md)
+> 源码导读：[Texture源码导读]({{< relref "/posts/interview/ios-source-analysis/Texture源码导读" >}})
 
 Facebook开源的异步UI框架。
 
@@ -980,7 +980,7 @@ extension FeedViewController: ASTableDataSource {
 
 ### IGListKit
 
-> 源码导读：[IGListKit源码导读](../三方库源码/IGListKit源码导读.md)
+> 源码导读：[IGListKit源码导读]({{< relref "/posts/interview/ios-source-analysis/IGListKit源码导读" >}})
 
 Instagram开源的数据驱动列表框架。
 

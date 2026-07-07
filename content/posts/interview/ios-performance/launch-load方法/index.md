@@ -45,7 +45,7 @@ categories = ["iOS开发", "性能优化"]
 | 线程安全 | 是 | 是 |
 | 调用顺序 | 父类→子类→Category | 父类→子类 |
 
-> 更详细的对比请参考：[+load与+initialize的区别](../../ios-basics/load与initialize的区别.md)
+> 更详细的对比请参考：[+load与+initialize的区别]({{< relref "/posts/interview/ios-basics/load与initialize的区别" >}})
 
 ---
 

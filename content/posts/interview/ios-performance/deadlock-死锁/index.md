@@ -266,7 +266,7 @@ final class EventCenter {
 }
 ```
 
-**修复**：采取 RxSwift 里那种"锁内拿快照、锁外发通知"模式（见 [RxSwift源码导读](../三方库源码/RxSwift源码导读.md)）：
+**修复**：采取 RxSwift 里那种"锁内拿快照、锁外发通知"模式（见 [RxSwift源码导读]({{< relref "/posts/interview/ios-source-analysis/RxSwift源码导读" >}})）：
 
 ```swift
 func notify(_ e: Event) {
@@ -284,7 +284,7 @@ func notify(_ e: Event) {
 
 Sentry Cocoa SDK 2024 年曝光过一个真实案例：`sentrycrashdl_dladdr` 号称 async-signal-safe，但内部调用了 `_dyld_get_image_header`，而后者在所有线程被挂起时会尝试申请 dyld 锁，形成死锁（[sentry-cocoa#4056](https://github.com/getsentry/sentry-cocoa/issues/4056)）。
 
-**规避**：Signal Handler 中只调用 [async-signal-safe](https://man7.org/linux/man-pages/man7/signal-safety.7.html) 函数（`write`、`_exit`、`sigaction`），堆栈采集用无锁 ring buffer 写到子线程异步落盘（见 [崩溃-信号处理](../崩溃/崩溃-信号处理.md)、[崩溃-Mach异常](../崩溃/崩溃-Mach异常.md)）。
+**规避**：Signal Handler 中只调用 [async-signal-safe](https://man7.org/linux/man-pages/man7/signal-safety.7.html) 函数（`write`、`_exit`、`sigaction`），堆栈采集用无锁 ring buffer 写到子线程异步落盘（见 [崩溃-信号处理]({{< relref "/posts/interview/ios-performance/crash-信号处理" >}})、[崩溃-Mach异常]({{< relref "/posts/interview/ios-performance/crash-Mach异常" >}})）。
 
 ### 场景 9：Swift Concurrency 下的死锁
 

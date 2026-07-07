@@ -43,7 +43,7 @@ obj->isa = [NSObject class]; // 实际过程更复杂，但本质如此
 
 ## isa
 
-通俗的讲，`isa`是对象与其类的连接。每个`Objective-C`对象结构体的第一个成员都是一个`isa`指针。它指向对象的类（Class），类中包含了对象的元数据（方法列表、属性列表、协议列表等），这是`Objective-C`动态消息派发的基石。关于消息发送和消息转发的详细机制，请参考 [Runtime](./runtime.md)。
+通俗的讲，`isa`是对象与其类的连接。每个`Objective-C`对象结构体的第一个成员都是一个`isa`指针。它指向对象的类（Class），类中包含了对象的元数据（方法列表、属性列表、协议列表等），这是`Objective-C`动态消息派发的基石。关于消息发送和消息转发的详细机制，请参考 [Runtime]({{< relref "/posts/interview/ios-basics/runtime" >}})。
 
 ### 传统isa指针
 
@@ -360,7 +360,7 @@ uintptr_t weakly_referenced : 1;  // 对象是否被弱引用指向过
 - 对象释放时，运行时会自动将所有指向该对象的弱引用置为nil
 - 这个过程需要遍历弱引用表，因此`weakly_referenced`标志有助于优化释放性能
 
-关于弱引用的详细实现原理，请参考[weak详解](weak详解.md)；关于iOS内存管理的完整介绍，请参考[iOS中的内存管理](iOS中的内存管理.md)。
+关于弱引用的详细实现原理，请参考[weak详解]({{< relref "/posts/interview/ios-basics/weak详解" >}})；关于iOS内存管理的完整介绍，请参考[iOS中的内存管理]({{< relref "/posts/interview/ios-basics/iOS中的内存管理" >}})。
 
 ## 内存分布
 
@@ -475,7 +475,7 @@ struct class_rw_t {
 };
 ```
 
-当运行时对类进行[realize（实现加载）](./App启动流程.md)时，会创建`class_rw_t`，并将`class_ro_t`中的`baseMethodList`作为基础方法列表。如果该类有Category，运行时会将Category中的方法**插入到方法列表的前面**，与类本身的方法合并成一份完整的方法列表。
+当运行时对类进行[realize（实现加载）]({{< relref "/posts/interview/ios-basics/App启动流程" >}})时，会创建`class_rw_t`，并将`class_ro_t`中的`baseMethodList`作为基础方法列表。如果该类有Category，运行时会将Category中的方法**插入到方法列表的前面**，与类本身的方法合并成一份完整的方法列表。
 
 这意味着，如果Category中定义了与类本身同名的方法，由于运行时查找方法是从前往后遍历方法列表的，会先找到Category的方法并执行，**表现上像是"覆盖"了原方法，但原方法仍然存在于列表中，并没有被真正替换或删除**。如果多个Category都定义了同名方法，最终生效的是最后参与编译的那个Category（由Xcode中Build Phases → Compile Sources的文件顺序决定），因为它的方法会被插入到列表的最前面。
 
@@ -499,7 +499,7 @@ struct class_ro_t {
 `class_ro_t`是在编译时确定的只读数据，其中的`instanceSize`（对象大小）和`ivars`（实例变量布局）都已经固化。这也说明了一个重要问题：**为什么分类不能（通过常规方式）添加实例变量？**
 因此，分类被设计为只能添加**行为**（方法），而不能修改**结构**（实例变量），这确保了运行时的内存安全和对象稳定性。
 
-不过，通过 Runtime 提供的关联对象（Associated Objects）机制，可以在 Category 中为对象动态添加存储。详细介绍请参考 [Runtime](./runtime.md) 中的关联对象章节
+不过，通过 Runtime 提供的关联对象（Associated Objects）机制，可以在 Category 中为对象动态添加存储。详细介绍请参考 [Runtime]({{< relref "/posts/interview/ios-basics/runtime" >}}) 中的关联对象章节
 
 ### 实例对象与类对象的内存对比
 

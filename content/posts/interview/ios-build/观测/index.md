@@ -156,7 +156,7 @@ Timeline 是最像 Chrome DevTools Performance 的视图：
 | 大量列级空白 | 依赖深链导致串行 | 检查隐式依赖、减少 public header 重导出 |
 | Script Phase 块横贯全程 | 某个 Run Script 阻塞 | 把 Script 改为 parallelizable 或下沉到构建前 |
 | Swift 块早开始、OC 块晚开始 | bridging header 依赖 | 检查 `*-Swift.h` 的生成位置 |
-| `Ld` 块持续 > 全程 20% | 链接慢 | 见 [编译优化-链接优化](./编译优化-链接优化.md) |
+| `Ld` 块持续 > 全程 20% | 链接慢 | 见 [编译优化-链接优化]({{< relref "/posts/interview/ios-build/链接优化" >}}) |
 
 点击某个色块右侧会展开任务详情：完整命令行、`stdin/stdout`、`DEPENDENCY_FILE`、输入/输出列表——这是排查"某个任务为什么被触发"时最值钱的信息。
 
@@ -218,7 +218,7 @@ flowchart TD
 3. **Target 内**：`Build Phases` 列表自上而下顺序执行，但 `Compile Sources` 内部文件是并行的
 4. **文件层**：Xcode 把每个 Compile Sources 文件转成一个 llbuild task，task 间通过 `inputs`/`outputs` 建立依赖。比如某个 `.m` 文件 `#import` 了另一个 Target 生成的 `*-Swift.h`，那个 header 的输出就是它的 input，必须等前者完成。
 
-换句话说，Timeline 里看到的并行度是**输入输出关系**允许的最大并行度，而不是开发者控制的。要增加并行度，本质上就是**削减 task 之间的依赖边**：减少 public header、打破循环 import、开启 Explicit Modules（见 [编译优化-Explicit Modules](./编译优化-Explicit%20Modules.md)）。
+换句话说，Timeline 里看到的并行度是**输入输出关系**允许的最大并行度，而不是开发者控制的。要增加并行度，本质上就是**削减 task 之间的依赖边**：减少 public header、打破循环 import、开启 Explicit Modules（见 [编译优化-Explicit Modules]({{< relref "/posts/interview/ios-build/Explicit-Modules" >}})）。
 
 #### OC / Swift 编译任务是怎么划分的？
 

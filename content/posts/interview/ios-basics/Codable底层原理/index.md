@@ -233,7 +233,7 @@ internal final class _KeyedEncodingContainerBox<
 }
 ```
 
-这种"**抽象基类 + 泛型具体子类**"的 pattern 在 Swift 标准库中很常见（比如 `AnyHashable`、`AnyCollection` 都是类似套路）。详见 [类型擦除](./类型擦除.md)。
+这种"**抽象基类 + 泛型具体子类**"的 pattern 在 Swift 标准库中很常见（比如 `AnyHashable`、`AnyCollection` 都是类似套路）。详见 [类型擦除]({{< relref "/posts/interview/ios-basics/类型擦除" >}})。
 
 ### CodingUserInfoKey 与 EncodingError / DecodingError
 
@@ -1028,7 +1028,7 @@ do {
 
 5. **代价透明**：自动合成的代码是可预测的，没有运行时魔法，任何时候都可以用 `-print-ast` 查看。出错时 `codingPath` 给出精确定位。
 
-相比反射方案（比如 [iOS反射](./iOS反射.md) 中介绍的 Mirror 或 OC Runtime），`Codable` 把"序列化"从**运行时的动态能力**变成了**编译期的静态契约**——这与 Swift 整体"尽量把错误提前到编译期"的哲学高度一致。理解了这层设计，再看 `@Observable`、`Macro`、`@Sendable` 等新特性，都能发现类似的思路：把模式化代码交给编译器，让用户只表达"意图"。
+相比反射方案（比如 [iOS反射]({{< relref "/posts/interview/ios-basics/iOS反射" >}}) 中介绍的 Mirror 或 OC Runtime），`Codable` 把"序列化"从**运行时的动态能力**变成了**编译期的静态契约**——这与 Swift 整体"尽量把错误提前到编译期"的哲学高度一致。理解了这层设计，再看 `@Observable`、`Macro`、`@Sendable` 等新特性，都能发现类似的思路：把模式化代码交给编译器，让用户只表达"意图"。
 
 ## 常见面试题
 

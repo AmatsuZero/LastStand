@@ -17,11 +17,11 @@ Runtime 提供的核心能力：
 - 动态创建类和对象
 - 动态添加和修改方法、属性
 
-> 关于对象、类、isa 指针等底层数据结构的详细介绍，请参考 [Objective-C底层原理-NSObject](./Objective-C底层原理-NSObject.md)。本文专注于 Runtime 的动态能力和实际应用。
+> 关于对象、类、isa 指针等底层数据结构的详细介绍，请参考 [Objective-C底层原理-NSObject]({{< relref "/posts/interview/ios-basics/Objective-C底层原理-NSObject" >}})。本文专注于 Runtime 的动态能力和实际应用。
 
 ## 消息发送机制
 
-Objective-C 的消息发送机制是其动态性的核心体现。与 Swift 支持静态派发不同，Objective-C 的方法调用都是动态消息派发。更多关于两者的对比，请参考 [Objective-C与Swift区别](./Objective-C与Swift区别.md)。
+Objective-C 的消息发送机制是其动态性的核心体现。与 Swift 支持静态派发不同，Objective-C 的方法调用都是动态消息派发。更多关于两者的对比，请参考 [Objective-C与Swift区别]({{< relref "/posts/interview/ios-basics/Objective-C与Swift区别" >}})。
 
 ### objc_msgSend
 
@@ -524,7 +524,7 @@ Method Swizzling 是在运行时交换两个方法实现的技术，常用于 Ho
 
 ## 关联对象
 
-关联对象允许在运行时为对象动态添加存储，常用于在 Category 中添加属性。关于为什么分类不能直接添加实例变量，详见 [Objective-C底层原理-NSObject](./Objective-C底层原理-NSObject.md) 。
+关联对象允许在运行时为对象动态添加存储，常用于在 Category 中添加属性。关于为什么分类不能直接添加实例变量，详见 [Objective-C底层原理-NSObject]({{< relref "/posts/interview/ios-basics/Objective-C底层原理-NSObject" >}}) 。
 
 ### 基本用法
 
@@ -743,7 +743,7 @@ void object_setIvar(id obj, Ivar ivar, id value);
 @end
 ```
 
-这种方式的优势在于：埋点逻辑集中在一个 Category 中，与业务代码完全解耦；新增页面无需额外操作即可自动获得埋点能力。实际项目中还可以结合配置表（将页面类名映射为可读的页面标识）实现更灵活的埋点管理。这也是 AOP 思想在 iOS 中最典型的应用之一，更多关于 AOP 的内容可参考 [OOP-POP-AOP](../ios-advanced/OOP-POP-AOP.md)。
+这种方式的优势在于：埋点逻辑集中在一个 Category 中，与业务代码完全解耦；新增页面无需额外操作即可自动获得埋点能力。实际项目中还可以结合配置表（将页面类名映射为可读的页面标识）实现更灵活的埋点管理。这也是 AOP 思想在 iOS 中最典型的应用之一，更多关于 AOP 的内容可参考 [OOP-POP-AOP]({{< relref "/posts/interview/ios-advanced/OOP-POP-AOP" >}})。
 
 ### 4. 实现多播代理
 
