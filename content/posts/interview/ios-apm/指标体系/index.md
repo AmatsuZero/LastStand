@@ -601,12 +601,12 @@ WebView 场景下，需要端侧 SDK 与 H5 页面 JS SDK 联动：
 ```mermaid
 quadrantChart
     title 指标采集优先级
-    x-axis: 采集难度 低 --> 高
-    y-axis: 业务价值 低 --> 高
-    quadrant-1: 必做
-    quadrant-2: 战略
-    quadrant-3: 选做
-    quadrant-4: 低 ROI
+    x-axis "采集难度 低" --> "高"
+    y-axis "业务价值 低" --> "高"
+    quadrant-1 "必做"
+    quadrant-2 "战略"
+    quadrant-3 "选做"
+    quadrant-4 "低 ROI"
 
     Crash率: [0.2, 0.95]
     启动耗时: [0.3, 0.9]
