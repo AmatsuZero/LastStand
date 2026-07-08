@@ -217,7 +217,7 @@ flowchart TD
     SM -->|session 复用或创建| AH
     AH -->|选择 Pi Harness| PR
     PR -->|流式请求| LLM
-    LLM -->|tool_use: calendar.list_events| PR
+    LLM -->|"tool_use: calendar.list_events"| PR
     PR -->|WS node.invoke| NH
     NH -->|RPC| IOS
     IOS -->|返回 events JSON| NH

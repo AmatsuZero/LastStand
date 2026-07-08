@@ -92,7 +92,7 @@ flowchart LR
     B -->|是| C{使用哪种定位}
     C -->|startUpdatingLocation| Continuous["持续定位<br/>需要allowsBackgroundLocationUpdates=YES<br/>显示蓝色/橙色状态条"]
     C -->|startMonitoringSignificantLocationChanges| Sig["重要位置变化<br/>系统控制唤醒<br/>功耗极低"]
-    C -->|startMonitoring(for: region)| Region["区域监控<br/>进出指定区域唤起App"]
+    C -->|"startMonitoring(for: region)"| Region["区域监控<br/>进出指定区域唤起App"]
     C -->|startMonitoringVisits| Visit["访问监控<br/>到访/离开地点"]
 ```
 

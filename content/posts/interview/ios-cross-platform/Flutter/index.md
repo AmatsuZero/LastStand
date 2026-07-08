@@ -328,7 +328,7 @@ graph LR
     NAV["UINavigationController"]
     METAL["CAMetalLayer"]
 
-    APP -->|创建&预热| ENGINE
+    APP -->|"创建&预热"| ENGINE
     ENGINE -->|run Dart main| ENGINE
     APP -->|push| NAV
     NAV -->|push| VC
