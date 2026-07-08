@@ -253,7 +253,7 @@ DrainRate = \frac{StartBattery - EndBattery}{DurationHours}
 例如用户在 Feed 页面前台停留 10 分钟，电量从 80% 降到 78%：
 
 \[
-DrainRate = \frac{2\%}{10 / 60} = 12\% / hour
+DrainRate = \frac{2\text{%}}{10 / 60} = 12\text{%}/\text{hour}
 \]
 
 实现上可以在页面/场景进入时记录起点，在离开、进入后台、定时采样时计算窗口：
