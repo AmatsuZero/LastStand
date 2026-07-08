@@ -384,7 +384,7 @@ sequenceDiagram
     Tool-->>Session: ToolOutput("小雨, 15°C")
     Session->>Model: 把ToolOutput加入上下文
     Model-->>Session: "明天北京预计小雨，建议带伞"
-    Session-->>App: Response<String>
+    Session-->>App: Response&lt;String&gt;
 ```
 
 ### 6.3 多工具与并行

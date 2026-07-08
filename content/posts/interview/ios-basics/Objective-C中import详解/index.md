@@ -909,7 +909,7 @@ if (MaybeTranslateInclude) {
 
 ```mermaid
 flowchart TD
-    A["#import <UIKit/UIKit.h>"] --> B["查找头文件"]
+    A["#import &lt;UIKit/UIKit.h&gt;"] --> B["查找头文件"]
     B --> C{"找到头文件?"}
     C -->|否| ERR["报错: file not found"]
     C -->|是| D{"启用了 -fmodules?"}

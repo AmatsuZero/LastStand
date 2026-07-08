@@ -462,8 +462,8 @@ install! 'cocoapods',
 
 ```mermaid
 flowchart LR
-    A["#import <Foo/Foo.h>"] --> B["HEADER_SEARCH_PATHS 逐目录查找"];
-    C["#import <Foo/Foo.h>"] --> D["HMap 直接映射到真实路径"];
+    A["#import &lt;Foo/Foo.h&gt;"] --> B["HEADER_SEARCH_PATHS 逐目录查找"];
+    C["#import &lt;Foo/Foo.h&gt;"] --> D["HMap 直接映射到真实路径"];
 ```
 
 **实现方式**：

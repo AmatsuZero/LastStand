@@ -322,8 +322,8 @@ SDWebImageManager.sharedManager.optionsProcessor = [SDWebImageOptionsProcessor o
 ```mermaid
 graph TB
     subgraph "SDImageCache"
-        A["memoryCache<br/>id<SDMemoryCache>"]
-        B["diskCache<br/>id<SDDiskCache>"]
+        A["memoryCache<br/>id&lt;SDMemoryCache&gt;"]
+        B["diskCache<br/>id&lt;SDDiskCache&gt;"]
         C["ioQueue<br/>dispatch_queue_t"]
         D["config<br/>SDImageCacheConfig"]
     end

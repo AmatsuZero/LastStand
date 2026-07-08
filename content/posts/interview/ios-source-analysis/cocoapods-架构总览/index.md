@@ -194,7 +194,7 @@ sequenceDiagram
     Note over I,D: 阶段 3：download_dependencies
     I->>D: install_pod_sources（可并发）
     D->>D: Downloader::Cache.download_pod
-    D->>D: git/http/... 下载 + rsync 到 Pods/<name>
+    D->>D: git/http/... 下载 + rsync 到 Pods/&lt;name&gt;
     I->>I: run_podfile_pre_install_hooks
 
     Note over I: 阶段 4：validate_targets

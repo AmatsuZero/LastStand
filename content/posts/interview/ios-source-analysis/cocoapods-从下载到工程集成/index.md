@@ -22,7 +22,7 @@ flowchart TB
     B -->|per pod| B1[PodSourceDownloader]
     B1 -->|命中| C1[Downloader::Cache]
     B1 -->|未命中| C2[cocoapods-downloader<br/>Git/HTTP/SVN/...]
-    C2 --> C3[rsync → Pods/<name>/]
+    C2 --> C3[rsync → Pods/&lt;name&gt;/]
     B -->|per pod| B2[PodSourceInstaller]
     B2 --> B3[PodSourcePreparer<br/>prepare_command]
     B2 --> B4[PodDirCleaner<br/>按 spec.source_files 裁剪]

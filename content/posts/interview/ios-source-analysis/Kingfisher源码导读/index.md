@@ -296,10 +296,10 @@ public func retrieveImage(
 
 ```mermaid
 graph TB
-    A["ImageCache"] --> B["MemoryStorage.Backend<KFCrossPlatformImage><br/>内存缓存"]
-    A --> C["DiskStorage.Backend<Data><br/>磁盘缓存"]
+    A["ImageCache"] --> B["MemoryStorage.Backend&lt;KFCrossPlatformImage&gt;<br/>内存缓存"]
+    A --> C["DiskStorage.Backend&lt;Data&gt;<br/>磁盘缓存"]
     
-    B --> D["NSCache<NSString, StorageObject>"]
+    B --> D["NSCache&lt;NSString, StorageObject&gt;"]
     C --> E["FileManager<br/>文件系统"]
     
     A --> F["ioQueue: DispatchQueue<br/>串行磁盘 IO"]
