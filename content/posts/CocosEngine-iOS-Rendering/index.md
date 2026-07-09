@@ -1556,5 +1556,5 @@ OSInterface（抽象接口，如 ISystemWindow、IScreen）
 6. **多帧飞行安全** — 确认资源释放有滞后机制，避免 `commit` 后立即释放导致的 GPU 崩溃
 
 ---
-> **延伸阅读**：Metal Best Practices Guide、Cocos Creator 渲染管线文档、FrameGraph: Extensible Rendering Architecture in Frostbite (GDC 2017)
+> **延伸阅读**：[Metal Best Practices Guide](https://developer.apple.com/library/archive/documentation/3DDrawing/Conceptual/MTLBestPracticesGuide/index.html)、[Cocos Creator 渲染管线文档](https://docs.cocos.com/creator/3.8/manual/zh/render-pipeline/overview.html)、[FrameGraph: Extensible Rendering Architecture in Frostbite (GDC 2017)](https://gdcvault.com/play/1024612/FrameGraph-Extensible-Rendering-Architecture-in)
 
