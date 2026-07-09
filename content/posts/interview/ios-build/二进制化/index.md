@@ -426,7 +426,7 @@ s.resource_bundles = {
 
 **解决方案**：
 - 打包时用 `resource_bundles`（而非 `resources`）并加命名空间前缀：`XYZSDK_Assets` 而不是 `Assets`
-- 多个 Lottie / 嵌套资源冲突见 [Pod 资源命名冲突排查](../../../.claude/skills/pod-resource-naming-conflict/SKILL.md) 的处理思路
+- 多个 Lottie / 嵌套资源冲突见 [Pod 资源命名冲突排查](https://github.com/AmatsuZero/LastStand/blob/master/static/claude/skills/pod-resource-naming-conflict/SKILL.md) 的处理思路
 
 ### 9. 打包环境与产物的"幂等性"坑
 

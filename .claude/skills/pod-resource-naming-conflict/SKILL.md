@@ -1,0 +1,1 @@
+../../../static/claude/skills/pod-resource-naming-conflict/SKILL.md
