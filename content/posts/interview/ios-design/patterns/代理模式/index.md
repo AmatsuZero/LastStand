@@ -465,7 +465,7 @@ Delegator  ←→  Protocol  ←  Delegate
 ```mermaid
 classDiagram
     class Protocol {
-        <<protocol>>
+        <<interface>>
         +delegateMethod()
     }
     

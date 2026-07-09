@@ -224,20 +224,18 @@ classDiagram
 ```mermaid
 classDiagram
     class Runnable {
-        <<protocol>>
+        协议
     }
     class Speakable {
-        <<protocol>>
+        协议
     }
     class Eatable {
-        <<protocol>>
+        协议
     }
-    class Dog {
-        <<遵循多个协议>>
-    }
-    Runnable <|.. Dog : 遵循
-    Speakable <|.. Dog : 遵循
-    Eatable <|.. Dog : 遵循
+    class Dog
+    Dog ..|> Runnable : 遵循
+    Dog ..|> Speakable : 遵循
+    Dog ..|> Eatable : 遵循
 ```
 
 ### 协议与协议扩展
