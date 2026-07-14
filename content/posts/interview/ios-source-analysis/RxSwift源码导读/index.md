@@ -1510,18 +1510,18 @@ RxDataSources 是 RxSwift 社区维护的列表数据源库，提供了响应式
 ```mermaid
 classDiagram
     class SectionModelType {
-        <<interface>>
+        &lt;&lt;interface&gt;&gt;
         +associatedtype Item
         +items: [Item]
         +init(original: Self, items: [Item])
     }
     class IdentifiableType {
-        <<interface>>
+        &lt;&lt;interface&gt;&gt;
         +associatedtype Identity: Hashable
         +identity: Identity
     }
     class AnimatableSectionModelType {
-        <<interface>>
+        &lt;&lt;interface&gt;&gt;
         +Item: IdentifiableType & Equatable
     }
 

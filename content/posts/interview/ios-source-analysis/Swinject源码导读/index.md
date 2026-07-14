@@ -547,7 +547,7 @@ extension ObjectScope {
 ```mermaid
 classDiagram
     class InstanceStorage {
-        <<interface>>
+        &lt;&lt;interface&gt;&gt;
         +instance: Any?
         +graphResolutionCompleted()
         +instance(inGraph:) Any?
