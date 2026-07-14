@@ -431,8 +431,8 @@ open class JSONEncoder {
 
 ```mermaid
 graph TB
-    A[用户调用 encoder.encode&lpar;value&rpar;] --> B[创建 __JSONEncoder 实例]
-    B --> C[调用 value.encode&lpar;to: self&rpar;]
+    A["用户调用 encoder.encode(value)"] --> B[创建 __JSONEncoder 实例]
+    B --> C["调用 value.encode(to: self)"]
     C --> D[通过 container 系列方法<br/>把值写入 storage 栈]
     D --> E[storage 栈顶拿到顶层 JSONValue]
     E --> F[JSONValue.Writer 写成 bytes]
@@ -702,8 +702,8 @@ graph TB
     A[Data] --> B[JSONSerialization.jsonObject<br/>或 JSONValue 解析]
     B --> C[NSDictionary / NSArray / NSNumber 树]
     C --> D[创建 __JSONDecoder<br/>storage 栈顶放入该树]
-    D --> E[调用 T.init&lpar;from: decoder&rpar;]
-    E --> F[调用 decoder.container&lpar;keyedBy:&rpar;<br/>生成 KeyedDecodingContainer]
+    D --> E["调用 T.init(from: decoder)"]
+    E --> F["调用 decoder.container(keyedBy:)<br/>生成 KeyedDecodingContainer"]
     F --> G[容器读字段 → 递归解码子树]
     G --> H[构造出 T 实例]
 ```
