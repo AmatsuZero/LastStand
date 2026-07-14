@@ -40,7 +40,7 @@ Client  →  Proxy  →  RealSubject
 ```mermaid
 classDiagram
     class Subject {
-        <<interface>>
+        &lt;&lt;interface&gt;&gt;
         +request()
     }
     
@@ -52,7 +52,11 @@ classDiagram
         -realSubject: RealSubject
         +request()
     }
-    
+
+    class Client {
+        +useSubject()
+    }
+
     Subject <|.. RealSubject
     Subject <|.. Proxy
     Proxy --> RealSubject : delegates to
@@ -465,7 +469,7 @@ Delegator  ←→  Protocol  ←  Delegate
 ```mermaid
 classDiagram
     class Protocol {
-        <<interface>>
+        &lt;&lt;interface&gt;&gt;
         +delegateMethod()
     }
     

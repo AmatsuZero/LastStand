@@ -98,7 +98,7 @@ class NetworkManager {
 ```mermaid
 classDiagram
     class Product {
-        <<interface>>
+        &lt;&lt;interface&gt;&gt;
         +operation()
     }
     
@@ -205,7 +205,7 @@ primaryBtn.render() // Rendering primary button with blue background
 ```mermaid
 classDiagram
     class Product {
-        <<interface>>
+        &lt;&lt;interface&gt;&gt;
         +operation()
     }
     
@@ -218,7 +218,7 @@ classDiagram
     }
     
     class Creator {
-        <<abstract>>
+        &lt;&lt;abstract&gt;&gt;
         +factoryMethod(): Product
         +someOperation()
     }
@@ -335,7 +335,7 @@ wordCreator.processDocument()
 ```mermaid
 classDiagram
     class AbstractFactory {
-        <<interface>>
+        &lt;&lt;interface&gt;&gt;
         +createProductA(): AbstractProductA
         +createProductB(): AbstractProductB
     }
@@ -351,13 +351,26 @@ classDiagram
     }
     
     class AbstractProductA {
-        <<interface>>
+        &lt;&lt;interface&gt;&gt;
     }
     
     class AbstractProductB {
-        <<interface>>
+        &lt;&lt;interface&gt;&gt;
     }
-    
+
+    class ProductA1 {
+        +operation()
+    }
+    class ProductA2 {
+        +operation()
+    }
+    class ProductB1 {
+        +operation()
+    }
+    class ProductB2 {
+        +operation()
+    }
+
     AbstractFactory <|.. ConcreteFactory1
     AbstractFactory <|.. ConcreteFactory2
     ConcreteFactory1 ..> ProductA1 : creates

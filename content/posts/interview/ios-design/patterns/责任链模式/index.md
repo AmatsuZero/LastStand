@@ -115,7 +115,7 @@ let result = teamLeader.approve(expense: expense)
 ```mermaid
 classDiagram
     class Handler {
-        <<abstract>>
+        &lt;&lt;abstract&gt;&gt;
         -nextHandler: Handler
         +setNext(handler: Handler)
         +handle(request: Request)
@@ -132,7 +132,11 @@ classDiagram
     class ConcreteHandlerC {
         +handle(request: Request)
     }
-    
+
+    class Client {
+        +sendRequest(request: Request)
+    }
+
     Handler <|-- ConcreteHandlerA
     Handler <|-- ConcreteHandlerB
     Handler <|-- ConcreteHandlerC

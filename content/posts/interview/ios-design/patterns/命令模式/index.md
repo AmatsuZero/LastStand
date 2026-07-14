@@ -126,7 +126,7 @@ classDiagram
     }
     
     class Command {
-        <<interface>>
+        &lt;&lt;interface&gt;&gt;
         +execute()
         +undo()
     }

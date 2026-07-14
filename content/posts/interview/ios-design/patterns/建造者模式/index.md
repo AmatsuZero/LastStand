@@ -123,7 +123,7 @@ classDiagram
     }
     
     class Builder {
-        <<interface>>
+        &lt;&lt;interface&gt;&gt;
         +buildPartA()
         +buildPartB()
         +buildPartC()

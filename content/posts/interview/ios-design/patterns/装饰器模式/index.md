@@ -224,7 +224,7 @@ view.addSubview(finalLabel)
 ```mermaid
 classDiagram
     class Component {
-        <<interface>>
+        &lt;&lt;interface&gt;&gt;
         +operation()
     }
     
@@ -233,7 +233,7 @@ classDiagram
     }
     
     class Decorator {
-        <<abstract>>
+        &lt;&lt;abstract&gt;&gt;
         -component: Component
         +operation()
     }

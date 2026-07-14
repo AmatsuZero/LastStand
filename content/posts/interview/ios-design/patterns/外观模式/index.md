@@ -138,7 +138,11 @@ classDiagram
     class SubsystemC {
         +operationC()
     }
-    
+
+    class Client {
+        +useFacade()
+    }
+
     Facade --> SubsystemA
     Facade --> SubsystemB
     Facade --> SubsystemC

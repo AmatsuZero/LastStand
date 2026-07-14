@@ -97,7 +97,7 @@ client.get(url: "https://api.example.com/users") { data, error in
 ```mermaid
 classDiagram
     class Target {
-        <<interface>>
+        &lt;&lt;interface&gt;&gt;
         +request()
     }
     
@@ -109,7 +109,11 @@ classDiagram
         -adaptee: Adaptee
         +request()
     }
-    
+
+    class Client {
+        +useTarget()
+    }
+
     Client --> Target
     Target <|.. Adapter
     Adapter --> Adaptee : uses
@@ -120,7 +124,7 @@ classDiagram
 ```mermaid
 classDiagram
     class Target {
-        <<interface>>
+        &lt;&lt;interface&gt;&gt;
         +request()
     }
     

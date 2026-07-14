@@ -84,19 +84,19 @@ iOS 无障碍系统从底到上可以分为三层：
 
 ```mermaid
 flowchart TB
-    subgraph 第三层：前端辅助技术
+    subgraph "第三层：前端辅助技术"
       VO[VoiceOver]
       SC[Switch Control]
       VC[Voice Control]
       FKA[Full Keyboard Access]
       UITest[XCUITest]
     end
-    subgraph 第二层：AX 系统服务 accessibilityd
+    subgraph "第二层：AX 系统服务 accessibilityd"
       AXS[AX Server 守护进程]
-      Reg[注册表:&nbsp;所有进程的 AX 客户端]
+      Reg[注册表: 所有进程的 AX 客户端]
       Cache[AX Tree 快照与缓存]
     end
-    subgraph 第一层：App 进程内
+    subgraph "第一层：App 进程内"
       UIKit[UIKit _AXUIClient]
       Views[UIView / UIAccessibilityElement]
       Protocol[UIAccessibility 协议实现]

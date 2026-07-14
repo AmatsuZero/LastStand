@@ -92,7 +92,7 @@ class HomeViewController: UIViewController {
 ```mermaid
 classDiagram
     class Subject {
-        <<interface>>
+        &lt;&lt;interface&gt;&gt;
         +attach(observer: Observer)
         +detach(observer: Observer)
         +notify()
@@ -109,7 +109,7 @@ classDiagram
     }
     
     class Observer {
-        <<interface>>
+        &lt;&lt;interface&gt;&gt;
         +update(subject: Subject)
     }
     

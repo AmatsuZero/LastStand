@@ -66,7 +66,7 @@ classDiagram
     }
     
     class Strategy {
-        <<interface>>
+        &lt;&lt;interface&gt;&gt;
         +execute()
     }
     
