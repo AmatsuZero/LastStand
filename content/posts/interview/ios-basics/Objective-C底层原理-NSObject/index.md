@@ -277,7 +277,7 @@ NSString类对象 → NSString元类 → 查找类方法 → 执行实现
 
 苹果官方提供的关系图清晰地展示了对象、类、元类之间的关系：
 
-![isa指向图](.././images/isa_graph.png)
+![isa指向图](images/isa_graph.png)
 
 从图中可以看出，运行时存在两条核心链：
 
@@ -528,7 +528,7 @@ struct class_ro_t {
 
 ### Q2: 实例对象、类对象、元类对象之间的isa和继承关系是怎样的？
 
-![isa指向图](.././images/isa_graph.png)
+![isa指向图](images/isa_graph.png)
 
 **isa链：**
 - 实例对象的isa指向类对象（查找实例方法）
