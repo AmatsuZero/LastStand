@@ -2,6 +2,7 @@ import { link, lstat, mkdir, mkdtemp, open, readFile, readdir, realpath, rename,
 import { execFile as execFileCallback } from 'node:child_process';
 import { promisify } from 'node:util';
 import { createHash, randomUUID } from 'node:crypto';
+import { constants as osConstants } from 'node:os';
 import path from 'node:path';
 
 import {
@@ -21,7 +22,7 @@ const SOURCE_URL = 'https://fe.ecool.fun/knowledge-learn';
 const CHECKPOINT_RELATIVE_PATH = '.omc/state/ecool-import.json';
 const MAX_BATCH_SIZE = 20;
 const execFile = promisify(execFileCallback);
-const RENAME_EXCL_SCRIPT = String.raw`
+const RENAME_NOFOLLOW_EXCL_SCRIPT = String.raw`
 import ctypes
 import os
 import sys
@@ -30,12 +31,35 @@ libc = ctypes.CDLL('/usr/lib/libSystem.B.dylib', use_errno=True)
 renameatx_np = libc.renameatx_np
 renameatx_np.argtypes = [ctypes.c_int, ctypes.c_char_p, ctypes.c_int, ctypes.c_char_p, ctypes.c_uint]
 renameatx_np.restype = ctypes.c_int
-AT_FDCWD = -100
+# Values from the installed macOS SDK's sys/stdio.h.
 RENAME_EXCL = 0x00000004
-if renameatx_np(AT_FDCWD, os.fsencode(sys.argv[1]), AT_FDCWD, os.fsencode(sys.argv[2]), RENAME_EXCL) != 0:
-    print(ctypes.get_errno())
+RENAME_NOFOLLOW_ANY = 0x00000010
+
+try:
+    root_fd = os.open(sys.argv[1], os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+except OSError as error:
+    print(error.errno)
     sys.exit(1)
+
+try:
+    if renameatx_np(
+        root_fd,
+        os.fsencode(sys.argv[2]),
+        root_fd,
+        os.fsencode(sys.argv[3]),
+        RENAME_EXCL | RENAME_NOFOLLOW_ANY,
+    ) != 0:
+        print(ctypes.get_errno())
+        sys.exit(1)
+finally:
+    os.close(root_fd)
 `;
+const PUBLISH_CONFLICT_ERRNOS = new Set([
+  osConstants.errno.ENOENT,
+  osConstants.errno.EEXIST,
+  osConstants.errno.ENOTDIR,
+  osConstants.errno.ELOOP,
+]);
 
 function codedError(code, message) {
   const error = new Error(message);
@@ -313,7 +337,8 @@ async function targetDirectoryState(root, targetDirectory) {
   const relative = path.relative(logicalRoot, targetDirectory);
   let current = logicalRoot;
   let targetExists = false;
-  for (const segment of relative.split(path.sep).filter(Boolean)) {
+  const segments = relative.split(path.sep).filter(Boolean);
+  for (const [index, segment] of segments.entries()) {
     current = path.join(current, segment);
     try {
       const info = await lstat(current);
@@ -325,22 +350,40 @@ async function targetDirectoryState(root, targetDirectory) {
       }
       if (current === targetDirectory) targetExists = true;
     } catch (error) {
-      if (error?.code === 'ENOENT') continue;
+      if (error?.code === 'ENOENT' && index === segments.length - 1) continue;
+      if (error?.code === 'ENOENT') {
+        throw codedError('TARGET_PARENT_MISSING', `导入目标父目录不存在: ${current}`);
+      }
       throw error;
     }
   }
   return { realRoot, targetExists };
 }
 
-async function publishDirectoryNoReplace(stagingDirectory, targetDirectory) {
-  try {
-    await execFile('python3', ['-c', RENAME_EXCL_SCRIPT, stagingDirectory, targetDirectory]);
-  } catch (error) {
-    const errno = Number(String(error?.stdout || '').trim());
-    if (errno === 17) return false;
-    throw codedError('BUNDLE_PUBLISH_FAILED', `无法使用 macOS 无覆盖目录提交: ${error?.message || String(error)}`);
+async function publishDirectoryNoReplace(root, stagingDirectory, targetDirectory) {
+  const logicalRoot = path.resolve(root);
+  const absoluteStaging = path.resolve(stagingDirectory);
+  const absoluteTarget = path.resolve(targetDirectory);
+  if (!isWithin(logicalRoot, absoluteStaging) || !isWithin(logicalRoot, absoluteTarget)) {
+    throw codedError('TARGET_CONFLICT', `导入目录提交超出根目录: ${targetDirectory}`);
   }
-  return true;
+  try {
+    await execFile('python3', [
+      '-c',
+      RENAME_NOFOLLOW_EXCL_SCRIPT,
+      logicalRoot,
+      path.relative(logicalRoot, absoluteStaging),
+      path.relative(logicalRoot, absoluteTarget),
+    ]);
+  } catch (error) {
+    const output = String(error?.stdout || '').trim();
+    const errno = /^\d+$/.test(output) ? Number(output) : null;
+    if (PUBLISH_CONFLICT_ERRNOS.has(errno)) {
+      throw codedError('TARGET_CONFLICT', `原子提交期间导入目标发生变化: ${targetDirectory} (errno ${errno})`);
+    }
+    const detail = errno === null ? (error?.message || String(error)) : `errno ${errno}`;
+    throw codedError('BUNDLE_PUBLISH_FAILED', `无法使用 macOS 无覆盖且无符号链接目录提交: ${detail}`);
+  }
 }
 
 async function bundleFileMap(directory, prefix = '') {
@@ -383,12 +426,6 @@ async function commitStagedBundle(root, relativePath, stagingDirectory, content,
   const targetDirectory = path.dirname(targetPath);
   const fileChecksum = checksum(content);
   let state = await targetDirectoryState(root, targetDirectory);
-  try {
-    await mkdir(path.dirname(targetDirectory), { recursive: true });
-  } catch (error) {
-    throw codedError('TARGET_CONFLICT', `无法创建导入目标父目录: ${relativePath}`);
-  }
-  state = await targetDirectoryState(root, targetDirectory);
   if (onBeforeBundleCommit) await onBeforeBundleCommit({ stagingDirectory, targetDirectory });
   state = await targetDirectoryState(root, targetDirectory);
   if (state.targetExists) {
@@ -398,13 +435,7 @@ async function commitStagedBundle(root, relativePath, stagingDirectory, content,
     throw codedError('TARGET_CONFLICT', `导入目标已存在且内容不同: ${relativePath}`);
   }
   if (onAfterBundlePrecheck) await onAfterBundlePrecheck({ stagingDirectory, targetDirectory });
-  if (!await publishDirectoryNoReplace(stagingDirectory, targetDirectory)) {
-    state = await targetDirectoryState(root, targetDirectory);
-    if (state.targetExists && await bundlesMatch(stagingDirectory, targetDirectory)) {
-      return { status: 'skipped', relativePath, fileChecksum };
-    }
-    throw codedError('TARGET_CONFLICT', `导入目标已存在且内容不同: ${relativePath}`);
-  }
+  await publishDirectoryNoReplace(root, stagingDirectory, targetDirectory);
   return { status: 'written', relativePath, fileChecksum };
 }
 

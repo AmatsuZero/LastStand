@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { lstat, mkdir, mkdtemp, readFile, readdir, rm, stat, symlink, writeFile } from 'node:fs/promises';
+import { lstat, mkdir, mkdtemp, readFile, readdir, rename, rm, stat, symlink, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
@@ -19,6 +19,13 @@ async function withTemporaryRoot(run) {
   } finally {
     await rm(root, { recursive: true, force: true });
   }
+}
+
+async function withBatchRoot(run) {
+  await withTemporaryRoot(async (root) => {
+    await writeSectionIndexes(root, []);
+    await run(root);
+  });
 }
 
 function article(overrides = {}) {
@@ -216,7 +223,7 @@ test('writeArticleAtomically clears its target lock after an exceptional tempora
 });
 
 test('runBatch resumes only checkpoint entries whose on-disk checksum still matches', async () => {
-  await withTemporaryRoot(async (root) => {
+  await withBatchRoot(async (root) => {
     const catalog = [catalogEntry()];
     const first = await runBatch({ tab: fakeTab(), root, catalog, start: 0, limit: 1 });
     const checkpointPath = path.join(root, '.omc/state/ecool-import.json');
@@ -307,7 +314,7 @@ test('runBatch discards a staged bundle when page-assets fail partway through', 
 });
 
 test('runBatch leaves no target bundle when final directory commit fails', async () => {
-  await withTemporaryRoot(async (root) => {
+  await withBatchRoot(async (root) => {
     await assert.rejects(
       () => runBatch({
         tab: fakeTab(),
@@ -325,7 +332,7 @@ test('runBatch leaves no target bundle when final directory commit fails', async
 });
 
 test('runBatch preserves an external bundle created during final directory commit', async () => {
-  await withTemporaryRoot(async (root) => {
+  await withBatchRoot(async (root) => {
     const targetDirectory = path.join(root, 'content/posts/interview/ecool/javascript/javascript-001');
     const marker = path.join(targetDirectory, 'external.txt');
     await assert.rejects(
@@ -349,7 +356,7 @@ test('runBatch preserves an external bundle created during final directory commi
 });
 
 test('runBatch never replaces an empty target directory created after the final precheck', async () => {
-  await withTemporaryRoot(async (root) => {
+  await withBatchRoot(async (root) => {
     const targetDirectory = path.join(root, 'content/posts/interview/ecool/javascript/javascript-001');
     await assert.rejects(
       () => runBatch({
@@ -369,8 +376,57 @@ test('runBatch never replaces an empty target directory created after the final 
   });
 });
 
-test('runBatch rejects a target-directory symlink without adopting outside matching files', async () => {
+test('runBatch fails closed when a category parent is swapped to a symlink after the final precheck', async () => {
   await withTemporaryRoot(async (root) => {
+    const outside = await mkdtemp(path.join(os.tmpdir(), 'ecool-outside-raced-parent-'));
+    try {
+      const categoryParent = path.join(root, 'content/posts/interview/ecool/javascript');
+      const displacedParent = path.join(root, 'content/posts/interview/ecool/javascript.original');
+      const outsideTarget = path.join(outside, 'javascript-001');
+      await mkdir(categoryParent, { recursive: true });
+      await writeFile(path.join(categoryParent, '_index.md'), '受信任栏目\n');
+
+      await assert.rejects(
+        () => runBatch({
+          tab: fakeTab(),
+          root,
+          catalog: [catalogEntry()],
+          start: 0,
+          limit: 1,
+          onAfterBundlePrecheck: async ({ targetDirectory }) => {
+            assert.equal(targetDirectory, path.join(categoryParent, 'javascript-001'));
+            await rename(categoryParent, displacedParent);
+            await symlink(outside, categoryParent);
+          },
+        }),
+        (error) => error?.code === 'TARGET_CONFLICT',
+      );
+      assert.equal((await lstat(categoryParent)).isSymbolicLink(), true);
+      assert.equal(await stat(outsideTarget).then(() => true, () => false), false);
+      assert.deepEqual(await readdir(outside), []);
+      assert.equal(await readFile(path.join(displacedParent, '_index.md'), 'utf8'), '受信任栏目\n');
+    } finally {
+      await rm(outside, { recursive: true, force: true });
+    }
+  });
+});
+
+test('runBatch requires the checked-in category parent instead of creating target parents recursively', async () => {
+  await withTemporaryRoot(async (root) => {
+    const categoryParent = path.join(root, 'content/posts/interview/ecool/javascript');
+    const targetDirectory = path.join(categoryParent, 'javascript-001');
+
+    await assert.rejects(
+      () => runBatch({ tab: fakeTab(), root, catalog: [catalogEntry()], start: 0, limit: 1 }),
+      (error) => error?.code === 'TARGET_PARENT_MISSING',
+    );
+    assert.equal(await stat(categoryParent).then(() => true, () => false), false);
+    assert.equal(await stat(targetDirectory).then(() => true, () => false), false);
+  });
+});
+
+test('runBatch rejects a target-directory symlink without adopting outside matching files', async () => {
+  await withBatchRoot(async (root) => {
     const outside = await mkdtemp(path.join(os.tmpdir(), 'ecool-outside-target-'));
     try {
       const targetDirectory = path.join(root, 'content/posts/interview/ecool/javascript/javascript-001');
@@ -418,7 +474,7 @@ test('runBatch rejects a symlinked category parent without writing outside root'
   });
 });
 
-test('runBatch rejects a higher symlinked parent before recursive mkdir can write outside root', async () => {
+test('runBatch rejects a higher symlinked parent without writing outside root', async () => {
   await withTemporaryRoot(async (root) => {
     const outside = await mkdtemp(path.join(os.tmpdir(), 'ecool-outside-ancestor-'));
     try {
@@ -454,7 +510,7 @@ test('runBatch reports a regular file at the target-directory path as TARGET_CON
 });
 
 test('runBatch safely adopts an identical complete bundle after checkpoint persistence fails', async () => {
-  await withTemporaryRoot(async (root) => {
+  await withBatchRoot(async (root) => {
     const checkpointPath = path.join(root, '.omc/state/ecool-import.json');
     const bundledPath = path.join(root, 'recovery.webp');
     await writeFile(bundledPath, webpBytes());
@@ -494,7 +550,7 @@ test('runBatch safely adopts an identical complete bundle after checkpoint persi
 });
 
 test('runBatch recovery rejects bundles with extra or changed target assets', async () => {
-  await withTemporaryRoot(async (root) => {
+  await withBatchRoot(async (root) => {
     const checkpointPath = path.join(root, '.omc/state/ecool-import.json');
     const bundledPath = path.join(root, 'different.webp');
     await writeFile(bundledPath, webpBytes());
@@ -530,7 +586,7 @@ test('runBatch recovery rejects bundles with extra or changed target assets', as
 });
 
 test('runBatch merges concurrent checkpoint updates from separate batches', async () => {
-  await withTemporaryRoot(async (root) => {
+  await withBatchRoot(async (root) => {
     let releaseSelections;
     const selectionGate = new Promise((resolve) => { releaseSelections = resolve; });
     let selected = 0;
@@ -557,7 +613,7 @@ test('runBatch merges concurrent checkpoint updates from separate batches', asyn
 });
 
 test('runBatch records a checksum mismatch before it touches the browser', async () => {
-  await withTemporaryRoot(async (root) => {
+  await withBatchRoot(async (root) => {
     const catalog = [catalogEntry()];
     await runBatch({ tab: fakeTab(), root, catalog, start: 0, limit: 1 });
     const target = path.join(root, 'content/posts/interview/ecool/javascript/javascript-001/index.md');
