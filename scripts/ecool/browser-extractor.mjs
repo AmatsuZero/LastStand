@@ -1,9 +1,10 @@
-import { copyFile, mkdir } from 'node:fs/promises';
+import { copyFile, mkdir, open } from 'node:fs/promises';
 import path from 'node:path';
 
 import { validateCatalog } from './model.mjs';
 
 const TREE_SELECTOR = '.ant-tree-node-content-wrapper';
+const SOURCE_URL = 'https://fe.ecool.fun/knowledge-learn';
 
 function codedError(code, message) {
   const error = new Error(message);
@@ -11,7 +12,15 @@ function codedError(code, message) {
   return error;
 }
 
+async function assertSourcePage(tab) {
+  const actualUrl = typeof tab?.url === 'function' ? await tab.url() : null;
+  if (actualUrl !== SOURCE_URL) {
+    throw codedError('SOURCE_PAGE_MISMATCH', `ECool 来源页面不匹配：期望 ${SOURCE_URL}，实际 ${actualUrl || 'unknown'}`);
+  }
+}
+
 export async function readCatalog(tab) {
+  await assertSourcePage(tab);
   const nodes = await tab.playwright.evaluate(() =>
     Array.from(document.querySelectorAll('.ant-tree-node-content-wrapper')).map((node, treeIndex) => {
       const treeNode = node.closest('.ant-tree-treenode') || node.parentElement;
@@ -54,6 +63,7 @@ export async function readCatalog(tab) {
 }
 
 export async function selectEntry(tab, entry) {
+  await assertSourcePage(tab);
   const nodes = tab.playwright.locator(TREE_SELECTOR);
   const actualCount = await nodes.count();
   if (actualCount !== entry.nodeCount) {
@@ -78,18 +88,8 @@ export async function selectEntry(tab, entry) {
   }
 }
 
-function removeArticleChrome(value) {
-  if (Array.isArray(value)) {
-    return value.map(removeArticleChrome).filter((item) => item !== null);
-  }
-  if (!value || typeof value !== 'object') return value;
-  if (value.type === 'text' && String(value.value || '').trim() === '预览') return null;
-  for (const [key, child] of Object.entries(value)) value[key] = removeArticleChrome(child);
-  return value;
-}
-
-export async function extractCurrentArticle(tab) {
-  const article = await tab.playwright.evaluate(() => {
+export function extractArticleDocument() {
+    const pageDocument = document;
     const elementChildren = (element) => Array.from(element?.children || []);
     const isElement = (node) => node?.nodeType === 1;
     const isText = (node) => node?.nodeType === 3;
@@ -101,6 +101,7 @@ export async function extractCurrentArticle(tab) {
       const classes = classText(element);
       const label = `${element.getAttribute?.('aria-label') || ''} ${element.getAttribute?.('title') || ''}`;
       return name === 'button'
+        || classes.includes('ant-image-mask')
         || classes.includes('linenumber')
         || classes.includes('line-number')
         || /复制|copy/i.test(label)
@@ -203,7 +204,7 @@ export async function extractCurrentArticle(tab) {
       return inline.length ? [{ type: 'paragraph', children: inline }] : [];
     };
 
-    const contentBox = Array.from(document.querySelectorAll('[class*="contentBox"]'))
+    const contentBox = Array.from(pageDocument.querySelectorAll('[class*="contentBox"]'))
       .find((element) => element.querySelector('#info-title'));
     if (!contentBox) return { error: 'ARTICLE_CONTENT_MISSING' };
     const articleBoxes = elementChildren(contentBox)
@@ -219,7 +220,7 @@ export async function extractCurrentArticle(tab) {
     const date = metadataText.match(/创建时间：\s*(\d{4}-\d{2}-\d{2})/)?.[1] || '';
     const lastmod = metadataText.match(/最近更新时间：\s*(\d{4}-\d{2}-\d{2})/)?.[1] || date;
     return JSON.stringify({
-      title: compactText(document.querySelector('#info-title')?.textContent).trim(),
+      title: compactText(pageDocument.querySelector('#info-title')?.textContent).trim(),
       date,
       lastmod,
       blocks: [
@@ -228,9 +229,13 @@ export async function extractCurrentArticle(tab) {
         ...elementChildren(pointsBody).flatMap(blockNode),
       ],
     });
-  });
+}
 
-  const parsedArticle = removeArticleChrome(typeof article === 'string' ? JSON.parse(article) : article);
+export async function extractCurrentArticle(tab) {
+  await assertSourcePage(tab);
+  const article = await tab.playwright.evaluate(extractArticleDocument);
+
+  const parsedArticle = typeof article === 'string' ? JSON.parse(article) : article;
 
   if (parsedArticle?.error) {
     throw codedError(parsedArticle.error, `ECool 正文提取失败: ${parsedArticle.error}`);
@@ -253,20 +258,23 @@ function imageNodes(value, result = []) {
   return result;
 }
 
-function imageExtension(asset) {
-  const contentType = String(asset.contentType || '').toLowerCase().split(';', 1)[0];
-  const byType = {
-    'image/avif': '.avif',
-    'image/gif': '.gif',
-    'image/jpeg': '.jpeg',
-    'image/png': '.png',
-    'image/svg+xml': '.svg',
-    'image/webp': '.webp',
-  };
-  if (byType[contentType]) return byType[contentType];
-  const pathname = String(asset.url || asset.name || '').split(/[?#]/, 1)[0];
-  const extension = path.extname(pathname).toLowerCase();
-  return /^\.[a-z0-9]{2,5}$/.test(extension) ? extension : '.bin';
+async function imageExtension(filePath) {
+  const handle = await open(filePath, 'r');
+  const signature = Buffer.alloc(512);
+  let bytesRead;
+  try {
+    ({ bytesRead } = await handle.read(signature, 0, signature.length, 0));
+  } finally {
+    await handle.close();
+  }
+  const bytes = signature.subarray(0, bytesRead);
+  if (bytes.length >= 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) return '.jpeg';
+  if (bytes.length >= 8 && bytes.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))) return '.png';
+  if (bytes.length >= 6 && ['GIF87a', 'GIF89a'].includes(bytes.subarray(0, 6).toString('ascii'))) return '.gif';
+  if (bytes.length >= 12 && bytes.subarray(0, 4).toString('ascii') === 'RIFF' && bytes.subarray(8, 12).toString('ascii') === 'WEBP') return '.webp';
+  if (bytes.length >= 12 && bytes.subarray(4, 8).toString('ascii') === 'ftyp' && ['avif', 'avis'].includes(bytes.subarray(8, 12).toString('ascii'))) return '.avif';
+  if (bytes.toString('utf8').replace(/^\uFEFF?\s*/, '').match(/^(?:<\?xml[^>]*>\s*)?<svg[\s>]/i)) return '.svg';
+  throw codedError('PAGE_ASSET_TYPE_UNKNOWN', `无法从文件签名识别正文图片: ${filePath}`);
 }
 
 export async function archiveCurrentImages(tab, record, articleDirectory) {
@@ -303,7 +311,7 @@ export async function archiveCurrentImages(tab, record, articleDirectory) {
     if (!bundledAsset?.path) {
       throw codedError('PAGE_ASSET_BUNDLE_MISSING', `归档结果缺少图片: ${selectedAsset.url}`);
     }
-    const filename = `image-${String(index + 1).padStart(2, '0')}${imageExtension(bundledAsset)}`;
+    const filename = `image-${String(index + 1).padStart(2, '0')}${await imageExtension(bundledAsset.path)}`;
     await copyFile(bundledAsset.path, path.join(articleDirectory, filename));
     localByUrl.set(selectedAsset.url, filename);
     assets.push({ filename, sourceUrl: selectedAsset.url });

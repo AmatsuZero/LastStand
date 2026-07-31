@@ -260,7 +260,7 @@ console.log(calculateBill(items, tax));
 >
 > 各符号的意思如下：S，是符号位，决定正负，0时为正数，1时为负数。M，是指有效位数，大于1小于2。E，是指数位。
 
-![](image-01.jpeg)
+![](image-01.webp)
 
 Javascript 是 64 位的双精度浮点数，最高的 1 位是符号位S，接着的 11 位是指数E，剩下的 52 位为有效数字M。
 
@@ -269,11 +269,11 @@ Javascript 是 64 位的双精度浮点数，最高的 1 位是符号位S，接�
 `JavaScript` 的 `Number` 类型为 [双精度IEEE 754 64位浮点](https://en.wikipedia.org/wiki/Floating-point_arithmetic)类型。
  在 JavaScript 中最大的值为 `2^53`。
 
-![](image-02.jpeg)
+![](image-02.webp)
 
 `[BigInt](https://link.segmentfault.com/?enc=AHcJ3RFIuOe9hpnBrVz%2Bsg%3D%3D.4YPpYPK76xX%2BYyrmbyiMuwPt%2BT%2BOIxdUDaWznETB%2BJ5GdyvU6p2DnCb8nHwn%2F9r6BzyxpEdhFGaiyTM4VZQgM5HxblzptkE%2FANLs%2BDm3%2FvzKWUqIgpY44pN9aRxar%2F8v)` 任意精度数字类型，已经进入stage3规范。`BigInt` 可以表示任意大的整数。要创建一个 `BigInt` ，我们只需要在任意整型的字面量上加上一个 n 后缀即可。例如，把123 写成 123n。这个全局的 BigInt(number) 可以用来将一个 Number 转换为一个 BigInt，言外之意就是说，BigInt(123) === 123n。现在让我来利用这两点来解决前面我们提到问题：
 
-![](image-03.jpeg)
+![](image-03.webp)
 
 ## Symbol——我是独一无二最靓的仔
 
