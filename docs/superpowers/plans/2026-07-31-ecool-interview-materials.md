@@ -1,5 +1,7 @@
 # ECool 面试资料 Markdown 迁移 Implementation Plan
 
+> 最终发布说明（2026-08-01）：本文件记录最初的临时迁移步骤。资料现发布到 `content/posts/frontend/`，默认 `draft = false`；发布与合并计划见 `docs/superpowers/plans/2026-08-01-ecool-frontend-publication.md`。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 将 ECool“面试资料”栏目中的 10 个分类、191 篇静态知识页忠实转换为带分类、标签和本地图片的 Hugo Markdown 草稿。

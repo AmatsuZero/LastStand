@@ -1,5 +1,7 @@
 # ECool 面试资料 Markdown 迁移设计
 
+> 最终发布说明（2026-08-01）：本文件记录最初的临时迁移约束。资料现发布到 `content/posts/frontend/`，默认 `draft = false`；当前设计见 `docs/superpowers/specs/2026-08-01-ecool-frontend-publication-design.md`。
+
 ## 目标
 
 将已登录的 `https://fe.ecool.fun/knowledge-learn` 中“面试资料”栏目转换为适用于当前 Hugo 站点的 Markdown page bundle，并按技术域建立可维护的目录、标签和分类。

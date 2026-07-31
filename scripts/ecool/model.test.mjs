@@ -47,7 +47,7 @@ test('slugifies stable English words and falls back for Chinese-only titles', ()
 test('builds an ECool page-bundle path from category and slug', () => {
   assert.equal(
     articleRelativePath({ category: 'JavaScript', slug: 'javascript-001' }),
-    'content/posts/interview/ecool/javascript/javascript-001/index.md',
+    'content/posts/frontend/javascript/javascript-001/index.md',
   );
 });
 
@@ -61,13 +61,13 @@ test('rejects inherited object properties as unknown categories', () => {
   }
 });
 
-test('builds draft TOML frontmatter with source and title tag', () => {
+test('builds published TOML frontmatter with source and title tag', () => {
   const frontmatter = buildFrontmatter(sample);
 
   assert.match(frontmatter, /^\+\+\+\ntitle = "数据类型"/);
   assert.match(frontmatter, /date = '2024-10-01T00:00:00\+08:00'/);
   assert.match(frontmatter, /lastmod = '2025-07-16T00:00:00\+08:00'/);
-  assert.match(frontmatter, /draft = true/);
+  assert.match(frontmatter, /draft = false/);
   assert.match(frontmatter, /tags = \["面试", "前端", "JavaScript", "数据类型", "ecool"\]/);
   assert.match(frontmatter, /source = "https:\/\/fe\.ecool\.fun\/knowledge-learn"/);
 });

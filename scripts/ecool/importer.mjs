@@ -190,7 +190,7 @@ function rootIndexContent() {
   return [
     '+++',
     'title = "ECool 前端面试资料"',
-    'draft = true',
+    'draft = false',
     'weight = -90',
     `source = "${SOURCE_URL}"`,
     '+++',
@@ -203,7 +203,7 @@ function sectionIndexContent(category, config, weight) {
   return [
     '+++',
     `title = "${category}"`,
-    'draft = true',
+    'draft = false',
     `weight = ${weight}`,
     `tags = ${tomlArray([...config.tags, 'ecool'])}`,
     `categories = ${tomlArray(config.categories)}`,
@@ -217,9 +217,9 @@ function sectionIndexContent(category, config, weight) {
 export async function writeSectionIndexes(root, catalog) {
   void catalog;
   const entries = [
-    ['content/posts/interview/ecool/_index.md', rootIndexContent()],
+    ['content/posts/frontend/_index.md', rootIndexContent()],
     ...Object.entries(CATEGORY_CONFIG).map(([category, config], index) => [
-      `content/posts/interview/ecool/${config.directory}/_index.md`,
+      `content/posts/frontend/${config.directory}/_index.md`,
       sectionIndexContent(category, config, index + 1),
     ]),
   ];

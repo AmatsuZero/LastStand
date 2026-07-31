@@ -62,7 +62,7 @@ export function buildFrontmatter(record) {
     `title = "${tomlString(record.title)}"`,
     `date = '${timestamp(record.date)}'`,
     `lastmod = '${timestamp(record.lastmod)}'`,
-    'draft = true',
+    'draft = false',
     `weight = ${record.weight}`,
     `tags = ${tomlArray([...new Set(tags)])}`,
     `categories = ${tomlArray(config.categories)}`,
@@ -74,7 +74,7 @@ export function buildFrontmatter(record) {
 
 export function articleRelativePath(record) {
   const config = categoryConfig(record.category);
-  return `content/posts/interview/ecool/${config.directory}/${record.slug}/index.md`;
+  return `content/posts/frontend/${config.directory}/${record.slug}/index.md`;
 }
 
 export function validateCatalog(entries) {
