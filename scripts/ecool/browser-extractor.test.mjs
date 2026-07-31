@@ -82,7 +82,7 @@ test('selectEntry refuses a changed tree before clicking', async () => {
   assert.equal(clicked, false);
 });
 
-test('selectEntry rejects a stale article title after the click', async () => {
+test('selectEntry rejects when its exact title never becomes visible', async () => {
   let clicked = false;
   const nodes = {
     async count() { return 201; },
@@ -93,7 +93,12 @@ test('selectEntry rejects a stale article title after the click', async () => {
   };
   const title = {
     async waitFor(options) { assert.deepEqual(options, { state: 'visible' }); },
-    async innerText() { return '类型判断'; },
+    filter(options) {
+      assert.ok(options.hasText instanceof RegExp);
+      assert.match(' 数据类型 ', options.hasText);
+      assert.doesNotMatch('类型判断', options.hasText);
+      return { async waitFor() { throw new Error('target title did not become visible'); } };
+    },
   };
   const tab = {
     async url() { return SOURCE_URL; },
@@ -108,9 +113,65 @@ test('selectEntry rejects a stale article title after the click', async () => {
 
   await assert.rejects(
     selectEntry(tab, { nodeCount: 201, treeIndex: 1, title: '数据类型' }),
-    (error) => error.code === 'PAGE_TITLE_MISMATCH',
+    /target title did not become visible/,
   );
   assert.equal(clicked, true);
+});
+
+test('selectEntry waits past a visible title containing the target as a substring', async () => {
+  let clicked = false;
+  let resolveTargetTitle;
+  let signalWaitStarted;
+  const targetTitleReady = new Promise((resolve) => { resolveTargetTitle = resolve; });
+  const titleWaitStarted = new Promise((resolve) => { signalWaitStarted = resolve; });
+  const nodes = {
+    async count() { return 201; },
+    nth(index) {
+      assert.equal(index, 1);
+      return { async click() { clicked = true; } };
+    },
+  };
+  const title = {
+    async waitFor(options) { assert.deepEqual(options, { state: 'visible' }); },
+    async innerText() { return '数据+类型(基础)详解'; },
+    filter(options) {
+      assert.ok(options.hasText instanceof RegExp);
+      assert.match(' 数据+类型(基础) ', options.hasText);
+      assert.doesNotMatch('数据+类型(基础)详解', options.hasText);
+      return {
+        async waitFor(options) {
+          assert.deepEqual(options, { state: 'visible' });
+          signalWaitStarted();
+          await targetTitleReady;
+        },
+        async innerText() { return ' 数据+类型(基础) '; },
+      };
+    },
+  };
+  const tab = {
+    async url() { return SOURCE_URL; },
+    playwright: {
+      locator(selector) {
+        if (selector === '.ant-tree-node-content-wrapper') return nodes;
+        if (selector === '#info-title') return title;
+        throw new Error(`unexpected selector: ${selector}`);
+      },
+    },
+  };
+
+  const selection = selectEntry(tab, { nodeCount: 201, treeIndex: 1, title: '数据+类型(基础)' });
+  const outcome = await Promise.race([
+    selection.then(
+      () => 'selected',
+      (error) => ({ error }),
+    ),
+    titleWaitStarted.then(() => 'waiting'),
+  ]);
+  assert.equal(outcome, 'waiting');
+  assert.equal(clicked, true);
+  assert.equal(await title.innerText(), '数据+类型(基础)详解');
+  resolveTargetTitle();
+  await selection;
 });
 
 test('extractCurrentArticle returns the main body and test points contract', async () => {

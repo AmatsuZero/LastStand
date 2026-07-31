@@ -67,6 +67,15 @@ function catalogEntry(overrides = {}) {
 
 function fakeTab({ title = '测试文章', blocks, assets = [], bundledAssets = assets, beforeSelect, nodeCount = 2 } = {}) {
   let selectedTitle = '';
+  const titleLocator = {
+    async waitFor() {},
+    filter(options) {
+      assert.ok(options.hasText instanceof RegExp);
+      assert.match(` ${title} `, options.hasText);
+      return titleLocator;
+    },
+    async innerText() { return selectedTitle; },
+  };
   return {
     async url() {
       return SOURCE_URL;
@@ -87,10 +96,7 @@ function fakeTab({ title = '测试文章', blocks, assets = [], bundledAssets = 
           };
         }
         if (selector === '#info-title') {
-          return {
-            async waitFor() {},
-            async innerText() { return selectedTitle; },
-          };
+          return titleLocator;
         }
         throw new Error(`unexpected selector: ${selector}`);
       },

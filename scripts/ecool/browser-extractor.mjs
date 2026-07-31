@@ -12,6 +12,10 @@ function codedError(code, message) {
   return error;
 }
 
+function exactTextPattern(value) {
+  return new RegExp(`^\\s*${String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*$`);
+}
+
 async function assertSourcePage(tab) {
   const actualUrl = typeof tab?.url === 'function' ? await tab.url() : null;
   if (actualUrl !== SOURCE_URL) {
@@ -79,7 +83,9 @@ export async function selectEntry(tab, entry) {
   await nodes.nth(entry.treeIndex).click();
   const title = tab.playwright.locator('#info-title');
   await title.waitFor({ state: 'visible' });
-  const actualTitle = (await title.innerText()).trim();
+  const expectedTitle = title.filter({ hasText: exactTextPattern(entry.title) });
+  await expectedTitle.waitFor({ state: 'visible' });
+  const actualTitle = (await expectedTitle.innerText()).trim();
   if (actualTitle !== entry.title) {
     throw codedError(
       'PAGE_TITLE_MISMATCH',
