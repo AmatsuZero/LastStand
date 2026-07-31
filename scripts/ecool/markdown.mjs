@@ -80,7 +80,7 @@ function renderBlock(block, depth = 0) {
       return renderInline(block);
     case 'blockquote': {
       const content = (block.children ?? block.blocks ?? []).map((child) => renderBlock(child, depth)).join('\n\n');
-      return content.split('\n').map((line) => `> ${line}`).join('\n');
+      return content.split('\n').map((line) => (line ? `> ${line}` : '>')).join('\n');
     }
     case 'list':
       return renderList(block, depth);

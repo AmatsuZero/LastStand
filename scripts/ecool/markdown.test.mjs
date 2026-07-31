@@ -88,3 +88,18 @@ test('escapes pipes inside inline code table cells', () => {
 
   assert.match(markdown, /\| `A\\\|B` \|/);
 });
+
+test('renders blank lines in multi-paragraph blockquotes without trailing whitespace', () => {
+  const markdown = renderMarkdown([
+    {
+      type: 'blockquote',
+      children: [
+        { type: 'paragraph', children: [{ type: 'text', value: '第一段' }] },
+        { type: 'paragraph', children: [{ type: 'text', value: '第二段' }] },
+      ],
+    },
+  ]);
+
+  assert.match(markdown, /^> 第一段\n>\n> 第二段$/m);
+  assert.doesNotMatch(markdown, /^>[ \t]+$/m);
+});
