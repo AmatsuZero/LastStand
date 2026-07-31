@@ -103,3 +103,114 @@ test('renders blank lines in multi-paragraph blockquotes without trailing whites
   assert.match(markdown, /^> 第一段\n>\n> 第二段$/m);
   assert.doesNotMatch(markdown, /^>[ \t]+$/m);
 });
+
+test('normalizes trailing whitespace without changing fenced code semantics', () => {
+  const markdown = normalizeMarkdown([
+    '硬换行  ',
+    '单空格 ',
+    ' \t',
+    '```javascript',
+    'const value = 1;  ',
+    '```',
+    '~~~text',
+    'tilde code\t',
+    '~~~',
+    '> 引用  ',
+    '> ',
+    '> 结束\t',
+  ].join('\n'));
+
+  assert.equal(markdown, [
+    '硬换行<br>',
+    '单空格',
+    '',
+    '```javascript',
+    'const value = 1;',
+    '```',
+    '~~~text',
+    'tilde code',
+    '~~~',
+    '> 引用<br>',
+    '>',
+    '> 结束',
+    '',
+  ].join('\n'));
+  assert.doesNotMatch(markdown, /[ \t]+$/m);
+});
+
+test('renders br nodes as whitespace-free HTML breaks', () => {
+  const markdown = renderMarkdown([{ type: 'paragraph', children: [{ type: 'text', value: '第一行' }, { type: 'br' }, { type: 'text', value: '第二行' }] }]);
+  assert.equal(markdown, '第一行<br>\n第二行\n');
+});
+
+test('normalizes only valid fenced-code closers, including blockquote containers', () => {
+  const markdown = normalizeMarkdown([
+    '````js',
+    'inside  ',
+    '```',
+    '',
+    '',
+    '````',
+    '~~~lang',
+    'still code  ',
+    '~~~not-a-close',
+    '~~~',
+    '    ```js  ',
+    'tab\t  ',
+    '\t~~~js  ',
+    '> ```js',
+    '> code  ',
+    '> ',
+    '> ',
+    '> ```',
+    '> > ~~~js',
+    '> > nested  ',
+    '> > ~~~',
+  ].join('\n'));
+
+  assert.match(markdown, /inside\n```\n\n\n````/);
+  assert.match(markdown, /still code\n~~~not-a-close\n~~~/);
+  assert.match(markdown, /^    ```js<br>$/m);
+  assert.match(markdown, /^tab<br>$/m);
+  assert.match(markdown, /^\t~~~js<br>$/m);
+  assert.match(markdown, /^> code$/m);
+  assert.match(markdown, /^>$/m);
+  assert.match(markdown, /^> > nested$/m);
+  assert.doesNotMatch(markdown, /code<br>|nested<br>/);
+});
+
+test('closes fences by quote depth and treats invalid openers as ordinary lines', () => {
+  const markdown = normalizeMarkdown([
+    '前言',
+    ' ```js',
+    'code  ',
+    '  ```',
+    '>```js',
+    '> code  ',
+    '> ````',
+    '```info`  ',
+  ].join('\n'));
+
+  assert.match(markdown, / ```js\ncode\n  ```/);
+  assert.match(markdown, />```js\n> code\n> ````/);
+  assert.match(markdown, /^```info`<br>$/m);
+  assert.doesNotMatch(markdown, /code<br>/);
+});
+
+test('ends unclosed quoted fences when their quote container depth decreases', () => {
+  const markdown = normalizeMarkdown([
+    '> ```js',
+    '> quoted code  ',
+    'outside  ',
+    '> > ~~~js',
+    '> > nested code  ',
+    '> after nested  ',
+    '```js',
+    'top-level code  ',
+  ].join('\n'));
+
+  assert.match(markdown, /^outside<br>$/m);
+  assert.match(markdown, /^> after nested<br>$/m);
+  assert.match(markdown, /^top-level code$/m);
+  assert.doesNotMatch(markdown, /^top-level code<br>$/m);
+});

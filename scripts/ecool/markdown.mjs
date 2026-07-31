@@ -36,7 +36,7 @@ function renderInlineNode(node, { tableCell }) {
     case 'image':
       return `![${node.alt ?? renderInline(node)}](${node.external ? (node.src ?? node.url) : localImageName(node.src ?? node.url)})`;
     case 'br':
-      return '  \n';
+      return '<br>\n';
     default:
       return renderInline(node, { tableCell });
   }
@@ -101,7 +101,47 @@ function renderBlock(block, depth = 0) {
 }
 
 export function normalizeMarkdown(markdown) {
-  return `${String(markdown).replace(/\n[\t ]*\n(?:[\t ]*\n)+/g, '\n\n').trim()}\n`;
+  const quoteContainer = (line) => {
+    let index = 0;
+    let quoteDepth = 0;
+    while (true) {
+      const quote = line.slice(index).match(/^ {0,3}> ?/);
+      if (!quote) break;
+      index += quote[0].length;
+      quoteDepth += 1;
+    }
+    return { index, quoteDepth };
+  };
+  const fenceMarker = (line) => {
+    const { index, quoteDepth } = quoteContainer(line);
+    const marker = line.slice(index).match(/^( {0,3})(`{3,}|~{3,})(.*)$/);
+    if (!marker) return null;
+    return {
+      char: marker[2][0],
+      length: marker[2].length,
+      quoteDepth,
+      rest: marker[3],
+    };
+  };
+  let fence = null;
+  const lines = [];
+  for (const sourceLine of String(markdown).split(/\r?\n/)) {
+    const line = sourceLine.replace(/[\t ]+$/, '');
+    if (fence?.quoteDepth > 0 && quoteContainer(line).quoteDepth < fence.quoteDepth) fence = null;
+    const marker = fenceMarker(line);
+    const wasFenced = Boolean(fence);
+    const closesFence = fence && marker && marker.char === fence.char && marker.length >= fence.length
+      && marker.quoteDepth === fence.quoteDepth && /^[ \t]*$/.test(marker.rest);
+    const opensFence = !fence && marker && (marker.char === '~' || !marker.rest.includes('`'));
+    if (closesFence) fence = null;
+    else if (opensFence) fence = marker;
+    const trailing = sourceLine.match(/[\t ]+$/)?.[0] ?? '';
+    const normalized = wasFenced || opensFence || closesFence
+      ? line
+      : (!line ? '' : (trailing.length >= 2 ? `${line}<br>` : line));
+    if (wasFenced || normalized || lines.at(-1) !== '') lines.push(normalized);
+  }
+  return `${lines.join('\n').trim()}\n`;
 }
 
 export function renderMarkdown(blocks) {
