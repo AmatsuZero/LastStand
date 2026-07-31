@@ -306,6 +306,124 @@ test('runBatch discards a staged bundle when page-assets fail partway through', 
   });
 });
 
+test('runBatch leaves no target bundle when final directory commit fails', async () => {
+  await withTemporaryRoot(async (root) => {
+    await assert.rejects(
+      () => runBatch({
+        tab: fakeTab(),
+        root,
+        catalog: [catalogEntry()],
+        start: 0,
+        limit: 1,
+        onBeforeBundleCommit: async () => { throw new Error('commit interrupted'); },
+      }),
+      /commit interrupted/,
+    );
+    const targetDirectory = path.join(root, 'content/posts/interview/ecool/javascript/javascript-001');
+    assert.equal(await stat(targetDirectory).then(() => true, () => false), false);
+  });
+});
+
+test('runBatch preserves an external bundle created during final directory commit', async () => {
+  await withTemporaryRoot(async (root) => {
+    const targetDirectory = path.join(root, 'content/posts/interview/ecool/javascript/javascript-001');
+    const marker = path.join(targetDirectory, 'external.txt');
+    await assert.rejects(
+      () => runBatch({
+        tab: fakeTab(),
+        root,
+        catalog: [catalogEntry()],
+        start: 0,
+        limit: 1,
+        onBeforeBundleCommit: async ({ targetDirectory: commitTarget }) => {
+          assert.equal(commitTarget, targetDirectory);
+          await mkdir(commitTarget, { recursive: true });
+          await writeFile(marker, '外部写入\n');
+        },
+      }),
+      (error) => error?.code === 'TARGET_CONFLICT',
+    );
+    assert.equal(await readFile(marker, 'utf8'), '外部写入\n');
+    assert.deepEqual(await readdir(targetDirectory), ['external.txt']);
+  });
+});
+
+test('runBatch safely adopts an identical complete bundle after checkpoint persistence fails', async () => {
+  await withTemporaryRoot(async (root) => {
+    const checkpointPath = path.join(root, '.omc/state/ecool-import.json');
+    const bundledPath = path.join(root, 'recovery.webp');
+    await writeFile(bundledPath, webpBytes());
+    const url = 'https://static.ecool.fun/article/recovery.webp';
+    const options = {
+      blocks: imageBlock(url),
+      assets: [{ id: 'image-1', kind: 'image', url }],
+      bundledAssets: [{ id: 'image-1', path: bundledPath }],
+    };
+    await assert.rejects(
+      () => runBatch({
+        tab: fakeTab({
+          ...options,
+          beforeSelect: async () => { await mkdir(checkpointPath, { recursive: true }); },
+        }),
+        root,
+        catalog: [catalogEntry()],
+        start: 0,
+        limit: 1,
+      }),
+      (error) => error?.code === 'EISDIR',
+    );
+    const targetDirectory = path.join(root, 'content/posts/interview/ecool/javascript/javascript-001');
+    const targetIndex = path.join(targetDirectory, 'index.md');
+    const targetImage = path.join(targetDirectory, 'image-01.webp');
+    const originalIndex = await readFile(targetIndex);
+    const originalImage = await readFile(targetImage);
+    await rm(checkpointPath, { recursive: true, force: true });
+
+    const resumed = await runBatch({ tab: fakeTab(options), root, catalog: [catalogEntry()], start: 0, limit: 1 });
+    assert.equal(resumed.skipped, 1);
+    assert.deepEqual(await readFile(targetIndex), originalIndex);
+    assert.deepEqual(await readFile(targetImage), originalImage);
+    const checkpoint = JSON.parse(await readFile(checkpointPath, 'utf8'));
+    assert.equal(checkpoint.completed.length, 1);
+  });
+});
+
+test('runBatch recovery rejects bundles with extra or changed target assets', async () => {
+  await withTemporaryRoot(async (root) => {
+    const checkpointPath = path.join(root, '.omc/state/ecool-import.json');
+    const bundledPath = path.join(root, 'different.webp');
+    await writeFile(bundledPath, webpBytes());
+    const url = 'https://static.ecool.fun/article/different.webp';
+    const options = {
+      blocks: imageBlock(url),
+      assets: [{ id: 'image-1', kind: 'image', url }],
+      bundledAssets: [{ id: 'image-1', path: bundledPath }],
+    };
+    await assert.rejects(
+      () => runBatch({
+        tab: fakeTab({ ...options, beforeSelect: async () => { await mkdir(checkpointPath, { recursive: true }); } }),
+        root,
+        catalog: [catalogEntry()],
+        start: 0,
+        limit: 1,
+      }),
+      (error) => error?.code === 'EISDIR',
+    );
+    const targetDirectory = path.join(root, 'content/posts/interview/ecool/javascript/javascript-001');
+    const targetImage = path.join(targetDirectory, 'image-01.webp');
+    await rm(checkpointPath, { recursive: true, force: true });
+    await writeFile(targetImage, '用户替换的图片\n');
+    await writeFile(path.join(targetDirectory, 'external.txt'), '额外文件\n');
+
+    await assert.rejects(
+      () => runBatch({ tab: fakeTab(options), root, catalog: [catalogEntry()], start: 0, limit: 1 }),
+      (error) => error?.code === 'TARGET_CONFLICT',
+    );
+    assert.equal(await readFile(targetImage, 'utf8'), '用户替换的图片\n');
+    assert.equal(await readFile(path.join(targetDirectory, 'external.txt'), 'utf8'), '额外文件\n');
+  });
+});
+
 test('runBatch merges concurrent checkpoint updates from separate batches', async () => {
   await withTemporaryRoot(async (root) => {
     let releaseSelections;

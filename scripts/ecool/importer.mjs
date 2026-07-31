@@ -1,4 +1,4 @@
-import { link, lstat, mkdir, mkdtemp, open, readFile, rename, rm, writeFile } from 'node:fs/promises';
+import { link, mkdir, mkdtemp, open, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises';
 import { createHash, randomUUID } from 'node:crypto';
 import path from 'node:path';
 
@@ -284,58 +284,73 @@ function saveFailure(checkpoint, entry, relativePath, error) {
 
 async function pathExists(filePath) {
   try {
-    await lstat(filePath);
+    await readdir(filePath);
     return true;
   } catch (error) {
-    if (error?.code === 'ENOENT') return false;
+    if (error?.code === 'ENOENT' || error?.code === 'ENOTDIR') return false;
     throw error;
   }
 }
 
-async function removeOwnedLinks(links) {
-  for (const { source, target } of links.reverse()) {
-    try {
-      const [sourceStats, targetStats] = await Promise.all([lstat(source), lstat(target)]);
-      if (sourceStats.dev === targetStats.dev && sourceStats.ino === targetStats.ino) {
-        await rm(target, { force: true });
+async function bundleFileMap(directory, prefix = '') {
+  const files = new Map();
+  const entries = await readdir(directory, { withFileTypes: true });
+  for (const entry of entries) {
+    const relativePath = path.posix.join(prefix, entry.name);
+    const absolutePath = path.join(directory, entry.name);
+    if (entry.isFile()) {
+      files.set(relativePath, await readFile(absolutePath));
+    } else if (entry.isDirectory()) {
+      files.set(`${relativePath}/`, null);
+      for (const [childPath, childContents] of await bundleFileMap(absolutePath, relativePath)) {
+        files.set(childPath, childContents);
       }
-    } catch (error) {
-      if (error?.code !== 'ENOENT') throw error;
+    } else {
+      throw codedError('BUNDLE_ENTRY_INVALID', `页面包包含不支持的条目: ${relativePath}`);
     }
   }
+  return files;
 }
 
-async function commitStagedBundle(root, relativePath, stagingDirectory, content, assets) {
+async function bundlesMatch(stagingDirectory, targetDirectory) {
+  if (!await pathExists(targetDirectory)) return false;
+  const [staging, target] = await Promise.all([bundleFileMap(stagingDirectory), bundleFileMap(targetDirectory)]);
+  if (staging.size !== target.size) return false;
+  for (const [relativePath, stagingContents] of staging) {
+    const targetContents = target.get(relativePath);
+    if (targetContents === undefined) return false;
+    if (stagingContents === null || targetContents === null) {
+      if (stagingContents !== targetContents) return false;
+    } else if (!stagingContents.equals(targetContents)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+async function commitStagedBundle(root, relativePath, stagingDirectory, content, onBeforeBundleCommit) {
   const targetPath = resolveTarget(root, relativePath);
   const targetDirectory = path.dirname(targetPath);
-  const stagedIndex = path.join(stagingDirectory, 'index.md');
   const fileChecksum = checksum(content);
   await mkdir(path.dirname(targetDirectory), { recursive: true });
-  try {
-    await mkdir(targetDirectory);
-  } catch (error) {
-    if (error?.code !== 'EEXIST') throw error;
+  if (onBeforeBundleCommit) await onBeforeBundleCommit({ stagingDirectory, targetDirectory });
+  if (await pathExists(targetDirectory)) {
+    if (await bundlesMatch(stagingDirectory, targetDirectory)) {
+      return { status: 'skipped', relativePath, fileChecksum };
+    }
     throw codedError('TARGET_CONFLICT', `导入目标已存在且内容不同: ${relativePath}`);
   }
-
-  const created = [];
   try {
-    for (const asset of assets) {
-      const source = path.join(stagingDirectory, asset.filename);
-      const target = path.join(targetDirectory, asset.filename);
-      await link(source, target);
-      created.push({ source, target });
-    }
-    await link(stagedIndex, targetPath);
-    created.push({ source: stagedIndex, target: targetPath });
-    return { status: 'written', relativePath, fileChecksum };
+    // A same-filesystem directory rename publishes the fully staged page bundle as one unit.
+    await rename(stagingDirectory, targetDirectory);
   } catch (error) {
-    await removeOwnedLinks(created);
-    if (error?.code === 'EEXIST') {
-      throw codedError('TARGET_CONFLICT', `导入目标已存在且内容不同: ${relativePath}`);
+    if (!['EEXIST', 'ENOTEMPTY'].includes(error?.code)) throw error;
+    if (await bundlesMatch(stagingDirectory, targetDirectory)) {
+      return { status: 'skipped', relativePath, fileChecksum };
     }
-    throw error;
+    throw codedError('TARGET_CONFLICT', `导入目标已存在且内容不同: ${relativePath}`);
   }
+  return { status: 'written', relativePath, fileChecksum };
 }
 
 async function withStagingDirectory(root, run) {
@@ -349,7 +364,7 @@ async function withStagingDirectory(root, run) {
   }
 }
 
-export async function runBatch({ tab, root, catalog, start = 0, limit = MAX_BATCH_SIZE }) {
+export async function runBatch({ tab, root, catalog, start = 0, limit = MAX_BATCH_SIZE, onBeforeBundleCommit }) {
   if (!Number.isInteger(limit) || limit < 1 || limit > MAX_BATCH_SIZE) {
     throw codedError('BATCH_LIMIT_EXCEEDED', `单批最多处理 ${MAX_BATCH_SIZE} 篇，实际请求 ${limit}`);
   }
@@ -374,10 +389,6 @@ export async function runBatch({ tab, root, catalog, start = 0, limit = MAX_BATC
       if (previous) {
         throw codedError('CHECKPOINT_CHECKSUM_MISMATCH', `已完成文章的磁盘校验和不匹配: ${relativePath}`);
       }
-      const targetDirectory = path.dirname(resolveTarget(root, relativePath));
-      if (await pathExists(targetDirectory)) {
-        throw codedError('TARGET_CONFLICT', `导入目标已存在且内容不同: ${relativePath}`);
-      }
       await selectEntry(tab, entry);
       const article = await extractCurrentArticle(tab);
       if (article.title !== entry.title) {
@@ -391,7 +402,7 @@ export async function runBatch({ tab, root, catalog, start = 0, limit = MAX_BATC
         record.imageCount = archived.assets.length;
         const content = contentFor(record, record.markdown);
         await writeFile(path.join(stagingDirectory, 'index.md'), content, { encoding: 'utf8', flag: 'wx' });
-        const result = await commitStagedBundle(root, relativePath, stagingDirectory, content, archived.assets);
+        const result = await commitStagedBundle(root, relativePath, stagingDirectory, content, onBeforeBundleCommit);
         return {
           ...result,
           bodyChecksum: checksum(record.markdown),
