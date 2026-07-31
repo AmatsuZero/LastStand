@@ -51,6 +51,16 @@ test('builds an ECool page-bundle path from category and slug', () => {
   );
 });
 
+test('rejects inherited object properties as unknown categories', () => {
+  for (const category of ['toString', 'constructor', '__proto__']) {
+    assert.throws(
+      () => articleRelativePath({ category, slug: 'javascript-001' }),
+      /未知分类/,
+    );
+    assert.throws(() => validateCatalog([{ category, title: 'x' }]), /未知分类/);
+  }
+});
+
 test('builds draft TOML frontmatter with source and title tag', () => {
   const frontmatter = buildFrontmatter(sample);
 

@@ -33,8 +33,8 @@ function timestamp(value) {
 }
 
 function categoryConfig(category) {
+  if (!Object.hasOwn(CATEGORY_CONFIG, category)) throw new Error(`未知分类: ${category}`);
   const config = CATEGORY_CONFIG[category];
-  if (!config) throw new Error(`未知分类: ${category}`);
   return config;
 }
 
