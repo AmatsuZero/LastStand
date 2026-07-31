@@ -101,6 +101,23 @@ function renderBlock(block, depth = 0) {
 }
 
 export function normalizeMarkdown(markdown) {
+  const expandLeadingTabs = (value) => {
+    let index = 0;
+    let column = 0;
+    let indentation = '';
+    while (index < value.length && (value[index] === ' ' || value[index] === '\t')) {
+      if (value[index] === '\t') {
+        const width = 4 - (column % 4);
+        indentation += ' '.repeat(width);
+        column += width;
+      } else {
+        indentation += ' ';
+        column += 1;
+      }
+      index += 1;
+    }
+    return `${indentation}${value.slice(index)}`;
+  };
   const quoteContainer = (line) => {
     let index = 0;
     let quoteDepth = 0;
@@ -126,7 +143,8 @@ export function normalizeMarkdown(markdown) {
   let fence = null;
   const lines = [];
   for (const sourceLine of String(markdown).split(/\r?\n/)) {
-    const line = sourceLine.replace(/[\t ]+$/, '');
+    const expandedLine = expandLeadingTabs(sourceLine);
+    const line = expandedLine.replace(/[\t ]+$/, '');
     if (fence?.quoteDepth > 0 && quoteContainer(line).quoteDepth < fence.quoteDepth) fence = null;
     const marker = fenceMarker(line);
     const wasFenced = Boolean(fence);
@@ -135,7 +153,7 @@ export function normalizeMarkdown(markdown) {
     const opensFence = !fence && marker && (marker.char === '~' || !marker.rest.includes('`'));
     if (closesFence) fence = null;
     else if (opensFence) fence = marker;
-    const trailing = sourceLine.match(/[\t ]+$/)?.[0] ?? '';
+    const trailing = expandedLine.match(/[\t ]+$/)?.[0] ?? '';
     const normalized = wasFenced || opensFence || closesFence
       ? line
       : (!line ? '' : (trailing.length >= 2 ? `${line}<br>` : line));

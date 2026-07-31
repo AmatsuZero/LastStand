@@ -172,7 +172,7 @@ test('normalizes only valid fenced-code closers, including blockquote containers
   assert.match(markdown, /still code\n~~~not-a-close\n~~~/);
   assert.match(markdown, /^    ```js<br>$/m);
   assert.match(markdown, /^tab<br>$/m);
-  assert.match(markdown, /^\t~~~js<br>$/m);
+  assert.match(markdown, /^    ~~~js<br>$/m);
   assert.match(markdown, /^> code$/m);
   assert.match(markdown, /^>$/m);
   assert.match(markdown, /^> > nested$/m);
@@ -213,4 +213,21 @@ test('ends unclosed quoted fences when their quote container depth decreases', (
   assert.match(markdown, /^> after nested<br>$/m);
   assert.match(markdown, /^top-level code$/m);
   assert.doesNotMatch(markdown, /^top-level code<br>$/m);
+});
+
+test('expands leading tabs to four-column stops without changing body tabs', () => {
+  const markdown = normalizeMarkdown([
+    '```text',
+    '     \tcode',
+    ' \t',
+    '\tindent',
+    'body\tvalue',
+    '```',
+  ].join('\n'));
+
+  assert.match(markdown, /^        code$/m);
+  assert.match(markdown, /code\n\n    indent/);
+  assert.match(markdown, /^    indent$/m);
+  assert.match(markdown, /^body\tvalue$/m);
+  assert.doesNotMatch(markdown, / +\t/);
 });
