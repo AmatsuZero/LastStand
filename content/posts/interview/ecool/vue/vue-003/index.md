@@ -138,8 +138,8 @@ new Vue({
 
 ```javascript
 <template>
-	<input type="text" v-model="text" placeholder="仅可填入正整数数字"
-		v-my-text="{key:'text',maxval:'1000'}">
+    <input type="text" v-model="text" placeholder="仅可填入正整数数字"
+        v-my-text="{key:'text',maxval:'1000'}">
 </template>
 <script>
 export default {
@@ -172,8 +172,8 @@ directives:{
 
 ```javascript
 <template>
-	<input type="text" v-model="text" placeholder="仅可填入正整数数字"
-		v-my-text="{key:'text',maxval:'1000'}">
+    <input type="text" v-model="text" placeholder="仅可填入正整数数字"
+        v-my-text="{key:'text',maxval:'1000'}">
 </template>
 <script>
 export default {

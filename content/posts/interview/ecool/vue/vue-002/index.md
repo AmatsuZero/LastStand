@@ -620,16 +620,16 @@ compileUtil.eventHandler(node, me.$vm, exp, dir);
 <script type="text/javascript" src="js/mvvm/watcher.js"></script>
 <script type="text/javascript">
 new MVVM({
-	el: '#test',
-	data: {
-		msg: '<a href="http://www.atguigu.com">xxx</a>',
-		myClass: 'aclass'
-	},
-	methods: {
-		test () {
-			alert(this.msg)
-		}
-	}
+    el: '#test',
+    data: {
+        msg: '<a href="http://www.atguigu.com">xxx</a>',
+        myClass: 'aclass'
+    },
+    methods: {
+        test () {
+            alert(this.msg)
+        }
+    }
 })
 </script>
 ```
@@ -1096,26 +1096,26 @@ text(node, vm, expr) { // 文本处理
 
 ```javascript
 Object.defineProperty(data, key, {
-	enumerable: true, // 可枚举
-	configurable: false, // 不能再define
-	get: function() {
-		// 建立dep与watcher的关系
-		if (Dep.target) {
-			dep.depend();
-		}
-		// 返回属性值
-		return val;
-	},
-	set: function(newVal) {
-		if (newVal === val) {
-			return;
-		}
-		val = newVal;
-		// 新的值是object的话，进行监听
-		childObj = observe(newVal);//observe观察data中的所有属性
-		// 通过dep ,通知订阅者
-		dep.notify();
-	}
+    enumerable: true, // 可枚举
+    configurable: false, // 不能再define
+    get: function() {
+        // 建立dep与watcher的关系
+        if (Dep.target) {
+            dep.depend();
+        }
+        // 返回属性值
+        return val;
+    },
+    set: function(newVal) {
+        if (newVal === val) {
+            return;
+        }
+        val = newVal;
+        // 新的值是object的话，进行监听
+        childObj = observe(newVal);//observe观察data中的所有属性
+        // 通过dep ,通知订阅者
+        dep.notify();
+    }
 });
 ```
 
@@ -1220,10 +1220,10 @@ class MVVM {
 </div>
 <script type="text/javascript">
 new MVVM({
-	el: '#test',
-	data: {
-		msg: 'haha'
-	}
+    el: '#test',
+    data: {
+        msg: 'haha'
+    }
 })
 </script>
 ```

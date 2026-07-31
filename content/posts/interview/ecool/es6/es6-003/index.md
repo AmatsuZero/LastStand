@@ -78,7 +78,7 @@ console.log(person); // {name: "小明"}
 
 ```
 function foo(a, b) {
-	console.log(arguments[0]);
+    console.log(arguments[0]);
     console.log(arguments[1]);
     console.log(arguments.length);
 }
@@ -92,7 +92,7 @@ foo(10, 20); // 依次输出 10、20、2
 
 ```
 function foo() {
-	console.log(arguments[0]);
+    console.log(arguments[0]);
     console.log(arguments[1]);
 }
 
@@ -107,14 +107,14 @@ foo(10, 20); // 依次输出 10、20
 
 ```
 function foo(a) {
-	arguments[0] ++;
+    arguments[0] ++;
     console.log(a);
 }
 
 foo(10); // 输出 11
 //------------------------------------
 function foo2(a) {
-	a++;
+    a++;
     console.log(arguments[0]);
 }
 
@@ -167,7 +167,7 @@ foo(); // 报错，arguments 未定义
 ```
 function fn1(){
     let fn2 = () => {
-    	console.log(arguments[0]);
+        console.log(arguments[0]);
     }
     fn2();
 }
@@ -199,7 +199,7 @@ foo({ sex: '男', age: 18, name: '小明' }); // 小明 男 18
 ```
 function sayHi(name) {
     name = name || 'everyone';
-	console.log( 'Hello ' + name + '!');
+    console.log( 'Hello ' + name + '!');
 }
 sayHi(); // 输出 'Hello everyone!'
 ```
@@ -211,15 +211,15 @@ sayHi(); // 输出 'Hello everyone!'
 ```
 // if 语句判断
 function sayHi(name) {
-	if (name === undefined) {
-		name = 'everyone';
-	}
-	console.log( 'Hello ' + name + '!');
+    if (name === undefined) {
+        name = 'everyone';
+    }
+    console.log( 'Hello ' + name + '!');
 
 }
 // 三元表达式判断
 function sayHi(name) {
-	name =  (name !== undefined) ? name : 'everyone';
+    name =  (name !== undefined) ? name : 'everyone';
 
     console.log( 'Hello ' + name + '!');
 
@@ -232,7 +232,7 @@ ES6 就方便了许多，因为它支持了显式的设置默认值的方式，�
 
 ```
 function sayHi(name = 'everyone') { // 定义函数时，直接给形参赋值
-	console.log( 'Hello ' + name + '!');
+    console.log( 'Hello ' + name + '!');
 }
 
 sayHi(); // 输出 'Hello everyone!'
@@ -248,7 +248,7 @@ sayHi(undefined); // 输出 'Hello everyone!'
 
 ```
 function sayHi(name = 'every'+'one') {
-	console.log( 'Hello ' + name + '!');
+    console.log( 'Hello ' + name + '!');
 }
 
 sayHi(); // 输出 'Hello everyone!'
@@ -259,7 +259,7 @@ function foo() {
 }
 
 function sayHi(name = foo()) {
-	console.log( 'Hello ' + name + '!');
+    console.log( 'Hello ' + name + '!');
 }
 
 sayHi(); // 输出 '调用foo'
@@ -279,7 +279,7 @@ sayHi('John'); // 输出 'Hello John!'
 
 ```
 function fn(x = 1, y) {
-	console.log([x, y]);
+    console.log([x, y]);
 }
 
 fn(); // 输出 [1, undefined]
@@ -294,7 +294,7 @@ fn(undefined, 2); // 输出 [1, 2] （那还不如传个 1 方便呢!）
 
 ```
 function fn(x, y = 2) {
-	console.log([x, y]);
+    console.log([x, y]);
 }
 
 fn(); // 输出 [undefined, 2]
@@ -308,7 +308,7 @@ fn(1, 1) // 输出 [1, 1]
 
 ```
 function fn(x, y = 2, z = 3) {
-	console.log([x, y, z]);
+    console.log([x, y, z]);
 }
 
 fn(1, , 10) // 报错
@@ -494,7 +494,7 @@ sum(0, 1, 2, 3); // 6
 ```
 // arguments 的写法
 function sortNumbers() {
-	return Array.prototype.slice.call(arguments).sort();
+    return Array.prototype.slice.call(arguments).sort();
 }
 
 // 剩余参数的写法
@@ -515,7 +515,7 @@ const sortNumbers = (...numbers) => {
 ```
 // 报错
 function fn1(a, ...rest, b) {
-	console.log([a, b, rest]);
+    console.log([a, b, rest]);
 }
 
 // 正确写法

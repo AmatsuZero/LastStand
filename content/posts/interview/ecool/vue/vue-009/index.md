@@ -245,9 +245,9 @@ function createVNode(type,props = null,children = null) {
   // 对 vnode 类型信息编码
     // 创建 vnode 对象
     const vnode = {
-    	type,
-    	props
-    	// 其他一些属性
+        type,
+        props
+        // 其他一些属性
     }
     // 标准化子节点，把不同数据类型的 children 转成数组或者文本类型
     normalizeChildren(vnode, children) return vnode

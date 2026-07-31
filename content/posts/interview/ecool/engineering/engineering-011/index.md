@@ -191,103 +191,103 @@ sectionElement.addEventListener('mouseleave', function () {
 ```html
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>表单行为跟踪示例</title>
-	</head>
-	<body>
-		<!-- 示例表单 -->
-		<h1>用户注册表单</h1>
-		<form id="registrationForm">
-			<label for="username">用户名：</label>
-			<input type="text" id="username" name="username" required />
-			<br /><br />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>表单行为跟踪示例</title>
+    </head>
+    <body>
+        <!-- 示例表单 -->
+        <h1>用户注册表单</h1>
+        <form id="registrationForm">
+            <label for="username">用户名：</label>
+            <input type="text" id="username" name="username" required />
+            <br /><br />
 
-			<label for="email">邮箱：</label>
-			<input type="email" id="email" name="email" required />
-			<br /><br />
+            <label for="email">邮箱：</label>
+            <input type="email" id="email" name="email" required />
+            <br /><br />
 
-			<label for="password">密码：</label>
-			<input type="password" id="password" name="password" required />
-			<br /><br />
+            <label for="password">密码：</label>
+            <input type="password" id="password" name="password" required />
+            <br /><br />
 
-			<button type="button" id="submitButton">注册</button>
-		</form>
+            <button type="button" id="submitButton">注册</button>
+        </form>
 
-		<script>
-			// 通用跟踪函数：用于记录事件并发送到服务器
-			function trackEvent(eventType, details) {
-				console.log(`Event: ${eventType}`, details)
-				// 将数据发送到分析服务
-				fetch('/请求路径', {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify({ eventType, details })
-				})
-			}
+        <script>
+            // 通用跟踪函数：用于记录事件并发送到服务器
+            function trackEvent(eventType, details) {
+                console.log(`Event: ${eventType}`, details)
+                // 将数据发送到分析服务
+                fetch('/请求路径', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ eventType, details })
+                })
+            }
 
-			// 1. 监控页面浏览量
-			window.addEventListener('load', function () {
-				trackEvent('page_view', {
-					url: window.location.href,
-					timestamp: Date.now()
-				})
-			})
+            // 1. 监控页面浏览量
+            window.addEventListener('load', function () {
+                trackEvent('page_view', {
+                    url: window.location.href,
+                    timestamp: Date.now()
+                })
+            })
 
-			// 2. 监控输入字段聚焦事件
-			const inputFields = document.querySelectorAll('#registrationForm input')
-			inputFields.forEach((field) => {
-				field.addEventListener('focus', function () {
-					trackEvent('input_focus', {
-						fieldName: field.name,
-						timestamp: Date.now()
-					})
-				})
-			})
+            // 2. 监控输入字段聚焦事件
+            const inputFields = document.querySelectorAll('#registrationForm input')
+            inputFields.forEach((field) => {
+                field.addEventListener('focus', function () {
+                    trackEvent('input_focus', {
+                        fieldName: field.name,
+                        timestamp: Date.now()
+                    })
+                })
+            })
 
-			// 3. 监控按钮点击量
-			const submitButton = document.getElementById('submitButton')
-			submitButton.addEventListener('click', function () {
-				trackEvent('button_click', {
-					buttonId: 'submitButton',
-					timestamp: Date.now()
-				})
+            // 3. 监控按钮点击量
+            const submitButton = document.getElementById('submitButton')
+            submitButton.addEventListener('click', function () {
+                trackEvent('button_click', {
+                    buttonId: 'submitButton',
+                    timestamp: Date.now()
+                })
 
-				// 模拟提交表单，调用表单提交处理逻辑
-				handleSubmit()
-			})
+                // 模拟提交表单，调用表单提交处理逻辑
+                handleSubmit()
+            })
 
-			// 4. 监控表单提交量
-			const form = document.getElementById('registrationForm')
-			function handleSubmit() {
-				// 验证表单是否有效（如果需要可以增加更多验证逻辑）
-				if (form.checkValidity()) {
-					trackEvent('form_submit', {
-						formId: 'registrationForm',
-						formData: {
-							username: form.username.value,
-							email: form.email.value,
-							password: form.password.value // 注意：实际场景中避免记录敏感信息
-						},
-						timestamp: Date.now()
-					})
+            // 4. 监控表单提交量
+            const form = document.getElementById('registrationForm')
+            function handleSubmit() {
+                // 验证表单是否有效（如果需要可以增加更多验证逻辑）
+                if (form.checkValidity()) {
+                    trackEvent('form_submit', {
+                        formId: 'registrationForm',
+                        formData: {
+                            username: form.username.value,
+                            email: form.email.value,
+                            password: form.password.value // 注意：实际场景中避免记录敏感信息
+                        },
+                        timestamp: Date.now()
+                    })
 
-					// 模拟发送表单数据到服务器
-					fetch('/请求路径', {
-						method: 'POST',
-						body: new FormData(form)
-					})
-						.then((response) => response.json())
-						.then((data) => {
-							console.log('Form submitted successfully', data)
-						})
-				} else {
-					alert('请填写完整表单')
-				}
-			}
-		</script>
-	</body>
+                    // 模拟发送表单数据到服务器
+                    fetch('/请求路径', {
+                        method: 'POST',
+                        body: new FormData(form)
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            console.log('Form submitted successfully', data)
+                        })
+                } else {
+                    alert('请填写完整表单')
+                }
+            }
+        </script>
+    </body>
 </html>
 ```
 

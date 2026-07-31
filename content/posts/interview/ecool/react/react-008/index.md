@@ -91,7 +91,7 @@ key 就像一个独特身份，让 React 可以去分辨哪些子元件被新增
 // 插入新元件后
 <ul>
   <li key="0">Connecticut</li>
-	<li key="1">Boston</li>
+    <li key="1">Boston</li>
   <li key="2">Duke</li>
   <li key="3">Villanova</li>
 </ul>

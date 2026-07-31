@@ -115,9 +115,9 @@ fs.readFile('config.json', 'utf8', (err, data) => {
     if(err) {
       throw err;
     }else{
-    	Object.assign(options, JSON.parse(data))
+        Object.assign(options, JSON.parse(data))
     }
-		startProgram(options)
+        startProgram(options)
 });
 ```
 
@@ -428,19 +428,19 @@ p.then((data) => {
 
 ```javascript
 let promise1 = new Promise((resolve,reject)=>{
-	setTimeout(()=>{
+    setTimeout(()=>{
        resolve(1);
-	},2000)
+    },2000)
 });
 let promise2 = new Promise((resolve,reject)=>{
-	setTimeout(()=>{
+    setTimeout(()=>{
        resolve(2);
-	},1000)
+    },1000)
 });
 let promise3 = new Promise((resolve,reject)=>{
-	setTimeout(()=>{
+    setTimeout(()=>{
        resolve(3);
-	},3000)
+    },3000)
 });
 
 Promise.all([promise1,promise2,promise3]).then(res=>{
@@ -458,22 +458,22 @@ Promise.all([promise1,promise2,promise3]).then(res=>{
 
 ```javascript
 let promise1 = new Promise((resolve,reject) => {
-	setTimeout(() =>  {
+    setTimeout(() =>  {
        reject(1);
-	},2000)
+    },2000)
 });
 let promise2 = new Promise((resolve,reject) => {
-	setTimeout(() => {
+    setTimeout(() => {
        resolve(2);
-	},1000)
+    },1000)
 });
 let promise3 = new Promise((resolve,reject) => {
-	setTimeout(() => {
+    setTimeout(() => {
        resolve(3);
-	},3000)
+    },3000)
 });
 Promise.race([promise1,promise2,promise3]).then(res => {
-	console.log(res); //结果：2
+    console.log(res); //结果：2
 },rej => {
     console.log(rej)};
 )
@@ -491,7 +491,7 @@ Promise.race([promise1, timeOutPromise(5000)]).then(res => console.log(res))
 
 ```javascript
 promise.then(result => {···})
-			 .catch(error => {···})
+             .catch(error => {···})
        .finally(() => {···});
 ```
 
@@ -580,7 +580,7 @@ allSettledPromise.then(function (results) {
 ```javascript
 let fail = () => {
     setTimeout(() => {
-	throw new Error("fail");
+    throw new Error("fail");
     }, 1000);
 };
 ```
@@ -1271,12 +1271,12 @@ const exe = (flag) => () => new Promise((resolve, reject) => {
 
 ```javascript
 const run = async () => {
-	try {
-		await exe(false)();
-		await exe(true)();
-	} catch (e) {
-		console.log(e);
-	}
+    try {
+        await exe(false)();
+        await exe(true)();
+    } catch (e) {
+        console.log(e);
+    }
 }
 run();
 ```

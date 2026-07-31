@@ -427,7 +427,7 @@ node.onclick = function(event){   //传递的事件参数名为event
 ```html
 <a href="www.baidu.com" onclick="handler()">百度</a>
 <script>
-	function handler(){
+    function handler(){
         /*....处理点击事件*/
         return false;   //返回false阻止跳转
     }
@@ -583,7 +583,7 @@ node.handler(event);   //event在这里是实参，这句语句是函数调用
 
 ```html
   <form name="myForm">
-  	<input type="text" name="user"/>
+    <input type="text" name="user"/>
       <input type="radio" name="sex" value="male"/>
       <input type="radio" name="sex" value="female"/>
   </form>

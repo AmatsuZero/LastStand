@@ -392,7 +392,7 @@ div :nth-last-child(1){
 <head>
 <style>
 div p:nth-last-of-type(2){
-	color:red;
+    color:red;
 }
 </style>
 </head>
@@ -415,7 +415,7 @@ div p:nth-last-of-type(2){
 
 ```css
 div p:nth-last-of-type(2n+1){
-	color:red;
+    color:red;
 }
 ```
 
@@ -507,7 +507,7 @@ div h1:only-of-type{
 <style>
 
 p:first-line{
-	background-color:yellow;
+    background-color:yellow;
 }
 
 </style>
@@ -529,7 +529,7 @@ p:first-line{
 <head>
 <style>
 h1:first-letter{
-	color:yellow;
+    color:yellow;
 }
 </style>
 </head>

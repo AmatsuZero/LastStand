@@ -86,7 +86,7 @@ rem相对于em就简单了很多，它是根据页面的根元素（根元素）
 }
 
 html {
-	font-size: 25px;
+    font-size: 25px;
 }
 ```
 
@@ -221,11 +221,11 @@ CSS中的时间单位有两个：秒（s）和毫秒（ms）。这两个时间�
 
 ```css
 a[href] {
-	transition-duration: 2.5s;
+    transition-duration: 2.5s;
 }
 
 a[href] {
-	transition-duration: 2500s;
+    transition-duration: 2500s;
 }
 ```
 

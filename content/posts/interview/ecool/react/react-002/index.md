@@ -133,7 +133,7 @@ Home 组件使用了Welcome组件，返回的React元素为：
 {
   type: 'h1',
   props: {
-  	children: 'Hello, 老干部'
+    children: 'Hello, 老干部'
   }
 }
 ```

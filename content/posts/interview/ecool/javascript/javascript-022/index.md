@@ -157,7 +157,7 @@ console.log(arr);   // [1, 2, 3]（原数组不变）
 ```js
 function repeatString(str, n) {
 //一个长度为n+1的空数组用string去拼接成字符串,就成了n个string的重复
-	return new Array(n + 1).join(str);
+    return new Array(n + 1).join(str);
 }
 console.log(repeatString("abc", 3));   // abcabcabc
 console.log(repeatString("Hi", 5));   // HiHiHiHiHi
@@ -218,11 +218,11 @@ console.log(arr2);   // [13, 24, 3, 51](元数组被改变)
 ```js
 function compare(value1, value2) {
     if (value1 < value2) {
-    	return -1;
+        return -1;
     } else if (value1 > value2) {
-   		return 1;
+        return 1;
     } else {
-    	return 0;
+        return 0;
     }
 }
 arr2 = [13, 24, 51, 3];
@@ -234,11 +234,11 @@ console.log(arr2.sort(compare));   // [3, 13, 24, 51]
 ```js
 function compare(value1, value2) {
     if (value1 < value2) {
-    	return 1;
+        return 1;
     } else if (value1 > value2) {
-    	return -1;
+        return -1;
     } else {
-    	return 0;
+        return 0;
     }
 }
 arr2 = [13, 24, 51, 3];
@@ -366,7 +366,7 @@ forEach()：对数组进行遍历循环，对数组中的每一项运行给定�
 ```js
 var arr = [11, 22, 33, 44, 55];
 arr.forEach(function(x, index, a){
-	console.log(x + '|' + index + '|' + (a === arr));
+    console.log(x + '|' + index + '|' + (a === arr));
 });
 
 输出为：
@@ -389,7 +389,7 @@ arr.forEach(function(x, index, a){
 ```js
 var arr = [1, 2, 3, 4, 5];
 var arr2 = arr.map(function(item){
-	return item*item;
+    return item*item;
 });
 console.log(arr2);  //[1, 4, 9, 16, 25]
 ```
@@ -401,7 +401,7 @@ filter()：“过滤”功能，数组中的每一项运行给定函数，返回
 ```js
 var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 var arr2 = arr.filter(function(x, index) {
-	return index % 3 === 0 || x >= 8;
+    return index % 3 === 0 || x >= 8;
 });
 console.log(arr2);  //[1, 4, 7, 8, 9, 10]
 ```
@@ -437,11 +437,11 @@ every()：判断数组中每一项都是否满足条件，只有所有项都满�
 ```js
 var arr = [1, 2, 3, 4, 5];
 var arr2 = arr.every(function(x) {
-	return x < 10;
+    return x < 10;
 });
 console.log(arr2);  //true
 var arr3 = arr.every(function(x) {
-	return x < 3;
+    return x < 3;
 });
 console.log(arr3);  // false
 ```
@@ -453,11 +453,11 @@ some()：判断数组中是否存在满足条件的项，只要有一项满足�
 ```js
 var arr = [1, 2, 3, 4, 5];
 var arr2 = arr.some(function(x) {
-	return x < 3;
+    return x < 3;
 });
 console.log(arr2);  //true
 var arr3 = arr.some(function(x) {
-	return x < 1;
+    return x < 1;
 });
 console.log(arr3);  // false
 ```

@@ -111,19 +111,19 @@ DOMContentLoaded 事件触发代表初始的 HTML 被完全加载和解析，不
 ```
 <div class="test"></div>
 <style>
-	.test {
-		position: absolute;
-		top: 10px;
-		width: 100px;
-		height: 100px;
-		background: red;
-	}
+    .test {
+        position: absolute;
+        top: 10px;
+        width: 100px;
+        height: 100px;
+        background: red;
+    }
 </style>
 <script>
-	setTimeout(() => {
+    setTimeout(() => {
         // 引起回流
-		document.querySelector('.test').style.top = '100px'
-	}, 1000)
+        document.querySelector('.test').style.top = '100px'
+    }, 1000)
 </script>
 ```
 -  使用 `visibility` 替换 `display: none` ，因为前者只会引起重绘，后者会引发回流（改变了布局）

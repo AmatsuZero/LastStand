@@ -247,12 +247,12 @@ export const userUsersStore = defineStore('users', {
       current: 100
     }
   },
-	getUserName(state) {
-		return state.name + '🐔你好帅'
-	},
-	getName(): string {
-		return this.name + '🐔你实在太帅'
-	}
+    getUserName(state) {
+        return state.name + '🐔你好帅'
+    },
+    getName(): string {
+        return this.name + '🐔你实在太帅'
+    }
 
 })
 ```
@@ -284,12 +284,12 @@ export const userUsersStore = defineStore('users', {
       current: 100
     }
   },
-	getUserName(state) {
-		return '大家好，我是' + state.name
-	},
-	getName(): string {
-		return this.getUserName + '🐔你实在太帅'
-	}
+    getUserName(state) {
+        return '大家好，我是' + state.name
+    },
+    getName(): string {
+        return this.getUserName + '🐔你实在太帅'
+    }
 
 })
 ```

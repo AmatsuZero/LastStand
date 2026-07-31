@@ -65,7 +65,7 @@ export default class App extends React.Component {
 ```jsx
 // Foo.jsx
 import React from 'react';
-			             // 3
+                         // 3
 const Foo = React.forwardRef((props, myRef) => {
   return (
     <div>

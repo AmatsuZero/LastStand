@@ -97,7 +97,7 @@ console.log(obj.siteName)	//输出：helloworld开发者社区
 ````js
 //a.js 中定义对象，并在最后导出
 var obj = {
-   	siteUrl:'www.helloworld.net',
+    siteUrl:'www.helloworld.net',
     siteName:'helloworld开发者社区'
 }
 
