@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdir, mkdtemp, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
+import { lstat, mkdir, mkdtemp, readFile, readdir, rm, stat, symlink, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
@@ -345,6 +345,111 @@ test('runBatch preserves an external bundle created during final directory commi
     );
     assert.equal(await readFile(marker, 'utf8'), '外部写入\n');
     assert.deepEqual(await readdir(targetDirectory), ['external.txt']);
+  });
+});
+
+test('runBatch never replaces an empty target directory created after the final precheck', async () => {
+  await withTemporaryRoot(async (root) => {
+    const targetDirectory = path.join(root, 'content/posts/interview/ecool/javascript/javascript-001');
+    await assert.rejects(
+      () => runBatch({
+        tab: fakeTab(),
+        root,
+        catalog: [catalogEntry()],
+        start: 0,
+        limit: 1,
+        onAfterBundlePrecheck: async ({ targetDirectory: publishTarget }) => {
+          assert.equal(publishTarget, targetDirectory);
+          await mkdir(publishTarget, { recursive: true });
+        },
+      }),
+      (error) => error?.code === 'TARGET_CONFLICT',
+    );
+    assert.deepEqual(await readdir(targetDirectory), []);
+  });
+});
+
+test('runBatch rejects a target-directory symlink without adopting outside matching files', async () => {
+  await withTemporaryRoot(async (root) => {
+    const outside = await mkdtemp(path.join(os.tmpdir(), 'ecool-outside-target-'));
+    try {
+      const targetDirectory = path.join(root, 'content/posts/interview/ecool/javascript/javascript-001');
+      await assert.rejects(
+        () => runBatch({
+          tab: fakeTab(),
+          root,
+          catalog: [catalogEntry()],
+          start: 0,
+          limit: 1,
+          onBeforeBundleCommit: async ({ stagingDirectory }) => {
+            await mkdir(path.dirname(targetDirectory), { recursive: true });
+            await writeFile(path.join(outside, 'index.md'), await readFile(path.join(stagingDirectory, 'index.md')));
+            await symlink(outside, targetDirectory);
+          },
+        }),
+        (error) => error?.code === 'TARGET_CONFLICT',
+      );
+      assert.equal((await lstat(targetDirectory)).isSymbolicLink(), true);
+      assert.match(await readFile(path.join(outside, 'index.md'), 'utf8'), /测试文章/);
+    } finally {
+      await rm(outside, { recursive: true, force: true });
+    }
+  });
+});
+
+test('runBatch rejects a symlinked category parent without writing outside root', async () => {
+  await withTemporaryRoot(async (root) => {
+    const outside = await mkdtemp(path.join(os.tmpdir(), 'ecool-outside-parent-'));
+    try {
+      const categoryParent = path.join(root, 'content/posts/interview/ecool');
+      const categoryLink = path.join(categoryParent, 'javascript');
+      await mkdir(categoryParent, { recursive: true });
+      await symlink(outside, categoryLink);
+
+      await assert.rejects(
+        () => runBatch({ tab: fakeTab(), root, catalog: [catalogEntry()], start: 0, limit: 1 }),
+        (error) => error?.code === 'TARGET_CONFLICT',
+      );
+      assert.equal((await lstat(categoryLink)).isSymbolicLink(), true);
+      assert.deepEqual(await readdir(outside), []);
+    } finally {
+      await rm(outside, { recursive: true, force: true });
+    }
+  });
+});
+
+test('runBatch rejects a higher symlinked parent before recursive mkdir can write outside root', async () => {
+  await withTemporaryRoot(async (root) => {
+    const outside = await mkdtemp(path.join(os.tmpdir(), 'ecool-outside-ancestor-'));
+    try {
+      const interviewParent = path.join(root, 'content/posts/interview');
+      const ecoolLink = path.join(interviewParent, 'ecool');
+      await mkdir(interviewParent, { recursive: true });
+      await symlink(outside, ecoolLink);
+
+      await assert.rejects(
+        () => runBatch({ tab: fakeTab(), root, catalog: [catalogEntry()], start: 0, limit: 1 }),
+        (error) => error?.code === 'TARGET_CONFLICT',
+      );
+      assert.equal((await lstat(ecoolLink)).isSymbolicLink(), true);
+      assert.deepEqual(await readdir(outside), []);
+    } finally {
+      await rm(outside, { recursive: true, force: true });
+    }
+  });
+});
+
+test('runBatch reports a regular file at the target-directory path as TARGET_CONFLICT', async () => {
+  await withTemporaryRoot(async (root) => {
+    const targetDirectory = path.join(root, 'content/posts/interview/ecool/javascript/javascript-001');
+    await mkdir(path.dirname(targetDirectory), { recursive: true });
+    await writeFile(targetDirectory, '用户文件\n');
+
+    await assert.rejects(
+      () => runBatch({ tab: fakeTab(), root, catalog: [catalogEntry()], start: 0, limit: 1 }),
+      (error) => error?.code === 'TARGET_CONFLICT',
+    );
+    assert.equal(await readFile(targetDirectory, 'utf8'), '用户文件\n');
   });
 });
 

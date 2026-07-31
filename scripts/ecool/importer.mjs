@@ -1,4 +1,6 @@
-import { link, mkdir, mkdtemp, open, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises';
+import { link, lstat, mkdir, mkdtemp, open, readFile, readdir, realpath, rename, rm, writeFile } from 'node:fs/promises';
+import { execFile as execFileCallback } from 'node:child_process';
+import { promisify } from 'node:util';
 import { createHash, randomUUID } from 'node:crypto';
 import path from 'node:path';
 
@@ -18,6 +20,22 @@ import { renderMarkdown } from './markdown.mjs';
 const SOURCE_URL = 'https://fe.ecool.fun/knowledge-learn';
 const CHECKPOINT_RELATIVE_PATH = '.omc/state/ecool-import.json';
 const MAX_BATCH_SIZE = 20;
+const execFile = promisify(execFileCallback);
+const RENAME_EXCL_SCRIPT = String.raw`
+import ctypes
+import os
+import sys
+
+libc = ctypes.CDLL('/usr/lib/libSystem.B.dylib', use_errno=True)
+renameatx_np = libc.renameatx_np
+renameatx_np.argtypes = [ctypes.c_int, ctypes.c_char_p, ctypes.c_int, ctypes.c_char_p, ctypes.c_uint]
+renameatx_np.restype = ctypes.c_int
+AT_FDCWD = -100
+RENAME_EXCL = 0x00000004
+if renameatx_np(AT_FDCWD, os.fsencode(sys.argv[1]), AT_FDCWD, os.fsencode(sys.argv[2]), RENAME_EXCL) != 0:
+    print(ctypes.get_errno())
+    sys.exit(1)
+`;
 
 function codedError(code, message) {
   const error = new Error(message);
@@ -282,14 +300,47 @@ function saveFailure(checkpoint, entry, relativePath, error) {
   checkpoint.failures.push(failure);
 }
 
-async function pathExists(filePath) {
-  try {
-    await readdir(filePath);
-    return true;
-  } catch (error) {
-    if (error?.code === 'ENOENT' || error?.code === 'ENOTDIR') return false;
-    throw error;
+function isWithin(root, candidate) {
+  return candidate === root || candidate.startsWith(`${root}${path.sep}`);
+}
+
+async function targetDirectoryState(root, targetDirectory) {
+  const logicalRoot = path.resolve(root);
+  const realRoot = await realpath(logicalRoot);
+  if (!isWithin(logicalRoot, targetDirectory)) {
+    throw codedError('TARGET_CONFLICT', `导入目标超出根目录: ${targetDirectory}`);
   }
+  const relative = path.relative(logicalRoot, targetDirectory);
+  let current = logicalRoot;
+  let targetExists = false;
+  for (const segment of relative.split(path.sep).filter(Boolean)) {
+    current = path.join(current, segment);
+    try {
+      const info = await lstat(current);
+      if (info.isSymbolicLink() || !info.isDirectory()) {
+        throw codedError('TARGET_CONFLICT', `导入目标包含非目录或符号链接: ${current}`);
+      }
+      if (!isWithin(realRoot, await realpath(current))) {
+        throw codedError('TARGET_CONFLICT', `导入目标解析到根目录外: ${current}`);
+      }
+      if (current === targetDirectory) targetExists = true;
+    } catch (error) {
+      if (error?.code === 'ENOENT') continue;
+      throw error;
+    }
+  }
+  return { realRoot, targetExists };
+}
+
+async function publishDirectoryNoReplace(stagingDirectory, targetDirectory) {
+  try {
+    await execFile('python3', ['-c', RENAME_EXCL_SCRIPT, stagingDirectory, targetDirectory]);
+  } catch (error) {
+    const errno = Number(String(error?.stdout || '').trim());
+    if (errno === 17) return false;
+    throw codedError('BUNDLE_PUBLISH_FAILED', `无法使用 macOS 无覆盖目录提交: ${error?.message || String(error)}`);
+  }
+  return true;
 }
 
 async function bundleFileMap(directory, prefix = '') {
@@ -313,7 +364,6 @@ async function bundleFileMap(directory, prefix = '') {
 }
 
 async function bundlesMatch(stagingDirectory, targetDirectory) {
-  if (!await pathExists(targetDirectory)) return false;
   const [staging, target] = await Promise.all([bundleFileMap(stagingDirectory), bundleFileMap(targetDirectory)]);
   if (staging.size !== target.size) return false;
   for (const [relativePath, stagingContents] of staging) {
@@ -328,24 +378,29 @@ async function bundlesMatch(stagingDirectory, targetDirectory) {
   return true;
 }
 
-async function commitStagedBundle(root, relativePath, stagingDirectory, content, onBeforeBundleCommit) {
+async function commitStagedBundle(root, relativePath, stagingDirectory, content, onBeforeBundleCommit, onAfterBundlePrecheck) {
   const targetPath = resolveTarget(root, relativePath);
   const targetDirectory = path.dirname(targetPath);
   const fileChecksum = checksum(content);
-  await mkdir(path.dirname(targetDirectory), { recursive: true });
+  let state = await targetDirectoryState(root, targetDirectory);
+  try {
+    await mkdir(path.dirname(targetDirectory), { recursive: true });
+  } catch (error) {
+    throw codedError('TARGET_CONFLICT', `无法创建导入目标父目录: ${relativePath}`);
+  }
+  state = await targetDirectoryState(root, targetDirectory);
   if (onBeforeBundleCommit) await onBeforeBundleCommit({ stagingDirectory, targetDirectory });
-  if (await pathExists(targetDirectory)) {
+  state = await targetDirectoryState(root, targetDirectory);
+  if (state.targetExists) {
     if (await bundlesMatch(stagingDirectory, targetDirectory)) {
       return { status: 'skipped', relativePath, fileChecksum };
     }
     throw codedError('TARGET_CONFLICT', `导入目标已存在且内容不同: ${relativePath}`);
   }
-  try {
-    // A same-filesystem directory rename publishes the fully staged page bundle as one unit.
-    await rename(stagingDirectory, targetDirectory);
-  } catch (error) {
-    if (!['EEXIST', 'ENOTEMPTY'].includes(error?.code)) throw error;
-    if (await bundlesMatch(stagingDirectory, targetDirectory)) {
+  if (onAfterBundlePrecheck) await onAfterBundlePrecheck({ stagingDirectory, targetDirectory });
+  if (!await publishDirectoryNoReplace(stagingDirectory, targetDirectory)) {
+    state = await targetDirectoryState(root, targetDirectory);
+    if (state.targetExists && await bundlesMatch(stagingDirectory, targetDirectory)) {
       return { status: 'skipped', relativePath, fileChecksum };
     }
     throw codedError('TARGET_CONFLICT', `导入目标已存在且内容不同: ${relativePath}`);
@@ -364,7 +419,15 @@ async function withStagingDirectory(root, run) {
   }
 }
 
-export async function runBatch({ tab, root, catalog, start = 0, limit = MAX_BATCH_SIZE, onBeforeBundleCommit }) {
+export async function runBatch({
+  tab,
+  root,
+  catalog,
+  start = 0,
+  limit = MAX_BATCH_SIZE,
+  onBeforeBundleCommit,
+  onAfterBundlePrecheck,
+}) {
   if (!Number.isInteger(limit) || limit < 1 || limit > MAX_BATCH_SIZE) {
     throw codedError('BATCH_LIMIT_EXCEEDED', `单批最多处理 ${MAX_BATCH_SIZE} 篇，实际请求 ${limit}`);
   }
@@ -402,7 +465,14 @@ export async function runBatch({ tab, root, catalog, start = 0, limit = MAX_BATC
         record.imageCount = archived.assets.length;
         const content = contentFor(record, record.markdown);
         await writeFile(path.join(stagingDirectory, 'index.md'), content, { encoding: 'utf8', flag: 'wx' });
-        const result = await commitStagedBundle(root, relativePath, stagingDirectory, content, onBeforeBundleCommit);
+        const result = await commitStagedBundle(
+          root,
+          relativePath,
+          stagingDirectory,
+          content,
+          onBeforeBundleCommit,
+          onAfterBundlePrecheck,
+        );
         return {
           ...result,
           bodyChecksum: checksum(record.markdown),
