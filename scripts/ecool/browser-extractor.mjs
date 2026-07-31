@@ -287,14 +287,21 @@ export async function archiveCurrentImages(tab, record, articleDirectory) {
   const referencedNodes = imageNodes(record.blocks);
   const referencedUrls = [...new Set(referencedNodes.map((node) => node.src))];
   const pageAssets = await tab.capabilities.get('pageAssets');
-  const inventory = await pageAssets.list();
+  let inventory = await pageAssets.list();
   if (referencedUrls.length === 0) return { record, assets: [] };
 
-  const inventoryByUrl = new Map(
-    (inventory.assets || []).filter((asset) => asset.kind === 'image').map((asset) => [asset.url, asset]),
-  );
-  const selected = referencedUrls.map((url) => inventoryByUrl.get(url));
-  const missing = referencedUrls.filter((url, index) => !selected[index]);
+  const selectAssets = () => {
+    const inventoryByUrl = new Map(
+      (inventory.assets || []).filter((asset) => asset.kind === 'image').map((asset) => [asset.url, asset]),
+    );
+    const selected = referencedUrls.map((url) => inventoryByUrl.get(url));
+    return { missing: referencedUrls.filter((url, index) => !selected[index]), selected };
+  };
+  let { missing, selected } = selectAssets();
+  if (missing.length) {
+    inventory = await pageAssets.list();
+    ({ missing, selected } = selectAssets());
+  }
   if (missing.length) {
     throw codedError('PAGE_ASSET_MISSING', `页面资产清单缺少正文图片: ${missing.join(', ')}`);
   }

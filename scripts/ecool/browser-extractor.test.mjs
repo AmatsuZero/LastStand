@@ -345,11 +345,52 @@ test('archiveCurrentImages names a misreported JPEG from its WebP file signature
   assert.deepEqual(await readFile(path.join(articleDirectory, 'image-01.webp')), webpBytes);
 });
 
+test('archiveCurrentImages re-reads the inventory once when a referenced image is initially absent', async (t) => {
+  const workspace = await mkdtemp(path.join(os.tmpdir(), 'ecool-assets-refresh-'));
+  t.after(() => rm(workspace, { recursive: true, force: true }));
+  const sourcePath = path.join(workspace, 'diagram-source');
+  const articleDirectory = path.join(workspace, 'article');
+  const url = 'https://cdn.example.com/late-diagram.png';
+  await writeFile(sourcePath, Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]));
+  let listCalls = 0;
+  let bundleOptions;
+  const pageAssets = {
+    async list() {
+      listCalls += 1;
+      if (listCalls === 1) return { id: 'inventory-stale', assets: [] };
+      return { id: 'inventory-fresh', assets: [{ id: 'asset-1', kind: 'image', name: 'late-diagram.png', url }] };
+    },
+    async bundle(options) {
+      bundleOptions = options;
+      return {
+        assets: [{ id: 'asset-1', kind: 'image', name: 'late-diagram.png', path: sourcePath, url }],
+        failures: [],
+        summary: { failedCount: 0 },
+      };
+    },
+  };
+  const tab = { capabilities: { async get() { return pageAssets; } } };
+  const record = { blocks: [{ type: 'image', alt: '延迟图片', src: url }] };
+
+  const result = await archiveCurrentImages(tab, record, articleDirectory);
+
+  assert.equal(listCalls, 2);
+  assert.deepEqual(bundleOptions, { inventoryId: 'inventory-fresh', assetIds: ['asset-1'] });
+  assert.equal(record.blocks[0].src, 'image-01.png');
+  assert.deepEqual(result.assets, [{ filename: 'image-01.png', sourceUrl: url }]);
+});
+
 test('archiveCurrentImages fails when a referenced image is absent from the inventory', async () => {
+  let listCalls = 0;
   const tab = {
     capabilities: {
       async get() {
-        return { async list() { return { id: 'inventory-1', assets: [] }; } };
+        return {
+          async list() {
+            listCalls += 1;
+            return { id: 'inventory-1', assets: [] };
+          },
+        };
       },
     },
   };
@@ -359,4 +400,5 @@ test('archiveCurrentImages fails when a referenced image is absent from the inve
     archiveCurrentImages(tab, record, '/tmp/not-written-by-missing-asset'),
     (error) => error.code === 'PAGE_ASSET_MISSING',
   );
+  assert.equal(listCalls, 2);
 });
