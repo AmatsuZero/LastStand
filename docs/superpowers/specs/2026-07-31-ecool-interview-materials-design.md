@@ -115,7 +115,7 @@ source = "https://fe.ecool.fun/knowledge-learn"
 - 所有文章包含合法 TOML frontmatter，`draft = true`，分类、标签、顺序和来源字段符合映射规则。
 - 所有正文非空，没有站点导航、VIP 标识、页脚或关联题目等噪声。
 - 代码围栏、表格和本地资源引用通过自动检查。
-- `hugo --minify` 成功完成，不新增构建错误。
+- `hugo --minify --buildDrafts` 成功完成，不新增构建错误，并实际覆盖本次新增的草稿页面。
 - 工作树中只出现本次设计、迁移工具和 `content/posts/interview/ecool/` 相关文件。
 
 ## 非目标
