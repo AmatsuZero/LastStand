@@ -237,16 +237,16 @@ export default {
 
 ```javascript
 // 选项 API
-<script>     
-   export default {         
-      mounted() {             
-         console.log('mounted!')         
-      },         
-      updated() {             
-         console.log('updated!')         
-      }     
+<script>    
+   export default {        
+      mounted() {            
+         console.log('mounted!')        
+      },        
+      updated() {            
+         console.log('updated!')        
+      }    
    }
-</script> 
+</script>
 ```
 
 那么我们是何时注册到组件实例上的呢。还记得我们在组件初始化的时候会调用`applyOptions`嘛。生命周期函数的注册也是在这个函数里面完成的。
@@ -437,7 +437,7 @@ const unmountComponent = (
 #### **考察点**：
 
 - Vue 实例在其生命周期内会经历一系列初始化、渲染、更新、销毁的过程，每个阶段都有相应的钩子函数供开发者操作。
-- 生命周期钩子按照顺序：  
+- 生命周期钩子按照顺序：<br>
   - **创建阶段**：`beforeCreate`、`created`
   - **挂载阶段**：`beforeMount`、`mounted`
   - **更新阶段**：`beforeUpdate`、`updated`
@@ -455,19 +455,19 @@ const unmountComponent = (
 
 #### **考察点**：
 
-- **创建阶段**：  
+- **创建阶段**：<br>
   - `beforeCreate`：Vue 实例刚初始化，还未设置 `data`、`methods` 等，`this` 上无可用数据。
   - `created`：实例已完成初始化，`data`、`methods` 可用，但未挂载 DOM。
-- **挂载阶段**：  
+- **挂载阶段**：<br>
   - `beforeMount`：模板编译完成，但 DOM 尚未插入。
   - `mounted`：模板已渲染并插入 DOM，适合操作 DOM。
-- **更新阶段**：  
+- **更新阶段**：<br>
   - `beforeUpdate`：响应式数据更新后，DOM 尚未更新。
   - `updated`：数据更新导致 DOM 更新完成，可用于 DOM 依赖的数据更新场景。
-- **销毁阶段**：  
+- **销毁阶段**：<br>
   - `beforeDestroy`：实例销毁前调用，适合清理定时器、事件监听等资源。
   - `destroyed`：实例销毁完成，所有绑定事件移除，无法再操作实例。
-- **缓存组件**：  
+- **缓存组件**：<br>
   - `activated`：组件被激活时触发（如切换到缓存组件）。
   - `deactivated`：组件被停用时触发（如切换到其他组件）。
 
@@ -482,11 +482,11 @@ const unmountComponent = (
 
 #### **考察点**：
 
-- 数据初始化：  
+- 数据初始化：<br>
   - 适合在 `created` 中发起异步请求（无需依赖 DOM）。
   - 如果需要操作 DOM，可以在 `mounted` 中发起请求。
-- 清理资源：  
-  - 在 `beforeDestroy` 钩子中清理定时器、事件监听器或解绑全局状态。  
+- 清理资源：<br>
+  - 在 `beforeDestroy` 钩子中清理定时器、事件监听器或解绑全局状态。<br>
 ```javascript
 beforeDestroy() {
   clearInterval(this.timer);
@@ -504,16 +504,16 @@ beforeDestroy() {
 
 #### **考察点**：
 
-- 异步操作不会阻塞生命周期的进程：  
+- 异步操作不会阻塞生命周期的进程：<br>
   - 即使异步任务未完成，生命周期依然继续执行。
-  - 需要注意避免在组件销毁后修改状态：  
+  - 需要注意避免在组件销毁后修改状态：<br>
 ```javascript
 async fetchData() {
   const data = await fetch('/api/data');
   if (!this._isDestroyed) this.data = data;
 }
 ```
-- 可通过 `beforeDestroy` 或取消令牌来中止任务：  
+- 可通过 `beforeDestroy` 或取消令牌来中止任务：<br>
 ```javascript
 const controller = new AbortController();
 fetch('/api/data', { signal: controller.signal });
@@ -534,9 +534,9 @@ beforeDestroy() {
 
 #### **考察点**：
 
-- **`created` 中无法操作 DOM**：  
+- **`created` 中无法操作 DOM**：<br>
   - 此时组件尚未挂载，`$el` 还不可用。
-- **`mounted` 中的 DOM 操作**：  
+- **`mounted` 中的 DOM 操作**：<br>
   - 确保操作的 DOM 已完全插入。
   - 避免在 `mounted` 中处理过多逻辑，影响首屏渲染性能。
 
@@ -551,9 +551,9 @@ beforeDestroy() {
 
 #### **考察点**：
 
-- **更新阶段优化**：  
+- **更新阶段优化**：<br>
   - 避免在 `updated` 钩子中操作大量 DOM。
-  - 通过条件判断，减少不必要的逻辑执行：  
+  - 通过条件判断，减少不必要的逻辑执行：<br>
 ```javascript
 updated() {
   if (this.previousValue !== this.currentValue) {
@@ -561,7 +561,7 @@ updated() {
   }
 }
 ```
-- **清理任务**：  
+- **清理任务**：<br>
   - 在 `beforeDestroy` 中释放资源，减少内存泄漏。
 
 ---
@@ -575,11 +575,11 @@ updated() {
 
 #### **考察点**：
 
-- **挂载顺序**：  
+- **挂载顺序**：<br>
   - 父组件的 `beforeCreate` -> `created` -> `beforeMount`
   - 子组件的 `beforeCreate` -> `created` -> `beforeMount` -> `mounted`
   - 父组件的 `mounted`
-- **销毁顺序**：  
+- **销毁顺序**：<br>
   - 父组件的 `beforeDestroy` 触发后，先销毁子组件。
   - 子组件的 `destroyed` 执行完成后，父组件进入 `destroyed` 钩子。
 
@@ -594,11 +594,11 @@ updated() {
 
 #### **考察点**：
 
-- 常见应用：  
+- 常见应用：<br>
   - `created` 用于初始化数据或全局事件监听。
   - `mounted` 用于 DOM 操作和第三方库的初始化。
   - `beforeDestroy` 用于资源清理（如移除事件监听、销毁定时器）。
-- 典型问题：  
+- 典型问题：<br>
   - 异步任务导致的状态更新问题。
   - 使用 `<keep-alive>` 时，生命周期行为不符合预期。
 
@@ -613,8 +613,8 @@ updated() {
 
 #### **考察点**：
 
-- **自定义钩子**：  
-  - 在 Vue 3 中使用 `onXXX` 的形式管理生命周期：  
+- **自定义钩子**：<br>
+  - 在 Vue 3 中使用 `onXXX` 的形式管理生命周期：<br>
 ```javascript
 import { onMounted } from 'vue';
 
@@ -622,8 +622,8 @@ onMounted(() => {
   console.log('Component mounted');
 });
 ```
-- **扩展场景**：  
-  - 使用自定义 hooks 组织复杂逻辑：  
+- **扩展场景**：<br>
+  - 使用自定义 hooks 组织复杂逻辑：<br>
 ```javascript
 function useFetchData() {
   onMounted(() => fetchData());

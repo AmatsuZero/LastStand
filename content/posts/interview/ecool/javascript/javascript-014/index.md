@@ -69,7 +69,7 @@ JavaScript 在设计之初是作为**浏览器脚本语言**，主要用于与�
 
 渲染进程负责控制和显示**视窗**部分（网站页面）的所有内容，主要是解析 HTML、CSS、JS 和其他资源，并生成渲染树、执行布局和绘制等操作。
 
-在现代浏览器中，默认会为**每个标签页**创建一个渲染进程。  
+在现代浏览器中，默认会为**每个标签页**创建一个渲染进程。<br>
  出于安全考虑，渲染进程运行在**沙箱模式**下，无法访问系统资源。
 
 > 通常可以通过浏览器的 *更多工具* -> *任务管理器* 查看当前浏览器开启的所有进程及资源消耗情况。
@@ -95,7 +95,7 @@ JavaScript 在设计之初是作为**浏览器脚本语言**，主要用于与�
 💎 事件循环具体过程如下：
 
 1. 从谷歌浏览器源码来看，渲染进程进入渲染流程，渲染主线程便会开启一个**无限循环**。
-2. 每次循环都会检查消息队列中是否有任务。  
+2. 每次循环都会检查消息队列中是否有任务。<br>
   - *如果有*，就拿出队列中的**第一个**任务执行，执行过程中若遇到**异步操作**，渲染主线程会将其加入其他线程的任务队列进行处理，它自己则不会等待，转而去执行后续代码
   - *如果没有*，则进入**休眠状态**
 3. 当其他线程把异步任务处理完成，就会**将后续的回调操作包装成新任务**，加入消息队列末尾，等待渲染主线程拿取执行。
@@ -111,7 +111,7 @@ JavaScript 在设计之初是作为**浏览器脚本语言**，主要用于与�
 
 各浏览器厂商在实现事件循环的时候会根据最新的解释：*每个任务都有其任务类型，同一个类型的任务必须在同一个队列里排队。在一次事件循环中，浏览器可根据实际情况从不同的队列中取出任务执行。并且浏览器必须准备好一个微队列，其中的任务优先于所有其他队列的任务执行*。
 
-不同浏览器，除微队列外，队列的种类和数量均可能不同，这取决于浏览器厂商。  
+不同浏览器，除微队列外，队列的种类和数量均可能不同，这取决于浏览器厂商。<br>
  在目前的 Chrome 的实现中，至少包含了下面几个队列：
 
 - 微队列：用于存放需要最快执行的任务，优先级极高，将任务加入微队列的方式有 `promise.then()` 、`MutationObserver`
@@ -135,24 +135,24 @@ JavaScript 在设计之初是作为**浏览器脚本语言**，主要用于与�
             console.log('promise1');
         });
     }
-    
+
     setTimeout(() => {
         console.log('set timer');
         Promise.resolve().then(test);
     }, 0);
-    
+
     btn.onclick = () => {
         console.log('click button');
     };
-    
+
     btn.click();
-    
+
     Promise.resolve().then(() => {
         console.log('promise2');
     });
-    
+
     console.log('script start');
-    
+
     // 输出结果依次为：
     // click button
     // script start
@@ -205,17 +205,17 @@ JavaScript 在设计之初是作为**浏览器脚本语言**，主要用于与�
 
 Nodejs 事件循环中的消息队列共有 **8** 个，若引用之前宏队列、微队列的说法，具体可划分为：
 
-- 宏队列  
+- 宏队列<br>
   - timers (重要)
-  - pending callback  
+  - pending callback<br>
     - 调用上一次事件循环没在 `poll` 阶段立刻执行，而延迟的 I/O 回调函数
-  - idle prepare  
+  - idle prepare<br>
     - 仅供 nodejs 内部使用
   - poll (重要)
   - check (重要)
-  - close callbacks  
+  - close callbacks<br>
     - 执行所有注册 `close` 事件的回调函数
-- 微队列  
+- 微队列<br>
   - nextTick
   - Promise
 
@@ -234,7 +234,7 @@ Nodejs 事件循环中的消息队列共有 **8** 个，若引用之前宏队列
 事件循环到达该阶段时，它的运行方式为：
 
 - 如果 `poll` 队列中有回调任务，则依次执行回调直到清空队列。
-- 如果 `poll` 队列中没有回调任务  
+- 如果 `poll` 队列中没有回调任务<br>
   - 若其他队列中后续可能会出现回调任务，则一直等待，等其他队列中后续的回调任务来临时，结束该阶段，开启下一次事件循环
   - 若等待时间超过预设的时间限制，也会自动进入下一次事件循环
   - 若其他队列中后续不可能再出现回调任务了，则立即结束该阶段，并在本轮事件循环完成后，退出 node 程序
@@ -245,18 +245,18 @@ Nodejs 事件循环中的消息队列共有 **8** 个，若引用之前宏队列
 
 ```js
     const fs = require('fs');
-    const start = Date.now(); 
-    
-    setTimeout(() => { 
-        console.log('setTimeout exec', Date.now() - start); 
+    const start = Date.now();
+
+    setTimeout(() => {
+        console.log('setTimeout exec', Date.now() - start);
     }, 200)
-    
+
     fs.readFile('./index.js', 'utf-8', (err, data) => {
         console.log('file read');
         const start = Date.now();
         while(Date.now() - start < 300) {};
     })
-    
+
     // 输出结果：
     // file read
     // setTimeout exec 313ms
@@ -283,11 +283,11 @@ Nodejs 事件循环中的消息队列共有 **8** 个，若引用之前宏队列
     setTimeout(() => {
         console.log('setTimeout');
     }, 0)
-    
+
     setImmediate(() => {
         console.log('setImmediate');
     })
-    
+
     // 上述代码是无法预测先输出那个的
     // 因为即使 setTimeout(xxx, 0)，在计算机运算慢的情况下也不能立刻加入 timers 队列
 ```
@@ -334,7 +334,7 @@ Nodejs 事件循环中的消息队列共有 **8** 个，若引用之前宏队列
     });
 
     console.log("script end");
-    
+
     // 输出结果依次为：
     // script start
     // async1 start
@@ -363,10 +363,10 @@ Nodejs 事件循环中的消息队列共有 **8** 个，若引用之前宏队列
 
 > 梳理一下此时各消息队列的状态：
 >
-> 已有的输出：`script start`、`async1 start`、`async2`、`promise1`、`promise2`、`script end`  
->  `nextTick` 队列：`console.log("nextTick")`  
->  `Promise` 队列：`console.log("async1 end")`、`console.log("promise3")`  
->  `timers` 队列：`console.log("setTimeout0")`、`console.log("setTimeout3")`  
+> 已有的输出：`script start`、`async1 start`、`async2`、`promise1`、`promise2`、`script end`<br>
+>  `nextTick` 队列：`console.log("nextTick")`<br>
+>  `Promise` 队列：`console.log("async1 end")`、`console.log("promise3")`<br>
+>  `timers` 队列：`console.log("setTimeout0")`、`console.log("setTimeout3")`<br>
 >  `check` 队列：`console.log("setImmediate")`
 
 9. 在进入 `timers` 阶段前先清空微队列，先执行 `nextTick` 队列，输出 `nextTick`。
@@ -382,7 +382,7 @@ Nodejs 事件循环中的消息队列共有 **8** 个，若引用之前宏队列
 ### 2. **执行栈（Call Stack）**
 
 - **定义**：执行栈是一个后进先出（LIFO）的数据结构，用于存储当前正在执行的函数。每当一个函数被调用时，它会被压入栈中；当函数执行完毕后，它会被弹出栈。
-- **示例**：  
+- **示例**：<br>
 ```javascript
 function first() {
     console.log('First');
@@ -399,7 +399,7 @@ second(); // 执行
 ### 3. **任务队列（Task Queue）**
 
 - **定义**：任务队列是存放待执行任务的地方，包括异步操作（如回调函数、事件处理程序等）。当执行栈为空时，事件循环会从任务队列中取出任务并执行。
-- **示例**：  
+- **示例**：<br>
 ```javascript
 setTimeout(() => {
     console.log('Timeout callback');
@@ -410,7 +410,7 @@ console.log('Synchronous code');
 ### 4. **微任务队列（Microtask Queue）**
 
 - **定义**：微任务队列存放优先级高的任务，如 Promise 的 `.then()` 回调和 `MutationObserver`。微任务会在当前执行栈为空后立即执行，而不是等到下一个事件循环。
-- **示例**：  
+- **示例**：<br>
 ```javascript
 Promise.resolve().then(() => {
     console.log('Promise resolved');
@@ -420,7 +420,7 @@ console.log('Synchronous code');
 
 ### 5. **事件循环的执行顺序**
 
-- **顺序执行**：事件循环的基本执行顺序为：  
+- **顺序执行**：事件循环的基本执行顺序为：<br>
   1. 执行栈中的所有同步代码。
   2. 执行微任务队列中的所有任务（直到队列为空）。
   3. 从任务队列中取出一个任务执行。
@@ -429,7 +429,7 @@ console.log('Synchronous code');
 ### 6. **异步操作的处理**
 
 - **异步任务的入队**：当异步操作（如网络请求、定时器等）完成时，其回调函数会被添加到任务队列或微任务队列中，等待执行。
-- **示例**：  
+- **示例**：<br>
 ```javascript
 console.log('Start');
 setTimeout(() => {

@@ -314,7 +314,7 @@ div p:nth-of-type(2){
     <p>p3</p>
 </div>
 <div>
-    <h1>h2</h1>  
+    <h1>h2</h1>
 </div>
 ```
 
@@ -332,7 +332,7 @@ div p:nth-of-type(2){
 <!DOCTYPE html>
 <html>
 <head>
-<style> 
+<style>
 p:empty
 {
 width:100px;
@@ -362,7 +362,7 @@ background:#ff0000;
 <!DOCTYPE html>
 <html>
 <head>
-<style> 
+<style>
 div :nth-last-child(1){
     color:red;
 }
@@ -375,7 +375,7 @@ div :nth-last-child(1){
         <p>第三个段落。</p>
         <p>第四个段落。</p>
         <p>第五个段落。</p>
-    </div>	
+    </div>
 </body>
 </html>
 ```
@@ -390,7 +390,7 @@ div :nth-last-child(1){
 <!DOCTYPE html>
 <html>
 <head>
-<style> 
+<style>
 div p:nth-last-of-type(2){
 	color:red;
 }
@@ -406,7 +406,7 @@ div p:nth-last-of-type(2){
     <p>第四个段落。</p>
     <p>第五个段落。</p>
     <h1>h11</h1>
-  </div>	
+  </div>
 </body>
 </html>
 ```
@@ -437,7 +437,7 @@ div p:nth-last-of-type(2n+1){
 <!DOCTYPE html>
 <html>
 <head>
-<style> 
+<style>
 
 div h1:only-of-type{
     color: red;
@@ -559,7 +559,7 @@ h1:first-letter{
 ### 1. **选择器基础**
 
 - 请简述 CSS 选择器的概念。选择器的作用是什么？
-- CSS 选择器分为哪几种类型？请举例说明每种类型。  
+- CSS 选择器分为哪几种类型？请举例说明每种类型。<br>
   - 元素选择器
   - 类选择器
   - ID 选择器
@@ -576,7 +576,7 @@ h1:first-letter{
 
 ### 3. **组合选择器**
 
-- 请解释并举例说明以下组合选择器的用法：  
+- 请解释并举例说明以下组合选择器的用法：<br>
   - 后代选择器（`space`）：`div p`
   - 子元素选择器（`>`）：`div > p`
   - 相邻兄弟选择器（`+`）：`div + p`
@@ -585,7 +585,7 @@ h1:first-letter{
 
 ### 4. **属性选择器**
 
-- 请解释属性选择器的作用，并举例说明如何使用它们：  
+- 请解释属性选择器的作用，并举例说明如何使用它们：<br>
   - `[type="text"]`
   - `[type^="text"]`
   - `[type$="text"]`
@@ -595,7 +595,7 @@ h1:first-letter{
 ### 5. **伪类选择器**
 
 - 伪类选择器的作用是什么？它们如何帮助实现一些动态效果？
-- 常见的伪类选择器有哪些？请解释并举例：  
+- 常见的伪类选择器有哪些？请解释并举例：<br>
   - `:hover`
   - `:focus`
   - `:active`
@@ -609,7 +609,7 @@ h1:first-letter{
 ### 6. **伪元素选择器**
 
 - 伪元素选择器的作用是什么？它们如何与伪类选择器不同？
-- 常见的伪元素选择器有哪些？请解释并举例：  
+- 常见的伪元素选择器有哪些？请解释并举例：<br>
   - `::before`
   - `::after`
   - `::first-letter`

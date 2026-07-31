@@ -31,7 +31,7 @@ JS 执行是单线程的，基于事件循环。事件循环大致分为以下�
 for (macroTask of macroTaskQueue) {
     // 执行宏任务
     handleMacroTask();
-      
+
     // 执行所有微任务
     for (microTask of microTaskQueue) {
         handleMicroTask(microTask);
@@ -39,7 +39,7 @@ for (macroTask of macroTaskQueue) {
 }
 ```
 
-`宏任务`： script、setTimeout、setInterval、Node中的setImmediate 等  
+`宏任务`： script、setTimeout、setInterval、Node中的setImmediate 等<br>
  `微任务`： Promise.then、MutationObserver、Node 中的 Process.nextTick等
 
 ## nextTick的具体实现原理
@@ -57,7 +57,7 @@ Promise.then`、`MutationObserver`、`setImmediate`、`setTimeout
 通过上面任意一种方法，进行降级操作
 
 ```javascript
-export let isUsingMicroTask = false 
+export let isUsingMicroTask = false
 const callbacks = [] // 回调队列
 let pending = false
 
@@ -164,8 +164,8 @@ function flushCallbacks () {
 
 ## 总结
 
-1.  Vue 的 nextTick 其本质是对 JavaScript 执行原理 EventLoop 的一种应用 
-2.  nextTick核心是利用了如 Promise 、MutationObserver、setImmediate、setTimeout的原生 JavaScript 方法来模拟对应的微/宏任务的实现，根据当前环境支持什么方法则确定调用哪个 
+1.  Vue 的 nextTick 其本质是对 JavaScript 执行原理 EventLoop 的一种应用
+2.  nextTick核心是利用了如 Promise 、MutationObserver、setImmediate、setTimeout的原生 JavaScript 方法来模拟对应的微/宏任务的实现，根据当前环境支持什么方法则确定调用哪个
 
 ## 常见考点
 
@@ -178,13 +178,13 @@ function flushCallbacks () {
 
 #### **考察点：**
 
--  **基本概念**： `$nextTick` 用于在下次 DOM 更新时执行回调。在 Vue 中，数据变化会触发视图更新，但视图更新是异步的，`$nextTick` 提供了一种在 DOM 更新后执行操作的方式。  
+-  **基本概念**： `$nextTick` 用于在下次 DOM 更新时执行回调。在 Vue 中，数据变化会触发视图更新，但视图更新是异步的，`$nextTick` 提供了一种在 DOM 更新后执行操作的方式。<br>
 ```javascript
 this.$nextTick(() => {
   // 在 DOM 更新之后执行的代码
 });
 ```
--  **常见使用场景**：  
+-  **常见使用场景**：<br>
   - **访问更新后的 DOM 元素**：当你需要访问更新后的 DOM（如获取元素的尺寸、位置等），可以使用 `$nextTick` 来确保在 DOM 更新完成后再执行操作。
   - **与第三方库的集成**：有时候需要与第三方库（如 jQuery、D3.js 等）进行交互，通常它们需要在 DOM 完全渲染后才能操作，因此 `$nextTick` 也非常有用。
   - **动画**：在某些情况下，DOM 更新后需要立刻应用动画样式，`$nextTick` 确保样式更新后再执行动画。
@@ -200,8 +200,8 @@ this.$nextTick(() => {
 
 #### **考察点：**
 
--  **工作原理**： 在 Vue 中，数据更新触发视图更新是异步的，Vue 会将这些视图更新操作放入一个队列中。`$nextTick` 提供的回调会被推入一个队列，确保它会在下次 DOM 更新完成后执行。 
--  **多个 `$nextTick` 调用的执行顺序**： 如果在同一个事件循环中调用多个 `$nextTick`，它们会被推到同一个队列中，依次执行。Vue 会在下次 DOM 更新完成后，按顺序依次执行所有的 `$nextTick` 回调。  
+-  **工作原理**： 在 Vue 中，数据更新触发视图更新是异步的，Vue 会将这些视图更新操作放入一个队列中。`$nextTick` 提供的回调会被推入一个队列，确保它会在下次 DOM 更新完成后执行。
+-  **多个 `$nextTick` 调用的执行顺序**： 如果在同一个事件循环中调用多个 `$nextTick`，它们会被推到同一个队列中，依次执行。Vue 会在下次 DOM 更新完成后，按顺序依次执行所有的 `$nextTick` 回调。<br>
 ```javascript
 this.$nextTick(() => {
   console.log('Next tick 1');
@@ -227,8 +227,8 @@ this.$nextTick(() => {
 
 #### **考察点：**
 
--  **异步更新的原因**： Vue 会批量更新 DOM 来提高性能，而不是每次数据变化都立即更新 DOM。这种异步更新机制意味着你不能立即在数据更新后访问到更新后的 DOM，`$nextTick` 就是为了解决这个问题，提供了一种方法来等待 DOM 更新完成后再执行操作。 
--  **操作顺序**： 在数据更新后，如果你需要立即访问更新后的 DOM，应该使用 `$nextTick` 来确保在 DOM 更新完成后再执行相关操作。  
+-  **异步更新的原因**： Vue 会批量更新 DOM 来提高性能，而不是每次数据变化都立即更新 DOM。这种异步更新机制意味着你不能立即在数据更新后访问到更新后的 DOM，`$nextTick` 就是为了解决这个问题，提供了一种方法来等待 DOM 更新完成后再执行操作。
+-  **操作顺序**： 在数据更新后，如果你需要立即访问更新后的 DOM，应该使用 `$nextTick` 来确保在 DOM 更新完成后再执行相关操作。<br>
 ```javascript
 this.someData = 'new data';
 this.$nextTick(() => {
@@ -247,7 +247,7 @@ this.$nextTick(() => {
 
 #### **考察点：**
 
--  **生命周期钩子与 `$nextTick`**： `$nextTick` 在 Vue 中非常有用，尤其是在生命周期钩子中，尤其是在一些视图更新相关的钩子（如 `mounted`、`updated`）中。   
+-  **生命周期钩子与 `$nextTick`**： `$nextTick` 在 Vue 中非常有用，尤其是在生命周期钩子中，尤其是在一些视图更新相关的钩子（如 `mounted`、`updated`）中。<br>
   - **`mounted`**：在组件实例被挂载到 DOM 后调用，此时 DOM 渲染已经完成，但如果你需要等 DOM 完全更新后再执行某些操作，可以使用 `$nextTick`。
   - **`updated`**：在数据变化后，DOM 更新完成时调用。如果你需要在数据变化后执行一些操作（如操作 DOM），可以使用 `$nextTick` 来确保操作的是最新的 DOM。
 ```javascript
@@ -269,7 +269,7 @@ mounted() {
 
 #### **考察点：**
 
--  **`$nextTick` 与 `setTimeout`**： `setTimeout` 是将回调推入宏任务队列中，而 `$nextTick` 则是将回调推入微任务队列中。微任务会在当前事件循环结束时立即执行，而宏任务会在下一轮事件循环时执行。因此，`$nextTick` 的回调比 `setTimeout` 的回调执行得更早。  
+-  **`$nextTick` 与 `setTimeout`**： `setTimeout` 是将回调推入宏任务队列中，而 `$nextTick` 则是将回调推入微任务队列中。微任务会在当前事件循环结束时立即执行，而宏任务会在下一轮事件循环时执行。因此，`$nextTick` 的回调比 `setTimeout` 的回调执行得更早。<br>
 ```javascript
 this.$nextTick(() => {
   console.log('nextTick');
@@ -282,7 +282,7 @@ setTimeout(() => {
 // 'nextTick'
 // 'setTimeout'
 ```
--  **`$nextTick` 与 `Promise.then`**： `$nextTick` 和 `Promise.then` 都是微任务，但它们的使用场景有所不同。`$nextTick` 是 Vue 特有的，它确保在数据更新后立即执行回调，而 `Promise.then` 是 JavaScript 原生的异步处理方法。 
+-  **`$nextTick` 与 `Promise.then`**： `$nextTick` 和 `Promise.then` 都是微任务，但它们的使用场景有所不同。`$nextTick` 是 Vue 特有的，它确保在数据更新后立即执行回调，而 `Promise.then` 是 JavaScript 原生的异步处理方法。
 
 ---
 

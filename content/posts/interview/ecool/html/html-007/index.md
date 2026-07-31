@@ -135,7 +135,7 @@ meta标签一般放在整个`html`页面的`head`部分，在`MDN`中对他这�
 ### 1. **基本用法**
 
 - **结构**：`<meta>` 标签没有闭合标签，通常包含 `name`、`http-equiv` 或 `charset` 属性来定义元数据。
-- **示例**：  
+- **示例**：<br>
 ```html
 <meta charset="UTF-8">
 <meta name="author" content="John Doe">
@@ -146,7 +146,7 @@ meta标签一般放在整个`html`页面的`head`部分，在`MDN`中对他这�
 
 - **定义**：指定文档的字符编码。常用于指定 HTML 文档所使用的字符集，确保页面能够正确显示非 ASCII 字符。
 - **常见值**：`UTF-8` 是最常用的字符编码。
-- **示例**：  
+- **示例**：<br>
 ```html
 <meta charset="UTF-8">
 ```
@@ -154,12 +154,12 @@ meta标签一般放在整个`html`页面的`head`部分，在`MDN`中对他这�
 ### 3. **`name` 属性**
 
 - **定义**：指定元数据的名称，通常用来描述页面的作者、描述、关键字等信息。
-- **常见的 `name` 属性值**：  
+- **常见的 `name` 属性值**：<br>
   - `description`：页面描述。
   - `keywords`：页面关键词。
   - `author`：页面作者。
   - `viewport`：用于响应式设计，控制页面的缩放和布局。
-- **示例**：  
+- **示例**：<br>
 ```html
 <meta name="description" content="This is a sample page for learning HTML.">
 <meta name="keywords" content="HTML, CSS, JavaScript, Web Development">
@@ -169,11 +169,11 @@ meta标签一般放在整个`html`页面的`head`部分，在`MDN`中对他这�
 ### 4. **`http-equiv` 属性**
 
 - **定义**：模拟 HTTP 响应头，提供与 HTTP 标头类似的元数据。常用于设置页面的缓存策略、内容类型等。
-- **常见的 `http-equiv` 属性值**：  
+- **常见的 `http-equiv` 属性值**：<br>
   - `Content-Type`：指定文档的 MIME 类型和字符集。
   - `refresh`：用于刷新页面或重定向页面。
   - `X-UA-Compatible`：指定浏览器的渲染模式。
-- **示例**：  
+- **示例**：<br>
 ```html
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="refresh" content="5;url=https://www.example.com">
@@ -183,11 +183,11 @@ meta标签一般放在整个`html`页面的`head`部分，在`MDN`中对他这�
 ### 5. **`viewport` 元标签**
 
 - **定义**：用于响应式设计，指定视口的大小和缩放行为。通过设置视口宽度和缩放比例来优化移动设备上的显示效果。
-- **常见属性**：  
+- **常见属性**：<br>
   - `width`：设置视口的宽度。常用的值是 `device-width`，即设备屏幕的宽度。
   - `initial-scale`：设置页面初始的缩放比例。
   - `maximum-scale`：限制页面的最大缩放比例。
-- **示例**：  
+- **示例**：<br>
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1">
 ```
@@ -195,11 +195,11 @@ meta标签一般放在整个`html`页面的`head`部分，在`MDN`中对他这�
 ### 6. **`robots` 元标签**
 
 - **定义**：控制搜索引擎如何爬取和索引网页。通常用于指定搜索引擎是否能够索引页面内容、是否跟踪页面中的链接。
-- **常见属性值**：  
+- **常见属性值**：<br>
   - `index, follow`：允许页面被索引，并允许爬虫跟踪页面中的链接。
   - `noindex, nofollow`：禁止页面被索引，并禁止跟踪链接。
   - `noarchive`：防止搜索引擎缓存页面。
-- **示例**：  
+- **示例**：<br>
 ```html
 <meta name="robots" content="noindex, nofollow">
 ```
@@ -207,7 +207,7 @@ meta标签一般放在整个`html`页面的`head`部分，在`MDN`中对他这�
 ### 7. **`refresh` 属性**
 
 - **定义**：设置页面自动刷新或重定向的时间间隔。通常用于需要定时更新页面内容或跳转到其他页面的场景。
-- **示例**：  
+- **示例**：<br>
 ```html
 <meta http-equiv="refresh" content="10;url=https://www.example.com">
 ```
@@ -215,12 +215,12 @@ meta标签一般放在整个`html`页面的`head`部分，在`MDN`中对他这�
 ### 8. **`og` 和 `twitter` 元标签**
 
 - **定义**：这些标签用于社交媒体平台，如 Facebook、Twitter 等，来控制页面的预览和分享内容。也称为 Open Graph 标签。
-- **常见标签**：  
+- **常见标签**：<br>
   - `og:title`：页面的标题。
   - `og:description`：页面的描述。
   - `og:image`：分享时显示的图像。
   - `twitter:card`：Twitter 卡片类型（如总结卡、图片卡等）。
-- **示例**：  
+- **示例**：<br>
 ```html
 <meta property="og:title" content="Web Development">
 <meta property="og:description" content="Learn web development using HTML, CSS, and JavaScript">
@@ -231,10 +231,10 @@ meta标签一般放在整个`html`页面的`head`部分，在`MDN`中对他这�
 ### 9. **`apple-mobile-web-app-capable`**
 
 - **定义**：控制 Web 应用是否在 iOS 设备上作为独立应用启动，消除浏览器界面元素（如地址栏）。
-- **常见值**：  
+- **常见值**：<br>
   - `yes`：支持全屏显示，像本地应用一样运行。
   - `no`：显示浏览器界面元素。
-- **示例**：  
+- **示例**：<br>
 ```html
 <meta name="apple-mobile-web-app-capable" content="yes">
 ```
@@ -242,7 +242,7 @@ meta标签一般放在整个`html`页面的`head`部分，在`MDN`中对他这�
 ### 10. **`theme-color`**
 
 - **定义**：设置浏览器地址栏的颜色。用于优化移动端的用户体验，尤其是在 Android 和 Chrome 浏览器中。
-- **示例**：  
+- **示例**：<br>
 ```html
 <meta name="theme-color" content="#4CAF50">
 ```
@@ -255,7 +255,7 @@ meta标签一般放在整个`html`页面的`head`部分，在`MDN`中对他这�
 ### 12. **`icon` 和 `favicon`**
 
 - **定义**：通过 `<meta>` 标签定义网站的图标，通常在浏览器标签栏显示，也可以作为移动设备上的快捷方式图标。
-- **示例**：  
+- **示例**：<br>
 ```html
 <meta rel="icon" href="favicon.ico">
 ```
@@ -263,7 +263,7 @@ meta标签一般放在整个`html`页面的`head`部分，在`MDN`中对他这�
 ### 13. **`http-equiv="X-UA-Compatible"`**
 
 - **定义**：告诉 Internet Explorer 使用最新的渲染引擎来呈现页面，避免使用较旧的兼容模式。
-- **示例**：  
+- **示例**：<br>
 ```html
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 ```
@@ -271,7 +271,7 @@ meta标签一般放在整个`html`页面的`head`部分，在`MDN`中对他这�
 ### 14. **`Content-Security-Policy (CSP)`**
 
 - **定义**：CSP 用于防止跨站脚本攻击（XSS）等安全问题。它通过指定允许加载资源的源来增加页面的安全性。
-- **示例**：  
+- **示例**：<br>
 ```html
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
 ```
@@ -279,7 +279,7 @@ meta标签一般放在整个`html`页面的`head`部分，在`MDN`中对他这�
 ### 15. **多语言网站的 `<meta>` 标签**
 
 - **定义**：设置页面的语言，帮助搜索引擎和浏览器了解页面的语言类型，优化本地化内容。
-- **示例**：  
+- **示例**：<br>
 ```html
 <meta http-equiv="Content-Language" content="en-US">
 ```

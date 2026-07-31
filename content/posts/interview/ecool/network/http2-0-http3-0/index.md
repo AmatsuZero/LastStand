@@ -20,10 +20,10 @@ HTTP 协议是 HyperText Transfer Protocol（超文本传输协议）的缩写�
 
 ### 二、HTTP/1.x 的缺陷
 
--  **连接无法复用**：连接无法复用会导致每次请求都经历三次握手和慢启动。三次握手在高延迟的场景下影响较明显，慢启动则对大量小文件请求影响较大（没有达到最大窗口请求就被终止）。  
+-  **连接无法复用**：连接无法复用会导致每次请求都经历三次握手和慢启动。三次握手在高延迟的场景下影响较明显，慢启动则对大量小文件请求影响较大（没有达到最大窗口请求就被终止）。<br>
   - HTTP/1.0 传输数据时，每次都需要重新建立连接，增加延迟。
   - HTTP/1.1 虽然加入 keep-alive 可以复用一部分连接，但域名分片等情况下仍然需要建立多个 connection，耗费资源，给服务器带来性能压力。
--  **Head-Of-Line Blocking（HOLB）**：导致带宽无法被充分利用，以及后续健康请求被阻塞。[HOLB](https://link.juejin.cn/?target=http%3A%2F%2Fstackoverflow.com%2Fquestions%2F25221954%2Fspdy-head-of-line-blocking)是指一系列包（package）因为第一个包被阻塞；当页面中需要请求很多资源的时候，HOLB（队头阻塞）会导致在达到最大请求数量时，剩余的资源需要等待其他资源请求完成后才能发起请求。  
+-  **Head-Of-Line Blocking（HOLB）**：导致带宽无法被充分利用，以及后续健康请求被阻塞。[HOLB](https://link.juejin.cn/?target=http%3A%2F%2Fstackoverflow.com%2Fquestions%2F25221954%2Fspdy-head-of-line-blocking)是指一系列包（package）因为第一个包被阻塞；当页面中需要请求很多资源的时候，HOLB（队头阻塞）会导致在达到最大请求数量时，剩余的资源需要等待其他资源请求完成后才能发起请求。<br>
   - HTTP 1.0：下个请求必须在前一个请求返回后才能发出，`request-response`对按序发生。显然，如果某个请求长时间没有返回，那么接下来的请求就全部阻塞了。
   - HTTP 1.1：尝试使用 pipeling 来解决，即浏览器可以一次性发出多个请求（同个域名，同一条 TCP 链接）。但 pipeling 要求返回是按序的，那么前一个请求如果很耗时（比如处理大图片），那么后面的请求即使服务器已经处理完，仍会等待前面的请求处理完才开始按序返回。所以，pipeling 只部分解决了 HOLB。
 

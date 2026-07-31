@@ -15,13 +15,13 @@ JS中的类型判断也是咱的老朋友了，如果要你说两句，那便是
 所有的类型判断里当属`typeof`最为经典，其最为出名之处就是这玩意不顶用，`typeof`居然会将`null`判定为`object`，但这到底是什么原因？实际上，这就是JS这门编程语言的官方团队造出来的一个bug。
 
 ```javascript
-let s = '123'    
-let n = 123     
-let f = true      
-let u = undefined  
-let nu = null      
-let sy = Symbol(123) 
-let big = 1234n  
+let s = '123'
+let n = 123
+let f = true
+let u = undefined
+let nu = null
+let sy = Symbol(123)
+let big = 1234n
 let obj = {}
 let arr = []
 let fn = function(){}
@@ -56,13 +56,13 @@ console.log(typeof(fn))   //function
 相较于`typeof`，`instanceof`有其优越之处，也有其不足之处，比如，`instanceof`只能判断引用类型，并且是通过原型链查找来判断类型。
 
 ```javascript
-let s = '123'    
-let n = 123     
-let f = true      
-let u = undefined  
-let nu = null      
-let sy = Symbol(123) 
-let big = 1234n  
+let s = '123'
+let n = 123
+let f = true
+let u = undefined
+let nu = null
+let sy = Symbol(123)
+let big = 1234n
 let obj = {}
 let arr = []
 let fn = function(){}
@@ -93,7 +93,7 @@ function myinstanceof(L, R){
         L = L.__proto__
     }
     return false
-} 
+}
 console.log(myinstanceof([], Array))  // true
 ```
 
@@ -119,7 +119,7 @@ function myinstanceof(L,R){
             if(L.__proto__.__proto__.__proto__ === R.prototype)
             return true
         }
-    
+
     }
 }
 
@@ -131,13 +131,13 @@ console.log(myinstanceof(a, Object))    // true
 类型判断中最为完美的毋庸置疑，当属 `Object.prototype.toString.call()`，这是一种属于`object`原型上的方法。它能做到正确的判断出每一种类型。
 
 ```javascript
-let s = '123'    
-let n = 123     
-let f = true      
-let u = undefined  
-let nu = null      
-let sy = Symbol(123) 
-let big = 1234n  
+let s = '123'
+let n = 123
+let f = true
+let u = undefined
+let nu = null
+let sy = Symbol(123)
+let big = 1234n
 let obj = {}
 let arr = []
 let fn = function(){}
@@ -161,14 +161,14 @@ console.log(Object.prototype.toString.call(date)); // [object Date]
 
 翻译成人话就是：
 
-1.  如果你传进来的值为`undefined`的话，直接返回一个[object Undefined]。 
-2.  如果你传进来的值为`null`的话，直接返回一个[object Null]。 
-3.  如果你既不是`undefined`又不是`null`的话，JS将调用`ToObject`方法，将`O`作为 `ToObject(this)`的执行结果。 
+1.  如果你传进来的值为`undefined`的话，直接返回一个[object Undefined]。
+2.  如果你传进来的值为`null`的话，直接返回一个[object Null]。
+3.  如果你既不是`undefined`又不是`null`的话，JS将调用`ToObject`方法，将`O`作为 `ToObject(this)`的执行结果。
 
 `ToObject`的执行机理简单来说就是，传进来一个`boolean`类型会创建一个`boolean`包装类对象，传进来`Number`会创建一个`Number`字面量，传进来一个`String`会创建一个字符串字面量，传进来一个对象就会创建这个对象。总而言之，任何传进去的任何值都会转换为对象。
 
-4.  定义一个`class`作为内部属性`[[class]]`的值，用于承接传进来的值。 
-5.  返回由 `"["` `object` 和 `class` 和 `"]"` 组成的字符串。 
+4.  定义一个`class`作为内部属性`[[class]]`的值，用于承接传进来的值。
+5.  返回由 `"["` `object` 和 `class` 和 `"]"` 组成的字符串。
 
 现在我们知道 `Object.prototype.toString()`的原理了，但是 `Object.prototype.toString.call()`后面加的这个`call`又有什么作用呢？让我们先试着输出一下:
 
@@ -194,7 +194,7 @@ obj.toString()
 
 ```javascript
 let arr = []
-let s = '123' 
+let s = '123'
 
 console.log(Array.isArray(arr));  // true
 console.log(Array.isArray(s));    // false

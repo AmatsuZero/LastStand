@@ -45,7 +45,7 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 ### 1、JSONP跨域
 
- **jsonp**的原理就是利用`<script>`标签没有跨域限制，通过`<script>`标签src属性，发送带有callback参数的GET请求，服务端将接口返回数据拼凑到callback函数中，返回给浏览器，浏览器解析执行，从而前端拿到callback函数返回的数据。  
+ **jsonp**的原理就是利用`<script>`标签没有跨域限制，通过`<script>`标签src属性，发送带有callback参数的GET请求，服务端将接口返回数据拼凑到callback函数中，返回给浏览器，浏览器解析执行，从而前端拿到callback函数返回的数据。<br>
  1）原生JS实现：
 
 ```bash
@@ -90,7 +90,7 @@ this.$http.jsonp('http://www.domain2.com:8080/login', {
     params: {},
     jsonp: 'handleCallback'
 }).then((res) => {
-    console.log(res); 
+    console.log(res);
 })
 ```
 
@@ -120,9 +120,9 @@ console.log('Server is running at port 8080...');
 
 ### 2、跨域资源共享（CORS）
 
- **CORS**是一个W3C标准，全称是"跨域资源共享"（Cross-origin resource sharing）。 它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制。 CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能，IE浏览器不能低于IE10。  
- 浏览器将CORS跨域请求分为简单请求和非简单请求。  
- 只要同时满足一下两个条件，就属于简单请求  
+ **CORS**是一个W3C标准，全称是"跨域资源共享"（Cross-origin resource sharing）。 它允许浏览器向跨源服务器，发出XMLHttpRequest请求，从而克服了AJAX只能同源使用的限制。 CORS需要浏览器和服务器同时支持。目前，所有浏览器都支持该功能，IE浏览器不能低于IE10。<br>
+ 浏览器将CORS跨域请求分为简单请求和非简单请求。<br>
+ 只要同时满足一下两个条件，就属于简单请求<br>
  (1)使用下列方法之一：
 
 - head
@@ -155,11 +155,11 @@ User-Agent: Mozilla/5.0...
 
 #### CORS请求设置的响应头字段，都以 Access-Control-开头:
 
-**1）Access-Control-Allow-Origin**：必选  
- 它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求。  
- **2）Access-Control-Allow-Credentials**：可选  
- 它的值是一个布尔值，表示是否允许发送Cookie。默认情况下，Cookie不包括在CORS请求之中。设为true，即表示服务器明确许可，Cookie可以包含在请求中，一起发给服务器。这个值也只能设为true，如果服务器不要浏览器发送Cookie，删除该字段即可。  
- **3）Access-Control-Expose-Headers**：可选  
+**1）Access-Control-Allow-Origin**：必选<br>
+ 它的值要么是请求时Origin字段的值，要么是一个*，表示接受任意域名的请求。<br>
+ **2）Access-Control-Allow-Credentials**：可选<br>
+ 它的值是一个布尔值，表示是否允许发送Cookie。默认情况下，Cookie不包括在CORS请求之中。设为true，即表示服务器明确许可，Cookie可以包含在请求中，一起发给服务器。这个值也只能设为true，如果服务器不要浏览器发送Cookie，删除该字段即可。<br>
+ **3）Access-Control-Expose-Headers**：可选<br>
  CORS请求时，XMLHttpRequest对象的getResponseHeader()方法只能拿到6个基本字段：Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma。如果想拿到其他字段，就必须在Access-Control-Expose-Headers里面指定。上面的例子指定，getResponseHeader('FooBar')可以返回FooBar字段的值。
 
 ### 非简单请求
@@ -181,27 +181,27 @@ Connection: keep-alive
 User-Agent: Mozilla/5.0..
 ```
 
-**1）Access-Control-Request-Method**：必选  
+**1）Access-Control-Request-Method**：必选<br>
  用来列出浏览器的CORS请求会用到哪些HTTP方法，上例是PUT。
 
-**2）Access-Control-Request-Headers**：可选  
+**2）Access-Control-Request-Headers**：可选<br>
  该字段是一个逗号分隔的字符串，指定浏览器CORS请求会额外发送的头信息字段，上例是X-Custom-Header。
 
 #### 预检请求的回应
 
- 服务器收到"预检"请求以后，检查了Origin、Access-Control-Request-Method和Access-Control-Request-Headers字段以后，确认允许跨源请求，就可以做出回应。  
+ 服务器收到"预检"请求以后，检查了Origin、Access-Control-Request-Method和Access-Control-Request-Headers字段以后，确认允许跨源请求，就可以做出回应。<br>
  HTTP回应中，除了关键的是Access-Control-Allow-Origin字段，其他CORS相关字段如下：
 
-**1）Access-Control-Allow-Methods**：必选  
+**1）Access-Control-Allow-Methods**：必选<br>
  它的值是逗号分隔的一个字符串，表明服务器支持的所有跨域请求的方法。注意，返回的是所有支持的方法，而不单是浏览器请求的那个方法。这是为了避免多次"预检"请求。
 
-**2）Access-Control-Allow-Headers**  
+**2）Access-Control-Allow-Headers**<br>
  如果浏览器请求包括Access-Control-Request-Headers字段，则Access-Control-Allow-Headers字段是必需的。它也是一个逗号分隔的字符串，表明服务器支持的所有头信息字段，不限于浏览器在"预检"中请求的字段。
 
-**3）Access-Control-Allow-Credentials**：可选  
+**3）Access-Control-Allow-Credentials**：可选<br>
  该字段与简单请求时的含义相同。
 
-**4）Access-Control-Max-Age**：可选  
+**4）Access-Control-Max-Age**：可选<br>
  用来指定本次预检请求的有效期，单位为秒。
 
 ### CORS跨域示例
@@ -265,7 +265,7 @@ server.on('request', function(req, res) {
         res.writeHead(200, {
             'Access-Control-Allow-Credentials': 'true',     // 后端允许发送Cookie
             'Access-Control-Allow-Origin': 'http://www.domain1.com',    // 允许访问的域（协议+域名+端口）
-            /* 
+            /*
              * 此处设置的cookie还是domain2的而非domain1，因为后端也不能跨域写cookie(nginx反向代理可以实现)，
              * 但只要domain2中写入一次cookie认证，后面的跨域接口都能从domain2中获取cookie，从而实现所有的接口都能跨域访问
              */
@@ -299,7 +299,7 @@ location / {
 
 > 跨域问题：同源策略仅是针对浏览器的安全策略。服务器端调用HTTP接口只是使用HTTP协议，不需要同源策略，也就不存在跨域问题。
 
-实现思路：通过Nginx配置一个代理服务器域名与domain1相同，端口不同）做跳板机，反向代理访问domain2接口，并且可以顺便修改cookie中domain信息，方便当前域cookie写入，实现跨域访问。  
+实现思路：通过Nginx配置一个代理服务器域名与domain1相同，端口不同）做跳板机，反向代理访问domain2接口，并且可以顺便修改cookie中domain信息，方便当前域cookie写入，实现跨域访问。<br>
  nginx具体配置：
 
 ```bash
@@ -322,8 +322,8 @@ server {
 
 ### 4、nodejs中间件代理跨域
 
- node中间件实现跨域代理，原理大致与nginx相同，都是通过启一个代理服务器，实现数据的转发，也可以通过设置cookieDomainRewrite参数修改响应头中cookie中域名，实现当前域的cookie写入，方便接口登录认证。  
- **1）非vue框架的跨域**  
+ node中间件实现跨域代理，原理大致与nginx相同，都是通过启一个代理服务器，实现数据的转发，也可以通过设置cookieDomainRewrite参数修改响应头中cookie中域名，实现当前域的cookie写入，方便接口登录认证。<br>
+ **1）非vue框架的跨域**<br>
  使用node + express + http-proxy-middleware搭建一个proxy服务器。
 
 - 前端代码：
@@ -365,8 +365,8 @@ app.listen(3000);
 console.log('Proxy server is listen at port 3000...');
 ```
 
-**2）vue框架的跨域**  
- node + vue + webpack + webpack-dev-server搭建的项目，跨域请求接口，直接修改webpack.config.js配置。开发环境下，vue渲染服务和接口代理服务都是webpack-dev-server同一个，所以页面与代理接口之间不再跨域。  
+**2）vue框架的跨域**<br>
+ node + vue + webpack + webpack-dev-server搭建的项目，跨域请求接口，直接修改webpack.config.js配置。开发环境下，vue渲染服务和接口代理服务都是webpack-dev-server同一个，所以页面与代理接口之间不再跨域。<br>
  webpack.config.js部分配置：
 
 ```bash
@@ -390,7 +390,7 @@ module.exports = {
 
 ### 5、document.domain + iframe跨域
 
- 此方案仅限主域相同，子域不同的跨域应用场景。实现原理：两个页面都通过js强制设置document.domain为基础主域，就实现了同域。  
+ 此方案仅限主域相同，子域不同的跨域应用场景。实现原理：两个页面都通过js强制设置document.domain为基础主域，就实现了同域。<br>
  1）父窗口：([www.domain.com/a.html](http://www.domain.com/a.html))
 
 ```bash
@@ -413,8 +413,8 @@ module.exports = {
 
 ### 6、location.hash + iframe跨域
 
- 实现原理： a欲与b跨域相互通信，通过中间页c来实现。 三个页面，不同域之间利用iframe的location.hash传值，相同域之间直接js访问来通信。  
- 具体实现：A域：a.html -> B域：b.html -> A域：c.html，a与b不同域只能通过hash值单向通信，b与c也不同域也只能单向通信，但c与a同域，所以c可通过parent.parent访问a页面所有对象。  
+ 实现原理： a欲与b跨域相互通信，通过中间页c来实现。 三个页面，不同域之间利用iframe的location.hash传值，相同域之间直接js访问来通信。<br>
+ 具体实现：A域：a.html -> B域：b.html -> A域：c.html，a与b不同域只能通过hash值单向通信，b与c也不同域也只能单向通信，但c与a同域，所以c可通过parent.parent访问a页面所有对象。<br>
  1）a.html：([www.domain1.com/a.html](http://www.domain1.com/a.html))
 
 ```bash
@@ -426,7 +426,7 @@ module.exports = {
     setTimeout(function() {
         iframe.src = iframe.src + '#user=admin';
     }, 1000);
-    
+
     // 开放给同域c.html的回调方法
     function onCallback(res) {
         alert('data from c.html ---> ' + res);
@@ -462,7 +462,7 @@ module.exports = {
 
 ### 7、window.name + iframe跨域
 
- window.name属性的独特之处：name值在不同的页面（甚至不同域名）加载后依旧存在，并且可以支持非常长的 name 值（2MB）。  
+ window.name属性的独特之处：name值在不同的页面（甚至不同域名）加载后依旧存在，并且可以支持非常长的 name 值（2MB）。<br>
  1）a.html：([www.domain1.com/a.html](http://www.domain1.com/a.html))
 
 ```bash
@@ -503,7 +503,7 @@ proxy('http://www.domain2.com/b.html', function(data){
 });
 ```
 
-2）proxy.html：([www.domain1.com/proxy.html](http://www.domain1.com/proxy.html))  
+2）proxy.html：([www.domain1.com/proxy.html](http://www.domain1.com/proxy.html))<br>
  中间代理页，与a.html同域，内容为空即可。
 
 3）b.html：([www.domain2.com/b.html](http://www.domain2.com/b.html))
@@ -534,7 +534,7 @@ proxy('http://www.domain2.com/b.html', function(data){
 
 ```bash
 <iframe id="iframe" src="http://www.domain2.com/b.html" style="display:none;"></iframe>
-<script>       
+<script>
     var iframe = document.getElementById('iframe');
     iframe.onload = function() {
         var data = {
@@ -572,7 +572,7 @@ proxy('http://www.domain2.com/b.html', function(data){
 
 ### 9、WebSocket协议跨域
 
- WebSocket protocol是HTML5一种新的协议。它实现了浏览器与服务器全双工通信，同时允许跨域通讯，是server push技术的一种很好的实现。 原生WebSocket API使用起来不太方便，我们使用Socket.io，它很好地封装了webSocket接口，提供了更简单、灵活的接口，也对不支持webSocket的浏览器提供了向下兼容。  
+ WebSocket protocol是HTML5一种新的协议。它实现了浏览器与服务器全双工通信，同时允许跨域通讯，是server push技术的一种很好的实现。 原生WebSocket API使用起来不太方便，我们使用Socket.io，它很好地封装了webSocket接口，提供了更简单、灵活的接口，也对不支持webSocket的浏览器提供了向下兼容。<br>
  1）前端代码：
 
 ```bash
@@ -585,12 +585,12 @@ var socket = io('http://www.domain2.com:8080');
 socket.on('connect', function() {
     // 监听服务端消息
     socket.on('message', function(msg) {
-        console.log('data from server: ---> ' + msg); 
+        console.log('data from server: ---> ' + msg);
     });
 
     // 监听服务端关闭
-    socket.on('disconnect', function() { 
-        console.log('Server socket has closed.'); 
+    socket.on('disconnect', function() {
+        console.log('Server socket has closed.');
     });
 });
 
@@ -627,7 +627,7 @@ socket.listen(server).on('connection', function(client) {
 
     // 断开处理
     client.on('disconnect', function() {
-        console.log('Client socket has closed.'); 
+        console.log('Client socket has closed.');
     });
 });
 ```

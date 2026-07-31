@@ -79,7 +79,7 @@ class setPerson {
         //创建信息名片
     }
     otherFynction(){
-    
+
     }
 }
 class Person {
@@ -131,7 +131,7 @@ window.applicationStation = new applicationStation()
 // application1和application2拥有同一个applicationStation对象
 const application1 = window.applicationStation
 const application2 = window.applicationStation
- 
+
 ```
 
 ## 二、结构型
@@ -174,7 +174,7 @@ class setPerson {
         //创建信息名片
     }
     otherFynction(){
-    
+
     }
 }
 // 追加

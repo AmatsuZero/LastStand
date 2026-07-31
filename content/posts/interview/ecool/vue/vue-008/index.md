@@ -41,13 +41,13 @@ export default {
     },
     setup(){
         // 创建一个响应式数据
-        
+
         // 写法一 适用于基础类型  ref 还有其他用处，下面章节有介绍
         const msg2 = ref("这是传级子组件的信息2")
-        
+
         // 写法二 适用于复杂类型，如数组、对象
         const msg2 = reactive(["这是传级子组件的信息2"])
-        
+
         return {
             msg2
         }
@@ -115,7 +115,7 @@ export default {
     <button @click="handleClick">按钮</buttom>
 </template>
 <script setup>
-    
+
     // 方法一 适用于Vue3.2版本 不需要引入
     // import { defineEmits } from "vue"
     // 对应写法一
@@ -124,7 +124,7 @@ export default {
     const handleClick = ()=>{
         emit("myClick", "这是发送给父组件的信息")
     }
-    
+
     // 方法二 不适用于 Vue3.2版本，该版本 useContext()已废弃
     import { useContext } from "vue"
     const { emit } = useContext()
@@ -162,7 +162,7 @@ export default {
             console.log("这是子组件的方法")
         }
     })
-    
+
     // 方法二 适用于Vue3.2版本, 不需要引入
     // import { defineExpose } from "vue"
     defineExpose({
@@ -214,7 +214,7 @@ export default {
     const ctx = useContext()
     // 如果没有用 props 接收 msg1 的话就是 { msg1: "1111", msg2:"2222", title: "3333" }
     console.log(ctx.attrs) // { msg2:"2222", title: "3333" }
-    
+
     // 方法二 适用于 Vue3.2版本
     const attrs = useAttrs()
     console.log(attrs) // { msg2:"2222", title: "3333" }
@@ -240,15 +240,15 @@ export default {
     <button @click="handlerClick">按钮</button>
 </template>
 <script setup>
-    
+
     // 方法一  不适用于 Vue3.2版本，该版本 useContext()已废弃
     import { useContext } from "vue"
     const { emit } = useContext()
-    
+
     // 方法二 适用于 Vue3.2版本，不需要引入
     // import { defineEmits } from "vue"
     const emit = defineEmits(["key","value"])
-    
+
     // 用法
     const handlerClick = () => {
         emit("update:key", "新的key")
@@ -319,7 +319,7 @@ createApp(App).use(store).mount("#app")
     console.log(store.state.count) // 1
 
     const count = computed(()=>store.state.count) // 响应式，会随着vuex数据改变而改变
-    console.log(count) // 1 
+    console.log(count) // 1
 </script>
 ```
 
@@ -348,7 +348,7 @@ const handleClick = () => {
 }
 </script>
 
-// 组件 B 
+// 组件 B
 <script setup>
 import mitt from './mitt'
 import { onUnmounted } from 'vue'
@@ -858,7 +858,7 @@ export default{
 
 #### **考察点：**
 
-- 父组件通过 `props` 向子组件传递数据：  
+- 父组件通过 `props` 向子组件传递数据：<br>
 ```vue
 <!-- 父组件 -->
 <ChildComponent :title="parentTitle" />
@@ -871,7 +871,7 @@ props: {
   }
 }
 ```
-- 子组件通过 `$emit` 向父组件发送事件：  
+- 子组件通过 `$emit` 向父组件发送事件：<br>
 ```vue
 // 子组件
 this.$emit('updateTitle', newTitle);
@@ -879,7 +879,7 @@ this.$emit('updateTitle', newTitle);
 <!-- 父组件 -->
 <ChildComponent @updateTitle="handleUpdate" />
 ```
-- **注意点**：  
+- **注意点**：<br>
   - 父组件数据变化会自动同步到子组件（单向数据流）。
   - 子组件传递数据时，应遵循父子分工明确的原则，避免子组件直接修改 `props`（违反单向数据流）。
 
@@ -894,8 +894,8 @@ this.$emit('updateTitle', newTitle);
 
 #### **考察点：**
 
-- **事件总线（Vue 2）**：  
-  - 使用一个空的 Vue 实例作为事件总线，在兄弟组件间传递消息：  
+- **事件总线（Vue 2）**：<br>
+  - 使用一个空的 Vue 实例作为事件总线，在兄弟组件间传递消息：<br>
 ```javascript
 // 创建事件总线
 const EventBus = new Vue();
@@ -908,11 +908,11 @@ EventBus.$on('eventName', (data) => {
   console.log(data);
 });
 ```
-- **父组件中转**：  
+- **父组件中转**：<br>
   - 将兄弟组件的通信数据提升到父组件，借助父组件的状态和事件分发。
-- **Vuex 或 Pinia**：  
+- **Vuex 或 Pinia**：<br>
   - 适合复杂应用，利用状态管理工具实现跨组件通信。
-- **Vue 3 的 `provide` 和 `inject`**：  
+- **Vue 3 的 `provide` 和 `inject`**：<br>
   - 通常适用于父子链条，不直接用于兄弟组件通信。
 
 ---
@@ -926,20 +926,20 @@ EventBus.$on('eventName', (data) => {
 
 #### **考察点：**
 
-- **Vue 2 中的跨层级通信**：  
+- **Vue 2 中的跨层级通信**：<br>
   - 依赖事件总线或 Vuex，手动传递数据。
-- **Vue 3 的 `provide` 和 `inject`**：  
-  - `provide` 用于在祖先组件中提供数据：  
+- **Vue 3 的 `provide` 和 `inject`**：<br>
+  - `provide` 用于在祖先组件中提供数据：<br>
 ```javascript
 // 祖先组件
 provide('keyName', value);
 ```
-  - `inject` 用于在后代组件中接收数据：  
+  - `inject` 用于在后代组件中接收数据：<br>
 ```javascript
 // 后代组件
 const value = inject('keyName');
 ```
-  - **注意点**：  
+  - **注意点**：<br>
     - `provide` 和 `inject` 适合静态依赖，不适合频繁变动的数据传递。
 
 ---
@@ -953,15 +953,15 @@ const value = inject('keyName');
 
 #### **考察点：**
 
-- 使用场景：  
+- 使用场景：<br>
   - 需要共享的状态数据较多且层级深时，使用全局状态管理工具（如 Vuex 或 Pinia）。
-- Vuex 的核心概念：  
+- Vuex 的核心概念：<br>
   - **state**：集中式存储状态。
   - **getters**：派生状态，类似计算属性。
   - **mutations**：同步修改状态的方法。
   - **actions**：提交异步逻辑后调用 `mutations`。
   - **modules**：模块化管理状态。
-- 使用示例：  
+- 使用示例：<br>
 ```javascript
 // 读取状态
 computed: {
@@ -989,13 +989,13 @@ methods: {
 
 #### **考察点：**
 
-- 动态组件通常由父组件管理，通过 `key` 控制重渲染：  
+- 动态组件通常由父组件管理，通过 `key` 控制重渲染：<br>
 ```vue
 <component :is="currentComponent" :data="dynamicData" />
 ```
-- 数据流方向：  
+- 数据流方向：<br>
   - 父组件管理动态组件的状态，动态组件通过 `props` 接收数据，通过 `$emit` 反馈。
-- 生命周期影响：  
+- 生命周期影响：<br>
   - 需要注意动态组件被销毁后，事件监听器或异步任务的清理。
 
 ---

@@ -343,7 +343,7 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 - HTTPS 如何使用对称加密和非对称加密？它们分别解决了什么问题？
 - 什么是 TLS/SSL？它在 HTTPS 中起什么作用？
-- HTTPS 的握手过程具体包括哪些步骤？  
+- HTTPS 的握手过程具体包括哪些步骤？<br>
   - 包括客户端和服务端如何协商加密算法。
   - 为什么需要中间的证书验证过程？
 - 为什么 HTTPS 握手中使用了非对称加密，而数据传输中使用对称加密？
@@ -354,7 +354,7 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 #### **问题**：
 
-- HTTPS 和 HTTP 的主要区别有哪些？从以下几个角度展开：  
+- HTTPS 和 HTTP 的主要区别有哪些？从以下几个角度展开：<br>
   - **加密**：明文 vs 加密。
   - **数据完整性**：如何防止数据篡改？
   - **身份验证**：如何确定服务器的合法性？
@@ -366,11 +366,11 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 #### **问题**：
 
-- HTTPS 如何解决以下安全问题？  
+- HTTPS 如何解决以下安全问题？<br>
   - 数据窃听（防止明文被拦截）。
   - 中间人攻击（MITM）。
   - 数据篡改。
-- 什么是 CA 证书？它在 HTTPS 中的作用是什么？  
+- 什么是 CA 证书？它在 HTTPS 中的作用是什么？<br>
   - 什么是信任链？如何验证证书的合法性？
   - 为什么自签名证书不能完全保证安全？
 - 如果证书被劫持或泄露，HTTPS 是否仍然安全？为什么？
@@ -382,7 +382,7 @@ source = "https://fe.ecool.fun/knowledge-learn"
 #### **问题**：
 
 - HTTPS 握手中的性能瓶颈在哪里？如何优化？
-- 什么是 HTTP/2？它如何与 HTTPS 协作提高性能？  
+- 什么是 HTTP/2？它如何与 HTTPS 协作提高性能？<br>
   - 例如，多路复用、头部压缩等特性。
 - 什么是 TLS Session Resumption？如何减少重复握手带来的开销？
 - 什么是 OCSP Stapling？它在 HTTPS 性能优化中起什么作用？
@@ -393,10 +393,10 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 #### **问题**：
 
-- 在实际项目中，如何配置 HTTPS？  
+- 在实际项目中，如何配置 HTTPS？<br>
   - 使用 Nginx 或 Apache 配置 HTTPS 的步骤有哪些？
   - 如何申请和安装 SSL/TLS 证书？
-- 如何确保 HTTPS 配置的安全性？  
+- 如何确保 HTTPS 配置的安全性？<br>
   - 强制使用 HTTPS：HSTS（HTTP Strict Transport Security）是什么？
   - 禁用过时的 TLS 版本（如 TLS 1.0、1.1）。
 - 项目中是否需要对静态资源的 CDN 访问启用 HTTPS？为什么？

@@ -311,9 +311,9 @@ function normalizeChildren (vnode, children) {
 }
 ```
 
-1.  往 `vnode.children` 属性上赋值传入的对象数据 
-2.  `vnode.shapeFlag` 会与 `slot` 子节点类型 `SLOTS_CHILDREN` 进行或运算，由于 `vnode` 本身的 `shapFlag ` 是 `STATEFUL_COMPONENT`，所以运算后的 ` shapeFlag` 是 ` SLOTS_CHILDREN | STATEFUL_COMPONENT`。 
-3.  不同的 ` shapeFlag` 会影响后续的 ` patch` 过程，我们知道在 ` patch` 中会根据 vnode 的 `type ` 和 `shapeFlag` 来决定后续的执行逻辑，我们来回顾一下它的实现： 
+1.  往 `vnode.children` 属性上赋值传入的对象数据
+2.  `vnode.shapeFlag` 会与 `slot` 子节点类型 `SLOTS_CHILDREN` 进行或运算，由于 `vnode` 本身的 `shapFlag ` 是 `STATEFUL_COMPONENT`，所以运算后的 ` shapeFlag` 是 ` SLOTS_CHILDREN | STATEFUL_COMPONENT`。
+3.  不同的 ` shapeFlag` 会影响后续的 ` patch` 过程，我们知道在 ` patch` 中会根据 vnode 的 `type ` 和 `shapeFlag` 来决定后续的执行逻辑，我们来回顾一下它的实现：
 
 #### （2）patch 函数
 
@@ -508,9 +508,9 @@ function withCtx(fn, ctx = currentRenderingInstance) {
 }
 ```
 
-1.  `withCtx` 的实现很简单，它支持传入一个函数 `fn` 和执行的上下文变量 ` ctx`，它的默认值是 `currentRenderingInstance`，也就是执行 `render` 函数时的当前组件实例。 
-2.  `withCtx` 会返回一个新的函数，这个函数执行的时候，会先保存当前渲染的组件实例 `owner`，然后把 `ctx ` 设置为当前渲染的组件实例，接着执行 ` f` n，执行完毕后，再把之前的 ` owner` 设置为当前组件实例。 
-3.  这么做就是为了保证在子组件中渲染具体插槽内容时，它的渲染组件实例是父组件实例，这样也就保证它的数据作用域也是父组件的了。 
+1.  `withCtx` 的实现很简单，它支持传入一个函数 `fn` 和执行的上下文变量 ` ctx`，它的默认值是 `currentRenderingInstance`，也就是执行 `render` 函数时的当前组件实例。
+2.  `withCtx` 会返回一个新的函数，这个函数执行的时候，会先保存当前渲染的组件实例 `owner`，然后把 `ctx ` 设置为当前渲染的组件实例，接着执行 ` f` n，执行完毕后，再把之前的 ` owner` 设置为当前组件实例。
+3.  这么做就是为了保证在子组件中渲染具体插槽内容时，它的渲染组件实例是父组件实例，这样也就保证它的数据作用域也是父组件的了。
 
 所以对于 ` header` 这个 ` slot`，它的 `slot` 函数的返回值是一个数组，如下：
 
@@ -570,23 +570,23 @@ const processFragment = (n1, n2, container, anchor, parentComponent, parentSuspe
 
 #### **考察点：**
 
-- 插槽的基础使用：  
-  - 子组件使用 `<slot>` 定义插槽：  
+- 插槽的基础使用：<br>
+  - 子组件使用 `<slot>` 定义插槽：<br>
 ```vue
 <!-- 子组件 -->
 <div>
   <slot></slot>
 </div>
 ```
-  - 父组件传递内容：  
+  - 父组件传递内容：<br>
 ```vue
 <!-- 父组件 -->
 <MyComponent>
   <p>插槽中的内容</p>
 </MyComponent>
 ```
-- 插槽的默认内容：  
-  - 当父组件没有传递内容时，渲染插槽的默认内容：  
+- 插槽的默认内容：<br>
+  - 当父组件没有传递内容时，渲染插槽的默认内容：<br>
 ```vue
 <slot>默认内容</slot>
 ```
@@ -603,7 +603,7 @@ const processFragment = (n1, n2, container, anchor, parentComponent, parentSuspe
 
 #### **考察点：**
 
-- 定义具名插槽：  
+- 定义具名插槽：<br>
 ```vue
 <!-- 子组件 -->
 <div>
@@ -612,7 +612,7 @@ const processFragment = (n1, n2, container, anchor, parentComponent, parentSuspe
   <slot name="footer">默认底部内容</slot>
 </div>
 ```
-- 传递具名插槽内容：  
+- 传递具名插槽内容：<br>
 ```vue
 <!-- 父组件 -->
 <MyComponent>
@@ -637,13 +637,13 @@ const processFragment = (n1, n2, container, anchor, parentComponent, parentSuspe
 
 #### **考察点：**
 
-- **作用域插槽定义和使用**：  
-  - 子组件通过 `<slot>` 将数据暴露给父组件：  
+- **作用域插槽定义和使用**：<br>
+  - 子组件通过 `<slot>` 将数据暴露给父组件：<br>
 ```vue
 <!-- 子组件 -->
 <slot :data="someData"></slot>
 ```
-  - 父组件通过作用域插槽接收数据：  
+  - 父组件通过作用域插槽接收数据：<br>
 ```vue
 <!-- 父组件 -->
 <MyComponent>
@@ -652,7 +652,7 @@ const processFragment = (n1, n2, container, anchor, parentComponent, parentSuspe
   </template>
 </MyComponent>
 ```
-- **简化语法（v-slot）**：  
+- **简化语法（v-slot）**：<br>
 ```vue
 <MyComponent v-slot:default="slotProps">
   <p>{{ slotProps.data }}</p>
@@ -661,10 +661,10 @@ const processFragment = (n1, n2, container, anchor, parentComponent, parentSuspe
 
 #### **深入考察：**
 
-- **用途**：  
+- **用途**：<br>
   - 动态渲染列表内容。
   - 通过插槽传递逻辑控制权。
-- **性能问题**：  
+- **性能问题**：<br>
   - 子组件频繁重新渲染时，是否影响插槽内容的更新。
 
 ---
@@ -678,7 +678,7 @@ const processFragment = (n1, n2, container, anchor, parentComponent, parentSuspe
 
 #### **考察点：**
 
-- 动态插槽的定义：  
+- 动态插槽的定义：<br>
 ```vue
 <!-- 父组件 -->
 <MyComponent>
@@ -687,7 +687,7 @@ const processFragment = (n1, n2, container, anchor, parentComponent, parentSuspe
   </template>
 </MyComponent>
 ```
-- 使用场景：  
+- 使用场景：<br>
   - 动态生成不同的内容区域。
   - 在开发组件库时为插槽提供更多灵活性。
 
@@ -703,14 +703,14 @@ const processFragment = (n1, n2, container, anchor, parentComponent, parentSuspe
 
 #### **考察点：**
 
-- 插槽内容始终属于父组件的作用域：  
+- 插槽内容始终属于父组件的作用域：<br>
 ```vue
 <slot></slot>
 <!-- 插槽内容的表达式，例如 {{ value }}，引用的是父组件的数据 -->
 ```
-- 插槽与子组件的生命周期：  
+- 插槽与子组件的生命周期：<br>
   - 插槽内容在父组件和子组件生命周期的交互中可能造成意外的行为。
-- 动态事件绑定：  
+- 动态事件绑定：<br>
   - 使用 `$listeners` 或 `$attrs` 将事件转发到插槽内容。
 
 ---
@@ -724,11 +724,11 @@ const processFragment = (n1, n2, container, anchor, parentComponent, parentSuspe
 
 #### **考察点：**
 
-- **默认插槽的优化**：  
+- **默认插槽的优化**：<br>
   - Vue 3 中插槽内容按需渲染，而不是提前编译所有内容。
-- **动态插槽改进**：  
+- **动态插槽改进**：<br>
   - 提供更高的灵活性，支持动态键值的插槽名。
-- **插槽传递（Slot forwarding）**：  
+- **插槽传递（Slot forwarding）**：<br>
   - 子组件可以将插槽内容传递给其嵌套的子组件。
 
 ---

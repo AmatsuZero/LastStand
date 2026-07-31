@@ -132,15 +132,15 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 依赖配置遵循下面几种配置规则：
 
-- `依赖包名称:VERSION`  
+- `依赖包名称:VERSION`<br>
   - `VERSION`是一个遵循`SemVer`规范的版本号配置，`npm install` 时将到npm服务器下载符合指定版本范围的包。
-- `依赖包名称:DWONLOAD_URL`  
+- `依赖包名称:DWONLOAD_URL`<br>
   - `DWONLOAD_URL` 是一个可下载的`tarball`压缩包地址，模块安装时会将这个`.tar`下载并安装到本地。
-- `依赖包名称:LOCAL_PATH`  
+- `依赖包名称:LOCAL_PATH`<br>
   - `LOCAL_PATH` 是一个本地的依赖包路径，例如 `file:../pacakges/pkgName`。适用于你在本地测试一个`npm`包，不应该将这种方法应用于线上。
-- `依赖包名称:GITHUB_URL`  
+- `依赖包名称:GITHUB_URL`<br>
   - `GITHUB_URL` 即 `github` 的 `username/modulename` 的写法，例如：`ant-design/ant-design`，你还可以在后面指定 `tag` 和 `commit id`。
-- `依赖包名称:GIT_URL`  
+- `依赖包名称:GIT_URL`<br>
   - `GIT_URL` 即我们平时clone代码库的 `git url`，其遵循以下形式：
 
 ```
@@ -920,27 +920,27 @@ grep "https://registry.npmjs.org/base64-js/-/base64-js-1.0.1.tgz" -r index-v5
 
 好了，我们再来整体总结下上面的流程：
 
--  检查 `.npmrc` 文件：优先级为：项目级的 `.npmrc` 文件 > 用户级的 `.npmrc` 文件> 全局级的 `.npmrc` 文件 > npm 内置的 `.npmrc` 文件 
--  检查项目中有无 `lock` 文件。 
--  无 `lock` 文件：  
+-  检查 `.npmrc` 文件：优先级为：项目级的 `.npmrc` 文件 > 用户级的 `.npmrc` 文件> 全局级的 `.npmrc` 文件 > npm 内置的 `.npmrc` 文件
+-  检查项目中有无 `lock` 文件。
+-  无 `lock` 文件：<br>
   - 从 `npm` 远程仓库获取包信息
-  - 根据 `package.json` 构建依赖树，构建过程：  
+  - 根据 `package.json` 构建依赖树，构建过程：<br>
     - 构建依赖树时，不管其是直接依赖还是子依赖的依赖，优先将其放置在 `node_modules` 根目录。
     - 当遇到相同模块时，判断已放置在依赖树的模块版本是否符合新模块的版本范围，如果符合则跳过，不符合则在当前模块的 `node_modules` 下放置该模块。
     - 注意这一步只是确定逻辑上的依赖树，并非真正的安装，后面会根据这个依赖结构去下载或拿到缓存中的依赖包
-  - 在缓存中依次查找依赖树中的每个包  
-    - 不存在缓存：  
+  - 在缓存中依次查找依赖树中的每个包<br>
+    - 不存在缓存：<br>
       - 从 `npm` 远程仓库下载包
       - 校验包的完整性
-      - 校验不通过：  
+      - 校验不通过：<br>
         - 重新下载
-      - 校验通过：  
+      - 校验通过：<br>
         - 将下载的包复制到 `npm` 缓存目录
         - 将下载的包按照依赖结构解压到 `node_modules`
     - 存在缓存：将缓存按照依赖结构解压到 `node_modules`
   - 将包解压到 `node_modules`
   - 生成 `lock` 文件
--  有 `lock` 文件：  
+-  有 `lock` 文件：<br>
   - 检查 `package.json` 中的依赖版本是否和 `package-lock.json` 中的依赖有冲突。
   - 如果没有冲突，直接跳过获取包信息、构建依赖树过程，开始在缓存中查找包信息，后续过程相同
 

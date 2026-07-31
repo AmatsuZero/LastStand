@@ -49,10 +49,10 @@ const element = MyComponent({ message: 'Hello' });
 函数组件的更新遵循React的渲染流程：
 
 1. **触发更新**：通过setState、父组件渲染等途径触发更新
-2. **协调阶段（Reconciliation）**：  
+2. **协调阶段（Reconciliation）**：<br>
   - React调用函数组件获取新的JSX
   - 与上一次渲染的JSX进行对比（Virtual DOM Diff）
-3. **提交阶段（Commit）**：  
+3. **提交阶段（Commit）**：<br>
   - 将差异应用到真实DOM
   - 执行useLayoutEffect的回调
 4. **浏览器绘制**：浏览器重绘屏幕
@@ -181,9 +181,9 @@ React函数组件的更新原理可以概括为：
 
 ## 常见考点
 
-1.  **函数组件的初次渲染**：  
+1.  **函数组件的初次渲染**：<br>
   - 请简述React函数组件的初次渲染过程。
   - 在初次渲染过程中，React是如何处理函数组件的输入（props）和状态（state，如果有的话）的？
-2.  **函数组件的更新触发**：  
+2.  **函数组件的更新触发**：<br>
   - 哪些因素会触发React函数组件的更新？
   - 当props或内部状态（如通过useState钩子创建的状态）发生变化时，React是如何检测到这些变化的？

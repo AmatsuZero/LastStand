@@ -262,7 +262,7 @@ transform: translateX(100px) rotate(90deg);
 ![](image-09.png)
 
 ```bash
-.td1 { 
+.td1 {
     transform-style: preserve-3d;
     perspective: 200px;
     perspective-origin: center;
@@ -334,12 +334,12 @@ transform: translateX(100px) rotate(90deg);
 
 ### translate位移
 
-translate位移系列中用于2D的有：`translate`，`translateX`，`translateY`  
+translate位移系列中用于2D的有：`translate`，`translateX`，`translateY`<br>
  设单值表示只X轴位移，Y轴坐标不变
 
 #### 示例
 
-`transform: translate(100px);`等价于`transform: translate(100px,0)`  
+`transform: translate(100px);`等价于`transform: translate(100px,0)`<br>
  `transform: translateY(100px);`等价于`transform: translate(0, 100px);`
 
 > 上面说了效果类似于`position:relative`属性，但和`position`语义不同，`position`用于页面布局，而`translate`属于`transform`中的一个系列，用于元素变形。你可能觉得语义不同有什么卵用，效果OK不就行了？就看你用什么标准来衡量效果了。CSS的神奇之处在于你可以将一个属性用在完全违背它原意的场景下，抛开代码可读性不谈，违背原意有时还是会有细微差别的。如结合动画效果时，`translate`能小于`1px`过渡，因此动画效果更为平滑。但`position`最小单位就是`1px`，动画效果肯定打折扣。另外用`translate`实现动画时，可以使用`GPU`，动画的`FPS`更高，而`position`显然无法享受这个优势。其他如回流和重绘也都有差异。因此如果你在该用`translate`的地方用了`position`，今后一些需求变动达不到要求，你也没什么立场可抱怨的了。
@@ -366,8 +366,8 @@ skew扭曲可以设单值和双值。单值时表示只X轴扭曲，Y轴不变�
 
 ### matrix矩阵
 
--  3x3 的变换矩阵 ![](image-12.png) 
--  对二维向量进行转换 ![](image-13.png) 其中 x1、y1 为经过 Matrix 转换后的向量。由公式可知，Matrix 中 `e, f` 主要用于设置元素在 X轴和 Y轴上的平移。`a, d` 主要用于设置元素在 X轴和 Y轴上的缩放。`a,b,c,d` 用于设置元素在 XY 平面上的旋转。`rotate/translate/screw` 等都可以直接通过设置 `Matrix` 来达到同样的效果 
+-  3x3 的变换矩阵 ![](image-12.png)
+-  对二维向量进行转换 ![](image-13.png) 其中 x1、y1 为经过 Matrix 转换后的向量。由公式可知，Matrix 中 `e, f` 主要用于设置元素在 X轴和 Y轴上的平移。`a, d` 主要用于设置元素在 X轴和 Y轴上的缩放。`a,b,c,d` 用于设置元素在 XY 平面上的旋转。`rotate/translate/screw` 等都可以直接通过设置 `Matrix` 来达到同样的效果
 
 ## 3D变形
 

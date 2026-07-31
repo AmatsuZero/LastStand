@@ -52,7 +52,7 @@ var arr2 = ['one', ...arr1, 'four', 'five'];
 
 ## 拷贝数组
 
-拷贝数组是个常见的任务，过去我们使用 `Array.prototype.slice`  
+拷贝数组是个常见的任务，过去我们使用 `Array.prototype.slice`<br>
  来完成，但现在我们可以通过展开运算符得到数组的副本：
 
 ```auto

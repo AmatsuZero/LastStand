@@ -23,14 +23,14 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 ### 1.2、节点、节点类型和节点类
 
--  **节点**：前面提过，节点是DOM树的组成单元。在JS看来，一个节点就是JS对象。下面用`node`表示任意的节点。 
--  **[节点类型](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/nodeType)**：并非所有的节点都是一样的，DOM规定文档中有12种节点类型，分别用常量`1 ~ 12`（有与之对应的常量名称`Node.XXX_NODE`）表示，可以通过`node.nodeType`属性获取节点的类型常量。 现在，有些类型的节点已经弃用了，常见到的只有几种类型的节点，包括：  
-  -  **元素节点**: 类型常量为`Node.ELEMENT_NODE`或`1`。最常见的一类节点，对应文档中的元素。大部分DOM操作都是在元素节点层次的。 
-  -  **文本节点**：类型常量为`Node.TEXT_NODE`或`2`。对应文档中的文本，**任何文档内容都有对应的文本节点，即使空格和换行符**。  
+-  **节点**：前面提过，节点是DOM树的组成单元。在JS看来，一个节点就是JS对象。下面用`node`表示任意的节点。
+-  **[节点类型](https://developer.mozilla.org/zh-CN/docs/Web/API/Node/nodeType)**：并非所有的节点都是一样的，DOM规定文档中有12种节点类型，分别用常量`1 ~ 12`（有与之对应的常量名称`Node.XXX_NODE`）表示，可以通过`node.nodeType`属性获取节点的类型常量。 现在，有些类型的节点已经弃用了，常见到的只有几种类型的节点，包括：<br>
+  -  **元素节点**: 类型常量为`Node.ELEMENT_NODE`或`1`。最常见的一类节点，对应文档中的元素。大部分DOM操作都是在元素节点层次的。
+  -  **文本节点**：类型常量为`Node.TEXT_NODE`或`2`。对应文档中的文本，**任何文档内容都有对应的文本节点，即使空格和换行符**。<br>
 > 空格和换行不会对页面内容产生影响，但它们确实以文本节点的形式存在于DOM树中。
-  -  **Document节点**：类型常量为`Node.DOCUMENT_NODE`或`9`。它不对应文档的内容，而是作为文档的入口节点，每个文档都有且仅有一个入口，因为这种独特性，赋予一个特殊的变量名称`document`。 
-  -  **注释节点**：类型常量为`Node.COMMENT_NODE`或`8`。它对应文档中的注释标签，文档的注释内容也是可读取和修改的。 
--  **节点类**：DOM内置许多节点类，类之间存在继承关系，形成一套节点类框架。每个节点对象都属于节点类，拥有该类和其父类的方法与属性，这使得操作节点十分简单。节点类框架的一部分大概如图： ![](image-02.webp) 这些节点上有丰富的属性和方法，是继承的结果，可以看到，一个HTML标签元素至少有四层的继承关系。 以`<a>`标签为例，它属于`HTMLAnchorElement`类，获得了`a.target`，`a.download`等属性，接着继承了`HTMLElement`类上的`title`, `hidden`等属性和`click()`等方法，又从`Element`类继承了`tagName`, `className`等属性和`getAttribute()`, `setAttribute()`等方法，再从`Node`类继承了`nodeType`(前面说过的节点类型), `appenChild()`, `removeChild()`等方法，最后从`EventTarget`类中继承了事件相关的属性和方法。 
+  -  **Document节点**：类型常量为`Node.DOCUMENT_NODE`或`9`。它不对应文档的内容，而是作为文档的入口节点，每个文档都有且仅有一个入口，因为这种独特性，赋予一个特殊的变量名称`document`。
+  -  **注释节点**：类型常量为`Node.COMMENT_NODE`或`8`。它对应文档中的注释标签，文档的注释内容也是可读取和修改的。
+-  **节点类**：DOM内置许多节点类，类之间存在继承关系，形成一套节点类框架。每个节点对象都属于节点类，拥有该类和其父类的方法与属性，这使得操作节点十分简单。节点类框架的一部分大概如图： ![](image-02.webp) 这些节点上有丰富的属性和方法，是继承的结果，可以看到，一个HTML标签元素至少有四层的继承关系。 以`<a>`标签为例，它属于`HTMLAnchorElement`类，获得了`a.target`，`a.download`等属性，接着继承了`HTMLElement`类上的`title`, `hidden`等属性和`click()`等方法，又从`Element`类继承了`tagName`, `className`等属性和`getAttribute()`, `setAttribute()`等方法，再从`Node`类继承了`nodeType`(前面说过的节点类型), `appenChild()`, `removeChild()`等方法，最后从`EventTarget`类中继承了事件相关的属性和方法。
 
 > **不要混淆节点类型和节点类这两个概念**。前者是一个生活中的**类别**，后者是编程意义上的**类**。节点对象的`nodeType`属性表示了它的类型，而节点类是该节点的从属的类。因为`Dode`是一个抽象类，所以，如果知道了某个节点从属的类，我们就知道它的节点类型。
 
@@ -63,13 +63,13 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 留意这个图，你要注意几点：
 
--  总共有4种类型的节点，分别是`标签节点`（红色）,`文本节点`（灰色），`注释节点`(黄色)和`DOCTYPE节点`（紫色）。 
--  文档没有`<head>`标签却出现了`HEAD`节点。这是因为HTML必然存在`<html>`，`<head>`，`<body>`标签，不存在时会自动补上。顺便一提，当出现`<table>`标签时，也一定会有`<tbody>`标签。 
--  文档中的文本都会形成文本节点的内容，包括`空格␣`和`换行↵`。第一,`单独的空格和换行都会形成对应的文本节点`；第二，有内容的文本节点的值包含前导和后继的空白。  
+-  总共有4种类型的节点，分别是`标签节点`（红色）,`文本节点`（灰色），`注释节点`(黄色)和`DOCTYPE节点`（紫色）。
+-  文档没有`<head>`标签却出现了`HEAD`节点。这是因为HTML必然存在`<html>`，`<head>`，`<body>`标签，不存在时会自动补上。顺便一提，当出现`<table>`标签时，也一定会有`<tbody>`标签。
+-  文档中的文本都会形成文本节点的内容，包括`空格␣`和`换行↵`。第一,`单独的空格和换行都会形成对应的文本节点`；第二，有内容的文本节点的值包含前导和后继的空白。<br>
 > 不是说HTML中的空白字符都被忽略吗？怎么这里又说全都是有效的字符？
 >
 > 在从文档解析生成DOM树的过程中，HTML中的任何字符都是有效的；不过，在接下去的页面渲染的过程中，空白内容被忽略。所以从文档到页面的整过过程中，空白确实被忽略了。
--  理解DOM树中的父子关系对应文档中的包含（嵌套）关系。一个极佳的类比是文件树，把元素看做文件夹，文本看做文件，文件夹中可以存放文件和新的文件夹，然后一层层深入下去，DOM树也是如此。 
+-  理解DOM树中的父子关系对应文档中的包含（嵌套）关系。一个极佳的类比是文件树，把元素看做文件夹，文本看做文件，文件夹中可以存放文件和新的文件夹，然后一层层深入下去，DOM树也是如此。
 
 几个原则可以帮我们快速理解这个DOM树的构建：
 
@@ -94,11 +94,11 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 对`node`节点，有以下属性：
 
--  `node.parentNode` -- 获取节点的父节点。 
--  `node.previousSibling` -- 获取节点的上一个兄弟节点。 
--  `node.nextSibling` -- 获取节点的下一个兄弟节点。 
--  `node.childNodes` -- 获取节点的孩子节点`列表`。没有子节点返回空列表。 
--  `node.firstChild`和`node.lastChild` -- 获取第一个和最后一个孩子节点，同`node.childNodes[0]`和`node.childNodes[node.childNodes.length-1]`。 
+-  `node.parentNode` -- 获取节点的父节点。
+-  `node.previousSibling` -- 获取节点的上一个兄弟节点。
+-  `node.nextSibling` -- 获取节点的下一个兄弟节点。
+-  `node.childNodes` -- 获取节点的孩子节点`列表`。没有子节点返回空列表。
+-  `node.firstChild`和`node.lastChild` -- 获取第一个和最后一个孩子节点，同`node.childNodes[0]`和`node.childNodes[node.childNodes.length-1]`。
 
 > 助记：都是两个单词拼写的。
 
@@ -178,17 +178,17 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 这些操作基于**[Node](https://developer.mozilla.org/zh-CN/docs/Web/API/Node)**接口，对所有节点都是通用的。
 
--  **判断节点类型**：`node.nodeType`或`node instanceof <NodeClass>`。两者都可以用于判断节点类型，当需要明确的节点类的时候，只能通过后者。  
+-  **判断节点类型**：`node.nodeType`或`node instanceof <NodeClass>`。两者都可以用于判断节点类型，当需要明确的节点类的时候，只能通过后者。<br>
 ```js
 node.nodeType === Node.ELEMENT_NODE; //或node.nodeType === 1;
 node instanceof Element;       //与上面等效
 node instanceof HTMLInputElement;   //判断是否是输入元素
 ```
--  获取节点名称：`node.nodeName`，对于元素节点，返回对应的标签名称，如`audio`。对其它类型节点，返回#与节点类型字符串，如`#text`, `#comment`,`#document`。也能通过节点名称判断节点类型，但基本不用。 
--  **获取或设置节点值**：`node.nodeValue`，**文本节点或注释节点返回文本内容，元素节点与document节点返回null**。读写属性，支持`node.nodeValue = "A simple text"`。同样的，空白文本也被包含在内容里。  
+-  获取节点名称：`node.nodeName`，对于元素节点，返回对应的标签名称，如`audio`。对其它类型节点，返回#与节点类型字符串，如`#text`, `#comment`,`#document`。也能通过节点名称判断节点类型，但基本不用。
+-  **获取或设置节点值**：`node.nodeValue`，**文本节点或注释节点返回文本内容，元素节点与document节点返回null**。读写属性，支持`node.nodeValue = "A simple text"`。同样的，空白文本也被包含在内容里。<br>
 > 提醒：文本节点和注释节点有一个`data`属性，使用与`nodeValue`相同，但它不是在Node接口上的。
--  判断节点是否拥有子节点：`node.hasChildNodes()`，返回true当节点有子节点时。 
--  判断节点是否拥有特定子节点：`node.contains(childNode)`，返回true当childNode是node的子节点。 
+-  判断节点是否拥有子节点：`node.hasChildNodes()`，返回true当节点有子节点时。
+-  判断节点是否拥有特定子节点：`node.contains(childNode)`，返回true当childNode是node的子节点。
 
 ### 3.2、元素节点操作（重点）
 
@@ -196,31 +196,31 @@ node instanceof HTMLInputElement;   //判断是否是输入元素
 
 > 解惑：那什么时候需要操作文本节点？会看1.3节的例子，`A simple text`的父节点是`body`，但body有其它元素节点。假如没有文本这种类型的节点，很难在body节点上只修改`A simple text`的内容。
 
--  判断元素类型：`elem.tagName`或`elem.nodeName`，效果一样，返回标签的字符串，如`audio`。另外，使用`instanceof`可以实现不同级别的类型判断。 
--  元素内容：有几个属性和元素内容相关：  使用区别请参看[实验探究innerHTML，innerText，textContent的使用区别](https://juejin.cn/post/6874822868304134158)。 
-  -  `elem.innerHTML` -- 获取或设置元素内的HTML片段。**设置的内容会被当成HTML片段解析，可能会引起文档结构的变化。**  
+-  判断元素类型：`elem.tagName`或`elem.nodeName`，效果一样，返回标签的字符串，如`audio`。另外，使用`instanceof`可以实现不同级别的类型判断。
+-  元素内容：有几个属性和元素内容相关：  使用区别请参看[实验探究innerHTML，innerText，textContent的使用区别](https://juejin.cn/post/6874822868304134158)。
+  -  `elem.innerHTML` -- 获取或设置元素内的HTML片段。**设置的内容会被当成HTML片段解析，可能会引起文档结构的变化。**<br>
 > 注意：HTML片段内的脚本不会执行。
-  -  `elem.textContent` -- 获取或设置元素的文本内容（标签被忽略）。设置的文本以安全模式（不会被解析）写入。 
+  -  `elem.textContent` -- 获取或设置元素的文本内容（标签被忽略）。设置的文本以安全模式（不会被解析）写入。
 
 #### 3.2.1、元素的特性和属性
 
 **特性**（attribute）是指html中写在标签内的特性，而**属性**（property）是只元素节点作为编程对象具有的属性。
 
--  `特性 -- 属性同步机制`：对标准规定的特性，元素对象具有响应的读写属性, 如`a.href`。这种机制极大的方便了在JS中获取或修改元素的特性。  
+-  `特性 -- 属性同步机制`：对标准规定的特性，元素对象具有响应的读写属性, 如`a.href`。这种机制极大的方便了在JS中获取或修改元素的特性。<br>
 > 提醒：对不同HTML元素，规定的特性不同，属性也就不同，如: 存在`a.href`但不存在`div.href`。
--  通用的特性操作接口：  
+-  通用的特性操作接口：<br>
   - `elem.hasAttribute(name)` -- 检查是否存在某个特性。
   - `elem.getAttribute(name)` -- 获取某一特性的值。
   - `elem.setAttribute(name, value)` -- 设置某一特性。
   - `elem.removeAttribute(name)` -- 删除某一特性。
   - `elem.attributes()` -- 获取所有的特性对，每个特性对具有`name`,`value`属性。
--  特殊的`data-*`：[data-*](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes/data-*)特性是一种合法且安全的传递自定义数据的方式。可通过`elem.dataset.name`读取或修改data特性的值。属性名称采用驼峰写法，如elem上的`data-apple-price`对应`elem.dataset.applePrice`。 
+-  特殊的`data-*`：[data-*](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Global_attributes/data-*)特性是一种合法且安全的传递自定义数据的方式。可通过`elem.dataset.name`读取或修改data特性的值。属性名称采用驼峰写法，如elem上的`data-apple-price`对应`elem.dataset.applePrice`。
 
 #### 3.2.2、元素的类和样式
 
 修改样式有两种方式，一是把样式写到某个类里，然后在代码中修改元素的类，一是直接修改`elem.style.*`。前者适用于随状态改变样式的情况，在代码可维护性上更加，用得较多。后者适用于频繁计算或切换的样式。
 
-- `elem.classList`: 一个包含elem所有类的可迭代的类数组对象。这个对象有几个方法，方便我们改变元素的类。  
+- `elem.classList`: 一个包含elem所有类的可迭代的类数组对象。这个对象有几个方法，方便我们改变元素的类。<br>
   - `elem.classList.contains(class)` -- 检查是否有某个类。
   - `elem.classList.add(class)` -- 添加某个类。
   - `elem.classList.remove(class)` -- 移除某个类。
@@ -274,28 +274,28 @@ elem.style.backgroundColor = "red";     //设置颜色
 
 > 提醒：定位父元素是指CSS定位元素（position为relative，absolute，fixed）或td，th，table元素，或者是body元素。
 
--  相对于定位父元素：`elem.offsetLeft/offsetTop` ，相对于参照父节点的左/上边距。`elem.offsetParent`获取元素的定位父元素。 
--  相对于视口：**[elem.getBoundingClientRect()](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect)**获取元素的定位矩形`elemRect`。  
+-  相对于定位父元素：`elem.offsetLeft/offsetTop` ，相对于参照父节点的左/上边距。`elem.offsetParent`获取元素的定位父元素。
+-  相对于视口：**[elem.getBoundingClientRect()](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/getBoundingClientRect)**获取元素的定位矩形`elemRect`。<br>
   - `elem.getBoundingClientRect().left/top/right/bottom`分别表示元素盒子（含边框）四角到视口左或上边的距离。
   - `elem.getBoundingClientRect().width/height`, 与`elem.offsetWidth/offsetHeight`等效，盒子的宽高。
   - `elem.getBoundingClientRect().x/y` ，一般情况下，与`elem.getBoundingClientRect().left/top`等效，且不兼容IE，不推荐使用。
--  相对于文档：没有直接获取的方式，但可以通过`相对于视口+滚动距离`简单计算。  
+-  相对于文档：没有直接获取的方式，但可以通过`相对于视口+滚动距离`简单计算。<br>
   - 盒子上方相对于到文档的距离：`elem.scrollTop + elem.getBoundingClientRect().top`。
   - 盒子左边到文档的距离：`elem.scrollLeft + elem.getBoundingClientRect().left`。
 
 元素盒子的尺寸也有多种情况，需要考虑边框、内边距、是否为标准盒子模型、甚至是否有滚动条。
 
--  含边框的盒子尺寸：`elem.offsetWidth/offsetHeight`或者`elem.getBoundingClientRect().width/height`都可以获取含边框的宽高。 
--  边框宽度：`elem.clientLeft/clientTop` -- 元素左上角边框的宽度。可以理解为左边框宽度和上边框的宽度，如果存在滚动条，也包含滚动条的宽度。  
+-  含边框的盒子尺寸：`elem.offsetWidth/offsetHeight`或者`elem.getBoundingClientRect().width/height`都可以获取含边框的宽高。
+-  边框宽度：`elem.clientLeft/clientTop` -- 元素左上角边框的宽度。可以理解为左边框宽度和上边框的宽度，如果存在滚动条，也包含滚动条的宽度。<br>
 > 补充：一般来说，上边框和左边框是常用的。如果四条边框宽度不一，可以通过`getComputedStyle(elem).borderRight`获取，注意这是含单位的字符串。
--  `elem.clientWidth/clientHeight` -- 内容宽度高度，包含padding，不包含滚动条。 
--  不含边框：`elem.clientWidth/clientHeight`，获取元素盒子内容宽高，不含边框和滚动条，含padding。 
--  内边距问题与盒子类型：在涉及内边距的时候，需要`getComputedStyle(elem)`方法获取，并且需要考虑是否为标准盒子。 
+-  `elem.clientWidth/clientHeight` -- 内容宽度高度，包含padding，不包含滚动条。
+-  不含边框：`elem.clientWidth/clientHeight`，获取元素盒子内容宽高，不含边框和滚动条，含padding。
+-  内边距问题与盒子类型：在涉及内边距的时候，需要`getComputedStyle(elem)`方法获取，并且需要考虑是否为标准盒子。
 
 如果元素的内容存在滚动时，我们可能需要知道与滚动相关的尺寸：
 
--  `elem.scrollLeft/scrollTop` -- 水平和垂直方向上滚动的长度。可写属性，通过设置该值改变控制内容滚动。 
--  `elem.scrollWidth/scrollHeight` -- 元素内容的长度和宽度，包括滚动的内容。  
+-  `elem.scrollLeft/scrollTop` -- 水平和垂直方向上滚动的长度。可写属性，通过设置该值改变控制内容滚动。
+-  `elem.scrollWidth/scrollHeight` -- 元素内容的长度和宽度，包括滚动的内容。<br>
 > 区分：在没有内容溢出发生滚动时，`clientWidth/Height`与`scrollWidth/Height`等效；存在滚动时，前者是盒子的可视内容大小，后者是内容的大小，包括需要滚动查看的部分。
 
 关于位置和尺寸，没有图片难以说清，不理解请参看：
@@ -314,20 +314,20 @@ DOM操作中，经常需要修改文档结果或内容。这类操作涉及节�
 
 插入节点可以分三步走：
 
-1.  创建一个节点：  
+1.  创建一个节点：<br>
   - 创建一个元素节点: `let elem = document.createElement(tagName)`。
   - 创建一个文本节点：·`let text = document.createTextNode(data)`。
   - 从已有节点克隆：`let dupNode = node.cloneNode(deep)`, deep为true表示深拷贝，常用。默认为false。
-2.  编辑节点的属性和内容 
-3.  把节点插入文档树中  
-  -  传统方式：传统方式需要在父节点上执行对节点的插入  
+2.  编辑节点的属性和内容
+3.  把节点插入文档树中<br>
+  -  传统方式：传统方式需要在父节点上执行对节点的插入<br>
     - `parentNode.appendChild(node)` -- 把node作为最后一个子节点插入。
     - `parentNode.insertBefore(node, nextSibling)` -- 在nextSibling之前插入node。
-  -  现代方式：可以实现多位置插入，你可以在父节点上执行插入或在兄弟节点上执行插入。   
-    -  `parentNode.prepend(...nodes or strings)`。在第一个子节点之前插入。 
-    -  `parentNode.append(...nodes or strings)`。在最后一个子节点之后插入。 
-    -  `nextSibling.before(...nodes or strings)`。在本节点之前同级插入。 
-    -  `previousSibling.after(...nodes or strings)`。在本节点之后同级插入。 
+  -  现代方式：可以实现多位置插入，你可以在父节点上执行插入或在兄弟节点上执行插入。<br>
+    -  `parentNode.prepend(...nodes or strings)`。在第一个子节点之前插入。
+    -  `parentNode.append(...nodes or strings)`。在最后一个子节点之后插入。
+    -  `nextSibling.before(...nodes or strings)`。在本节点之前同级插入。
+    -  `previousSibling.after(...nodes or strings)`。在本节点之后同级插入。
 > 提醒：参数的形式说明它们支持一次插入多个，并且字符串会作为文本节点插入。
 
 有一种情况，我们希望直接描述节点的插入HTML代码段，这种时候，可以使用之前的`elem.innerHTML`属性, 或者使用**[elem.insertAdjacentHTML(position, html)](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/insertAdjacentHTML)**进行插入。其中，`position`的可选值有：`"beforebegin"`, `"afterbegin"`, `"beforeend"`, `afterend`.
@@ -352,7 +352,7 @@ DOM操作中，经常需要修改文档结果或内容。这类操作涉及节�
 - `事件`是某事发生的信号, 所有的DOM对象都具有这些信号。
 - `事件处理程序`是当一个事件信号发生时运行的函数，用于对事件作出响应。
 - `事件处理`就是为事件分配正确的处理函数，在事件发生时作出正确处理。
-- `事件类型` 是事件的分类，[常见的事件类型有](https://developer.mozilla.org/zh-CN/docs/Web/Events#%E6%9C%80%E5%B8%B8%E8%A7%81%E7%9A%84%E7%B1%BB%E5%88%AB)  
+- `事件类型` 是事件的分类，[常见的事件类型有](https://developer.mozilla.org/zh-CN/docs/Web/Events#%E6%9C%80%E5%B8%B8%E8%A7%81%E7%9A%84%E7%B1%BB%E5%88%AB)<br>
   - 鼠标事件：`click`, `contextmenu`, `dbclick`, `mousedown`, `mouseup`,`mouseover`, `mouseout`等。
   - 键盘类型：`keydown`, `keyup`
   - 焦点事件：`focus`, `blur`, `focusin`, `focusout`,
@@ -480,17 +480,17 @@ node.handler(event);   //event在这里是实参，这句语句是函数调用
 
 事件对象`event`在调用事件处理函数时自动传入，它具有很多属性和方法，在事件处理的时候大有用处。
 
--  **`event.preventDefault()`** -- 取消事件的默认行为，只有`event.cancelable`为true时才有效。  
+-  **`event.preventDefault()`** -- 取消事件的默认行为，只有`event.cancelable`为true时才有效。<br>
 > 补充：如果使用`on<event>`方式添加处理函数，在函数返回false也可以取消默认事件。
--  **`event.stopPropagation()`** -- 停止事件的继续冒泡，上层的事件响应不会再发生。 
--  `event.stopImmediatePropagation()` -- 停止事件继续响应。包括事件冒泡和当前目标的其它处理函数也不会发生。 
--  **`event.type`** -- 事件类型字符串，在使用一个处理函数处理多类事件时，可以判断当前发生的事件类型。 
--  **`event.target`与`event.currentTarget` **-- 事件的最小目标和事件的当前目标。  
+-  **`event.stopPropagation()`** -- 停止事件的继续冒泡，上层的事件响应不会再发生。
+-  `event.stopImmediatePropagation()` -- 停止事件继续响应。包括事件冒泡和当前目标的其它处理函数也不会发生。
+-  **`event.type`** -- 事件类型字符串，在使用一个处理函数处理多类事件时，可以判断当前发生的事件类型。
+-  **`event.target`与`event.currentTarget` **-- 事件的最小目标和事件的当前目标。<br>
 > 区分：事件在最小目标上发生，然后往上冒泡的过程中，`event.target`始终不变，指向最小目标，但`event.currentTarget === this`，会随着冒泡过程指向当前正在处理的节点。
--  `event.phase` -- 事件流阶段，整数，1代表捕获，2代表目标阶段，3代表冒泡阶段。 
--  `event.bubbles` -- 布尔值，事件是否冒泡。 
--  `event.cancelable` -- 布尔值，事件是否可取消默认行为。 
--  `event.trusted` -- 布尔值，如果事件是浏览器发生的，为true，如果事件是js代码发生的，为false。 
+-  `event.phase` -- 事件流阶段，整数，1代表捕获，2代表目标阶段，3代表冒泡阶段。
+-  `event.bubbles` -- 布尔值，事件是否冒泡。
+-  `event.cancelable` -- 布尔值，事件是否可取消默认行为。
+-  `event.trusted` -- 布尔值，如果事件是浏览器发生的，为true，如果事件是js代码发生的，为false。
 
 上面的属性都是**只读**的。
 
@@ -500,32 +500,32 @@ node.handler(event);   //event在这里是实参，这句语句是函数调用
 
 鼠标事件是最常见的一类事件，有：
 
--  `click` -- 鼠标左键**点击**触发，或触摸屏的点击。  
+-  `click` -- 鼠标左键**点击**触发，或触摸屏的点击。<br>
 > 提醒：**点击**一次的含义是鼠标**在目标上**按下并松起，如果鼠标按下后滑动到元素外部松起，或者元素位置变化导致鼠标松起时不再元素上方，不能形成有效点击。
--  `contextmenu` -- 鼠标右键点击事件，该事件浏览器一般有默认的菜单，如果需要实现自定义菜单，需要阻止默认行为。 
--  `dbclick` -- 双击鼠标左键。双击具有选择文本的默认行为。 
--  `mousedown/mouseup` -- 鼠标**任意键**按下/松起。 
--  `mouseenter/mouseleave` -- 鼠标进入/离开元素，不会冒泡。 
--  `mouseover/mouseout` -- 鼠标进入/离开元素，会冒泡，进入/离开子元素时也会触发。  
+-  `contextmenu` -- 鼠标右键点击事件，该事件浏览器一般有默认的菜单，如果需要实现自定义菜单，需要阻止默认行为。
+-  `dbclick` -- 双击鼠标左键。双击具有选择文本的默认行为。
+-  `mousedown/mouseup` -- 鼠标**任意键**按下/松起。
+-  `mouseenter/mouseleave` -- 鼠标进入/离开元素，不会冒泡。
+-  `mouseover/mouseout` -- 鼠标进入/离开元素，会冒泡，进入/离开子元素时也会触发。<br>
 > 区分：`mouseenter/mouseleave`与`mouseover/mouseout`事件类似，但是后者会冒泡，且在进入子元素会触发`mouseout`。
--  `mousemove` -- 鼠标按下后松起前发送移动。 
+-  `mousemove` -- 鼠标按下后松起前发送移动。
 
 鼠标点击时，会发生一系列事件，它们具有特定的顺序，以某次双击为例，依次触发事件`mousedown->mouseup->click->mousedown->mouseup->click->dbclick`。
 
 鼠标事件有一些适合获取事件相关信息的属性：
 
--  鼠标按键：按键属性只对`mousedown/mouseup`有意义，`event.button`，数字`1~5`，代表鼠标上的按键，依次是：鼠标左键，中键，右键，前进，后退。 
--  坐标：它们是事件发生时刻（定点类）的坐标，或者实时的（`mousemove`）坐标。  
+-  鼠标按键：按键属性只对`mousedown/mouseup`有意义，`event.button`，数字`1~5`，代表鼠标上的按键，依次是：鼠标左键，中键，右键，前进，后退。
+-  坐标：它们是事件发生时刻（定点类）的坐标，或者实时的（`mousemove`）坐标。<br>
   - `event.pageX/pageY` -- 相对于文档的坐标。
   - `event.clientX/clientY` -- 相对于窗口的坐标。
   - `event.screenX/screenY` -- 相对于屏幕的坐标，较少使用。
--  组合键：在鼠标事件发生时，如果下列按键被按下，对应的属性为true。用于在一个事件类型上绑定多种任务。   
-  -  `event.shiftKey` -- `shift键`是否被按下。 
-  -  `event.ctrlKey` -- `ctrl键`是否被按下。 
-  -  `event.altKey` -- `alt键`是否被按下。 
-  -  `event.mateKey` -- `cmd键`(Mac专用)是否被按下。 
+-  组合键：在鼠标事件发生时，如果下列按键被按下，对应的属性为true。用于在一个事件类型上绑定多种任务。<br>
+  -  `event.shiftKey` -- `shift键`是否被按下。
+  -  `event.ctrlKey` -- `ctrl键`是否被按下。
+  -  `event.altKey` -- `alt键`是否被按下。
+  -  `event.mateKey` -- `cmd键`(Mac专用)是否被按下。
 > 提醒：如果想处理`ctrl键`，应该注意在Mac下使用`cmd键`，所以应该判断`if(event.ctrlKey||event.cmdKey)`。
--  相关目标：`event.relatedTarget`。`mouseenter/mouseleave`和`mouseover/mouseout`事件的属性。如果鼠标从`divA->divB`，在divA上发生mouseout（mouseleave），`event.target === divA`并且`event.relatedTarget === divB`。相反，在divB上发生mouseover（mouseenter），`event.target ===divB`且`event.relatedTarget === divA`。 
+-  相关目标：`event.relatedTarget`。`mouseenter/mouseleave`和`mouseover/mouseout`事件的属性。如果鼠标从`divA->divB`，在divA上发生mouseout（mouseleave），`event.target === divA`并且`event.relatedTarget === divB`。相反，在divB上发生mouseover（mouseenter），`event.target ===divB`且`event.relatedTarget === divA`。
 
 这是[一篇鼠标拖放事件的文章](https://zh.javascript.info/mouse-drag-and-drop)，应该能对鼠标事件的使用有所帮助。
 
@@ -542,13 +542,13 @@ node.handler(event);   //event在这里是实参，这句语句是函数调用
 
 键盘事件最重要的属性是键码，我们常常需要获取键盘的键码，根据按下的键盘做出响应。
 
--  `event.code` -- 键码。**键码是唯一的**。在按键判断时，经常使用的属性。键码是字符串，常见规则：   
-  -  数字键码为`Digit<num>`或`Numpad<num>`(小键盘)。如`Digit2`, `Numpad2` 
-  -  字符按键`Key<letter>`, 如`KeyZ`, `KeyA` 
-  -  功能键一般为按键名称，如`F4`, `Tab`,`Enter` 
-  -  使用`Left/Right`区分左右，左shift的键码为`ShiftLeft`, 右shift的键码为`ShiftRight`。 
+-  `event.code` -- 键码。**键码是唯一的**。在按键判断时，经常使用的属性。键码是字符串，常见规则：<br>
+  -  数字键码为`Digit<num>`或`Numpad<num>`(小键盘)。如`Digit2`, `Numpad2`
+  -  字符按键`Key<letter>`, 如`KeyZ`, `KeyA`
+  -  功能键一般为按键名称，如`F4`, `Tab`,`Enter`
+  -  使用`Left/Right`区分左右，左shift的键码为`ShiftLeft`, 右shift的键码为`ShiftRight`。
 > 补充：一个被废弃的`event.keyCode`与`event.code`有同样的功能，但键码是基于数字的。可能在兼容IE时需要用到。
--  `event.key` -- 键。表征按键的**含义**而不是位置。跟是否按下`shift`、键盘语言有关。如按下`z键`时表示字符`z`，而`shift+z`表示字符`Z`。左右shift的`key`也一样。只在使用基于意义的时候才使用`event.key`判断。 
+-  `event.key` -- 键。表征按键的**含义**而不是位置。跟是否按下`shift`、键盘语言有关。如按下`z键`时表示字符`z`，而`shift+z`表示字符`Z`。左右shift的`key`也一样。只在使用基于意义的时候才使用`event.key`判断。
 
 键盘事件也同样支持组合键，可以使用`event.ctrlKey`, `event.shiftKey`, `event.altKey`, `event.metaKey`获取其它按键是否被按下，而不用单独监听它们。
 
@@ -569,9 +569,9 @@ node.handler(event);   //event在这里是实参，这句语句是函数调用
 
 表单是一类特殊的元素，需要频繁的获取或修改，所以，通用的节点获取方式上，增加了额外的属性，方便表单操作。
 
--  `document.forms` -- 获取文档中的表单元素集合。这是一个`命名集合`。命名意味着可以通过表单名称方式`document.forms.formName`获取表单，而集合本身又支持下标方式`document.form[0]`。 
--  `form.elements` -- 获取表单form的输入元素集合，同样，这是一个`动态的`命名集合。可以通过`form.elements.inputName`或者`form.elements[index/inputName]`获取。 
--  `form.inputName`或`form[index/inputName]` -- 获取表单form的输入元素。`form.elements.inputName`的简写。  
+-  `document.forms` -- 获取文档中的表单元素集合。这是一个`命名集合`。命名意味着可以通过表单名称方式`document.forms.formName`获取表单，而集合本身又支持下标方式`document.form[0]`。
+-  `form.elements` -- 获取表单form的输入元素集合，同样，这是一个`动态的`命名集合。可以通过`form.elements.inputName`或者`form.elements[index/inputName]`获取。
+-  `form.inputName`或`form[index/inputName]` -- 获取表单form的输入元素。`form.elements.inputName`的简写。<br>
 > 注意：
 >
 > （1）radio、checkbox等多个输入共享一个name时，`form.elements.inputName`或`form.inputName`返回一个集合。
@@ -579,7 +579,7 @@ node.handler(event);   //event在这里是实参，这句语句是函数调用
 > （2）无法获取到type为image的输入组件。
 >
 > （3）如果表单中有`<fieldset>`(输入组)，它会成为一个`form.elements`的一个元素，可进一步通过`fieldset.elements`获取表单组中的输入控件集合。
--  `input.formName` -- 获取输入元素所在的表单。`form.inputName`的反向引用。 
+-  `input.formName` -- 获取输入元素所在的表单。`form.inputName`的反向引用。
 
 ```html
   <form name="myForm">
@@ -639,10 +639,10 @@ node.handler(event);   //event在这里是实参，这句语句是函数调用
 
 此外，也有一些事件在表单上发挥了主要作用：
 
--  `pressdown` 
--  `focus/blur` -- 获得或焦点时，不会冒泡。 
--  `focusin/focusout` -- 获得或失去焦点时，与上类似，但是会冒泡。 
--  `cut/copy/paste` -- 剪切板事件  
+-  `pressdown`
+-  `focus/blur` -- 获得或焦点时，不会冒泡。
+-  `focusin/focusout` -- 获得或失去焦点时，与上类似，但是会冒泡。
+-  `cut/copy/paste` -- 剪切板事件<br>
 > 补充：可以通过`e.preventDefault()`(或返回false)取消剪切板事件默认行为，来禁用页面/输入的剪切板功能。`event.clipboardData`可用于读写剪切板内容。
 >
 > ```js

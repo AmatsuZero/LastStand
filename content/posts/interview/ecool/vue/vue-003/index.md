@@ -35,7 +35,7 @@ Vue.directive('gqs',{
     componentUpdated() {
       // 指令所在组件的 VNode 及其子 VNode 全部更新后调用。
       console.log('componentUpdated triggerd')
-      
+
     },
     unbind() {
       // 只调用一次，指令与元素解绑时调用.
@@ -48,8 +48,8 @@ Vue.directive('gqs',{
 
 指令钩子函数会被传入以下参数：
 
--  el 指令所绑定的元素，可以用来直接操作 DOM 
--  binding 一个对象，包含以下属性：  
+-  el 指令所绑定的元素，可以用来直接操作 DOM
+-  binding 一个对象，包含以下属性：<br>
 ```
  name：指令名，不包括 v- 前缀。
 
@@ -63,8 +63,8 @@ Vue.directive('gqs',{
 
  modifiers：一个包含修饰符的对象。例如：v-my-directive.foo.bar 中，修饰符对象为 { foo: true, bar: true }。
 ```
--  vnode：Vue 编译生成的虚拟节点。 
--  oldVnode：上一个虚拟节点，仅在 update 和 componentUpdated 钩子中可用。 *除了 el 之外，其它参数都应该是只读的，切勿进行修改。如果需要在钩子之间共享数据，建议通过元素的 dataset 来进行。* 
+-  vnode：Vue 编译生成的虚拟节点。
+-  oldVnode：上一个虚拟节点，仅在 update 和 componentUpdated 钩子中可用。 *除了 el 之外，其它参数都应该是只读的，切勿进行修改。如果需要在钩子之间共享数据，建议通过元素的 dataset 来进行。*
 
 #### 1.3 指令简写
 
@@ -89,10 +89,10 @@ Vue.directive('color-swatch', function (el, binding) {
 - 在使用指令的HTML元素上,我们需要加上 v-.
 
 ```html
-<input type="text" v-focus placeholder="我有v-focus,所以,我获取了焦点"/> 
+<input type="text" v-focus placeholder="我有v-focus,所以,我获取了焦点"/>
 ```
 
--  Vue.directive('focus',{}) 第二个参数是一个对象,对象内部有个 inserted() 的函数,函数有 el 这个参数.  
+-  Vue.directive('focus',{}) 第二个参数是一个对象,对象内部有个 inserted() 的函数,函数有 el 这个参数.<br>
   - el 这个参数表示了绑定这个指令的 DOM元素,在这里就是后面那个有 placeholder 的 input
   - el 就等价于 document.getElementById('el.id')....
   - 可以利用 $(el) 无缝连接 jQuery
@@ -138,7 +138,7 @@ new Vue({
 
 ```javascript
 <template>
-	<input type="text" v-model="text" placeholder="仅可填入正整数数字"	
+	<input type="text" v-model="text" placeholder="仅可填入正整数数字"
 		v-my-text="{key:'text',maxval:'1000'}">
 </template>
 <script>
@@ -172,7 +172,7 @@ directives:{
 
 ```javascript
 <template>
-	<input type="text" v-model="text" placeholder="仅可填入正整数数字"	
+	<input type="text" v-model="text" placeholder="仅可填入正整数数字"
 		v-my-text="{key:'text',maxval:'1000'}">
 </template>
 <script>
@@ -195,7 +195,7 @@ export default {
       }
       el.addEventListener('input', el.handler)
     },
-  }, 
+  },
 }
 </script>
 ```
@@ -339,7 +339,7 @@ children: [
 
 ```javascript
 import Vue from 'vue'
-    
+
 /**权限指令**/
 const has = Vue.directive('has', {
     bind: function (el, binding, vnode) {
@@ -389,7 +389,7 @@ import has from './public/js/btnPermissions.js';
 
 #### **考察点**：
 
-- **常用内置指令**：  
+- **常用内置指令**：<br>
   - `v-bind`：绑定属性或动态值。
   - `v-model`：双向绑定。
   - `v-if/v-else/v-else-if`：条件渲染。
@@ -398,7 +398,7 @@ import has from './public/js/btnPermissions.js';
   - `v-on`：事件绑定。
   - `v-html`：渲染 HTML 字符串（需注意安全问题）。
   - `v-slot`：插槽绑定。
-- **高级指令**：  
+- **高级指令**：<br>
   - `v-once`：渲染一次后不再更新，提高性能。
   - `v-pre`：跳过这个元素和子元素的编译。
   - `v-cloak`：控制未编译模板的占位样式。
@@ -415,10 +415,10 @@ import has from './public/js/btnPermissions.js';
 
 #### **考察点**：
 
-- **区别**：  
+- **区别**：<br>
   - `v-if`：真正地创建和销毁 DOM 元素，性能开销较大。
   - `v-show`：仅通过 `display` 样式控制显示/隐藏，适合频繁切换的场景。
-- **多条件渲染**：  
+- **多条件渲染**：<br>
   - 使用 `v-else` 和 `v-else-if`。
   - 注意 `v-if` 的优先级，避免渲染逻辑混乱。
 
@@ -450,18 +450,18 @@ import has from './public/js/btnPermissions.js';
 
 #### **考察点**：
 
-- **常用修饰符**：  
+- **常用修饰符**：<br>
   - `.stop`：阻止事件冒泡。
   - `.prevent`：阻止默认事件。
   - `.capture`：使用事件捕获模式。
   - `.once`：事件只触发一次。
   - `.self`：只在事件由自身触发时才触发处理。
-- **参数传递**：  
+- **参数传递**：<br>
   - 在模板中使用 `@click="method(arg)"`。
   - 使用 `$event` 传递原生事件对象。
-- **节流与防抖**：  
+- **节流与防抖**：<br>
   - 使用第三方工具库（如 Lodash）。
-  - 或通过自定义指令实现：  
+  - 或通过自定义指令实现：<br>
 ```javascript
 <button v-on:click="throttledClick">Click Me</button>
 methods: {
@@ -483,14 +483,14 @@ methods: {
 
 #### **考察点**：
 
-- 动态属性绑定：  
+- 动态属性绑定：<br>
 ```html
 <img v-bind:src="imageSrc" />
 ```
-- 动态类名绑定：  
+- 动态类名绑定：<br>
   - 对象语法：`<div :class="{ active: isActive, 'text-danger': hasError }"></div>`
   - 数组语法：`<div :class="[classA, classB]"></div>`
-- 动态样式绑定：  
+- 动态样式绑定：<br>
   - 对象语法：`<div :style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>`
   - 数组语法：`<div :style="[styleObjectA, styleObjectB]"></div>`
 
@@ -506,16 +506,16 @@ methods: {
 
 #### **考察点**：
 
-- **使用场景**：  
+- **使用场景**：<br>
   - 特殊的 DOM 操作（如聚焦、拖拽、权限控制）。
   - 在多个组件复用的复杂逻辑。
-- **指令的钩子函数**：  
+- **指令的钩子函数**：<br>
   - `bind`：指令绑定到元素时调用，初始化逻辑。
   - `inserted`：元素插入 DOM 时调用。
   - `update`：包含上下文更新时调用。
   - `componentUpdated`：包含子节点更新后调用。
   - `unbind`：指令解绑时调用。
-- **拖拽功能示例**：  
+- **拖拽功能示例**：<br>
 ```javascript
 Vue.directive('drag', {
   bind(el) {
@@ -546,9 +546,9 @@ Vue.directive('drag', {
 
 #### **考察点**：
 
-- **动态切换指令**：  
+- **动态切换指令**：<br>
   - 通过动态属性名实现动态绑定。
-  - 示例：  
+  - 示例：<br>
 ```html
 <div v-bind:[dynamicPropName]="propValue"></div>
 ```
@@ -564,11 +564,11 @@ Vue.directive('drag', {
 
 #### **考察点**：
 
-- 项目经验：  
+- 项目经验：<br>
   - 聚焦指令：`v-focus`
   - 权限指令：`v-permission`
   - 其他复杂场景指令。
-- 优缺点：  
+- 优缺点：<br>
   - 优点：便于实现 DOM 操作的复用。
   - 缺点：对指令的滥用可能导致代码难以维护。
 

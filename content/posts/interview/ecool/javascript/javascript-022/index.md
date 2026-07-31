@@ -80,7 +80,7 @@ arga('arr1', 26, 'from'); // ['arr1',26,'from']
 如果你想实行进一步的数组转换，你可以向 Array.from()方法传递一个映射用的函数作为第二个参数。此函数会将数组对象的每一个值转换为目标形式，并将其存储在目标数组的对应位置上。
 
 ```js
-function arga(...args) {  
+function arga(...args) {
      return Array.from(args, value => value + 1);
 }
 
@@ -100,7 +100,7 @@ const helper = {
 
 function translate() {
  //arguments 是一个对应于传递给函数的参数的类数组对象
-  return Array.from(arguments, helper.add, helper); 
+  return Array.from(arguments, helper.add, helper);
 }
 
 let arr = translate('liu', 26, 'man');
@@ -611,31 +611,31 @@ entries()，keys()和values() —— 用于遍历数组。它们都返回一个�
 区别是**keys()是对键名的遍历**、**values()是对键值的遍历**，**entries()是对键值对的遍历**
 
 ```js
-for (let index of ['a', 'b'].keys()) {  
-console.log(index);  
-}  
-// 0  
-// 1  
-for (let elem of ['a', 'b'].values()) {  
-console.log(elem);  
-}  
-// 'a'  
-// 'b'  
-for (let [index, elem] of ['a', 'b'].entries()) {  
-console.log(index, elem);  
-}  
-// 0 "a"  
-// 1 "b" 
+for (let index of ['a', 'b'].keys()) {
+console.log(index);
+}
+// 0
+// 1
+for (let elem of ['a', 'b'].values()) {
+console.log(elem);
+}
+// 'a'
+// 'b'
+for (let [index, elem] of ['a', 'b'].entries()) {
+console.log(index, elem);
+}
+// 0 "a"
+// 1 "b"
 ```
 
 如果不使用for...of循环，可以手动调用遍历器对象的**next方法**，进行遍历。
 
 ```js
-let letter = ['a', 'b', 'c'];  
-let entries = letter.entries();  
-console.log(entries.next().value); // [0, 'a']  
-console.log(entries.next().value); // [1, 'b']  
-console.log(entries.next().value); // [2, 'c'] 
+let letter = ['a', 'b', 'c'];
+let entries = letter.entries();
+console.log(entries.next().value); // [0, 'a']
+console.log(entries.next().value); // [1, 'b']
+console.log(entries.next().value); // [2, 'c']
 ```
 
 ## 常见考点

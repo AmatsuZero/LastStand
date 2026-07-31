@@ -390,7 +390,7 @@ vm.conflicting() // => "from self"
 
 #### **考察点：**
 
--  **定义 Mixin**： Mixin 是一个包含组件选项的对象，可以包含 `data`、`methods`、`computed`、`watch` 等选项，它们会被合并到组件的选项中。  
+-  **定义 Mixin**： Mixin 是一个包含组件选项的对象，可以包含 `data`、`methods`、`computed`、`watch` 等选项，它们会被合并到组件的选项中。<br>
 ```javascript
 const myMixin = {
   data() {
@@ -405,7 +405,7 @@ const myMixin = {
   }
 };
 ```
--  **使用 Mixin**： Mixin 可以通过 `mixins` 选项在组件中使用：  当 `mixins` 选项被添加到组件中时，Mixin 的数据、方法等都会被合并到该组件中。 
+-  **使用 Mixin**： Mixin 可以通过 `mixins` 选项在组件中使用：  当 `mixins` 选项被添加到组件中时，Mixin 的数据、方法等都会被合并到该组件中。
 ```javascript
 import myMixin from './myMixin';
 
@@ -429,7 +429,7 @@ export default {
 
 #### **考察点：**
 
--  **合并数据**： Mixin 中的 `data` 会与组件的 `data` 合并。如果它们有相同的属性，组件中的属性会覆盖 Mixin 中的属性。  最终，`myComponent` 中的 `sharedData` 值为 `'component data'`，因为组件的数据会覆盖 Mixin 的数据。 
+-  **合并数据**： Mixin 中的 `data` 会与组件的 `data` 合并。如果它们有相同的属性，组件中的属性会覆盖 Mixin 中的属性。  最终，`myComponent` 中的 `sharedData` 值为 `'component data'`，因为组件的数据会覆盖 Mixin 的数据。
 ```javascript
 const myMixin = {
   data() {
@@ -447,8 +447,8 @@ const myComponent = {
   mixins: [myMixin]
 };
 ```
--  **合并方法**： 当组件和 Mixin 中都有同名的方法时，组件中的方法会覆盖 Mixin 中的方法。若方法需要同时调用 Mixin 和组件中的方法，可以在方法中调用 `this.$super` 或显式调用 Mixin 中的方法。 
--  **生命周期钩子函数合并**： Vue 会将 Mixin 和组件的生命周期钩子函数合并。如果同名钩子函数都存在，它们会按顺序执行（Mixin 的钩子在组件的钩子之前执行）。  输出：  
+-  **合并方法**： 当组件和 Mixin 中都有同名的方法时，组件中的方法会覆盖 Mixin 中的方法。若方法需要同时调用 Mixin 和组件中的方法，可以在方法中调用 `this.$super` 或显式调用 Mixin 中的方法。
+-  **生命周期钩子函数合并**： Vue 会将 Mixin 和组件的生命周期钩子函数合并。如果同名钩子函数都存在，它们会按顺序执行（Mixin 的钩子在组件的钩子之前执行）。  输出：<br>
 ```javascript
 const myMixin = {
   created() {
@@ -479,10 +479,10 @@ Component created
 
 #### **考察点：**
 
--  **适用场景**：  
+-  **适用场景**：<br>
   - **功能复用**：如果多个组件之间需要共享相同的逻辑（如同一组方法、生命周期钩子、事件处理等），Mixin 是一个方便的选择。例如，多个组件需要执行相同的请求处理、事件监听、或者处理相同的状态。
   - **跨组件共享逻辑**：当业务逻辑跨越多个组件时，使用 Mixin 可以避免重复代码。
--  **潜在问题**：  
+-  **潜在问题**：<br>
   - **命名冲突**：如果 Mixin 和组件中有相同的属性或方法，可能会引发命名冲突。
   - **可维护性差**：当项目中使用大量 Mixin 时，可能会导致项目代码难以维护和调试，因为难以追踪哪些功能来源于 Mixin，哪些来自组件本身。
   - **过度依赖 Mixin**：过度使用 Mixin 会导致代码高度耦合，尤其是在大型项目中，使用过多的 Mixin 会使得组件之间的关系复杂化，降低组件的独立性和可重用性。
@@ -498,7 +498,7 @@ Component created
 
 #### **考察点：**
 
--  **Composition API** 提供了一种新的逻辑复用方式，它通过 `setup()` 函数和组合式函数让代码更加清晰和可维护。  示例：  
+-  **Composition API** 提供了一种新的逻辑复用方式，它通过 `setup()` 函数和组合式函数让代码更加清晰和可维护。  示例：<br>
   - **解耦**：Composition API 允许将相关逻辑封装为独立的函数，这比 Mixin 更具灵活性和可读性。
   - **避免命名冲突**：因为 Composition API 使用的是函数而不是对象，所以避免了 Mixin 中可能出现的命名冲突。
   - **类型推导**：使用 Composition API 时，可以更方便地进行类型推导，尤其在 TypeScript 中，能够减少潜在的类型错误。
@@ -525,7 +525,7 @@ export default {
   }
 };
 ```
--  **优缺点对比**：  
+-  **优缺点对比**：<br>
   - **Mixin**：适用于简单的逻辑复用，但存在命名冲突、难以维护等问题。
   - **Composition API**：提供更清晰的逻辑组织方式，避免命名冲突，适合更复杂的逻辑复用。
 
@@ -540,7 +540,7 @@ export default {
 
 #### **考察点：**
 
--  **全局行为**：你可以将全局的逻辑（如日志记录、权限校验等）封装到 Mixin 中，以便在多个组件中复用：  
+-  **全局行为**：你可以将全局的逻辑（如日志记录、权限校验等）封装到 Mixin 中，以便在多个组件中复用：<br>
 ```javascript
 const logMixin = {
   created() {
@@ -548,7 +548,7 @@ const logMixin = {
   }
 };
 ```
--  **与 Vuex 结合使用**：你可以通过 Mixin 与 Vuex 结合，提供全局状态或方法：  
+-  **与 Vuex 结合使用**：你可以通过 Mixin 与 Vuex 结合，提供全局状态或方法：<br>
 ```javascript
 const storeMixin = {
   computed: {

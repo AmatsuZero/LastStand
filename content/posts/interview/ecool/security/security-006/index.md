@@ -99,11 +99,11 @@ https的数据传输过程，数据都是密文的，那么，使用了https协�
 MD5 是一种非常经典的哈希摘要算法，被广泛应用于数据完整性校验、数据（消息）摘要、数据加密等。但是仅仅使用 MD5 对密码进行摘要，并不安全。我们看个例子，如下：
 
 ```java
-public class MD5Test {  
-    public static void main(String[] args) {  
-        String password = "abc123456";  
-        System.out.println(DigestUtils.md5Hex(password));  
-    }  
+public class MD5Test {
+    public static void main(String[] args) {
+        String password = "abc123456";
+        System.out.println(DigestUtils.md5Hex(password));
+    }
 }
 ```
 
@@ -134,19 +134,19 @@ public class MD5Test {
 看个例子对比一下吧：
 
 ```java
-public class BCryptTest {  
-  
-    public static void main(String[] args) {  
-        String password = "123456";  
-        long md5Begin = System.currentTimeMillis();  
-        DigestUtils.md5Hex(password);  
-        long md5End = System.currentTimeMillis();  
-        System.out.println("md5 time:"+(md5End - md5Begin));  
-        long bcrytBegin = System.currentTimeMillis();  
-        BCrypt.hashpw(password, BCrypt.gensalt(10));  
-        long bcrytEnd = System.currentTimeMillis();  
-        System.out.println("bcrypt Time:" + (bcrytEnd- bcrytBegin));  
-    }  
+public class BCryptTest {
+
+    public static void main(String[] args) {
+        String password = "123456";
+        long md5Begin = System.currentTimeMillis();
+        DigestUtils.md5Hex(password);
+        long md5End = System.currentTimeMillis();
+        System.out.println("md5 time:"+(md5End - md5Begin));
+        long bcrytBegin = System.currentTimeMillis();
+        BCrypt.hashpw(password, BCrypt.gensalt(10));
+        long bcrytEnd = System.currentTimeMillis();
+        System.out.println("bcrypt Time:" + (bcrytEnd- bcrytBegin));
+    }
 }
 ```
 
@@ -175,10 +175,10 @@ public class BCryptTest {
 
 #### **考察点：**
 
--  **明文存储的风险**：  
+-  **明文存储的风险**：<br>
   - 明文存储一旦泄露，攻击者可以直接获取所有用户的密码，后果严重。
   - 用户往往在多个平台使用相同密码，因此泄露会带来连锁反应（撞库攻击）。
--  **哈希函数的特点**：  
+-  **哈希函数的特点**：<br>
   - 不可逆性：无法通过哈希值反推出原始输入。
   - 雪崩效应：输入的微小改变会导致输出的哈希值发生巨大变化。
   - 确定性：相同的输入总会得到相同的输出。
@@ -194,11 +194,11 @@ public class BCryptTest {
 
 #### **考察点：**
 
--  **加盐的定义**： 加盐是指在密码前后附加一段随机字符串（Salt），再进行哈希处理，确保相同的密码生成不同的哈希值。 
--  **作用**：  
+-  **加盐的定义**： 加盐是指在密码前后附加一段随机字符串（Salt），再进行哈希处理，确保相同的密码生成不同的哈希值。
+-  **作用**：<br>
   - 防止彩虹表攻击（Rainbow Table Attack）：彩虹表是一种预计算的哈希值表，通过加盐，可以使攻击者难以匹配表中的哈希值。
   - 增强唯一性：即使两个用户使用相同密码，加盐后也会生成不同的哈希值。
--  **示例**：  
+-  **示例**：<br>
 ```javascript
 const crypto = require('crypto');
 const salt = crypto.randomBytes(16).toString('hex'); // 随机盐
@@ -216,22 +216,22 @@ const hashedPassword = crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toS
 
 #### **考察点：**
 
--  **常见哈希算法**：  
+-  **常见哈希算法**：<br>
   - MD5（已不安全）
   - SHA-1（已不安全）
   - SHA-256、SHA-512（安全，但计算速度较快，易受暴力破解攻击）
   - bcrypt、PBKDF2、scrypt、Argon2（推荐的密码存储算法）
--  **推荐算法特点**：  
-  - **bcrypt**：  
+-  **推荐算法特点**：<br>
+  - **bcrypt**：<br>
     - 内置加盐。
     - 可调整计算复杂度（通过 cost 参数控制）。
     - 使用 Blowfish 加密算法，抗 GPU 暴力破解。
-  - **PBKDF2**：  
+  - **PBKDF2**：<br>
     - 基于 HMAC（哈希消息认证码）的加密算法。
     - 支持多次迭代，增加破解成本。
-  - **scrypt**：  
+  - **scrypt**：<br>
     - 结合高计算成本和高内存消耗，特别适合抵抗大规模并行计算攻击。
-  - **Argon2**：  
+  - **Argon2**：<br>
     - 密码哈希竞赛获胜算法，被认为是当前最安全的密码存储算法。
     - 支持灵活调整内存、时间和并行度，安全性极高。
 
@@ -246,15 +246,15 @@ const hashedPassword = crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toS
 
 #### **考察点：**
 
--  **存储过程**：  
+-  **存储过程**：<br>
   1. 用户注册时，生成随机盐。
   2. 使用盐和密码进行哈希计算。
   3. 将盐和哈希值一起存储到数据库。
--  **校验过程**：  
+-  **校验过程**：<br>
   1. 用户登录时，提取数据库中存储的盐。
   2. 用相同的哈希算法对用户输入的密码和盐进行计算。
   3. 将计算结果与存储的哈希值比对。
--  **示例**：  
+-  **示例**：<br>
 ```javascript
 const verifyPassword = (password, salt, hash) => {
   const hashToVerify = crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
@@ -274,12 +274,12 @@ const verifyPassword = (password, salt, hash) => {
 
 #### **考察点：**
 
--  **彩虹表攻击**： 彩虹表是哈希值的预计算表，通过与目标哈希值比对，可以快速破解未加盐的密码。 
--  **数据库泄露防御措施**：  
+-  **彩虹表攻击**： 彩虹表是哈希值的预计算表，通过与目标哈希值比对，可以快速破解未加盐的密码。
+-  **数据库泄露防御措施**：<br>
   - 使用强哈希算法（如 bcrypt、Argon2）。
   - 使用独立的随机盐。
   - 定期更新迭代次数，增加破解成本。
--  **迭代次数的作用**： 增加密码哈希的计算时间，使攻击者每次尝试都需要更多时间，从而降低暴力破解的可行性。 
+-  **迭代次数的作用**： 增加密码哈希的计算时间，使攻击者每次尝试都需要更多时间，从而降低暴力破解的可行性。
 
 ---
 
@@ -292,11 +292,11 @@ const verifyPassword = (password, salt, hash) => {
 
 #### **考察点：**
 
--  **密码强度规则**：  
+-  **密码强度规则**：<br>
   - 最小长度（如 8 位以上）。
   - 包含大写字母、小写字母、数字和特殊字符。
   - 避免常用密码（如 "123456"）。
--  **用户体验优化**：  
+-  **用户体验优化**：<br>
   - 提供实时密码强度提示。
   - 避免设置过于复杂的规则，导致用户体验不佳。
 
@@ -311,10 +311,10 @@ const verifyPassword = (password, salt, hash) => {
 
 #### **考察点：**
 
--  **前端措施**：  
+-  **前端措施**：<br>
   - 使用 HTTPS 确保传输安全。
   - 可以在前端对密码进行预哈希处理，但后端仍需使用强哈希算法加盐存储。
--  **后端措施**：  
+-  **后端措施**：<br>
   - 永远不要直接存储明文密码。
   - 确保后端的密码校验过程使用安全的哈希算法和盐。
 
@@ -329,9 +329,9 @@ const verifyPassword = (password, salt, hash) => {
 
 #### **考察点：**
 
--  **算法升级**：  
+-  **算法升级**：<br>
   - 在用户下次登录时，将密码重新哈希并更新存储。
   - 或者为每个用户添加字段记录当前哈希算法版本，在用户主动更新密码时进行升级。
--  **多租户支持**：  
+-  **多租户支持**：<br>
   - 不同租户存储独立的盐。
   - 使用动态配置的哈希算法或参数。

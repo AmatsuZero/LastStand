@@ -134,7 +134,7 @@ export function initState (vm: Component) {
   // 初始化methods方法
   if (opts.methods) initMethods(vm, opts.methods)
   if (opts.data) {
-    // 初始化data  
+    // 初始化data
     initData(vm)
   } else {
     observe(vm._data = {}, true /* asRootData */)
@@ -548,7 +548,7 @@ Vue.prototype._render = function (): VNode {
 
 ### **三、结论**
 
-- `new Vue`的时候调用会调用`_init`方法  
+- `new Vue`的时候调用会调用`_init`方法<br>
   - 定义 set、get 、delete、watch 等方法
   - 定义 on、off、emit、off等事件
   - 定义 _update、forceUpdate、destroy生命周期
@@ -589,7 +589,7 @@ Vue.prototype._render = function (): VNode {
 
 - `el` 必须是一个已存在的 DOM 元素或 CSS 选择器。
 - 如果 `el` 不存在，Vue 会创建一个空的 DOM 元素作为挂载点。
-- 动态挂载示例：  
+- 动态挂载示例：<br>
 ```javascript
 const app = new Vue({
   render: h => h(App)
@@ -654,13 +654,13 @@ app.$mount('#app');
 
 #### **关键点**：
 
-- 使用 `v-cloak` 避免模板渲染前的白屏：  
+- 使用 `v-cloak` 避免模板渲染前的白屏：<br>
 ```css
 [v-cloak] {
   display: none;
 }
 ```
-- 优化挂载性能：  
+- 优化挂载性能：<br>
   - 减少初始数据体积。
   - 延迟挂载不必要的组件（按需加载）。
   - 使用预渲染或服务端渲染（SSR）。
@@ -677,10 +677,10 @@ app.$mount('#app');
 
 #### **关键点**：
 
-- 排查挂载问题：  
+- 排查挂载问题：<br>
   - 检查 `el` 是否存在。
   - 确认 `data` 或模板中是否有语法错误。
-- 多实例挂载：  
+- 多实例挂载：<br>
 ```javascript
 new Vue({ el: '#app1' });
 new Vue({ el: '#app2' });
@@ -698,7 +698,7 @@ new Vue({ el: '#app2' });
 
 #### **关键点**：
 
-- Vue 3 使用 `createApp` 创建实例：  
+- Vue 3 使用 `createApp` 创建实例：<br>
 ```javascript
 import { createApp } from 'vue';
 const app = createApp(App);
@@ -717,7 +717,7 @@ app.mount('#app');
 
 #### **关键点**：
 
-- 自定义指令的生命周期（Vue 2 和 3）：  
+- 自定义指令的生命周期（Vue 2 和 3）：<br>
   - `bind`/`beforeMount`：绑定时触发。
   - `inserted`/`mounted`：元素插入 DOM 后触发，适合操作 DOM。
 

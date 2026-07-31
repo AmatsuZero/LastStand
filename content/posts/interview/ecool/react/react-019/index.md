@@ -144,7 +144,7 @@ source = "https://fe.ecool.fun/knowledge-learn"
     getSnapshotBeforeUpdate(prevProps, prevState){
         // 获取真实DOM在渲染到页面前做一些附加操作...
         document.querySelectorAll("div").forEach(it=>it.innerHTML = "123");
-        
+
         return "componentDidUpdate的第三个参数";
     }
 ```
@@ -273,7 +273,7 @@ class ClassComp extends React.Component{
     render(){
         return (
             <div>组件节点-Class</div>
-        ) 
+        )
     }
 }
 
@@ -406,7 +406,7 @@ class ClassComp extends React.Component {
     componentDidMount(){
         console.log("333 ClassComp componentDidMount");
     }
-    
+
     render() {
         return (
             <div className="class-wrapper">
@@ -492,7 +492,7 @@ export default class App extends PureComponent {
     state = {
         flag: true
     }
-    
+
     render() {
         console.log("render了");
         return (
@@ -619,7 +619,7 @@ export default class App extends PureComponent {
 
     render() {
         console.log("重新渲染render");
-        
+
         if (this.state.flag) {
             return <span className="wrapper">
                 <button onClick={() => {
@@ -892,12 +892,12 @@ export default class App extends PureComponent {
 
 从调用组件到页面展示，React 渲染经历以下阶段：
 
-1.  **初始渲染阶段**  
+1.  **初始渲染阶段**<br>
   - JSX 被编译成 React 元素（虚拟 DOM）
   - 构建 Fiber 树，执行组件函数或类的 `render` 方法
   - 生成更新对象（Update）
   - 将变更应用到真实 DOM
-2.  **更新阶段（Reconciliation 协调）**  
+2.  **更新阶段（Reconciliation 协调）**<br>
   - 触发更新（如 `setState`）
   - 比较前后两棵 Fiber 树（Diff 算法）
   - 标记需要变更的节点
@@ -921,20 +921,20 @@ export default class App extends PureComponent {
 
 ### 3. **协调（Reconciliation）过程**
 
--  React 是如何比较新旧节点的？ 
--  diff 算法的优化原则是什么？  
+-  React 是如何比较新旧节点的？
+-  diff 算法的优化原则是什么？<br>
   - 同层比较
   - Key 的作用
--  什么情况下组件会被重用或销毁？ 
+-  什么情况下组件会被重用或销毁？
 
 ### 4. **调度机制**
 
--  React 18 引入了什么调度特性？  
+-  React 18 引入了什么调度特性？<br>
   - 并发模式（Concurrent Mode）
   - 时间分片（Time Slicing）
   - `startTransition`、`useDeferredValue`
--  React 如何确定任务的优先级？ 
--  任务调度与浏览器帧调度的关系？ 
+-  React 如何确定任务的优先级？
+-  任务调度与浏览器帧调度的关系？
 
 ### 5. **commit 阶段**
 
@@ -944,12 +944,12 @@ export default class App extends PureComponent {
 
 ### 6. **渲染优化**
 
--  如何避免不必要的组件更新？  
+-  如何避免不必要的组件更新？<br>
   - `React.memo`
   - `shouldComponentUpdate`
   - `useMemo` / `useCallback`
--  如何使用 Key 减少 diff 损耗？ 
--  React.lazy 和 Suspense 如何实现异步加载？ 
+-  如何使用 Key 减少 diff 损耗？
+-  React.lazy 和 Suspense 如何实现异步加载？
 
 ## 三、与 Hooks 相关的渲染机制
 
@@ -970,12 +970,12 @@ export default class App extends PureComponent {
 
 ## 四、React 的重新渲染触发机制
 
--  哪些行为会触发重新渲染？  
+-  哪些行为会触发重新渲染？<br>
   - props 改变
   - state 改变
   - context 改变
--  父组件重新渲染是否一定导致子组件更新？ 
--  如何避免子组件因为 props 变化重新渲染？ 
+-  父组件重新渲染是否一定导致子组件更新？
+-  如何避免子组件因为 props 变化重新渲染？
 
 ## 五、调试与性能分析工具
 

@@ -20,13 +20,13 @@ CSS 视觉格式化模型（英文称之**Visual Formatting Model**）。该模�
 
 简单点说呢。Web 页面（文档树）是由很一个个盒子组成（因为任何元素都可以被视为是一个盒子），而**视觉格式化模型**却是一套规则，用来计算**元素转换为盒子**的规则。而页面的布局都由这些盒子的所处的各处位置组合而成。那么理解了元素怎么转成盒子的规则，就理解了 Web 页面是怎么布局。而每个盒子的布局主要由以下几个因素决定：
 
--  **盒子的尺寸**：精确指定、由约束条件指定或没有指定 
--  **盒子的类型**：行内盒子（inline）、行内级盒子（inline-level）、原子行内级盒子（atomic inline-level）和块盒子（block） 
--  **定位方案**：普通流定位、浮动定位或绝对定位 
--  **文档树中的其它元素**：即当前盒子的子元素或兄弟元素 
--  **视窗尺寸与位置** 
--  **所包含的图片的尺寸** 
--  **其他的某些外部因素** 
+-  **盒子的尺寸**：精确指定、由约束条件指定或没有指定
+-  **盒子的类型**：行内盒子（inline）、行内级盒子（inline-level）、原子行内级盒子（atomic inline-level）和块盒子（block）
+-  **定位方案**：普通流定位、浮动定位或绝对定位
+-  **文档树中的其它元素**：即当前盒子的子元素或兄弟元素
+-  **视窗尺寸与位置**
+-  **所包含的图片的尺寸**
+-  **其他的某些外部因素**
 
 先来看一张图，这个图是由下面的 HTML 结构构造出来的：
 
@@ -75,11 +75,11 @@ CSS 视觉格式化模型（英文称之**Visual Formatting Model**）。该模�
 
 大至意思是，盒子的定位和大小都是参考一个矩形边缘来计算的，而这个矩形就是元素的容器块。一个元素的容器块大概定义如下：
 
--  首先根元素就是一个初始容器块（Initial Containing Block） 
--  其次，如果元素的 `position` 是 `relative` 或`static`，其容器块就是由离它最近的块容器父元素或创建了一个格式化上下文的父级元素生成 
--  如果元素设置了`position:fixed`，它的容器块一般由视窗生成 
--  如果元素设置了`position:absolute`，它的容器块就由设置了`position`值为`relative`、`absolute`或`fixed`的最近父元素生成，如果父级元素都没有设置，则由根元素生成 
--  `transform`属性值为非`none`的元素会生成一个容器块，其`fixed`的子元素会以此定位 
+-  首先根元素就是一个初始容器块（Initial Containing Block）
+-  其次，如果元素的 `position` 是 `relative` 或`static`，其容器块就是由离它最近的块容器父元素或创建了一个格式化上下文的父级元素生成
+-  如果元素设置了`position:fixed`，它的容器块一般由视窗生成
+-  如果元素设置了`position:absolute`，它的容器块就由设置了`position`值为`relative`、`absolute`或`fixed`的最近父元素生成，如果父级元素都没有设置，则由根元素生成
+-  `transform`属性值为非`none`的元素会生成一个容器块，其`fixed`的子元素会以此定位
 
 那么如何来判断包含块呢？我们用 w3chelp 的一张图来向大家展示：
 
@@ -207,19 +207,19 @@ CSS 的 `display` 属性的值，将导致文档里的元素生成一个主盒�
 
 前面提到过，在 CSS 中任何东西都是一个盒子，盒子之间的类型还可以使用 `display` 的不同值来进行切换。在 `display` 中还有两个不同的值 `none` 和 `contents` ，**可以用来控制盒子是否应该显式**。如果你希望 HTML 中的元素不想在 CSS 中生成盒子，就需要以某种方式来抑制盒子的生成。你可能想做两件事：
 
--  防止元素及其后代元素生成一个盒子 
--  防止元素自身生成一个盒子，但其后代元素仍然会生成一个盒子 
+-  防止元素及其后代元素生成一个盒子
+-  防止元素自身生成一个盒子，但其后代元素仍然会生成一个盒子
 
 在 CSS 中的 `display` 属性的 `none` 和 `contents` 即可帮助我们做到这两点：
 
--  如果元素的 `display` 取值为 `none` 时，元素和其后代元素都将不可见，也不会生成任何盒子 
--  如果元素的 `display` 取值为 `contents` 时，元素自身的盒子属性（`margin`、`padding` 和 `border` 等）都将丢失，但其后代元素不受任何影响。也就是说，元素自身不再是一个盒子，但其后代元素依旧是一个盒子 
+-  如果元素的 `display` 取值为 `none` 时，元素和其后代元素都将不可见，也不会生成任何盒子
+-  如果元素的 `display` 取值为 `contents` 时，元素自身的盒子属性（`margin`、`padding` 和 `border` 等）都将丢失，但其后代元素不受任何影响。也就是说，元素自身不再是一个盒子，但其后代元素依旧是一个盒子
 
 也就是说，CSS 的 `display` 属性控制盒子生成：
 
--  元素的 `display` 值不是 `none` 或 `contents` 时，元素即可生成一个盒子，盒子的类型由其值的类型来决定 
--  元素的 `display` 值是 `none` 时，元素及其后代元素都不会生成盒子 
--  元素的 `display` 值是 `contents` 时，元素自身不会生成盒子，但其后代元素依旧会根据 `display` 生成相应的盒子 
+-  元素的 `display` 值不是 `none` 或 `contents` 时，元素即可生成一个盒子，盒子的类型由其值的类型来决定
+-  元素的 `display` 值是 `none` 时，元素及其后代元素都不会生成盒子
+-  元素的 `display` 值是 `contents` 时，元素自身不会生成盒子，但其后代元素依旧会根据 `display` 生成相应的盒子
 
 接下来，我们来看看各种盒子的生成。
 
@@ -241,13 +241,13 @@ CSS 的 `display` 属性的值，将导致文档里的元素生成一个主盒�
 
 前面我们提到过各种块、盒子和元素这样的术语。那么这里我们简单的理一理**块（Block）** 、**包含块（Containing Block）** 、**盒子（Box）** 、**块级盒子（Block-level Box）** 、**块盒子（Block Box）** 、**块容器盒子（Block Containning Box）** 和**块级元素（Block-level Element）** 之间的关系：
 
--  元素`display`的值为`block`、`list-item`、`table`、`flex`和`grid`时，该元素会生成一个**块级元素（Block-level Element）** 
--  块级元素（Block-level Element）会生成一个**块级盒子（Block-level Box）** 
--  块级盒子会参与**块格式化上下文（BFC）** 的创建 
--  块级盒子（Block-level Element）描述了元素与其父元素和兄弟元素之间的行为 
--  **块容器盒子（Block Containning Box）** 描述了元素跟其后代之间的行为。要么只包含**块级盒子（Block-level Box）** ，要么只包含**行内级盒子（Inline-level Box）** 。有的块容器盒子不是**块级盒子**，同样块级盒子有时也不是块容器盒子 
--  同时是**块级盒子（Block-level Box）** 和**块容器盒子（Block Containning Box）** 的盒子被称作是**块盒子（Block Box）** 
--  除此之外，还有**匿名块盒子（Anonymous Block Box）** （稍后介绍） 
+-  元素`display`的值为`block`、`list-item`、`table`、`flex`和`grid`时，该元素会生成一个**块级元素（Block-level Element）**
+-  块级元素（Block-level Element）会生成一个**块级盒子（Block-level Box）**
+-  块级盒子会参与**块格式化上下文（BFC）** 的创建
+-  块级盒子（Block-level Element）描述了元素与其父元素和兄弟元素之间的行为
+-  **块容器盒子（Block Containning Box）** 描述了元素跟其后代之间的行为。要么只包含**块级盒子（Block-level Box）** ，要么只包含**行内级盒子（Inline-level Box）** 。有的块容器盒子不是**块级盒子**，同样块级盒子有时也不是块容器盒子
+-  同时是**块级盒子（Block-level Box）** 和**块容器盒子（Block Containning Box）** 的盒子被称作是**块盒子（Block Box）**
+-  除此之外，还有**匿名块盒子（Anonymous Block Box）** （稍后介绍）
 
 比如下面这样的一个示例：
 
@@ -261,9 +261,9 @@ CSS的`display`有很多个属性值，当元素的`display`属性的值为`inli
 
 简单归纳一下：
 
--  元素`display`的值为`inline`、`inline-block`、`inline-table`、`inline-flex`或`inline-grid`时，元素则为行内级元素（Inline-level Element） 
--  行内级元素会生成行内级盒子（Inline-level Box），会参与IFC的创建 
--  同样的，也会创建一个匿名行内盒子 
+-  元素`display`的值为`inline`、`inline-block`、`inline-table`、`inline-flex`或`inline-grid`时，元素则为行内级元素（Inline-level Element）
+-  行内级元素会生成行内级盒子（Inline-level Box），会参与IFC的创建
+-  同样的，也会创建一个匿名行内盒子
 
 ### **匿名盒子**
 
@@ -313,10 +313,10 @@ CSS选择器不能作用于匿名盒子（Anonymous Box），所以无法设置�
 
 除了上述说到的盒子，在CSS中还定义了几种内容模型，这些模型同样可以应用于元素。这些模型一般用来描述布局，它们可能会定义一些额外的盒子类型：
 
--  **表格内容模型**：可能会创建一个表格包装器盒子和一个表格盒子，以及多个其他盒子如表格标题盒子等 
--  **多列内容模型**：可能会在容器盒子和内容之间创建多个列盒子 
--  **Flexbox内容模型**：可能会创建一个弹性盒子 
--  **Grid内容模型**：可能会创建一个网格盒子 
+-  **表格内容模型**：可能会创建一个表格包装器盒子和一个表格盒子，以及多个其他盒子如表格标题盒子等
+-  **多列内容模型**：可能会在容器盒子和内容之间创建多个列盒子
+-  **Flexbox内容模型**：可能会创建一个弹性盒子
+-  **Grid内容模型**：可能会创建一个网格盒子
 
 ## **格式化上下文**
 
@@ -334,27 +334,27 @@ IFC的行盒的高度是根据包含行内元素中最高的实际高度计算�
 
 当几个行内元素不能在一个单独的行盒中水平放置时，他们会被分配给两个或更多的(Vertically-stacked Line Box)垂直栈上的行盒，因此，一个段落是很多行盒的垂直栈。这些行盒不会在垂直方向上被分离（除非在其他地方有特殊规定），并且他们也不重叠。
 
--  垂直方向上，当行内元素的高度比行盒要低，那么 `vertical-align` 属性决定垂直方向上的对齐方式。 
--  水平方向上，当行内元素的总宽度比行盒要小，那么行内元素在水平方向上的分部由 `text-align` 决定。 
--  水平方向上，当行内元素的总宽度超过了行盒，那么行内元素会被分配到多个行盒中去，如果设置了不可折行等属性，那么行内元素会溢出行盒。 
--  行盒的左右两边都会触碰到包含块，而 `float` 元素则会被放置在行盒和包含快边缘的中间位置。 
+-  垂直方向上，当行内元素的高度比行盒要低，那么 `vertical-align` 属性决定垂直方向上的对齐方式。
+-  水平方向上，当行内元素的总宽度比行盒要小，那么行内元素在水平方向上的分部由 `text-align` 决定。
+-  水平方向上，当行内元素的总宽度超过了行盒，那么行内元素会被分配到多个行盒中去，如果设置了不可折行等属性，那么行内元素会溢出行盒。
+-  行盒的左右两边都会触碰到包含块，而 `float` 元素则会被放置在行盒和包含快边缘的中间位置。
 
 下面这些规则都会创建一个行内格式化上下文：
 
--  IFC只有在一个**块级元素**中仅包含**行内级元素**时才会生成 
--  内部的盒子会在不平方向，一个接一个的放置 
--  这些盒子垂直方向的起点从包含块盒子的顶部开始 
--  摆放这些盒子的时候，它们在水平方向上的`padding`、`border`和`margin`所占用的空间都会被考虑在内 
--  在垂直方向上，这些盒子可能会以不同形式来对齐（`vertical-align`） 
--  能把在一行上的盒子都完全包含在一行行盒（Line Box），行盒的宽度是由包含块和存在的浮动来决定 
--  IFC中的行盒一般左右边都紧贴其包含块，但是会因浮动元素的存在发生变化。浮动元素会位于IFC与行盒之间，使得行盒宽度缩短 
--  当行内级盒的总宽度小于包含它们的行盒时，其水平渲染规则则由`text-align`来确定 
--  当行内盒超过行盒的宽度时，它会被分割成多个盒子，这些盒子被分布在多个行盒里。如果一个行内盒不能被分割，则会溢出行盒 
+-  IFC只有在一个**块级元素**中仅包含**行内级元素**时才会生成
+-  内部的盒子会在不平方向，一个接一个的放置
+-  这些盒子垂直方向的起点从包含块盒子的顶部开始
+-  摆放这些盒子的时候，它们在水平方向上的`padding`、`border`和`margin`所占用的空间都会被考虑在内
+-  在垂直方向上，这些盒子可能会以不同形式来对齐（`vertical-align`）
+-  能把在一行上的盒子都完全包含在一行行盒（Line Box），行盒的宽度是由包含块和存在的浮动来决定
+-  IFC中的行盒一般左右边都紧贴其包含块，但是会因浮动元素的存在发生变化。浮动元素会位于IFC与行盒之间，使得行盒宽度缩短
+-  当行内级盒的总宽度小于包含它们的行盒时，其水平渲染规则则由`text-align`来确定
+-  当行内盒超过行盒的宽度时，它会被分割成多个盒子，这些盒子被分布在多个行盒里。如果一个行内盒不能被分割，则会溢出行盒
 
 IFC主要用于：
 
--  行内元素按照 `text-align` 进行水平居中 
--  行内元素撑开父元素高度，通过 `vertical-align` 属性进行垂直居中 
+-  行内元素按照 `text-align` 进行水平居中
+-  行内元素撑开父元素高度，通过 `vertical-align` 属性进行垂直居中
 
 ### **块格式化上下文**
 
@@ -366,26 +366,26 @@ BFC 内部的盒子会从上至下一个接着一个顺序排列。BFC 内的垂
 
 下面这些规则可以创建一个BFC：
 
--  根元素或包含根元素的元素 
--  浮动元素（元素的 `float` 不是 `none`） 
--  绝对定位元素（元素的 `position` 为 `absolute` 或 `fixed`） 
--  行内块元素（元素的 `display` 为 `inline-block`） 
--  表格单元格（元素的 `display`为 `table-cell`，HTML表格单元格默认为该值） 
--  表格标题（元素的 `display` 为 `table-caption`，HTML表格标题默认为该值） 
--  匿名表格单元格元素（元素的 `display`为 `table`、`table-row`、 `table-row-group`、`table-header-group`、`table-footer-group`（分别是HTML `table`、`row`、`tbody`、`thead`、`tfoot`的默认属性）或 `inline-table`） 
--  `overflow` 值不为 `visible` 的块元素 
--  `display` 值为 `flow-root` 的元素 
--  `contain` 值为 `layout`、`content`或 `strict` 的元素 
--  弹性元素（`display`为 `flex` 或 `inline-flex`元素的直接子元素） 
--  网格元素（`display`为 `grid` 或 `inline-grid` 元素的直接子元素） 
--  多列容器（元素的 `column-count` 或 `column-width` 不为 `auto`，包括 `column-count` 为 `1`） 
--  `column-span` 为 `all` 的元素始终会创建一个新的BFC，即使该元素没有包裹在一个多列容器中 
+-  根元素或包含根元素的元素
+-  浮动元素（元素的 `float` 不是 `none`）
+-  绝对定位元素（元素的 `position` 为 `absolute` 或 `fixed`）
+-  行内块元素（元素的 `display` 为 `inline-block`）
+-  表格单元格（元素的 `display`为 `table-cell`，HTML表格单元格默认为该值）
+-  表格标题（元素的 `display` 为 `table-caption`，HTML表格标题默认为该值）
+-  匿名表格单元格元素（元素的 `display`为 `table`、`table-row`、 `table-row-group`、`table-header-group`、`table-footer-group`（分别是HTML `table`、`row`、`tbody`、`thead`、`tfoot`的默认属性）或 `inline-table`）
+-  `overflow` 值不为 `visible` 的块元素
+-  `display` 值为 `flow-root` 的元素
+-  `contain` 值为 `layout`、`content`或 `strict` 的元素
+-  弹性元素（`display`为 `flex` 或 `inline-flex`元素的直接子元素）
+-  网格元素（`display`为 `grid` 或 `inline-grid` 元素的直接子元素）
+-  多列容器（元素的 `column-count` 或 `column-width` 不为 `auto`，包括 `column-count` 为 `1`）
+-  `column-span` 为 `all` 的元素始终会创建一个新的BFC，即使该元素没有包裹在一个多列容器中
 
 块格式化上下文包含创建它的元素内部的所有内容。其主要使用：
 
--  创建独立的渲染环境 
--  防止因浮动导致的高度塌陷 
--  防止上下相邻的外边距折叠 
+-  创建独立的渲染环境
+-  防止因浮动导致的高度塌陷
+-  防止上下相邻的外边距折叠
 
 ### **Flex格式化上下文**
 
@@ -393,10 +393,10 @@ Flex格式化上下文（Flexbox Formatting Context）俗称**FFC**。当`displa
 
 不过要注意的是，Flexbox容器不是块容器（块级盒子），下列适用于块布局的属性并不适用于Flexbox布局：
 
--  多列中的`column-*`属性不适用于Flexbox容器 
--  `float`和`clear`属性作用于Flex项目上将无效，也不会把让Flex项目脱离文档流 
--  `vertical-algin`属性作用于Flex项目上将无效 
--  `::first-line`和`::first-letter`伪元素不适用于Flexbox容器，而且Flexbox容器不为他们的祖先提供第一个格式化的行或第一个字母 
+-  多列中的`column-*`属性不适用于Flexbox容器
+-  `float`和`clear`属性作用于Flex项目上将无效，也不会把让Flex项目脱离文档流
+-  `vertical-algin`属性作用于Flex项目上将无效
+-  `::first-line`和`::first-letter`伪元素不适用于Flexbox容器，而且Flexbox容器不为他们的祖先提供第一个格式化的行或第一个字母
 
 ### **Grid格式化上下文**
 
@@ -404,9 +404,9 @@ Grid格式化上下文（Grid Formaatting Context），俗称**GFC**。和FFC有
 
 网格容器不是块容器，因此一些假定为块布局设计的属性并不适用于网格格式化上下文中。特别是：
 
--  `float`和`clear`运用于网格项目将不会生效。但是`float`属性仍然影响网格完完全全器子元素上`display`的计算值，因为这发生在确定网格项目之前 
--  `vertical-align`运用于网格项目也将不会生效 
--  `::first-line`和`::first-letter`伪元素不适用于网格容器，而且网格容器不向它们社先提供第一个格式化行或第一个格式化字母 
+-  `float`和`clear`运用于网格项目将不会生效。但是`float`属性仍然影响网格完完全全器子元素上`display`的计算值，因为这发生在确定网格项目之前
+-  `vertical-align`运用于网格项目也将不会生效
+-  `::first-line`和`::first-letter`伪元素不适用于网格容器，而且网格容器不向它们社先提供第一个格式化行或第一个格式化字母
 
 ## **小结**
 
@@ -431,7 +431,7 @@ Grid格式化上下文（Grid Formaatting Context），俗称**GFC**。和FFC有
 ### 2. **格式化上下文**
 
 - **定义**：什么是格式化上下文（formatting context）？有哪些类型的格式化上下文？
-- **常见格式化上下文**：  
+- **常见格式化上下文**：<br>
   - **块级格式化上下文**（BFC）：如何触发 BFC？BFC 对浮动和清除浮动有何作用？
   - **内联格式化上下文**（IFC）：内联元素是如何排列的？如何计算内联框的高度？
 - **使用场景**：BFC 和 IFC 在解决布局问题时的应用场景有哪些？

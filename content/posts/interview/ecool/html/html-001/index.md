@@ -102,7 +102,7 @@ HTML5新增表单属性
 
  `<audio>` 元素允许使用多个 `<source>` 元素. `<source>` 元素可以链接不同的音频文件，浏览器将使用第一个支持的音频文件
 
- 目前, 元素支持三种音频格式文件: MP3, Wav, 和 Ogg 
+ 目前, 元素支持三种音频格式文件: MP3, Wav, 和 Ogg
 
 - **视频文件标准** `<vedio>`
 
@@ -130,27 +130,27 @@ Canvas 是 HTML5 提供的一个用于绘制图形的元素，使用 `<canvas>` 
 
 什么是SVG：
 
--  SVG指可伸缩矢量图形 
--  SVG用于定义用于网络的基于矢量的图形 
--  SVG使用XML格式定义图形 
--  SVG图像在放大或改变尺寸的情况下其图形质量不会有损失 
--  SVG是万维网联盟的标准 
+-  SVG指可伸缩矢量图形
+-  SVG用于定义用于网络的基于矢量的图形
+-  SVG使用XML格式定义图形
+-  SVG图像在放大或改变尺寸的情况下其图形质量不会有损失
+-  SVG是万维网联盟的标准
 
 SVG的优势：
 
--  SVG图像可通过文本编译器来创建和修改 
--  SVG图像可被搜索、索引、脚本化或压缩 
--  SVG是可伸缩的 
--  SVG图像可在任何的分辨率下被高质量的打印 
--  SVG可在图像质量不下降的情况下被放大 
+-  SVG图像可通过文本编译器来创建和修改
+-  SVG图像可被搜索、索引、脚本化或压缩
+-  SVG是可伸缩的
+-  SVG图像可在任何的分辨率下被高质量的打印
+-  SVG可在图像质量不下降的情况下被放大
 
 SVG与Canvas的区别：
 
--  SVG适用于描述XML中的2D图形的语言 
--  Canvas随时随地绘制2D图形（使用javaScript） 
--  SVG是基于XML的，意味这可以操作DOM，渲染速度较慢 
--  在SVG中每个形状都被当做是一个对象，如果SVG发生改变，页面就会发生重绘 
--  Canvas是一像素一像素地渲染，如果改变某一个位置，整个画布会重绘。 
+-  SVG适用于描述XML中的2D图形的语言
+-  Canvas随时随地绘制2D图形（使用javaScript）
+-  SVG是基于XML的，意味这可以操作DOM，渲染速度较慢
+-  在SVG中每个形状都被当做是一个对象，如果SVG发生改变，页面就会发生重绘
+-  Canvas是一像素一像素地渲染，如果改变某一个位置，整个画布会重绘。
 
 | Canvas | SVG |
 | --- | --- |
@@ -187,7 +187,7 @@ navigator.geolocation.getCurrentPosition(
 
 },    //定位成功的回调
 
-function(err){ 
+function(err){
 　　　　console.log('用户定位数据获取失败')
 　　　　//console.log(arguments);
 
@@ -287,27 +287,27 @@ WebSocket协议为web应用程序客户端和服务端之间提供了一种全�
 
 特点：
 
--  握手阶段采用HTTP协议，默认端口是80和443 
--  建立在TCP协议基础之上，和http协议同属于应用层 
--  可以发送文本，也可以发送二进制数据。 
--  没有同源限制，客户端可以与任意服务器通信。 
--  协议标识符是ws（如果加密，为wss），如ws://localhost:8023 
+-  握手阶段采用HTTP协议，默认端口是80和443
+-  建立在TCP协议基础之上，和http协议同属于应用层
+-  可以发送文本，也可以发送二进制数据。
+-  没有同源限制，客户端可以与任意服务器通信。
+-  协议标识符是ws（如果加密，为wss），如ws://localhost:8023
 
 ## 常见考点
 
-1.  **新语义化元素**：  
+1.  **新语义化元素**：<br>
   - 了解新引入的语义化标签，如 `<article>`、`<section>`、`<header>`、`<footer>`、`<nav>` 等。
-2.  **多媒体支持**：  
+2.  **多媒体支持**：<br>
   - 讨论 `<audio>` 和 `<video>` 标签的使用及其属性，如何在页面中嵌入音频和视频。
-3.  **表单控件**：  
+3.  **表单控件**：<br>
   - 了解新表单元素和属性，如 `<input>` 类型（如 date、email、range）以及新特性（如 placeholder、required、autofocus）。
-4.  **Canvas 和 SVG**：  
+4.  **Canvas 和 SVG**：<br>
   - 掌握 `<canvas>` 元素的基本用法，以及如何使用它绘制图形和动画。
-5.  **Web Storage**：  
+5.  **Web Storage**：<br>
   - 理解 LocalStorage 和 SessionStorage 的概念及其用法，如何在客户端存储数据。
-6.  **离线存储**：  
+6.  **离线存储**：<br>
   - 讨论应用缓存（AppCache）和离线网页的实现，以及其优势。
-7.  **WebSockets**：  
+7.  **WebSockets**：<br>
   - 了解 WebSockets 的概念及其在实时通信中的应用。
-8.  **新API**：  
+8.  **新API**：<br>
   - 熟悉新引入的 API，如 Geolocation API、Drag and Drop API、Web Workers 等。

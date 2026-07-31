@@ -85,7 +85,7 @@ self.addEventListener('message', e => { // 接收到消息
 const myWorker = new Worker('/worker.js');
 
 const obj = {name: '小明'};
-myWorker.addEventListener('message', e => { 
+myWorker.addEventListener('message', e => {
     console.log(e.data === obj); // false
 });
 myWorker.postMessage(obj);
@@ -179,24 +179,24 @@ myWorker.postMessage('Greeting from Main.js');
 self.addEventListener('message', e => {
 
     postMessage('Greeting from Worker');
-    
+
     setTimeout(() => {
         console.log('setTimeout run');
         postMessage('Greeting from SetTimeout');
     });
-    
+
     Promise.resolve().then(() => {
         console.log('Promise run');
         postMessage('Greeting from Promise');
     })
-    
+
     for (let i = 0; i < 1001; i++) {
         if (i === 1000) {
             console.log('Loop run');
             postMessage('Greeting from Loop');
         }
     }
-    
+
 });
 ```
 
@@ -229,26 +229,26 @@ myWorker.postMessage('Greeting from Main.js');
 self.addEventListener('message', e => {
 
     postMessage('Greeting from Worker');
-    
+
     self.close(); // 关闭 worker
-    
+
     setTimeout(() => {
         console.log('setTimeout run');
         postMessage('Greeting from SetTimeout');
     });
-    
+
     Promise.resolve().then(() => {
         console.log('Promise run');
         postMessage('Greeting from Promise');
     })
-    
+
     for (let i = 0; i < 1001; i++) {
         if (i === 1000) {
             console.log('Loop run');
             postMessage('Greeting from Loop');
         }
     }
-    
+
 });
 ```
 
@@ -269,7 +269,7 @@ const add = (a, b) => a + b;
 
 ```js
 // worker.js（worker线程）
-// 使用方法：importScripts(path1, path2, ...); 
+// 使用方法：importScripts(path1, path2, ...);
 
 importScripts('./utils.js');
 
@@ -296,7 +296,7 @@ export default add = (a, b) => a + b;
 // worker.js（worker线程）
 import add from './utils.js'; // 导入外部js
 
-self.addEventListener('message', e => { 
+self.addEventListener('message', e => {
     postMessage(e.data);
 });
 
@@ -326,7 +326,7 @@ myWorker.postMessage(fun); // Error：Failed to execute 'postMessage' on 'Worker
 
 - `Error` 以及 `Function` 对象；
 - DOM 节点
-- 对象的某些特定参数不会被保留  
+- 对象的某些特定参数不会被保留<br>
   - `RegExp` 对象的 `lastIndex` 字段不会被保留
   - 属性描述符，setters 以及 getters（以及其他类似元数据的功能）同样不会被复制。例如，如果一个对象用属性描述符标记为 read-only，它将会被复制为 read-write
   - 原形链上的属性也不会被追踪以及复制。
@@ -412,9 +412,9 @@ myWorker.port.onmessage = msg => {
         if (!!window.SharedWorker) {
             const container = document.getElementById('container');
             const add = document.getElementById('add');
-            
+
             const myWorker = new SharedWorker('./sharedWorker.js');
-            
+
             myWorker.port.start();
 
             myWorker.port.addEventListener('message', msg => {
@@ -453,7 +453,7 @@ myWorker.port.onmessage = msg => {
             const myWorker = new SharedWorker('./sharedWorker.js');
 
             myWorker.port.start();
-            
+
             myWorker.port.addEventListener('message', msg => {
                 container.innerText = msg.data;
             })

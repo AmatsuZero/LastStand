@@ -41,7 +41,7 @@ export default class App extends React.Component {
     this.input = React.createRef(); // 1
       // ↑5
   }
-  
+
   handleClick = (e) => {
     const input = this.input.current;
       // 6
@@ -49,7 +49,7 @@ export default class App extends React.Component {
     console.log(input.value);
     input.focus();
   }
-  
+
   render() {
     return (
       <>
@@ -95,9 +95,9 @@ export default Foo;
 
 之前说过，步骤2很关键，这是因为 `ref` 的值根据节点的类型而有所不同：
 
-1.  当 `ref` 属性用于 HTML 元素时，接收底层 DOM 元素作为其 `current` 属性。 
-2.  当 `ref` 属性用于自定义 class 组件时，`ref` 接收组件实例作为其 `current` 属性。 
-3.  **不能在函数组件上使用 `ref` 属性**，因为他们没有实例。 
+1.  当 `ref` 属性用于 HTML 元素时，接收底层 DOM 元素作为其 `current` 属性。
+2.  当 `ref` 属性用于自定义 class 组件时，`ref` 接收组件实例作为其 `current` 属性。
+3.  **不能在函数组件上使用 `ref` 属性**，因为他们没有实例。
 
 第一个很好理解，我们上面的例子已经体现了这一点, `ref` 最终被挂载到了 `input` 节点上, `input`是一个`HTML`元素，所以`current`中保留的是`DOM`元素。
 
@@ -114,7 +114,7 @@ export default class Bar extends React.Component {
       message: '这是class组件, ref 只能挂载到实例上'
     };
   }
-  
+
   componentDidMount() {
     console.log(this);
   }
@@ -139,7 +139,7 @@ export default class App extends React.Component {
     this.state = {};
     this.myRef = React.createRef(); // 创建 ref
   }
-  
+
   handleClick = (e) => {
     const instance = this.myRef.current;
     // 打印的是 Bar 实例
@@ -251,7 +251,7 @@ export default class Bar extends React.Component {
       message: '这是Bar.jsx'
     };
   }
-  
+
   componentDidMount() {
     console.log(this);
   }
@@ -270,7 +270,7 @@ export default class Bar extends React.Component {
 ```jsx
 // logProps.js
 function logProps(WrappedComponent) {
-    
+
   class LogProps extends React.Component {
     componentDidUpdate(prevProps) {
       console.log('Previous props: ', prevProps);
@@ -356,7 +356,7 @@ export default class App extends React.Component {
 import React from 'react';
 
 export default function logProps(WrappedComponent) {
-  
+
   class LogProps extends React.Component {
     // 2
     constructor(props) {
@@ -381,7 +381,7 @@ export default function logProps(WrappedComponent) {
     // 1
     <LogProps {...props} customRef={ref} />
   ))
-  
+
 }
 ```
 
@@ -426,10 +426,10 @@ render() {
 
 ## **1. `forwardRef` 的基本概念**
 
--  **考察点**：  
+-  **考察点**：<br>
   - `forwardRef` 的作用及使用场景。
   - 为什么需要 `forwardRef`，它解决了什么问题？
--  **问题示例**：  
+-  **问题示例**：<br>
   - `forwardRef` 是什么？它的主要作用是什么？
   - 为什么 React 需要 `forwardRef`，在什么场景下会使用它？
   - `forwardRef` 和 `useRef` 有什么区别？
@@ -439,10 +439,10 @@ render() {
 
 ## **2. `forwardRef` 的基本用法**
 
--  **考察点**：  
+-  **考察点**：<br>
   - 如何正确使用 `forwardRef`，将 `ref` 传递给子组件。
   - `forwardRef` 适用于函数组件，而类组件不需要它。
--  **问题示例**：  
+-  **问题示例**：<br>
   - 如何使用 `forwardRef` 将 `ref` 透传给子组件？
   - `forwardRef` 只能用于函数组件吗？如果要在类组件中使用 `ref`，该怎么办？
   - 请写一个使用 `forwardRef` 传递 `ref` 到 `input` 元素的示例。
@@ -451,10 +451,10 @@ render() {
 
 ## **3. `forwardRef` 与 DOM 交互**
 
--  **考察点**：  
+-  **考察点**：<br>
   - 如何使用 `forwardRef` 操作原生 DOM？
   - 如何在 `forwardRef` 组件中访问子组件的 `ref`？
--  **问题示例**：  
+-  **问题示例**：<br>
   - 如何使用 `forwardRef` 让父组件能够获取子组件的 DOM 节点？
   - `forwardRef` 是否可以用于自定义的 React 组件，而不仅仅是 HTML 元素？
   - 在 `forwardRef` 组件中，`useImperativeHandle` 有什么作用？
@@ -463,10 +463,10 @@ render() {
 
 ## **4. `forwardRef` 与高阶组件（HOC）**
 
--  **考察点**：  
+-  **考察点**：<br>
   - `forwardRef` 解决了高阶组件（HOC）不能正确传递 `ref` 的问题。
   - 如何在高阶组件中使用 `forwardRef`？
--  **问题示例**：  
+-  **问题示例**：<br>
   - 为什么 `forwardRef` 适用于高阶组件（HOC）？
   - `forwardRef` 如何解决高阶组件 `ref` 透传的问题？
   - 你如何在 HOC 内部正确使用 `forwardRef`？
@@ -475,10 +475,10 @@ render() {
 
 ## **5. `forwardRef` 与 `useImperativeHandle` 结合**
 
--  **考察点**：  
+-  **考察点**：<br>
   - `useImperativeHandle` 用于自定义 `ref` 的暴露内容。
   - `forwardRef` 与 `useImperativeHandle` 组合的使用方式。
--  **问题示例**：  
+-  **问题示例**：<br>
   - `useImperativeHandle` 的作用是什么？为什么要与 `forwardRef` 结合使用？
   - 如何使用 `useImperativeHandle` 让 `ref` 只暴露部分方法，而不是整个 DOM？
   - 请写一个 `forwardRef` + `useImperativeHandle` 结合的示例，实现一个 `ref` 只暴露 `focus` 方法的 `input` 组件。
@@ -487,10 +487,10 @@ render() {
 
 ## **6. `forwardRef` 的局限性与注意事项**
 
--  **考察点**：  
+-  **考察点**：<br>
   - `forwardRef` 不能用于 `props.children` 直接传递 `ref`。
   - `forwardRef` 不能直接用于 React 组件的默认 `ref` 绑定。
--  **问题示例**：  
+-  **问题示例**：<br>
   - `forwardRef` 是否可以用于 `props.children`？为什么不行？
   - `forwardRef` 是否可以用于 Fragment（`<>...</>`）？为什么？
   - `forwardRef` 传递 `ref` 给多个子组件时应该如何处理？
@@ -499,10 +499,10 @@ render() {
 
 ## **7. `forwardRef` 与 TypeScript**
 
--  **考察点**：  
+-  **考察点**：<br>
   - `forwardRef` 如何在 TypeScript 中正确使用？
   - 如何为 `forwardRef` 组件定义正确的 `ref` 类型？
--  **问题示例**：  
+-  **问题示例**：<br>
   - 在 TypeScript 中，如何为 `forwardRef` 组件定义 `ref` 的类型？
   - `forwardRef` 组件的 `ref` 类型与 `props` 类型如何结合？
   - 如何在 TypeScript 中使用 `forwardRef` 让 `ref` 指向一个 `input` 元素？
@@ -511,10 +511,10 @@ render() {
 
 ## **8. `forwardRef` 在实际项目中的应用**
 
--  **考察点**：  
+-  **考察点**：<br>
   - 真实业务场景中的 `forwardRef` 使用，如封装 UI 组件库。
   - `forwardRef` 适用于哪些 UI 组件（如 `Button`、`Input`、`Modal`）？
--  **问题示例**：  
+-  **问题示例**：<br>
   - 在设计一个 `Button` 组件时，为什么要使用 `forwardRef`？
   - `forwardRef` 在 `Modal` 组件中可以用于哪些场景？
   - `forwardRef` 在封装 Ant Design 或 Material-UI 组件时的作用是什么？

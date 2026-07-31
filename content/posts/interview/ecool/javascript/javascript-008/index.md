@@ -405,7 +405,7 @@ function Person(name, age) {
 
     // 这里的this指向了谁?
     this.name = name;
-    this.age = age;   
+    this.age = age;
 }
 
 Person.prototype.getName = function() {

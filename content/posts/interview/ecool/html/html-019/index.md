@@ -128,9 +128,9 @@ element.requestFullscreen();
 - **前缀兼容**：某些浏览器使用前缀（如 `webkitRequestFullscreen` 或 `mozRequestFullScreen`），考察点可能包括如何处理跨浏览器的兼容性。
 
 ```javascript
-element.requestFullscreen = element.requestFullscreen || 
-                            element.webkitRequestFullscreen || 
-                            element.mozRequestFullScreen || 
+element.requestFullscreen = element.requestFullscreen ||
+                            element.webkitRequestFullscreen ||
+                            element.mozRequestFullScreen ||
                             element.msRequestFullscreen;
 element.requestFullscreen();
 ```

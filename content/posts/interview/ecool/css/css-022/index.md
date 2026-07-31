@@ -100,23 +100,23 @@ BEM 简单的三层分法，在应对小中型网站没有问题，但是去应�
 
 SMACSS(Scalable and Modular Architecture for CSS)是要编写模块化、结构化和可扩展的 CSS。它对项目中的CSS分为五大类
 
--  Base: 默认属性样式重置，知名库为normalize.css 
--  Layout：布局样式 
--  Modules：可复用模块的样式，比如一些列表展示 
--  State：状态样式，比如按钮的置灰或高亮的展示 
--  Theme：皮肤样式，比如有些网站具有换肤的功能 
+-  Base: 默认属性样式重置，知名库为normalize.css
+-  Layout：布局样式
+-  Modules：可复用模块的样式，比如一些列表展示
+-  State：状态样式，比如按钮的置灰或高亮的展示
+-  Theme：皮肤样式，比如有些网站具有换肤的功能
 
 ### 4.ITCSS模式
 
 ITCSS(Inverted Triangle Cascading Style Sheets)可以翻译为`"倒三角CSS"`，它基于分层的概念把我们项目中的样式分为七层
 
--  Settings: 项目样式变量，如主题色、字体等 
--  Tools：工具类样式，比如定义一个函数，表示字数过多出现省略号等 
--  Generic：重置和/或标准化样式、框大小定义等，对应的是normalize.css 
--  Base：重置浏览器元素属性默认值 
--  Objects：维护OOCSS的样式 
--  Components：公共组件样式 
--  Trumps：让样式权重变得最高，实用程序和辅助类，能够覆盖三角形中前面的任何内容，唯一 important! 的地方 
+-  Settings: 项目样式变量，如主题色、字体等
+-  Tools：工具类样式，比如定义一个函数，表示字数过多出现省略号等
+-  Generic：重置和/或标准化样式、框大小定义等，对应的是normalize.css
+-  Base：重置浏览器元素属性默认值
+-  Objects：维护OOCSS的样式
+-  Components：公共组件样式
+-  Trumps：让样式权重变得最高，实用程序和辅助类，能够覆盖三角形中前面的任何内容，唯一 important! 的地方
 
 ### 5.ACSS模式
 
@@ -147,8 +147,8 @@ ACSS(Atomic CSS)翻译为`"原子化CSS"`，是一种 CSS 的架构方式，它�
 
 ### 创建vue3项目和安装依赖
 
--  1.创建vue3项目 
--  2.安装：`npm i sass@1.26.5 sass-loader@8.0.2 --save` 
+-  1.创建vue3项目
+-  2.安装：`npm i sass@1.26.5 sass-loader@8.0.2 --save`
 
 ### CSS目录结构展示与说明
 
@@ -255,7 +255,7 @@ createApp(App).use(router).mount('#app')
 ```css
 /* style/acss/border.scss */
 @for $i from 1 through 100 {
-  [radius#{$i}] { 
+  [radius#{$i}] {
     border-radius: #{$i}Px;
     overflow: hidden;
   }
@@ -266,7 +266,7 @@ createApp(App).use(router).mount('#app')
 
 /* style/acss/font-size.scss */
 @for $i from 12 through 30 {
-  [fz#{$i}] { 
+  [fz#{$i}] {
     font-size: #{$i}px;
   }
 }
@@ -500,7 +500,7 @@ $modifierSeparator: '--';
 
 ### **1. CSS 架构的基本概念**
 
-- **问题**：  
+- **问题**：<br>
   - 什么是 CSS 架构？为什么需要在项目中构建 CSS 架构？
   - 面对复杂项目，直接写样式会出现什么问题？CSS 架构如何解决这些问题？
 
@@ -508,7 +508,7 @@ $modifierSeparator: '--';
 
 #### **BEM（Block Element Modifier）**
 
-- **问题**：  
+- **问题**：<br>
   - 什么是 BEM？请解释 Block、Element、Modifier 的含义。
   - BEM 的命名规则是什么？如何在大型项目中保持一致性？
   - BEM 的优缺点是什么？在实际项目中遇到过哪些挑战？
@@ -516,21 +516,21 @@ $modifierSeparator: '--';
 
 #### **OOCSS（Object-Oriented CSS）**
 
-- **问题**：  
+- **问题**：<br>
   - 什么是 OOCSS？核心思想是什么？
   - 如何将样式拆分为“结构（Structure）”和“皮肤（Skin）”？
   - 在 OOCSS 中，如何实现组件复用？有什么典型的例子？
 
 #### **SMACSS（Scalable and Modular Architecture for CSS）**
 
-- **问题**：  
+- **问题**：<br>
   - 什么是 SMACSS？SMACSS 提倡将样式分为哪些类别？
   - 在使用 SMACSS 时，如何区分模块化样式与主题样式？
   - SMACSS 与 BEM 的主要区别是什么？
 
 #### **Atomic CSS**
 
-- **问题**：  
+- **问题**：<br>
   - 什么是 Atomic CSS？它的核心思想是什么？
   - 使用原子化 CSS 有哪些优点和缺点？
   - Tailwind CSS 是如何实现原子化的？
@@ -538,21 +538,21 @@ $modifierSeparator: '--';
 
 #### **ITCSS（Inverted Triangle CSS）**
 
-- **问题**：  
+- **问题**：<br>
   - ITCSS 的核心理念是什么？为什么叫“倒三角”？
   - ITCSS 的层级划分是什么（如全局样式、工具类、组件样式等）？
   - 如何在实际项目中使用 ITCSS？
 
 #### **Utility-First CSS**
 
-- **问题**：  
+- **问题**：<br>
   - 什么是 Utility-First CSS？与传统 CSS 架构相比有何不同？
   - 在使用工具类 CSS（如 Tailwind CSS）时，如何保持样式的可维护性？
   - Utility-First CSS 是否会影响代码的可读性？如何权衡？
 
 ### **3. CSS 模块化**
 
-- **问题**：  
+- **问题**：<br>
   - 如何在大型项目中组织 CSS 文件？是否有推荐的目录结构？
   - CSS Modules 是什么？与传统的全局 CSS 有什么不同？
   - 在 CSS Modules 中，如何处理全局样式和模块化样式的冲突？
@@ -560,48 +560,48 @@ $modifierSeparator: '--';
 
 ### **4. 代码复用与可维护性**
 
-- **问题**：  
+- **问题**：<br>
   - 如何在 CSS 架构中实现代码复用？Mixin、变量、函数的使用场景有哪些？
   - 在团队协作中，如何制定样式规范以保证样式一致性？
   - 当项目规模变大时，如何避免样式冲突和冗余？
 
 ### **5. 响应式设计与适配**
 
-- **问题**：  
+- **问题**：<br>
   - 在 CSS 架构中，如何高效地支持响应式设计？
   - 栅格系统（Grid System）如何在架构中发挥作用？
   - 如何在样式体系中支持多主题（如暗黑模式和浅色模式）？
 
 ### **6. 样式的动态化**
 
-- **问题**：  
+- **问题**：<br>
   - 动态样式（如主题切换）如何与 CSS 架构结合？
   - 使用 CSS 变量（Custom Properties）如何提升架构的灵活性？
   - 动态样式切换与预处理器（如 Sass）能否配合使用？
 
 ### **7. 架构的性能优化**
 
-- **问题**：  
+- **问题**：<br>
   - 在 CSS 架构中，如何避免样式的层叠和优先级问题导致的性能问题？
   - 如何利用关键路径渲染（Critical Path Rendering）优化首屏加载速度？
   - 使用工具（如 PurgeCSS）清理无用样式时，有哪些注意事项？
 
 ### **8. 架构与工具链集成**
 
-- **问题**：  
+- **问题**：<br>
   - 如何在 Webpack、Vite 等工具链中集成 CSS 模块化或预处理器？
   - 使用 PostCSS 时，如何配置插件以支持现代 CSS 特性？
   - 在构建过程中，如何自动化地生成架构规范（如 CSS 命名规则）？
 
 ### **9. 代码实践问题**
 
-- **问题**：  
+- **问题**：<br>
   - 如果给你一个已有的样式文件，其中没有任何架构，请设计一个合理的架构来重构。
   - 如何为一个表单组件设计 CSS 架构，使其支持主题切换和响应式设计？
   - 在多团队协作下，如何通过 CSS 架构实现代码风格的统一？
 
 ### **10. 架构的迭代与演进**
 
-- **问题**：  
+- **问题**：<br>
   - 随着项目增长，CSS 架构需要不断调整。你是否参与过架构调整？遇到过什么问题？
   - 如果团队中不同成员使用不同的命名规则或框架风格，你会如何规范化？

@@ -226,7 +226,7 @@ class Index extends React.Componen{
 function Index(){
     /* .... */
 }
-export default withStyles(styles)(withRouter( keepaliveLifeCycle(Index) )) 
+export default withStyles(styles)(withRouter( keepaliveLifeCycle(Index) ))
 ```
 
 ### 模型：嵌套HOC
@@ -285,8 +285,8 @@ function HOC(WrapComponent){
 
 #### 缺点
 
--  ① 一般无法直接获取业务组件的状态，如果想要获取，需要`ref`获取组件实例。 
--  ② 无法直接继承静态属性。如果需要继承需要手动处理，或者引入第三方库。 
+-  ① 一般无法直接获取业务组件的状态，如果想要获取，需要`ref`获取组件实例。
+-  ② 无法直接继承静态属性。如果需要继承需要手动处理，或者引入第三方库。
 
 **例子：**
 
@@ -306,7 +306,7 @@ function HOC(Component) {
      }
   }
 }
-const newIndex =  HOC(Index) 
+const newIndex =  HOC(Index)
 console.log(newIndex.say)
 ```
 
@@ -329,7 +329,7 @@ function HOC(Component){
 
     }
 }
-export default HOC(Index) 
+export default HOC(Index)
 ```
 
 #### 优点
@@ -350,7 +350,7 @@ function HOC(Component) {
   return class wrapComponent extends Component{
   }
 }
-const newIndex =  HOC(Index) 
+const newIndex =  HOC(Index)
 console.log(newIndex.say)
 ```
 
@@ -410,7 +410,7 @@ export default classHOC(Index)
 ```js
 function functionHoc(WrapComponent){
     return function Index(props){
-        const [ state , setState ] = useState({ name :'alien'  })       
+        const [ state , setState ] = useState({ name :'alien'  })
         return  <WrapComponent { ...props }  { ...state }   />
     }
 }
@@ -477,13 +477,13 @@ function renderHOC(WrapComponent){
   return class Index  extends React.Component{
       constructor(props){
         super(props)
-        this.state={ visible:true }  
+        this.state={ visible:true }
       }
       setVisible(){
          this.setState({ visible:!this.state.visible })
       }
       render(){
-         const {  visible } = this.state 
+         const {  visible } = this.state
          return <div className="box"  >
            <button onClick={ this.setVisible.bind(this) } > 挂载组件 </button>
            { visible ? <WrapComponent { ...this.props } setVisible={ this.setVisible.bind(this) }   />  : <div className="icon" ><SyncOutlined spin  className="theicon"  /></div> }
@@ -497,7 +497,7 @@ class Index extends React.Component{
     const { setVisible } = this.props
     return <div className="box" >
         <p>hello,my name is alien</p>
-        <img  src='https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=294206908,2427609994&fm=26&gp=0.jpg'   /> 
+        <img  src='https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=294206908,2427609994&fm=26&gp=0.jpg'   />
         <button onClick={() => setVisible()}  > 卸载当前组件 </button>
     </div>
   }
@@ -525,7 +525,7 @@ const tryRender = ()=>{
   setTimeout(()=>{
     render() /* 执行下一段渲染 */
   },300)
-} 
+}
 /* HOC */
 function renderHOC(WrapComponent){
     return function Index(props){
@@ -657,7 +657,7 @@ function HOC (Component){
       const newchild =  React.Children.map(element.props.children.props.children,(child,index)=>{
            if(index === 2) return appendElement
            return  child
-      }) 
+      })
       return  React.cloneElement(element, element.props, newchild)
     }
   }
@@ -775,7 +775,7 @@ export default ()=> {
 
 ```js
 function HOC (Component){
-  const proDidMount = Component.prototype.componentDidMount 
+  const proDidMount = Component.prototype.componentDidMount
   Component.prototype.componentDidMount = function(){
      console.log('劫持生命周期：componentDidMount')
      proDidMount.call(this)
@@ -845,7 +845,7 @@ function ClickHoc (Component){
   return  function Wrap(props){
     const dom = useRef(null)
     useEffect(()=>{
-     const handerClick = () => console.log('发生点击事件') 
+     const handerClick = () => console.log('发生点击事件')
      dom.current.addEventListener('click',handerClick)
      return () => dom.current.removeEventListener('click',handerClick)
     },[])
@@ -986,14 +986,14 @@ function connect(mapStateToProps){
         function ConnectFunction(props){
             const [ , forceUpdate ] = useState(0)
             const { reactReduxForwardedRef ,...wrapperProps } = props
-            
+
             /* 取出Context */
             const { store } = useContext(ReactReduxContext)
 
             /* 强化props：合并 store state 和 props  */
             const trueComponentProps = useMemo(()=>{
                   /* 只有props或者订阅的state变化，才返回合并后的props */
-                 return selectorFactory(mapStateToProps(store.getState()),wrapperProps) 
+                 return selectorFactory(mapStateToProps(store.getState()),wrapperProps)
             },[ store , wrapperProps ])
 
             /* 只有 trueComponentProps 改变时候,更新组件。  */
@@ -1016,16 +1016,16 @@ function connect(mapStateToProps){
         /* React.memo 包裹  */
         const Connect = React.memo(ConnectFunction)
 
-        /* 处理hoc,获取ref问题 */  
+        /* 处理hoc,获取ref问题 */
         if(forwardRef){
           const forwarded = React.forwardRef(function forwardConnectRef( props,ref) {
             return <Connect {...props} reactReduxForwardedRef={ref} reactReduxForwardedRef={ref} />
           })
           return hoistStatics(forwarded, WrappedComponent)
-        } 
+        }
         /* 继承静态属性 */
         return hoistStatics(Connect,WrappedComponent)
-    } 
+    }
 }
 export default Index
 ```
@@ -1089,7 +1089,7 @@ function keepaliveLifeCycle(Component) {
       const lifeCycleFunc = this.cur[type]
       isFuntion(lifeCycleFunc) && lifeCycleFunc.call(this.cur)
     }
-    componentDidMount() { 
+    componentDidMount() {
       const {cacheId} = this.props
       cacheId && (lifeCycles[cacheId] = this.handerLifeCycle)
     }
@@ -1111,7 +1111,7 @@ function keepaliveLifeCycle(Component) {
 
 ```js
 function HOC (Component){
-  const proDidMount = Component.prototype.componentDidMount 
+  const proDidMount = Component.prototype.componentDidMount
   Component.prototype.componentDidMount = function(){
      console.log('劫持生命周期：componentDidMount')
      proDidMount.call(this)
@@ -1135,7 +1135,7 @@ function HOC(Component) {
   class WrappedComponent extends React.Component {
       /*...*/
   }
-  // 必须准确知道应该拷贝哪些方法 
+  // 必须准确知道应该拷贝哪些方法
   WrappedComponent.staticMethod = Component.staticMethod
   return WrappedComponent
 }
@@ -1162,7 +1162,7 @@ function HOC(Component) {
 
 ```js
 /**
- * 
+ *
  * @param {*} Component 原始组件
  * @param {*} isRef  是否开启ref模式
  */
@@ -1193,7 +1193,7 @@ const HocIndex =  HOC(Index,true)
 export default ()=>{
   const node = useRef(null)
   useEffect(()=>{
-     /* 就可以跨层级，捕获到 Index 组件的实例了 */ 
+     /* 就可以跨层级，捕获到 Index 组件的实例了 */
     console.log(node.current.componentDidMount)
   },[])
   return <div><HocIndex ref={node}  /></div>
@@ -1234,21 +1234,21 @@ class index extends React.Component{
 
 ## 常见考点
 
-1.  **高阶组件的定义**：  
+1.  **高阶组件的定义**：<br>
   - 请解释什么是高阶组件（HOC），并给出一个简单的例子。
   - 高阶组件与普通组件、函数组件以及类组件之间有何区别？
-2.  **高阶组件的用途**：  
+2.  **高阶组件的用途**：<br>
   - 高阶组件在React中主要用于什么目的？
   - 能否列举几个实际场景中高阶组件的应用？
-3.  **HOC的实现方式**：  
+3.  **HOC的实现方式**：<br>
   - 请描述如何编写一个简单的高阶组件。
   - 在实现HOC时，需要注意哪些事项？
-4.  **属性代理与反向继承**：  
+4.  **属性代理与反向继承**：<br>
   - 什么是属性代理（Props Proxying）和反向继承（Render Props Technique）？
   - 能否分别给出一个使用属性代理和反向继承实现高阶组件的例子？
-5.  **状态管理**：  
+5.  **状态管理**：<br>
   - 如何使用高阶组件来管理React组件的状态？
   - 能否给出一个使用HOC实现状态管理的示例？
-6.  **权限控制**：  
+6.  **权限控制**：<br>
   - 在React应用中，如何使用高阶组件实现权限控制？
   - 能否展示一个包含权限验证逻辑的高阶组件示例？

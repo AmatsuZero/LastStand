@@ -26,7 +26,7 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 ##### 1.1.2 视频容器格式
 
-容器格式相信大家经常见到：  
+容器格式相信大家经常见到：<br>
  MP4、AVI、FLV、TS/M3U8、WebM、OGV、MOV...
 
 ##### 1.1.2 视频编码格式
@@ -113,7 +113,7 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 ### 二、直播技术
 
-首先看一张直观的示意图，这是一张从主播推流到用户拉流的直播流程。  
+首先看一张直观的示意图，这是一张从主播推流到用户拉流的直播流程。<br>
  ![](image-01.png)
 
 #### 流媒体协议
@@ -128,23 +128,23 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 ### 三、播放器
 
-本节主要讲述播放器相关技术，在本节中会简要讲述播放器在拿到相关流之后如何运作。  
+本节主要讲述播放器相关技术，在本节中会简要讲述播放器在拿到相关流之后如何运作。<br>
  ![](image-02.png)
 
 #### 4.1 拉流
 
-第一步是拉流，在播放之前率先需要拿到视频流才可能执行播放。  
+第一步是拉流，在播放之前率先需要拿到视频流才可能执行播放。<br>
  举个例子，flv格式的视频流数据，我们可以通过浏览器提供的：Fetch API、Stream API 进行拉流。
 
 #### 4.2 解封装
 
-拿到流数据之后，紧接着需要执行解封装操作。在开始播放的之前，需要把图像、声音、字幕(可能不存在)等从拉取的流数据中分离出来，这个分离的行为和过程就是解封装(demux)。  
- ![](image-03.png)  
+拿到流数据之后，紧接着需要执行解封装操作。在开始播放的之前，需要把图像、声音、字幕(可能不存在)等从拉取的流数据中分离出来，这个分离的行为和过程就是解封装(demux)。<br>
+ ![](image-03.png)<br>
  在解封装之后获得图像、声音、字幕等基本流，而后基本流可以通过解码器进行解码。
 
 #### 4.3 demux(解码)
 
-从上层解封装中，我们了解到，在解封装之后，需要对分离出来的原始码流进行解码，生成音、视频播放器可播放的数据。  
+从上层解封装中，我们了解到，在解封装之后，需要对分离出来的原始码流进行解码，生成音、视频播放器可播放的数据。<br>
  在解码过程中，我们会得到各式各样的数据，我们挑选几个重要的来讲：
 
 ##### 4.3.1 SPS 和 PPS
@@ -167,15 +167,15 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 ##### 4.3.4 PTS和DTS
 
--  DTS（Decoding Time Stamp）：即解码时间戳，这个时间戳的意义在于告诉播放器该在什么时候解码这一帧的数据。 
--  PTS（Presentation Time Stamp）：即显示时间戳，这个时间戳用来告诉播放器该在什么时候显示这一帧的数据。  
- 简而言之，这俩哥们儿很可能直接决定了你音视频播放是不是同步的。 
+-  DTS（Decoding Time Stamp）：即解码时间戳，这个时间戳的意义在于告诉播放器该在什么时候解码这一帧的数据。
+-  PTS（Presentation Time Stamp）：即显示时间戳，这个时间戳用来告诉播放器该在什么时候显示这一帧的数据。<br>
+ 简而言之，这俩哥们儿很可能直接决定了你音视频播放是不是同步的。
 
 解码还会生成各式各样的产物，这里就不展开介绍了，有兴趣的同学可以在本篇最后查看。
 
 #### 4.4 remux(复用)
 
-有demux，自然就有remux。把基本的音频ES、视频ES、字幕ES等组合成一个完整的多媒体就是Remux(复用)。  
+有demux，自然就有remux。把基本的音频ES、视频ES、字幕ES等组合成一个完整的多媒体就是Remux(复用)。<br>
  对一个视频来说，改变封装格式，改变视频编码，需要remux和demux的配合。这里不展开叙述。
 
 #### 4.5 渲染
@@ -190,14 +190,14 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 网页即时通信（英语：Web Real-Time Communication），它允许网络应用或者站点，在不借助中间媒介的情况下，建立浏览器之间点对点（Peer-to-Peer）的连接，实现视频流和（或）音频流或者其他任意数据的**快速传输**。
 
-组成形式：  
+组成形式：<br>
  视频引擎（VideoEngine）、音效引擎（VoiceEngine）、会议管理（Session Management）、iSAC(音效压缩)、VP8（Google自家的WebM项目的视频编解码器）、APIs（Native C++ API, Web API）
 
 ![](image-05.png)
 
 #### 4.2 MSE
 
-用过播放器的同学对于MSE肯定不会陌生。媒体源扩展 API（MSE） 提供了实现无插件且基于 Web 的流媒体的功能。使用 MSE，媒体串流能够通过 JavaScript 创建，并且能通过使用 audio 和 video 元素进行播放。  
+用过播放器的同学对于MSE肯定不会陌生。媒体源扩展 API（MSE） 提供了实现无插件且基于 Web 的流媒体的功能。使用 MSE，媒体串流能够通过 JavaScript 创建，并且能通过使用 audio 和 video 元素进行播放。<br>
  MSE 大大地扩展了浏览器的媒体播放功能，提供允许 JavaScript 生成媒体流。这可以用于自适应流（adaptive streaming）及随时间变化的视频直播流（live streaming）等应用场景。
 
 这里不展开叙述MSE的使用，感兴趣的同学可以去搜索一下MSE，相信能帮助到你们。
@@ -226,15 +226,15 @@ WebAssembly 或者 wasm 是一个可移植、体积小、加载快并且兼容 W
 
 #### 5.1 flv.js
 
-flv.js是Bilibili网站开源的HTML5 flv播放器，基于HTTP-FLV流媒体协议，通过纯js实现FLV转封装，使flv格式文件能在web上进行播放。  
+flv.js是Bilibili网站开源的HTML5 flv播放器，基于HTTP-FLV流媒体协议，通过纯js实现FLV转封装，使flv格式文件能在web上进行播放。<br>
  ![](image-06.png)
 
 官方GitHub：[github.com/bilibili/fl…](https://github.com/bilibili/flv.js)
 
 #### 5.2 hls.js
 
-hls.js是基于Http Live Stream协议开发，利用Media Source Extension，用于实现HLS在web上播放的一款js播放库。  
- 值得一提的是由于HLS协议由苹果提出，并且在移动端设备上广泛支持，因此可以被广泛应用与直播场景。  
+hls.js是基于Http Live Stream协议开发，利用Media Source Extension，用于实现HLS在web上播放的一款js播放库。<br>
+ 值得一提的是由于HLS协议由苹果提出，并且在移动端设备上广泛支持，因此可以被广泛应用与直播场景。<br>
  ![](image-07.png)
 
 官方GitHub：[github.com/video-dev/h…](https://github.com/video-dev/hls.js/)
@@ -274,19 +274,19 @@ github：[github.com/mltframewor…](https://github.com/mltframework/mlt/)
 
 ## 常见考点
 
-1.  **多媒体元素的定义**：  
+1.  **多媒体元素的定义**：<br>
   - 理解 `<audio>` 和 `<video>` 元素的基本用途及其结构。
-2.  **常用属性**：  
+2.  **常用属性**：<br>
   - 掌握常用属性，如 `controls`、`autoplay`、`loop`、`muted`、`preload` 等，及其功能。
-3.  **格式支持**：  
+3.  **格式支持**：<br>
   - 了解常见的音频和视频格式（如 MP3、OGG、MP4、WebM）及其浏览器兼容性。
-4.  **嵌入多媒体**：  
+4.  **嵌入多媒体**：<br>
   - 讨论如何在网页中嵌入音频和视频，包括流媒体的使用。
-5.  **字幕和文本轨道**：  
+5.  **字幕和文本轨道**：<br>
   - 理解如何使用 `<track>` 标签为视频添加字幕和文本轨道，提升可访问性。
-6.  **JavaScript 控制**：  
+6.  **JavaScript 控制**：<br>
   - 掌握如何使用 JavaScript 操作音频和视频元素，比如播放、暂停、调整音量等。
-7.  **响应式设计**：  
+7.  **响应式设计**：<br>
   - 讨论如何使多媒体元素在不同设备和屏幕尺寸下自适应显示。
-8.  **性能优化**：  
+8.  **性能优化**：<br>
   - 了解音视频文件的优化技巧，如压缩、格式选择，以提高加载性能和用户体验。

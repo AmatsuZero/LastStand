@@ -261,7 +261,7 @@ interface CalendarProps{
   onChange?: (date: Date) => void;
 }
 function Calendar(props: CalendarProps) {
-  
+
   const {
     defaultValue = new Date(),
     onChange
@@ -272,7 +272,7 @@ function Calendar(props: CalendarProps) {
   function changeValue(date: Date) {
     setValue(date);
     onChange?.(date);
-  } 
+  }
 
   return <div>
     {value.toLocaleDateString()}
@@ -311,7 +311,7 @@ interface CalendarProps{
   onChange?: (date: Date) => void;
 }
 function Calendar(props: CalendarProps) {
-  
+
   const {
     value,
     onChange
@@ -319,7 +319,7 @@ function Calendar(props: CalendarProps) {
 
   function changeValue(date: Date) {
     onChange?.(date);
-  } 
+  }
 
   return <div>
     {value.toLocaleDateString()}
@@ -365,7 +365,7 @@ interface CalendarProps{
 }
 
 function Calendar(props: CalendarProps) {
-  
+
   const {
     value: propsValue,
     defaultValue,
@@ -396,7 +396,7 @@ function Calendar(props: CalendarProps) {
       setValue(date);
     }
     onChange?.(date);
-  } 
+  }
 
   return <div>
     {mergedValue?.toLocaleDateString()}
@@ -547,7 +547,7 @@ function Calendar(props: CalendarProps) {
       setValue(date);
     }
     onChange?.(date);
-  } 
+  }
 
   return <div>
     {mergedValue?.toLocaleDateString()}
@@ -625,7 +625,7 @@ function useMergeState<T>(
 
   function isFunction(value: unknown): value is Function {
     return typeof value === 'function';
-  } 
+  }
 
   const setState = useCallback((value: SetStateAction<T>) => {
     let res = isFunction(value) ? value(stateValue) : value
@@ -737,18 +737,18 @@ arco design、ant design 等组件库都是这么做的，并且不约而同封�
 
 ## 常见考点
 
-1.  **受控组件与非受控组件**：  
+1.  **受控组件与非受控组件**：<br>
   - 请解释什么是受控组件和非受控组件，并给出它们的使用场景。
   - 在React中，如何实现一个受控组件和一个非受控组件？
-2.  **表单状态管理**：  
+2.  **表单状态管理**：<br>
   - 在React中，通常如何管理表单的状态？
   - 能否给出一个使用`useState` Hook管理表单状态的示例？
-3.  **表单验证**：  
+3.  **表单验证**：<br>
   - 请描述在React中实现表单验证的常见方法。
   - 能否给出一个使用自定义Hook或第三方库（如Formik、Yup）进行表单验证的示例？
-4.  **表单提交**：  
+4.  **表单提交**：<br>
   - 在React中，如何优雅地处理表单提交事件？
   - 能否展示一个包含表单验证和提交逻辑的完整表单组件示例？
-5.  **性能优化**：  
+5.  **性能优化**：<br>
   - 在处理大型表单或频繁更新的表单时，有哪些性能优化的技巧？
   - 如何避免不必要的重新渲染和性能瓶颈？

@@ -83,7 +83,7 @@ function foo(a, b) {
     console.log(arguments.length);
 }
 
-foo(10, 20); // 依次输出 10、20、2 
+foo(10, 20); // 依次输出 10、20、2
 ```
 
 上面例子中，foo() 函数的第一个参数是 a，第二个参数是b ，可以通过 arguments[x] 的方式来分别获取同样的值 。因此，你甚至可以在声明函数时不设置形参。
@@ -96,7 +96,7 @@ function foo() {
     console.log(arguments[1]);
 }
 
-foo(10, 20); // 依次输出 10、20 
+foo(10, 20); // 依次输出 10、20
 ```
 
 由此可见，JavaScript 函数的形参只是方便使用才写出来的。想传多少个参数都不会产生错误。
@@ -201,7 +201,7 @@ function sayHi(name) {
     name = name || 'everyone';
 	console.log( 'Hello ' + name + '!');
 }
-sayHi(); // 输出 'Hello everyone!' 
+sayHi(); // 输出 'Hello everyone!'
 ```
 
 通过检查参数值的方式判断有没有赋值，上面的做法虽然简便，但缺点在于如果传入的实参对应布尔值为 false ，实参就不起作用了。需要更精确的话可以用 if 语句或者三元表达式，判断参数是否等于 undefined，如果是则说明这个参数缺失 ：
@@ -235,8 +235,8 @@ function sayHi(name = 'everyone') { // 定义函数时，直接给形参赋值
 	console.log( 'Hello ' + name + '!');
 }
 
-sayHi(); // 输出 'Hello everyone!' 
-sayHi('Tony'); // 输出 'Hello Tony!' 
+sayHi(); // 输出 'Hello everyone!'
+sayHi('Tony'); // 输出 'Hello Tony!'
 sayHi(undefined); // 输出 'Hello everyone!'
 ```
 
@@ -251,7 +251,7 @@ function sayHi(name = 'every'+'one') {
 	console.log( 'Hello ' + name + '!');
 }
 
-sayHi(); // 输出 'Hello everyone!' 
+sayHi(); // 输出 'Hello everyone!'
 //--------------------------------------
 function foo() {
     console.log('调用foo');
@@ -261,12 +261,12 @@ function foo() {
 function sayHi(name = foo()) {
 	console.log( 'Hello ' + name + '!');
 }
-		  
+
 sayHi(); // 输出 '调用foo'
-         // 输出 'Hello Tony!' 
+         // 输出 'Hello Tony!'
 
 sayHi(undefined); // 输出 '调用foo'
-                  // 输出 'Hello Tony!' 
+                  // 输出 'Hello Tony!'
 
 sayHi('John'); // 输出 'Hello John!'
 ```
@@ -329,7 +329,7 @@ function fn(obj = {}) {
     }
 
     let result = Object.assign(defaultObj, obj);
-    
+
     console.log([result.x, result.y, result.z]);
 
 }
@@ -374,9 +374,9 @@ fn(); // 输出 [undefined, 2, 3]
 代码语言：javascript
 
 ```
-if( 实参 === {...} ) { // 当 fn({...});     
+if( 实参 === {...} ) { // 当 fn({...});
     { x, y = 2, z = 3 } = {...};
-                        
+
 } else if ( 实参 === undefined ){ // 当 fn();
     { x, y = 2, z = 3 } = {};
 }
@@ -477,7 +477,7 @@ function sum(a, ...values) {
     for (let val of values) {
         a += val;
     }
-    
+
     return a;
 
 }
@@ -516,7 +516,7 @@ const sortNumbers = (...numbers) => {
 // 报错
 function fn1(a, ...rest, b) {
 	console.log([a, b, rest]);
-} 
+}
 
 // 正确写法
 function fn2(a, b, ...rest) {
@@ -537,7 +537,7 @@ function sum(...values) {
     for (let val of values) {
         sum += val;
     }
-    
+
     return sum;
 
 }
@@ -588,15 +588,15 @@ sum(-1, ...arr, ...[5, 6, 7]); // 27
 
 ## 常见考点
 
-1.  **定义与用法**：  
+1.  **定义与用法**：<br>
   - ES6中，函数参数可以使用`=`操作符设置默认值。
   - 当调用函数时未传递该参数或传递`undefined`，将使用默认值。
-2.  **TypeScript中的默认参数**：  
+2.  **TypeScript中的默认参数**：<br>
   - TypeScript支持为函数参数添加类型注解，并同时设置默认值。
   - 有助于在编译阶段捕获错误。
-3.  **应用**：  
+3.  **应用**：<br>
   - 提高函数灵活性，减少代码冗余。
   - 处理可选参数，简化函数调用。
-4.  **注意事项**：  
+4.  **注意事项**：<br>
   - 默认值仅在参数未传递或传递`undefined`时生效。
   - 参数顺序：具有默认值的参数应位于没有默认值的参数之后（虽然这不是硬性规定，但通常建议这样做以提高代码可读性）。

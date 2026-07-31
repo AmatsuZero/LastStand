@@ -69,7 +69,7 @@ let ws = new WeakSet();
 ws.add(obj);
 
 global.gc();
-console.log(process.memoryUsage())  
+console.log(process.memoryUsage())
 
 // heapUsed: 45172336 ≈ 4.5M
 ```
@@ -79,7 +79,7 @@ console.log(process.memoryUsage())
 ```ini
 global.gc(); // 强制节点运行垃圾回收
 
-let obj = { name: '诺克萨斯', age: new Array(5 * 1024 * 1024) } 
+let obj = { name: '诺克萨斯', age: new Array(5 * 1024 * 1024) }
 let ws = new WeakSet();
 ws.add(obj);
 global.gc();
@@ -225,7 +225,7 @@ class Person {
 
 ## 七、补充说明：WeakRef 与 FinalizationRegistry（新特性）
 
--  ES2021 提供了 `WeakRef` 和 `FinalizationRegistry`：  
+-  ES2021 提供了 `WeakRef` 和 `FinalizationRegistry`：<br>
   - `WeakRef`：显式持有对象的弱引用。
   - `FinalizationRegistry`：对象被垃圾回收时执行回调。
 

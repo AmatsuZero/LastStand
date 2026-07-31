@@ -91,9 +91,9 @@ new Vue({
 
 #### **考察点**：
 
-- **定义**：  
+- **定义**：<br>
  `methods` 是一个对象，包含组件的多个方法，供模板（`template`）或 JavaScript 逻辑调用。
-- **基本语法**：   
+- **基本语法**：<br>
 ```javascript
 methods: {
   greet() {
@@ -115,17 +115,17 @@ methods: {
 
 #### **考察点**：
 
-- **事件绑定**：  
-  - 在模板中通过 `v-on` 或 `@` 绑定事件：  
+- **事件绑定**：<br>
+  - 在模板中通过 `v-on` 或 `@` 绑定事件：<br>
 ```html
 <button @click="handleClick">Click Me</button>
 ```
-  - 绑定方法可以直接调用，也可以传递参数：  
+  - 绑定方法可以直接调用，也可以传递参数：<br>
 ```html
 <button @click="handleClick('param')">Click Me</button>
 ```
-- **接收事件对象**：  
-  - 默认情况下，事件对象会作为方法的第一个参数传递：  
+- **接收事件对象**：<br>
+  - 默认情况下，事件对象会作为方法的第一个参数传递：<br>
 ```javascript
 methods: {
   handleClick(event) {
@@ -145,8 +145,8 @@ methods: {
 
 #### **考察点**：
 
-- **访问组件数据**：  
-  - 在 `methods` 中可以通过 `this` 访问组件的 `data` 和 `props`：  
+- **访问组件数据**：<br>
+  - 在 `methods` 中可以通过 `this` 访问组件的 `data` 和 `props`：<br>
 ```javascript
 methods: {
   displayInfo() {
@@ -155,13 +155,13 @@ methods: {
   }
 }
 ```
-- **`this` 问题**：  
-  - 如果 `this` 指向不正确，通常是由于方法被解构或传递给其他函数：  
+- **`this` 问题**：<br>
+  - 如果 `this` 指向不正确，通常是由于方法被解构或传递给其他函数：<br>
 ```javascript
 const fn = this.displayInfo; // this 会丢失
 ```
-  - 解决方法：  
-    - 使用箭头函数或手动绑定：  
+  - 解决方法：<br>
+    - 使用箭头函数或手动绑定：<br>
 ```javascript
 const fn = () => this.displayInfo();
 ```
@@ -177,10 +177,10 @@ const fn = () => this.displayInfo();
 
 #### **考察点**：
 
-- **性能差异**：  
+- **性能差异**：<br>
   - `methods` 中的方法是每次调用时执行，不会缓存结果。
   - 与之对比，`computed` 的结果是基于依赖缓存的，适合复杂计算。
-- **作用域限制**：  
+- **作用域限制**：<br>
   - `methods` 只能在当前组件的模板中或通过 `this` 调用，不能直接从子组件调用。
 
 ---
@@ -193,11 +193,11 @@ const fn = () => this.displayInfo();
 
 #### **考察点**：
 
-- **典型场景**：  
+- **典型场景**：<br>
   - 处理用户交互：如按钮点击、表单提交。
   - 业务逻辑：如计算税费、验证输入。
   - 发起异步操作：如通过 `axios` 发送 HTTP 请求。
-- **对比**：  
+- **对比**：<br>
   - **`methods`**：命令式逻辑，适合事件驱动的任务。
   - **`computed`**：用于声明式计算，适合依赖数据的派生值。
   - **`watch`**：监听数据变化并触发副作用。
@@ -213,12 +213,12 @@ const fn = () => this.displayInfo();
 
 #### **考察点**：
 
-- **多参数传递**：  
-  - 在模板中通过括号传递多个参数：  
+- **多参数传递**：<br>
+  - 在模板中通过括号传递多个参数：<br>
 ```html
 <button @click="calculate(10, 20)">Calculate</button>
 ```
-  - 方法定义：  
+  - 方法定义：<br>
 ```javascript
 methods: {
   calculate(a, b) {
@@ -226,8 +226,8 @@ methods: {
   }
 }
 ```
-- **返回值**：  
-  - 方法可以返回任意值，但在模板中使用时仅支持表达式：  
+- **返回值**：<br>
+  - 方法可以返回任意值，但在模板中使用时仅支持表达式：<br>
 ```html
 <div>{{ calculate(10, 20) }}</div>
 ```
@@ -243,8 +243,8 @@ methods: {
 
 #### **考察点**：
 
-- **处理异步任务**：  
-  - 可以使用 `async/await` 处理异步任务：  
+- **处理异步任务**：<br>
+  - 可以使用 `async/await` 处理异步任务：<br>
 ```javascript
 methods: {
   async fetchData() {
@@ -253,11 +253,11 @@ methods: {
   }
 }
 ```
-  - 在模板中调用异步方法：  
+  - 在模板中调用异步方法：<br>
 ```html
 <button @click="fetchData">Fetch Data</button>
 ```
-- **生命周期影响**：  
+- **生命周期影响**：<br>
   - 异步操作不会阻塞组件生命周期，但需注意在组件销毁后不再更新状态以防止报错。
 
 ---
@@ -271,13 +271,13 @@ methods: {
 
 #### **考察点**：
 
-- **测试方法**：  
-  - 独立测试逻辑：  
+- **测试方法**：<br>
+  - 独立测试逻辑：<br>
 ```javascript
 expect(component.methods.calculate(2, 3)).toBe(5);
 ```
   - 使用 Vue 的测试工具（如 Vue Test Utils）测试交互行为。
-- **重构建议**：  
+- **重构建议**：<br>
   - 将复杂逻辑提取到工具函数中，以便复用和测试。
 
 ---
@@ -291,14 +291,14 @@ expect(component.methods.calculate(2, 3)).toBe(5);
 
 #### **考察点**：
 
-- **协同使用**：  
-  - `methods` 可以在生命周期钩子中调用，以便初始化数据或设置组件状态：  
+- **协同使用**：<br>
+  - `methods` 可以在生命周期钩子中调用，以便初始化数据或设置组件状态：<br>
 ```javascript
 mounted() {
   this.fetchData();
 }
 ```
-- **适用钩子**：  
+- **适用钩子**：<br>
   - `created`：适合不依赖 DOM 的初始化逻辑。
   - `mounted`：适合需要访问 DOM 的任务。
 
@@ -313,10 +313,10 @@ mounted() {
 
 #### **考察点**：
 
-- **方法组织**：  
+- **方法组织**：<br>
   - 将通用逻辑抽离为工具函数。
   - 按功能分类 `methods`，保持结构清晰。
-- **性能优化**：  
+- **性能优化**：<br>
   - 避免在方法中处理复杂的同步计算。
   - 使用防抖或节流优化频繁触发的方法。
 

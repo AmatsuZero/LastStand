@@ -414,14 +414,14 @@ export function dpConvertTopx(dp) {
 借助`PostCSS`的`postcss-write-svg`我们能直接使用`border-image`和`background-image`创建`svg`的`1px`边框：
 
 ```css
-@svg border_1px { 
-  height: 2px; 
-  @rect { 
-    fill: var(--color, black); 
-    width: 100%; 
-    height: 50%; 
-    } 
-  } 
+@svg border_1px {
+  height: 2px;
+  @rect {
+    fill: var(--color, black);
+    width: 100%;
+    height: 50%;
+    }
+  }
 .example { border: 1px solid transparent; border-image: svg(border_1px param(--color #00b1ff)) 2 2 stretch; }
 ```
 
@@ -599,15 +599,15 @@ body {
 
 ```js
 window.addEventListener("resize", ()=>{
-    if (window.orientation === 180 || window.orientation === 0) { 
+    if (window.orientation === 180 || window.orientation === 0) {
       // 正常方向或屏幕旋转180度
         console.log('竖屏');
     };
-    if (window.orientation === 90 || window.orientation === -90 ){ 
+    if (window.orientation === 90 || window.orientation === -90 ){
        // 屏幕顺时钟旋转90度或屏幕逆时针旋转90度
         console.log('横屏');
-    }  
-}); 
+    }
+});
 ```
 
 ### 8.2 CSS检测横屏
@@ -615,7 +615,7 @@ window.addEventListener("resize", ()=>{
 ```css
 @media screen and (orientation: portrait) {
   /*竖屏...*/
-} 
+}
 @media screen and (orientation: landscape) {
   /*横屏...*/
 }

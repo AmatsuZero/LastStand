@@ -21,12 +21,12 @@ HTML5 拖拽操作的核心是 `dragstart`、`dragover` 和 `drop` 等事件。�
 
 ### **实现步骤**
 
-1.  **设置拖拽元素**：使用 `draggable="true"` 使 HTML 元素可拖动。 
-2.  **监听拖拽事件**：  
+1.  **设置拖拽元素**：使用 `draggable="true"` 使 HTML 元素可拖动。
+2.  **监听拖拽事件**：<br>
   - `dragstart`：当拖拽开始时触发。
   - `dragover`：在拖拽过程中，拖动到可放置目标区域时持续触发。
   - `drop`：当拖动的元素被释放到目标区域时触发。
-3.  **阻止默认行为**：`dragover` 和 `drop` 事件默认情况下是禁止的，需要使用 `event.preventDefault()` 来阻止默认行为，从而允许放置元素。 
+3.  **阻止默认行为**：`dragover` 和 `drop` 事件默认情况下是禁止的，需要使用 `event.preventDefault()` 来阻止默认行为，从而允许放置元素。
 
 ### **拖拽的相关事件**
 

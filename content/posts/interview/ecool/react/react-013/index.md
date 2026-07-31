@@ -274,7 +274,7 @@ const List = AsyncRouter(()=>import('../src/page/list'))
 const Detail = AsyncRouter(()=>import('../src/page/detail'))
 const index = () => {
   useEffect(()=>{
-    /* 增加监听函数 */  
+    /* 增加监听函数 */
     beforeRouterComponentLoad((history)=>{
       console.log('当前激活的路由是',history.location.pathname)
     })
@@ -418,7 +418,7 @@ const ComponentInput = memo(function({ notifyFatherChange }:any){
 此时的组件更新由组件单元自行控制，不需要父组件的更新，所以不需要父组件设置独立`state`保留状态。只需要绑定到`this`上即可。不是所有状态都应该放在组件的 state 中. 例如缓存数据。如果需要组件响应它的变动, 或者需要渲染到视图中的数据才应该放到 state 中。这样可以避免不必要的数据变动导致组件重新渲染.
 
 ```js
-class index extends React.Component<any,any>{   
+class index extends React.Component<any,any>{
     formData :any = {}
     render(){
         return <div>
@@ -501,7 +501,7 @@ function ComponentA(){
        getDataA().then(res=> setDataA(res.data)  )
     },[])
     return  <div> { /* 用 dataA 数据做展示渲染 */ } </div>
-} 
+}
 
 function ComponentB(){
     const [ dataB, setDataB ] = useState(null)
@@ -509,7 +509,7 @@ function ComponentB(){
        getDataB().then(res=> setDataB(res.data)  )
     },[])
     return  <div> { /* 用 dataB 数据做展示渲染 */ } </div>
-} 
+}
 
 function ComponentC(){
     const [ dataC, setDataC ] = useState(null)
@@ -517,7 +517,7 @@ function ComponentC(){
        getDataC().then(res=> setDataC(res.data)  )
     },[])
     return  <div> { /* 用 dataC 数据做展示渲染 */ } </div>
-}  
+}
 
 function Index (){
     return <div>
@@ -602,7 +602,7 @@ class Index extends React.Component<any,any>{
 
 ```js
 shouldComponentUpdate(nextProps, nextState) {
-  /* 当 state 中 data1 发生改变的时候，重新更新组件 */  
+  /* 当 state 中 data1 发生改变的时候，重新更新组件 */
   return nextState.data1 !== this.state.data1
 }
 ```
@@ -611,7 +611,7 @@ shouldComponentUpdate(nextProps, nextState) {
 
 ```js
 shouldComponentUpdate(nextProps, nextState) {
-  /* 当 props 中 data2发生改变的时候，重新更新组件 */  
+  /* 当 props 中 data2发生改变的时候，重新更新组件 */
   return nextProps.data2 !== this.props.data2
 }
 ```
@@ -687,7 +687,7 @@ class index extends React.Component{
 
 ```js
 function index(){
-   
+
     const handerClick1 = useMemo(()=>()=>{
        console.log(777)
     },[])  /* [] 存在当前 handerClick1 的依赖项*/
@@ -886,7 +886,7 @@ class index extends React.Component{
 this.setState({
     a:a+1 ,
     b:b+1 ,
-    c:c+1 
+    c:c+1
 })
 ```
 
@@ -897,8 +897,8 @@ this.setState({
     const  [ b , setB ] = useState({})
     const  [ c , setC ] = useState(1)
     const handerClick = () => {
-        setB( { ...b } ) 
-        setC( c+1 ) 
+        setB( { ...b } )
+        setC( c+1 )
         setA( a+1 )
     }
 ```
@@ -920,8 +920,8 @@ handerClick=()=>{
 ```js
  const handerClick = () => {
     Promise.resolve().then(()=>{
-    setB( { ...b } ) 
-    setC( c+1 ) 
+    setB( { ...b } )
+    setC( c+1 )
     setA( a+1 )
     })
 }
@@ -937,8 +937,8 @@ handerClick=()=>{
  const handerClick = () => {
     Promise.resolve().then(()=>{
         unstable_batchedUpdates(()=>{
-            setB( { ...b } ) 
-            setC( c+1 ) 
+            setB( { ...b } )
+            setC( c+1 )
             setA( a+1 )
         })
     })
@@ -1081,7 +1081,7 @@ const NotUpdate = React.memo(({ children }:any)=> typeof children === 'function'
 class Index extends React.Component<any,any>{
     constructor(prop){
         super(prop)
-        this.state = { 
+        this.state = {
             list: [ { id:1 , name: 'xixi' } ,{ id:2 , name: 'haha' },{ id:3 , name: 'heihei' } ],
             number:0,
          }
@@ -1106,7 +1106,7 @@ class Index extends React.Component<any,any>{
            <NotUpdate>
                 <ChildrenComponent />
            </NotUpdate>
-          
+
        </div>
     }
 }
@@ -1136,7 +1136,7 @@ class Demo extends React.Component{
          /* 我们只是希望在初始化,用text记录 props中 a 的值 */
         this.setState({
             text:a
-        })    
+        })
     }
     render(){
         /* 没有引入text */
@@ -1205,7 +1205,7 @@ function Demo ({ a }){
 ```js
 function demo (){
     const [ number , setNumber ] = useState(0)
-    return <div>  
+    return <div>
         <DemoComponent  handerChange={ ()=>{ setNumber(number+1)  } } />
     </div>
 }
@@ -1217,9 +1217,9 @@ function demo (){
 function demo (){
     const [ number , setNumber ] = useState(0)
     const handerChange = ()=>{
-        setNumber(number+1) 
+        setNumber(number+1)
     }
-    return <div>  
+    return <div>
         <DemoComponent  handerChange={ handerChange } />
     </div>
 }
@@ -1231,9 +1231,9 @@ function demo (){
 function demo (){
     const [ number , setNumber ] = useState(0)
     const handerChange = useCallback( ()=>{
-        setNumber(number+1) 
+        setNumber(number+1)
     },[])
-    return <div>  
+    return <div>
         <DemoComponent  handerChange={ handerChange } />
     </div>
 }
@@ -1314,7 +1314,7 @@ class Text extends React.Component{
             { /*  下拉框 */ }
             <select>
                {
-                  list.map(item=><option key={ item.id } >{ item.name }</option>) 
+                  list.map(item=><option key={ item.id } >{ item.name }</option>)
                }
             </select>
         </div>
@@ -1388,7 +1388,7 @@ class Index extends React.Component<any,any>{
        this.sliceTime(new Array(40000).fill(0), 0)
     }
     sliceTime=(list,times)=>{
-        if(times === 400) return 
+        if(times === 400) return
         setTimeout(() => {
             const newList = list.slice( times , (times + 1) * 100 ) /* 每次截取 100 个 */
             this.setState({
@@ -1437,9 +1437,9 @@ react-tiny-virtual-list 是一个较为轻量的实现虚拟列表的组件。�
 import React from 'react';
 import {render} from 'react-dom';
 import VirtualList from 'react-tiny-virtual-list';
- 
+
 const data = ['A', 'B', 'C', 'D', 'E', 'F', ...];
- 
+
 render(
   <VirtualList
     width='100%'
@@ -1462,7 +1462,7 @@ render(
 let num  = 0
 class Index extends React.Component<any, any>{
     state = {
-        list: new Array(9999).fill(0).map(() =>{ 
+        list: new Array(9999).fill(0).map(() =>{
             num++
             return num
         }),
@@ -1506,7 +1506,7 @@ class Index extends React.Component<any, any>{
      /* 性能优化：只有在列表start 和 end 改变的时候在渲染列表 */
     shouldComponentUpdate(_nextProps, _nextState){
         const { start , end } = _nextState
-        return start !== this.state.start || end !==this.state.end 
+        return start !== this.state.start || end !==this.state.end
     }
     /* 处理滚动效果 */
     render() {
@@ -1515,11 +1515,11 @@ class Index extends React.Component<any, any>{
         const renderList = list.slice(start,end)
         return <div className="list_box"
             ref={(node) => this.listBox = node}
-        >   
-            <div  
-               style={{ height: scorllBoxHeight, overflow: 'scroll', position: 'relative' }}  
+        >
+            <div
+               style={{ height: scorllBoxHeight, overflow: 'scroll', position: 'relative' }}
                ref={ (node)=> this.scrollBox = node }
-               onScroll={ this.handerScroll }   
+               onScroll={ this.handerScroll }
             >
                 { /* 占位作用 */}
                 <div style={{ height: `${list.length * itemHeight}px`, position: 'absolute', left: 0, top: 0, right: 0 }} />
@@ -1563,7 +1563,7 @@ class Index extends React.Component<any, any>{
 ### 1. **组件渲染优化**
 
 - **考察点**：如何减少不必要的渲染，避免性能浪费。
-- **问题示例**：  
+- **问题示例**：<br>
   - 什么时候应该使用 `React.memo`？它的局限性是什么？
   - `useMemo` 和 `useCallback` 的作用是什么？它们有什么区别？
   - React 组件的 `key` 属性有什么作用？错误使用 `key` 会导致什么问题？
@@ -1572,7 +1572,7 @@ class Index extends React.Component<any, any>{
 ### 2. **状态管理优化**
 
 - **考察点**：状态更新的合理性，如何避免不必要的 re-render。
-- **问题示例**：  
+- **问题示例**：<br>
   - 为什么频繁更新 `useState` 可能会影响性能？如何优化？
   - `useReducer` 在什么场景下比 `useState` 更优？
   - React 组件内部的状态应该如何设计，才能减少不必要的渲染？
@@ -1581,7 +1581,7 @@ class Index extends React.Component<any, any>{
 ### 3. **Virtual DOM 及 Diff 算法**
 
 - **考察点**：理解 React 的 Virtual DOM 及其工作原理，如何提升 DOM 更新效率。
-- **问题示例**：  
+- **问题示例**：<br>
   - React 是如何使用 Virtual DOM 进行渲染的？
   - 介绍一下 React 的 Diff 算法，如何减少不必要的 DOM 更新？
   - `shouldComponentUpdate` 在类组件中如何使用？它的替代方案是什么？
@@ -1589,7 +1589,7 @@ class Index extends React.Component<any, any>{
 ### 4. **异步渲染 & 并发模式**
 
 - **考察点**：React 18 的并发特性，以及如何避免阻塞主线程。
-- **问题示例**：  
+- **问题示例**：<br>
   - 什么是 React 18 的 Concurrent Mode，并发渲染如何提升性能？
   - `useTransition` 的作用是什么？适用于哪些场景？
   - `React.lazy` 和 `Suspense` 如何优化 React 应用的性能？
@@ -1598,7 +1598,7 @@ class Index extends React.Component<any, any>{
 ### 5. **列表渲染优化**
 
 - **考察点**：长列表的渲染性能问题及优化策略。
-- **问题示例**：  
+- **问题示例**：<br>
   - 当列表数据量较大时，直接使用 `map` 渲染会有什么问题？如何优化？
   - React 中如何实现虚拟列表（Virtual List）？常见的库有哪些？
   - `windowing` 技术是如何提高 React 渲染性能的？
@@ -1607,7 +1607,7 @@ class Index extends React.Component<any, any>{
 ### 6. **代码拆分与懒加载**
 
 - **考察点**：按需加载、动态导入，减少首屏加载时间。
-- **问题示例**：  
+- **问题示例**：<br>
   - 在 React 中如何实现代码拆分？有哪些常见的方法？
   - `React.lazy` 的工作原理是什么？和 `import()` 有什么关系？
   - 如何配合 `Suspense` 进行懒加载？它的局限性是什么？
@@ -1616,7 +1616,7 @@ class Index extends React.Component<any, any>{
 ### 7. **事件处理优化**
 
 - **考察点**：事件绑定、事件代理、避免性能开销。
-- **问题示例**：  
+- **问题示例**：<br>
   - React 事件系统是如何工作的？事件代理有什么作用？
   - 如何优化 React 事件绑定，避免事件过多导致的性能问题？
   - `useCallback` 在事件处理函数中应该如何使用？什么时候会导致性能问题？
@@ -1625,7 +1625,7 @@ class Index extends React.Component<any, any>{
 ### 8. **SSR（服务器端渲染）优化**
 
 - **考察点**：SSR 的渲染方式、影响以及优化手段。
-- **问题示例**：  
+- **问题示例**：<br>
   - 什么时候应该使用 Server-Side Rendering（SSR）？SSR 如何提升 React 应用的性能？
   - 在 Next.js 中，`getServerSideProps` 和 `getStaticProps` 有什么区别？如何选择？
   - React SSR 如何避免“水合（Hydration）”问题？
@@ -1634,7 +1634,7 @@ class Index extends React.Component<any, any>{
 ### 9. **生产环境优化**
 
 - **考察点**：构建优化、减少打包体积、提升加载速度。
-- **问题示例**：  
+- **问题示例**：<br>
   - 如何减少 React 应用的打包体积？
   - `webpack` 如何优化 React 项目？Tree Shaking 和 Code Splitting 具体如何实现？
   - 如何使用 PWA（渐进式 Web 应用）提升 React 应用的体验？

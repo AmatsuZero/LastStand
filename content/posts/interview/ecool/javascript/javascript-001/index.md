@@ -266,7 +266,7 @@ Javascript 是 64 位的双精度浮点数，最高的 1 位是符号位S，接�
 
 ## BigInt——突破最大的限制
 
-`JavaScript` 的 `Number` 类型为 [双精度IEEE 754 64位浮点](https://en.wikipedia.org/wiki/Floating-point_arithmetic)类型。  
+`JavaScript` 的 `Number` 类型为 [双精度IEEE 754 64位浮点](https://en.wikipedia.org/wiki/Floating-point_arithmetic)类型。<br>
  在 JavaScript 中最大的值为 `2^53`。
 
 ![](image-02.webp)
@@ -405,7 +405,7 @@ console.log(c.constructor === Array); // false
 
 ### 1. **基本数据类型**
 
-- **Primitive Types**：JavaScript 有七种基本数据类型：  
+- **Primitive Types**：JavaScript 有七种基本数据类型：<br>
   - **Number**：表示数字，包括整数和浮点数。
   - **String**：表示字符串，文本数据。
   - **Boolean**：表示布尔值，只有 `true` 和 `false`。

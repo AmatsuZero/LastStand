@@ -58,7 +58,7 @@ Grid 布局示例：
 .one {
   background: #19CAAD;
 }
-.two { 
+.two {
   background: #8CC7B5;
 }
 .three {
@@ -390,7 +390,7 @@ Grid 布局示例：
 ```css
 .container {
   justify-content: start | end | center | stretch | space-around | space-between | space-evenly;
-  align-content: start | end | center | stretch | space-around | space-between | space-evenly;  
+  align-content: start | end | center | stretch | space-around | space-between | space-evenly;
 }
 ```
 
@@ -490,7 +490,7 @@ Grid 布局示例：
   grid-column-end: 2;
   background: #19CAAD;
 }
-.two { 
+.two {
   grid-column-start: 2;
   grid-column-end: 4;
   grid-row-start: 1;
@@ -577,8 +577,8 @@ Grid 布局示例：
 
 ![](image-29.webp)
 
--  center：单元格内部居中 ![](image-30.webp) 
--  stretch：拉伸，占满单元格的整个宽度（默认值） ![](image-31.webp) 
+-  center：单元格内部居中 ![](image-30.webp)
+-  stretch：拉伸，占满单元格的整个宽度（默认值） ![](image-31.webp)
 
 ## Grid 实战——实现响应式布局
 
@@ -674,35 +674,35 @@ Grid 布局示例：
 
 ## 常见考点
 
-1.  **基础概念**：  
+1.  **基础概念**：<br>
   - 理解CSS Grid的基本概念：Grid布局是用于创建二维布局的工具，可以同时管理行和列。
-2.  **主要属性**：  
-  - **容器属性**：  
+2.  **主要属性**：<br>
+  - **容器属性**：<br>
     - `display: grid;`：将元素设置为网格容器。
     - `grid-template-columns` 和 `grid-template-rows`：定义列和行的大小以及数量。
     - `grid-template-areas`：定义一个区域网格，允许为特定区域命名。
     - `grid-column-gap` 和 `grid-row-gap`：设置列和行的间隙。
     - `grid-auto-flow`：控制自动创建行或列的方式。
-3.  **项目属性**：  
+3.  **项目属性**：<br>
   - `grid-column-start`, `grid-column-end`, `grid-row-start`, `grid-row-end`：定义项目在网格内起始和结束的行/列位置。
   - `grid-area`：简写属性，设置项目占据的区域。
   - `justify-self` 和 `align-self`：用于控制单个网格项在其单元格中的对齐方式。
-4.  **网格线和网格单元**：  
+4.  **网格线和网格单元**：<br>
   - 理解网格线的概念，以及如何在布局中使用它们来定义位置。
   - 了解网格单元的概念，并能够针对不同布局需求灵活使用。
-5.  **自适应与响应式设计**：  
+5.  **自适应与响应式设计**：<br>
   - 如何使用Grid布局创建响应式设计，使用媒体查询和可自适应的单元格定义。
-6.  **常见布局模式**：  
-  - 使用Grid布局实现常见的布局例如：  
+6.  **常见布局模式**：<br>
+  - 使用Grid布局实现常见的布局例如：<br>
     - 栅格布局
     - 瀑布流布局
     - Masonry（拼贴）布局
     - 多列内容布局
-7.  **与Flexbox的比较**：  
+7.  **与Flexbox的比较**：<br>
   - 理解Grid布局与Flexbox布局的区别和适用场景，知道在哪种情况下使用Grid或Flexbox。
-8.  **层叠上下文与z-index**：  
+8.  **层叠上下文与z-index**：<br>
   - 了解如何在Grid布局中处理层叠上下文和使用`z-index`属性进行堆叠顺序的管理。
-9.  **浏览器支持与兼容性**：  
+9.  **浏览器支持与兼容性**：<br>
   - 了解不同浏览器对Grid布局的支持情况及可能需要的前缀（如`-ms-`）。
-10.  **实践应用**：  
+10.  **实践应用**：<br>
   - 常见的Grid布局相关面试题，如给定一组元素，如何设定Grid样式达到特定的布局效果。

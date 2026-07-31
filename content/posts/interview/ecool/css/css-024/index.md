@@ -146,7 +146,7 @@ export default App;
 - **悬停、焦点或者其他状态的处理。**`Tailwind CSS`包含几乎所有的伪类和伪元素修饰符，可以与工具类随意组合使用。
 
 ```HTML
-<!-- 
+<!--
   1. 输入框不可用时会显示浅灰的背景颜色
   2. "用户名称"后会显示红色*号
   3. 输入框聚焦时会显示不同颜色的边框
@@ -389,7 +389,7 @@ export default App;
 
 ```HTML
 <!-- 修改windi.config.js文件，添加attributify: true配置 -->
-<button 
+<button
   bg="blue-400 hover:blue-500 dark:blue-500 dark:hover:blue-600"
   text="sm white"
   font="light"
@@ -400,7 +400,7 @@ export default App;
 </button>
 
 <!-- 为了避免属性冲突，也可以自定义前缀，修改attributify属性值为{ prefix: 'mi-' } -->
-<button 
+<button
   mi-bg="blue-400 hover:blue-500 dark:blue-500 dark:hover:blue-600"
   mi-text="sm white"
   mi-font="light"
@@ -428,7 +428,7 @@ export default App;
 ```Bash
 npm create vite@latest unocss-demo -- --template react
 cd unocss-demo
-npm i   
+npm i
 ```
 
 2. 安装UnoCSS插件
@@ -535,8 +535,8 @@ JSX中大量的类名增加了JS文件的体积？相比于自定义CSS类名，
 
 基于以上原子化CSS的优缺点，个人觉得原子化CSS的适用场景有：
 
--  个人项目，对样式没有太高的要求，借助设计系统，可以提升页面显示效果，毕竟不用起类名真的很香。 
--  大型项目，有较为完整且稳定的视觉规范，能够很好的搭建设计系统。可以很好的解决历史样式的堆积问题并且有效的减少CSS的体积。 
+-  个人项目，对样式没有太高的要求，借助设计系统，可以提升页面显示效果，毕竟不用起类名真的很香。
+-  大型项目，有较为完整且稳定的视觉规范，能够很好的搭建设计系统。可以很好的解决历史样式的堆积问题并且有效的减少CSS的体积。
 
 ## 常见考点
 

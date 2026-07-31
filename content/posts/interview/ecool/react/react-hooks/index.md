@@ -91,7 +91,7 @@ function Index(){
     const [ number, setNumber ] = React.useState(0)
     const handleClick = () => setInterval(()=>{
         // 此时 number 一直都是 0
-        setNumber(number + 1 ) 
+        setNumber(number + 1 )
     },1000)
     return <button onClick={ handleClick } > 点击 { number }</button>
 }
@@ -143,9 +143,9 @@ const DemoUseReducer = ()=>{
            case 'add':
                return state + 1
            case 'sub':
-               return state - 1 
+               return state - 1
            case 'reset':
-             return payload       
+             return payload
        }
        return state
    },0)
@@ -220,8 +220,8 @@ function Index(){
 
 在 React v18 中，有一种新概念叫做过渡任务，这种任务是对比立即更新任务而产生的，通常一些影响用户交互直观响应的任务，例如按键，点击，输入等，这些任务需要视图上立即响应，所以可以称之为立即更新的任务，但是有一些更新不是那么急迫，比如页面从一个状态过渡到另外一个状态，这些任务就叫做过渡任务。 打个比方如下图当点击 tab 从 tab1 切换到 tab2 的时候，本质上产生了两个更新任务。
 
--  第一个就是 hover 状态由 tab1 变成 tab2。 
--  第二个就是内容区域由 tab1 内容变换到 tab2 内容。 
+-  第一个就是 hover 状态由 tab1 变成 tab2。
+-  第二个就是内容区域由 tab1 内容变换到 tab2 内容。
 
 这两个任务，用户肯定希望 hover 状态的响应更迅速，而内容的响应有可能还需要请求数据等操作，所以更新状态并不是立马生效，通常还会有一些 loading 效果。所以第一个任务作为**立即执行任务**，而第二个任务就可以视为**过渡任务**。
 
@@ -235,7 +235,7 @@ useTransition 执行返回一个数组。数组有两个状态值：
 - 第二个是一个方法，可以理解为上述的 startTransition。可以把里面的更新任务变成过渡任务。
 
 ```js
-import { useTransition } from 'react' 
+import { useTransition } from 'react'
 /* 使用 */
 const  [ isPending , startTransition ] = useTransition ()
 ```
@@ -259,7 +259,7 @@ const tab = {
 export default function Index(){
   const [ active, setActive ] = React.useState('tab1') //需要立即响应的任务，立即更新任务
   const [ renderData, setRenderData ] = React.useState(tab[active]) //不需要立即响应的任务，过渡任务
-  const [ isPending,startTransition  ] = React.useTransition() 
+  const [ isPending,startTransition  ] = React.useTransition()
   const handleChangeTab = (activeItem) => {
      setActive(activeItem) // 立即更新
      startTransition(()=>{ // startTransition 里面的任务优先级低
@@ -349,11 +349,11 @@ useEffect 第一个参数 callback, 返回的 destory ， destory 作为下一�
 /* 模拟数据交互 */
 function getUserInfo(a){
     return new Promise((resolve)=>{
-        setTimeout(()=>{ 
+        setTimeout(()=>{
            resolve({
                name:a,
                age:16,
-           }) 
+           })
         },500)
     })
 }
@@ -378,7 +378,7 @@ const Demo = ({ a }) => {
        window.addEventListener('resize', handleResize)
          /* 此函数用于清除副作用 */
        return function(){
-           clearInterval(timer) 
+           clearInterval(timer)
            window.removeEventListener('resize', handleResize)
        }
     /* 只有当props->a和state->number改变的时候 ,useEffect副作用函数重新执行 ，如果此时数组为空[]，证明函数只有在初始化的时候执行一次相当于componentDidMount */
@@ -543,7 +543,7 @@ const DemoUseRef = ()=>{
     return <div>
         {/* ref 标记当前dom节点 */}
         <div ref={dom} >表单组件</div>
-        <button onClick={()=>handerSubmit()} >提交</button> 
+        <button onClick={()=>handerSubmit()} >提交</button>
     </div>
 }
 ```
@@ -653,7 +653,7 @@ const cacheSomething = useMemo(create,deps)
 function Scope() {
     const keeper = useKeep()
     const { cacheDispatch, cacheList, hasAliveStatus } = keeper
-   
+
     /* 通过 useMemo 得到派生出来的新状态 contextValue  */
     const contextValue = useMemo(() => {
         return {
@@ -661,7 +661,7 @@ function Scope() {
             hasAliveStatus: hasAliveStatus.bind(keeper),
             cacheDestory: (payload) => cacheDispatch.call(keeper, { type: ACTION_DESTORY, payload })
         }
-      
+
     }, [keeper])
     return <KeepaliveContext.Provider value={contextValue}>
     </KeepaliveContext.Provider>
@@ -763,7 +763,7 @@ useId 也是 React v18 产生的新的 hooks , 它可以在 client 和 server �
 ```js
 const rid = Math.random() + '_id_'  /* 生成一个随机id  */
 function Demo (){
-   // 使用 rid 
+   // 使用 rid
    return <div id={rid} ></div>
 }
 ```
@@ -778,7 +778,7 @@ function Demo (){
 
 ```js
 function Demo (){
-   const rid = useId() // 生成稳定的 id 
+   const rid = useId() // 生成稳定的 id
    return <div id={rid} ></div>
 }
 ```

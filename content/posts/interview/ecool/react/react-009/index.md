@@ -35,7 +35,7 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 ```js
 class Index extends React.Component{
-    handerClick= (value) => console.log(value) 
+    handerClick= (value) => console.log(value)
     render(){
         return <div>
             <button onClick={ this.handerClick } > 按钮点击 </button>
@@ -85,7 +85,7 @@ class Index extends React.Component{
     componentDidMount(){
         console.log(this)
     }
-    handerClick= (value) => console.log(value) 
+    handerClick= (value) => console.log(value)
     handerChange=(value) => console.log(value)
     render(){
         return <div style={{ marginTop:'50px' }} >
@@ -108,10 +108,10 @@ class Index extends React.Component{
 
 综上我们可以得出结论：
 
--  ①**我们在 `jsx` 中绑定的事件(demo中的`handerClick`，`handerChange`),根本就没有注册到真实的`dom`上。是绑定在`document`上统一管理的。** 
--  ②**真实的`dom`上的`click`事件被单独处理,已经被`react`底层替换成空函数。** 
--  ③**我们在`react`绑定的事件,比如`onChange`，在`document`上，可能有多个事件与之对应。** 
--  ④ **`react`并不是一开始，把所有的事件都绑定在`document`上，而是采取了一种按需绑定，比如发现了`onClick`事件,再去绑定`document click`事件。** 
+-  ①**我们在 `jsx` 中绑定的事件(demo中的`handerClick`，`handerChange`),根本就没有注册到真实的`dom`上。是绑定在`document`上统一管理的。**
+-  ②**真实的`dom`上的`click`事件被单独处理,已经被`react`底层替换成空函数。**
+-  ③**我们在`react`绑定的事件,比如`onChange`，在`document`上，可能有多个事件与之对应。**
+-  ④ **`react`并不是一开始，把所有的事件都绑定在`document`上，而是采取了一种按需绑定，比如发现了`onClick`事件,再去绑定`document click`事件。**
 
 那么什么是`react`事件合成呢？
 
@@ -132,7 +132,7 @@ class Index extends React.Component{
 我们先来看一个代码片段：
 
 ```js
-<div> 
+<div>
   <div> hello , my name is alien </div>
 </div>
 ```
@@ -210,10 +210,10 @@ const  plugins = [LegacySimpleEventPlugin, LegacyEnterLeaveEventPlugin, ...];
 
 ```js
 const SimpleEventPlugin = {
-    eventTypes:{ 
+    eventTypes:{
         'click':{ /* 处理点击事件  */
             phasedRegistrationNames:{
-                bubbled: 'onClick',       // 对应的事件冒泡 - onClick 
+                bubbled: 'onClick',       // 对应的事件冒泡 - onClick
                 captured:'onClickCapture' //对应事件捕获阶段 - onClickCapture
             },
             dependencies: ['click'], //事件依赖
@@ -291,7 +291,7 @@ function recomputePluginOrdering(){
     for (const eventName in publishedEvents) {
        // publishedEvents[eventName] -> eventConfig , pluginModule -> 事件插件 ， eventName -> 事件名称
         publishEventForPlugin(publishedEvents[eventName],pluginModule,eventName,)
-    } 
+    }
     }
 
 }
@@ -302,7 +302,7 @@ function recomputePluginOrdering(){
 ```js
 /*
   dispatchConfig -> 原生事件对应配置项 { phasedRegistrationNames :{  冒泡 捕获  } ，   }
-  pluginModule -> 事件插件 比如SimpleEventPlugin  
+  pluginModule -> 事件插件 比如SimpleEventPlugin
   eventName -> 原生事件名称。
 */
 function publishEventForPlugin (dispatchConfig,pluginModule,eventName){
@@ -427,7 +427,7 @@ break;
   capture = false
 */
 function addTrappedEventListener(targetContainer,topLevelType,eventSystemFlags,capture){
-   const listener = dispatchEvent.bind(null,topLevelType,eventSystemFlags,targetContainer) 
+   const listener = dispatchEvent.bind(null,topLevelType,eventSystemFlags,targetContainer)
    if(capture){
        // 事件捕获阶段处理函数。
    }else{
@@ -482,7 +482,7 @@ function attemptToDispatchEvent(topLevelType,eventSystemFlags,targetContainer,na
     /* 获取原生事件 e.target */
     const nativeEventTarget = getEventTarget(nativeEvent)
     /* 获取当前事件，最近的dom类型fiber ，我们 demo中 button 按钮对应的 fiber */
-    let targetInst = getClosestInstanceFromNode(nativeEventTarget); 
+    let targetInst = getClosestInstanceFromNode(nativeEventTarget);
     /* 重要：进入legacy模式的事件处理系统 */
     dispatchEventForLegacyPluginEventSystem(topLevelType,eventSystemFlags,nativeEvent,targetInst,);
     return null;
@@ -503,7 +503,7 @@ function attemptToDispatchEvent(topLevelType,eventSystemFlags,targetContainer,na
 // 声明随机key
 var internalInstanceKey = '__reactInternalInstance$' + randomKey;
 
-// 使用随机key 
+// 使用随机key
 function getClosestInstanceFromNode(targetNode){
   // targetNode -dom  targetInst -> 与之对应的fiber对象
   var targetInst = targetNode[internalInstanceKey];
@@ -530,7 +530,7 @@ function dispatchEventForLegacyPluginEventSystem(topLevelType,eventSystemFlags,n
     try { /* 执行批量更新 handleTopLevel 为事件处理的主要函数 */
     batchedEventUpdates(handleTopLevel, bookKeeping);
   } finally {
-    /* 释放事件池 */  
+    /* 释放事件池 */
     releaseTopLevelCallbackBookKeeping(bookKeeping);
   }
 }
@@ -582,7 +582,7 @@ handerClick = () =>{
 
 ```js
 // 流程简化后
-// topLevelType - click  
+// topLevelType - click
 // targetInst - button Fiber
 // nativeEvent
 function handleTopLevel(bookKeeping){
@@ -590,7 +590,7 @@ function handleTopLevel(bookKeeping){
     for(let i=0; i < plugins.length;i++ ){
         const possiblePlugin = plugins[i];
         /* 找到对应的事件插件，形成对应的合成event，形成事件执行队列  */
-        const  extractedEvents = possiblePlugin.extractEvents(topLevelType,targetInst,nativeEvent,eventTarget,eventSystemFlags)  
+        const  extractedEvents = possiblePlugin.extractEvents(topLevelType,targetInst,nativeEvent,eventTarget,eventSystemFlags)
     }
     if (extractedEvents) {
         events = accumulateInto(events, extractedEvents);
@@ -675,10 +675,10 @@ const  SimpleEventPlugin = {
 ```js
 handerClick = () => console.log(1)
 handerClick1 = () => console.log(2)
-handerClick2 = () => console.log(3) 
+handerClick2 = () => console.log(3)
 handerClick3= () => console.log(4)
 render(){
-    return <div onClick={ this.handerClick2 } onClickCapture={this.handerClick3}  > 
+    return <div onClick={ this.handerClick2 } onClickCapture={this.handerClick3}  >
         <button onClick={ this.handerClick }  onClickCapture={ this.handerClick1  }  className="button" >点击</button>
     </div>
 }
@@ -731,7 +731,7 @@ function runEventsInBatch(){
       if (event.isPropagationStopped()) { /* 判断是否已经阻止事件冒泡 */
         break;
       }
-      
+
       dispatchListeners[i](event)
     }
   }
@@ -763,7 +763,7 @@ handerClick(e){
 
 ```js
  handerClick = (e) => {
-    console.log(e.target) // button 
+    console.log(e.target) // button
     setTimeout(()=>{
         console.log(e.target) // null
     },0)
@@ -776,9 +776,9 @@ handerClick(e){
 
 我把事件触发阶段做的事总结一下：
 
--  **①首先通过统一的事件处理函数 `dispatchEvent`,进行批量更新batchUpdate。** 
--  **②然后执行事件对应的处理插件中的`extractEvents`，合成事件源对象,每次React会从事件源开始，从上遍历类型为 hostComponent即 dom类型的fiber,判断props中是否有当前事件比如onClick,最终形成一个事件执行队列，React就是用这个队列，来模拟事件捕获->事件源->事件冒泡这一过程。** 
--  **③最后通过`runEventsInBatch`执行事件队列，如果发现阻止冒泡，那么break跳出循环，最后重置事件源，放回到事件池中，完成整个流程。** 
+-  **①首先通过统一的事件处理函数 `dispatchEvent`,进行批量更新batchUpdate。**
+-  **②然后执行事件对应的处理插件中的`extractEvents`，合成事件源对象,每次React会从事件源开始，从上遍历类型为 hostComponent即 dom类型的fiber,判断props中是否有当前事件比如onClick,最终形成一个事件执行队列，React就是用这个队列，来模拟事件捕获->事件源->事件冒泡这一过程。**
+-  **③最后通过`runEventsInBatch`执行事件队列，如果发现阻止冒泡，那么break跳出循环，最后重置事件源，放回到事件池中，完成整个流程。**
 
 ![](image-15.webp)
 
@@ -804,7 +804,7 @@ React 的事件机制是前端面试的重要考点，涉及 **合成事件（Sy
 
 ### **(1) 合成事件（SyntheticEvent）**
 
--  React 并不直接使用原生 DOM 事件，而是采用 **合成事件（SyntheticEvent）** 进行封装：  **示例：**  **考察点**  
+-  React 并不直接使用原生 DOM 事件，而是采用 **合成事件（SyntheticEvent）** 进行封装：  **示例：**  **考察点**<br>
   - 统一事件处理，兼容不同浏览器。
   - 事件对象是 **React 维护的对象**，它会被 **事件池（Event Pooling）** 复用，提升性能。
   - 事件在**所有浏览器中表现一致**，避免浏览器差异带来的问题。
@@ -823,7 +823,7 @@ return <button onClick={handleClick}>Click me</button>;
 
 ### **(2) React 的事件代理**
 
--  React **并不会直接把事件绑定到 DOM 元素上**，而是采用**事件代理机制**：  **示例：**  **考察点**  
+-  React **并不会直接把事件绑定到 DOM 元素上**，而是采用**事件代理机制**：  **示例：**  **考察点**<br>
   - 事件会**委托到最外层的 `document`**，然后通过 **事件冒泡机制** 触发组件内的事件处理函数。
   - 这种方式可以减少事件绑定，提高性能，适用于**大规模列表渲染**的场景。
 ```jsx
@@ -843,7 +843,7 @@ function App() {
 
 ### **(3) React 事件的绑定方式**
 
-- 事件绑定可以是**箭头函数、bind 绑定、class 方法**：  **考察点**  
+- 事件绑定可以是**箭头函数、bind 绑定、class 方法**：  **考察点**<br>
 ```jsx
 class App extends React.Component {
   handleClick() {
@@ -865,7 +865,7 @@ class App extends React.Component {
 
 ### **(4) 事件传播机制（捕获 & 冒泡）**
 
-- React 的事件默认**只支持冒泡，不支持捕获**，但可以通过 `onClickCapture` 监听捕获阶段：  **考察点**  
+- React 的事件默认**只支持冒泡，不支持捕获**，但可以通过 `onClickCapture` 监听捕获阶段：  **考察点**<br>
 ```jsx
 function App() {
   return (
@@ -884,8 +884,8 @@ function App() {
 
 ### **(5) React 事件的 `stopPropagation` 和 `preventDefault`**
 
--  **`stopPropagation()`**: 阻止事件冒泡（但在 React 事件代理下，可能仍会触发 `document` 上的监听）。 
--  **`preventDefault()`**: 阻止默认行为，如 `submit` 提交表单。 **示例：**  **考察点**  
+-  **`stopPropagation()`**: 阻止事件冒泡（但在 React 事件代理下，可能仍会触发 `document` 上的监听）。
+-  **`preventDefault()`**: 阻止默认行为，如 `submit` 提交表单。 **示例：**  **考察点**<br>
 ```jsx
 function App() {
   return (
@@ -911,7 +911,7 @@ function App() {
 
 **考察点**
 
-- **如何在 React 事件中绑定原生事件？**  
+- **如何在 React 事件中绑定原生事件？**<br>
 ```jsx
 useEffect(() => {
   const handleScroll = () => console.log("Scrolling...");
@@ -919,7 +919,7 @@ useEffect(() => {
   return () => window.removeEventListener("scroll", handleScroll);
 }, []);
 ```
-- **React 事件的 `event.persist()` 作用是什么？**  
+- **React 事件的 `event.persist()` 作用是什么？**<br>
 ```jsx
 function handleClick(event) {
   event.persist(); // 让事件对象不会被回收
@@ -933,11 +933,11 @@ function handleClick(event) {
 
 ### **(1) 避免重复绑定**
 
-- **错误方式（每次 render 重新创建函数）：**  
+- **错误方式（每次 render 重新创建函数）：**<br>
 ```jsx
 <button onClick={() => handleClick()}>Click</button>
 ```
-- **优化方式（使用 `useCallback` 或 `class` 方法）：**  
+- **优化方式（使用 `useCallback` 或 `class` 方法）：**<br>
 ```jsx
 const handleClick = useCallback(() => {
   console.log("Clicked");
@@ -949,13 +949,13 @@ const handleClick = useCallback(() => {
 
 ### **(2) 使用事件委托优化大量事件**
 
-- 在 **长列表** 中，如果每个子元素都绑定 `onClick`，会导致大量事件监听：  
+- 在 **长列表** 中，如果每个子元素都绑定 `onClick`，会导致大量事件监听：<br>
 ```jsx
 {items.map(item => (
   <button key={item.id} onClick={() => handleClick(item.id)}>Click</button>
 ))}
 ```
-- **优化方式（事件代理到父元素）：**  
+- **优化方式（事件代理到父元素）：**<br>
 ```jsx
 <div onClick={(e) => {
   if (e.target.tagName === "BUTTON") {

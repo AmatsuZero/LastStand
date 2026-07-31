@@ -14,14 +14,14 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 ## 一：简单使用
 
--  背景颜色和背景图片是可以共同出现的  
+-  背景颜色和背景图片是可以共同出现的<br>
 ```css
   div {
     width: 300px;
     height: 300px;
     background-color: red;
     background-image: url(./imgs/1.jpg);
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
    }
 ```
 
@@ -52,7 +52,7 @@ div {
   height: 300px;
   background-color: red;
   background-image: url(./imgs/1.jpg);
-  background-repeat: repeat; 
+  background-repeat: repeat;
  }
 ```
 
@@ -68,7 +68,7 @@ div {
   height: 300px;
   background-color: red;
   background-image: url(./imgs/1.jpg);
-  background-repeat: repeat-x; 
+  background-repeat: repeat-x;
  }
 ```
 
@@ -84,7 +84,7 @@ div {
   height: 300px;
   background-color: red;
   background-image: url(./imgs/1.jpg);
-  background-repeat: repeat-y; 
+  background-repeat: repeat-y;
  }
 ```
 
@@ -105,7 +105,7 @@ div {
   background-color: red;
   background-image: url(./imgs/1.jpg);
   background-repeat: no-repeat;
-  background-position: 100px 100px; 
+  background-position: 100px 100px;
  }
 ```
 
@@ -126,9 +126,9 @@ div {
   background-color: red;
   background-image: url(./imgs/1.jpg);
   background-repeat: no-repeat;
-  background-position: center center; 
+  background-position: center center;
  }
- 
+
 ```
 
 ![](image-06.webp)
@@ -150,9 +150,9 @@ div {
   background-color: red;
   background-image: url(./imgs/1.jpg);
   background-repeat: no-repeat;
-  background-position: 50% 50%; 
+  background-position: 50% 50%;
  }
- 
+
 ```
 
 ![](image-07.webp)
@@ -173,8 +173,8 @@ background:color url repeat postion
 
 **1.具体px**
 
--  直接指定了背景图的宽和高 
--  设置宽高存在背景图变形问题：我们都清楚每张图片都有自己原始的像素，如果我们每次都直接指定其宽和高那么图片的宽和高直接被压缩到指定像素，图片会存在变形的问题，这样十分影响用户体验。  
+-  直接指定了背景图的宽和高
+-  设置宽高存在背景图变形问题：我们都清楚每张图片都有自己原始的像素，如果我们每次都直接指定其宽和高那么图片的宽和高直接被压缩到指定像素，图片会存在变形的问题，这样十分影响用户体验。<br>
 ```css
   div {
     width: 300px;
@@ -190,8 +190,8 @@ background:color url repeat postion
 
 **2. 百分比**
 
--  百分比是相对于盒子的宽和高决定 
--  百分比也存在背景图变形问题  
+-  百分比是相对于盒子的宽和高决定
+-  百分比也存在背景图变形问题<br>
 ```css
   div {
     width: 300px;
@@ -238,8 +238,8 @@ cover英文意思覆盖，那么其涵义就是要求背景图片覆盖整个盒
 
 > 特点
 
--  宽和高等比拉伸或缩小填满整个盒子，宽和高必须同时填满盒子 
--  图片不变形  
+-  宽和高等比拉伸或缩小填满整个盒子，宽和高必须同时填满盒子
+-  图片不变形<br>
 ```css
   div {
     width: 300px;
@@ -264,8 +264,8 @@ contain,要求背景图片的宽和高必须满足其中一个覆盖盒子就行
 
 > 特点
 
--  宽和高等比拉伸或缩，宽或者高满足一个和盒子宽高相同就行。 
--  图片不变形  
+-  宽和高等比拉伸或缩，宽或者高满足一个和盒子宽高相同就行。
+-  图片不变形<br>
 ```css
   div {
     width: 300px;
@@ -275,7 +275,7 @@ contain,要求背景图片的宽和高必须满足其中一个覆盖盒子就行
     background-repeat: no-repeat;
     background-size: contain;
    }
-   
+
 ```
 
 ## 四：background-origin
@@ -339,7 +339,7 @@ background-clip决定了背景颜色从盒子的什么位置开始渲染
 ### 1. **基本概念与语法**
 
 - **`background`** 是什么？它如何影响元素的视觉展示？
-- **`background`** 是一个复合属性，它包含了哪些子属性？请简述每个子属性的作用。  
+- **`background`** 是一个复合属性，它包含了哪些子属性？请简述每个子属性的作用。<br>
   - 例如：`background-color`、`background-image`、`background-repeat`、`background-position`、`background-size` 等。
 
 ### 2. **`background-color`**

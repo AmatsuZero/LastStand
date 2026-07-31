@@ -196,24 +196,24 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 #### **考察点：**
 
--  **数组遍历**：  
-  - `v-for` 可以遍历数组、对象、甚至 Set 和 Map。  
+-  **数组遍历**：<br>
+  - `v-for` 可以遍历数组、对象、甚至 Set 和 Map。<br>
 ```vue
 <ul>
   <li v-for="item in items" :key="item.id">{{ item.name }}</li>
 </ul>
 ```
   - 数组遍历语法：`v-for="item in items"`, 其中 `items` 是数组，`item` 是每一项。
--  **对象遍历**：  
-  - `v-for` 也可以遍历对象的属性和对应的值。  
+-  **对象遍历**：<br>
+  - `v-for` 也可以遍历对象的属性和对应的值。<br>
 ```vue
 <ul>
   <li v-for="(value, key) in object" :key="key">{{ key }}: {{ value }}</li>
 </ul>
 ```
   - 对象遍历语法：`v-for="(value, key) in object"`, 其中 `object` 是对象，`key` 和 `value` 分别是对象的属性名和属性值。
--  **索引的使用**：  
-  - `v-for` 可以通过索引（index）来访问数组元素的索引值。  
+-  **索引的使用**：<br>
+  - `v-for` 可以通过索引（index）来访问数组元素的索引值。<br>
 ```vue
 <ul>
   <li v-for="(item, index) in items" :key="index">{{ index }}: {{ item }}</li>
@@ -231,10 +231,10 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 #### **考察点：**
 
--  **性能问题**：  
+-  **性能问题**：<br>
   - 当渲染大量数据时，`v-for` 会根据数据项的数量创建相应数量的 DOM 元素，如果没有适当优化，可能会造成性能瓶颈，特别是在频繁变化的列表中。
   - 渲染的每一项都可能引发组件的重新渲染，特别是当数据更新时，整个列表的 DOM 可能会重新渲染。
--  **使用 `key` 的作用**：  
+-  **使用 `key` 的作用**：<br>
   - `key` 是 Vue 中用于标识每个元素或组件的唯一标识。它帮助 Vue 优化虚拟 DOM 的差异计算，避免不必要的重渲染。
   - 如果不设置 `key`，Vue 会基于顺序来判断元素的变化，可能会出现性能下降或渲染错误的问题。
   - 正确使用 `key` 可以确保 Vue 在更新时能够准确地复用已有的 DOM 元素。
@@ -250,10 +250,10 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 #### **考察点：**
 
--  **组合使用的问题**：  
+-  **组合使用的问题**：<br>
   - 使用 `v-for` 和 `v-if` 同时在同一个元素上时，Vue 会先进行 `v-if` 条件判断，再进行 `v-for` 的遍历。因此，如果 `v-if` 在外层，可能会影响 `v-for` 的渲染效率。
   - 不推荐将 `v-if` 放在 `v-for` 上，尤其是在列表项较多的情况下。这样做可能会导致每个渲染项都做一次条件判断，影响性能。
--  **优化方案**：  
+-  **优化方案**：<br>
   - 如果需要对某些元素进行条件渲染，可以将 `v-if` 放在 `v-for` 之外的容器上，或者先用 `computed` 计算出符合条件的数据源，再用 `v-for` 渲染。
 
 ---
@@ -267,10 +267,10 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 #### **考察点：**
 
--  **渲染大量组件的性能问题**：  
+-  **渲染大量组件的性能问题**：<br>
   - 当 `v-for` 用于渲染大量数据并且每个项是组件时，可能会导致性能问题，因为每个组件都可能有自己的生命周期、事件监听和渲染开销。
   - 对于大量组件的渲染，Vue 会尝试通过 `key` 和虚拟 DOM 的优化来提升性能，但大量的组件仍可能影响渲染速度。
--  **性能优化**：  
+-  **性能优化**：<br>
   - 使用 `v-for` 渲染大量组件时，可以考虑使用 **懒加载** 或 **虚拟列表**（如 `vue-virtual-scroller`）来减少同时渲染的组件数量。
   - 采用 **组件懒加载** 或 **按需渲染**，即只有在需要时才渲染该项组件。
   - 使用 `keep-alive` 缓存不频繁变化的组件，减少不必要的销毁和重新创建。
@@ -286,8 +286,8 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 #### **考察点：**
 
--  **递归渲染的使用**：  
-  - `v-for` 可以用于递归渲染子组件，例如树形结构的数据渲染：  
+-  **递归渲染的使用**：<br>
+  - `v-for` 可以用于递归渲染子组件，例如树形结构的数据渲染：<br>
 ```vue
 <template v-for="node in nodes">
   <TreeNode :node="node" :key="node.id" />
@@ -297,7 +297,7 @@ source = "https://fe.ecool.fun/knowledge-learn"
 </template>
 ```
   - 需要在递归渲染时为每个递归项设置一个唯一的 `key`，并且确保递归的数据结构是合理的，避免过深的递归。
--  **性能优化**：  
+-  **性能优化**：<br>
   - 递归渲染时，可以采取懒加载、延迟加载或仅渲染当前可见的部分，避免一次性渲染过多节点。
   - 限制递归深度，避免无限递归导致性能和内存问题。
 
@@ -312,16 +312,16 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 #### **考察点：**
 
--  **嵌套循环**：  
-  - `v-for` 可以嵌套使用来处理多层数据结构，例如：  
+-  **嵌套循环**：<br>
+  - `v-for` 可以嵌套使用来处理多层数据结构，例如：<br>
 ```vue
 <div v-for="(item, index) in list" :key="index">
   <p v-for="(subItem, subIndex) in item.subList" :key="subIndex">{{ subItem }}</p>
 </div>
 ```
   - 在嵌套循环中，需要确保每一层数据都有一个独特的 `key`，以提高渲染效率。
--  **二维数组或对象数组**：  
-  - `v-for` 可用于渲染二维数组，迭代过程中可以通过计算索引来访问每一项。  
+-  **二维数组或对象数组**：<br>
+  - `v-for` 可用于渲染二维数组，迭代过程中可以通过计算索引来访问每一项。<br>
 ```vue
 <div v-for="(row, rowIndex) in matrix" :key="rowIndex">
   <div v-for="(col, colIndex) in row" :key="colIndex">{{ col }}</div>

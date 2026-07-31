@@ -42,25 +42,25 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 所谓“同源”，就是以下三者必须**都相同**：
 
-1. 协议相同  
-  - 协议**相同**的两个域名：（都是 `https` 协议）  
+1. 协议相同<br>
+  - 协议**相同**的两个域名：（都是 `https` 协议）<br>
     - `https://juejin.cn`
     - `https://juejin.cn`
-  - 协议**不同**的两个域名：（一个是 `http` 协议，一个是 `https` 协议）  
+  - 协议**不同**的两个域名：（一个是 `http` 协议，一个是 `https` 协议）<br>
     - `http://juejin.cn`
     - `https://juejin.cn`
-2. 域名相同  
-  - 域名**相同**的两个域名：  
+2. 域名相同<br>
+  - 域名**相同**的两个域名：<br>
     - `https://juejin.cn`
     - `https://juejin.cn`
-  - 域名**不同**的两个域名：（一个是[二级域名](https://help.aliyun.com/document_detail/155782.html#h2-u4EC0u4E48u53EBu5B50u57DFu540D1)，一个是[三级域名](https://help.aliyun.com/document_detail/155782.html#h2-u4EC0u4E48u53EBu5B50u57DFu540D1)）（可能这个是最容易记错的）  
+  - 域名**不同**的两个域名：（一个是[二级域名](https://help.aliyun.com/document_detail/155782.html#h2-u4EC0u4E48u53EBu5B50u57DFu540D1)，一个是[三级域名](https://help.aliyun.com/document_detail/155782.html#h2-u4EC0u4E48u53EBu5B50u57DFu540D1)）（可能这个是最容易记错的）<br>
     - `https://juejin.cn`
     - `https://www.juejin.cn`
-3. 端口相同  
-  - 端口**相同**的两个域名：  
+3. 端口相同<br>
+  - 端口**相同**的两个域名：<br>
     - `https://juejin.cn`
     - `https://juejin.cn`
-  - 端口**不同**的两个域名：  
+  - 端口**不同**的两个域名：<br>
     - `https://juejin.cn`
     - `https://juejin.cn:8081`
 
@@ -76,11 +76,11 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 在同源策略下，如果**非同源**，会有以下三个方面的行为受到限制：
 
-1. DOM  
+1. DOM<br>
   - 如果非同源，其 JS 脚本，不能互相对 DOM 进行读写操作
-2. 数据  
+2. 数据<br>
   - 如果非同源，不能互相读写 Cookies、LocalStorage、SessionStorage 和 IndexedDB
-3. 网络请求  
+3. 网络请求<br>
   - 如果非同源，不能通过 AJAX 的方式互相发送、接收数据
 
 为了方便理解，接下来我们展开说说这三条规则 ↓↓↓
@@ -144,15 +144,15 @@ has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is pres
 
 ## 一、同源策略的基本概念
 
--  **什么是同源？** 两个 URL 的协议（protocol）、域名（host）、端口（port）三者都相同，才算同源。 
--  **同源策略的目的是什么？** 防止恶意脚本窃取或篡改另一个网站的数据，保护用户隐私和安全。 
+-  **什么是同源？** 两个 URL 的协议（protocol）、域名（host）、端口（port）三者都相同，才算同源。
+-  **同源策略的目的是什么？** 防止恶意脚本窃取或篡改另一个网站的数据，保护用户隐私和安全。
 
 ## 二、同源策略具体限制的内容
 
--  **DOM 访问限制** 脚本无法访问跨源页面的 DOM，如 `iframe` 中的跨源文档。 
--  **Cookie、LocalStorage、IndexedDB 等存储限制** 跨源时无法访问对方的存储空间。 
--  **AJAX（XHR、fetch）请求限制** 只能请求同源资源，否则会被浏览器阻止。 
--  **WebSocket 限制** 建立连接时也受同源限制。 
+-  **DOM 访问限制** 脚本无法访问跨源页面的 DOM，如 `iframe` 中的跨源文档。
+-  **Cookie、LocalStorage、IndexedDB 等存储限制** 跨源时无法访问对方的存储空间。
+-  **AJAX（XHR、fetch）请求限制** 只能请求同源资源，否则会被浏览器阻止。
+-  **WebSocket 限制** 建立连接时也受同源限制。
 
 ## 三、哪些属于“不同源”？
 

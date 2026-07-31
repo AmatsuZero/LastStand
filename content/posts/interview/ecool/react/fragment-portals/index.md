@@ -199,7 +199,7 @@ import React, { PureComponent, Fragment } from 'react'
 
 export class App extends PureComponent {
   constructor() {
-    super() 
+    super()
 
     this.state = {
       sections: [
@@ -328,24 +328,24 @@ export default App
 
 ### React Fragment
 
-1.  **Fragment的基本概念**：  
+1.  **Fragment的基本概念**：<br>
   - 请解释什么是React Fragment，以及它解决了什么问题。
   - Fragment与普通的div包裹元素相比，有何优势？
-2.  **Fragment的使用场景**：  
+2.  **Fragment的使用场景**：<br>
   - 在哪些情况下，你会选择使用React Fragment？
   - 能否给出一个使用Fragment来避免不必要的DOM层级的示例？
-3.  **Fragment的语法**：  
+3.  **Fragment的语法**：<br>
   - 请展示如何使用短语法和长语法来定义一个Fragment。
   - 在Fragment内部，如何传递props给子组件？
 
 ### React Portals
 
-1.  **Portals的基本概念**：  
+1.  **Portals的基本概念**：<br>
   - 请解释什么是React Portals，以及它的主要用途是什么。
   - Portals如何帮助我们将子组件渲染到父组件DOM层次结构之外？
-2.  **Portals的使用场景**：  
+2.  **Portals的使用场景**：<br>
   - 在哪些情况下，你会选择使用React Portals？
   - 能否给出一个使用Portals来渲染模态框或工具提示的示例？
-3.  **Portals的实现细节**：  
+3.  **Portals的实现细节**：<br>
   - 请描述如何创建一个Portal，并将其附加到DOM中的特定节点。
   - 在使用Portals时，如何管理事件和生命周期方法？

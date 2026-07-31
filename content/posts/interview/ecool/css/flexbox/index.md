@@ -381,31 +381,31 @@ Flex布局是一个完整的模块，它包括了一套完整的属性。其中�
 
 ## 常见考点
 
-1.  **基本概念**：  
+1.  **基本概念**：<br>
   - 理解 Flexbox 的基本概念和目的：提供一种在容器内分配空间和对齐子元素的方式。
-2.  **主要属性**：  
-  - **容器属性**：  
+2.  **主要属性**：<br>
+  - **容器属性**：<br>
     - `display: flex;`：将普通块元素变为 flex 容器。
     - `flex-direction`：定义主轴方向（`row`, `row-reverse`, `column`, `column-reverse`）。
     - `flex-wrap`：控制子元素是否换行（`nowrap`, `wrap`, `wrap-reverse`）。
     - `justify-content`：定义主轴上的对齐方式（`flex-start`, `flex-end`, `center`, `space-between`, `space-around`）。
     - `align-items`：定义交叉轴上的对齐方式（`flex-start`, `flex-end`, `center`, `baseline`, `stretch`）。
     - `align-content`：在有多条行的情况下，控制行之间的对齐（`flex-start`, `flex-end`, `center`, `space-between`, `space-around`, `stretch`）。
-3.  **子元素属性**：  
+3.  **子元素属性**：<br>
   - **flex**：简写属性，允许设置三个属性：`flex-grow`、`flex-shrink`、`flex-basis`。
   - `flex-grow`：定义项目的放大比例。
   - `flex-shrink`：定义项目的缩小比例。
   - `flex-basis`：定义在分配多余空间之前，项目占据的主轴空间。
   - `align-self`：允许单个项目改变其父容器的对齐方式。
-4.  **响应式设计**：  
+4.  **响应式设计**：<br>
   - 如何利用 Flexbox 制作响应式布局，适应不同的屏幕尺寸和方向。
-5.  **常见布局模式**：  
+5.  **常见布局模式**：<br>
   - 使用 Flexbox 实现常见布局，例如中心对齐、瀑布流布局、导航栏、卡片布局等。
-6.  **与其他布局模型的比较**：  
+6.  **与其他布局模型的比较**：<br>
   - Flexbox 与 CSS Grid、Floats、Inline-Block 等布局模型的区别与适用场景。
-7.  **处理溢出与换行**：  
+7.  **处理溢出与换行**：<br>
   - 在 Flexbox 中如何处理元素的溢出和换行，确保布局良好。
-8.  **浏览器支持与前缀**：  
+8.  **浏览器支持与前缀**：<br>
   - 了解 Flexbox 的浏览器支持情况及需要的前缀（如 `-webkit-`）。
-9.  **实践应用**：  
+9.  **实践应用**：<br>
   - 常见的 Flexbox 相关面试题，例如给定一个布局要求，如何用 Flexbox 实现。

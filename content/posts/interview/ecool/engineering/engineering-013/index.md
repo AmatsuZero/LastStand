@@ -414,9 +414,9 @@ Switch.prototype.render = function render() {
 
 **考察重点：**
 
--  SPA 与 MPA 的区别（单页应用 vs 多页应用） 
--  SPA 的本质：**前端接管路由 + 局部刷新渲染 + 状态持久** 
--  单页架构的优缺点：  
+-  SPA 与 MPA 的区别（单页应用 vs 多页应用）
+-  SPA 的本质：**前端接管路由 + 局部刷新渲染 + 状态持久**
+-  单页架构的优缺点：<br>
   - 优点：用户体验流畅、前后端分离、开发效率高
   - 缺点：首屏加载慢、SEO 不友好、复杂状态管理
 
@@ -432,13 +432,13 @@ Switch.prototype.render = function render() {
 
 **考察重点：**
 
--  前端路由的两种实现方式：  
+-  前端路由的两种实现方式：<br>
   1. **Hash 模式**（依赖 `window.onhashchange`）
   2. **History 模式**（依赖 HTML5 History API，如 `pushState`/`replaceState`）
--  路由与组件渲染的映射机制 
--  浏览器刷新时的 404 问题与 Nginx 配置重定向 
--  动态路由与懒加载机制 
--  嵌套路由、路由守卫、导航守卫（beforeEach、onEnter） 
+-  路由与组件渲染的映射机制
+-  浏览器刷新时的 404 问题与 Nginx 配置重定向
+-  动态路由与懒加载机制
+-  嵌套路由、路由守卫、导航守卫（beforeEach、onEnter）
 
 **典型问题：**
 
@@ -453,14 +453,14 @@ Switch.prototype.render = function render() {
 
 **考察重点：**
 
--  SPA 首屏性能瓶颈：**JS 体积大、阻塞渲染、数据依赖多** 
--  优化手段：  
+-  SPA 首屏性能瓶颈：**JS 体积大、阻塞渲染、数据依赖多**
+-  优化手段：<br>
   - 代码分割、懒加载（`dynamic import`）
   - 资源预加载（`<link rel="preload">`）
   - 骨架屏 / loading 占位
   - SSR / SSG / Prerender
   - 缓存策略（localStorage、indexedDB、Service Worker）
--  打包优化：Tree-shaking、动态 Polyfill、CDN 分发 
+-  打包优化：Tree-shaking、动态 Polyfill、CDN 分发
 
 **典型问题：**
 
@@ -492,12 +492,12 @@ Switch.prototype.render = function render() {
 
 **考察重点：**
 
--  SPA 对 SEO 的影响（内容渲染在客户端） 
--  解决方案：  
+-  SPA 对 SEO 的影响（内容渲染在客户端）
+-  解决方案：<br>
   - **SSR（服务端渲染）**
   - **静态化预渲染（Prerender）**
   - **动态渲染（Dynamic Rendering）**
--  是否理解 SSR 的原理与前后端同构机制 
+-  是否理解 SSR 的原理与前后端同构机制
 
 **典型问题：**
 

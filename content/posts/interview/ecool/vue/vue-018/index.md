@@ -18,10 +18,10 @@ http://www.xxx.com/login
 
 大致流程可以看成这样：
 
-1.  浏览器发出请求 
-2.  服务器监听到80端口（或443）有请求过来，并解析url路径 
-3.  根据服务器的路由配置，返回相应信息（可以是 html 字串，也可以是 json 数据，图片等） 
-4.  浏览器根据数据包的 Content-Type 来决定如何解析数据 
+1.  浏览器发出请求
+2.  服务器监听到80端口（或443）有请求过来，并解析url路径
+3.  根据服务器的路由配置，返回相应信息（可以是 html 字串，也可以是 json 数据，图片等）
+4.  浏览器根据数据包的 Content-Type 来决定如何解析数据
 
 简单来说路由就是用来跟后端服务器进行交互的一种方式，通过不同的路径，来请求不同的资源，请求不同的页面是路由的其中一种功能。
 
@@ -316,7 +316,7 @@ this.history = this.mode === 'history' ? new HTML5History(this) : new HashHistor
       route.beforeEnter,
       route.afterEnter
     )
-    
+
     // 通过 step 调度执行
     let i = -1
     const step = () => {
@@ -340,7 +340,7 @@ this.history = this.mode === 'history' ? new HTML5History(this) : new HashHistor
 ```javascript
   /**
    * 跳转，添加历史记录
-   * @param location 
+   * @param location
    * @example this.push({name: 'home'})
    * @example this.push('/')
    */
@@ -393,13 +393,13 @@ this.history = this.mode === 'history' ? new HTML5History(this) : new HashHistor
 
 #### **考察点：**
 
--  **路由的作用**：  
+-  **路由的作用**：<br>
   - 根据 URL 的变化加载不同的组件或页面内容。
   - 实现页面的导航和状态管理。
--  **前端路由 vs 后端路由**：  
+-  **前端路由 vs 后端路由**：<br>
   - **前端路由**：通过监听浏览器地址栏的变化更新视图（如 `hash` 模式或 `history` 模式）。
   - **后端路由**：服务器根据不同的 URL 返回对应的资源。
--  **Vue Router 的实现**：  
+-  **Vue Router 的实现**：<br>
   - Vue Router 是通过动态组件和 URL 监听实现页面切换的。
 
 ---
@@ -413,11 +413,11 @@ this.history = this.mode === 'history' ? new HTML5History(this) : new HashHistor
 
 #### **考察点：**
 
--  **模式种类**：  
+-  **模式种类**：<br>
   - **`hash` 模式**：基于 `#` 的 URL，依赖 `location.hash`。不需要服务器配置，适合简单场景。
   - **`history` 模式**：基于 HTML5 的 `history.pushState`，更符合 URL 语义，但需要服务器支持。
   - **`abstract` 模式**：运行于无浏览器环境（如 Node.js 中）。
--  **SEO 相关性**：  
+-  **SEO 相关性**：<br>
   - **`hash` 模式**：URL 不利于 SEO，因为爬虫无法识别 `#` 之后的内容。
   - **`history` 模式**：URL 简洁，可被爬虫索引。
 
@@ -433,8 +433,8 @@ this.history = this.mode === 'history' ? new HTML5History(this) : new HashHistor
 
 #### **考察点：**
 
--  **基本配置**：  
-  - 静态路由：  
+-  **基本配置**：<br>
+  - 静态路由：<br>
 ```javascript
 const routes = [
   { path: '/', component: Home },
@@ -445,23 +445,23 @@ const routes = [
 ```javascript
 { path: '/user/:id', component: User }
 ```
--  **嵌套路由**：  
-  - 子路由需要在父路由的 `children` 中配置。  
+-  **嵌套路由**：<br>
+  - 子路由需要在父路由的 `children` 中配置。<br>
 ```javascript
-{ 
-  path: '/parent', 
-  component: Parent, 
+{
+  path: '/parent',
+  component: Parent,
   children: [
     { path: 'child', component: Child }
-  ] 
+  ]
 }
 ```
--  **路由 `props`**：  
-  - 静态值：  
+-  **路由 `props`**：<br>
+  - 静态值：<br>
 ```javascript
 { path: '/user/:id', component: User, props: { staticValue: true } }
 ```
-  - 动态解析：  
+  - 动态解析：<br>
 ```javascript
 { path: '/user/:id', component: User, props: route => ({ id: route.params.id }) }
 ```
@@ -478,17 +478,17 @@ const routes = [
 
 #### **考察点：**
 
--  **导航守卫的分类**：  
-  - **全局守卫**：  
+-  **导航守卫的分类**：<br>
+  - **全局守卫**：<br>
     - `beforeEach`：跳转前的全局拦截。
     - `afterEach`：跳转后的全局回调。
   - **路由独享守卫**：通过路由配置的 `beforeEnter`。
-  - **组件内守卫**：  
+  - **组件内守卫**：<br>
     - `beforeRouteEnter`
     - `beforeRouteUpdate`
     - `beforeRouteLeave`
--  **权限验证**：  
-  - 示例：在 `beforeEach` 中检查是否登录。  
+-  **权限验证**：<br>
+  - 示例：在 `beforeEach` 中检查是否登录。<br>
 ```javascript
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !isLoggedIn()) {
@@ -498,7 +498,7 @@ router.beforeEach((to, from, next) => {
   }
 });
 ```
--  **取消导航**：  
+-  **取消导航**：<br>
   - 调用 `next(false)` 取消导航。
 
 ---
@@ -512,17 +512,17 @@ router.beforeEach((to, from, next) => {
 
 #### **考察点：**
 
--  **实现方式**：  
-  - 使用动态 `import`：  
+-  **实现方式**：<br>
+  - 使用动态 `import`：<br>
 ```javascript
 const routes = [
-  { 
-    path: '/about', 
-    component: () => import('./About.vue') 
+  {
+    path: '/about',
+    component: () => import('./About.vue')
   }
 ];
 ```
--  **优点**：  
+-  **优点**：<br>
   - 减少首屏加载时间，按需加载组件。
   - 提高应用性能，尤其适合大型单页应用。
 
@@ -537,17 +537,17 @@ const routes = [
 
 #### **考察点：**
 
--  **动态添加**：  
-  - 使用 `router.addRoute`：  
+-  **动态添加**：<br>
+  - 使用 `router.addRoute`：<br>
 ```javascript
 router.addRoute({
   path: '/new',
   component: NewComponent
 });
 ```
--  **动态移除**：  
+-  **动态移除**：<br>
   - Vue Router 4 提供了 `removeRoute` 方法。
--  **应用场景**：  
+-  **应用场景**：<br>
   - 根据用户权限动态加载路由。
   - 动态模块加载（如微前端场景）。
 
@@ -562,17 +562,17 @@ router.addRoute({
 
 #### **考察点：**
 
--  **基本导航**：  
-  - 使用 `$router.push`：  
+-  **基本导航**：<br>
+  - 使用 `$router.push`：<br>
 ```javascript
 this.$router.push('/home');
 ```
-  - 使用命名路由：  
+  - 使用命名路由：<br>
 ```javascript
 this.$router.push({ name: 'home', params: { id: 123 } });
 ```
--  **替代导航**：  
-  - 使用 `$router.replace`：  
+-  **替代导航**：<br>
+  - 使用 `$router.replace`：<br>
 ```javascript
 this.$router.replace('/login');
 ```
@@ -588,8 +588,8 @@ this.$router.replace('/login');
 
 #### **考察点：**
 
--  **自定义滚动行为**：  
-  - 在路由实例中配置 `scrollBehavior`：  
+-  **自定义滚动行为**：<br>
+  - 在路由实例中配置 `scrollBehavior`：<br>
 ```javascript
 const router = new VueRouter({
   scrollBehavior(to, from, savedPosition) {
@@ -601,7 +601,7 @@ const router = new VueRouter({
   }
 });
 ```
--  **保持位置**：  
+-  **保持位置**：<br>
   - 使用 `savedPosition` 参数保存滚动位置。
 
 ---
@@ -615,14 +615,14 @@ const router = new VueRouter({
 
 #### **考察点：**
 
--  **组件复用**：  
-  - 使用 `keep-alive` 缓存路由组件。  
+-  **组件复用**：<br>
+  - 使用 `keep-alive` 缓存路由组件。<br>
 ```html
 <keep-alive>
   <router-view />
 </keep-alive>
 ```
--  **性能优化**：  
+-  **性能优化**：<br>
   - 优化路由懒加载，减少组件首次渲染时间。
   - 减少复杂嵌套路由的层级。
 
@@ -637,13 +637,13 @@ const router = new VueRouter({
 
 #### **考察点：**
 
--  **404 页面**：  
-  - 配置通配路由：  
+-  **404 页面**：<br>
+  - 配置通配路由：<br>
 ```javascript
 { path: '*', component: NotFound }
 ```
--  **错误处理**：  
-  - 捕获导航错误：  
+-  **错误处理**：<br>
+  - 捕获导航错误：<br>
 ```javascript
 router.onError(err => {
   console.error('Navigation Error:', err);

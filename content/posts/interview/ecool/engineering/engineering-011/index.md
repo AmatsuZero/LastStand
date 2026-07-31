@@ -301,9 +301,9 @@ sectionElement.addEventListener('mouseleave', function () {
 
 **考察点：**
 
--  是否理解性能监控与性能优化的区别。 （监控是“量化和发现问题”，优化是“解决问题”） 
--  是否能从“用户体验”出发定义性能指标，而不仅是代码层面。 
--  是否知道前端性能监控的两大手段：  
+-  是否理解性能监控与性能优化的区别。 （监控是“量化和发现问题”，优化是“解决问题”）
+-  是否能从“用户体验”出发定义性能指标，而不仅是代码层面。
+-  是否知道前端性能监控的两大手段：<br>
   1. **RUM（Real User Monitoring）真实用户监控**
   2. **Synthetic Monitoring** 合成监控（如 Lighthouse、Puppeteer 定期检测）
 
@@ -313,7 +313,7 @@ sectionElement.addEventListener('mouseleave', function () {
 
 **考察点：**
 
-1.  **页面加载类指标**  
+1.  **页面加载类指标**<br>
   - **FP（First Paint）**
   - **FCP（First Contentful Paint）**
   - **LCP（Largest Contentful Paint）**
@@ -323,10 +323,10 @@ sectionElement.addEventListener('mouseleave', function () {
   - **INP（Interaction to Next Paint）**
   - **CLS（Cumulative Layout Shift）**
   - 是否能解释这些指标代表的含义及优化方向。
-2.  **资源加载类指标**  
+2.  **资源加载类指标**<br>
   - JS/CSS 体积、请求耗时、压缩率、缓存命中率
   - 图片资源大小与懒加载情况
-3.  **网络层指标**  
+3.  **网络层指标**<br>
   - DNS 查询耗时、TCP 建立、SSL 握手、HTTP 请求阶段拆解
 
 ---
@@ -347,11 +347,11 @@ sectionElement.addEventListener('mouseleave', function () {
 
 **考察点：**
 
--  前端性能数据如何**采集、聚合、上报**  
+-  前端性能数据如何**采集、聚合、上报**<br>
   - 异步批量上报机制（`sendBeacon` / `navigator.sendBeacon`）
   - 上报策略（定时、限频、合并）
--  性能数据如何与用户维度或页面维度做关联（userId、sessionId、pageKey） 
--  是否考虑埋点 SDK 的轻量化与对性能的反噬影响 
+-  性能数据如何与用户维度或页面维度做关联（userId、sessionId、pageKey）
+-  是否考虑埋点 SDK 的轻量化与对性能的反噬影响
 
 ---
 
@@ -359,13 +359,13 @@ sectionElement.addEventListener('mouseleave', function () {
 
 **考察点：**
 
--  是否了解前端监控平台的组成：  
+-  是否了解前端监控平台的组成：<br>
   1. 数据采集 SDK
   2. 数据上报 API
   3. 数据存储与聚合（如 Elasticsearch、ClickHouse）
   4. 数据可视化展示（如 Grafana、ECharts）
--  是否考虑在监控中结合**错误监控**与**白屏监控** 
--  是否提到核心指标的报警机制（如 LCP > 4s，自动报警） 
+-  是否考虑在监控中结合**错误监控**与**白屏监控**
+-  是否提到核心指标的报警机制（如 LCP > 4s，自动报警）
 
 ---
 
@@ -373,11 +373,11 @@ sectionElement.addEventListener('mouseleave', function () {
 
 **考察点：**
 
--  是否有实际使用过性能分析工具：  
+-  是否有实际使用过性能分析工具：<br>
   - Chrome Performance、Lighthouse、WebPageTest
   - Sentry Performance、阿里 ARMS、字节 ApmPlus
--  是否能解释如何定位性能瓶颈（CPU、网络、渲染） 
--  是否能讲出真实业务场景下的优化闭环：  
+-  是否能解释如何定位性能瓶颈（CPU、网络、渲染）
+-  是否能讲出真实业务场景下的优化闭环：<br>
   - 采集 → 统计 → 报警 → 优化 → 验证 → 回归
 
 ---

@@ -32,20 +32,20 @@ class stateJjFather extends React.Component {
         this.state = {
             mes: '给子组件的信息',
             obj： {
-                
+
             },
             arr: []
         }
     }
     fun(e) {
-        
+
     }
     render() {
         const {mes, obj, arr} = this.state;
         return (
             <div>
                 // 不写箭头函数 this指向会发生错误 也可以使用bind的方式绑定this
-                <stateJj name={'给子组件的信息'} name1={mes}  fun={(e) => this.fun(e)}  obj={obj}  arr={arr} />  
+                <stateJj name={'给子组件的信息'} name1={mes}  fun={(e) => this.fun(e)}  obj={obj}  arr={arr} />
             </div>
         );
     }
@@ -140,7 +140,7 @@ state不同于props的一点是，state是可以被改变的。不过，不可�
 
 ```js
     setState({
-       mes: '123' 
+       mes: '123'
     }, function() {
         console.log(this.state.mes); // 此时state中的mes为 123
     });
@@ -154,7 +154,7 @@ state不同于props的一点是，state是可以被改变的。不过，不可�
             mes: 123
         })
     }, 500); // 里面的值会即时更新 因为react并能监测定时器、延时器里面的方法
-    
+
     // 在调用事件的时候使用原生事件
     componentDidMount() {
       document.querySelector('#btn-raw').addEventListener('click', this.onClick);
@@ -174,7 +174,7 @@ state不同于props的一点是，state是可以被改变的。不过，不可�
         </div>
       )
     }
-    
+
 ```
 
 ## 总结
@@ -351,10 +351,10 @@ function ControlledInput() {
   const [value, setValue] = useState('');
 
   return (
-    <input 
-      type="text" 
-      value={value} 
-      onChange={(e) => setValue(e.target.value)} 
+    <input
+      type="text"
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
     />
   );
 }

@@ -61,23 +61,23 @@ Vue.delete(this.someObject, 'someProperty');
 
 #### **考察点：**
 
--  **Vue.set 和 Vue.delete**： Vue 中的 `Vue.set` 和 `Vue.delete` 是为了响应式系统而提供的工具函数，它们用于确保在数组或对象中添加、删除元素时，能够保持数据的响应性。  
-  - `Vue.set`：用于向对象中添加新的属性，并确保该属性是响应式的。  
+-  **Vue.set 和 Vue.delete**： Vue 中的 `Vue.set` 和 `Vue.delete` 是为了响应式系统而提供的工具函数，它们用于确保在数组或对象中添加、删除元素时，能够保持数据的响应性。<br>
+  - `Vue.set`：用于向对象中添加新的属性，并确保该属性是响应式的。<br>
 ```javascript
 Vue.set(obj, 'newProp', value);
 ```
-  - `Vue.delete`：用于删除对象或数组中的元素，并保持响应性。  
+  - `Vue.delete`：用于删除对象或数组中的元素，并保持响应性。<br>
 ```javascript
 Vue.delete(obj, 'propertyName');
 Vue.delete(arr, index);
 ```
--  **Vue.nextTick**： `Vue.nextTick` 是一个异步队列，用于在 DOM 更新后执行回调函数。它保证了在 Vue 完成 DOM 更新后，回调才会被执行。  
+-  **Vue.nextTick**： `Vue.nextTick` 是一个异步队列，用于在 DOM 更新后执行回调函数。它保证了在 Vue 完成 DOM 更新后，回调才会被执行。<br>
 ```javascript
 Vue.nextTick(() => {
   console.log('DOM has been updated!');
 });
 ```
--  **Vue.util**： Vue 提供了一些工具函数，如 `Vue.util.extend` 用于对象的深拷贝，`Vue.util.merge` 用于合并对象。 
+-  **Vue.util**： Vue 提供了一些工具函数，如 `Vue.util.extend` 用于对象的深拷贝，`Vue.util.merge` 用于合并对象。
 
 ---
 
@@ -90,7 +90,7 @@ Vue.nextTick(() => {
 
 #### **考察点：**
 
--  **日期格式化工具函数**： 在 Vue 项目中，常常需要对日期进行格式化。你可以创建一个工具函数来统一处理日期格式。  在组件中使用该工具函数：  
+-  **日期格式化工具函数**： 在 Vue 项目中，常常需要对日期进行格式化。你可以创建一个工具函数来统一处理日期格式。  在组件中使用该工具函数：<br>
 ```javascript
 // utils/date.js
 export function formatDate(date, format = 'YYYY-MM-DD') {
@@ -122,7 +122,7 @@ export default {
   }
 };
 ```
--  **深拷贝工具函数**： 在某些场景下，你可能需要深拷贝对象，避免对原始对象进行修改。  
+-  **深拷贝工具函数**： 在某些场景下，你可能需要深拷贝对象，避免对原始对象进行修改。<br>
 ```javascript
 export function deepClone(obj) {
   return JSON.parse(JSON.stringify(obj));
@@ -140,7 +140,7 @@ export function deepClone(obj) {
 
 #### **考察点：**
 
--  **Vue 过滤器**： 过滤器是用于格式化输出数据的一种工具，在 Vue 模板中可以直接使用，但仅适用于模板中的数据绑定。常用的场景是格式化日期、数字等。  
+-  **Vue 过滤器**： 过滤器是用于格式化输出数据的一种工具，在 Vue 模板中可以直接使用，但仅适用于模板中的数据绑定。常用的场景是格式化日期、数字等。<br>
 ```javascript
 Vue.filter('currency', function (value) {
   return '$' + value.toFixed(2);
@@ -149,7 +149,7 @@ Vue.filter('currency', function (value) {
 // 在模板中使用
 {{ price | currency }}
 ```
--  **工具函数与过滤器的区别**：  
+-  **工具函数与过滤器的区别**：<br>
   - **过滤器**：通常用于模板中，只能格式化输出。
   - **工具函数**：可以在组件的任何地方使用，提供更强的逻辑处理能力，适合更复杂的功能（如数据计算、事件管理等）。
 
@@ -166,7 +166,7 @@ Vue.filter('currency', function (value) {
 
 在 Vuex 中，常常需要对数据进行集中管理。可以通过工具函数来简化 Vuex 操作，避免重复代码。
 
--  **简化 Vuex action**： 假设你有多个组件需要获取相同的数据，你可以创建一个工具函数来简化这部分逻辑。  在组件中使用：  
+-  **简化 Vuex action**： 假设你有多个组件需要获取相同的数据，你可以创建一个工具函数来简化这部分逻辑。  在组件中使用：<br>
 ```javascript
 // utils/vuex.js
 export function fetchData(store, action) {
@@ -199,7 +199,7 @@ export default {
 
 #### **考察点：**
 
--  **防抖（Debounce）函数**： 防抖是限制函数执行频率的一种方式，当连续触发事件时，只有在停止触发一段时间后，才会执行函数。  使用防抖：  
+-  **防抖（Debounce）函数**： 防抖是限制函数执行频率的一种方式，当连续触发事件时，只有在停止触发一段时间后，才会执行函数。  使用防抖：<br>
 ```javascript
 export function debounce(fn, delay = 300) {
   let timer;
@@ -221,7 +221,7 @@ export default {
   }
 };
 ```
--  **节流（Throttle）函数**： 节流是限制函数在单位时间内只执行一次。  
+-  **节流（Throttle）函数**： 节流是限制函数在单位时间内只执行一次。<br>
 ```javascript
 export function throttle(fn, delay = 300) {
   let lastTime = 0;

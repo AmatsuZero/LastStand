@@ -14,7 +14,7 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 `Dom`标准事件流的触发的先后顺序为：先捕获再冒泡。即当触发`dom`事件时，会先进行事件捕获，捕获到事件源之后通过事件传播进行事件冒泡。
 
-**addEventListener的第三个参数**  
+**addEventListener的第三个参数**<br>
  在我们平常用的`addEventListener`方法中，一般只会用到两个参数，一个是需要绑定的事件，另一个是触发事件后要执行的函数，然而`addEventListener`还可以传入第三个参数：
 
 ```js
@@ -87,10 +87,10 @@ element.addEventListener(event, function, useCapture);
 
 优点：
 
-1.  替代循环绑定事件的操作，减少内存消耗，提高性能。比如：  
+1.  替代循环绑定事件的操作，减少内存消耗，提高性能。比如：<br>
   - 在`table`上代理所有`td`的`click`事件。
   - 在`ul`上代理所有`li`的`click`事件。
-2.  简化了`dom`节点更新时，相应事件的更新。比如：  
+2.  简化了`dom`节点更新时，相应事件的更新。比如：<br>
   - 不用在新添加的`li`上绑定`click`事件。
   - 当删除某个`li`时，不用移解绑上面的`click`事件。
 

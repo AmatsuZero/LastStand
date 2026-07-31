@@ -52,7 +52,7 @@ import { defineStore } from 'pinia'
 
 export const useUsersStore = defineStore('users', {
   // 其他配置...
-  
+
 })
 ```
 
@@ -285,7 +285,7 @@ export const userUsersStore = defineStore('users', {
     }
   },
 	getUserName(state) {
-		return '大家好，我是' + state.name 
+		return '大家好，我是' + state.name
 	},
 	getName(): string {
 		return this.getUserName + '🐔你实在太帅'
@@ -612,9 +612,9 @@ store.$persist()
 
 #### **考察点：**
 
--  **定义**：  
+-  **定义**：<br>
   - 状态管理是为了管理应用中的共享状态，特别是在组件间需要频繁通信或多级传递的情况下。
--  **状态管理的解决方案**：  
+-  **状态管理的解决方案**：<br>
   - 简单项目：通过 `props` 和 `$emit` 实现父子通信。
   - 中等复杂项目：通过 **事件总线** 或 **依赖注入**（`provide` 和 `inject`）。
   - 大型项目：借助 Vuex 或 Pinia 实现全局状态管理。
@@ -631,11 +631,11 @@ store.$persist()
 
 #### **考察点：**
 
--  **父子通信**：  
+-  **父子通信**：<br>
   - 父传子：通过 `props`。
   - 子传父：通过 `$emit` 触发事件。
--  **兄弟组件通信**：  
-  - 使用 **事件总线**。  
+-  **兄弟组件通信**：<br>
+  - 使用 **事件总线**。<br>
 ```javascript
 // EventBus.js
 import Vue from 'vue';
@@ -647,8 +647,8 @@ EventBus.$emit('eventName', data);
 // 在组件 B 中
 EventBus.$on('eventName', callback);
 ```
--  **跨层级通信**：  
-  - 使用 `provide` 和 `inject`：  
+-  **跨层级通信**：<br>
+  - 使用 `provide` 和 `inject`：<br>
 ```javascript
 // 父组件
 provide('key', value);
@@ -656,7 +656,7 @@ provide('key', value);
 // 子组件
 inject('key');
 ```
--  **状态共享**：  
+-  **状态共享**：<br>
   - 利用 Vuex、Pinia 或全局变量。
 
 ---
@@ -671,14 +671,14 @@ inject('key');
 
 #### **考察点：**
 
--  **核心概念**：  
+-  **核心概念**：<br>
   - **单一状态树**：应用的所有状态都集中在一个对象中，便于追踪和管理。
-  - **Vuex 的四个核心模块**：  
+  - **Vuex 的四个核心模块**：<br>
     - `state`：存储共享状态。
     - `getters`：计算属性，用于派生状态。
     - `mutations`：同步修改状态的方法。
     - `actions`：异步操作，通过提交 `mutations` 改变状态。
--  **代码示例**：  
+-  **代码示例**：<br>
 ```javascript
 const store = new Vuex.Store({
   state: {
@@ -701,8 +701,8 @@ const store = new Vuex.Store({
   }
 });
 ```
--  **状态注入组件**：  
-  - 使用 `mapState`、`mapGetters` 辅助函数：  
+-  **状态注入组件**：<br>
+  - 使用 `mapState`、`mapGetters` 辅助函数：<br>
 ```javascript
 import { mapState, mapGetters } from 'vuex';
 computed: {
@@ -723,11 +723,11 @@ computed: {
 
 #### **考察点：**
 
--  **Pinia 的特点**：  
+-  **Pinia 的特点**：<br>
   - 更简单的 API，基于 Composition API 实现。
   - 更好的开发体验（如类型推导、支持 SSR）。
   - 不再区分 `mutations` 和 `actions`，状态修改直接在 `actions` 中完成。
--  **代码示例**：  
+-  **代码示例**：<br>
 ```javascript
 import { defineStore } from 'pinia';
 
@@ -750,7 +750,7 @@ export const useCounterStore = defineStore('counter', {
   }
 });
 ```
--  **模块化管理**：  
+-  **模块化管理**：<br>
   - 每个模块独立定义 `store`，通过 `useStore` 调用。
 
 ---
@@ -764,8 +764,8 @@ export const useCounterStore = defineStore('counter', {
 
 #### **考察点：**
 
-- **状态持久化方法**：  
-  - 利用第三方库 `vuex-persistedstate`：  
+- **状态持久化方法**：<br>
+  - 利用第三方库 `vuex-persistedstate`：<br>
 ```javascript
 import createPersistedState from 'vuex-persistedstate';
 
@@ -773,7 +773,7 @@ const store = new Vuex.Store({
   plugins: [createPersistedState()]
 });
 ```
-  - 手动监听状态变化并保存：  
+  - 手动监听状态变化并保存：<br>
 ```javascript
 store.subscribe((mutation, state) => {
   localStorage.setItem('state', JSON.stringify(state));
@@ -791,10 +791,10 @@ store.subscribe((mutation, state) => {
 
 #### **考察点：**
 
--  **性能问题**：  
+-  **性能问题**：<br>
   - 全局状态更新可能导致过多的组件重新渲染。
   - 状态树过大可能影响调试和开发效率。
--  **优化方法**：  
+-  **优化方法**：<br>
   - 拆分模块，按需加载状态。
   - 使用 `getters` 提取需要的部分状态。
   - 使用 `Vue.set` 确保响应性。
@@ -810,10 +810,10 @@ store.subscribe((mutation, state) => {
 
 #### **考察点：**
 
--  **适用场景**：  
+-  **适用场景**：<br>
   - 当多个组件需要共享状态且层级较深时，引入 Vuex 或 Pinia。
   - 小型项目可以直接使用 `provide` 和 `inject`。
--  **避免滥用**：  
+-  **避免滥用**：<br>
   - 不要将所有状态都放入 Vuex，应将仅需共享的部分存储到全局状态中。
 
 ---
@@ -827,8 +827,8 @@ store.subscribe((mutation, state) => {
 
 #### **考察点：**
 
--  **其他方案**：  
+-  **其他方案**：<br>
   - 使用 `reactive` 或 `ref` 实现简单的状态共享。
   - 使用 RxJS 管理复杂的异步数据流。
--  **第三方库**：  
+-  **第三方库**：<br>
   - Redux：功能强大，但与 Vue 的风格不完全一致，可能增加学习成本。

@@ -205,13 +205,13 @@ function* gen() {
   return 3
 }
 const g = gen()
-console.log(g.next()) 
+console.log(g.next())
 // 1
 // { value: 1, done: false }
 console.log(g.next())
 // 2
 //  { value: 2, done: false }
-console.log(g.next()) 
+console.log(g.next())
 // { value: 3, done: true }
 ```
 
@@ -280,7 +280,7 @@ console.log(g.next()) // { value: 1, done: false }
 console.log(g.next(11111))
 // 11111
 //  { value: 2, done: false }
-console.log(g.next(22222)) 
+console.log(g.next(22222))
 // 22222
 // { value: 3, done: true }
 ```
@@ -350,7 +350,7 @@ next1.value.then(res1 => {
 ```js
 function highorderFn(函数) {
     // 一系列处理
-    
+
     return 函数
 }
 ```
@@ -360,7 +360,7 @@ function highorderFn(函数) {
 ```js
 function generatorToAsync(generatorFn) {
   // 经过一系列处理
-  
+
   return 具有async函数功能的函数
 }
 ```

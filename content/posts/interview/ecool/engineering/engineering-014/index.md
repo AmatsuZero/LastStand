@@ -965,12 +965,12 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 **考察重点：**
 
--  能否清楚区分：  
+-  能否清楚区分：<br>
   - **UI 状态**（组件内部状态）
   - **全局业务状态**（用户信息、权限、配置等）
   - **服务端状态**（接口数据缓存）
--  是否理解状态管理的本质是：**数据可控、流向清晰、可预测** 
--  能否明确“为什么需要状态管理库”：组件通信复杂、状态共享困难、数据一致性难维护。 
+-  是否理解状态管理的本质是：**数据可控、流向清晰、可预测**
+-  能否明确“为什么需要状态管理库”：组件通信复杂、状态共享困难、数据一致性难维护。
 
 **典型问题：**
 
@@ -984,14 +984,14 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 **考察重点：**
 
--  **单向数据流（React 思想）**与**响应式数据流（Vue 思想）** 
--  状态变化的可追踪性（Action → Reducer → State → View） 
--  数据分层结构设计：  
+-  **单向数据流（React 思想）**与**响应式数据流（Vue 思想）**
+-  状态变化的可追踪性（Action → Reducer → State → View）
+-  数据分层结构设计：<br>
   - 页面局部状态（useState / reactive）
   - 模块级状态（Feature Store）
   - 全局状态（App Store）
   - 远程状态（API cache、RTK Query、React Query）
--  是否具备清晰的层次划分和数据流动规范。 
+-  是否具备清晰的层次划分和数据流动规范。
 
 **典型问题：**
 
@@ -1005,15 +1005,15 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 **考察重点：**
 
--  常见状态管理方案的原理对比：  
+-  常见状态管理方案的原理对比：<br>
   - Redux / Redux Toolkit（函数式 + 可预测）
   - Zustand / Jotai / Recoil（轻量、hooks 驱动）
   - Vuex / Pinia（响应式代理）
   - RxJS（响应式流）
--  **状态访问模式：**  
+-  **状态访问模式：**<br>
   - 直接访问 vs 派生状态（selector / computed）
   - 共享状态 vs 独立实例状态
--  **不可变数据（Immutable）**的重要性与性能影响 
+-  **不可变数据（Immutable）**的重要性与性能影响
 
 **典型问题：**
 
@@ -1044,14 +1044,14 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 **考察重点：**
 
--  大型项目状态更新频繁导致的性能问题 
--  React 中：  
+-  大型项目状态更新频繁导致的性能问题
+-  React 中：<br>
   - 拆分 store / 使用 selector / memo 优化
   - React 18 并发更新与状态切片思想
--  Vue 中：  
+-  Vue 中：<br>
   - 响应式细粒度更新、computed 缓存
   - 拆 store 模块、按需订阅
--  异步状态与请求缓存（React Query、SWR） 
+-  异步状态与请求缓存（React Query、SWR）
 
 **典型问题：**
 
@@ -1065,13 +1065,13 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 **考察重点：**
 
--  服务端状态与客户端状态的边界 
--  数据获取策略：  
+-  服务端状态与客户端状态的边界
+-  数据获取策略：<br>
   - SWR（stale-while-revalidate）
   - 缓存 + 失效 + 重新验证
--  React Query / RTK Query 在工程化体系中的角色 
--  接口层抽象：API 模块 vs 状态同步 vs 缓存层 
--  异步状态管理与错误边界 
+-  React Query / RTK Query 在工程化体系中的角色
+-  接口层抽象：API 模块 vs 状态同步 vs 缓存层
+-  异步状态管理与错误边界
 
 **典型问题：**
 

@@ -85,7 +85,7 @@ body#god span#test {width: 250px;}
 ```html
 <style type="text/css">
      #parent p { background-color: red;  }
-      div .a.b.c.d.e.f.g.h.i.j.k p{ background-color: green;  
+      div .a.b.c.d.e.f.g.h.i.j.k p{ background-color: green;
 </style>
 ......
 <div id="parent">
@@ -190,7 +190,7 @@ body#god span#test {width: 250px;}
 ### 2. **CSS 优先级**
 
 - CSS 的优先级（Specificity）是什么？如何计算优先级？
-- 请列举并解释以下选择器的优先级从高到低的顺序：  
+- 请列举并解释以下选择器的优先级从高到低的顺序：<br>
   - 元素选择器（例如 `div`）
   - 类选择器（例如 `.class-name`）
   - ID 选择器（例如 `#id-name`）
@@ -221,7 +221,7 @@ body#god span#test {width: 250px;}
 - 请解释什么是 **CSS 继承**。哪些 CSS 属性是可以继承的，哪些不能继承？
 - 请举例说明常见的继承属性，例如 `color`、`font-family` 和 `line-height`。
 - CSS 继承是如何工作的？子元素是否会自动继承父元素的样式？
-- 如果需要防止某些属性继承到子元素，你该如何做？  
+- 如果需要防止某些属性继承到子元素，你该如何做？<br>
   - 比如，如何防止 `font-family` 在子元素中继承？
 
 ### 7. **`inherit`、`initial` 和 `unset`**
@@ -238,7 +238,7 @@ body#god span#test {width: 250px;}
 
 ### 9. **样式表的来源**
 
-- 请列举并解释以下样式表的来源以及它们在层叠和优先级中的影响：  
+- 请列举并解释以下样式表的来源以及它们在层叠和优先级中的影响：<br>
   - 浏览器的默认样式表（user agent stylesheets）
   - 外部样式表
   - 内联样式

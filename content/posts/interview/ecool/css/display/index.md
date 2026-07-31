@@ -81,7 +81,7 @@ display 属性规定元素应该生成的框的类型。
 ### 1. **基本概念**
 
 - 请简述 CSS 中的 **`display`** 属性及其作用。
-- **`display`** 属性的常见值有哪些？请列举并解释其含义。  
+- **`display`** 属性的常见值有哪些？请列举并解释其含义。<br>
   - 例如：`block`、`inline`、`inline-block`、`flex`、`grid`、`none` 等。
 
 ### 2. **`display: block`**

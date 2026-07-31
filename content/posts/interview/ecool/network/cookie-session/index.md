@@ -333,9 +333,9 @@ Session Cookies 只能用在`单个节点的域`或者它的`子域`中有效。
 
 ### 3. 安全风险
 
--  **Session Fixation**：攻击者预设 sessionId 引导用户登录 
--  **Session 劫持**：中间人截获 sessionId 
--  解决方式：  
+-  **Session Fixation**：攻击者预设 sessionId 引导用户登录
+-  **Session 劫持**：中间人截获 sessionId
+-  解决方式：<br>
   - 登录成功后重置 sessionId
   - 配合 HTTPS、防止 sessionId 泄露
 

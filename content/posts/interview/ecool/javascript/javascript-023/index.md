@@ -165,7 +165,7 @@ console.log(pattern.multiline); //true
 > 返回**字面量形式**的正则表达式（**类似于toString**）
 
 ```js
-var pattern = /hello/igm; 
+var pattern = /hello/igm;
 console.log(pattern.source,typeof pattern.source);  //hello string
 ```
 
@@ -188,7 +188,7 @@ console.log(pattern.source,typeof pattern.source);  //hello string
 ```js
 var reg = /\n/;
 console.log(reg.test('hello \n world'));  //true
-console.log('hello \n world'); 
+console.log('hello \n world');
 结果为：
 hello
  world
@@ -222,7 +222,7 @@ console.log(reg.test('xyz'));  //false
 > 如果 ^和 $ 在一起，表示必须是精确匹配。
 
 ```js
-var rg = /abc/; 
+var rg = /abc/;
 // /abc/ 只要包含有abc这个字符串返回的都是true
 console.log(rg.test('abc'));  //true
 console.log(rg.test('abcd')); //true
@@ -284,7 +284,7 @@ var reg = /\brld\b/;
 console.log(reg.exec(str)); //null
 
 var reg = /\bhello\b/;
-console.log(reg.exec(str)); 
+console.log(reg.exec(str));
 //[
     //'hello',
     //index: 0,
@@ -317,13 +317,13 @@ console.log(reg.exec(str)); //[ 'orl', index: 7, input: 'hello world javascript'
 
 ```js
 var reg = /./; //匹配除\n\r 之外的任意字符
-var str = '\nhello\r world js'; 
+var str = '\nhello\r world js';
 console.log(reg.test(str)); //true
 
-var str = '\n\r '; 
+var str = '\n\r ';
 console.log(reg.test(str)); //true
 
-var str = '\n\r'; 
+var str = '\n\r';
 console.log(reg.test(str)); //false
 
 var reg = /\d/; //\d 等同于[0-9] 匹配任意数字
@@ -362,8 +362,8 @@ console.log(reg.test('1')); //false
 var reg = /\S/; //\S 等效于 [^\f\t\n\r]
 console.log(reg.test('1'));
 console.log(reg.test('a'));
-console.log(reg.test('!')); 
-console.log(reg.test(' ')); //false 
+console.log(reg.test('!'));
+console.log(reg.test(' ')); //false
 console.log(reg.test('\n')); //false
 ```
 
@@ -428,7 +428,7 @@ console.log(reg.test("1440549324"));
 var reg = /^[1-9]\d{16}[xX\d]$/;
 console.log(reg.test('142325202006283320'));
 console.log(reg.test('14232520200628332x'));
-console.log(reg.test('1423252020062833')); //false 
+console.log(reg.test('1423252020062833')); //false
 console.log(reg.test('1423252020062833xx')); //false
 ```
 
@@ -480,7 +480,7 @@ console.log(reg.test('briupbriupbriup'));
 console.log(reg.test('briupbriupbriupbriup'));
 
 var reg = /^(briup){3}$/;
-console.log(reg.test('briup')); //false 
+console.log(reg.test('briup')); //false
 console.log(reg.test('briupbriup')); //false
 console.log(reg.test('briupbriupbriup')); //true
 console.log(reg.test('briupbriupbriupbriup')); //false
@@ -517,7 +517,7 @@ console.log(RegExp.$3); //28
 var reg = /((apple) is (a (fruit)))/;
 reg.exec('apple is a fruit');
 console.log(RegExp.$1); //apple is a fruit
-console.log(RegExp.$2); //apple 
+console.log(RegExp.$2); //apple
 console.log(RegExp.$3); //a fruit
 console.log(RegExp.$4); //fruit
 ```
@@ -649,7 +649,7 @@ console.log(newStr);//Tello, Hi, I am Hilary.
 > 最后以0-9的9个整数结尾
 
 ```js
-var reg = /^[1][34578]\d{9}$/; 
+var reg = /^[1][34578]\d{9}$/;
 console.log(reg.test('18412341225'));  //true
 console.log(reg.test('1100'));
 console.log(reg.test('12345678910'));

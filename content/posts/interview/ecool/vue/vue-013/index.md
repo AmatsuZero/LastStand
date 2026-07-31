@@ -218,10 +218,10 @@ function processAttrs(el) {
                 } else {
                     addAttr(el, name, value, list[i], isDynamic);
                 }
-            } else if (onRE.test(name)) { 
+            } else if (onRE.test(name)) {
                 // 处理 v-on 情形
                 addHandler(el, name, value, modifiers, false, warn$2, list[i], isDynamic);
-            } else { 
+            } else {
                 // 处理 常规指令情形
                 // Tip：给被解析到的元素，添加 directives 属性
                 addDirective(el, name, rawName, value, arg, isDynamic, modifiers, list[i]);
@@ -335,7 +335,7 @@ function _update(oldVnode, vnode) {
 
 #### **考察点：**
 
--  **定义自定义指令**： 自定义指令通过 `Vue.directive()` 来定义：  使用自定义指令：  在这个例子中，`v-focus` 是一个自定义指令，当该元素插入 DOM 后，自动聚焦。 
+-  **定义自定义指令**： 自定义指令通过 `Vue.directive()` 来定义：  使用自定义指令：  在这个例子中，`v-focus` 是一个自定义指令，当该元素插入 DOM 后，自动聚焦。
 ```javascript
 Vue.directive('focus', {
   // 绑定钩子函数
@@ -347,7 +347,7 @@ Vue.directive('focus', {
 ```vue
 <input v-focus />
 ```
--  **内置指令与自定义指令**：  
+-  **内置指令与自定义指令**：<br>
   - 内置指令（如 `v-if`、`v-for`、`v-model` 等）由 Vue 提供并在应用中广泛使用。
   - 自定义指令是由开发者自定义的，用于实现特定功能。
 
@@ -364,31 +364,31 @@ Vue.directive('focus', {
 
 自定义指令支持以下几个生命周期钩子函数：
 
--  **`bind`**：只在指令第一次绑定到元素时调用，可以用于设置初始的绑定状态。  
+-  **`bind`**：只在指令第一次绑定到元素时调用，可以用于设置初始的绑定状态。<br>
 ```javascript
 bind(el, binding) {
   console.log('v-focus bind', el);
 }
 ```
--  **`inserted`**：当元素插入到 DOM 中时调用，一般用于操作 DOM 元素。  
+-  **`inserted`**：当元素插入到 DOM 中时调用，一般用于操作 DOM 元素。<br>
 ```javascript
 inserted(el) {
   el.focus();
 }
 ```
--  **`update`**：在组件更新时，指令的值发生变化时调用，但不会调用 `inserted`。  
+-  **`update`**：在组件更新时，指令的值发生变化时调用，但不会调用 `inserted`。<br>
 ```javascript
 update(el, binding) {
   console.log('update', binding.value);
 }
 ```
--  **`componentUpdated`**：在组件更新时调用，且不管指令的值是否发生变化。  
+-  **`componentUpdated`**：在组件更新时调用，且不管指令的值是否发生变化。<br>
 ```javascript
 componentUpdated(el) {
   console.log('componentUpdated');
 }
 ```
--  **`unbind`**：在指令与元素解绑时调用，通常用于清理事件监听等操作。  
+-  **`unbind`**：在指令与元素解绑时调用，通常用于清理事件监听等操作。<br>
 ```javascript
 unbind(el) {
   console.log('unbind');
@@ -406,15 +406,15 @@ unbind(el) {
 
 #### **考察点：**
 
--  **传递参数**：可以通过指令的绑定来传递参数：  在指令的钩子中，`binding.arg` 获取到 `delay` 参数，`binding.value` 获取到值 `1000`。 
+-  **传递参数**：可以通过指令的绑定来传递参数：  在指令的钩子中，`binding.arg` 获取到 `delay` 参数，`binding.value` 获取到值 `1000`。
 ```vue
 <input v-focus:delay="1000" />
 ```
--  **修饰符**：修饰符是通过 `v-directive.modifier` 访问的，用于对指令进行修饰或拓展功能：  `binding.modifiers.prevent` 可以访问到修饰符 `prevent`。 
+-  **修饰符**：修饰符是通过 `v-directive.modifier` 访问的，用于对指令进行修饰或拓展功能：  `binding.modifiers.prevent` 可以访问到修饰符 `prevent`。
 ```vue
 <input v-focus.prevent />
 ```
--  **常见场景**：比如实现一个 `v-color` 指令，它可以接收颜色作为参数，且有一个 `.hover` 修饰符控制鼠标悬停时的颜色变化。  
+-  **常见场景**：比如实现一个 `v-color` 指令，它可以接收颜色作为参数，且有一个 `.hover` 修饰符控制鼠标悬停时的颜色变化。<br>
 ```javascript
 Vue.directive('color', {
   bind(el, binding) {
@@ -481,7 +481,7 @@ Vue.directive('hover', {
 
 #### **考察点：**
 
--  在 Vue 实例中，你可以动态注册指令：  
+-  在 Vue 实例中，你可以动态注册指令：<br>
 ```javascript
 Vue.directive('dynamic', {
   bind(el) {
@@ -489,7 +489,7 @@ Vue.directive('dynamic', {
   }
 });
 ```
--  **动态指令的应用场景**：  
+-  **动态指令的应用场景**：<br>
   - 在多种指令配置之间切换。
   - 根据组件的不同状态动态控制 DOM 行为。
 
@@ -520,7 +520,7 @@ Vue.directive('dynamic', {
 #### **考察点：**
 
 - **限制**：自定义指令只作用于 DOM 元素，无法操作组件的实例或行为。它们主要用于封装 DOM 操作和元素特定的行为。
-- **指令 vs 组件**：  
+- **指令 vs 组件**：<br>
   - **自定义指令**：适用于直接操作 DOM 元素（例如：焦点控制、事件绑定、样式控制等）。
   - **组件**：适用于复杂的 UI 逻辑和交互，能够复用多个视图和行为。
 

@@ -12,20 +12,20 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 ### 1. 盒子模型的组成部分
 
--  **内容（Content）**:  
+-  **内容（Content）**:<br>
   - 盒子中实际显示的文本或图像部分。内容区的大小由 `width` 和 `height` 属性确定。
--  **内边距（Padding）**:  
+-  **内边距（Padding）**:<br>
   - 内容与边框之间的空间。它用于增加内容与边框之间的距离，可以通过 `padding`、`padding-top`、`padding-right`、`padding-bottom` 和 `padding-left` 属性进行设置。
--  **边框（Border）**:  
+-  **边框（Border）**:<br>
   - 环绕在内边距和内容周围的边界。可以设置边框的宽度、样式和颜色。相关属性包括 `border`、`border-width`、`border-style` 和 `border-color`。
--  **外边距（Margin）**:  
+-  **外边距（Margin）**:<br>
   - 盒子外部的空间。用于控制元素与元素之间的间距。可以通过 `margin`、`margin-top`、`margin-right`、`margin-bottom` 和 `margin-left` 属性进行设置。
 
 ### 2. 标准盒子模型与替代盒子模型
 
--  **标准盒子模型（content-box）**:  
+-  **标准盒子模型（content-box）**:<br>
   - 默认的盒子模型。`width` 和 `height` 只包含内容区，不包括内边距和边框。因此，元素的实际占用空间是 `width + padding + border`。
--  **替代盒子模型（border-box）**:  
+-  **替代盒子模型（border-box）**:<br>
   - 通过设置 `box-sizing: border-box`，使得 `width` 和 `height` 包括内边距和边框，这样内容区的大小会自动调整以适应总高度和宽度。这样做通常可以避免许多布局问题。
 
 #### 示例
@@ -96,7 +96,7 @@ source = "https://fe.ecool.fun/knowledge-learn"
 ### 1. **盒模型基础**
 
 - 请简述 CSS 盒模型的概念。一个元素在页面中会占据多少空间？
-- 盒模型的组成部分有哪些？它们分别是什么作用？  
+- 盒模型的组成部分有哪些？它们分别是什么作用？<br>
   - `content`（内容区域）
   - `padding`（内边距）
   - `border`（边框）
@@ -106,7 +106,7 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 - 请解释标准盒模型和怪异盒模型的区别。它们的主要区别是什么？
 - 在标准盒模型中，元素的 `width` 和 `height` 只包含内容区域的尺寸，内边距、边框和外边距不算在内。怪异盒模型如何影响元素的尺寸计算？
-- 如何使用 `box-sizing` 属性来切换标准盒模型和怪异盒模型？  
+- 如何使用 `box-sizing` 属性来切换标准盒模型和怪异盒模型？<br>
   - `box-sizing: content-box` 与 `box-sizing: border-box` 的区别是什么？
 
 ### 3. **`box-sizing` 属性**
@@ -145,7 +145,7 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 ### 9. **计算元素总宽度与高度**
 
-- 如何计算一个元素的总宽度和总高度？  
+- 如何计算一个元素的总宽度和总高度？<br>
   - 在标准盒模型下，总宽度 = `width` + `padding-left` + `padding-right` + `border-left` + `border-right` + `margin-left` + `margin-right`。
   - 在怪异盒模型下，总宽度 = `width`（包含 `padding` 和 `border`）。
 

@@ -155,7 +155,7 @@ this.$http.jsonp('http://www.domain2.com:8080/login', {
     params: {},
     jsonp: 'handleCallback'
 }).then((res) => {
-    console.log(res); 
+    console.log(res);
 })
 ```
 
@@ -200,7 +200,7 @@ postMessage是HTML5 XMLHttpRequest Level 2中的API，且是为数不多可以�
 
 ```xml
 <iframe id="iframe" src="http://www.domain2.com/b.html" style="display:none;"></iframe>
-<script>       
+<script>
     var iframe = document.getElementById('iframe');
     iframe.onload = function() {
         var data = {
@@ -377,7 +377,7 @@ module.exports = {
     setTimeout(function() {
         iframe.src = iframe.src + '#user=admin';
     }, 1000);
-    
+
     // 开放给同域c.html的回调方法
     function onCallback(res) {
         alert('data from c.html ---> ' + res);
@@ -479,11 +479,11 @@ var socket = io('http://www.domain2.com:8080');
 socket.on('connect', function() {
     // 监听服务端消息
     socket.on('message', function(msg) {
-        console.log('data from server: ---> ' + msg); 
+        console.log('data from server: ---> ' + msg);
     });
     // 监听服务端关闭
-    socket.on('disconnect', function() { 
-        console.log('Server socket has closed.'); 
+    socket.on('disconnect', function() {
+        console.log('Server socket has closed.');
     });
 });
 document.getElementsByTagName('input')[0].onblur = function() {
@@ -515,7 +515,7 @@ socket.listen(server).on('connection', function(client) {
     });
     // 断开处理
     client.on('disconnect', function() {
-        console.log('Client socket has closed.'); 
+        console.log('Client socket has closed.');
     });
 });
 ```
@@ -533,30 +533,30 @@ socket.listen(server).on('connection', function(client) {
 
 ### 3. **跨域解决方案**
 
--  **CORS**（跨域资源共享）  
+-  **CORS**（跨域资源共享）<br>
   - 如何通过 HTTP 头实现跨域？
   - 简单请求与复杂请求的区别？
   - 预检请求（OPTIONS）是什么？
--  **JSONP**  
+-  **JSONP**<br>
   - JSONP 如何实现跨域？
   - JSONP 的局限性和安全问题。
--  **代理服务器**  
+-  **代理服务器**<br>
   - 如何通过代理服务器解决跨域问题？
   - 正向代理与反向代理的区别。
--  **WebSocket**  
+-  **WebSocket**<br>
   - 为什么 WebSocket 可以跨域？
   - WebSocket 与传统 HTTP 请求的区别。
--  **postMessage**  
+-  **postMessage**<br>
   - 什么是 `window.postMessage()`？
   - 如何在不同窗口或 iframe 之间通信？
--  **跨域资源嵌入**  
+-  **跨域资源嵌入**<br>
   - 如何通过 `<script>`、`<img>`、`<iframe>` 标签实现资源加载？
   - 什么场景下可以通过这些标签实现跨域？
--  **服务器端跨域处理**  
+-  **服务器端跨域处理**<br>
   - 如何通过 Nginx 或其他服务器配置实现跨域？
--  **document.domain**  
+-  **document.domain**<br>
   - 通过 `document.domain` 实现跨子域名通信的原理。
--  **浏览器同源策略放宽**  
+-  **浏览器同源策略放宽**<br>
   - 如何在开发环境中临时放宽浏览器的同源策略（如使用浏览器插件）？
 
 ### 4. **CORS 的具体应用**

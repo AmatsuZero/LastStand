@@ -38,9 +38,9 @@ console.log(site)	//输出： www.helloworld.net
  //a.js 中定义两个变量，并导出
  var siteUrl="www.helloworld.net"
  var siteName="helloworld开发者社区"
- 
+
  //将上面的变量导出
- export { siteUrl ,siteName }  
+ export { siteUrl ,siteName }
 
  // b.js 中使用这两个变量
  import { siteUrl , siteName } from "/.a.js" //路径根据你的实际情况填写
@@ -60,7 +60,7 @@ function sum(a, b) {
     return a + b
 }
 //将函数sum导出
-export { sum } 
+export { sum }
 
 //b.js 中导入函数并使用
 import { sum } from "/.a.js" //路径根据你的实际情况填写
@@ -155,7 +155,7 @@ class Person {
 }
 
 //导出这个类
-export default Person 
+export default Person
 
 //b.js 中导入并使用
 //导入类

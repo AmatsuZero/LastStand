@@ -95,7 +95,7 @@ function track(key){
     if(!dep){
         depsMap.set(key, (dep = new Set()))
     }
-    
+
     dep.add(effect)
 }
 
@@ -158,7 +158,7 @@ function trigger(target, key){
     if(dep){
         dep.forEach(effect => {
             effect()
-        }) 
+        })
     }
 }
 
@@ -209,12 +209,12 @@ console.log('quantity: ', product.quantity)
 
 ### **1. 响应式实现原理**
 
--  **Vue 2：`Object.defineProperty`**  
+-  **Vue 2：`Object.defineProperty`**<br>
   - 如何通过 `Object.defineProperty` 劫持对象的属性？
   - 为什么 Vue 2 中的响应式不能监控数组索引和对象新增/删除属性？
   - Vue 2 是如何进行依赖收集和视图更新的？
   - Vue 2 中，`setter` 和 `getter` 是如何工作的？
--  **Vue 3：`Proxy`**  
+-  **Vue 3：`Proxy`**<br>
   - 为什么 Vue 3 使用 `Proxy` 代替了 `Object.defineProperty`？
   - `Proxy` 如何处理对象的所有操作（包括新增属性、删除属性等）？
   - Vue 3 中，`get` 和 `set` 方法如何拦截数据的读写？
@@ -225,12 +225,12 @@ console.log('quantity: ', product.quantity)
 
 ### **2. 数据代理与依赖收集**
 
-- **依赖收集**：  
+- **依赖收集**：<br>
   - Vue 如何实现依赖收集？`Watcher` 和 `Dep` 的角色是什么？
   - 在 Vue 3 中，如何通过 `Effect` 函数收集依赖？
   - 依赖收集与视图更新是如何相互作用的？
   - Vue 如何跟踪每个组件或视图对响应式数据的依赖？
-- **视图更新**：  
+- **视图更新**：<br>
   - 当响应式数据发生变化时，Vue 是如何通知依赖于它的视图进行更新的？
   - Vue 3 中如何通过 `Proxy` 来通知依赖的更新，而不需要手动触发 `set`？
 
@@ -238,12 +238,12 @@ console.log('quantity: ', product.quantity)
 
 ### **3. 响应式数据的种类**
 
--  **`reactive()` 和 `ref()`**：  
+-  **`reactive()` 和 `ref()`**：<br>
   - `reactive()` 是如何让对象变得响应式的？与 `ref()` 有什么区别？
   - `ref()` 返回的是一个对象，为什么需要 `.value` 属性来访问和修改其值？
   - 如何在 Vue 3 中处理基本数据类型（例如字符串、数字、布尔值）的响应式？
   - 如何通过 `reactive()` 和 `ref()` 组合使用来处理复杂的数据结构？
--  **对象和数组的响应式**：  
+-  **对象和数组的响应式**：<br>
   - Vue 3 如何解决 Vue 2 中数组索引和对象新增/删除属性无法响应式更新的问题？
   - 在 Vue 3 中，如何处理嵌套对象的响应式？`Proxy` 是如何递归地处理嵌套对象的？
 
@@ -251,11 +251,11 @@ console.log('quantity: ', product.quantity)
 
 ### **4. Vue 3 响应式的性能优化**
 
--  **懒加载和优化**：  
+-  **懒加载和优化**：<br>
   - Vue 3 如何优化性能，特别是在处理嵌套对象时？为什么 `Proxy` 相比 `Object.defineProperty` 更高效？
   - 如何通过懒加载来减少不必要的依赖收集？
   - 在 Vue 3 中，依赖追踪是如何更加高效的，避免了 Vue 2 中的性能瓶颈？
--  **优化的目标**：  
+-  **优化的目标**：<br>
   - 为什么 Vue 3 能够比 Vue 2 更高效地处理大规模的数据和复杂的组件树？
   - `Proxy` 如何支持惰性计算和按需收集依赖？
 
@@ -263,11 +263,11 @@ console.log('quantity: ', product.quantity)
 
 ### **5. Vue 2 和 Vue 3 的响应式差异**
 
-- **响应式系统的差异**：  
+- **响应式系统的差异**：<br>
   - Vue 2 和 Vue 3 的响应式系统有何本质区别？
   - 为什么 Vue 3 的响应式系统相较 Vue 2 更加强大和灵活？
   - `Proxy` 如何解决 Vue 2 中的一些限制（如不能响应数组索引、对象新增/删除属性等）？
-- **性能差异**：  
+- **性能差异**：<br>
   - 在处理深度嵌套的数据结构时，Vue 2 和 Vue 3 的性能差异。
   - Vue 3 如何避免了 Vue 2 中的递归性能问题？
   - Vue 3 是如何提高响应式系统在高频更新场景下的性能的？
@@ -276,11 +276,11 @@ console.log('quantity: ', product.quantity)
 
 ### **6. 响应式的局限性与陷阱**
 
--  **Vue 2 的局限性**：  
+-  **Vue 2 的局限性**：<br>
   - Vue 2 为什么无法监测数组索引的变化？
   - Vue 2 如何使用 `$set` 和 `$delete` 来处理新增和删除属性的问题？
   - Vue 2 的响应式系统是否存在性能瓶颈，如何优化？
--  **Vue 3 的陷阱**：  
+-  **Vue 3 的陷阱**：<br>
   - Vue 3 中是否仍有需要注意的响应式陷阱？
   - 如果手动修改对象的 `__proto__`，Vue 3 是否仍然能监测到这些变化？
 
@@ -288,10 +288,10 @@ console.log('quantity: ', product.quantity)
 
 ### **7. 响应式的使用场景**
 
--  **Vue 3 的 `watch` 和 `computed`**：  
+-  **Vue 3 的 `watch` 和 `computed`**：<br>
   - 如何利用 `watch` 和 `computed` 对响应式数据进行监听与派发操作？
   - Vue 3 中，`computed` 和 `watch` 的工作原理是什么？与 Vue 2 有什么不同？
--  **嵌套对象与数组的处理**：  
+-  **嵌套对象与数组的处理**：<br>
   - 如何在 Vue 3 中创建一个包含嵌套对象或数组的响应式数据，并确保其变化会反映到视图？
   - 何时选择使用 `reactive()` 还是 `ref()` 来创建响应式数据？
 
@@ -299,9 +299,9 @@ console.log('quantity: ', product.quantity)
 
 ### **8. Vue 3 中的其他相关特性**
 
--  **`readonly()` 和 `shallowReactive()`**：  
+-  **`readonly()` 和 `shallowReactive()`**：<br>
   - `readonly()` 是如何限制数据修改的？它是如何影响响应式系统的？
   - `shallowReactive()` 是什么？如何使用它避免对嵌套对象的深度代理？
--  **`toRefs()` 和 `toRaw()`**：  
+-  **`toRefs()` 和 `toRaw()`**：<br>
   - `toRefs()` 如何将响应式对象转换为普通的引用，方便解构？
   - `toRaw()` 是如何返回原始对象的？何时使用 `toRaw()`？

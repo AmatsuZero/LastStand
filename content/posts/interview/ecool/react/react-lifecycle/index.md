@@ -48,18 +48,18 @@ React从v16.3的版本开始， 对生命周期的钩子进行了渐进式的调
 
 ![](image-02.webp)
 
-- 挂载  
+- 挂载<br>
   - constructor
   - getDerivedStateFromProps
   - render
   - componentDidMount
-- 更新  
+- 更新<br>
   - getDerivedStateFromProps
   - shouldComponentUpdate
   - render
   - getSnapshotBeforeUpdate
   - componentDidUpdate
-- 卸载  
+- 卸载<br>
   - componentWillUnmount
 
 从以上生命周期的对比，我们不难看出，React从v16.3开始废弃 `componentWillMount` `componentWillReceiveProps` `componentWillUpdate` 三个钩子函数
@@ -371,56 +371,56 @@ export default class Child extends Component {
 
 点击子组件 [改变自身状态counter] 按钮，其 [自身状态counter] 值会 +1, 此时控制台的打印顺序为：
 
--  Child 组件： getDerivedStateFromProps() 
--  Child 组件： shouldComponentUpdate() 
--  Child 组件： render() 
--  Child 组件： getSnapshotBeforeUpdate() 
--  Child 组件： componentDidUpdate() 
+-  Child 组件： getDerivedStateFromProps()
+-  Child 组件： shouldComponentUpdate()
+-  Child 组件： render()
+-  Child 组件： getSnapshotBeforeUpdate()
+-  Child 组件： componentDidUpdate()
 
 ##### 三、修改父组件中传入子组件的 props
 
 点击父组件中的 [改变传给子组件的属性 count] 按钮，则界面上 [父组件传过来的属性 count] 的值会 + 1，控制台的打印顺序为：
 
--  Parent 组件： getDerivedStateFromProps() 
--  Parent 组件： shouldComponentUpdate() 
--  Parent 组件： render() 
--  Child 组件： getDerivedStateFromProps() 
--  Child 组件： shouldComponentUpdate() 
--  Child 组件： render() 
--  Child 组件： getSnapshotBeforeUpdate() 
--  Parent 组件： getSnapshotBeforeUpdate() 
--  Child 组件： componentDidUpdate() 
--  Parent 组件： componentDidUpdate() 
+-  Parent 组件： getDerivedStateFromProps()
+-  Parent 组件： shouldComponentUpdate()
+-  Parent 组件： render()
+-  Child 组件： getDerivedStateFromProps()
+-  Child 组件： shouldComponentUpdate()
+-  Child 组件： render()
+-  Child 组件： getSnapshotBeforeUpdate()
+-  Parent 组件： getSnapshotBeforeUpdate()
+-  Child 组件： componentDidUpdate()
+-  Parent 组件： componentDidUpdate()
 
 ##### 四、卸载子组件
 
 点击父组件中的 [卸载 / 挂载子组件] 按钮，则界面上子组件会消失，控制台的打印顺序为：
 
--  Parent 组件： getDerivedStateFromProps() 
--  Parent 组件： shouldComponentUpdate() 
--  Parent 组件： render() 
--  Parent 组件： getSnapshotBeforeUpdate() 
--  Child 组件： componentWillUnmount() 
--  Parent 组件： componentDidUpdate() 
+-  Parent 组件： getDerivedStateFromProps()
+-  Parent 组件： shouldComponentUpdate()
+-  Parent 组件： render()
+-  Parent 组件： getSnapshotBeforeUpdate()
+-  Child 组件： componentWillUnmount()
+-  Parent 组件： componentDidUpdate()
 
 ##### 五、重新挂载子组件
 
 再次点击父组件中的 [卸载 / 挂载子组件] 按钮，则界面上子组件会重新渲染出来，控制台的打印顺序为：
 
--  Parent 组件： getDerivedStateFromProps() 
--  Parent 组件： shouldComponentUpdate() 
--  Parent 组件： render() 
--  Child 组件： constructor() 
--  Child 组件： getDerivedStateFromProps() 
--  Child 组件： render() 
--  Parent 组件： getSnapshotBeforeUpdate() 
--  Child 组件： componentDidMount() 
--  Parent 组件： componentDidUpdate() 
+-  Parent 组件： getDerivedStateFromProps()
+-  Parent 组件： shouldComponentUpdate()
+-  Parent 组件： render()
+-  Child 组件： constructor()
+-  Child 组件： getDerivedStateFromProps()
+-  Child 组件： render()
+-  Parent 组件： getSnapshotBeforeUpdate()
+-  Child 组件： componentDidMount()
+-  Parent 组件： componentDidUpdate()
 
 #### 父子组件生命周期执行顺序总结：
 
--  当子组件自身状态改变时，不会对父组件产生副作用的情况下，父组件不会进行更新，即不会触发父组件的生命周期 
--  当父组件中状态发生变化（包括子组件的挂载以及卸载）时，会触发自身对应的生命周期以及子组件的更新  当子组件进行卸载时，只会执行自身的 `componentWillUnmount` 生命周期，不会再触发别的生命周期 
+-  当子组件自身状态改变时，不会对父组件产生副作用的情况下，父组件不会进行更新，即不会触发父组件的生命周期
+-  当父组件中状态发生变化（包括子组件的挂载以及卸载）时，会触发自身对应的生命周期以及子组件的更新  当子组件进行卸载时，只会执行自身的 `componentWillUnmount` 生命周期，不会再触发别的生命周期
   - `render` 以及 `render` 之前的生命周期，则 父组件先执行
   - `render` 以及 `render`之后的声明周期，则子组件先执行，并且是与父组件交替执行
 
@@ -511,18 +511,18 @@ class Example extends React.Component {
 
 **执行顺序（挂载、更新、卸载阶段）：**
 
-1. **挂载阶段（Mount）**  
+1. **挂载阶段（Mount）**<br>
   - `constructor()`
   - `getDerivedStateFromProps()`
   - `render()`
   - `componentDidMount()`
-2. **更新阶段（Update）**  
+2. **更新阶段（Update）**<br>
   - `getDerivedStateFromProps()`
   - `shouldComponentUpdate()`
   - `render()`
   - `getSnapshotBeforeUpdate()`
   - `componentDidUpdate()`
-3. **卸载阶段（Unmount）**  
+3. **卸载阶段（Unmount）**<br>
   - `componentWillUnmount()`
 
 ---

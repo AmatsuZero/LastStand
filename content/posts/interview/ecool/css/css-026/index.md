@@ -142,8 +142,8 @@ body,dl,dd,h1,h2,h3,h4,h5,h6,p,form,ol,ul{
 
 不建议使用`@import`主要有以下两点原因：
 
--  使用`@import`引入CSS会影响浏览器的并行下载。使用`@import`引用的CSS文件只有在引用它的那个css文件被下载、解析之后，浏览器才会知道还有另外一个css需要下载，这时才去下载，然后下载后开始解析、构建render tree等一系列操作。这就导致浏览器无法并行下载所需的样式文件。 
--  多个`@impor`t会导致下载顺序紊乱。在IE中，`@import`会引发资源文件的下载顺序被打乱，即**排列在@import后面的js文件先于@import下载，并且打乱甚至破坏@import自身的并行下载**。 
+-  使用`@import`引入CSS会影响浏览器的并行下载。使用`@import`引用的CSS文件只有在引用它的那个css文件被下载、解析之后，浏览器才会知道还有另外一个css需要下载，这时才去下载，然后下载后开始解析、构建render tree等一系列操作。这就导致浏览器无法并行下载所需的样式文件。
+-  多个`@impor`t会导致下载顺序紊乱。在IE中，`@import`会引发资源文件的下载顺序被打乱，即**排列在@import后面的js文件先于@import下载，并且打乱甚至破坏@import自身的并行下载**。
 
 ## 不要在ID选择器前面进行嵌套其它选择器
 
@@ -279,7 +279,7 @@ el.parentElement.replaceChild(cloneEl,el)
 
 ### 5. **异步加载 CSS**
 
-- **使用异步加载**：通过 `rel="preload"` 或 `media="print"` 方式异步加载 CSS，提升页面渲染速度。如：  
+- **使用异步加载**：通过 `rel="preload"` 或 `media="print"` 方式异步加载 CSS，提升页面渲染速度。如：<br>
 ```html
 <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 ```

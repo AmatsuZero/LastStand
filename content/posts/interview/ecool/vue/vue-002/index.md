@@ -66,7 +66,7 @@ Vue.js中的v-model主要用在表单的input输入框，完成视图和数据�
 
 Vue 数据双向绑定原理是通过 `数据劫持` + `发布者-订阅者模式` 的方式来实现的，首先是通过 `ES5` 提供的 `Object.defineProperty()` 方法来劫持（监听）各属性的 **getter、setter**，并在当监听的属性发生变动时通知订阅者，是否需要更新，若更新就会执行对应的更新函数。详见 [vue源码](https://github.com/vuejs/vue)。
 
-- 常见的`基于数据劫持`的**双向绑定**有两种实现  
+- 常见的`基于数据劫持`的**双向绑定**有两种实现<br>
   - 一个是目前Vue在用的 `Object.defineProperty`
   - 一个是ES2015中新增的 `Proxy`，而在Vue3.0版本后加入Proxy从而代替Object.defineProperty
 
@@ -164,20 +164,20 @@ const object1 = {};
 ```
 
 ```javascript
-//1.  [].slice.call(lis):通过实例调用方法，将伪数组转换为真数组   
+//1.  [].slice.call(lis):通过实例调用方法，将伪数组转换为真数组
 //.call()让一个函数在指定对象上调用
   const lis = document.getElementsByTagName('li')     //lis是伪数组
   console.log(lis instanceof Array, lis[1].innerHTML, lis.forEach)
-  //false    "222"    undefined             
+  //false    "222"    undefined
   //对象属性（lis.forEach）查找的是原型链，找不到就是undefined (因为是伪数组，不具备数组的方法)
-  
+
   //ES6中将伪数组转换为真数组：Array.from(lis)
   //ES5中Array.prototype.slice(begin,end)相当于（ 浅拷贝,但是原数组不变这点类似深拷贝），若是不指定begin,end，就是全部
   //slice在数组原型上，call()让一个函数在指定对象上面调用
-  const lis2 = Array.prototype.slice.call(lis)  //推荐  
+  const lis2 = Array.prototype.slice.call(lis)  //推荐
   //.call(lis) 让一个函数成为指定对象的方法进行调用
   console.log(lis2 instanceof Array,lis2[1].innerHTML,lis2.forEach)
-  //true    "222"     ƒ forEach() { [native code] }          
+  //true    "222"     ƒ forEach() { [native code] }
   //这样就可以通过.forEach来遍历数组了
 ```
 
@@ -260,7 +260,7 @@ Object.defineProperty(obj,propName,{}): 给对象添加/修改属性(指定描�
 ```javascript
 //5.obj.hasOwnProperty(prop):判断prop是否是obj自身的属性
   console.log(obj.hasOwnProperty('fullName'), obj.hasOwnProperty('toString'))
-  //true false      
+  //true false
   //toString也可能是原型链上的
 ```
 
@@ -313,7 +313,7 @@ Object.defineProperty(obj,propName,{}): 给对象添加/修改属性(指定描�
 - `数据代理:` 通过**一个对象代理** 对 **另一个对象(在前一个对象内部)中属性的操作(读/写)**
 - vue 数据代理: 通过 **vm 对象**来代理 data 对象中所有属性的操作
 - 好处: 更方便的操作 data 中的数据
-- 基本实现流程  
+- 基本实现流程<br>
   - 通过 **Object.defineProperty(vm, key, { })** 给vm添加与data对象的属性对应的属性
   - 所有 **添加的属性都包含get/set方法**
   - 在get/set方法中去操作data中对应的属性
@@ -426,7 +426,7 @@ MVVM.prototype = {
     data: {
       b: 123
     }
-  }; 
+  };
 /**   * 实现访问 a.b === 123   */
   function proxy(target: Object, sourceKey: string): void {
     let data = target[sourceKey];
@@ -464,9 +464,9 @@ MVVM.prototype = {
 #### 5.1 模板解析的基本流程
 
 1. 将 el 的所有子节点取出, 添加到一个新建的文档 fragment 对象中
-2. 对 fragment 中的所有层次子节点递归进行编译解析处理  
+2. 对 fragment 中的所有层次子节点递归进行编译解析处理<br>
   1. 对大括号表达式文本节点进行解析
-  2. 对元素节点的指令属性进行解析  
+  2. 对元素节点的指令属性进行解析<br>
     1. 事件指令解析
     2. 一般指令解析
 3. 将解析后的 fragment 添加到 el 中显示
@@ -683,8 +683,8 @@ new MVVM({
 
 **observe(data, this)**
 
-1.  `数据劫持是` vue 中用来 **实现数据绑定** 的一种 **技术** 
-2.  基本思想: 通过 defineProperty()来监视 **data 中所有属性**(任意层次)数据的变化, 一旦变化就去更新界面 即，给data中的属性**添加set(监视变化)，get方法** 
+1.  `数据劫持是` vue 中用来 **实现数据绑定** 的一种 **技术**
+2.  基本思想: 通过 defineProperty()来监视 **data 中所有属性**(任意层次)数据的变化, 一旦变化就去更新界面 即，给data中的属性**添加set(监视变化)，get方法**
 
 例如:this.xxx = 3,此时this是vm,改变vm的set的值，然后这里的set变化了，会改变data中xxx的值。(`vm`——>`M`)
 
@@ -692,8 +692,8 @@ new MVVM({
 
 即：
 
--  **vm**中的`set` 是用来**实现 数据代理**的 
--  **data**中的`set` 是用来实现 **数据绑定** 的（界面会变） 
+-  **vm**中的`set` 是用来**实现 数据代理**的
+-  **data**中的`set` 是用来实现 **数据绑定** 的（界面会变）
 
 #### 6.1四个重要对象
 
@@ -708,10 +708,10 @@ new MVVM({
 
 ##### 6.1.1 Compiler
 
--  用来解析模板页面的对象的构造函数(一个实例) 
--  利用 compile 对象解析模板页面 
--  每解析一个表达式(非事件指令)都会创建一个对应的watcher对象, 并建立watcher 与 dep 的关系 
--  `complie 与 watcher 关系:` 一对多的关系 
+-  用来解析模板页面的对象的构造函数(一个实例)
+-  利用 compile 对象解析模板页面
+-  每解析一个表达式(非事件指令)都会创建一个对应的watcher对象, 并建立watcher 与 dep 的关系
+-  `complie 与 watcher 关系:` 一对多的关系
 
 MVVM中调用了Compile类来编译我们的页面,开始来实现模板编译
 
@@ -889,9 +889,9 @@ model(node, vm, expr) { // 输入框处理
 
 （观察到了然后去“劫持”数据，定义get/set，创建dep对象）
 
--  用来对 data 所有属性数据**进行劫持**的构造函数 
--  给 data 中所有属性重新定义属性描述(get/set) 
--  为 data 中的每个属性创建对应的 dep 对象 
+-  用来对 data 所有属性数据**进行劫持**的构造函数
+-  给 data 中所有属性重新定义属性描述(get/set)
+-  为 data 中的每个属性创建对应的 dep 对象
 
 > 可以利用`Obeject.defineProperty()`来监听属性变动 那么将需要observe的数据对象进行递归遍历，包括子属性对象的属性，都加上 `setter`和`getter` 这样的话，给这个对象的某个值赋值，就会触发`setter`，那么就能监听到了数据变化
 
@@ -949,11 +949,11 @@ model(node, vm, expr) { // 输入框处理
 
 （存放watcher的数组，即subscribes——subs）
 
--  data 中的每个属性(所有层次)都对应一个 dep 对象 
--  创建的时机:  
+-  data 中的每个属性(所有层次)都对应一个 dep 对象
+-  创建的时机:<br>
   - 在初始化 definedata 中各个属性时创建对应的 dep 对象
   - 在 data 中的某个属性值被设置为新的对象时
--  对象的结构 
+-  对象的结构
 
 > {
 >
@@ -963,7 +963,7 @@ model(node, vm, expr) { // 输入框处理
 >
 > }
 
-- subs 属性说明  
+- subs 属性说明<br>
   - 当 watcher 被创建时, 内部将当前 watcher对象添加到对应的 dep对象的 subs中
   - 当此 data 属性的值发生改变时,subs 中所有的 watcher 都会收到更新的通知,从而最终更新对应的界面
 
@@ -988,10 +988,10 @@ model(node, vm, expr) { // 输入框处理
 
 更新显示内容的
 
--  模板中每个非事件指令或表达式都对应一个 watcher **对象** 
--  监视当前表达式数据的变化 
--  创建的时机: 在初始化编译模板时 
--  对象的组成 
+-  模板中每个非事件指令或表达式都对应一个 watcher **对象**
+-  监视当前表达式数据的变化
+-  创建的时机: 在初始化编译模板时
+-  对象的组成
 
 > {
 >
@@ -1070,11 +1070,11 @@ text(node, vm, expr) { // 文本处理
 
 **多对多**
 
--  a .data 中的一个属性对应一个 dep, 一个 dep 中可能包含多个 watcher(模板中有几个 表达式使用到了同一个属性) 
--  b.模板中一个非事件表达式对应一个 watcher, 一个 watcher 中可能包含多个 dep(表 达式是多层:a.b) 
--  c.**数据绑定**使用到 2 个核心技术  
-  -  **defineProperty()** 
-  -  **消息订阅与发布** `Dep与Watch之间的关系 ：多对多` dep先创建，watcher后创建。一旦watcher创建，关系就有限制条件了  
+-  a .data 中的一个属性对应一个 dep, 一个 dep 中可能包含多个 watcher(模板中有几个 表达式使用到了同一个属性)
+-  b.模板中一个非事件表达式对应一个 watcher, 一个 watcher 中可能包含多个 dep(表 达式是多层:a.b)
+-  c.**数据绑定**使用到 2 个核心技术<br>
+  -  **defineProperty()**
+  -  **消息订阅与发布** `Dep与Watch之间的关系 ：多对多` dep先创建，watcher后创建。一旦watcher创建，关系就有限制条件了<br>
     - `1data属性` ---> `1Dep` ---> `n个watcher(模板中有多个表达式使用了此属性)`
     - 例如：在模板中写了多次表达式：{{name}}/ v-text="name" ，则此时`1个name` --->`1个Dep` ---> `2个watcher`
     - `1表达式` ---> `1Watcher` ---> `n个Dep(多层表达式)`
@@ -1084,13 +1084,13 @@ text(node, vm, expr) { // 文本处理
 
 如何建立的？
 
--  data中属性的get()中建立 
--  **vm.name = 'abc' --->data中的name属性值变化 ---> name的set()调用 ---> dep --->相关的所有watcher --->cb() --->updater** 
+-  data中属性的get()中建立
+-  **vm.name = 'abc' --->data中的name属性值变化 ---> name的set()调用 ---> dep --->相关的所有watcher --->cb() --->updater**
 
 什么时候建立？
 
--  初始化的解析模板中的表达式创建watcher对象时 
--  通过get:建立dep与watcher的关系 
+-  初始化的解析模板中的表达式创建watcher对象时
+-  通过get:建立dep与watcher的关系
 
 关联dep和watcher，watcher中有个重要的逻辑就是this.get()；每个watcher被实例化时都会获取数据从而会调用当前属性的get方法
 
@@ -1210,8 +1210,8 @@ class MVVM {
 
 #### 8.1 v-model
 
-1.  **双向数据绑定**是建立在**单向数据绑定**(**model==>View**)的基础之上的 
-2.  双向数据绑定的实现流程: a. 在解析 v-model 指令时, 给当前元素添加 **input 监听** （从View==>model） b. 当 input 的 value 发生改变时, 将最新的值赋值给当前表达式所对应的 data 属性 
+1.  **双向数据绑定**是建立在**单向数据绑定**(**model==>View**)的基础之上的
+2.  双向数据绑定的实现流程: a. 在解析 v-model 指令时, 给当前元素添加 **input 监听** （从View==>model） b. 当 input 的 value 发生改变时, 将最新的值赋值给当前表达式所对应的 data 属性
 
 ```html
 <div id="test">
@@ -1239,7 +1239,7 @@ new MVVM({
 
 #### **关键点**：
 
-- Vue 提供了 **单向数据绑定** 和 **双向数据绑定**：  
+- Vue 提供了 **单向数据绑定** 和 **双向数据绑定**：<br>
   - **单向绑定**：`{{}}` 插值表达式、`v-bind`（简称 `:`）语法，常用于父组件向子组件传递数据。
   - **双向绑定**：`v-model`，通常用于表单控件的用户输入处理。
 - 单向绑定的优势是明确数据流动方向，双向绑定更适合快速开发但需注意复杂性和调试困难。
@@ -1256,15 +1256,15 @@ new MVVM({
 
 #### **关键点**：
 
-- **Vue2**：  
+- **Vue2**：<br>
   - 通过 `Object.defineProperty` 劫持数据的 `getter` 和 `setter`。
   - 数据变化时，触发依赖收集（订阅者更新视图）。
-  - 局限性：  
+  - 局限性：<br>
     - 无法直接检测数组下标变化。
     - 无法检测对象的属性新增或删除。
-- **Vue3**：  
+- **Vue3**：<br>
   - 使用 `Proxy` 实现深层次的数据劫持。
-  - Proxy 的优势：  
+  - Proxy 的优势：<br>
     - 能直接监听数组变化。
     - 对动态添加属性的对象支持更好。
 
@@ -1281,7 +1281,7 @@ new MVVM({
 #### **关键点**：
 
 - Vue 通过监听 DOM 事件（如 `input`、`change`）实现双向绑定。
-- 自定义组件中的 `v-model`，需要使用 `model` 选项或 `prop` + `emit` 组合：  
+- 自定义组件中的 `v-model`，需要使用 `model` 选项或 `prop` + `emit` 组合：<br>
 ```javascript
 props: ['value'],
 methods: {
@@ -1290,7 +1290,7 @@ methods: {
   }
 }
 ```
-- 表单绑定示例：  
+- 表单绑定示例：<br>
   - 单选框：`<input type="radio" v-model="value">`
   - 复选框：`<input type="checkbox" v-model="checked">`
   - 多选框：`<select multiple v-model="selected"></select>`
@@ -1307,7 +1307,7 @@ methods: {
 #### **关键点**：
 
 - 父组件向子组件传递数据：通过 `props`。
-- 子组件向父组件传递数据：  
+- 子组件向父组件传递数据：<br>
   - 使用 `$emit` 触发事件。
   - 使用 `v-model` 实现双向绑定。
 - 子组件的 `props` 是单向数据流，直接修改 `props` 会触发警告。
@@ -1325,7 +1325,7 @@ methods: {
 #### **关键点**：
 
 - Vue 将数据更新操作缓存起来，并在下一个事件循环（microtask）中统一执行，以优化性能。
-- 示例：  
+- 示例：<br>
 ```javascript
 this.value = 1;
 this.value = 2;
@@ -1348,7 +1348,7 @@ this.$nextTick(() => {
 #### **关键点**：
 
 - 避免不必要的响应式：使用 `Object.freeze` 或 `nonReactive` 对象。
-- 优化数据结构：  
+- 优化数据结构：<br>
   - 将大列表拆分为分页加载。
   - 使用 `key` 确保高效的 DOM 更新。
 - 在 Vue3 中，响应式系统性能显著提升，特别是对 Proxy 的全面支持。
@@ -1365,10 +1365,10 @@ this.$nextTick(() => {
 
 #### **关键点**：
 
-- Vue2 数组变动问题：  
+- Vue2 数组变动问题：<br>
   - 使用 Vue 提供的数组变异方法，如 `splice`。
   - 或者手动触发视图更新：`this.$set(array, index, value)`。
-- 数据绑定失效：  
+- 数据绑定失效：<br>
   - 数据未在响应式系统内。
   - 数据对象层级过深但未使用深度监听。
   - 直接修改 `props` 数据。
@@ -1384,7 +1384,7 @@ this.$nextTick(() => {
 
 #### **关键点**：
 
-- 实现双向绑定的自定义组件：  
+- 实现双向绑定的自定义组件：<br>
 ```javascript
 props: ['value'],
 methods: {
@@ -1405,10 +1405,10 @@ methods: {
 
 #### **关键点**：
 
-- 对比 Vue 的响应式与 React 的单向数据流：  
+- 对比 Vue 的响应式与 React 的单向数据流：<br>
   - Vue：数据变化自动更新视图（响应式）。
   - React：通过 `setState` 手动触发更新（受控组件）。
-- 改进空间：  
+- 改进空间：<br>
   - 更灵活的响应式选择（如按需响应）。
   - 提供更丰富的调试工具。
 

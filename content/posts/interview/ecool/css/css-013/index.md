@@ -47,7 +47,7 @@ css样式：
         height: 200px;
         background-color: coral;
         float: left;
-    }      
+    }
 ```
 
 ![](image-02.webp)
@@ -66,7 +66,7 @@ html结构：
     <li>2</li>
     <li>3</li>
  </ul>
- 
+
 ```
 
 css样式：
@@ -75,7 +75,7 @@ css样式：
     *{
         margin: 0;
         padding: 0;
-    } 
+    }
     ul li{
         list-style:none;
         width: 200px;
@@ -107,7 +107,7 @@ css样式：
         font-size: 16px;
         float: left;
     }
-    
+
 ```
 
 则各个li到同一行去了：
@@ -198,7 +198,7 @@ css样式：
         height: 200px;
         background-color: rgb(87, 179, 182);
     }
-    
+
 ```
 
 使li浮动后，li会脱离文档流，导致别的元素出现在它下面：
@@ -210,7 +210,7 @@ css样式：
 ```css
     ul{
         height: 100px;
-    } 
+    }
 ```
 
 ![](image-08.webp)
@@ -226,7 +226,7 @@ css样式：
     <li>1</li>
     <li>2</li>
     <li>3</li>
-    <div class="clear"></div> 
+    <div class="clear"></div>
 </ul>
 ```
 
@@ -234,7 +234,7 @@ css样式：
 
 ```arduino
   .clear{
-        clear: left; 
+        clear: left;
   }
 ```
 
@@ -272,7 +272,7 @@ css样式：
 
 BFC 是块级格式化上下文的缩写，它是一种特殊的渲染区域，具有独立的布局规则。创建 BFC 可以解决一些常见的布局问题，比如外边距重叠等。
 
-- 如何创建BFC？给容器设置以下属性能成为BFC容器：  
+- 如何创建BFC？给容器设置以下属性能成为BFC容器：<br>
   1. 浮动：float: left | right
   2. 定位：position: absolute | fixed
   3. 行内块：display: inline-block
@@ -302,7 +302,7 @@ BFC的效果是让处于BFC内部的元素与外部的元素相互隔离，使�
 ### 2. **清除浮动（Clearfix）**
 
 - **清除浮动的必要性**：为什么需要清除浮动？如果不清除浮动，布局会产生什么问题？
-- **清除浮动的方法**：常见的清除浮动方法有哪些？可以分别介绍以下几种：  
+- **清除浮动的方法**：常见的清除浮动方法有哪些？可以分别介绍以下几种：<br>
   - **使用 `clear` 属性**：如何通过在浮动元素后添加一个设置了 `clear: both` 的空元素实现清除浮动？
   - **伪元素清除法**：如何利用伪元素（如 `::after`）来清除浮动？为什么 `content: ""` 和 `display: table` 可以解决浮动问题？
   - **触发 BFC**：如何通过触发 BFC 清除浮动？相对于其他方法，它的优缺点是什么？
@@ -312,11 +312,11 @@ BFC的效果是让处于BFC内部的元素与外部的元素相互隔离，使�
 
 - **BFC 的定义**：什么是块级格式化上下文（Block Formatting Context, BFC）？
 - **BFC 的特点**：BFC 有哪些特性？例如，BFC 内部的元素不会与外部浮动元素重叠、计算高度时包含浮动元素等。
-- **触发 BFC 的方法**：有哪些 CSS 属性可以触发 BFC？请列举常见的几种触发方式：  
+- **触发 BFC 的方法**：有哪些 CSS 属性可以触发 BFC？请列举常见的几种触发方式：<br>
   - 设置 `overflow: hidden`、`auto`、`scroll`。
   - 设置 `display: inline-block`、`table-cell`、`flex`、`grid`。
   - 设置 `position: absolute`、`fixed` 等。
-- **BFC 的应用场景**：在什么情况下会用到 BFC？  
+- **BFC 的应用场景**：在什么情况下会用到 BFC？<br>
   - **清除浮动**：通过触发 BFC 来包裹浮动元素，从而解决父容器高度塌陷问题。
   - **避免外边距合并**：如何利用 BFC 解决上下相邻元素间的外边距合并问题？
   - **布局控制**：BFC 如何帮助控制布局中的重叠和对齐？

@@ -45,15 +45,15 @@ let array = [1,2,1,4,5,3];
 
 #### Set实例的属性和方法
 
-- Set的属性：  
+- Set的属性：<br>
   - size：返回集合所包含元素的数量
-- Set的方法：  
-  - 操作方法  
+- Set的方法：<br>
+  - 操作方法<br>
     - add(value)：向集合添加一个新的项
     - delete(value)：从集合中移除一个值
     - has(value)：如果值在集合中存在，返回true,否则false
     - clear(): 移除集合里所有的项
-  - 遍历方法  
+  - 遍历方法<br>
     - keys()：返回一个包含集合中所有键的数组
     - values()：返回一个包含集合中所有值的数组
     - entries：返回一个包含集合中所有键值对的数组(感觉没什么用就不实现了)
@@ -82,11 +82,11 @@ module.exports = Set;
 function Set() {
     let items = {};
     this.size = 0;
-    
+
     // has(val)方法
     this.has = function(val) {
         // 对象都有hasOwnProperty方法，判断是否拥有特定属性
-        return items.hasOwnProperty(val);  
+        return items.hasOwnProperty(val);
     };
 }
 ```
@@ -178,7 +178,7 @@ ES6中Set结构的实例上带的forEach方法，其实和数组的forEach方法
     this.forEach = function(fn, context = this) {
         for (let i = 0; i < this.size; i++) {
             let item = Object.keys(items)[i];
-            fn.call(context, item, item, items);     
+            fn.call(context, item, item, items);
         }
     };
 ```
@@ -539,7 +539,7 @@ function Map() {
     // set相同key时，后面声明的会覆盖前面
     // 如： new Map().set({}, 'a')
     this.set = function(key, val) {
-        items[key] = val;   
+        items[key] = val;
     };
     // get(key)方法
     this.get = function(key) {
@@ -581,7 +581,7 @@ set和get方法写好了，再接着搞delete和clear方法，不废话，看
     };
     // values()方法
     this.values = function() {
-        return Object.values(items);  
+        return Object.values(items);
     };
     // forEach(fn, context)方法
     this.forEach = function(fn, context = this) {
@@ -666,7 +666,7 @@ module.exports = Map;
     console.log(m.keys());      // [ 'Jay', 'true' ]
     console.log(m.values());    // [ 'Jay的Chou', '真的' ]
     console.log(m.get('jay'));  // undefined
-    
+
     m.delete(true);
     console.log(m.keys());      // [ 'Jay' ]
     console.log(m.values());    // [ 'Jay的Chou' ]
@@ -703,12 +703,12 @@ s.forEach((value) => { ... });
 
 ### 4. **常见应用场景**
 
--  数组去重：  
+-  数组去重：<br>
 ```js
 const arr = [1, 2, 2, 3];
 const unique = [...new Set(arr)];
 ```
--  对值集合做集合运算（交集、并集、差集）：  
+-  对值集合做集合运算（交集、并集、差集）：<br>
 ```js
 // 并集
 new Set([...a, ...b]);

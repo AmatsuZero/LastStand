@@ -254,15 +254,15 @@ npm run test
 
 ## 七、常见面试问题示例
 
-1.  **npm scripts 和 Gulp、Webpack 有什么区别？**  
+1.  **npm scripts 和 Gulp、Webpack 有什么区别？**<br>
   - npm scripts 更底层，本质是命令行任务调度器，而 Gulp/Webpack 是构建工具。
-2.  **如何在 npm scripts 中设置不同环境变量？**  
+2.  **如何在 npm scripts 中设置不同环境变量？**<br>
   - 使用 `cross-env NODE_ENV=production webpack --config webpack.prod.js`。
-3.  **如何同时运行多个命令？**  
+3.  **如何同时运行多个命令？**<br>
   - 可用 `concurrently` 或 `npm-run-all --parallel`。
-4.  **`pre` 与 `post` 钩子机制的作用是什么？**  
+4.  **`pre` 与 `post` 钩子机制的作用是什么？**<br>
   - npm 支持如 `prebuild`、`postbuild` 自动在主任务前后执行脚本。
-5.  **如何在 CI/CD 中自动执行构建与部署？**  
+5.  **如何在 CI/CD 中自动执行构建与部署？**<br>
   - 将 npm scripts 集成到 CI 流水线中，通过 `npm ci && npm run build && npm run deploy` 实现自动化。
 
 ---

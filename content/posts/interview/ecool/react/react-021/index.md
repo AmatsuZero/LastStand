@@ -365,7 +365,7 @@ const Tab = ({ children ,onChange }) => {
     </div>
 }
 
-Tab.displayName = 'tab' 
+Tab.displayName = 'tab'
 ```
 
 我写的这个 Tab，负责了整个 Tab 切换的主要功能，包括 **TabItem 的过滤**，**状态收集**，**控制对应的子组件展示**。
@@ -672,7 +672,7 @@ function HOC(Component){
 
     }
 }
-export default HOC(Index) 
+export default HOC(Index)
 ```
 
 - ① 方便获取组件内部状态，比如state，props ,生命周期,绑定的事件函数等
@@ -722,7 +722,7 @@ export default function Index(){
 
 如上，有三个子组件，`ComponentA` ，`ComponentB`，`ComponentC`，现在期望执行顺序是 ComponentA 渲染完成，挂载 ComponentB ，ComponentB 渲染完成，挂载 ComponentC，也就是三个组件是按照先后顺序渲染挂载的，那么如何实现呢？
 
-实际上，这种情况完全可以用一个 hoc 来实现，那么接下来，请大家跟上我的思路实现这个场景。  
+实际上，这种情况完全可以用一个 hoc 来实现，那么接下来，请大家跟上我的思路实现这个场景。<br>
  首先这个 hoc 是针对当前 index 下面，ComponentA ｜ ComponentB ｜ ComponentC 一组 component 进行功能强化。所以这个 hoc 最好可以动态创建，而且服务于当前一组组件。那么可以声明一个生产 hoc 的函数工厂。
 
 ```js
@@ -730,7 +730,7 @@ function createHoc(){
    const renderQueue = []            /* 待渲染队列 */
     return function Hoc(Component){  /* Component - 原始组件   */
         return class Wrap extends React.Component{  /* hoc 包装组件 */
-         
+
         }
     }
 }
@@ -1058,7 +1058,7 @@ export default function ProviderDemo(){
 
 ### 1 介绍
 
-> React 有十分强大的组合模式。我们推荐使用组合而非继承来实现组件间的代码重用  
+> React 有十分强大的组合模式。我们推荐使用组合而非继承来实现组件间的代码重用<br>
 >  虽然 React 官方推荐**用组合方式**，而**非继承方式**。但是也不是说明继承这种方式没有用武之地，继承方式还是有很多应用场景的。
 
 在 class 组件盛行之后，我们可以通过继承的方式进一步的强化我们的组件。这种模式的好处在于，可以封装基础功能组件，然后根据需要去 extends 我们的基础组件，按需强化组件，但是值得注意的是，必须要对基础组件有足够的掌握，否则会造成一些列意想不到的情况发生。
@@ -1204,11 +1204,11 @@ function Index({ history }){
 
 ## 一、**组合模式（Composition）**
 
--  通过 `props.children` 组合子组件，避免继承带来的耦合。 
--  **考点：**  
+-  通过 `props.children` 组合子组件，避免继承带来的耦合。
+-  **考点：**<br>
   - 如何使用 `children` 构建可插拔组件？
   - 如何传递插槽型内容？
--  **示例：**  
+-  **示例：**<br>
 ```jsx
 const Card = ({ title, children }) => (
   <div>
@@ -1220,12 +1220,12 @@ const Card = ({ title, children }) => (
 
 ## 二、**容器组件与展示组件（Smart / Dumb Components）**
 
--  **容器组件**：处理数据、状态、逻辑。 
--  **展示组件**：只负责展示，靠 props 渲染。 
--  **考点：**  
+-  **容器组件**：处理数据、状态、逻辑。
+-  **展示组件**：只负责展示，靠 props 渲染。
+-  **考点：**<br>
   - 为什么要拆分组件职责？
   - 如何让组件更通用、更可测试？
--  **示例：**  
+-  **示例：**<br>
 ```jsx
 // 展示组件
 const UserList = ({ users }) => <ul>{users.map(u => <li>{u.name}</li>)}</ul>;
@@ -1242,11 +1242,11 @@ const UserListContainer = () => {
 
 ## 三、**高阶组件（Higher-Order Components, HOC）**
 
--  函数接收组件并返回新组件，用于复用逻辑。 
--  **考点：**  
+-  函数接收组件并返回新组件，用于复用逻辑。
+-  **考点：**<br>
   - HOC 是如何封装逻辑的？
   - 如何防止 props 冲突和静态属性丢失？
--  **示例：**  
+-  **示例：**<br>
 ```jsx
 function withLoading(Component) {
   return function WithLoadingComponent({ loading, ...props }) {
@@ -1258,11 +1258,11 @@ function withLoading(Component) {
 
 ## 四、**函数作为子组件（Function as Child / Render Props）**
 
--  使用函数作为 `children`，动态渲染内容。 
--  **考点：**  
+-  使用函数作为 `children`，动态渲染内容。
+-  **考点：**<br>
   - 与 HOC 有何异同？
   - 存在哪些性能问题（频繁创建函数）？
--  **示例：**  
+-  **示例：**<br>
 ```jsx
 const Mouse = ({ children }) => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -1279,11 +1279,11 @@ const Mouse = ({ children }) => {
 
 ## 五、**自定义 Hook（Custom Hook）**
 
--  提取复用逻辑到函数中，适用于函数组件。 
--  **考点：**  
+-  提取复用逻辑到函数中，适用于函数组件。
+-  **考点：**<br>
   - 如何提取副作用逻辑、表单逻辑、状态逻辑？
   - 如何与上下文、请求、动画结合？
--  **示例：**  
+-  **示例：**<br>
 ```jsx
 function useUserData(id) {
   const [user, setUser] = useState(null);

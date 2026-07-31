@@ -115,47 +115,47 @@ CSS 属性受到过渡效应(transition effect)的影响，会产生不断变化
 形式语法如下：
 
 ```txt
-transition-timing-function = 
-  <easing-function>#  
+transition-timing-function =
+  <easing-function>#
 
-<easing-function> = 
+<easing-function> =
   linear                          |
   <linear-easing-function>        |
   <cubic-bezier-easing-function>  |
-  <step-easing-function>          
+  <step-easing-function>
 
-<linear-easing-function> = 
-  linear( <linear-stop-list> )  
+<linear-easing-function> =
+  linear( <linear-stop-list> )
 
-<cubic-bezier-easing-function> = 
+<cubic-bezier-easing-function> =
   ease                                                |
   ease-in                                             |
   ease-out                                            |
   ease-in-out                                         |
-  cubic-bezier( <number [0,1]> , <number> , <number [0,1]> , <number> )  
+  cubic-bezier( <number [0,1]> , <number> , <number [0,1]> , <number> )
 
-<step-easing-function> = 
+<step-easing-function> =
   step-start                             |
   step-end                               |
-  steps( <integer> , <step-position>? )  
+  steps( <integer> , <step-position>? )
 
-<linear-stop-list> = 
-  [ <linear-stop> ]#  
+<linear-stop-list> =
+  [ <linear-stop> ]#
 
-<step-position> = 
+<step-position> =
   jump-start  |
   jump-end    |
   jump-none   |
   jump-both   |
   start       |
-  end         
+  end
 
-<linear-stop> = 
+<linear-stop> =
   <number>               &&
-  <linear-stop-length>?  
+  <linear-stop-length>?
 
-<linear-stop-length> = 
-  <percentage>{1,2}  
+<linear-stop-length> =
+  <percentage>{1,2}
 ```
 
 语法书写示例如下：
@@ -215,7 +215,7 @@ CSS 过渡通常使用简写属性 `transition` 控制。这是最好的方式�
 
 每个单属性转换都描述了应该应用于单个属性的转换（或特殊值`all`和`none`）。这包括：
 
-- 零或一个值，表示转换应适用的属性。这可能是以下任何一种：  
+- 零或一个值，表示转换应适用的属性。这可能是以下任何一种：<br>
   - 关键字`none`
   - 关键字`all`
   - 命名 CSS 属性的 <custom-ident> 。
@@ -227,18 +227,18 @@ CSS 过渡通常使用简写属性 `transition` 控制。这是最好的方式�
 标准语法
 
 ```txt
-transition = 
-  <single-transition>#  
+transition =
+  <single-transition>#
 
-<single-transition> = 
+<single-transition> =
   [ none | <single-transition-property> ]  ||
   <time>                                   ||
   <easing-function>                        ||
-  <time>                                   
+  <time>
 
-<single-transition-property> = 
+<single-transition-property> =
   all             |
-  <custom-ident> 
+  <custom-ident>
 ```
 
 语法使用示例
@@ -285,9 +285,9 @@ element.ontransitionrun = (event) => {};
 
 从其父接口 `Event` 继承属性，事件属性如下。
 
--  `TransitionEvent.propertyName` 一个包含与`transition`相关联的CSS属性名称的字符串。 
--  `TransitionEvent.elapsedTime` 一个浮点数，给出此事件触发时`transition`运行的时间，单位为秒。此值不受过渡延迟特性的影响。对于 `transitionstart` 事件，elapsedTime 的值为 0.0（除非将 `transition-delay` 设置成了一个负值，在这种情况下，`elapsedTime` 为 (-1 * `transition-delay`)）。 
--  `TransitionEvent.pseudoElement` 一个字符串，以 `::` 开头，包含了`transition` 运行时所在的伪元素的名称。如果`transition`不是在伪元素而是在元素上运行，则为空字符串：''。 
+-  `TransitionEvent.propertyName` 一个包含与`transition`相关联的CSS属性名称的字符串。
+-  `TransitionEvent.elapsedTime` 一个浮点数，给出此事件触发时`transition`运行的时间，单位为秒。此值不受过渡延迟特性的影响。对于 `transitionstart` 事件，elapsedTime 的值为 0.0（除非将 `transition-delay` 设置成了一个负值，在这种情况下，`elapsedTime` 为 (-1 * `transition-delay`)）。
+-  `TransitionEvent.pseudoElement` 一个字符串，以 `::` 开头，包含了`transition` 运行时所在的伪元素的名称。如果`transition`不是在伪元素而是在元素上运行，则为空字符串：''。
 
 下面几种`transition`事件方法，与此一致。
 
@@ -445,7 +445,7 @@ domTransition.onclick = function () {
   function appear() {
     domTransition.style.display = "block";
   }
-  
+
   // 或点击元素使应用于目标的transition-property属性的值被更改
   // domTransition.style.transitionProperty = 'width'
 };
@@ -526,7 +526,7 @@ document.addEventListener(
 
 克服这个限制的简单方法是在修改过渡的CSS属性之前应用若干毫秒的 `setTimeout()` 函数。
 
--  如下演示，如何规避使用 `.appendChild()` 向 DOM 中添加元素，动效不生效问题。 还是用上面小球移动的示例，复用css。 修改js如下：  
+-  如下演示，如何规避使用 `.appendChild()` 向 DOM 中添加元素，动效不生效问题。 还是用上面小球移动的示例，复用css。 修改js如下：<br>
 ```js
 const domDiv = document.createElement('div');
 domDiv.className = 'ball';
@@ -536,7 +536,7 @@ setTimeout(() => {
   domDiv.style.transform = 'translate(100px, 100px)';
 }, 20)
 ```
--  如下演示，如何规避移除元素的 `display: none` 属性，动效不生效问题。 还是用上面小球移动的示例，复用css，在这基础上添加 `display: none;` 修改js如下：  
+-  如下演示，如何规避移除元素的 `display: none` 属性，动效不生效问题。 还是用上面小球移动的示例，复用css，在这基础上添加 `display: none;` 修改js如下：<br>
 ```js
 const domBall = document.querySelector('.ball');
 domBall.style.display = 'block';
@@ -558,7 +558,7 @@ setTimeout(() => {
 
 ### 2. **过渡的四个关键属性**
 
-- 过渡动画的四个关键属性是什么？请简述它们的作用：  
+- 过渡动画的四个关键属性是什么？请简述它们的作用：<br>
   - `transition-property`：控制哪个 CSS 属性发生过渡。
   - `transition-duration`：控制过渡持续时间。
   - `transition-timing-function`：控制过渡效果的速度曲线。
@@ -574,7 +574,7 @@ setTimeout(() => {
 ### 4. **过渡时长与速率**
 
 - 如何控制过渡的时长？例如，如何设置过渡持续时间为 2 秒？
-- 过渡的 `timing-function` 属性中常用的几个值是什么？请解释它们的作用，并举例：  
+- 过渡的 `timing-function` 属性中常用的几个值是什么？请解释它们的作用，并举例：<br>
   - `linear`, `ease`, `ease-in`, `ease-out`, `ease-in-out`。
 - 如何创建自定义的速率曲线？例如，使用 `cubic-bezier` 创建复杂的过渡效果。
 

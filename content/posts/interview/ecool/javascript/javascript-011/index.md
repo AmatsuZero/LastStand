@@ -114,14 +114,14 @@ obj.toString();
 
 ```javascript
 'use strict';
- 
+
 const express = require('express');
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
 const path = require('path');
- 
+
 const isObject = obj => obj && obj.constructor && obj.constructor === Object;
- 
+
 function merge(a, b) {
     for (var attr in b) {
         if (isObject(a[attr]) && isObject(b[attr])) {
@@ -132,21 +132,21 @@ function merge(a, b) {
     }
     return a
 }
- 
+
 function clone(a) {
     return merge({}, a);
 }
- 
+
 // Constants
 const PORT = 8080;
 const HOST = '0.0.0.0';
 const admin = {};
- 
+
 // App
 const app = express();
 app.use(bodyParser.json())
 app.use(cookieParser());
- 
+
 app.use('/', express.static(path.join(__dirname, 'views')));
 app.post('/signup', (req, res) => {
     var body = JSON.parse(JSON.stringify(req.body));
@@ -192,7 +192,7 @@ console.log(obj); // => {}
 console.log(obj.hack); // => undefined
 ```
 
-2.  使用 `Object.freeze(obj)` 冻结指定对象，使之不能被修改属性，成为不可扩展对象：  
+2.  使用 `Object.freeze(obj)` 冻结指定对象，使之不能被修改属性，成为不可扩展对象：<br>
 ```javascript
 Object.freeze(Object.prototype);
 
@@ -201,8 +201,8 @@ Object.prototype.toString = 'evil';
 console.log(Object.prototype.toString);
 // => ƒ toString() { [native code] }
 ```
-3.  建立 `JSON schema` ，在解析用户输入内容时，通过 `JSON schema` 过滤敏感键名。 
-4.  规避不安全的递归性合并。这一点类似 `lodash` 修复手段，完善了合并操作的安全性，对敏感键名跳过处理。 
+3.  建立 `JSON schema` ，在解析用户输入内容时，通过 `JSON schema` 过滤敏感键名。
+4.  规避不安全的递归性合并。这一点类似 `lodash` 修复手段，完善了合并操作的安全性，对敏感键名跳过处理。
 
 ## 继承
 
@@ -406,29 +406,29 @@ console.log(Object.prototype.isPrototypeOf(baz)); // true
 
 ### JavaScript原型链
 
-1.  **原型链的概念**：  
+1.  **原型链的概念**：<br>
   - 原型链是JavaScript中对象继承属性的机制。
   - 每个对象都有一个指向它的原型（prototype）对象的内部链接。
   - 当试图访问一个对象的属性时，如果对象本身没有这个属性，那么JavaScript就会在该对象的原型上查找这个属性，以此类推，直到找到属性或到达原型链的末尾（通常是null）。
-2.  **原型链的查找机制**：  
+2.  **原型链的查找机制**：<br>
   - 实例对象可以访问构造函数原型对象中的属性和方法，因为它们通过原型链与原型对象关联在一起。
   - 当访问一个对象的属性或方法时，如果对象本身没有定义该属性或方法，JavaScript引擎会通过原型链向上查找，直到找到对应的属性或方法为止。
-3.  **原型链的应用**：  
+3.  **原型链的应用**：<br>
   - 对象可以使用构造函数prototype原型对象的属性和方法。
   - 通过原型链，对象之间可以共享属性和方法，从而实现继承的效果。
 
 ### JavaScript继承
 
-1.  **继承的概念**：  
+1.  **继承的概念**：<br>
   - 继承是面向对象编程的重要概念，它允许我们创建基于现有对象的新对象，并在新对象中拥有原有对象的属性和方法。
   - 在JavaScript中，继承是通过原型链来实现的。
-2.  **常见的继承方式**：  
+2.  **常见的继承方式**：<br>
   - **原型链继承**：通过将父类的实例作为子类的原型来实现继承关系。这种方式会导致所有实例共享来自原型对象的属性，包括引用属性。
   - **构造函数继承**：通过在子类构造函数中调用父类构造函数，复制父类的实例属性给子类。这种方式解决了原型链继承中子类实例共享父类引用属性的问题，但无法继承父类的原型属性和方法。
   - **组合继承**：结合了原型链继承和构造函数继承的优点，既可以实现属性的继承，又可以实现方法的继承。但这种方式在子类中调用了两遍父类，可能会影响性能。
   - **原型式继承**：直接通过父对象创建子对象，使用Object.create实现原型继承。这种方式会导致多个子对象之间共享一个原型对象。
   - **寄生式继承**：在原型式继承的基础上新增了更多方法。这种方式同样会导致多个子对象共享一个对象。
   - **寄生组合式继承**：基于组合继承的方式，使用Object.create()代理new的原型链继承实现。这种方式是目前主流的继承方式，它解决了组合继承中子类调用两遍父类的问题。
-3.  **继承的实现**：  
+3.  **继承的实现**：<br>
   - 熟练掌握各种继承方式的实现方法，并能够根据具体需求选择合适的继承方式。
   - 了解不同继承方式的优缺点，以便在开发中做出合理的选择。

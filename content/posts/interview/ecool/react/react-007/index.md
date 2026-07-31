@@ -409,7 +409,7 @@ const Wrap = (props) => {
 **考察点：**
 
 - 适用场景：根据某些条件渲染不同的组件或元素。
-- 语法：  
+- 语法：<br>
 ```jsx
 let content;
 if (isLoggedIn) {
@@ -427,7 +427,7 @@ return <div>{content}</div>;
 **考察点：**
 
 - 简单的条件判断可以直接用三元运算符渲染。
-- 语法：  
+- 语法：<br>
 ```jsx
 return (
   <div>
@@ -442,8 +442,8 @@ return (
 
 **考察点：**
 
--  **适用场景：** 渲染某些内容时，只需在条件为 `true` 时显示。 
--  语法：  
+-  **适用场景：** 渲染某些内容时，只需在条件为 `true` 时显示。
+-  语法：<br>
 ```jsx
 return (
   <div>
@@ -451,7 +451,7 @@ return (
   </div>
 );
 ```
--  **注意：** 如果条件为 `false`，什么也不会渲染。 
+-  **注意：** 如果条件为 `false`，什么也不会渲染。
 
 ### **(4) 使用 `Switch` 和 `Case` 语法**
 
@@ -460,7 +460,7 @@ return (
 **考察点：**
 
 - **适用场景：** 多条件判断。
-- 语法：  
+- 语法：<br>
 ```jsx
 const renderContent = () => {
   switch (status) {
@@ -483,7 +483,7 @@ return <div>{renderContent()}</div>;
 
 ### **(1) 条件渲染中的 `null` 和 `false`**
 
-- 在 React 中，如果条件渲染的内容是 `null` 或 `false`，它不会被渲染。  
+- 在 React 中，如果条件渲染的内容是 `null` 或 `false`，它不会被渲染。<br>
   - 例如：`{condition && <SomeComponent />}`，当 `condition` 为 `false` 时，`<SomeComponent />` 不会被渲染。
 
 **考察点：**

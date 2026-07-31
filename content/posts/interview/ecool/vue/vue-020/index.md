@@ -14,8 +14,8 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 SSR能解决什么问题？
 
--  SEO: `Google`、`百度`、`Yandex`、`Bing`或者`Yahoo`等搜索引擎会通过网络爬取你的页面并建立索引，如果的信息越完整，那么你的网站就更容易被检索到。使用SSR技术，让页面在服务端提前渲染好再返回给客户端，这样各类搜索引擎就能拿到比较完整的页面信息，提升检索质量。 
--  首屏渲染：SPA(Single Page Application)将页面渲染放到客户端执行，并且在渲染之前要加载大量的Javascript代码，所以首屏渲染需要花费较长时间。而SSR直接在服务端渲染完再返回客户端，使用户能够快速看到页面内容。 
+-  SEO: `Google`、`百度`、`Yandex`、`Bing`或者`Yahoo`等搜索引擎会通过网络爬取你的页面并建立索引，如果的信息越完整，那么你的网站就更容易被检索到。使用SSR技术，让页面在服务端提前渲染好再返回给客户端，这样各类搜索引擎就能拿到比较完整的页面信息，提升检索质量。
+-  首屏渲染：SPA(Single Page Application)将页面渲染放到客户端执行，并且在渲染之前要加载大量的Javascript代码，所以首屏渲染需要花费较长时间。而SSR直接在服务端渲染完再返回客户端，使用户能够快速看到页面内容。
 
 **有哪些框架支持SSR？**
 
@@ -485,14 +485,14 @@ const color = useColor() // 与useState('color')相同
 
 Nuxt与流行的状态库有多种集成方式：
 
--  pinia    在`nuxt.config.ts`中配置pinia。  配置以后就可以正常使用pinia了，例如新增一个`stores/myStore.ts`文件，添加Store内容：  在组件中使用myStore：  
+-  pinia    在`nuxt.config.ts`中配置pinia。  配置以后就可以正常使用pinia了，例如新增一个`stores/myStore.ts`文件，添加Store内容：  在组件中使用myStore：<br>
 ```css
 npm i pinia @pinia/nuxt
 ```
 > 如果你正在使用 npm，你可能会遇到 *ERESOLVE unable to resolve dependency tree* 错误。如果那样的话，将以下内容添加到 `package.json` 中：
 ```json
-"overrides": { 
-    "vue": "latest" 
+"overrides": {
+    "vue": "latest"
 }
 ```
 ```arduino
@@ -508,7 +508,7 @@ npm i pinia @pinia/nuxt
       version: string;
   }
 
-  export const useStore = defineStore<'myStore', MyState>('myStore', { 
+  export const useStore = defineStore<'myStore', MyState>('myStore', {
       state: () => {
           return {
               version: "1.0"
@@ -665,14 +665,14 @@ Module几乎可以覆盖`Nuxt`所有功能，你可以为`Nuxt`添加其支持�
 
 #### **考察点：**
 
--  **SSR 定义**：  
+-  **SSR 定义**：<br>
   - 服务器端渲染是指在服务器上生成 HTML 内容并将其直接发送到浏览器，浏览器解析后呈现页面。
   - 与 CSR 的区别是渲染过程的位置：CSR 在浏览器渲染，SSR 在服务器生成初始页面。
--  **优点**：  
+-  **优点**：<br>
   - 改善 SEO：搜索引擎爬虫可以抓取完整的 HTML 内容。
   - 更快的首屏加载速度：用户可以直接看到预渲染的内容。
   - 更好的分享体验：分享链接时能生成完整的页面快照。
--  **缺点**：  
+-  **缺点**：<br>
   - 更高的服务器负载：每个请求都需要服务器生成页面。
   - 更复杂的开发：需要考虑服务器和客户端的协同工作。
   - 调试和部署复杂度增加。
@@ -689,16 +689,16 @@ Module几乎可以覆盖`Nuxt`所有功能，你可以为`Nuxt`添加其支持�
 
 #### **考察点：**
 
--  **工作流程**：  
+-  **工作流程**：<br>
   1. 在服务器端运行 Vue 实例，根据路由生成 HTML。
   2. HTML 包含渲染好的内容和状态，并发送到客户端。
   3. 客户端接管页面，进行“激活”（hydration），绑定交互逻辑。
--  **序列化状态**：  
-  - 在 SSR 中，Vue 的状态（如 Vuex 的 `state`）需要通过 `<script>` 标签嵌入到 HTML 中，供客户端使用：  
+-  **序列化状态**：<br>
+  - 在 SSR 中，Vue 的状态（如 Vuex 的 `state`）需要通过 `<script>` 标签嵌入到 HTML 中，供客户端使用：<br>
 ```html
 <script>window.__INITIAL_STATE__ = { /* state */ }</script>
 ```
--  **客户端和服务端实例的区别**：  
+-  **客户端和服务端实例的区别**：<br>
   - 服务端实例专注于生成 HTML，不能直接操作 DOM。
   - 客户端实例负责挂载到已有的 DOM 上，并补充交互逻辑。
 
@@ -714,8 +714,8 @@ Module几乎可以覆盖`Nuxt`所有功能，你可以为`Nuxt`添加其支持�
 
 #### **考察点：**
 
--  **基本实现方式**：  
-  -  使用 `@vue/server-renderer` 手动搭建 SSR：  
+-  **基本实现方式**：<br>
+  -  使用 `@vue/server-renderer` 手动搭建 SSR：<br>
 ```javascript
 import { createSSRApp } from 'vue';
 import { renderToString } from '@vue/server-renderer';
@@ -728,11 +728,11 @@ renderToString(app).then(html => {
   console.log(html);
 });
 ```
-  -  使用 Nuxt.js 快速搭建 SSR 项目：  
+  -  使用 Nuxt.js 快速搭建 SSR 项目：<br>
 ```bash
 npx create-nuxt-app my-app
 ```
--  **服务端渲染的配置**：  
+-  **服务端渲染的配置**：<br>
   - 路由：基于 Vue Router，确保客户端和服务端的路由一致。
   - 数据预取：在服务端预取数据后，将其传递到客户端。
 
@@ -748,20 +748,20 @@ npx create-nuxt-app my-app
 
 #### **考察点：**
 
--  **服务端预取数据**：  
-  - 使用 `asyncData` 或在路由守卫中预取数据：  
+-  **服务端预取数据**：<br>
+  - 使用 `asyncData` 或在路由守卫中预取数据：<br>
 ```javascript
 const fetchData = async () => {
   const data = await fetch('api/data');
   return data.json();
 };
 ```
--  **传递状态**：  
-  - 使用 `renderToString` 时，将数据注入到 HTML：  
+-  **传递状态**：<br>
+  - 使用 `renderToString` 时，将数据注入到 HTML：<br>
 ```html
 <script>window.__INITIAL_STATE__ = ${JSON.stringify(state)}</script>
 ```
--  **客户端同步**：  
+-  **客户端同步**：<br>
   - 客户端在挂载时，通过 `window.__INITIAL_STATE__` 初始化状态。
 
 ---
@@ -776,14 +776,14 @@ const fetchData = async () => {
 
 #### **考察点：**
 
--  **SEO 提升**：  
+-  **SEO 提升**：<br>
   - 服务端返回的 HTML 包含完整内容，便于爬虫抓取。
   - 配置动态 `meta` 标签（如 `title` 和 `description`）提升页面权重。
--  **性能优化**：  
+-  **性能优化**：<br>
   - 使用缓存（如 Redis）减少重复渲染。
   - 压缩 HTML 和资源文件。
   - 避免不必要的组件加载，使用按需加载。
--  **避免重复渲染**：  
+-  **避免重复渲染**：<br>
   - 确保数据预取只在服务端执行，客户端通过传递的状态初始化。
 
 ---
@@ -798,17 +798,17 @@ const fetchData = async () => {
 
 #### **考察点：**
 
--  **第三方库问题**：  
+-  **第三方库问题**：<br>
   - 许多第三方库依赖 DOM，例如操作 `document` 或 `window`，在服务端渲染时可能会报错。
   - 解决方案：在 `mounted` 中引入这些库，确保只在客户端运行。
--  **浏览器特性冲突**：  
-  - 在代码中检查环境：  
+-  **浏览器特性冲突**：<br>
+  - 在代码中检查环境：<br>
 ```javascript
 if (typeof window !== 'undefined') {
   // 浏览器相关代码
 }
 ```
--  **闪屏问题**：  
+-  **闪屏问题**：<br>
   - 问题：服务端生成的 HTML 和客户端激活过程中样式或内容不一致。
   - 解决方案：确保服务端和客户端使用相同的组件、路由和状态。
 
@@ -824,14 +824,14 @@ if (typeof window !== 'undefined') {
 
 #### **考察点：**
 
--  **简化实现**：  
+-  **简化实现**：<br>
   - Nuxt.js 提供开箱即用的 SSR 支持，集成了路由、数据预取和打包优化。
--  **`asyncData` 和 `fetch`**：  
+-  **`asyncData` 和 `fetch`**：<br>
   - `asyncData`：在组件渲染前获取数据，用于静态内容。
   - `fetch`：在客户端和服务端均可执行，用于动态内容。
--  **动态路由和 SEO**：  
+-  **动态路由和 SEO**：<br>
   - 使用动态路由文件（`pages/_id.vue`）。
-  - 在页面中定义 `head` 方法动态配置 meta 信息：  
+  - 在页面中定义 `head` 方法动态配置 meta 信息：<br>
 ```javascript
 export default {
   head() {
@@ -854,9 +854,9 @@ export default {
 
 #### **考察点：**
 
--  **SSR**：  
+-  **SSR**：<br>
   - 每次请求动态生成页面。
   - 适用于需要实时数据的应用，如电商、动态内容。
--  **SSG**：  
+-  **SSG**：<br>
   - 在构建时生成静态 HTML 文件，部署到 CDN。
   - 适用于静态内容较多的应用，如博客、文档。

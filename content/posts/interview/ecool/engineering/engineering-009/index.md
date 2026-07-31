@@ -135,7 +135,7 @@ deploy_production:
 1. 触发：push / PR → GitHub Actions / GitLab CI / Jenkins 自动拉起流水线。
 2. 流程：安装依赖 → lint → test → build → 上传产物 → 部署。
 3. 产物：dist 包打 zip / Docker 镜像，版本号由 changesets 自动生成。
-4. 部署：  
+4. 部署：<br>
   - 静态：CI 里 `rsync` / `aws s3 sync` 到 CDN；
   - 容器：`docker build` → 推送仓库 → K8s 滚动更新。
 5. 回滚：保留最近 N 个版本，一键 revert；监控告警异常自动触发回滚脚本。

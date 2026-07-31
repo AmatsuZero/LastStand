@@ -277,7 +277,7 @@ console.log(AppJSX)
 ```js
 ReactDOM.render(
     // 需要渲染的元素（ReactElement）
-    element, 
+    element,
     // 元素挂载的目标容器（一个真实DOM）
     container,
     // 回调函数，可选参数，可以用来处理渲染结束后的逻辑
@@ -296,84 +296,84 @@ ReactDOM.render(<App />, rootElement);
 
 ## 总结
 
-1.  `JSX` 是 `JavaScript` 的一种语法扩展，它和模板语言很接近，但是它充分具备 `JavaScript` 的能力。**JSX 的本质是**`React.createElement`**这个 JavaScript 调用的语法糖** 
-2.  `JSX` 语法糖允许前端开发者使用我们最为熟悉的类 `HTML` 标签语法来创建虚拟 `DOM`，在降低学习成本的同时，也提升了研发效率与研发体验。 
-3.  `JSX`被`React.createElement`转化为`ReactElement` ,`React.render`将`ReactElement`虚拟节点变成真实节点挂载在HTML上； 
+1.  `JSX` 是 `JavaScript` 的一种语法扩展，它和模板语言很接近，但是它充分具备 `JavaScript` 的能力。**JSX 的本质是**`React.createElement`**这个 JavaScript 调用的语法糖**
+2.  `JSX` 语法糖允许前端开发者使用我们最为熟悉的类 `HTML` 标签语法来创建虚拟 `DOM`，在降低学习成本的同时，也提升了研发效率与研发体验。
+3.  `JSX`被`React.createElement`转化为`ReactElement` ,`React.render`将`ReactElement`虚拟节点变成真实节点挂载在HTML上；
 
 ## 常见考点
 
 ### **1. JSX 的基本概念**
 
--  **JSX 是什么？**  
- JSX 是一种 JavaScript 语法扩展，用于在 JavaScript 代码中嵌入类似 HTML 的结构。它最终会被转译成 React.createElement 调用，生成虚拟 DOM。  
+-  **JSX 是什么？**<br>
+ JSX 是一种 JavaScript 语法扩展，用于在 JavaScript 代码中嵌入类似 HTML 的结构。它最终会被转译成 React.createElement 调用，生成虚拟 DOM。<br>
   - **考察点**：候选人是否理解 JSX 只是语法糖，底层是 React.createElement。
   - **示例问题**：JSX 是什么？它和 HTML 有什么不同？
 
 ### **2. JSX 语法**
 
--  **嵌套和标签闭合**：JSX 中所有标签必须闭合，包括自闭合标签。  
+-  **嵌套和标签闭合**：JSX 中所有标签必须闭合，包括自闭合标签。<br>
   - **考察点**：候选人是否知道在 JSX 中，所有标签必须闭合，不能像 HTML 一样省略闭合标签。
   - **示例问题**：JSX 中标签必须闭合的原因是什么？`<img>` 标签需要如何书写？
--  **属性传递**：在 JSX 中，属性的书写与 HTML 类似，但需要使用驼峰命名（例如：`className`、`htmlFor`）。  
+-  **属性传递**：在 JSX 中，属性的书写与 HTML 类似，但需要使用驼峰命名（例如：`className`、`htmlFor`）。<br>
   - **考察点**：候选人是否了解 JSX 中如何使用 DOM 属性以及 React 特有的属性（如 `className`、`htmlFor`）。
   - **示例问题**：在 JSX 中如何传递 class、for 属性？为什么不能使用 `class` 和 `for`？
--  **表达式嵌入**：JSX 中可以嵌入 JavaScript 表达式，表达式需要放在 `{}` 中。  
+-  **表达式嵌入**：JSX 中可以嵌入 JavaScript 表达式，表达式需要放在 `{}` 中。<br>
   - **考察点**：候选人是否知道如何在 JSX 中插入 JavaScript 表达式以及如何处理表达式的返回值。
   - **示例问题**：在 JSX 中嵌入 JavaScript 表达式时如何书写？举个例子说明。
 
 ### **3. JSX 和 JavaScript 的结合**
 
--  **JavaScript 表达式的返回值**：JSX 只能包含有效的 JavaScript 表达式，不能包含语句。  
+-  **JavaScript 表达式的返回值**：JSX 只能包含有效的 JavaScript 表达式，不能包含语句。<br>
   - **考察点**：候选人是否知道 JSX 只能放置返回值的表达式，不能直接放置像 `if` 或 `for` 这样的语句。
   - **示例问题**：在 JSX 中能写 `if` 和 `for` 语句吗？为什么不能？
--  **条件渲染**：使用条件语句（如三元运算符）在 JSX 中实现条件渲染。  
+-  **条件渲染**：使用条件语句（如三元运算符）在 JSX 中实现条件渲染。<br>
   - **考察点**：候选人是否知道如何在 JSX 中实现条件渲染，常用的技术是三元运算符。
   - **示例问题**：如何在 JSX 中根据条件渲染不同的内容？你可以给出一个三元运算符的示例吗？
--  **循环渲染**：通过 `map` 函数渲染列表，生成一组 JSX 元素。  
+-  **循环渲染**：通过 `map` 函数渲染列表，生成一组 JSX 元素。<br>
   - **考察点**：候选人是否了解如何通过 `map` 函数遍历数组，并返回一组 JSX 元素。
   - **示例问题**：如何使用 `map` 在 JSX 中渲染一个列表？
 
 ### **4. JSX 事件处理**
 
--  **事件处理机制**：JSX 中的事件处理与 DOM 事件类似，但有一些不同之处，尤其是事件名称的写法（如 `onClick`、`onChange`）。  
+-  **事件处理机制**：JSX 中的事件处理与 DOM 事件类似，但有一些不同之处，尤其是事件名称的写法（如 `onClick`、`onChange`）。<br>
   - **考察点**：候选人是否了解 React 的事件系统，以及如何在 JSX 中处理事件。
   - **示例问题**：如何在 JSX 中处理用户点击事件？如何给按钮绑定 `onClick` 事件？
--  **事件处理函数的绑定**：在类组件中，事件处理函数常常需要绑定 `this`，而在函数组件中，不需要绑定。  
+-  **事件处理函数的绑定**：在类组件中，事件处理函数常常需要绑定 `this`，而在函数组件中，不需要绑定。<br>
   - **考察点**：候选人是否理解函数式组件与类组件事件绑定的区别。
   - **示例问题**：在类组件中如何绑定事件处理函数的 `this`？
 
 ### **5. JSX 中的类与样式**
 
-- **类名与样式**：在 JSX 中，`class` 被替换为 `className`，并且样式可以通过内联样式对象或类名的方式来应用。  
+- **类名与样式**：在 JSX 中，`class` 被替换为 `className`，并且样式可以通过内联样式对象或类名的方式来应用。<br>
   - **考察点**：候选人是否了解在 JSX 中如何设置元素的类和样式。
   - **示例问题**：在 JSX 中如何给元素添加 `class`？如何在 JSX 中设置内联样式？
 
 ### **6. JSX 中的 key 属性**
 
-- **`key` 的使用**：在渲染列表时，React 需要 `key` 属性来标识每个元素，这样可以有效地更新虚拟 DOM。  
+- **`key` 的使用**：在渲染列表时，React 需要 `key` 属性来标识每个元素，这样可以有效地更新虚拟 DOM。<br>
   - **考察点**：候选人是否理解为什么在渲染列表时需要 `key` 属性，并知道如何使用。
   - **示例问题**：为什么在渲染列表时需要给每个元素添加 `key` 属性？如果没有添加 `key` 会怎样？
 
 ### **7. JSX 中的 Fragment 和返回多个元素**
 
-- **Fragment**：JSX 不允许返回多个根元素，因此使用 `Fragment` 或 `div` 包裹多个元素。  
+- **Fragment**：JSX 不允许返回多个根元素，因此使用 `Fragment` 或 `div` 包裹多个元素。<br>
   - **考察点**：候选人是否知道如何返回多个元素，避免 JSX 只能返回一个根节点的问题。
   - **示例问题**：如果需要在 JSX 中返回多个元素，如何处理？
 
 ### **8. JSX 性能优化**
 
-- **JSX 性能考虑**：React 的虚拟 DOM 会通过 diff 算法优化更新，但不合理的 JSX 写法仍然可能影响性能。  
+- **JSX 性能考虑**：React 的虚拟 DOM 会通过 diff 算法优化更新，但不合理的 JSX 写法仍然可能影响性能。<br>
   - **考察点**：候选人是否能理解 JSX 可能导致的性能问题，并知道如何优化（例如避免不必要的 re-render、使用 `key` 属性优化列表渲染）。
   - **示例问题**：如何优化大量元素渲染时的性能？
 
 ### **9. JSX 与组件的结合**
 
-- **组件中使用 JSX**：在组件中，JSX 作为组件的返回值，在组件内部需要返回 JSX 元素来渲染。  
+- **组件中使用 JSX**：在组件中，JSX 作为组件的返回值，在组件内部需要返回 JSX 元素来渲染。<br>
   - **考察点**：候选人是否能理解 JSX 在组件中的应用，以及如何正确地使用 JSX 返回渲染内容。
   - **示例问题**：在 React 组件中，如何使用 JSX 返回多个元素？
 
 ### **10. JSX 转换和编译**
 
-- **JSX 转换**：JSX 需要通过 Babel 或其他编译工具转译成 JavaScript 代码，最终生成 `React.createElement` 调用。  
+- **JSX 转换**：JSX 需要通过 Babel 或其他编译工具转译成 JavaScript 代码，最终生成 `React.createElement` 调用。<br>
   - **考察点**：候选人是否了解 JSX 的编译过程，以及它如何转译成 React.createElement。
   - **示例问题**：React 中的 JSX 是如何转换成 JavaScript 代码的？

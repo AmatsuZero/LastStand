@@ -154,7 +154,7 @@ console.log(obj.valueOf()); // []
 `toString()` 方法是 JavaScript 中所有对象继承自 `Object.prototype` 的方法，用于返回对象的字符串表示形式。
 
 - 基本包装类型直接返回原始值
-- 很多类都有实现各自版本的 toString()，例如日期、数组、函数。  
+- 很多类都有实现各自版本的 toString()，例如日期、数组、函数。<br>
   - 对象调用:{}.toSring 返回由"[Object" 和 类型名 和"]"组成的字符串
   - 数组调用:[].toString 返回由数组内部元素以逗号拼接的字符串
   - Date类型转换为可读的日期和时间字符串
@@ -212,7 +212,7 @@ console.log(new Number('10')); // [Number: 10]
 - 逻辑表达式：逻辑运算符（如逻辑非 `！`逻辑与 `&&`、逻辑或 `||`）中，非布尔类型的值会被隐式转换为布尔类型。
 
 ```sql
-console.log(![]); //false 
+console.log(![]); //false
 //[]先被转换成boolean，值为true，再取反为false。
 ```
 
@@ -244,7 +244,7 @@ console.log("10" == 10); // true，字符串 "10" 隐式转换为数字 10，然
 ### 1. **隐式类型转换**
 
 - **自动转换**：JavaScript 在某些操作中会自动进行类型转换。例如，在运算、比较或逻辑运算中，常常会发生隐式转换。
-- **示例**：  
+- **示例**：<br>
 ```javascript
 console.log(1 + '2'); // "12"（数字转换为字符串）
 console.log(1 - '2'); // -1（字符串转换为数字）
@@ -254,19 +254,19 @@ console.log(true + 1); // 2（布尔值转换为数字）
 ### 2. **显式类型转换**
 
 - **使用构造函数**：可以使用内置构造函数显式地转换数据类型。
-- **示例**：  
-  - **String 转换**：`String(value)`  
+- **示例**：<br>
+  - **String 转换**：`String(value)`<br>
 ```javascript
 console.log(String(123)); // "123"
 ```
-  - **Number 转换**：`Number(value)`  
+  - **Number 转换**：`Number(value)`<br>
 ```javascript
 console.log(Number('123')); // 123
 console.log(Number('')); // 0
 console.log(Number(null)); // 0
 console.log(Number(undefined)); // NaN
 ```
-  - **Boolean 转换**：`Boolean(value)`  
+  - **Boolean 转换**：`Boolean(value)`<br>
 ```javascript
 console.log(Boolean(0)); // false
 console.log(Boolean(1)); // true
@@ -276,18 +276,18 @@ console.log(Boolean('')); // false
 ### 3. **特殊情况**
 
 - **NaN 的处理**：了解 `NaN` 是如何产生的，如何判断一个值是否为 `NaN`（使用 `Number.isNaN()`）。
-- **字符串与数字的转换**：当一个字符串被转换为数字时，如果字符串不能被解析为有效数字，结果将是 `NaN`。  
+- **字符串与数字的转换**：当一个字符串被转换为数字时，如果字符串不能被解析为有效数字，结果将是 `NaN`。<br>
 ```javascript
 console.log(Number('abc')); // NaN
 ```
 
 ### 4. **数组和对象的转换**
 
-- **数组转字符串**：数组在隐式转换为字符串时，元素会被逗号分隔。  
+- **数组转字符串**：数组在隐式转换为字符串时，元素会被逗号分隔。<br>
 ```javascript
 console.log([1, 2, 3]); // "1,2,3"
 ```
-- **对象转字符串**：对象在隐式转换时会调用 `toString()` 方法，通常返回 `[object Object]`，需要使用 `JSON.stringify()` 来获取对象的 JSON 表示。  
+- **对象转字符串**：对象在隐式转换时会调用 `toString()` 方法，通常返回 `[object Object]`，需要使用 `JSON.stringify()` 来获取对象的 JSON 表示。<br>
 ```javascript
 console.log({ a: 1 }); // "[object Object]"
 console.log(JSON.stringify({ a: 1 })); // "{"a":1}"
@@ -296,7 +296,7 @@ console.log(JSON.stringify({ a: 1 })); // "{"a":1}"
 ### 5. **使用 `parseInt` 和 `parseFloat`**
 
 - **解析字符串**：`parseInt` 和 `parseFloat` 用于将字符串解析为整数或浮点数。
-- **示例**：  
+- **示例**：<br>
 ```javascript
 console.log(parseInt('123')); // 123
 console.log(parseFloat('123.45')); // 123.45
@@ -311,7 +311,7 @@ console.log(parseInt('abc')); // NaN
 ### 7. **对象与基本类型之间的转换**
 
 - **对象包装类型**：当访问基本数据类型的方法时，JavaScript 会自动将其转换为对应的对象类型（如 `String`、`Number`、`Boolean`）。
-- **示例**：  
+- **示例**：<br>
 ```javascript
 let str = 'hello';
 console.log(str.toUpperCase()); // "HELLO"（隐式转换为 String 对象）

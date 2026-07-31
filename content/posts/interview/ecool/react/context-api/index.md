@@ -292,7 +292,7 @@ function App() {
 }
 ```
 
-⚠ **问题：**  
+⚠ **问题：**<br>
  即使 `Child` 组件不使用 `count`，它仍然会重新渲染。因为 `{ count }` 是一个新对象，每次 `setCount` 触发 `App` 重新渲染时，`value={{ count }}` 也会变成新对象，导致 `Provider` 重新传递值，从而触发所有 `useContext(CountContext)` 的组件更新。
 
 ### **(3) 如何优化 Context 重新渲染？**

@@ -299,9 +299,9 @@ function read(url){
   })
 }
 read('./a.txt').then(data=>{
-  return read(data) 
+  return read(data)
 }).then(data=>{
-  return read(data)  
+  return read(data)
 }).then(data=>{
   console.log(data)
 })
@@ -404,7 +404,7 @@ promise.then(res=>{
         })
     })
 }).then(res=>{
-    
+
 })
 ```
 
@@ -419,7 +419,7 @@ p.then((data) => {
      console.log('resolved',data);
 },(err) => {
      console.log('rejected',err);
-}); 
+});
 ```
 
 #### （3）all()
@@ -444,7 +444,7 @@ let promise3 = new Promise((resolve,reject)=>{
 });
 
 Promise.all([promise1,promise2,promise3]).then(res=>{
-    console.log(res);  //结果为：[1,2,3] 
+    console.log(res);  //结果为：[1,2,3]
 })
 ```
 
@@ -778,7 +778,7 @@ MyPromise.prototype.then = function(onResolved, onRejected) {
 ```javascript
 then(onFulfilled, onReject){
     // 保存前一个promise的this
-    const self = this; 
+    const self = this;
     return new MyPromise((resolve, reject) => {
       // 封装前一个promise成功时执行的函数
       let fulfilled = () => {
@@ -799,7 +799,7 @@ then(onFulfilled, onReject){
         }
       }
       switch(self.status){
-        case PENDING: 
+        case PENDING:
           self.onFulfilledCallbacks.push(fulfilled);
           self.onRejectedCallbacks.push(rejected);
           break;
@@ -835,7 +835,7 @@ Promise.all = function (arr) {
           let then = val.then
           if (typeof then === 'function') {
             then.call(val, function (val) { // 这里如果传入参数是 promise的话需要将结果传入 args, 而不是 promise实例
-              res(i, val) 
+              res(i, val)
             }, reject)
             return
           }
@@ -889,7 +889,7 @@ console.log(typeof g)   // 返回 object 这里不是 "function"
 console.log(g.next())
 console.log(g.next())
 console.log(g.next())
-console.log(g.next()) 
+console.log(g.next())
 ```
 
 输出结果如下：
@@ -1122,7 +1122,7 @@ async function httpRequest() {
 async function testAsy(){
    return 'hello world';
 }
-let result = testAsy(); 
+let result = testAsy();
 console.log(result)
 ```
 
@@ -1166,7 +1166,7 @@ function testAsy(x){
     }
    )
 }
-async function testAwt(){    
+async function testAwt(){
   let result =  await testAsy('hello world');
   console.log(result);    // 3秒钟之后出现hello world
   console.log('cuger')   // 3秒钟之后出现cug
@@ -1300,7 +1300,7 @@ no
 ### 2. **回调函数**
 
 - **基本使用**：使用回调函数来处理异步操作的结果。
-- **示例**：  
+- **示例**：<br>
 ```javascript
 function fetchData(callback) {
     setTimeout(() => {
@@ -1317,7 +1317,7 @@ fetchData((data) => {
 
 - **定义**：Promise 是一种用于处理异步操作的对象，代表一个可能在未来某个时间点完成或失败的操作。
 - **状态**：Promise 有三种状态：pending（待定）、fulfilled（已完成）、rejected（已拒绝）。
-- **示例**：  
+- **示例**：<br>
 ```javascript
 const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -1334,7 +1334,7 @@ promise.then((data) => {
 
 - **定义**：`async/await` 是基于 Promise 的语法糖，使异步代码看起来像同步代码。
 - **使用方式**：使用 `async` 关键字定义异步函数，使用 `await` 等待 Promise 的结果。
-- **示例**：  
+- **示例**：<br>
 ```javascript
 async function fetchData() {
     const response = await new Promise((resolve) => {
@@ -1356,7 +1356,7 @@ fetchData();
 ### 6. **并发与串行**
 
 - **并发处理**：如何同时发起多个异步操作，并等待所有操作完成。
-- **示例**：  
+- **示例**：<br>
 ```javascript
 const promise1 = fetchData();
 const promise2 = fetchData();
@@ -1365,7 +1365,7 @@ Promise.all([promise1, promise2]).then((results) => {
 });
 ```
 - **串行处理**：如何按顺序执行异步操作，确保一个操作完成后再开始下一个。
-- **示例**：  
+- **示例**：<br>
 ```javascript
 async function serialFetch() {
     const data1 = await fetchData();
@@ -1378,7 +1378,7 @@ serialFetch();
 ### 7. **异步迭代**
 
 - **for...of 和 `async/await` 结合**：使用 `for...of` 循环处理异步数组。
-- **示例**：  
+- **示例**：<br>
 ```javascript
 async function processArray(array) {
     for (const item of array) {
@@ -1396,7 +1396,7 @@ async function processArray(array) {
 ### 9. **请求和响应**
 
 - **AJAX 和 Fetch API**：如何使用 AJAX 或 Fetch API 进行网络请求，以及处理异步响应。
-- **示例**：  
+- **示例**：<br>
 ```javascript
 fetch('https://api.example.com/data')
     .then(response => response.json())

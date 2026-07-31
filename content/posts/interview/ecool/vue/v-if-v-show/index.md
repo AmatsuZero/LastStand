@@ -88,8 +88,8 @@ export const transformIf = createStructuralDirectiveTransform(
 
 ## 使用场景
 
-1.  如果需要频繁地切换，则`v-show`较好。 
-2.  如果在运行时条件很少改变，则使用`v-if`较好。 
+1.  如果需要频繁地切换，则`v-show`较好。
+2.  如果在运行时条件很少改变，则使用`v-if`较好。
 
 ## 常见考点
 
@@ -102,14 +102,14 @@ export const transformIf = createStructuralDirectiveTransform(
 
 #### **考察点：**
 
--  **`v-if` 的基本用法**：  
-  - `v-if` 用来控制元素的渲染，只有条件为 `true` 时才会创建或销毁元素：  
+-  **`v-if` 的基本用法**：<br>
+  - `v-if` 用来控制元素的渲染，只有条件为 `true` 时才会创建或销毁元素：<br>
 ```vue
 <div v-if="isVisible">Hello, world!</div>
 ```
   - `v-if` 会在条件变化时触发 DOM 的销毁和重新渲染。
--  **`v-show` 的基本用法**：  
-  - `v-show` 用来控制元素的显示与隐藏，通过设置元素的 `display` 样式：  
+-  **`v-show` 的基本用法**：<br>
+  - `v-show` 用来控制元素的显示与隐藏，通过设置元素的 `display` 样式：<br>
 ```vue
 <div v-show="isVisible">Hello, world!</div>
 ```
@@ -126,11 +126,11 @@ export const transformIf = createStructuralDirectiveTransform(
 
 #### **考察点：**
 
--  **`v-if` 的性能开销**：  
+-  **`v-if` 的性能开销**：<br>
   - `v-if` 会在条件变化时销毁并重新创建 DOM 元素。如果条件变化频繁，频繁的 DOM 操作可能会带来性能问题。
--  **`v-show` 的性能开销**：  
+-  **`v-show` 的性能开销**：<br>
   - `v-show` 只会切换元素的 `display` 样式，因此无需重新渲染元素，性能开销较小。但如果元素内容复杂，使用 `v-show` 时，元素仍然存在于 DOM 中，可能会造成不必要的内存占用。
--  **选择依据**：  
+-  **选择依据**：<br>
   - 如果条件变化不频繁，且元素较复杂（例如绑定了复杂事件或子组件），使用 `v-show` 更合适。
   - 如果条件变化较频繁或元素简单（例如简单的文本或图标），使用 `v-if` 更合适，避免不必要的渲染。
 
@@ -145,10 +145,10 @@ export const transformIf = createStructuralDirectiveTransform(
 
 #### **考察点：**
 
--  **动态列表或分页场景**：  
+-  **动态列表或分页场景**：<br>
   - 如果一个列表或分页项的显示与隐藏变化频繁，且列表项较简单，使用 `v-show` 会更高效。
   - 如果列表项的渲染涉及较为复杂的逻辑（例如数据请求、组件创建等），使用 `v-if` 会更适合，避免不必要的渲染。
--  **过渡动画**：  
+-  **过渡动画**：<br>
   - `v-if` 和 `v-show` 都支持 Vue 的过渡动画。不同的是，`v-if` 会在元素进入和离开时触发过渡，而 `v-show` 仅会在元素显示与隐藏时触发过渡。
   - 对于复杂的过渡效果，如果需要元素完全消失并重新创建，`v-if` 更合适。对于简单的显隐效果，`v-show` 更加轻便。
 
@@ -163,11 +163,11 @@ export const transformIf = createStructuralDirectiveTransform(
 
 #### **考察点：**
 
--  **`v-if` 的实现**：  
+-  **`v-if` 的实现**：<br>
   - `v-if` 会根据条件动态添加或移除元素及其子组件。当条件为 `true` 时，Vue 会创建该元素，并在条件为 `false` 时销毁它。这意味着它会完全消耗性能进行创建和销毁。
--  **`v-show` 的实现**：  
+-  **`v-show` 的实现**：<br>
   - `v-show` 会通过 CSS 控制元素的 `display` 属性，元素一直存在于 DOM 中，只是通过修改样式来控制其显示与隐藏。
--  **生命周期钩子**：  
+-  **生命周期钩子**：<br>
   - 使用 `v-if` 时，元素及其组件的生命周期钩子（如 `mounted` 和 `destroyed`）会在元素渲染和销毁时被触发。
   - 使用 `v-show` 时，元素的生命周期钩子不会被触发，元素始终存在于 DOM 中，只是其样式被修改。
 
@@ -182,9 +182,9 @@ export const transformIf = createStructuralDirectiveTransform(
 
 #### **考察点：**
 
-- **`v-if` 和 `v-show` 混合使用**：  
+- **`v-if` 和 `v-show` 混合使用**：<br>
   - 在同一元素或同一组件上混合使用 `v-if` 和 `v-show` 是不建议的。由于它们控制元素显示的方式不同，可能会导致代码的复杂性和不易维护性。
-- **父子组件的 `v-if` 和 `v-show` 使用**：  
+- **父子组件的 `v-if` 和 `v-show` 使用**：<br>
   - 在父组件中控制子组件的显示隐藏时，可以根据场景选择 `v-if` 或 `v-show`。对于频繁变化的子组件，推荐使用 `v-show`；而对于不频繁显示的复杂子组件，推荐使用 `v-if`。
 
 ---

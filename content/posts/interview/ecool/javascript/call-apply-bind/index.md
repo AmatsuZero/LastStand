@@ -34,7 +34,7 @@ banana = {    color: "yellow"}apple.say.call(banana);     //My color is yellowap
 
 ```plain
 var func = function(arg1, arg2) {
-     
+
 };
 ```
 
@@ -58,9 +58,9 @@ func.apply(this, [arg1, arg2])
 在 `ES6` 的扩展运算符出现之前，我们可以用 `Array.prototype.push` 来实现
 
 ```plain
-var array1 = [12 , "foo" , {name "Joe"} , -2458]; 
-var array2 = ["Doe" , 555 , 100]; 
-Array.prototype.push.apply(array1, array2); 
+var array1 = [12 , "foo" , {name "Joe"} , -2458];
+var array2 = ["Doe" , 555 , 100];
+Array.prototype.push.apply(array1, array2);
 /* array1 值为  [12 , "foo" , {name "Joe"} , -2458 , "Doe" , 555 , 100] */
 ```
 
@@ -71,7 +71,7 @@ ES6 中可以使用 `[...array1, ...array2]` 实现。
 number 本身没有 max 方法，但是 Math 有，我们可以借助 `call` 或者 `apply` 使用其方法。
 
 ```plain
-var  numbers = [5, 458 , 120 , -215 ]; 
+var  numbers = [5, 458 , 120 , -215 ];
 var maxInNumbers = Math.max.apply(Math, numbers),   //458
     maxInNumbers = Math.max.call(Math,5, 458 , 120 , -215); //458
 ```
@@ -79,7 +79,7 @@ var maxInNumbers = Math.max.apply(Math, numbers),   //458
 - 验证是否是数组（前提是toString()方法没有被重写过）
 
 ```plain
-function isArray(obj){ 
+function isArray(obj){
     return Object.prototype.toString.call(obj) === '[object Array]' ;
 }
 ```
@@ -191,7 +191,7 @@ var sed = {
 }
 var func = bar.bind(foo).bind(sed);
 func(); //?
- 
+
 var fiv = {
     x:5
 }

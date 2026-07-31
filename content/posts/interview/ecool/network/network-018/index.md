@@ -137,11 +137,11 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 ### 3. **HTTP 协议优化**
 
--  使用 HTTP/2：  
+-  使用 HTTP/2：<br>
   - 多路复用（消除队头阻塞）
   - 头部压缩
   - Server Push（预加载资源）
--  使用 HTTP/3：  
+-  使用 HTTP/3：<br>
   - 基于 QUIC，减少握手延迟
 
 ### 4. **缓存策略优化**
@@ -153,11 +153,11 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 ### 5. **资源加载优化**
 
--  懒加载：图片、视频等资源按需加载（`loading="lazy"`） 
--  预加载 & 预请求：  
+-  懒加载：图片、视频等资源按需加载（`loading="lazy"`）
+-  预加载 & 预请求：<br>
   - `<link rel="preload">`
   - `<link rel="prefetch">`
--  按需加载模块（JS/CSS） 
+-  按需加载模块（JS/CSS）
 
 ### 6. **压缩与传输优化**
 

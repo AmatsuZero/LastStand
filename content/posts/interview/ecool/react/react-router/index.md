@@ -60,7 +60,7 @@ const menusList = [
 const index = () => {
   return <div >
     <div >
-     
+
       <Router  >
       <div>{
         /* link 路由跳转 */
@@ -166,19 +166,19 @@ function createBrowserHistory(){
     const transitionManager = createTransitionManager()
     /* 改变location对象，通知组件更新 */
     const setState = () => { /* ... */ }
-    
+
     /* 处理当path改变后，处理popstate变化的回调函数 */
     const handlePopState = () => { /* ... */ }
-   
+
     /* history.push方法，改变路由，通过全局对象history.pushState改变url, 通知router触发更新，替换组件 */
     const push=() => { /*...*/ }
-    
+
     /* 底层应用事件监听器，监听popstate事件 */
-    const listen=()=>{ /*...*/ } 
+    const listen=()=>{ /*...*/ }
     return {
        push,
        listen,
-       /* .... */ 
+       /* .... */
     }
 }
 ```
@@ -521,7 +521,7 @@ class Route extends React.Component {
           invariant(context, "You should not use <Route> outside a <Router>");
           // computedMatch 为 经过 swich处理后的 path
           const location = this.props.location || context.location;
-          const match = this.props.computedMatch 
+          const match = this.props.computedMatch
             ? this.props.computedMatch // <Switch> already computed the match for us
             : this.props.path
             ? matchPath(location.pathname, this.props)
@@ -601,7 +601,7 @@ function Redirect({ computedMatch, to, push = false }) {
                 })
               ) {
                 method(location);
-              } 
+              }
             }}
               to={to}
           />
@@ -638,11 +638,11 @@ function Redirect({ computedMatch, to, push = false }) {
 
 ## **1. React Router 的基本概念**
 
--  **考察点**：  
+-  **考察点**：<br>
   - React Router 的作用及其核心概念。
   - React Router 是如何工作的？
   - SPA（单页面应用）中的路由管理。
--  **问题示例**：  
+-  **问题示例**：<br>
   - 什么是 React Router？它的主要作用是什么？
   - React Router 如何管理单页面应用（SPA）的路由？
   - 什么是 `BrowserRouter` 和 `HashRouter`？它们有什么区别？
@@ -653,11 +653,11 @@ function Redirect({ computedMatch, to, push = false }) {
 
 ## **2. React Router 的基本使用**
 
--  **考察点**：  
+-  **考察点**：<br>
   - 如何定义路由？
   - 如何在组件中获取路由信息？
   - 动态路由参数的获取方法。
--  **问题示例**：  
+-  **问题示例**：<br>
   - React Router 中如何定义一个基本的路由？
   - 在 v6 版本中，如何使用 `<Routes>` 和 `<Route>`？
   - 在组件中如何获取当前路由参数？
@@ -668,10 +668,10 @@ function Redirect({ computedMatch, to, push = false }) {
 
 ## **3. React Router 的动态路由**
 
--  **考察点**：  
+-  **考察点**：<br>
   - 动态路由的定义和匹配。
   - 如何获取动态参数。
--  **问题示例**：  
+-  **问题示例**：<br>
   - 在 React Router v6 中，如何定义动态路由？
   - `useParams` 在动态路由中如何使用？
   - `useSearchParams` 和 `useParams` 的区别是什么？
@@ -681,10 +681,10 @@ function Redirect({ computedMatch, to, push = false }) {
 
 ## **4. 路由导航**
 
--  **考察点**：  
+-  **考察点**：<br>
   - 如何在 React Router 中进行编程式导航？
   - `Link` 和 `NavLink` 的作用及区别。
--  **问题示例**：  
+-  **问题示例**：<br>
   - 如何在 React 组件中进行路由跳转？
   - `Link` 和 `a` 标签有什么区别？
   - `NavLink` 如何实现高亮状态？
@@ -695,10 +695,10 @@ function Redirect({ computedMatch, to, push = false }) {
 
 ## **5. 路由守卫（权限控制）**
 
--  **考察点**：  
+-  **考察点**：<br>
   - 如何实现路由权限控制？
   - `useEffect` 在路由守卫中的作用。
--  **问题示例**：  
+-  **问题示例**：<br>
   - 如何在 React Router 中实现权限控制（如未登录用户不能访问某些页面）？
   - 如何基于用户角色动态渲染路由？
   - 在 React Router 中，如何封装一个 `PrivateRoute` 组件？
@@ -708,10 +708,10 @@ function Redirect({ computedMatch, to, push = false }) {
 
 ## **6. 路由懒加载**
 
--  **考察点**：  
+-  **考察点**：<br>
   - 结合 `React.lazy` 和 `Suspense` 实现路由懒加载。
   - 如何优化大规模应用的路由加载。
--  **问题示例**：  
+-  **问题示例**：<br>
   - 如何在 React Router 中实现懒加载？
   - `React.lazy` 和 `Suspense` 在路由懒加载中的作用是什么？
   - 在懒加载路由时，如何为用户提供加载指示（Loading）？
@@ -721,10 +721,10 @@ function Redirect({ computedMatch, to, push = false }) {
 
 ## **7. 路由嵌套**
 
--  **考察点**：  
+-  **考察点**：<br>
   - 如何使用 `Outlet` 渲染嵌套路由？
   - 父子路由如何协同工作？
--  **问题示例**：  
+-  **问题示例**：<br>
   - 如何在 React Router v6 中定义嵌套路由？
   - `Outlet` 在嵌套路由中的作用是什么？
   - 为什么在 v6 版本中，嵌套路由不再使用 `children` 而是 `element`？
@@ -734,10 +734,10 @@ function Redirect({ computedMatch, to, push = false }) {
 
 ## **8. 404 页面（Not Found）**
 
--  **考察点**：  
+-  **考察点**：<br>
   - 如何在 React Router 中定义 404 页面？
   - 404 页面如何与 `useNavigate` 结合？
--  **问题示例**：  
+-  **问题示例**：<br>
   - 如何在 React Router v6 中配置 404 页面？
   - 404 页面如何与 `navigate(-1)` 结合返回上一页？
   - 在动态路由中，如何确保未匹配的 URL 跳转到 404？
@@ -746,9 +746,9 @@ function Redirect({ computedMatch, to, push = false }) {
 
 ## **9. 路由动画**
 
--  **考察点**：  
+-  **考察点**：<br>
   - 如何使用 `react-transition-group` 或 `framer-motion` 实现路由动画？
--  **问题示例**：  
+-  **问题示例**：<br>
   - 如何在 React Router 中添加页面切换动画？
   - `react-transition-group` 如何与 React Router 结合？
   - `framer-motion` 如何实现路由过渡效果？
@@ -757,10 +757,10 @@ function Redirect({ computedMatch, to, push = false }) {
 
 ## **10. 路由状态管理**
 
--  **考察点**：  
+-  **考察点**：<br>
   - 如何在路由之间传递状态？
   - `useLocation` 的作用及使用方式。
--  **问题示例**：  
+-  **问题示例**：<br>
   - 如何在 `navigate` 过程中传递 `state`？
   - `useLocation` 可以获取哪些信息？
   - `useLocation` 和 `useParams` 的区别是什么？
@@ -769,10 +769,10 @@ function Redirect({ computedMatch, to, push = false }) {
 
 ## **11. SSR（服务器端渲染）与 React Router**
 
--  **考察点**：  
+-  **考察点**：<br>
   - React Router 如何支持 SSR？
   - `react-router-dom` 和 `react-router` 在 SSR 场景下的区别。
--  **问题示例**：  
+-  **问题示例**：<br>
   - React Router 在 SSR 场景下如何使用？
   - `StaticRouter` 在 SSR 中的作用是什么？
   - SSR 如何确保正确的路由匹配？
@@ -781,10 +781,10 @@ function Redirect({ computedMatch, to, push = false }) {
 
 ## **12. React Router v5 和 v6 的区别**
 
--  **考察点**：  
+-  **考察点**：<br>
   - React Router v6 相比 v5 的改动点。
   - 为什么要从 `Switch` 改成 `Routes`？
--  **问题示例**：  
+-  **问题示例**：<br>
   - React Router v5 和 v6 在路由配置上的主要区别是什么？
   - 为什么 React Router v6 移除了 `exact`？
   - `Switch` 和 `Routes` 有什么不同？

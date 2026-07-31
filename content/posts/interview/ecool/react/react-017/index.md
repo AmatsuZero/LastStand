@@ -56,7 +56,7 @@ class ErrorBoundary extends React.Component {
 </ErrorBoundary>
 ```
 
-开源世界就是好，早有大神封装了[react-error-boundary](https://www.npmjs.com/package/react-error-boundary) 这种优秀的库。  
+开源世界就是好，早有大神封装了[react-error-boundary](https://www.npmjs.com/package/react-error-boundary) 这种优秀的库。<br>
  你只需要关心出现错误后需要关心什么，还以来个 `Reset`, 完美。
 
 ```js
@@ -93,8 +93,8 @@ const ui = (
 
 原文可见参见官网[introducing-error-boundaries](https://reactjs.org/docs/error-boundaries.html#introducing-error-boundaries)
 
-本文要捕获的就是 事件处理程序的错误。  
- 官方其实也是有方案的[how-about-event-handlers](https://reactjs.org/docs/error-boundaries.html#how-about-event-handlers)， 就是 try catch.  
+本文要捕获的就是 事件处理程序的错误。<br>
+ 官方其实也是有方案的[how-about-event-handlers](https://reactjs.org/docs/error-boundaries.html#how-about-event-handlers)， 就是 try catch.<br>
  但是，那么多事件处理程序，我的天，得写多少，。。。。。。。。。。。。。。。。。。。。
 
 ```js
@@ -149,7 +149,7 @@ window.removeEventListener('unhandledrejection', this.onReject, true)
 
 至于`fetch`, 自己带着catch跑，不处理就是你自己的问题了。
 
-这么多，太难了。  
+这么多，太难了。<br>
  还好，其实有一个库 [react-error-catch](https://www.npmjs.com/package/react-error-catch) 是基于ErrorBoudary,error与unhandledrejection封装的一个组件。
 
 其核心如下
@@ -186,14 +186,14 @@ const App = () => {
     </ErrorCatch>)
 }
 
-export default 
+export default
 ```
 
 鼓掌，鼓掌。
 
 其实不然： 利用error捕获的错误，其最主要的是提供了错误堆栈信息，对于分析错误相当不友好，尤其打包之后。
 
-错误那么多，我就先好好处理React里面的事件处理程序。  
+错误那么多，我就先好好处理React里面的事件处理程序。<br>
  至于其他，待续。
 
 ## 事件处理程序的异常捕获
@@ -212,11 +212,11 @@ export default
         if (!res || res.errCode !== 0) {
             return Toast.error("创建订单失败");
         }
-        
+
         .......
         其他可能产生异常的代码
         .......
-        
+
        Toast.success("创建订单成功");
     }
 ```
@@ -228,7 +228,7 @@ export default
 - report: 出现错误，是否上报
 - log: 使用使用console.error打印
 
-可能你说，这这，消息定死，不合理啊。我要是有其他消息呢。  
+可能你说，这这，消息定死，不合理啊。我要是有其他消息呢。<br>
  此时我微微一笑别急， 再看一段代码
 
 ```js
@@ -239,17 +239,17 @@ export default
         if (!res || res.errCode !== 0) {
             return Toast.error("创建订单失败");
         }
-       
+
         .......
         其他可能产生异常的代码
         .......
-        
+
        throw new CatchError("创建订单失败了，请联系管理员", {
            toast: true,
            report: true,
            log: false
        })
-       
+
        Toast.success("创建订单成功");
 
     }
@@ -351,7 +351,7 @@ export function methodCatch(options: string | CatchOptions = DEFAULT_ERROR_CATCH
                             }
 
                         } else {
-                            
+
                             const message = err.message || opt.message;
                             console.error("asyncMethodCatch:", message, err);
 
@@ -384,11 +384,11 @@ export function methodCatch(options: string | CatchOptions = DEFAULT_ERROR_CATCH
             return Toast.error("创建订单失败");
         }
        Toast.success("创建订单成功");
-       
+
         .......
         其他可能产生异常的代码
         .......
-        
+
        throw new CatchError("创建订单失败了，请联系管理员", {
            toast: true,
            report: true,
@@ -421,9 +421,9 @@ classs AAA{
 **当前方案存在的问题:**
 
 1. 功能局限
-2. 抽象不够  
+2. 抽象不够<br>
  获取选项,代理函数, 错误处理函数完全可以分离，变成通用方法。
-3. 同步方法经过转换后会变为异步方法。  
+3. 同步方法经过转换后会变为异步方法。<br>
  所以理论上，要区分同步和异步方案。
 4. 错误处理函数再异常怎么办
 
@@ -431,8 +431,8 @@ classs AAA{
 
 ## Hooks版本
 
-有掘友说，这个年代了，谁还不用Hooks。  
- 是的，大佬们说得对，我们得与时俱进。  
+有掘友说，这个年代了，谁还不用Hooks。<br>
+ 是的，大佬们说得对，我们得与时俱进。<br>
  Hooks的基础版本已经有了，先分享使用，后续的文章跟上。
 
 Hook的名字就叫useCatch
@@ -463,7 +463,7 @@ const TestView: React.FC<Props> = function (props) {
         console.log("delay begin:", Date.now())
 
         await d.run();
-        
+
         console.log("delay end:", Date.now())
         console.log("TestView", this)
         throw new CatchError("自定义的异常，你知道不")
@@ -486,10 +486,10 @@ export default React.memo(TestView);
 至于思路，基于`useMemo`,可以先看一下代码：
 
 ```typescript
-export function useCatch<T extends (...args: any[]) => any>(callback: T, deps: DependencyList, options: CatchOptions =DEFAULT_ERRPR_CATCH_OPTIONS): T {    
+export function useCatch<T extends (...args: any[]) => any>(callback: T, deps: DependencyList, options: CatchOptions =DEFAULT_ERRPR_CATCH_OPTIONS): T {
 
     const opt =  useMemo( ()=> getOptions(options), [options]);
-    
+
     const fn = useMemo((..._args: any[]) => {
         const proxy = observerHandler(callback, undefined, function (error: Error) {
             commonErrorHandler(error, opt)
@@ -506,11 +506,11 @@ export function useCatch<T extends (...args: any[]) => any>(callback: T, deps: D
 
 ## **1. 错误边界的基本概念**
 
--  **考察点**：  
+-  **考察点**：<br>
   - 什么是错误边界？
   - 错误边界的作用及其工作原理。
   - 为什么 React 需要错误边界？
--  **问题示例**：  
+-  **问题示例**：<br>
   - 什么是 React 的错误边界？它的作用是什么？
   - React 组件中的错误会影响整个应用吗？为什么？
   - React 中哪些错误可以被错误边界捕获？哪些不能？
@@ -520,11 +520,11 @@ export function useCatch<T extends (...args: any[]) => any>(callback: T, deps: D
 
 ## **2. 如何实现错误边界**
 
--  **考察点**：  
+-  **考察点**：<br>
   - 如何正确实现错误边界组件？
   - `componentDidCatch` 和 `getDerivedStateFromError` 的作用。
   - 错误边界的基本用法。
--  **问题示例**：  
+-  **问题示例**：<br>
   - 如何在 React 组件中创建一个错误边界？
   - `componentDidCatch` 和 `getDerivedStateFromError` 的区别是什么？
   - `componentDidCatch` 的参数有哪些？如何使用？
@@ -534,11 +534,11 @@ export function useCatch<T extends (...args: any[]) => any>(callback: T, deps: D
 
 ## **3. 错误边界的适用范围**
 
--  **考察点**：  
+-  **考察点**：<br>
   - 错误边界的作用范围及其对不同组件的影响。
   - 是否应该在应用的根组件上设置错误边界？
   - 错误边界的最佳实践。
--  **问题示例**：  
+-  **问题示例**：<br>
   - 错误边界应该放在应用的哪个层级？为什么？
   - 如何在大型应用中合理使用错误边界？
   - 在 React 16 之前，如何处理组件中的错误？
@@ -548,10 +548,10 @@ export function useCatch<T extends (...args: any[]) => any>(callback: T, deps: D
 
 ## **4. 错误边界的局限性**
 
--  **考察点**：  
+-  **考察点**：<br>
   - 错误边界的局限性，如无法捕获事件处理函数中的错误。
   - 不能捕获错误的场景及解决方案。
--  **问题示例**：  
+-  **问题示例**：<br>
   - React 错误边界不能捕获哪些类型的错误？如何处理？
   - 为什么错误边界无法捕获 `setTimeout` 里的错误？如何解决？
   - 在错误边界无法捕获的场景下，如何进行全局错误监控？
@@ -560,10 +560,10 @@ export function useCatch<T extends (...args: any[]) => any>(callback: T, deps: D
 
 ## **5. 错误边界与 Hooks**
 
--  **考察点**：  
+-  **考察点**：<br>
   - React Hooks 不能直接使用 `componentDidCatch`，如何在函数组件中实现错误边界？
   - `useEffect` 是否可以替代 `componentDidCatch`？
--  **问题示例**：  
+-  **问题示例**：<br>
   - 为什么 React Hooks 不能使用 `componentDidCatch`？
   - 在 Hooks 组件中如何实现类似错误边界的功能？
   - `useEffect` 能够捕获组件渲染过程中的错误吗？为什么？
@@ -572,10 +572,10 @@ export function useCatch<T extends (...args: any[]) => any>(callback: T, deps: D
 
 ## **6. 错误边界与 React Router 结合**
 
--  **考察点**：  
+-  **考察点**：<br>
   - 在路由跳转时如何确保错误边界生效？
   - 发生错误时，如何跳转到错误页面？
--  **问题示例**：  
+-  **问题示例**：<br>
   - 如何结合 React Router 让某个页面在发生错误时跳转到 `/error`？
   - 在 `Suspense` 组件中，错误边界如何影响懒加载组件？
 
@@ -583,9 +583,9 @@ export function useCatch<T extends (...args: any[]) => any>(callback: T, deps: D
 
 ## **7. 错误边界与日志记录**
 
--  **考察点**：  
+-  **考察点**：<br>
   - 结合日志系统（如 Sentry、LogRocket）记录错误信息。
--  **问题示例**：  
+-  **问题示例**：<br>
   - 如何在错误边界中上报错误日志？
   - `componentDidCatch` 中的错误信息如何存储到日志系统？
   - 错误边界如何与 Sentry 结合？
@@ -594,10 +594,10 @@ export function useCatch<T extends (...args: any[]) => any>(callback: T, deps: D
 
 ## **8. 错误边界在生产环境中的应用**
 
--  **考察点**：  
+-  **考察点**：<br>
   - 在实际项目中如何使用错误边界保证应用的健壮性？
   - 在组件库或 UI 框架中如何利用错误边界提升用户体验？
--  **问题示例**：  
+-  **问题示例**：<br>
   - 在生产环境中，如何合理使用错误边界？
   - 如何在 UI 组件库（如 Ant Design）中使用错误边界？
   - 错误边界如何配合 `fallback UI` 提供良好的用户体验？

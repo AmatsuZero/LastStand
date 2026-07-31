@@ -112,14 +112,14 @@ ALLOW-FROM origin 定义允许frame加载的页面地址
 
 *配置 X-FRAME-OPTIONS*：
 
--  使用 meta标签来设置 `X-Frame-Options` 是无效的！例如 `<meta http-equiv="X-Frame-Options" content="deny">` 没有任何效果 
--  配置 Apache  
+-  使用 meta标签来设置 `X-Frame-Options` 是无效的！例如 `<meta http-equiv="X-Frame-Options" content="deny">` 没有任何效果
+-  配置 Apache<br>
   - 把下面这行添加到 'site' 的配置中：
   - `Header always set X-Frame-Options "SAMEORIGIN"`
--  配置nginx  
+-  配置nginx<br>
   - 把下面这行添加到 'http', 'server' 或者 'location'，配置中
   - `add_header X-Frame-Options SAMEORIGIN;`
--  其余配置可自行百度。 
+-  其余配置可自行百度。
 
 除了`X-Frame-Options`之外，Firefox的`Content Security Policy`以及Firefox的`NoScript`扩展也能有效防御ClickJacking。这些方案为我们提供了更多的选择。
 
@@ -228,12 +228,12 @@ window.onbeforeunload = function() {
 
 **关键点**：
 
-- **`X-Frame-Options`**：  
+- **`X-Frame-Options`**：<br>
   - `DENY`：不允许页面被嵌套。
   - `SAMEORIGIN`：仅允许相同源嵌套。
-- **`Content-Security-Policy`**：  
+- **`Content-Security-Policy`**：<br>
   - `frame-ancestors 'none';` 可完全禁止嵌套。
-- **JavaScript 检测**：  
+- **JavaScript 检测**：<br>
   - 判断 `window.top === window.self`，若不相等，则页面被嵌套。
 
 ---
@@ -242,7 +242,7 @@ window.onbeforeunload = function() {
 
 #### **问题**：
 
-- 在以下场景中，点击劫持可能如何发生？如何防御？  
+- 在以下场景中，点击劫持可能如何发生？如何防御？<br>
   1. 一个支付页面被恶意嵌入到第三方网站。
   2. 一个用户点赞功能的按钮被伪装成无害的广告。
   3. 在线表单提交功能被恶意页面诱导填写。
@@ -263,7 +263,7 @@ window.onbeforeunload = function() {
 
 **关键点**：
 
-- 检测并阻止嵌套行为：  
+- 检测并阻止嵌套行为：<br>
 ```javascript
 if (window.top !== window.self) {
     window.top.location = window.self.location;
@@ -284,7 +284,7 @@ if (window.top !== window.self) {
 **关键点**：
 
 - 为合作伙伴提供明确的域名白名单。
-- 配置灵活的 `Content-Security-Policy` 策略，例如：  
+- 配置灵活的 `Content-Security-Policy` 策略，例如：<br>
 ```http
 Content-Security-Policy: frame-ancestors 'self' https://trusted-partner.com;
 ```

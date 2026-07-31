@@ -84,7 +84,7 @@ Vue 中提供了事件绑定的语法糖，我们可以很简单地在标签中�
 <div @click="log(1)" @click.capture="log(1)" style="background-color: #00f">
   <div @click="log(2)" @click.capture="log(2)" style="background-color: #66f">
     <div @click="log(3)" @click.capture.stop="log(3)" style="background-color: #ccf">
-      <a @click="log(4)" @click.capture="log(4)" href="javascript: console.log('x')" 
+      <a @click="log(4)" @click.capture="log(4)" href="javascript: console.log('x')"
 style="background-color: #fff">
         点击这里
       </a>
@@ -102,7 +102,7 @@ style="background-color: #fff">
 <div @click="log(1)" @click.capture="log(1)" style="background-color: #00f">
   <div @click="log(2)" @click.capture="log(2)" style="background-color: #66f">
     <div @click="log(3)" @click.capture="log(3)" style="background-color: #ccf">
-      <a @click.prevent="log(4)" @click.capture="log(4)" href="javascript: console.log('x')" 
+      <a @click.prevent="log(4)" @click.capture="log(4)" href="javascript: console.log('x')"
 style="background-color: #fff">
         点击这里
       </a>
@@ -114,7 +114,7 @@ style="background-color: #fff">
 <div @click="log(1)" @click.capture="log(1)" style="background-color: #00f">
   <div @click="log(2)" @click.capture="log(2)" style="background-color: #66f">
     <div @click="log(3)" @click.capture="log(3)" style="background-color: #ccf">
-      <a @click="log(4)" @click.capture.prevent="log(4)" href="javascript: console.log('x')" 
+      <a @click="log(4)" @click.capture.prevent="log(4)" href="javascript: console.log('x')"
 style="background-color: #fff">
         点击这里
       </a>
@@ -143,7 +143,7 @@ style="background-color: #fff">
 <div @click="log(1)" @click.capture="log(1)" style="background-color: #00f">
   <div @click="log(2)" @click.capture.self="log(2)" style="background-color: #66f">
     <div @click.self="log(3)" @click.capture="log(3)" style="background-color: #ccf">
-      <a @click="log(4)" @click.capture="log(4)" href="javascript: console.log('x')" 
+      <a @click="log(4)" @click.capture="log(4)" href="javascript: console.log('x')"
 style="background-color: #fff">
         点击这里
       </a>
@@ -159,7 +159,7 @@ style="background-color: #fff">
 <div @click="log(1)" @click.capture="log(1)" style="background-color: #00f">
   <div @click="log(2)" @click.capture="log(2)" style="background-color: #66f">
     <div @click="log(3)" @click.capture="log(3)" style="background-color: #ccf">
-      <a @click.prevent.self="log(4)" @click.capturet="log(4)" href="javascript: console.log('x')" 
+      <a @click.prevent.self="log(4)" @click.capturet="log(4)" href="javascript: console.log('x')"
 style="background-color: #fff">
         点击这里
         <div style="background-color: #ccc">5</div>
@@ -176,7 +176,7 @@ style="background-color: #fff">
 <div @click="log(1)" @click.capture="log(1)" style="background-color: #00f">
   <div @click="log(2)" @click.capture="log(2)" style="background-color: #66f">
     <div @click="log(3)" @click.capture="log(3)" style="background-color: #ccf">
-      <a @click.self.prevent="log(4)" @click.capture="log(4)" href="javascript: console.log('x')" 
+      <a @click.self.prevent="log(4)" @click.capture="log(4)" href="javascript: console.log('x')"
 style="background-color: #fff">
         点击这里
         <div style="background-color: #ccc">5</div>
@@ -214,15 +214,15 @@ style="background-color: #fff">
 
 #### **考察点：**
 
--  **事件绑定**：  
+-  **事件绑定**：<br>
   - 使用 `v-on` 绑定事件：`v-on:event="method"`, 其中 `event` 是事件类型，`method` 是方法名称。
-  - 简写方式：`@event="method"`，等同于 `v-on:event="method"`。  
+  - 简写方式：`@event="method"`，等同于 `v-on:event="method"`。<br>
 ```vue
 <button v-on:click="handleClick">Click Me</button>
 <button @click="handleClick">Click Me</button>
 ```
--  **事件处理方法**：  
-  - 事件处理方法可以在 `methods` 中定义。  
+-  **事件处理方法**：<br>
+  - 事件处理方法可以在 `methods` 中定义。<br>
 ```vue
 methods: {
   handleClick() {
@@ -242,28 +242,28 @@ methods: {
 
 #### **考察点：**
 
-- **事件修饰符**：  
-  - **`.stop`**：阻止事件冒泡（`event.stopPropagation()`）。  
+- **事件修饰符**：<br>
+  - **`.stop`**：阻止事件冒泡（`event.stopPropagation()`）。<br>
 ```vue
 <button @click.stop="handleClick">Click Me</button>
 ```
-  - **`.prevent`**：调用 `event.preventDefault()` 来阻止默认事件（例如表单提交）。  
+  - **`.prevent`**：调用 `event.preventDefault()` 来阻止默认事件（例如表单提交）。<br>
 ```vue
 <form @submit.prevent="handleSubmit">Submit</form>
 ```
-  - **`.capture`**：在捕获阶段触发事件，而不是冒泡阶段。  
+  - **`.capture`**：在捕获阶段触发事件，而不是冒泡阶段。<br>
 ```vue
 <button @click.capture="handleClick">Click Me</button>
 ```
-  - **`.once`**：只触发一次事件，然后移除事件监听器。  
+  - **`.once`**：只触发一次事件，然后移除事件监听器。<br>
 ```vue
 <button @click.once="handleClick">Click Me</button>
 ```
-  - **`.self`**：仅当事件源是当前元素时才触发事件。  
+  - **`.self`**：仅当事件源是当前元素时才触发事件。<br>
 ```vue
 <button @click.self="handleClick">Click Me</button>
 ```
-  - **`.passive`**：表示该事件处理函数不会调用 `event.preventDefault()`，提高性能。  
+  - **`.passive`**：表示该事件处理函数不会调用 `event.preventDefault()`，提高性能。<br>
 ```vue
 <button @scroll.passive="handleScroll">Scroll</button>
 ```
@@ -279,8 +279,8 @@ methods: {
 
 #### **考察点：**
 
--  **传递参数**：  
-  - 可以通过箭头函数或方法引用的方式传递自定义参数：  
+-  **传递参数**：<br>
+  - 可以通过箭头函数或方法引用的方式传递自定义参数：<br>
 ```vue
 <button @click="handleClick('Hello')">Click Me</button>
 methods: {
@@ -289,8 +289,8 @@ methods: {
   }
 }
 ```
--  **使用 `$event`**：  
-  - `$event` 是 Vue 自动传递给事件处理函数的原生事件对象，可以用来访问事件的详细信息：  
+-  **使用 `$event`**：<br>
+  - `$event` 是 Vue 自动传递给事件处理函数的原生事件对象，可以用来访问事件的详细信息：<br>
 ```vue
 <button @click="handleClick($event)">Click Me</button>
 methods: {
@@ -311,14 +311,14 @@ methods: {
 
 #### **考察点：**
 
--  **事件委托**：  
-  - Vue 内部已经为你处理了事件委托，通常不需要手动绑定事件监听器。如果你通过 `v-for` 动态渲染元素，Vue 会自动为这些元素绑定事件。  
+-  **事件委托**：<br>
+  - Vue 内部已经为你处理了事件委托，通常不需要手动绑定事件监听器。如果你通过 `v-for` 动态渲染元素，Vue 会自动为这些元素绑定事件。<br>
 ```vue
 <ul>
   <li v-for="item in items" :key="item.id" @click="handleClick(item)">Click {{ item.name }}</li>
 </ul>
 ```
--  **动态元素的事件处理**：  
+-  **动态元素的事件处理**：<br>
   - 动态渲染的元素会自动响应事件，无需额外的事件委托。Vue 会将事件绑定到新创建的 DOM 元素上。
 
 ---
@@ -332,8 +332,8 @@ methods: {
 
 #### **考察点：**
 
--  **触发自定义事件**：  
-  - 子组件可以通过 `$emit` 触发自定义事件，父组件通过 `v-on` 监听。  
+-  **触发自定义事件**：<br>
+  - 子组件可以通过 `$emit` 触发自定义事件，父组件通过 `v-on` 监听。<br>
 ```vue
 <!-- 子组件 -->
 <button @click="notifyParent">Click</button>
@@ -351,7 +351,7 @@ methods: {
   }
 }
 ```
--  **组件间通信**：  
+-  **组件间通信**：<br>
   - 子组件触发的自定义事件会通过 `$emit` 向父组件传递，可以传递多个参数。
   - 在 Vue 3 中，`$on` 方法不再使用，取而代之的是使用 `v-on` 来绑定事件。
 
@@ -366,9 +366,9 @@ methods: {
 
 #### **考察点：**
 
--  **防抖（Debouncing）**：  
+-  **防抖（Debouncing）**：<br>
   - 防抖是指在事件触发后的延迟一段时间才执行事件处理程序，避免频繁调用。
-  - 可以使用第三方库如 `lodash.debounce` 或手动实现防抖逻辑。  
+  - 可以使用第三方库如 `lodash.debounce` 或手动实现防抖逻辑。<br>
 ```vue
 <input @input="debouncedInput" />
 methods: {
@@ -377,9 +377,9 @@ methods: {
   }, 300)
 }
 ```
--  **节流（Throttling）**：  
+-  **节流（Throttling）**：<br>
   - 节流是指在固定时间间隔内只执行一次事件处理函数，避免频繁执行。
-  - 同样可以使用 `lodash.throttle` 或自己实现节流功能。  
+  - 同样可以使用 `lodash.throttle` 或自己实现节流功能。<br>
 ```vue
 <div @scroll="throttledScroll">Scroll</div>
 methods: {
@@ -400,9 +400,9 @@ methods: {
 
 #### **考察点：**
 
--  **异步操作**：  
+-  **异步操作**：<br>
   - Vue 事件处理默认是同步的，意味着所有事件处理函数会按顺序执行。如果事件处理涉及异步操作（如 API 请求），则会导致界面延迟更新。
-  - 异步操作通常通过 `setTimeout`、`Promise` 或 `async/await` 实现。  
+  - 异步操作通常通过 `setTimeout`、`Promise` 或 `async/await` 实现。<br>
 ```vue
 <button @click="handleClick">Click Me</button>
 methods: {
@@ -412,7 +412,7 @@ methods: {
   }
 }
 ```
--  **影响**：  
+-  **影响**：<br>
   - 异步操作可能会导致事件处理函数的执行顺序不确定，因此需要保证异步操作的顺序或依赖关系。
 
 ---
@@ -426,14 +426,14 @@ methods: {
 
 #### **考察点：**
 
--  **事件总线（Event Bus）**：  
-  - 在 Vue 2 中，事件总线通常是一个空的 Vue 实例，可以用来实现跨组件的事件通信。  
+-  **事件总线（Event Bus）**：<br>
+  - 在 Vue 2 中，事件总线通常是一个空的 Vue 实例，可以用来实现跨组件的事件通信。<br>
 ```javascript
 const bus = new Vue();
 bus.$emit('event', data);
 bus.$on('event', callback);
 ```
--  **Vue 3 的变化**：  
+-  **Vue 3 的变化**：<br>
   - Vue 3 中没有事件总线的支持，推荐使用 **`provide`/`inject`** 或 **Vuex** 进行组件间的状态共享和事件通信。
 
 ---

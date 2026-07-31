@@ -20,30 +20,30 @@ font: [font-style] [font-variant] [font-weight] [font-size] [line-height] [font-
 
 ## 各个属性的详细说明
 
-1.  **font-style**：设置字体的样式。  
-  - 取值：  
+1.  **font-style**：设置字体的样式。<br>
+  - 取值：<br>
     - `normal`：正常字体（默认值）。
     - `italic`：斜体字。
     - `oblique`：倾斜字体。
-2.  **font-variant**：设置字体的变体。  
-  - 取值：  
+2.  **font-variant**：设置字体的变体。<br>
+  - 取值：<br>
     - `normal`：正常（默认值）。
     - `small-caps`：小型大写字母。
-3.  **font-weight**：设置字体的粗细。  
-  - 取值：  
+3.  **font-weight**：设置字体的粗细。<br>
+  - 取值：<br>
     - `normal`：正常粗细（默认值）。
     - `bold`：加粗。
     - `bolder`：比父元素更粗。
     - `lighter`：比父元素更细。
     - 数值：可以使用 100 到 900 的数值，100 为最细，900 为最粗。
-4.  **font-size**：设置字体的大小。  
-  - 取值：  
+4.  **font-size**：设置字体的大小。<br>
+  - 取值：<br>
     - 可以使用绝对单位（如 `px`、 `pt`）或相对单位（如 `em`、 `rem`、 `%`）。
-5.  **line-height**：设置行高。  
-  - 取值：  
+5.  **line-height**：设置行高。<br>
+  - 取值：<br>
     - 可以使用数值、单位（如 `px`、 `em`）或百分比。
-6.  **font-family**：设置字体系列。  
-  - 取值：  
+6.  **font-family**：设置字体系列。<br>
+  - 取值：<br>
     - 可以指定多个字体名称，以逗号分隔，浏览器将使用第一个可用的字体。
     - 例如： `"Arial", "Helvetica", sans-serif`。
 
@@ -92,8 +92,8 @@ body {
 
 ## 解释
 
-1.  **HTML结构**：我们创建了一个包含标题和描述的简单网页。 
-2.  **CSS样式**：  
+1.  **HTML结构**：我们创建了一个包含标题和描述的简单网页。
+2.  **CSS样式**：<br>
   - 在 `.title` 类中，使用 `font` 属性设置了字体为加粗、24px大、行高为1.5、字体系列为 `"Helvetica Neue"`，后备字体为 `Arial` 和无衬线字体。
   - 在 `.description` 类中，使用 `font` 属性设置了字体为斜体、正常粗细、16px大、行高为1.8、字体系列为 `"Georgia"`，后备字体为衬线字体。
 
@@ -117,7 +117,7 @@ CSS的 `font` 属性是一个非常实用的工具，可以在一个声明中设
 
 ### 2. **`font` 的语法**
 
-- **`font`** 属性的语法格式是什么？请列举 **`font`** 属性的完整语法结构，并简述每个部分的作用。  
+- **`font`** 属性的语法格式是什么？请列举 **`font`** 属性的完整语法结构，并简述每个部分的作用。<br>
   - 例如：`font: [font-style] [font-variant] [font-weight] [font-size] [line-height] [font-family]`
 - `font-size` 和 `line-height` 如何在 **`font`** 中配合使用？
 

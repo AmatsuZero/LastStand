@@ -494,9 +494,9 @@ ok，明白了函数的隐式转换规则与call/apply在这种场景的使用�
 
 在前端面试中有一个关于柯里化的面试题，流传甚广。
 
-> 实现一个add方法，使计算结果能够满足如下预期：  
->  `add(1)(2)(3) = 6`  
->  `add(1, 2, 3)(4) = 10`  
+> 实现一个add方法，使计算结果能够满足如下预期：<br>
+>  `add(1)(2)(3) = 6`<br>
+>  `add(1, 2, 3)(4) = 10`<br>
 >  `add(1)(2)(3)(4)(5) = 15`
 
 很明显，计算结果正是所有参数的和，add方法每运行一次，肯定返回了一个同样的函数，继续计算剩下的参数。
@@ -725,7 +725,7 @@ Object.prototype.bind = function(context) {
 ### 1. **柯里化的定义**
 
 - **基本概念**：柯里化是将一个多参数函数转换为多个单参数函数的过程。每个函数返回一个新的函数，直到所有参数都被提供。
-- **示例**：  
+- **示例**：<br>
 ```javascript
 function add(a) {
     return function(b) {
@@ -739,7 +739,7 @@ console.log(add5(3)); // 8
 ### 2. **柯里化的实现**
 
 - **基本实现**：可以通过闭包实现柯里化。
-- **示例**：  
+- **示例**：<br>
 ```javascript
 function curry(func) {
     return function curried(...args) {
@@ -764,7 +764,7 @@ console.log(curriedMultiply(2)(3)); // 6
 ### 3. **柯里化的应用**
 
 - **部分应用**：柯里化允许你创建部分应用的函数，即只传递部分参数，返回一个新的函数。
-- **示例**：  
+- **示例**：<br>
 ```javascript
 function multiply(a, b, c) {
     return a * b * c;
@@ -793,7 +793,7 @@ console.log(multiplyBy2(3, 4)); // 24
 ### 7. **ES6 中的柯里化**
 
 - **使用箭头函数**：在 ES6 中，可以使用箭头函数简化柯里化的实现。
-- **示例**：  
+- **示例**：<br>
 ```javascript
 const curry = (func) => (...args) =>
     args.length >= func.length
@@ -818,7 +818,7 @@ console.log(curriedAdd(2)(3)); // 5
 ### 10. **柯里化与链式调用**
 
 - **链式调用的支持**：通过柯里化，可以方便地实现链式调用。
-- **示例**：  
+- **示例**：<br>
 ```javascript
 const chainableAdd = curry((a, b) => {
     return a + b;

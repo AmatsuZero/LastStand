@@ -127,7 +127,7 @@ function deepClone(source){
       }else{ // 如果不是，就直接赋值
         targetObj[keys] = source[keys];
       }
-    } 
+    }
   }
   return targetObj;
 }
@@ -200,7 +200,7 @@ const originArray = [1,[1,2,3],{a:1}];
 const cloneArray = originArray.concat();
 console.log(cloneArray === originArray); // false
 cloneArray[1].push(4);
-cloneArray[2].a = 2; 
+cloneArray[2].a = 2;
 console.log(originArray); // [1,[1,2,3,4],{a:2}]
 ```
 
@@ -232,7 +232,7 @@ const originArray = [1,[1,2,3],{a:1}];
 const cloneArray = originArray.slice();
 console.log(cloneArray === originArray); // false
 cloneArray[1].push(4);
-cloneArray[2].a = 2; 
+cloneArray[2].a = 2;
 console.log(originArray); // [1,[1,2,3,4],{a:2}]
 ```
 

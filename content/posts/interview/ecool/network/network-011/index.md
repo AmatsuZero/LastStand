@@ -110,10 +110,10 @@ from memory cache代表使用内存中的缓存，from disk cache则代表使用
 
 过程如下：
 
--  访问[https://heyingye.github.io/](https://heyingye.github.io/) ![](image-11.webp) 
--  关闭博客的标签页 
--  重新打开[https://heyingye.github.io/](https://heyingye.github.io/) ![](image-12.webp) 
--  刷新 ![](image-13.webp) from disk memory 
+-  访问[https://heyingye.github.io/](https://heyingye.github.io/) ![](image-11.webp)
+-  关闭博客的标签页
+-  重新打开[https://heyingye.github.io/](https://heyingye.github.io/) ![](image-12.webp)
+-  刷新 ![](image-13.webp) from disk memory
 
 > 看到这里可能有人小伙伴问了，最后一个步骤刷新的时候，不是同时存在着from disk cache和from memory cache吗？
 
@@ -180,18 +180,18 @@ Etag-match
 
 ### 1. **强缓存（强制缓存 / 本地缓存）**
 
--  特点：**浏览器不发请求**，直接使用本地缓存。 
--  响应状态码：`200 (from disk cache)` 或 `200 (from memory cache)` 
--  相关响应头：  
+-  特点：**浏览器不发请求**，直接使用本地缓存。
+-  响应状态码：`200 (from disk cache)` 或 `200 (from memory cache)`
+-  相关响应头：<br>
   - `Expires`（HTTP/1.0，绝对时间）
   - `Cache-Control: max-age=xxx`（HTTP/1.1，相对时间）
 
 ### 2. **协商缓存**
 
--  特点：**浏览器发送请求**，由服务器判断是否可用缓存。 
--  响应状态码：  
+-  特点：**浏览器发送请求**，由服务器判断是否可用缓存。
+-  响应状态码：<br>
   - `304 Not Modified` → 命中协商缓存
--  相关响应头：  
+-  相关响应头：<br>
   - 请求头：`If-Modified-Since`、`If-None-Match`
   - 响应头：`Last-Modified`、`ETag`
 

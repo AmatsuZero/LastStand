@@ -14,9 +14,9 @@ HTML5 提供了地理定位（Geolocation）API，用于获取用户的当前位
 
 主要通过 `navigator.geolocation` 对象来访问地理位置信息，提供了以下三个方法：
 
-1.  **`getCurrentPosition(success, error, options)`** 获取用户的当前位置，一次性返回位置信息。 
-2.  **`watchPosition(success, error, options)`** 持续监听用户的位置变化，并且实时返回新的位置信息。 
-3.  **`clearWatch(id)`** 取消 `watchPosition` 监听的位置变化。 
+1.  **`getCurrentPosition(success, error, options)`** 获取用户的当前位置，一次性返回位置信息。
+2.  **`watchPosition(success, error, options)`** 持续监听用户的位置变化，并且实时返回新的位置信息。
+3.  **`clearWatch(id)`** 取消 `watchPosition` 监听的位置变化。
 
 ### **方法的参数说明**
 
@@ -101,7 +101,7 @@ HTML5 的 Geolocation API 提供了一种便捷的方式来获取用户的地理
 
 ### 2. **如何使用 Geolocation API**
 
-- **获取位置的基本方法**：   
+- **获取位置的基本方法**：<br>
   - `navigator.geolocation.getCurrentPosition(successCallback, errorCallback, options)`：获取当前的地理位置。
 ```javascript
 navigator.geolocation.getCurrentPosition(function(position) {
@@ -111,7 +111,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
     console.log('Error occurred. Error code: ' + error.code);
 });
 ```
-- **实时监听位置变化**：   
+- **实时监听位置变化**：<br>
   - `navigator.geolocation.watchPosition(successCallback, errorCallback, options)`：实时监听位置的变化，适用于移动设备上的应用。
 ```javascript
 const watchID = navigator.geolocation.watchPosition(function(position) {
@@ -123,12 +123,12 @@ const watchID = navigator.geolocation.watchPosition(function(position) {
 ### 3. **Geolocation API 的参数**
 
 - **successCallback**：获取位置成功时调用的回调函数，返回 `position` 对象，包含 `coords` 属性（纬度、经度、精确度、速度、时间戳等）。
-- **errorCallback**：获取位置失败时调用的回调函数，返回 `error` 对象，包含 `code` 和 `message` 属性。  
-  - `error.code` 包含 3 个可能的错误值：  
+- **errorCallback**：获取位置失败时调用的回调函数，返回 `error` 对象，包含 `code` 和 `message` 属性。<br>
+  - `error.code` 包含 3 个可能的错误值：<br>
     - `1`：用户拒绝了定位请求。
     - `2`：无法获取位置（位置不可用）。
     - `3`：获取位置超时。
-- **options**：可选配置，包含以下参数：  
+- **options**：可选配置，包含以下参数：<br>
   - `enableHighAccuracy`：是否要求高精度定位，默认是 `false`。
   - `timeout`：定位请求的超时时间。
   - `maximumAge`：缓存的位置数据的有效时间，单位为毫秒。
@@ -145,7 +145,7 @@ const watchID = navigator.geolocation.watchPosition(function(position) {
 ### 6. **兼容性与降级处理**
 
 - 并不是所有浏览器都支持 Geolocation API，因此需要检查浏览器兼容性，并提供降级方案。
-- 如何判断浏览器是否支持 Geolocation API：  
+- 如何判断浏览器是否支持 Geolocation API：<br>
 ```javascript
 if ("geolocation" in navigator) {
     // 支持

@@ -22,8 +22,8 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
  从上面的描述也能看得出来正向代理和反向代理最关键的两点区别：
 
--  是否指定目标服务器 
--  客户端是否要做设置 下面用一张图来表示两者的差异： ![](image-01.png) *正向代理与反向代理* 
+-  是否指定目标服务器
+-  客户端是否要做设置 下面用一张图来表示两者的差异： ![](image-01.png) *正向代理与反向代理*
 
  正向代理中，proxy和client同属一个LAN，对server透明； 反向代理中，proxy和server同属一个LAN，对client透明。 实际上proxy在两种代理中做的事都是代为收发请求和响应，不过从结构上来看正好左右互换了下，所以把前者那种代理方式叫做正向代理，后者叫做反向代理。
 
@@ -119,9 +119,9 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 ## 二、举例理解
 
--  **正向代理**：你无法直接访问被墙的 `google.com`，通过代理服务器 `proxy.com` 访问，`proxy.com` 再去请求 `google.com` 并返回结果给你。  
+-  **正向代理**：你无法直接访问被墙的 `google.com`，通过代理服务器 `proxy.com` 访问，`proxy.com` 再去请求 `google.com` 并返回结果给你。<br>
   - 常用于：**翻墙、隐匿用户身份、访问受限资源**
--  **反向代理**：你访问 `api.example.com`，请求先到反向代理服务器（如 Nginx），再转发到真正的后端服务（如 `node1.internal`）。  
+-  **反向代理**：你访问 `api.example.com`，请求先到反向代理服务器（如 Nginx），再转发到真正的后端服务（如 `node1.internal`）。<br>
   - 常用于：**负载均衡、缓存、统一鉴权、隐藏服务结构**
 
 ---
@@ -174,14 +174,14 @@ source = "https://fe.ecool.fun/knowledge-learn"
 
 ## 六、配套场景理解
 
--  Nginx 配置反向代理示例：  
+-  Nginx 配置反向代理示例：<br>
 ```nginx
 location /api/ {
   proxy_pass http://backend-server/;
   proxy_set_header Host $host;
 }
 ```
--  Webpack DevServer 开发时的代理设置（前端 CORS 绕过）：  
+-  Webpack DevServer 开发时的代理设置（前端 CORS 绕过）：<br>
 ```js
 devServer: {
   proxy: {

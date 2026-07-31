@@ -294,7 +294,7 @@ let miaoMiao = {
 let miaoXy = new Proxy(miaoMiao, {
   get (target, prop, receiver) {
     return Reflect.get(target, prop, receiver);
-    // 也可以简写为 Reflect.get(...arguments) 
+    // 也可以简写为 Reflect.get(...arguments)
   }
 });
 
@@ -303,7 +303,7 @@ let kexingMiao = {
   _name: '科兴疫苗'
 };
 
-// 结果是科兴疫苗 
+// 结果是科兴疫苗
 console.log(kexingMiao.name);
 ```
 

@@ -38,16 +38,16 @@ index表示字符在字符串中的索引值：
 
 ```javascript
 const str = 'hello';
-str.charAt(1)  // 输出结果：e 
+str.charAt(1)  // 输出结果：e
 ```
 
 我们知道，字符串也可以通过索引值来直接获取对应字符，那它和charAt()有什么区别呢？来看例子：
 
 ```javascript
 const str = 'hello';
-str.charAt(1)  // 输出结果：e 
-str[1]         // 输出结果：e 
-str.charAt(5)  // 输出结果：'' 
+str.charAt(1)  // 输出结果：e
+str[1]         // 输出结果：e
+str.charAt(5)  // 输出结果：''
 str[5]         // 输出结果：undefined
 ```
 
@@ -192,7 +192,7 @@ string.split(separator,limit)
 ```javascript
 let str = "abcdef";
 str.split("c");    // 输出结果：["ab", "def"]
-str.split("", 4)   // 输出结果：['a', 'b', 'c', 'd'] 
+str.split("", 4)   // 输出结果：['a', 'b', 'c', 'd']
 ```
 
 如果把空字符串用作 separator，那么字符串中的每个字符之间都会被分割。
@@ -230,9 +230,9 @@ string.slice(start,end)
 
 ```javascript
 let str = "abcdefg";
-str.slice(1,6);   // 输出结果："bcdef" 
-str.slice(1);     // 输出结果："bcdefg" 
-str.slice();      // 输出结果："abcdefg" 
+str.slice(1,6);   // 输出结果："bcdef"
+str.slice(1);     // 输出结果："bcdefg"
+str.slice();      // 输出结果："abcdefg"
 str.slice(-2);    // 输出结果："fg"
 str.slice(6, 1);  // 输出结果：""
 ```
@@ -254,7 +254,7 @@ string.substr(start,length)
 
 ```javascript
 let str = "abcdefg";
-str.substr(1,6); // 输出结果："bcdefg" 
+str.substr(1,6); // 输出结果："bcdefg"
 str.substr(1);   // 输出结果："bcdefg" 相当于截取[1,str.length-1]
 str.substr();    // 输出结果："abcdefg" 相当于截取[0,str.length-1]
 str.substr(-1);  // 输出结果："g"

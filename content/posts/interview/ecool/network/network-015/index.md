@@ -374,9 +374,9 @@ DDOS 不是⼀种攻击，⽽是⼀⼤类攻击的总称。它有⼏⼗种类型
 
 **考察点**：
 
--  XSS 的类型（反射型、存储型、DOM 型） 
--  攻击入口：表单、URL、DOM 插值、富文本 
--  防范措施：  
+-  XSS 的类型（反射型、存储型、DOM 型）
+-  攻击入口：表单、URL、DOM 插值、富文本
+-  防范措施：<br>
   - 输出内容做转义（如 HTML Entity）
   - 使用 CSP（内容安全策略）
   - 禁止 `innerHTML`，使用安全 API（如 `textContent`）
@@ -391,9 +391,9 @@ DDOS 不是⼀种攻击，⽽是⼀⼤类攻击的总称。它有⼏⼗种类型
 
 **考察点**：
 
--  原理：利用浏览器自动携带 Cookie 发起请求 
--  攻击方式：诱导点击、图片加载等隐式提交 
--  防范措施：  
+-  原理：利用浏览器自动携带 Cookie 发起请求
+-  攻击方式：诱导点击、图片加载等隐式提交
+-  防范措施：<br>
   - 使用 Token 验证（CSRF Token）
   - 检查 `Referer` 或 `Origin` 头
   - 请求接口限定为 POST，并校验内容
@@ -407,8 +407,8 @@ DDOS 不是⼀种攻击，⽽是⼀⼤类攻击的总称。它有⼏⼗种类型
 
 **考察点**：
 
--  利用 iframe 蒙版 + 透明操作实现诱导点击 
--  防范方式：  
+-  利用 iframe 蒙版 + 透明操作实现诱导点击
+-  防范方式：<br>
   - 使用 `X-Frame-Options: DENY` / `SAMEORIGIN`
   - 使用 `Content-Security-Policy: frame-ancestors` 控制嵌套来源
   - 页面内 JS 检测 `window.top !== window.self` 防 iframe 嵌套
@@ -421,7 +421,7 @@ DDOS 不是⼀种攻击，⽽是⼀⼤类攻击的总称。它有⼏⼗种类型
 
 **考察点**：
 
--  防御方式：  
+-  防御方式：<br>
   - 使用 HTTPS 加密数据传输
   - 启用 HSTS，防止降级攻击
   - 证书校验、防止证书伪造
@@ -434,12 +434,12 @@ DDOS 不是⼀种攻击，⽽是⼀⼤类攻击的总称。它有⼏⼗种类型
 
 **考察点**：
 
--  基本语法：  
+-  基本语法：<br>
 ```http
 Content-Security-Policy: default-src 'self'; script-src 'self' cdn.com;
 ```
--  如何配置 CSP 白名单 
--  影响第三方脚本、图片等内容的加载 
+-  如何配置 CSP 白名单
+-  影响第三方脚本、图片等内容的加载
 
 ---
 
@@ -447,11 +447,11 @@ Content-Security-Policy: default-src 'self'; script-src 'self' cdn.com;
 
 **考察点**：
 
--  Cookie 属性的安全配置：  
+-  Cookie 属性的安全配置：<br>
   - `Secure`: 仅通过 HTTPS 传输
   - `HttpOnly`: JS 无法访问（防止 XSS 窃取）
   - `SameSite`：限制跨站携带行为
--  Cookie 泄露的常见途径 
+-  Cookie 泄露的常见途径
 
 ---
 
