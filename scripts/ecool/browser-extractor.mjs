@@ -297,12 +297,27 @@ function imageResources(frameTree, result = []) {
 }
 
 function decodeCanonicalBase64(value, url) {
-  if (!value || !/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(value)) {
+  const invalid = () => codedError('PAGE_ASSET_CDP_CONTENT_INVALID', `CDP 图片内容不是规范的 base64: ${url}`);
+  if (!value || value.length % 4 !== 0) {
+    throw invalid();
+  }
+  const padding = value.endsWith('==') ? 2 : (value.endsWith('=') ? 1 : 0);
+  const bodyLength = value.length - padding;
+  if (padding > 2 || bodyLength === 0 || (padding === 1 && bodyLength % 4 !== 3) || (padding === 2 && bodyLength % 4 !== 2)) {
     throw codedError('PAGE_ASSET_CDP_CONTENT_INVALID', `CDP 图片内容不是规范的 base64: ${url}`);
+  }
+  for (let index = 0; index < bodyLength; index += 1) {
+    const code = value.charCodeAt(index);
+    const alphabet = (code >= 65 && code <= 90) || (code >= 97 && code <= 122)
+      || (code >= 48 && code <= 57) || code === 43 || code === 47;
+    if (!alphabet) throw invalid();
+  }
+  for (let index = bodyLength; index < value.length; index += 1) {
+    if (value.charCodeAt(index) !== 61) throw invalid();
   }
   const bytes = Buffer.from(value, 'base64');
   if (!bytes.length || bytes.toString('base64') !== value) {
-    throw codedError('PAGE_ASSET_CDP_CONTENT_INVALID', `CDP 图片内容不是规范的 base64: ${url}`);
+    throw invalid();
   }
   return bytes;
 }

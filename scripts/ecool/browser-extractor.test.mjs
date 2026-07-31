@@ -512,6 +512,41 @@ test('archiveCurrentImages rejects malformed CDP base64 without writing an image
     (error) => error.code === 'ENOENT');
 });
 
+test('archiveCurrentImages accepts a multi-megabyte canonical CDP base64 image', async (t) => {
+  const workspace = await mkdtemp(path.join(os.tmpdir(), 'ecool-assets-cdp-large-'));
+  t.after(() => rm(workspace, { recursive: true, force: true }));
+  const url = 'https://cdn.example.com/large.awebp';
+  const bytes = Buffer.concat([Buffer.from([0x52, 0x49, 0x46, 0x46, 0x04, 0x00, 0x00, 0x00, 0x57, 0x45, 0x42, 0x50]), Buffer.alloc(24 * 1024 * 1024)]);
+  const cdp = { async send(method) {
+    if (method === 'Page.getResourceTree') return { frameTree: { childFrames: [], frame: { id: 'frame-1' }, resources: [{ type: 'Image', url }] } };
+    return { base64Encoded: true, content: bytes.toString('base64') };
+  } };
+  const tab = { capabilities: { async get(name) {
+    if (name === 'pageAssets') return { async list() { return { id: 'inventory-1', assets: [{ id: 'asset-1', kind: 'image', url }] }; }, async bundle() { return { assets: [], failures: [{ url }], summary: { failedCount: 1 } }; } };
+    return cdp;
+  } } };
+  const record = { blocks: [{ type: 'image', src: url }] };
+
+  await archiveCurrentImages(tab, record, workspace);
+  assert.deepEqual(await readFile(path.join(workspace, 'image-01.webp')), bytes);
+});
+
+test('archiveCurrentImages rejects invalid and noncanonical CDP base64 forms', async () => {
+  for (const content of ['TQ==!!!!', 'T=Q=', 'TR==']) {
+    const url = `https://cdn.example.com/${encodeURIComponent(content)}.awebp`;
+    const cdp = { async send(method) {
+      if (method === 'Page.getResourceTree') return { frameTree: { childFrames: [], frame: { id: 'frame-1' }, resources: [{ type: 'Image', url }] } };
+      return { base64Encoded: true, content };
+    } };
+    const tab = { capabilities: { async get(name) {
+      if (name === 'pageAssets') return { async list() { return { id: 'inventory-1', assets: [{ id: 'asset-1', kind: 'image', url }] }; }, async bundle() { return { assets: [], failures: [{ url }], summary: { failedCount: 1 } }; } };
+      return cdp;
+    } } };
+    await assert.rejects(archiveCurrentImages(tab, { blocks: [{ type: 'image', src: url }] }, '/tmp/not-written-invalid-base64'),
+      (error) => error.code === 'PAGE_ASSET_CDP_CONTENT_INVALID');
+  }
+});
+
 test('archiveCurrentImages combines bundled, failed, and inventory-missing images in reference order', async (t) => {
   const workspace = await mkdtemp(path.join(os.tmpdir(), 'ecool-assets-mixed-'));
   t.after(() => rm(workspace, { recursive: true, force: true }));
