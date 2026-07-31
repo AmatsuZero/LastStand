@@ -296,6 +296,16 @@ function imageResources(frameTree, result = []) {
   return result;
 }
 
+function resourceUrlKey(value) {
+  try {
+    const url = new URL(value);
+    url.hash = '';
+    return url.href;
+  } catch {
+    return value;
+  }
+}
+
 function decodeCanonicalBase64(value, url) {
   const invalid = () => codedError('PAGE_ASSET_CDP_CONTENT_INVALID', `CDP 图片内容不是规范的 base64: ${url}`);
   if (!value || value.length % 4 !== 0) {
@@ -379,20 +389,20 @@ async function cdpImageBytes(tab, selectedAssets) {
   } catch (error) {
     throw codedError('PAGE_ASSET_CDP_READ_FAILED', `无法读取 CDP 图片资源树: ${error.message || error}`);
   }
-  const resourcesByUrl = new Map(imageResources(resourceTree.frameTree).map((resource) => [resource.url, resource]));
+  const resourcesByUrl = new Map(imageResources(resourceTree.frameTree).map((resource) => [resourceUrlKey(resource.url), resource]));
   const bytesByUrl = new Map();
   const externalAssets = [];
   for (const asset of selectedAssets) {
-    const resource = resourcesByUrl.get(asset.url);
+    const resource = resourcesByUrl.get(resourceUrlKey(asset.url));
     if (!resource) {
       throw codedError('PAGE_ASSET_CDP_RESOURCE_MISSING', `CDP 资源树缺少图片资源: ${asset.url}`);
     }
     try {
       let content;
       try {
-        content = await cdp.send('Page.getResourceContent', { frameId: resource.frameId, url: asset.url });
+        content = await cdp.send('Page.getResourceContent', { frameId: resource.frameId, url: resource.url });
       } catch {
-        content = { base64Encoded: true, content: await runtimeFetchBase64(cdp, asset.url) };
+        content = { base64Encoded: true, content: await runtimeFetchBase64(cdp, resource.url) };
       }
       if (!content?.base64Encoded || typeof content.content !== 'string') {
         throw codedError('PAGE_ASSET_CDP_CONTENT_INVALID', `CDP 图片内容不是可解码的 base64: ${asset.url}`);

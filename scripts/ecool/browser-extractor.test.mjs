@@ -781,3 +781,42 @@ test('archiveCurrentImages rejects an unreadable source image that is not broken
   );
   globalThis.document = previousDocument;
 });
+
+test('archiveCurrentImages matches fragment asset URLs to fragmentless CDP resources without changing external URLs', async (t) => {
+  const workspace = await mkdtemp(path.join(os.tmpdir(), 'ecool-assets-fragment-'));
+  t.after(() => rm(workspace, { recursive: true, force: true }));
+  const assetUrl = 'https://cdn.example.com/diagram.awebp?width=640#?w=640';
+  const resourceUrl = 'https://cdn.example.com/diagram.awebp?width=640';
+  const calls = [];
+  const cdp = { async send(method, params) {
+    calls.push({ method, params });
+    if (method === 'Page.getResourceTree') return { frameTree: { childFrames: [], frame: { id: 'frame-1' }, resources: [{ type: 'Image', url: resourceUrl }] } };
+    if (method === 'Page.getResourceContent') { assert.deepEqual(params, { frameId: 'frame-1', url: resourceUrl }); throw new Error('not cached'); }
+    return { result: { value: { ok: false, status: 0 } } };
+  } };
+  const prior = globalThis.document;
+  globalThis.document = { images: [{ complete: true, naturalWidth: 0, src: assetUrl }] };
+  t.after(() => { globalThis.document = prior; });
+  const tab = {
+    playwright: { async evaluate(callback, url) { return callback(url); } },
+    capabilities: { async get(name) {
+      if (name === 'pageAssets') return { async list() { return { id: 'inventory-1', assets: [] }; } };
+      return cdp;
+    } },
+  };
+  const record = { blocks: [{ type: 'image', src: assetUrl }] };
+
+  const result = await archiveCurrentImages(tab, record, workspace);
+
+  assert.deepEqual(calls.map((call) => call.method), ['Page.getResourceTree', 'Page.getResourceContent', 'Runtime.evaluate']);
+  assert.equal(record.blocks[0].src, assetUrl);
+  assert.deepEqual(result.externalAssets, [{ sourceUrl: assetUrl, reason: 'source-image-unavailable' }]);
+});
+
+test('archiveCurrentImages does not match CDP resources with different queries', async () => {
+  const assetUrl = 'https://cdn.example.com/diagram.awebp?width=640#display';
+  const cdp = { async send() { return { frameTree: { childFrames: [], frame: { id: 'frame-1' }, resources: [{ type: 'Image', url: 'https://cdn.example.com/diagram.awebp?width=320' }] } }; } };
+  const tab = { capabilities: { async get(name) { return name === 'pageAssets' ? { async list() { return { id: 'inventory-1', assets: [] }; } } : cdp; } } };
+  await assert.rejects(archiveCurrentImages(tab, { blocks: [{ type: 'image', src: assetUrl }] }, '/tmp/not-written-query-mismatch'),
+    (error) => error.code === 'PAGE_ASSET_CDP_RESOURCE_MISSING');
+});
