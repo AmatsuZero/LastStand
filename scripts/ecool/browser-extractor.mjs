@@ -356,39 +356,40 @@ export async function archiveCurrentImages(tab, record, articleDirectory) {
     inventory = await pageAssets.list();
     ({ missing, selected } = selectAssets());
   }
-  if (missing.length) {
-    throw codedError('PAGE_ASSET_MISSING', `页面资产清单缺少正文图片: ${missing.join(', ')}`);
-  }
-
-  const bundle = await pageAssets.bundle({
-    inventoryId: inventory.id,
-    assetIds: selected.map((asset) => asset.id),
-  });
+  const inventoryAssets = selected.filter(Boolean);
+  const bundle = inventoryAssets.length
+    ? await pageAssets.bundle({ inventoryId: inventory.id, assetIds: inventoryAssets.map((asset) => asset.id) })
+    : { assets: [], failures: [], summary: { failedCount: 0 } };
   const bundledById = new Map((bundle.assets || []).map((asset) => [asset.id, asset]));
   const failedUrls = new Set((bundle.failures || []).map((failure) => failure.url).filter(Boolean));
-  const fallbackAssets = selected.filter((asset) => failedUrls.has(asset.url) || !bundledById.get(asset.id)?.path);
-  if ((bundle.failures?.length || bundle.summary?.failedCount) && fallbackAssets.length === 0) {
+  const bundleFallbackAssets = inventoryAssets.filter((asset) => failedUrls.has(asset.url) || !bundledById.get(asset.id)?.path);
+  if ((bundle.failures?.length || bundle.summary?.failedCount) && bundleFallbackAssets.length === 0) {
     const reasons = (bundle.failures || []).map((failure) => `${failure.url}: ${failure.reason}`).join('; ');
     throw codedError('PAGE_ASSET_BUNDLE_FAILED', `正文图片归档失败: ${reasons || '未知错误'}`);
   }
+  const fallbackUrls = new Set([...missing, ...bundleFallbackAssets.map((asset) => asset.url)]);
+  const fallbackAssets = referencedUrls
+    .filter((url) => fallbackUrls.has(url))
+    .map((url) => inventoryAssets.find((asset) => asset.url === url) || { url });
   const cdpBytesByUrl = fallbackAssets.length ? await cdpImageBytes(tab, fallbackAssets) : new Map();
 
   await mkdir(articleDirectory, { recursive: true });
   const assets = [];
   const localByUrl = new Map();
   for (const [index, selectedAsset] of selected.entries()) {
-    const bundledAsset = bundledById.get(selectedAsset.id);
-    const cdpBytes = cdpBytesByUrl.get(selectedAsset.url);
+    const bundledAsset = selectedAsset ? bundledById.get(selectedAsset.id) : null;
+    const sourceUrl = referencedUrls[index];
+    const cdpBytes = cdpBytesByUrl.get(sourceUrl);
     if (!bundledAsset?.path && !cdpBytes) {
-      throw codedError('PAGE_ASSET_BUNDLE_MISSING', `归档结果缺少图片: ${selectedAsset.url}`);
+      throw codedError('PAGE_ASSET_BUNDLE_MISSING', `归档结果缺少图片: ${sourceUrl}`);
     }
-    const extension = cdpBytes ? imageExtensionFromBytes(cdpBytes, selectedAsset.url) : await imageExtension(bundledAsset.path);
+    const extension = cdpBytes ? imageExtensionFromBytes(cdpBytes, sourceUrl) : await imageExtension(bundledAsset.path);
     const filename = `image-${String(index + 1).padStart(2, '0')}${extension}`;
     const targetPath = path.join(articleDirectory, filename);
     if (cdpBytes) await writeFile(targetPath, cdpBytes);
     else await copyFile(bundledAsset.path, targetPath);
-    localByUrl.set(selectedAsset.url, filename);
-    assets.push({ filename, sourceUrl: selectedAsset.url });
+    localByUrl.set(sourceUrl, filename);
+    assets.push({ filename, sourceUrl });
   }
   for (const node of referencedNodes) node.src = localByUrl.get(node.src);
   return { record, assets };

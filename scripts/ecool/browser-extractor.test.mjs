@@ -470,7 +470,7 @@ test('archiveCurrentImages rejects malformed CDP base64 without writing an image
     (error) => error.code === 'ENOENT');
 });
 
-test('archiveCurrentImages preserves bundled assets while using CDP only for failed URLs', async (t) => {
+test('archiveCurrentImages combines bundled, failed, and inventory-missing images in reference order', async (t) => {
   const workspace = await mkdtemp(path.join(os.tmpdir(), 'ecool-assets-mixed-'));
   t.after(() => rm(workspace, { recursive: true, force: true }));
   const articleDirectory = path.join(workspace, 'article');
@@ -482,8 +482,10 @@ test('archiveCurrentImages preserves bundled assets while using CDP only for fai
   ]);
   const bundledUrl = 'https://cdn.example.com/bundled.jpeg';
   const fallbackUrl = 'https://cdn.example.com/fallback.awebp';
+  const missingUrl = 'https://cdn.example.com/missing.awebp';
   await writeFile(bundledPath, bundledBytes);
   const cdpCalls = [];
+  let bundleOptions;
   const pageAssets = {
     async list() {
       return {
@@ -494,7 +496,8 @@ test('archiveCurrentImages preserves bundled assets while using CDP only for fai
         ],
       };
     },
-    async bundle() {
+    async bundle(options) {
+      bundleOptions = options;
       return {
         assets: [{ id: 'asset-1', path: bundledPath, url: bundledUrl }],
         failures: [{ reason: 'octet-stream', url: fallbackUrl }],
@@ -506,9 +509,15 @@ test('archiveCurrentImages preserves bundled assets while using CDP only for fai
     async send(method, params) {
       cdpCalls.push({ method, params });
       if (method === 'Page.getResourceTree') {
-        return { frameTree: { childFrames: [], frame: { id: 'frame-1' }, resources: [{ type: 'Image', url: fallbackUrl }] } };
+        return {
+          frameTree: {
+            childFrames: [],
+            frame: { id: 'frame-1' },
+            resources: [{ type: 'Image', url: fallbackUrl }, { type: 'Image', url: missingUrl }],
+          },
+        };
       }
-      assert.deepEqual(params, { frameId: 'frame-1', url: fallbackUrl });
+      assert.ok([fallbackUrl, missingUrl].includes(params.url));
       return { base64Encoded: true, content: fallbackBytes.toString('base64') };
     },
   };
@@ -517,6 +526,7 @@ test('archiveCurrentImages preserves bundled assets while using CDP only for fai
     blocks: [
       { type: 'image', alt: '已归档', src: bundledUrl },
       { type: 'image', alt: 'CDP 回退', src: fallbackUrl },
+      { type: 'image', alt: '清单缺失', src: missingUrl },
     ],
   };
 
@@ -525,14 +535,18 @@ test('archiveCurrentImages preserves bundled assets while using CDP only for fai
   assert.deepEqual(cdpCalls, [
     { method: 'Page.getResourceTree', params: undefined },
     { method: 'Page.getResourceContent', params: { frameId: 'frame-1', url: fallbackUrl } },
+    { method: 'Page.getResourceContent', params: { frameId: 'frame-1', url: missingUrl } },
   ]);
-  assert.deepEqual(record.blocks.map((block) => block.src), ['image-01.jpeg', 'image-02.webp']);
+  assert.deepEqual(bundleOptions, { inventoryId: 'inventory-1', assetIds: ['asset-1', 'asset-2'] });
+  assert.deepEqual(record.blocks.map((block) => block.src), ['image-01.jpeg', 'image-02.webp', 'image-03.webp']);
   assert.deepEqual(result.assets, [
     { filename: 'image-01.jpeg', sourceUrl: bundledUrl },
     { filename: 'image-02.webp', sourceUrl: fallbackUrl },
+    { filename: 'image-03.webp', sourceUrl: missingUrl },
   ]);
   assert.deepEqual(await readFile(path.join(articleDirectory, 'image-01.jpeg')), bundledBytes);
   assert.deepEqual(await readFile(path.join(articleDirectory, 'image-02.webp')), fallbackBytes);
+  assert.deepEqual(await readFile(path.join(articleDirectory, 'image-03.webp')), fallbackBytes);
 });
 
 test('archiveCurrentImages fails when CDP cannot find a failed asset as an image resource', async () => {
@@ -562,25 +576,37 @@ test('archiveCurrentImages fails when CDP cannot find a failed asset as an image
   );
 });
 
-test('archiveCurrentImages fails when a referenced image is absent from the inventory', async () => {
+test('archiveCurrentImages fails when an inventory-missing image is also absent from CDP', async (t) => {
+  const workspace = await mkdtemp(path.join(os.tmpdir(), 'ecool-assets-missing-cdp-'));
+  t.after(() => rm(workspace, { recursive: true, force: true }));
   let listCalls = 0;
+  const url = 'https://cdn.example.com/missing.png';
   const tab = {
     capabilities: {
-      async get() {
-        return {
+      async get(name) {
+        if (name === 'pageAssets') {
+          return {
           async list() {
             listCalls += 1;
             return { id: 'inventory-1', assets: [] };
+          },
+          };
+        }
+        return {
+          async send(method) {
+            assert.equal(method, 'Page.getResourceTree');
+            return { frameTree: { childFrames: [], frame: { id: 'frame-1' }, resources: [] } };
           },
         };
       },
     },
   };
-  const record = { blocks: [{ type: 'image', alt: '图', src: 'https://cdn.example.com/missing.png' }] };
+  const record = { blocks: [{ type: 'image', alt: '图', src: url }] };
 
   await assert.rejects(
-    archiveCurrentImages(tab, record, '/tmp/not-written-by-missing-asset'),
-    (error) => error.code === 'PAGE_ASSET_MISSING',
+    archiveCurrentImages(tab, record, workspace),
+    (error) => error.code === 'PAGE_ASSET_CDP_RESOURCE_MISSING',
   );
   assert.equal(listCalls, 2);
+  await assert.rejects(readFile(path.join(workspace, 'image-01.png')), (error) => error.code === 'ENOENT');
 });
