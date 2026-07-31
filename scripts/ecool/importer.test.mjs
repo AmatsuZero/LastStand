@@ -28,6 +28,17 @@ async function withBatchRoot(run) {
   });
 }
 
+async function withoutGlobalProcess(run) {
+  const descriptor = Object.getOwnPropertyDescriptor(globalThis, 'process');
+  assert.ok(descriptor);
+  assert.equal(delete globalThis.process, true);
+  try {
+    return await run();
+  } finally {
+    Object.defineProperty(globalThis, 'process', descriptor);
+  }
+}
+
 function article(overrides = {}) {
   return {
     category: 'JavaScript',
@@ -222,6 +233,16 @@ test('writeArticleAtomically clears its target lock after an exceptional tempora
   });
 });
 
+test('writeArticleAtomically writes without the Node process global', async () => {
+  await withTemporaryRoot(async (root) => {
+    const result = await withoutGlobalProcess(() => writeArticleAtomically(root, article()));
+    const target = path.join(root, 'content/posts/interview/ecool/javascript/javascript-001/index.md');
+
+    assert.equal(result.status, 'written');
+    assert.match(await readFile(target, 'utf8'), /title = "测试文章"/);
+  });
+});
+
 test('runBatch resumes only checkpoint entries whose on-disk checksum still matches', async () => {
   await withBatchRoot(async (root) => {
     const catalog = [catalogEntry()];
@@ -245,6 +266,23 @@ test('runBatch resumes only checkpoint entries whose on-disk checksum still matc
     });
     assert.equal(resumed.skipped, 1);
     assert.match(await readFile(target, 'utf8'), /批处理正文/);
+  });
+});
+
+test('runBatch writes its checkpoint without the Node process global', async () => {
+  await withBatchRoot(async (root) => {
+    const result = await withoutGlobalProcess(() => runBatch({
+      tab: fakeTab(),
+      root,
+      catalog: [catalogEntry()],
+      start: 0,
+      limit: 1,
+    }));
+    const checkpoint = JSON.parse(await readFile(path.join(root, '.omc/state/ecool-import.json'), 'utf8'));
+
+    assert.equal(result.completed, 1);
+    assert.equal(checkpoint.completed.length, 1);
+    assert.equal(checkpoint.completed[0].title, '测试文章');
   });
 });
 

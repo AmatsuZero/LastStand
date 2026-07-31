@@ -113,7 +113,7 @@ async function writeTextAtomically(root, relativePath, content, onTemporaryWrite
   }
   const temporaryPath = path.join(
     path.dirname(targetPath),
-    `.${path.basename(targetPath)}.${process.pid}.${randomUUID()}.tmp`,
+    `.${path.basename(targetPath)}.${randomUUID()}.tmp`,
   );
   try {
     // The lock closes the check-to-rename window between concurrent importer processes.
@@ -257,7 +257,7 @@ async function writeCheckpoint(root, checkpoint) {
   const relativePath = CHECKPOINT_RELATIVE_PATH;
   const targetPath = resolveTarget(root, relativePath);
   await mkdir(path.dirname(targetPath), { recursive: true });
-  const temporaryPath = path.join(path.dirname(targetPath), `.ecool-import.${process.pid}.${randomUUID()}.tmp`);
+  const temporaryPath = path.join(path.dirname(targetPath), `.ecool-import.${randomUUID()}.tmp`);
   try {
     await writeFile(temporaryPath, `${JSON.stringify(checkpoint, null, 2)}\n`, { encoding: 'utf8', flag: 'wx' });
     await rename(temporaryPath, targetPath);
