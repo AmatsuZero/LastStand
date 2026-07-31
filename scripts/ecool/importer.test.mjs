@@ -65,7 +65,7 @@ function catalogEntry(overrides = {}) {
   };
 }
 
-function fakeTab({ title = '测试文章', blocks, assets = [], bundledAssets = assets, beforeSelect, nodeCount = 2 } = {}) {
+function fakeTab({ title = '测试文章', blocks, assets = [], bundledAssets = assets, beforeSelect, cdp, nodeCount = 2 } = {}) {
   let selectedTitle = '';
   const titleLocator = {
     async waitFor() {},
@@ -111,11 +111,14 @@ function fakeTab({ title = '测试文章', blocks, assets = [], bundledAssets = 
     },
     capabilities: {
       async get(name) {
-        assert.equal(name, 'pageAssets');
-        return {
-          async list() { return { id: 'assets', assets }; },
-          async bundle() { return { assets: bundledAssets, summary: { failedCount: 0 } }; },
-        };
+        if (name === 'pageAssets') {
+          return {
+            async list() { return { id: 'assets', assets }; },
+            async bundle() { return { assets: bundledAssets, summary: { failedCount: 0 } }; },
+          };
+        }
+        if (name === 'cdp' && cdp) return cdp;
+        throw new Error(`unexpected capability: ${name}`);
       },
     },
   };
@@ -344,13 +347,25 @@ test('runBatch discards a staged bundle when page-assets fail partway through', 
             { id: 'image-2', kind: 'image', url: secondUrl },
           ],
           bundledAssets: [{ id: 'image-1', path: firstBundledPath }],
+          cdp: {
+            async send(method) {
+              assert.equal(method, 'Page.getResourceTree');
+              return {
+                frameTree: {
+                  childFrames: [],
+                  frame: { id: 'frame-1' },
+                  resources: [{ type: 'Document', url: secondUrl }],
+                },
+              };
+            },
+          },
         }),
         root,
         catalog: [catalogEntry()],
         start: 0,
         limit: 1,
       }),
-      (error) => error?.code === 'PAGE_ASSET_BUNDLE_MISSING',
+      (error) => error?.code === 'PAGE_ASSET_CDP_RESOURCE_MISSING',
     );
     const targetDirectory = path.join(root, 'content/posts/interview/ecool/javascript/javascript-001');
     assert.equal(await stat(targetDirectory).then(() => true, () => false), false);

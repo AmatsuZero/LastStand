@@ -380,6 +380,188 @@ test('archiveCurrentImages re-reads the inventory once when a referenced image i
   assert.deepEqual(result.assets, [{ filename: 'image-01.png', sourceUrl: url }]);
 });
 
+test('archiveCurrentImages falls back to CDP for an octet-stream WebP bundle failure', async (t) => {
+  const workspace = await mkdtemp(path.join(os.tmpdir(), 'ecool-assets-cdp-'));
+  t.after(() => rm(workspace, { recursive: true, force: true }));
+  const articleDirectory = path.join(workspace, 'article');
+  const url = 'https://cdn.example.com/diagram.awebp';
+  const webpBytes = Buffer.from([
+    0x52, 0x49, 0x46, 0x46, 0x04, 0x00, 0x00, 0x00,
+    0x57, 0x45, 0x42, 0x50,
+  ]);
+  const cdpCalls = [];
+  const pageAssets = {
+    async list() { return { id: 'inventory-1', assets: [{ id: 'asset-1', kind: 'image', name: 'diagram.awebp', url }] }; },
+    async bundle() {
+      return {
+        assets: [],
+        failures: [{ reason: 'application/octet-stream', url }],
+        summary: { failedCount: 1 },
+      };
+    },
+  };
+  const cdp = {
+    async send(method, params) {
+      cdpCalls.push({ method, params });
+      if (method === 'Page.getResourceTree') {
+        return {
+          frameTree: {
+            childFrames: [],
+            frame: { id: 'frame-1' },
+            resources: [{ mimeType: 'application/octet-stream', type: 'Image', url }],
+          },
+        };
+      }
+      if (method === 'Page.getResourceContent') {
+        assert.deepEqual(params, { frameId: 'frame-1', url });
+        return { base64Encoded: true, content: webpBytes.toString('base64') };
+      }
+      throw new Error(`unexpected CDP method: ${method}`);
+    },
+  };
+  const tab = {
+    capabilities: {
+      async get(name) {
+        if (name === 'pageAssets') return pageAssets;
+        if (name === 'cdp') return cdp;
+        throw new Error(`unexpected capability: ${name}`);
+      },
+    },
+  };
+  const record = { blocks: [{ type: 'image', alt: 'WebP', src: url }] };
+
+  const result = await archiveCurrentImages(tab, record, articleDirectory);
+
+  assert.deepEqual(cdpCalls.map((call) => call.method), ['Page.getResourceTree', 'Page.getResourceContent']);
+  assert.equal(record.blocks[0].src, 'image-01.webp');
+  assert.deepEqual(result.assets, [{ filename: 'image-01.webp', sourceUrl: url }]);
+  assert.deepEqual(await readFile(path.join(articleDirectory, 'image-01.webp')), webpBytes);
+});
+
+test('archiveCurrentImages rejects malformed CDP base64 without writing an image', async (t) => {
+  const workspace = await mkdtemp(path.join(os.tmpdir(), 'ecool-assets-cdp-invalid-'));
+  t.after(() => rm(workspace, { recursive: true, force: true }));
+  const articleDirectory = path.join(workspace, 'article');
+  const url = 'https://cdn.example.com/invalid.awebp';
+  const validWebp = Buffer.from([
+    0x52, 0x49, 0x46, 0x46, 0x04, 0x00, 0x00, 0x00,
+    0x57, 0x45, 0x42, 0x50,
+  ]).toString('base64');
+  const pageAssets = {
+    async list() { return { id: 'inventory-1', assets: [{ id: 'asset-1', kind: 'image', name: 'invalid.awebp', url }] }; },
+    async bundle() { return { assets: [], failures: [{ reason: 'octet-stream', url }], summary: { failedCount: 1 } }; },
+  };
+  const cdp = {
+    async send(method) {
+      if (method === 'Page.getResourceTree') {
+        return { frameTree: { childFrames: [], frame: { id: 'frame-1' }, resources: [{ type: 'Image', url }] } };
+      }
+      return { base64Encoded: true, content: `${validWebp}!!!!` };
+    },
+  };
+  const tab = { capabilities: { async get(name) { return name === 'pageAssets' ? pageAssets : cdp; } } };
+  const record = { blocks: [{ type: 'image', alt: '损坏图片', src: url }] };
+
+  await assert.rejects(
+    archiveCurrentImages(tab, record, articleDirectory),
+    (error) => error.code === 'PAGE_ASSET_CDP_CONTENT_INVALID',
+  );
+  await assert.rejects(readFile(path.join(articleDirectory, 'image-01.webp')),
+    (error) => error.code === 'ENOENT');
+});
+
+test('archiveCurrentImages preserves bundled assets while using CDP only for failed URLs', async (t) => {
+  const workspace = await mkdtemp(path.join(os.tmpdir(), 'ecool-assets-mixed-'));
+  t.after(() => rm(workspace, { recursive: true, force: true }));
+  const articleDirectory = path.join(workspace, 'article');
+  const bundledPath = path.join(workspace, 'bundled.jpeg');
+  const bundledBytes = Buffer.from([0xff, 0xd8, 0xff, 0xd9]);
+  const fallbackBytes = Buffer.from([
+    0x52, 0x49, 0x46, 0x46, 0x04, 0x00, 0x00, 0x00,
+    0x57, 0x45, 0x42, 0x50,
+  ]);
+  const bundledUrl = 'https://cdn.example.com/bundled.jpeg';
+  const fallbackUrl = 'https://cdn.example.com/fallback.awebp';
+  await writeFile(bundledPath, bundledBytes);
+  const cdpCalls = [];
+  const pageAssets = {
+    async list() {
+      return {
+        id: 'inventory-1',
+        assets: [
+          { id: 'asset-1', kind: 'image', name: 'bundled.jpeg', url: bundledUrl },
+          { id: 'asset-2', kind: 'image', name: 'fallback.awebp', url: fallbackUrl },
+        ],
+      };
+    },
+    async bundle() {
+      return {
+        assets: [{ id: 'asset-1', path: bundledPath, url: bundledUrl }],
+        failures: [{ reason: 'octet-stream', url: fallbackUrl }],
+        summary: { failedCount: 1 },
+      };
+    },
+  };
+  const cdp = {
+    async send(method, params) {
+      cdpCalls.push({ method, params });
+      if (method === 'Page.getResourceTree') {
+        return { frameTree: { childFrames: [], frame: { id: 'frame-1' }, resources: [{ type: 'Image', url: fallbackUrl }] } };
+      }
+      assert.deepEqual(params, { frameId: 'frame-1', url: fallbackUrl });
+      return { base64Encoded: true, content: fallbackBytes.toString('base64') };
+    },
+  };
+  const tab = { capabilities: { async get(name) { return name === 'pageAssets' ? pageAssets : cdp; } } };
+  const record = {
+    blocks: [
+      { type: 'image', alt: '已归档', src: bundledUrl },
+      { type: 'image', alt: 'CDP 回退', src: fallbackUrl },
+    ],
+  };
+
+  const result = await archiveCurrentImages(tab, record, articleDirectory);
+
+  assert.deepEqual(cdpCalls, [
+    { method: 'Page.getResourceTree', params: undefined },
+    { method: 'Page.getResourceContent', params: { frameId: 'frame-1', url: fallbackUrl } },
+  ]);
+  assert.deepEqual(record.blocks.map((block) => block.src), ['image-01.jpeg', 'image-02.webp']);
+  assert.deepEqual(result.assets, [
+    { filename: 'image-01.jpeg', sourceUrl: bundledUrl },
+    { filename: 'image-02.webp', sourceUrl: fallbackUrl },
+  ]);
+  assert.deepEqual(await readFile(path.join(articleDirectory, 'image-01.jpeg')), bundledBytes);
+  assert.deepEqual(await readFile(path.join(articleDirectory, 'image-02.webp')), fallbackBytes);
+});
+
+test('archiveCurrentImages fails when CDP cannot find a failed asset as an image resource', async () => {
+  const url = 'https://cdn.example.com/not-an-image.awebp';
+  const pageAssets = {
+    async list() { return { id: 'inventory-1', assets: [{ id: 'asset-1', kind: 'image', name: 'not-an-image.awebp', url }] }; },
+    async bundle() {
+      return { assets: [], failures: [{ reason: 'application/octet-stream', url }], summary: { failedCount: 1 } };
+    },
+  };
+  const cdp = {
+    async send(method) {
+      assert.equal(method, 'Page.getResourceTree');
+      return { frameTree: { childFrames: [], frame: { id: 'frame-1' }, resources: [{ type: 'Document', url }] } };
+    },
+  };
+  const tab = {
+    capabilities: {
+      async get(name) { return name === 'pageAssets' ? pageAssets : cdp; },
+    },
+  };
+  const record = { blocks: [{ type: 'image', alt: '错误资源', src: url }] };
+
+  await assert.rejects(
+    archiveCurrentImages(tab, record, '/tmp/not-written-by-cdp-fallback'),
+    (error) => error.code === 'PAGE_ASSET_CDP_RESOURCE_MISSING',
+  );
+});
+
 test('archiveCurrentImages fails when a referenced image is absent from the inventory', async () => {
   let listCalls = 0;
   const tab = {

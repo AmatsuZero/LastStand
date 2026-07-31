@@ -1,4 +1,4 @@
-import { copyFile, mkdir, open } from 'node:fs/promises';
+import { copyFile, mkdir, open, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { validateCatalog } from './model.mjs';
@@ -264,6 +264,16 @@ function imageNodes(value, result = []) {
   return result;
 }
 
+function imageExtensionFromBytes(bytes, source) {
+  if (bytes.length >= 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) return '.jpeg';
+  if (bytes.length >= 8 && bytes.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))) return '.png';
+  if (bytes.length >= 6 && ['GIF87a', 'GIF89a'].includes(bytes.subarray(0, 6).toString('ascii'))) return '.gif';
+  if (bytes.length >= 12 && bytes.subarray(0, 4).toString('ascii') === 'RIFF' && bytes.subarray(8, 12).toString('ascii') === 'WEBP') return '.webp';
+  if (bytes.length >= 12 && bytes.subarray(4, 8).toString('ascii') === 'ftyp' && ['avif', 'avis'].includes(bytes.subarray(8, 12).toString('ascii'))) return '.avif';
+  if (bytes.toString('utf8').replace(/^\uFEFF?\s*/, '').match(/^(?:<\?xml[^>]*>\s*)?<svg[\s>]/i)) return '.svg';
+  throw codedError('PAGE_ASSET_TYPE_UNKNOWN', `无法从文件签名识别正文图片: ${source}`);
+}
+
 async function imageExtension(filePath) {
   const handle = await open(filePath, 'r');
   const signature = Buffer.alloc(512);
@@ -273,14 +283,58 @@ async function imageExtension(filePath) {
   } finally {
     await handle.close();
   }
-  const bytes = signature.subarray(0, bytesRead);
-  if (bytes.length >= 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) return '.jpeg';
-  if (bytes.length >= 8 && bytes.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))) return '.png';
-  if (bytes.length >= 6 && ['GIF87a', 'GIF89a'].includes(bytes.subarray(0, 6).toString('ascii'))) return '.gif';
-  if (bytes.length >= 12 && bytes.subarray(0, 4).toString('ascii') === 'RIFF' && bytes.subarray(8, 12).toString('ascii') === 'WEBP') return '.webp';
-  if (bytes.length >= 12 && bytes.subarray(4, 8).toString('ascii') === 'ftyp' && ['avif', 'avis'].includes(bytes.subarray(8, 12).toString('ascii'))) return '.avif';
-  if (bytes.toString('utf8').replace(/^\uFEFF?\s*/, '').match(/^(?:<\?xml[^>]*>\s*)?<svg[\s>]/i)) return '.svg';
-  throw codedError('PAGE_ASSET_TYPE_UNKNOWN', `无法从文件签名识别正文图片: ${filePath}`);
+  return imageExtensionFromBytes(signature.subarray(0, bytesRead), filePath);
+}
+
+function imageResources(frameTree, result = []) {
+  if (!frameTree) return result;
+  const frameId = frameTree.frame?.id;
+  for (const resource of frameTree.resources || []) {
+    if (resource.type === 'Image' && resource.url && frameId) result.push({ frameId, url: resource.url });
+  }
+  for (const child of frameTree.childFrames || []) imageResources(child, result);
+  return result;
+}
+
+function decodeCanonicalBase64(value, url) {
+  if (!value || !/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(value)) {
+    throw codedError('PAGE_ASSET_CDP_CONTENT_INVALID', `CDP 图片内容不是规范的 base64: ${url}`);
+  }
+  const bytes = Buffer.from(value, 'base64');
+  if (!bytes.length || bytes.toString('base64') !== value) {
+    throw codedError('PAGE_ASSET_CDP_CONTENT_INVALID', `CDP 图片内容不是规范的 base64: ${url}`);
+  }
+  return bytes;
+}
+
+async function cdpImageBytes(tab, selectedAssets) {
+  let cdp;
+  let resourceTree;
+  try {
+    cdp = await tab.capabilities.get('cdp');
+    resourceTree = await cdp.send('Page.getResourceTree');
+  } catch (error) {
+    throw codedError('PAGE_ASSET_CDP_READ_FAILED', `无法读取 CDP 图片资源树: ${error.message || error}`);
+  }
+  const resourcesByUrl = new Map(imageResources(resourceTree.frameTree).map((resource) => [resource.url, resource]));
+  const bytesByUrl = new Map();
+  for (const asset of selectedAssets) {
+    const resource = resourcesByUrl.get(asset.url);
+    if (!resource) {
+      throw codedError('PAGE_ASSET_CDP_RESOURCE_MISSING', `CDP 资源树缺少图片资源: ${asset.url}`);
+    }
+    let content;
+    try {
+      content = await cdp.send('Page.getResourceContent', { frameId: resource.frameId, url: asset.url });
+    } catch (error) {
+      throw codedError('PAGE_ASSET_CDP_READ_FAILED', `无法读取 CDP 图片内容: ${asset.url}: ${error.message || error}`);
+    }
+    if (!content?.base64Encoded || typeof content.content !== 'string') {
+      throw codedError('PAGE_ASSET_CDP_CONTENT_INVALID', `CDP 图片内容不是可解码的 base64: ${asset.url}`);
+    }
+    bytesByUrl.set(asset.url, decodeCanonicalBase64(content.content, asset.url));
+  }
+  return bytesByUrl;
 }
 
 export async function archiveCurrentImages(tab, record, articleDirectory) {
@@ -310,22 +364,29 @@ export async function archiveCurrentImages(tab, record, articleDirectory) {
     inventoryId: inventory.id,
     assetIds: selected.map((asset) => asset.id),
   });
-  if (bundle.failures?.length || bundle.summary?.failedCount) {
+  const bundledById = new Map((bundle.assets || []).map((asset) => [asset.id, asset]));
+  const failedUrls = new Set((bundle.failures || []).map((failure) => failure.url).filter(Boolean));
+  const fallbackAssets = selected.filter((asset) => failedUrls.has(asset.url) || !bundledById.get(asset.id)?.path);
+  if ((bundle.failures?.length || bundle.summary?.failedCount) && fallbackAssets.length === 0) {
     const reasons = (bundle.failures || []).map((failure) => `${failure.url}: ${failure.reason}`).join('; ');
     throw codedError('PAGE_ASSET_BUNDLE_FAILED', `正文图片归档失败: ${reasons || '未知错误'}`);
   }
+  const cdpBytesByUrl = fallbackAssets.length ? await cdpImageBytes(tab, fallbackAssets) : new Map();
 
-  const bundledById = new Map((bundle.assets || []).map((asset) => [asset.id, asset]));
   await mkdir(articleDirectory, { recursive: true });
   const assets = [];
   const localByUrl = new Map();
   for (const [index, selectedAsset] of selected.entries()) {
     const bundledAsset = bundledById.get(selectedAsset.id);
-    if (!bundledAsset?.path) {
+    const cdpBytes = cdpBytesByUrl.get(selectedAsset.url);
+    if (!bundledAsset?.path && !cdpBytes) {
       throw codedError('PAGE_ASSET_BUNDLE_MISSING', `归档结果缺少图片: ${selectedAsset.url}`);
     }
-    const filename = `image-${String(index + 1).padStart(2, '0')}${await imageExtension(bundledAsset.path)}`;
-    await copyFile(bundledAsset.path, path.join(articleDirectory, filename));
+    const extension = cdpBytes ? imageExtensionFromBytes(cdpBytes, selectedAsset.url) : await imageExtension(bundledAsset.path);
+    const filename = `image-${String(index + 1).padStart(2, '0')}${extension}`;
+    const targetPath = path.join(articleDirectory, filename);
+    if (cdpBytes) await writeFile(targetPath, cdpBytes);
+    else await copyFile(bundledAsset.path, targetPath);
     localByUrl.set(selectedAsset.url, filename);
     assets.push({ filename, sourceUrl: selectedAsset.url });
   }
