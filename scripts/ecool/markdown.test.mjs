@@ -76,3 +76,15 @@ test('escapes pipes inside formatted table cells', () => {
 
   assert.match(markdown, /\| \*\*A\\\|B\*\* \|/);
 });
+
+test('escapes pipes inside inline code table cells', () => {
+  const markdown = renderMarkdown([
+    {
+      type: 'table',
+      header: [[{ type: 'text', value: '名称' }]],
+      rows: [[[{ type: 'code', value: 'A|B' }]]],
+    },
+  ]);
+
+  assert.match(markdown, /\| `A\\\|B` \|/);
+});

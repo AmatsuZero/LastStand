@@ -22,7 +22,8 @@ function renderInlineNode(node, { tableCell }) {
       return tableCell ? String(value).replaceAll('|', '\\|') : String(value);
     case 'code': {
       const ticks = '`'.repeat(longestBacktickRun(value) + 1);
-      return `${ticks}${value}${ticks}`;
+      const code = tableCell ? String(value).replaceAll('|', '\\|') : value;
+      return `${ticks}${code}${ticks}`;
     }
     case 'strong':
       return `**${renderInline(node, { tableCell })}**`;
