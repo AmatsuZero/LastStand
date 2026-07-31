@@ -1,0 +1,62 @@
+{
+  "source": "https://fe.ecool.fun/knowledge-learn",
+  "startedAt": "2026-07-31T19:11:29.546Z",
+  "finishedAt": "2026-07-31T21:51:34.664Z",
+  "categories": [
+    { "category": "JavaScript", "expected": 29, "success": 29 },
+    { "category": "CSS", "expected": 27, "success": 27 },
+    { "category": "HTML", "expected": 24, "success": 24 },
+    { "category": "React.js", "expected": 21, "success": 21 },
+    { "category": "Vue.js", "expected": 23, "success": 23 },
+    { "category": "计算机网络", "expected": 20, "success": 20 },
+    { "category": "性能优化", "expected": 4, "success": 4 },
+    { "category": "前端安全", "expected": 12, "success": 12 },
+    { "category": "ES6", "expected": 17, "success": 17 },
+    { "category": "工程化", "expected": 14, "success": 14 }
+  ],
+  "totals": {
+    "expected": 191,
+    "success": 191,
+    "skipped": 0,
+    "failures": 0
+  },
+  "images": {
+    "localized": 1087,
+    "preservedExternal": 6,
+    "failures": 0
+  },
+  "failures": [],
+  "imageFailures": [],
+  "sourceUnavailableImages": [
+    {
+      "article": "position: sticky",
+      "path": "content/posts/interview/ecool/css/position-sticky/index.md",
+      "sourceUrl": "https://files.mdnice.com/user/27807/026e14da-8f68-4a44-ac38-82cc5f0ce24c.png"
+    },
+    {
+      "article": "布局技巧",
+      "path": "content/posts/interview/ecool/css/css-009/index.md",
+      "sourceUrl": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c83b43f18e5e4f2292747d12b1a2e967~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?"
+    },
+    {
+      "article": "布局技巧",
+      "path": "content/posts/interview/ecool/css/css-009/index.md",
+      "sourceUrl": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/dcd8c3ca7c8b418a9cbfe6c526c41766~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?"
+    },
+    {
+      "article": "状态管理",
+      "path": "content/posts/interview/ecool/vue/vue-019/index.md",
+      "sourceUrl": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/32c34dabc1714f8e81b6446b4a9ae76e~tplv-k3u1fbpfcp-jj-mark:3024:0:0:0:q75.awebp#?w=911&h=759&s=76353&e=png&b=fefefe"
+    },
+    {
+      "article": "响应式原理",
+      "path": "content/posts/interview/ecool/vue/vue-022/index.md",
+      "sourceUrl": "https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1f4ec6ced9894297aa653934cc2f6737~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?"
+    },
+    {
+      "article": "响应式原理",
+      "path": "content/posts/interview/ecool/vue/vue-022/index.md",
+      "sourceUrl": "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0b20757194a94f0db90ed3d57c9c0876~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?"
+    }
+  ]
+}
