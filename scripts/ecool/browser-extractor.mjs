@@ -307,6 +307,44 @@ function decodeCanonicalBase64(value, url) {
   return bytes;
 }
 
+function runtimeFetchExpression(url) {
+  return `(async () => {
+    const response = await fetch(${JSON.stringify(url)});
+    if (!response.ok) return { ok: false, status: response.status };
+    const bytes = new Uint8Array(await response.arrayBuffer());
+    const chunkSize = 24576;
+    let base64 = '';
+    for (let offset = 0; offset < bytes.length; offset += chunkSize) {
+      let chunk = '';
+      const end = Math.min(offset + chunkSize, bytes.length);
+      for (let index = offset; index < end; index += 1) chunk += String.fromCharCode(bytes[index]);
+      base64 += btoa(chunk);
+    }
+    return { ok: true, status: response.status, base64 };
+  })()`;
+}
+
+async function runtimeFetchBase64(cdp, url) {
+  let response;
+  try {
+    response = await cdp.send('Runtime.evaluate', {
+      awaitPromise: true,
+      expression: runtimeFetchExpression(url),
+      returnByValue: true,
+    });
+  } catch (error) {
+    throw codedError('PAGE_ASSET_CDP_READ_FAILED', `无法通过页面上下文读取图片: ${url}: ${error.message || error}`);
+  }
+  const value = response?.result?.value;
+  if (response?.exceptionDetails || value?.ok === false) {
+    throw codedError('PAGE_ASSET_CDP_READ_FAILED', `页面上下文读取图片失败: ${url}${value?.status ? ` (HTTP ${value.status})` : ''}`);
+  }
+  if (!value || value.ok !== true || typeof value.base64 !== 'string') {
+    throw codedError('PAGE_ASSET_CDP_CONTENT_INVALID', `页面上下文返回的图片内容无效: ${url}`);
+  }
+  return value.base64;
+}
+
 async function cdpImageBytes(tab, selectedAssets) {
   let cdp;
   let resourceTree;
@@ -327,7 +365,7 @@ async function cdpImageBytes(tab, selectedAssets) {
     try {
       content = await cdp.send('Page.getResourceContent', { frameId: resource.frameId, url: asset.url });
     } catch (error) {
-      throw codedError('PAGE_ASSET_CDP_READ_FAILED', `无法读取 CDP 图片内容: ${asset.url}: ${error.message || error}`);
+      content = { base64Encoded: true, content: await runtimeFetchBase64(cdp, asset.url) };
     }
     if (!content?.base64Encoded || typeof content.content !== 'string') {
       throw codedError('PAGE_ASSET_CDP_CONTENT_INVALID', `CDP 图片内容不是可解码的 base64: ${asset.url}`);

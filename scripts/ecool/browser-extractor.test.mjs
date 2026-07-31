@@ -438,6 +438,48 @@ test('archiveCurrentImages falls back to CDP for an octet-stream WebP bundle fai
   assert.deepEqual(await readFile(path.join(articleDirectory, 'image-01.webp')), webpBytes);
 });
 
+test('archiveCurrentImages fetches a not-cached CDP image with a JSON-quoted URL', async (t) => {
+  const workspace = await mkdtemp(path.join(os.tmpdir(), 'ecool-assets-runtime-'));
+  t.after(() => rm(workspace, { recursive: true, force: true }));
+  const articleDirectory = path.join(workspace, 'article');
+  const url = 'https://cdn.example.com/awebp/";globalThis.injected=true;//.awebp';
+  const webpBytes = Buffer.from([
+    0x52, 0x49, 0x46, 0x46, 0x04, 0x00, 0x00, 0x00,
+    0x57, 0x45, 0x42, 0x50,
+  ]);
+  let runtimeParameters;
+  const pageAssets = {
+    async list() { return { id: 'inventory-1', assets: [{ id: 'asset-1', kind: 'image', name: 'quoted.awebp', url }] }; },
+    async bundle() { return { assets: [], failures: [{ reason: 'octet-stream', url }], summary: { failedCount: 1 } }; },
+  };
+  const cdp = {
+    async send(method, params) {
+      if (method === 'Page.getResourceTree') {
+        return { frameTree: { childFrames: [], frame: { id: 'frame-1' }, resources: [{ type: 'Image', url }] } };
+      }
+      if (method === 'Page.getResourceContent') {
+        assert.deepEqual(params, { frameId: 'frame-1', url });
+        throw new Error('Content unavailable/not cached');
+      }
+      assert.equal(method, 'Runtime.evaluate');
+      runtimeParameters = params;
+      return { result: { value: { base64: webpBytes.toString('base64'), ok: true, status: 200 } } };
+    },
+  };
+  const tab = { capabilities: { async get(name) { return name === 'pageAssets' ? pageAssets : cdp; } } };
+  const record = { blocks: [{ type: 'image', alt: '运行期回退', src: url }] };
+
+  const result = await archiveCurrentImages(tab, record, articleDirectory);
+
+  assert.deepEqual(runtimeParameters.awaitPromise, true);
+  assert.deepEqual(runtimeParameters.returnByValue, true);
+  assert.ok(runtimeParameters.expression.includes(`fetch(${JSON.stringify(url)})`));
+  assert.ok(!runtimeParameters.expression.includes(`fetch('${url}')`));
+  assert.equal(record.blocks[0].src, 'image-01.webp');
+  assert.deepEqual(result.assets, [{ filename: 'image-01.webp', sourceUrl: url }]);
+  assert.deepEqual(await readFile(path.join(articleDirectory, 'image-01.webp')), webpBytes);
+});
+
 test('archiveCurrentImages rejects malformed CDP base64 without writing an image', async (t) => {
   const workspace = await mkdtemp(path.join(os.tmpdir(), 'ecool-assets-cdp-invalid-'));
   t.after(() => rm(workspace, { recursive: true, force: true }));
