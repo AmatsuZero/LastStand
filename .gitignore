@@ -3,6 +3,7 @@
 .omc/
 .codebuddy/
 .superpowers/
+.worktrees/
 
 # Hugo build output
 public/
