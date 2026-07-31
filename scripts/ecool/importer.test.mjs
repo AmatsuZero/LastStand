@@ -65,7 +65,7 @@ function catalogEntry(overrides = {}) {
   };
 }
 
-function fakeTab({ title = '测试文章', blocks, assets = [], bundledAssets = assets, beforeSelect, cdp, nodeCount = 2 } = {}) {
+function fakeTab({ title = '测试文章', blocks, assets = [], bundledAssets = assets, beforeSelect, brokenImageUrls = [], cdp, nodeCount = 2 } = {}) {
   let selectedTitle = '';
   const titleLocator = {
     async waitFor() {},
@@ -100,7 +100,8 @@ function fakeTab({ title = '测试文章', blocks, assets = [], bundledAssets = 
         }
         throw new Error(`unexpected selector: ${selector}`);
       },
-      async evaluate() {
+      async evaluate(_callback, expectedUrl) {
+        if (typeof expectedUrl === 'string') return brokenImageUrls.includes(expectedUrl);
         return JSON.stringify({
           title,
           date: '2024-10-01',
@@ -292,6 +293,31 @@ test('runBatch writes its checkpoint without the Node process global', async () 
     assert.equal(result.completed, 1);
     assert.equal(checkpoint.completed.length, 1);
     assert.equal(checkpoint.completed[0].title, '测试文章');
+  });
+});
+
+test('runBatch checkpoints confirmed broken source images as external assets', async () => {
+  await withBatchRoot(async (root) => {
+    const url = 'https://mdnice.example.com/broken.png';
+    const cdp = {
+      async send(method) {
+        if (method === 'Page.getResourceTree') return { frameTree: { childFrames: [], frame: { id: 'frame-1' }, resources: [{ type: 'Image', url }] } };
+        if (method === 'Page.getResourceContent') throw new Error('Content unavailable/not cached');
+        return { result: { value: { ok: false, status: 0 } } };
+      },
+    };
+    await runBatch({
+      tab: fakeTab({ assets: [], blocks: imageBlock(url), brokenImageUrls: [url], cdp }),
+      root,
+      catalog: [catalogEntry()],
+      start: 0,
+      limit: 1,
+    });
+    const checkpoint = JSON.parse(await readFile(path.join(root, '.omc/state/ecool-import.json'), 'utf8'));
+    const completed = checkpoint.completed[0];
+    assert.equal(completed.imageCount, 0);
+    assert.deepEqual(completed.externalAssets, [{ sourceUrl: url, reason: 'source-image-unavailable' }]);
+    assert.match(await readFile(path.join(root, completed.path), 'utf8'), new RegExp(url.replace(/[.?]/g, '\\$&')));
   });
 });
 

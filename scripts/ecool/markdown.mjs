@@ -34,7 +34,7 @@ function renderInlineNode(node, { tableCell }) {
     case 'link':
       return `[${renderInline(node, { tableCell })}](${node.href ?? node.url ?? ''})`;
     case 'image':
-      return `![${node.alt ?? renderInline(node)}](${localImageName(node.src ?? node.url)})`;
+      return `![${node.alt ?? renderInline(node)}](${node.external ? (node.src ?? node.url) : localImageName(node.src ?? node.url)})`;
     case 'br':
       return '  \n';
     default:
@@ -92,7 +92,7 @@ function renderBlock(block, depth = 0) {
     case 'table':
       return renderTable(block);
     case 'image':
-      return `![${block.alt ?? ''}](${localImageName(block.src ?? block.url)})`;
+      return `![${block.alt ?? ''}](${block.external ? (block.src ?? block.url) : localImageName(block.src ?? block.url)})`;
     case 'hr':
       return '---';
     default:

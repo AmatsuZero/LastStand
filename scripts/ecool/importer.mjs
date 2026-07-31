@@ -494,6 +494,7 @@ export async function runBatch({
         const archived = await archiveCurrentImages(tab, record, stagingDirectory);
         record.markdown = renderMarkdown(record.blocks);
         record.imageCount = archived.assets.length;
+        record.externalAssets = archived.externalAssets;
         const content = contentFor(record, record.markdown);
         await writeFile(path.join(stagingDirectory, 'index.md'), content, { encoding: 'utf8', flag: 'wx' });
         const result = await commitStagedBundle(
@@ -508,6 +509,7 @@ export async function runBatch({
           ...result,
           bodyChecksum: checksum(record.markdown),
           imageCount: record.imageCount,
+          externalAssets: record.externalAssets,
         };
       });
       await updateCheckpoint(root, (latest) => {
@@ -518,6 +520,7 @@ export async function runBatch({
           checksum: written.bodyChecksum,
           fileChecksum: written.fileChecksum,
           imageCount: written.imageCount,
+          externalAssets: written.externalAssets,
           completedAt: new Date().toISOString(),
         });
         latest.failures = latest.failures.filter((item) => item.path !== relativePath);

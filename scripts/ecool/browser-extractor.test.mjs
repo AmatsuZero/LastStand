@@ -652,3 +652,97 @@ test('archiveCurrentImages fails when an inventory-missing image is also absent 
   assert.equal(listCalls, 2);
   await assert.rejects(readFile(path.join(workspace, 'image-01.png')), (error) => error.code === 'ENOENT');
 });
+
+test('archiveCurrentImages preserves only confirmed broken source images as external assets', async (t) => {
+  const workspace = await mkdtemp(path.join(os.tmpdir(), 'ecool-assets-external-'));
+  t.after(() => rm(workspace, { recursive: true, force: true }));
+  const url = 'https://mdnice.example.com/broken.png';
+  const previousDocument = globalThis.document;
+  globalThis.document = { images: [{ complete: true, naturalWidth: 0, src: url }] };
+  t.after(() => { globalThis.document = previousDocument; });
+  const cdp = {
+    async send(method) {
+      if (method === 'Page.getResourceTree') return { frameTree: { childFrames: [], frame: { id: 'frame-1' }, resources: [{ type: 'Image', url }] } };
+      if (method === 'Page.getResourceContent') throw new Error('Content unavailable/not cached');
+      return { result: { value: { ok: false, status: 0 } } };
+    },
+  };
+  const tab = {
+    playwright: { async evaluate(callback, expectedUrl) { assert.equal(expectedUrl, url); return callback(expectedUrl); } },
+    capabilities: {
+      async get(name) {
+        if (name === 'pageAssets') return { async list() { return { id: 'inventory-1', assets: [] }; } };
+        return cdp;
+      },
+    },
+  };
+  const record = { blocks: [{ type: 'image', alt: '破图', src: url }] };
+
+  const result = await archiveCurrentImages(tab, record, workspace);
+
+  assert.deepEqual(result.assets, []);
+  assert.deepEqual(result.externalAssets, [{ sourceUrl: url, reason: 'source-image-unavailable' }]);
+  assert.equal(record.blocks[0].src, url);
+  await assert.rejects(readFile(path.join(workspace, 'image-01.png')), (error) => error.code === 'ENOENT');
+});
+
+test('archiveCurrentImages numbers local images independently of preceding external images', async (t) => {
+  const workspace = await mkdtemp(path.join(os.tmpdir(), 'ecool-assets-external-mixed-'));
+  t.after(() => rm(workspace, { recursive: true, force: true }));
+  const externalUrl = 'https://mdnice.example.com/broken.png';
+  const localUrl = 'https://cdn.example.com/local.jpeg';
+  const sourcePath = path.join(workspace, 'source.jpeg');
+  await writeFile(sourcePath, Buffer.from([0xff, 0xd8, 0xff, 0xd9]));
+  const cdp = { async send(method) {
+    if (method === 'Page.getResourceTree') return { frameTree: { childFrames: [], frame: { id: 'frame-1' }, resources: [{ type: 'Image', url: externalUrl }] } };
+    if (method === 'Page.getResourceContent') throw new Error('Content unavailable/not cached');
+    return { result: { value: { ok: false, status: 0 } } };
+  } };
+  const tab = {
+    playwright: { async evaluate(callback, url) {
+      const prior = globalThis.document;
+      globalThis.document = { images: [{ complete: true, naturalWidth: 0, src: externalUrl }] };
+      try { return callback(url); } finally { globalThis.document = prior; }
+    } },
+    capabilities: { async get(name) {
+      if (name === 'pageAssets') return {
+        async list() { return { id: 'inventory-1', assets: [{ id: 'local', kind: 'image', url: localUrl }] }; },
+        async bundle() { return { assets: [{ id: 'local', path: sourcePath }], failures: [], summary: { failedCount: 0 } }; },
+      };
+      return cdp;
+    } },
+  };
+  const record = { blocks: [{ type: 'image', src: externalUrl }, { type: 'image', src: localUrl }] };
+
+  const result = await archiveCurrentImages(tab, record, workspace);
+
+  assert.deepEqual(record.blocks.map((block) => block.src), [externalUrl, 'image-01.jpeg']);
+  assert.deepEqual(result.assets, [{ filename: 'image-01.jpeg', sourceUrl: localUrl }]);
+});
+
+test('archiveCurrentImages rejects an unreadable source image that is not broken', async () => {
+  const url = 'https://mdnice.example.com/not-broken.png';
+  const previousDocument = globalThis.document;
+  globalThis.document = {
+    images: [
+      { complete: true, naturalWidth: 0, src: 'https://mdnice.example.com/other.png' },
+      { complete: false, naturalWidth: 0, src: url },
+      { complete: true, naturalWidth: 1, src: url },
+    ],
+  };
+  const cdp = { async send(method) {
+    if (method === 'Page.getResourceTree') return { frameTree: { childFrames: [], frame: { id: 'frame-1' }, resources: [{ type: 'Image', url }] } };
+    if (method === 'Page.getResourceContent') throw new Error('Content unavailable/not cached');
+    return { result: { value: { ok: false, status: 0 } } };
+  } };
+  const tab = {
+    playwright: { async evaluate(callback, expectedUrl) { return callback(expectedUrl); } },
+    capabilities: { async get(name) { return name === 'pageAssets' ? { async list() { return { id: 'inventory-1', assets: [] }; } } : cdp; } },
+  };
+
+  await assert.rejects(
+    archiveCurrentImages(tab, { blocks: [{ type: 'image', src: url }] }, '/tmp/not-written-by-nonbroken-image'),
+    (error) => error.code === 'PAGE_ASSET_CDP_READ_FAILED',
+  );
+  globalThis.document = previousDocument;
+});

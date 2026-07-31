@@ -345,6 +345,16 @@ async function runtimeFetchBase64(cdp, url) {
   return value.base64;
 }
 
+async function sourceImageUnavailable(tab, url) {
+  try {
+    return await tab.playwright.evaluate((expectedUrl) => Array.from(document.images).some(
+      (image) => image.src === expectedUrl && image.complete && image.naturalWidth === 0,
+    ), url);
+  } catch {
+    return false;
+  }
+}
+
 async function cdpImageBytes(tab, selectedAssets) {
   let cdp;
   let resourceTree;
@@ -356,23 +366,32 @@ async function cdpImageBytes(tab, selectedAssets) {
   }
   const resourcesByUrl = new Map(imageResources(resourceTree.frameTree).map((resource) => [resource.url, resource]));
   const bytesByUrl = new Map();
+  const externalAssets = [];
   for (const asset of selectedAssets) {
     const resource = resourcesByUrl.get(asset.url);
     if (!resource) {
       throw codedError('PAGE_ASSET_CDP_RESOURCE_MISSING', `CDP 资源树缺少图片资源: ${asset.url}`);
     }
-    let content;
     try {
-      content = await cdp.send('Page.getResourceContent', { frameId: resource.frameId, url: asset.url });
+      let content;
+      try {
+        content = await cdp.send('Page.getResourceContent', { frameId: resource.frameId, url: asset.url });
+      } catch {
+        content = { base64Encoded: true, content: await runtimeFetchBase64(cdp, asset.url) };
+      }
+      if (!content?.base64Encoded || typeof content.content !== 'string') {
+        throw codedError('PAGE_ASSET_CDP_CONTENT_INVALID', `CDP 图片内容不是可解码的 base64: ${asset.url}`);
+      }
+      bytesByUrl.set(asset.url, decodeCanonicalBase64(content.content, asset.url));
     } catch (error) {
-      content = { base64Encoded: true, content: await runtimeFetchBase64(cdp, asset.url) };
+      if (error?.code === 'PAGE_ASSET_CDP_READ_FAILED' && await sourceImageUnavailable(tab, asset.url)) {
+        externalAssets.push({ sourceUrl: asset.url, reason: 'source-image-unavailable' });
+        continue;
+      }
+      throw error;
     }
-    if (!content?.base64Encoded || typeof content.content !== 'string') {
-      throw codedError('PAGE_ASSET_CDP_CONTENT_INVALID', `CDP 图片内容不是可解码的 base64: ${asset.url}`);
-    }
-    bytesByUrl.set(asset.url, decodeCanonicalBase64(content.content, asset.url));
   }
-  return bytesByUrl;
+  return { bytesByUrl, externalAssets };
 }
 
 export async function archiveCurrentImages(tab, record, articleDirectory) {
@@ -409,26 +428,36 @@ export async function archiveCurrentImages(tab, record, articleDirectory) {
   const fallbackAssets = referencedUrls
     .filter((url) => fallbackUrls.has(url))
     .map((url) => inventoryAssets.find((asset) => asset.url === url) || { url });
-  const cdpBytesByUrl = fallbackAssets.length ? await cdpImageBytes(tab, fallbackAssets) : new Map();
+  const cdpResult = fallbackAssets.length ? await cdpImageBytes(tab, fallbackAssets) : { bytesByUrl: new Map(), externalAssets: [] };
+  const cdpBytesByUrl = cdpResult.bytesByUrl;
+  const externalByUrl = new Set(cdpResult.externalAssets.map((asset) => asset.sourceUrl));
 
   await mkdir(articleDirectory, { recursive: true });
   const assets = [];
   const localByUrl = new Map();
+  let localImageCount = 0;
   for (const [index, selectedAsset] of selected.entries()) {
     const bundledAsset = selectedAsset ? bundledById.get(selectedAsset.id) : null;
     const sourceUrl = referencedUrls[index];
     const cdpBytes = cdpBytesByUrl.get(sourceUrl);
+    if (externalByUrl.has(sourceUrl)) {
+      localByUrl.set(sourceUrl, sourceUrl);
+      continue;
+    }
     if (!bundledAsset?.path && !cdpBytes) {
       throw codedError('PAGE_ASSET_BUNDLE_MISSING', `归档结果缺少图片: ${sourceUrl}`);
     }
     const extension = cdpBytes ? imageExtensionFromBytes(cdpBytes, sourceUrl) : await imageExtension(bundledAsset.path);
-    const filename = `image-${String(index + 1).padStart(2, '0')}${extension}`;
+    const filename = `image-${String(++localImageCount).padStart(2, '0')}${extension}`;
     const targetPath = path.join(articleDirectory, filename);
     if (cdpBytes) await writeFile(targetPath, cdpBytes);
     else await copyFile(bundledAsset.path, targetPath);
     localByUrl.set(sourceUrl, filename);
     assets.push({ filename, sourceUrl });
   }
-  for (const node of referencedNodes) node.src = localByUrl.get(node.src);
-  return { record, assets };
+  for (const node of referencedNodes) {
+    if (externalByUrl.has(node.src)) node.external = true;
+    else node.src = localByUrl.get(node.src);
+  }
+  return { record, assets, externalAssets: cdpResult.externalAssets };
 }
