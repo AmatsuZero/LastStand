@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, readFile, readdir, rm, stat } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
@@ -35,7 +35,19 @@ function article(overrides = {}) {
   };
 }
 
-function fakeTab() {
+function catalogEntry(overrides = {}) {
+  return {
+    category: 'JavaScript',
+    title: '测试文章',
+    treeIndex: 1,
+    nodeCount: 2,
+    vip: false,
+    weight: 1,
+    ...overrides,
+  };
+}
+
+function fakeTab({ title = '测试文章', blocks, assets = [], bundledAssets = assets, beforeSelect, nodeCount = 2 } = {}) {
   let selectedTitle = '';
   return {
     async url() {
@@ -45,11 +57,12 @@ function fakeTab() {
       locator(selector) {
         if (selector === '.ant-tree-node-content-wrapper') {
           return {
-            async count() { return 2; },
+            async count() { return nodeCount; },
             nth() {
               return {
                 async click() {
-                  selectedTitle = '测试文章';
+                  if (beforeSelect) await beforeSelect();
+                  selectedTitle = title;
                 },
               };
             },
@@ -65,10 +78,10 @@ function fakeTab() {
       },
       async evaluate() {
         return JSON.stringify({
-          title: '测试文章',
+          title,
           date: '2024-10-01',
           lastmod: '2025-07-16',
-          blocks: [{ type: 'paragraph', children: [{ type: 'text', value: '批处理正文' }] }],
+          blocks: blocks || [{ type: 'paragraph', children: [{ type: 'text', value: '批处理正文' }] }],
         });
       },
     },
@@ -76,11 +89,20 @@ function fakeTab() {
       async get(name) {
         assert.equal(name, 'pageAssets');
         return {
-          async list() { return { id: 'assets', assets: [] }; },
+          async list() { return { id: 'assets', assets }; },
+          async bundle() { return { assets: bundledAssets, summary: { failedCount: 0 } }; },
         };
       },
     },
   };
+}
+
+function webpBytes() {
+  return Buffer.from([0x52, 0x49, 0x46, 0x46, 0x04, 0x00, 0x00, 0x00, 0x57, 0x45, 0x42, 0x50]);
+}
+
+function imageBlock(url) {
+  return [{ type: 'paragraph', children: [{ type: 'image', src: url, alt: '示意图' }] }];
 }
 
 test('writeArticleAtomically writes a new article and safely skips identical content', async () => {
@@ -110,6 +132,24 @@ test('writeArticleAtomically fails closed when existing content differs', async 
       (error) => error?.code === 'TARGET_CONFLICT',
     );
     assert.equal(await readFile(target, 'utf8'), original);
+  });
+});
+
+test('writeArticleAtomically preserves a non-cooperating target created at final commit time', async () => {
+  await withTemporaryRoot(async (root) => {
+    const target = path.join(root, 'content/posts/interview/ecool/javascript/javascript-001/index.md');
+    const externalContent = '用户在提交瞬间创建的内容。\n';
+
+    await assert.rejects(
+      () => writeArticleAtomically(root, article({
+        onBeforeCommit: async ({ targetPath }) => {
+          assert.equal(targetPath, target);
+          await writeFile(targetPath, externalContent);
+        },
+      })),
+      (error) => error?.code === 'TARGET_CONFLICT',
+    );
+    assert.equal(await readFile(target, 'utf8'), externalContent);
   });
 });
 
@@ -163,16 +203,21 @@ test('writeArticleAtomically fails closed when another importer owns the target 
   });
 });
 
+test('writeArticleAtomically clears its target lock after an exceptional temporary write hook', async () => {
+  await withTemporaryRoot(async (root) => {
+    await assert.rejects(
+      () => writeArticleAtomically(root, article({
+        onTemporaryWrite: async () => { throw new Error('temporary hook failed'); },
+      })),
+      /temporary hook failed/,
+    );
+    assert.equal((await writeArticleAtomically(root, article())).status, 'written');
+  });
+});
+
 test('runBatch resumes only checkpoint entries whose on-disk checksum still matches', async () => {
   await withTemporaryRoot(async (root) => {
-    const catalog = [{
-      category: 'JavaScript',
-      title: '测试文章',
-      treeIndex: 1,
-      nodeCount: 2,
-      vip: false,
-      weight: 1,
-    }];
+    const catalog = [catalogEntry()];
     const first = await runBatch({ tab: fakeTab(), root, catalog, start: 0, limit: 1 });
     const checkpointPath = path.join(root, '.omc/state/ecool-import.json');
     const checkpoint = JSON.parse(await readFile(checkpointPath, 'utf8'));
@@ -196,12 +241,136 @@ test('runBatch resumes only checkpoint entries whose on-disk checksum still matc
   });
 });
 
+test('runBatch stages image bundles so an index conflict leaves the existing bundle untouched', async () => {
+  await withTemporaryRoot(async (root) => {
+    const targetDirectory = path.join(root, 'content/posts/interview/ecool/javascript/javascript-001');
+    const targetIndex = path.join(targetDirectory, 'index.md');
+    const targetImage = path.join(targetDirectory, 'image-01.webp');
+    const bundledPath = path.join(root, 'bundled.webp');
+    await mkdir(targetDirectory, { recursive: true });
+    await writeFile(targetIndex, '用户文章\n');
+    await writeFile(targetImage, '用户图片\n');
+    await writeFile(bundledPath, webpBytes());
+    const url = 'https://static.ecool.fun/article/example.webp';
+
+    await assert.rejects(
+      () => runBatch({
+        tab: fakeTab({
+          blocks: imageBlock(url),
+          assets: [{ id: 'image-1', kind: 'image', url }],
+          bundledAssets: [{ id: 'image-1', path: bundledPath }],
+        }),
+        root,
+        catalog: [catalogEntry()],
+        start: 0,
+        limit: 1,
+      }),
+      (error) => error?.code === 'TARGET_CONFLICT',
+    );
+    assert.equal(await readFile(targetIndex, 'utf8'), '用户文章\n');
+    assert.equal(await readFile(targetImage, 'utf8'), '用户图片\n');
+    assert.deepEqual((await readdir(targetDirectory)).sort(), ['image-01.webp', 'index.md']);
+  });
+});
+
+test('runBatch discards a staged bundle when page-assets fail partway through', async () => {
+  await withTemporaryRoot(async (root) => {
+    const firstBundledPath = path.join(root, 'first.webp');
+    await writeFile(firstBundledPath, webpBytes());
+    const firstUrl = 'https://static.ecool.fun/article/first.webp';
+    const secondUrl = 'https://static.ecool.fun/article/second.webp';
+    const blocks = [
+      ...imageBlock(firstUrl),
+      ...imageBlock(secondUrl),
+    ];
+
+    await assert.rejects(
+      () => runBatch({
+        tab: fakeTab({
+          blocks,
+          assets: [
+            { id: 'image-1', kind: 'image', url: firstUrl },
+            { id: 'image-2', kind: 'image', url: secondUrl },
+          ],
+          bundledAssets: [{ id: 'image-1', path: firstBundledPath }],
+        }),
+        root,
+        catalog: [catalogEntry()],
+        start: 0,
+        limit: 1,
+      }),
+      (error) => error?.code === 'PAGE_ASSET_BUNDLE_MISSING',
+    );
+    const targetDirectory = path.join(root, 'content/posts/interview/ecool/javascript/javascript-001');
+    assert.equal(await stat(targetDirectory).then(() => true, () => false), false);
+  });
+});
+
+test('runBatch merges concurrent checkpoint updates from separate batches', async () => {
+  await withTemporaryRoot(async (root) => {
+    let releaseSelections;
+    const selectionGate = new Promise((resolve) => { releaseSelections = resolve; });
+    let selected = 0;
+    let bothSelected;
+    const bothSelectedGate = new Promise((resolve) => { bothSelected = resolve; });
+    const waitForBothSelections = async () => {
+      selected += 1;
+      if (selected === 2) bothSelected();
+      await selectionGate;
+    };
+    const catalog = [
+      catalogEntry({ title: '第一篇', weight: 1, nodeCount: 3 }),
+      catalogEntry({ category: 'CSS', title: '第二篇', weight: 1, treeIndex: 2, nodeCount: 3 }),
+    ];
+    const first = runBatch({ tab: fakeTab({ title: '第一篇', beforeSelect: waitForBothSelections, nodeCount: 3 }), root, catalog, start: 0, limit: 1 });
+    const second = runBatch({ tab: fakeTab({ title: '第二篇', beforeSelect: waitForBothSelections, nodeCount: 3 }), root, catalog, start: 1, limit: 1 });
+    await bothSelectedGate;
+    releaseSelections();
+    await Promise.all([first, second]);
+
+    const checkpoint = JSON.parse(await readFile(path.join(root, '.omc/state/ecool-import.json'), 'utf8'));
+    assert.deepEqual(checkpoint.completed.map((item) => item.title).sort(), ['第一篇', '第二篇']);
+  });
+});
+
+test('runBatch records a checksum mismatch before it touches the browser', async () => {
+  await withTemporaryRoot(async (root) => {
+    const catalog = [catalogEntry()];
+    await runBatch({ tab: fakeTab(), root, catalog, start: 0, limit: 1 });
+    const target = path.join(root, 'content/posts/interview/ecool/javascript/javascript-001/index.md');
+    await writeFile(target, '用户修改后的文章\n');
+
+    await assert.rejects(
+      () => runBatch({ tab: new Proxy({}, { get() { throw new Error('browser must not be touched'); } }), root, catalog, start: 0, limit: 1 }),
+      (error) => error?.code === 'CHECKPOINT_CHECKSUM_MISMATCH',
+    );
+    const checkpoint = JSON.parse(await readFile(path.join(root, '.omc/state/ecool-import.json'), 'utf8'));
+    assert.equal(checkpoint.failures.at(-1).error.code, 'CHECKPOINT_CHECKSUM_MISMATCH');
+  });
+});
+
+test('runBatch records malformed entries as checkpoint failures', async () => {
+  await withTemporaryRoot(async (root) => {
+    const entry = catalogEntry({ category: '未知分类', title: '无法定位的文章' });
+    await assert.rejects(
+      () => runBatch({ tab: new Proxy({}, { get() { throw new Error('browser must not be touched'); } }), root, catalog: [entry], start: 0, limit: 1 }),
+      (error) => error?.code === 'CATEGORY_INVALID',
+    );
+    const checkpoint = JSON.parse(await readFile(path.join(root, '.omc/state/ecool-import.json'), 'utf8'));
+    assert.deepEqual(checkpoint.failures.at(-1).title, '无法定位的文章');
+    assert.equal(checkpoint.failures.at(-1).path, null);
+    assert.equal(checkpoint.failures.at(-1).error.code, 'CATEGORY_INVALID');
+  });
+});
+
 test('runBatch rejects browser batches larger than twenty entries', async () => {
   await withTemporaryRoot(async (root) => {
+    let browserTouched = false;
     await assert.rejects(
-      () => runBatch({ tab: fakeTab(), root, catalog: [], start: 0, limit: 21 }),
+      () => runBatch({ tab: new Proxy({}, { get() { browserTouched = true; throw new Error('browser must not be touched'); } }), root, catalog: [], start: 0, limit: 21 }),
       (error) => error?.code === 'BATCH_LIMIT_EXCEEDED',
     );
+    assert.equal(browserTouched, false);
   });
 });
 

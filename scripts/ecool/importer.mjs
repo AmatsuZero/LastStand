@@ -1,4 +1,4 @@
-import { mkdir, open, readFile, rename, rm, writeFile } from 'node:fs/promises';
+import { link, lstat, mkdir, mkdtemp, open, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { createHash, randomUUID } from 'node:crypto';
 import path from 'node:path';
 
@@ -47,7 +47,7 @@ async function readTextIfPresent(filePath) {
   }
 }
 
-async function writeTextAtomically(root, relativePath, content, onTemporaryWrite) {
+async function writeTextAtomically(root, relativePath, content, onTemporaryWrite, onBeforeCommit) {
   const targetPath = resolveTarget(root, relativePath);
   const existing = await readTextIfPresent(targetPath);
   const fileChecksum = checksum(content);
@@ -93,7 +93,18 @@ async function writeTextAtomically(root, relativePath, content, onTemporaryWrite
       }
       throw codedError('TARGET_CONFLICT', `导入目标已存在且内容不同: ${relativePath}`);
     }
-    await rename(temporaryPath, targetPath);
+    if (onBeforeCommit) await onBeforeCommit({ temporaryPath, targetPath, content });
+    try {
+      // link(2) is atomic no-replace: unlike rename(2), it cannot clobber a file created after the check above.
+      await link(temporaryPath, targetPath);
+    } catch (error) {
+      if (error?.code !== 'EEXIST') throw error;
+      const raced = await readTextIfPresent(targetPath);
+      if (raced !== null && checksum(raced) === fileChecksum) {
+        return { status: 'skipped', relativePath, fileChecksum };
+      }
+      throw codedError('TARGET_CONFLICT', `导入目标已存在且内容不同: ${relativePath}`);
+    }
     return { status: 'written', relativePath, fileChecksum };
   } finally {
     await rm(temporaryPath, { force: true });
@@ -115,7 +126,13 @@ function contentFor(record, markdown) {
 export async function writeArticleAtomically(root, record) {
   const markdown = markdownFor(record);
   const relativePath = record.relativePath || articleRelativePath(record);
-  const result = await writeTextAtomically(root, relativePath, contentFor(record, markdown), record.onTemporaryWrite);
+  const result = await writeTextAtomically(
+    root,
+    relativePath,
+    contentFor(record, markdown),
+    record.onTemporaryWrite,
+    record.onBeforeCommit,
+  );
   return {
     ...result,
     bodyChecksum: checksum(markdown),
@@ -207,6 +224,41 @@ async function writeCheckpoint(root, checkpoint) {
   }
 }
 
+function delay(milliseconds) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
+async function withCheckpointLock(root, run) {
+  const lockPath = resolveTarget(root, '.omc/state/ecool-import.lock');
+  await mkdir(path.dirname(lockPath), { recursive: true });
+  let lock;
+  for (let attempt = 0; attempt < 100; attempt += 1) {
+    try {
+      lock = await open(lockPath, 'wx');
+      break;
+    } catch (error) {
+      if (error?.code !== 'EEXIST') throw error;
+      await delay(5);
+    }
+  }
+  if (!lock) throw codedError('CHECKPOINT_LOCKED', `断点状态正由另一批次更新: ${CHECKPOINT_RELATIVE_PATH}`);
+  try {
+    return await run();
+  } finally {
+    await lock.close();
+    await rm(lockPath, { force: true });
+  }
+}
+
+async function updateCheckpoint(root, update) {
+  return withCheckpointLock(root, async () => {
+    const checkpoint = await readCheckpoint(root);
+    update(checkpoint);
+    await writeCheckpoint(root, checkpoint);
+    return checkpoint;
+  });
+}
+
 function fallbackSlug(entry) {
   const config = CATEGORY_CONFIG[entry.category];
   if (!config) throw codedError('CATEGORY_INVALID', `未知分类: ${entry.category}`);
@@ -221,13 +273,80 @@ async function completedEntryMatches(root, completed) {
 
 function saveFailure(checkpoint, entry, relativePath, error) {
   const failure = {
-    title: entry.title,
+    title: entry?.title || '',
     path: relativePath,
     error: { code: error?.code || 'IMPORT_FAILED', message: error?.message || String(error) },
     failedAt: new Date().toISOString(),
   };
   checkpoint.failures = checkpoint.failures.filter((item) => item.path !== relativePath);
   checkpoint.failures.push(failure);
+}
+
+async function pathExists(filePath) {
+  try {
+    await lstat(filePath);
+    return true;
+  } catch (error) {
+    if (error?.code === 'ENOENT') return false;
+    throw error;
+  }
+}
+
+async function removeOwnedLinks(links) {
+  for (const { source, target } of links.reverse()) {
+    try {
+      const [sourceStats, targetStats] = await Promise.all([lstat(source), lstat(target)]);
+      if (sourceStats.dev === targetStats.dev && sourceStats.ino === targetStats.ino) {
+        await rm(target, { force: true });
+      }
+    } catch (error) {
+      if (error?.code !== 'ENOENT') throw error;
+    }
+  }
+}
+
+async function commitStagedBundle(root, relativePath, stagingDirectory, content, assets) {
+  const targetPath = resolveTarget(root, relativePath);
+  const targetDirectory = path.dirname(targetPath);
+  const stagedIndex = path.join(stagingDirectory, 'index.md');
+  const fileChecksum = checksum(content);
+  await mkdir(path.dirname(targetDirectory), { recursive: true });
+  try {
+    await mkdir(targetDirectory);
+  } catch (error) {
+    if (error?.code !== 'EEXIST') throw error;
+    throw codedError('TARGET_CONFLICT', `导入目标已存在且内容不同: ${relativePath}`);
+  }
+
+  const created = [];
+  try {
+    for (const asset of assets) {
+      const source = path.join(stagingDirectory, asset.filename);
+      const target = path.join(targetDirectory, asset.filename);
+      await link(source, target);
+      created.push({ source, target });
+    }
+    await link(stagedIndex, targetPath);
+    created.push({ source: stagedIndex, target: targetPath });
+    return { status: 'written', relativePath, fileChecksum };
+  } catch (error) {
+    await removeOwnedLinks(created);
+    if (error?.code === 'EEXIST') {
+      throw codedError('TARGET_CONFLICT', `导入目标已存在且内容不同: ${relativePath}`);
+    }
+    throw error;
+  }
+}
+
+async function withStagingDirectory(root, run) {
+  const stagingParent = resolveTarget(root, '.omc/state/ecool-import-staging');
+  await mkdir(stagingParent, { recursive: true });
+  const stagingDirectory = await mkdtemp(path.join(stagingParent, 'bundle-'));
+  try {
+    return await run(stagingDirectory);
+  } finally {
+    await rm(stagingDirectory, { recursive: true, force: true });
+  }
 }
 
 export async function runBatch({ tab, root, catalog, start = 0, limit = MAX_BATCH_SIZE }) {
@@ -243,17 +362,21 @@ export async function runBatch({ tab, root, catalog, start = 0, limit = MAX_BATC
   let skipped = 0;
 
   for (const entry of batch) {
-    const slug = fallbackSlug(entry);
-    const relativePath = articleRelativePath({ ...entry, slug });
-    const previous = checkpoint.completed.find((item) => item.path === relativePath);
-    if (previous && await completedEntryMatches(root, previous)) {
-      skipped += 1;
-      continue;
-    }
-
+    let relativePath = null;
     try {
+      const slug = fallbackSlug(entry);
+      relativePath = articleRelativePath({ ...entry, slug });
+      const previous = checkpoint.completed.find((item) => item.path === relativePath);
+      if (previous && await completedEntryMatches(root, previous)) {
+        skipped += 1;
+        continue;
+      }
       if (previous) {
         throw codedError('CHECKPOINT_CHECKSUM_MISMATCH', `已完成文章的磁盘校验和不匹配: ${relativePath}`);
+      }
+      const targetDirectory = path.dirname(resolveTarget(root, relativePath));
+      if (await pathExists(targetDirectory)) {
+        throw codedError('TARGET_CONFLICT', `导入目标已存在且内容不同: ${relativePath}`);
       }
       await selectEntry(tab, entry);
       const article = await extractCurrentArticle(tab);
@@ -262,29 +385,37 @@ export async function runBatch({ tab, root, catalog, start = 0, limit = MAX_BATC
       }
 
       const record = { ...entry, ...article, slug };
-      const articleDirectory = path.dirname(resolveTarget(root, relativePath));
-      const archived = await archiveCurrentImages(tab, record, articleDirectory);
-      record.markdown = renderMarkdown(record.blocks);
-      record.imageCount = archived.assets.length;
-      const written = await writeArticleAtomically(root, record);
-      checkpoint.completed = checkpoint.completed.filter((item) => item.path !== relativePath);
-      checkpoint.completed.push({
-        title: record.title,
-        path: written.relativePath,
-        checksum: written.bodyChecksum,
-        fileChecksum: written.fileChecksum,
-        imageCount: written.imageCount,
-        completedAt: new Date().toISOString(),
+      const written = await withStagingDirectory(root, async (stagingDirectory) => {
+        const archived = await archiveCurrentImages(tab, record, stagingDirectory);
+        record.markdown = renderMarkdown(record.blocks);
+        record.imageCount = archived.assets.length;
+        const content = contentFor(record, record.markdown);
+        await writeFile(path.join(stagingDirectory, 'index.md'), content, { encoding: 'utf8', flag: 'wx' });
+        const result = await commitStagedBundle(root, relativePath, stagingDirectory, content, archived.assets);
+        return {
+          ...result,
+          bodyChecksum: checksum(record.markdown),
+          imageCount: record.imageCount,
+        };
       });
-      checkpoint.failures = checkpoint.failures.filter((item) => item.path !== relativePath);
-      await writeCheckpoint(root, checkpoint);
+      await updateCheckpoint(root, (latest) => {
+        latest.completed = latest.completed.filter((item) => item.path !== relativePath);
+        latest.completed.push({
+          title: record.title,
+          path: written.relativePath,
+          checksum: written.bodyChecksum,
+          fileChecksum: written.fileChecksum,
+          imageCount: written.imageCount,
+          completedAt: new Date().toISOString(),
+        });
+        latest.failures = latest.failures.filter((item) => item.path !== relativePath);
+      });
       if (written.status === 'skipped') skipped += 1;
       else completed += 1;
     } catch (error) {
-      saveFailure(checkpoint, entry, relativePath, error);
-      await writeCheckpoint(root, checkpoint);
+      await updateCheckpoint(root, (latest) => saveFailure(latest, entry, relativePath, error));
       throw error;
     }
   }
-  return { completed, skipped, failures: checkpoint.failures.length };
+  return { completed, skipped, failures: (await readCheckpoint(root)).failures.length };
 }
