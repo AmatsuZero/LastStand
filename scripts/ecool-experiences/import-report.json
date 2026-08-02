@@ -1,0 +1,21 @@
+{
+  "source": "https://fe.ecool.fun/experience-list",
+  "importedAt": "2026-08-02",
+  "experienceCount": 59,
+  "roundCount": 108,
+  "questionCount": 1677,
+  "parentSectionCount": 59,
+  "roundArticleCount": 108,
+  "missingPublicDetailCount": 0,
+  "sourceMissingSubjectiveAnswerCount": 3,
+  "curatedFallbackAnswerCount": 3,
+  "failureCount": 0,
+  "output": "content/posts/frontend/interview-experiences",
+  "format": {
+    "experience": "section bundle",
+    "round": "page bundle",
+    "stableKeys": ["experienceId", "roundId", "roundOrder"],
+    "navigation": "Hugo relref",
+    "answersCollapsed": true
+  }
+}
