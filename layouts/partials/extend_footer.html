@@ -187,6 +187,204 @@
   }
 </script>
 
+<script>
+  (() => {
+    const images = Array.from(document.querySelectorAll('.post-content img'))
+      .filter(image => !image.closest('a') && !image.closest('pre.mermaid'));
+    if (!images.length) return;
+
+    images.forEach(image => {
+      image.dataset.imageLightbox = '';
+      image.tabIndex = 0;
+      image.setAttribute('role', 'button');
+      image.setAttribute('aria-label', image.alt ? `查看大图：${image.alt}` : '查看大图');
+      image.addEventListener('click', () => open(image));
+      image.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          open(image);
+        }
+      });
+    });
+
+    function open(source) {
+      const overlay = document.createElement('div');
+      overlay.className = 'image-lightbox';
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      overlay.setAttribute('aria-label', source.alt || '图片大图查看');
+      overlay.innerHTML = `
+        <div class="image-lightbox__stage">
+          <img class="image-lightbox__image" alt="">
+        </div>
+        <div class="image-lightbox__toolbar" aria-label="图片查看工具栏">
+          <button class="image-lightbox__button" type="button" data-action="zoom-out" aria-label="缩小">−</button>
+          <button class="image-lightbox__button" type="button" data-action="reset" aria-label="适应屏幕">⟲</button>
+          <button class="image-lightbox__button" type="button" data-action="zoom-in" aria-label="放大">+</button>
+          <button class="image-lightbox__button" type="button" data-action="close" aria-label="关闭">×</button>
+        </div>
+        <p class="image-lightbox__caption"></p>
+      `;
+
+      const stage = overlay.querySelector('.image-lightbox__stage');
+      const image = overlay.querySelector('.image-lightbox__image');
+      const caption = overlay.querySelector('.image-lightbox__caption');
+      const closeButton = overlay.querySelector('[data-action="close"]');
+      const previousOverflow = document.body.style.overflow;
+      const previousRootOverflow = document.documentElement.style.overflow;
+      let scale = 1;
+      let fitScale = 1;
+      let x = 0;
+      let y = 0;
+      let dragging = false;
+      let moved = false;
+      let pointerX = 0;
+      let pointerY = 0;
+      let touchOriginX = 0;
+      let touchOriginY = 0;
+      let pinchDistance = 0;
+
+      image.src = source.currentSrc || source.src;
+      caption.textContent = source.alt || source.title || '';
+      caption.hidden = !caption.textContent;
+      document.body.appendChild(overlay);
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      closeButton.focus({ preventScroll: true });
+
+      const render = () => {
+        image.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) scale(${scale})`;
+      };
+
+      const fit = () => {
+        const width = image.naturalWidth || source.naturalWidth || source.clientWidth || 1;
+        const height = image.naturalHeight || source.naturalHeight || source.clientHeight || 1;
+        image.style.width = `${width}px`;
+        image.style.height = `${height}px`;
+        fitScale = Math.min(window.innerWidth * 0.94 / width, window.innerHeight * 0.9 / height, 1);
+        scale = fitScale;
+        x = 0;
+        y = 0;
+        render();
+      };
+
+      const zoom = factor => {
+        scale = Math.max(fitScale * 0.5, Math.min(8, scale * factor));
+        render();
+      };
+
+      const close = () => {
+        window.removeEventListener('resize', fit);
+        document.removeEventListener('keydown', onKeydown);
+        overlay.remove();
+        document.body.style.overflow = previousOverflow;
+        document.documentElement.style.overflow = previousRootOverflow;
+        source.focus({ preventScroll: true });
+      };
+
+      const onKeydown = event => {
+        if (event.key === 'Escape') close();
+        else if (event.key === '+' || event.key === '=') zoom(1.25);
+        else if (event.key === '-') zoom(0.8);
+        else if (event.key === '0') fit();
+        else if (event.key === 'Tab') {
+          const buttons = Array.from(overlay.querySelectorAll('button'));
+          const index = buttons.indexOf(document.activeElement);
+          event.preventDefault();
+          buttons[(index + (event.shiftKey ? -1 : 1) + buttons.length) % buttons.length].focus();
+        }
+      };
+
+      if (image.complete) fit();
+      else image.addEventListener('load', fit, { once: true });
+      image.addEventListener('error', close, { once: true });
+
+      overlay.addEventListener('click', event => {
+        const action = event.target.closest('button')?.dataset.action;
+        if (action === 'close') close();
+        else if (action === 'zoom-in') zoom(1.25);
+        else if (action === 'zoom-out') zoom(0.8);
+        else if (action === 'reset') fit();
+        else if (event.target === stage && !moved) close();
+        moved = false;
+      });
+
+      stage.addEventListener('wheel', event => {
+        event.preventDefault();
+        zoom(event.deltaY < 0 ? 1.15 : 0.87);
+      }, { passive: false });
+
+      stage.addEventListener('pointerdown', event => {
+        if (event.pointerType === 'touch') return;
+        dragging = true;
+        moved = false;
+        pointerX = event.clientX;
+        pointerY = event.clientY;
+        stage.setPointerCapture(event.pointerId);
+        stage.classList.add('is-dragging');
+      });
+      stage.addEventListener('pointermove', event => {
+        if (!dragging) return;
+        moved = true;
+        x += event.clientX - pointerX;
+        y += event.clientY - pointerY;
+        pointerX = event.clientX;
+        pointerY = event.clientY;
+        render();
+      });
+      stage.addEventListener('pointerup', () => {
+        dragging = false;
+        stage.classList.remove('is-dragging');
+      });
+      stage.addEventListener('pointercancel', () => {
+        dragging = false;
+        stage.classList.remove('is-dragging');
+      });
+
+      stage.addEventListener('touchstart', event => {
+        if (event.touches.length === 1) {
+          moved = false;
+          pointerX = event.touches[0].clientX;
+          pointerY = event.touches[0].clientY;
+          touchOriginX = pointerX;
+          touchOriginY = pointerY;
+        } else if (event.touches.length === 2) {
+          moved = true;
+          pinchDistance = Math.hypot(
+            event.touches[0].clientX - event.touches[1].clientX,
+            event.touches[0].clientY - event.touches[1].clientY
+          );
+        }
+      }, { passive: true });
+      stage.addEventListener('touchmove', event => {
+        event.preventDefault();
+        if (event.touches.length === 1) {
+          if (Math.hypot(
+            event.touches[0].clientX - touchOriginX,
+            event.touches[0].clientY - touchOriginY
+          ) > 6) moved = true;
+          x += event.touches[0].clientX - pointerX;
+          y += event.touches[0].clientY - pointerY;
+          pointerX = event.touches[0].clientX;
+          pointerY = event.touches[0].clientY;
+          render();
+        } else if (event.touches.length === 2) {
+          const nextDistance = Math.hypot(
+            event.touches[0].clientX - event.touches[1].clientX,
+            event.touches[0].clientY - event.touches[1].clientY
+          );
+          if (pinchDistance) zoom(nextDistance / pinchDistance);
+          pinchDistance = nextDistance;
+        }
+      }, { passive: false });
+      stage.addEventListener('touchend', () => { pinchDistance = 0; }, { passive: true });
+      stage.addEventListener('dblclick', fit);
+      window.addEventListener('resize', fit);
+      document.addEventListener('keydown', onKeydown);
+    }
+  })();
+</script>
+
 {{- $headers := findRE "<h[1-6].*?>(.|\n])+?</h[1-6]>" .Content -}}
 {{- $hasToc := (and (.Param "ShowToc") (gt (len $headers) 0)) -}}
 {{- if $hasToc }}

@@ -1,0 +1,114 @@
+.post-content img[data-image-lightbox] {
+  cursor: zoom-in;
+}
+
+.post-content img[data-image-lightbox]:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  background: rgba(8, 15, 28, 0.96);
+  color: #fff;
+  animation: image-lightbox-fade-in 160ms ease-out;
+}
+
+.image-lightbox[hidden] {
+  display: none;
+}
+
+.image-lightbox__stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.image-lightbox__stage.is-dragging {
+  cursor: grabbing;
+}
+
+.image-lightbox__image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  max-width: none;
+  max-height: none;
+  pointer-events: none;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.image-lightbox__toolbar {
+  position: absolute;
+  top: max(12px, env(safe-area-inset-top));
+  right: max(12px, env(safe-area-inset-right));
+  z-index: 2;
+  display: flex;
+  gap: 8px;
+}
+
+.image-lightbox__button {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.78);
+  color: #fff;
+  font: 600 21px/1 system-ui, sans-serif;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.image-lightbox__button:hover,
+.image-lightbox__button:focus-visible {
+  background: rgba(51, 65, 85, 0.96);
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.image-lightbox__caption {
+  position: absolute;
+  right: 16px;
+  bottom: max(14px, env(safe-area-inset-bottom));
+  left: 16px;
+  z-index: 2;
+  margin: 0 auto;
+  max-width: 760px;
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 13px;
+  line-height: 1.45;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+@keyframes image-lightbox-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .image-lightbox__toolbar {
+    gap: 6px;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image-lightbox {
+    animation: none;
+  }
+}
