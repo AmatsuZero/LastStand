@@ -31,7 +31,7 @@ OBS 原生支持多种推流协议，但腾讯视频直播中台采用的是 TRT
 
 整体技术架构如下图所示：
 
-<div style="border:1px solid #334155;border-radius:12px;padding:14px 16px;background:rgba(15,23,42,0.35);margin:12px auto;max-width:920px;color:#e2e8f0;">
+<div class="pc-helper-diagram" style="border:1px solid #334155;border-radius:12px;padding:14px 16px;background:rgba(15,23,42,0.35);margin:12px auto;max-width:920px;color:#e2e8f0;">
   <div style="font-weight:700;font-size:15px;margin-bottom:10px;color:#e2e8f0;">图 1｜整体技术架构</div>
 
   <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:10px;">
@@ -64,7 +64,7 @@ OBS 原生支持多种推流协议，但腾讯视频直播中台采用的是 TRT
 
 陪看场景最大的技术约束是：主播需要同时处于**主直播间**和**虚拟陪看房间**。为此我们在 TRTC 单房间模型之上封装了 `ITRTCSubRoom`，并通过 `SubRoomService` 统一管理子房间生命周期。
 
-<div style="border:1px solid #334155;border-radius:12px;padding:14px 16px;background:rgba(15,23,42,0.35);margin:12px auto;max-width:920px;color:#e2e8f0;">
+<div class="pc-helper-diagram" style="border:1px solid #334155;border-radius:12px;padding:14px 16px;background:rgba(15,23,42,0.35);margin:12px auto;max-width:920px;color:#e2e8f0;">
   <div style="font-weight:700;font-size:15px;margin-bottom:10px;color:#e2e8f0;">图 2｜多房间架构（SubRoom）</div>
 
   <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:8px;">
@@ -114,7 +114,7 @@ OBS 原生支持多种推流协议，但腾讯视频直播中台采用的是 TRT
 
 由于所有开播相关的操作都通过 OBS Node 完成，我们首先需要了解其基本工作流程：
 
-<div style="border:1px solid #334155;border-radius:12px;padding:14px 16px;background:rgba(15,23,42,0.35);margin:12px auto;max-width:920px;color:#e2e8f0;">
+<div class="pc-helper-diagram" style="border:1px solid #334155;border-radius:12px;padding:14px 16px;background:rgba(15,23,42,0.35);margin:12px auto;max-width:920px;color:#e2e8f0;">
   <div style="font-weight:700;font-size:15px;margin-bottom:10px;color:#e2e8f0;">图 3｜OBS Node 推流流程</div>
   <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;line-height:1.8;">
     <span style="border:1px solid #60a5fa;border-radius:8px;padding:6px 10px;background:rgba(96,165,250,0.12);color:#dbeafe;">1. 加载 obs-studio-node</span>
@@ -168,7 +168,7 @@ obs.SceneFactory.create('test-scene').add(source); // 将输入源添加到场�
 
 在"最小化修改 OBS 源码"的原则下，我们复用了 OBS 原有的 API 接口来实现 TRTC 推流。具体做法是：通过 `OBS_settings_saveSettings` 方法设置 TRTC 相关的推流参数，然后直接调用原有的 `OBS_service_startStreaming` 接口启动推流。
 
-<div style="border:1px solid #334155;border-radius:12px;padding:14px 16px;background:rgba(15,23,42,0.35);margin:12px auto;max-width:920px;color:#e2e8f0;">
+<div class="pc-helper-diagram" style="border:1px solid #334155;border-radius:12px;padding:14px 16px;background:rgba(15,23,42,0.35);margin:12px auto;max-width:920px;color:#e2e8f0;">
   <div style="font-weight:700;font-size:15px;margin-bottom:10px;color:#e2e8f0;">图 4｜RTMP / TRTC 复用推流入口</div>
   <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:8px;">
     <span style="border:1px solid #60a5fa;border-radius:8px;padding:6px 10px;background:rgba(96,165,250,0.12);color:#dbeafe;">业务侧构建推流参数</span>
@@ -571,7 +571,7 @@ void RenderWindowManager::updateSDLRender(LiveStreamVideoFrame* videoFrame) {
 
 该链路的核心是：视频帧从 SDK 进入 SDL 纹理后直接由 GPU 渲染到子窗口，避免跨进程 CPU 拷贝与额外编解码。
 
-<div style="border:1px solid #334155;border-radius:12px;padding:14px 16px;background:rgba(15,23,42,0.35);margin:12px auto;max-width:920px;color:#e2e8f0;">
+<div class="pc-helper-diagram" style="border:1px solid #334155;border-radius:12px;padding:14px 16px;background:rgba(15,23,42,0.35);margin:12px auto;max-width:920px;color:#e2e8f0;">
   <div style="font-weight:700;font-size:15px;margin-bottom:10px;color:#e2e8f0;">图 7｜零拷贝渲染链路</div>
   <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;line-height:1.8;">
     <span style="border:1px solid #22d3ee;border-radius:8px;padding:6px 10px;background:rgba(34,211,238,0.12);color:#cffafe;">TRTC SDK 视频帧</span>

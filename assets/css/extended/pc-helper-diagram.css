@@ -1,0 +1,75 @@
+/* PCHelper diagrams use dark inline colors as their fallback. Override them in
+   light mode while keeping the rules scoped to this article's diagrams. */
+.pc-helper-diagram {
+  background: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+.pc-helper-diagram > div:first-child {
+  color: #0f172a !important;
+}
+
+.pc-helper-diagram [style*="border:1px solid #60a5fa"] {
+  background: #eff6ff !important;
+  color: #1e3a5f !important;
+}
+
+.pc-helper-diagram [style*="border:1px solid #22d3ee"] {
+  background: #ecfeff !important;
+  color: #155e75 !important;
+}
+
+.pc-helper-diagram [style*="border:1px dashed #94a3b8"] {
+  background: #f1f5f9 !important;
+  color: #334155 !important;
+}
+
+.pc-helper-diagram [style*="color:#60a5fa"] {
+  color: #2563eb !important;
+}
+
+.pc-helper-diagram [style*="color:#22d3ee"] {
+  color: #0891b2 !important;
+}
+
+.pc-helper-diagram [style*="color:#94a3b8"] {
+  color: #475569 !important;
+}
+
+[data-theme="dark"] .pc-helper-diagram {
+  background: rgba(15, 23, 42, 0.35) !important;
+  border-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .pc-helper-diagram > div:first-child {
+  color: #e2e8f0 !important;
+}
+
+[data-theme="dark"] .pc-helper-diagram [style*="border:1px solid #60a5fa"] {
+  background: rgba(96, 165, 250, 0.12) !important;
+  color: #dbeafe !important;
+}
+
+[data-theme="dark"] .pc-helper-diagram [style*="border:1px solid #22d3ee"] {
+  background: rgba(34, 211, 238, 0.12) !important;
+  color: #cffafe !important;
+}
+
+[data-theme="dark"] .pc-helper-diagram [style*="border:1px dashed #94a3b8"] {
+  background: rgba(148, 163, 184, 0.1) !important;
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .pc-helper-diagram [style*="color:#60a5fa"] {
+  color: #60a5fa !important;
+}
+
+[data-theme="dark"] .pc-helper-diagram [style*="color:#22d3ee"] {
+  color: #22d3ee !important;
+}
+
+[data-theme="dark"] .pc-helper-diagram [style*="color:#94a3b8"] {
+  color: #94a3b8 !important;
+}
