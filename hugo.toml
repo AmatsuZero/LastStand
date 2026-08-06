@@ -11,6 +11,30 @@ TocOpen = true
 favicon = 'favicon.svg'
 theme_color = '#111827'
 
+[[params.socialIcons]]
+name = 'github'
+url = 'https://github.com/AmatsuZero/AmatsuZero'
+
+[[params.socialIcons]]
+name = 'email'
+url = 'mailto:jzh16s@hotmail.com'
+
+[[params.socialIcons]]
+name = 'x'
+url = 'https://x.com/DaubertJzh16s'
+
+[[params.socialIcons]]
+name = 'linkedin'
+url = 'https://www.linkedin.com/in/jiangzhenhua/'
+
+[[params.socialIcons]]
+name = 'zhihu'
+url = 'https://www.zhihu.com/people/jiang-zhen-hua-86'
+
+[[params.socialIcons]]
+name = 'telegram'
+url = 'https://t.me/AMATSUZERO'
+
 [markup.goldmark.renderer]
 unsafe = true
 
@@ -37,3 +61,8 @@ weight = 10
 name = '分类'
 url = '/categories/'
 weight = 20
+
+[[menu.main]]
+name = '关于我'
+url = '/about/'
+weight = 30

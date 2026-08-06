@@ -127,6 +127,12 @@
 </footer>
 {{- end }}
 
+{{- if .IsHome }}
+<div class="home-social">
+  {{- partial "social_icons.html" (dict "align" "center") }}
+</div>
+{{- end }}
+
 {{- end }}{{/* end profileMode */}}
 
 {{- end }}{{- /* end main */ -}}
