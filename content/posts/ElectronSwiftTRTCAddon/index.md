@@ -114,6 +114,10 @@ flowchart TD
 - [Node-API 文档](https://nodejs.org/api/n-api.html)
 - [SwiftPM PackageDescription](https://docs.swift.org/swiftpm/documentation/packagedescription/)
 - [Swift C++ Interoperability](https://www.swift.org/documentation/cxx-interop/)
+- [Electron crashReporter](https://www.electronjs.org/docs/latest/api/crash-reporter)
+- [Electron Symbol Server](https://www.electronjs.org/docs/latest/development/debugging-with-symbol-server)
+- [Sentry Debug Information Files](https://docs.sentry.dev/cli/dif/)
+- [Windows Debugging with Symbols](https://learn.microsoft.com/en-us/windows/win32/dxtecharts/debugging-with-symbols)
 
 ## 核心结论
 
@@ -870,6 +874,7 @@ macOS Electron 打包时，需要关注：
 - Swift runtime 依赖
 - TRTC framework 及其资源
 - SDK 内部 companion frameworks
+- dSYM、TRTC dSYM 和 Sentry 符号上传
 - Hardened Runtime
 - notarization
 - 隐私权限说明和 `PrivacyInfo.xcprivacy`
@@ -882,10 +887,65 @@ Windows 打包时，需要关注：
 - `txffmpeg.dll`
 - `txsoundtouch.dll`
 - 可能的音频 hook DLL
+- 自研 `.node`、shim DLL 和第三方 SDK 的 PDB 归档与上传
 - DLL 搜索路径
 - x64 / arm64 / ia32 产物区分
 
 SwiftPM 管理的是编译和链接，不会自动替你完成 Electron packaging 中所有 runtime 依赖复制。
+
+## Crash 定位和符号上传
+
+Native Addon 一旦 crash，通常不是抛一个 JS 异常，而是直接把 Electron 的主进程或渲染进程打崩。因此发布流程里不能只打包 `.node`、framework 和 DLL，还要把符号文件一起归档并上传到 Sentry 之类的平台。
+
+Electron 本身使用 Crashpad 收集 native crash。接入 Sentry Electron SDK 或直接配置 Electron `crashReporter` 后，线上 crash 会以 minidump 形式上报。Sentry 收到 minidump 后，会根据崩溃栈里每个模块的 debug identifier 去匹配已经上传的 Debug Information Files，然后把地址还原成函数名、文件名和行号。
+
+如果 crash 发生在 Electron 自身，Electron 官方也提供了符号支持，但它和业务自己的符号文件不是同一个来源。Windows 调试时可以使用 Electron 官方 symbol server：`https://symbols.electronjs.org`，WinDbg 或 Visual Studio 会按模块信息自动拉取匹配的 PDB。macOS 则可以通过 Electron 发布物料下载对应版本、平台和架构的 symbols 包，例如用 `@electron/get` 下载 `artifactSuffix: "symbols"` 的产物。也就是说，Electron 自身的符号要按 Electron 的精确版本、平台和架构匹配；业务自己的 `.node`、shim、framework 和 DLL 符号则仍然要由自己的发布流程上传和归档。
+
+macOS 上需要关注这些符号：
+
+- Electron app、helper app 和 Native Addon 对应的 dSYM
+- SwiftPM 生成的动态库或最终重命名出来的 `.node` 对应的 dSYM
+- TRTC macOS SDK 提供的 dSYM
+- 如果开启了 bitcode 或符号隐藏，还要保存匹配的 BCSymbolMaps
+
+Windows 上对应的是 PDB，而不是 dSYM。自己的 `.node`、C++ shim DLL，以及其他自研 DLL 都应该在 Release 构建时生成 PDB。MSVC 体系里通常通过编译参数 `/Zi` 或 `/ZI` 生成调试信息，再通过链接参数 `/DEBUG` 生成最终 PDB。PDB 不应该跟应用一起发给用户，但必须归档并上传到 Sentry 或内部符号服务器。
+
+TRTC Windows SDK 如果提供 PDB，也应该和对应版本的 DLL 一起上传；如果没有提供 PDB，就只能还原到模块名、导出符号或偏移地址。这个时候至少要保存以下信息：
+
+- TRTC SDK 的精确版本
+- 实际发布出去的 DLL 文件
+- 每个 DLL 的文件 hash
+- 崩溃发生时 Sentry 报告里的 module name、debug identifier 和 offset
+
+这样即使第三方库内部无法完全符号化，也能判断 crash 是否发生在自研 shim、TRTC SDK，还是 Electron/Chromium 侧。
+
+一个比较完整的发布流程可以这样组织：
+
+```text
+1. 构建 Electron app、Native Addon 和平台 shim
+2. macOS 产出 .app、.node、framework、dSYM
+3. Windows 产出 .exe、.node、DLL、PDB
+4. 上传 JS sourcemap
+5. 上传 dSYM / PDB / 第三方 SDK 符号
+6. 归档本次 release 的安装包、符号文件、TRTC SDK 版本和构建日志
+7. 打包、签名、notarize 或生成 Windows installer
+8. 发布应用
+```
+
+Sentry CLI 可以先检查符号是否可用，再上传：
+
+```bash
+sentry-cli debug-files check path/to/symbols
+sentry-cli debug-files upload -o <org> -p <project> --wait path/to/symbols
+```
+
+线上看到 crash 后，排查顺序一般是：
+
+1. 先看 Sentry stack trace 是否已经符号化。
+2. 如果显示 missing debug information，按 Sentry 给出的 debug identifier 找对应 dSYM 或 PDB。
+3. 上传缺失符号后等待处理完成，再重新打开 crash 事件。
+4. 如果缺的是 TRTC Windows SDK 的 PDB，而 SDK 没提供，只能结合模块名、偏移、SDK 版本和厂商支持定位。
+5. 如果 crash 落在自己的 `.node` 或 shim 里，必须能还原到具体函数和源码行，否则说明发布流程漏传了符号。
 
 ## 推荐落地顺序
 
