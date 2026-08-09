@@ -182,7 +182,7 @@ TRTC frame callback
 
 ### TRTC SDK 渲染到 TXView
 
-TRTC macOS 和 Windows SDK 都提供把视频渲染到平台视图或控件的 API：
+TRTC macOS 和 Windows SDK 都提供把视频渲染到平台视图或控件的 API。可先看 [startLocalPreview](https://trtc.io/document/47634)、[startRemoteView](https://trtc.io/document/48270)、[setLocalRenderParams](https://trtc.io/document/72270) 和 [setRemoteRenderParams](https://trtc.io/document/72270)：
 
 ```objc
 // macOS
@@ -836,6 +836,33 @@ TRTC / camera frame callback
 
 但直播和连麦场景通常要让远端也看到美颜后的画面，因此更推荐把处理后的 frame 送回 TRTC 自定义采集链路，而不是只在本地 view 上画。
 
+## 补充方案：sharedTexture + VideoFrame + video / Canvas
+
+如果项目方坚持不使用原生 view，而是希望继续在 Electron 里做 Canvas、WebGPU 或 `<video>` 渲染，那么可以把这套方案作为性能最优的补充路线，而不是主推荐路线。
+
+核心思想是：不要把视频帧先落到 CPU，再通过 IPC 传给渲染进程；而是让 native SDK 输出可共享的 GPU texture，再把这个 texture 通过 [sharedTexture.importSharedTexture()](https://www.electronjs.org/docs/latest/api/shared-texture) 导入 Electron，转换成 [VideoFrame](https://developer.mozilla.org/en-US/docs/Web/API/VideoFrame)，最后交给浏览器媒体管线或 WebGPU 渲染。
+
+TRTC / 美颜 SDK -> GPU texture -> Electron [sharedTexture.importSharedTexture()](https://www.electronjs.org/docs/latest/api/shared-texture) -> [SharedTextureImported.getVideoFrame()](https://www.electronjs.org/docs/latest/api/structures/shared-texture-imported) -> [VideoTrackGenerator](https://developer.mozilla.org/en-US/docs/Web/API/VideoTrackGenerator) / [MediaStreamTrackGenerator](https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrackGenerator) -> `<video srcObject=MediaStream>`
+
+如果要走 WebGPU，这条链路还可以继续变成：
+
+[VideoFrame](https://developer.mozilla.org/en-US/docs/Web/API/VideoFrame) -> [GPUDevice.importExternalTexture()](https://developer.mozilla.org/en-US/docs/Web/API/GPUDevice/importExternalTexture) -> WebGPU pipeline -> canvas
+
+这条路线的优点是：
+
+- 在保留 Electron 渲染体系的同时，尽量避免 CPU 拷贝
+- 可以继续做 WebGPU shader、DOM 叠层和视频特效
+- 比传统 Buffer -> IPC -> Canvas 路线明显更快
+
+但它也有明显限制：
+
+- 依赖 Electron 的 `sharedTexture`、`VideoTrackGenerator`、`MediaStreamTrackGenerator` 和 WebGPU 等能力
+- 其中部分 API 仍是 experimental / limited availability
+- 需要 native SDK 能输出真正可共享的 GPU texture
+- 纹理生命周期、同步令牌和 release/close 管理会比较复杂
+
+因此，这条路线适合“必须在浏览器里画视频，但又想把性能尽量做高”的场景；不适合把它当成比原生 view 更优的通用方案。
+
 ## Buffer 优化思路
 
 如果某些场景必须处理 frame buffer，优先考虑以下策略：
@@ -997,4 +1024,22 @@ flowchart LR
     SH -->|Windows| W1[HWND + TRTC Windows SDK]
     M1 --> R1[SDK 自己渲染]
     W1 --> R1
+```
+
+```mermaid
+flowchart TB
+    A[原生 view / TXView] --> A1[最低延迟]
+    A --> A2[最少拷贝]
+    A --> A3[适合纯显示]
+    A --> A4[特效和 DOM 混排弱]
+
+    B["sharedTexture + VideoFrame + video"] --> B1[接近零拷贝]
+    B --> B2[性能很高]
+    B --> B3[保留浏览器视频管线]
+    B --> B4[依赖 experimental API]
+
+    C[Canvas / WebGL / WebGPU] --> C1[可做自定义 shader]
+    C --> C2[与 DOM 更灵活混排]
+    C --> C3[通常有额外上传/绘制开销]
+    C --> C4[复杂度最高]
 ```
