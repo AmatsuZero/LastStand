@@ -4,6 +4,19 @@
 .codebuddy/
 .superpowers/
 .worktrees/
+__pycache__/
+*.py[cod]
+
+# Obsidian's generated, read-only article mirror
+obsidian/Library/
+
+# Obsidian per-device/session state
+obsidian/.obsidian/workspace.json
+obsidian/.obsidian/workspace-mobile.json
+obsidian/.obsidian/cache/
+obsidian/.obsidian/plugins/
+obsidian/.obsidian/themes/
+obsidian/.trash/
 
 # Hugo build output
 public/
