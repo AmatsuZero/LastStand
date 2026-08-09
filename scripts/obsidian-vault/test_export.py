@@ -41,6 +41,13 @@ class ExportTests(unittest.TestCase):
         self.assertIn('/Library/p/pic.png',(self.vault/'Library/p.md').read_text())
         self.assertTrue(mod.Exporter(self.source,self.vault).check())
         (self.vault/'Library/p.md').write_text('changed'); self.assertFalse(mod.Exporter(self.source,self.vault).check())
+    def test_write_and_check_create_nonexistent_vault(self):
+        self.put('p/index.md','+++\ntitle="P"\n+++\nBody')
+        missing_vault=self.root/'nested'/'obsidian'
+        self.assertFalse(missing_vault.exists())
+        mod.Exporter(self.source,missing_vault).generate(True)
+        self.assertTrue((missing_vault/'Library/p.md').is_file())
+        self.assertTrue(mod.Exporter(self.source,missing_vault).check())
     def test_refuses_unowned_library(self):
         self.put('a/index.md','+++\ntitle="A"\n+++\nx'); lib=self.vault/'Library'; lib.mkdir(); (lib/'mine.md').write_text('personal')
         with self.assertRaises(RuntimeError): mod.Exporter(self.source,self.vault).generate(True)

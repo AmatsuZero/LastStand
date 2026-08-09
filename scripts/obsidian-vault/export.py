@@ -198,6 +198,9 @@ class Exporter:
                 if unquote(target) not in available: self.errors.append(f'broken generated link: {target} ({path})')
         if write:
             if not self._owned_library(): raise RuntimeError(f'refusing to replace unowned directory: {self.library}')
+            # CI and first-time users may pass a vault path that does not exist
+            # yet.  tempfile.mkdtemp requires its parent directory to exist.
+            self.vault.mkdir(parents=True, exist_ok=True)
             tmp=Path(tempfile.mkdtemp(prefix='.obsidian-export-', dir=str(self.vault)))
             try:
                 new=tmp/'Library'
