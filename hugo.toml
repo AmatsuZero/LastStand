@@ -52,6 +52,17 @@ guessSyntax = true
 tag = 'tags'
 category = 'categories'
 
+[outputs]
+home = ['HTML', 'RSS', 'JSON']
+
+[params.fuseOpts]
+threshold = 0.3
+distance = 100
+ignorelocation = true
+minmatchcharlength = 1
+limit = 20
+keys = ['title', 'permalink', 'summary']
+
 [[menu.main]]
 name = '标签'
 url = '/tags/'
@@ -66,3 +77,8 @@ weight = 20
 name = '关于我'
 url = '/about/'
 weight = 30
+
+[[menu.main]]
+name = '搜索'
+url = '/search/'
+weight = 40
