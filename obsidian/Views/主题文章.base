@@ -1,0 +1,72 @@
+filters:
+  and:
+    - file.inFolder("Library")
+    - generated == true
+views:
+  - type: table
+    name: 前端
+    filters:
+      or:
+        - file.path.contains("/frontend/")
+        - tags.contains("前端")
+        - source_tags.contains("前端")
+    order:
+      - title
+      - categories
+      - tags
+      - date
+  - type: table
+    name: iOS 与 Apple 平台
+    filters:
+      or:
+        - file.path.contains("iOS")
+        - file.path.contains("Swift")
+        - file.path.contains("OCSourceCode")
+        - tags.contains("iOS")
+        - source_tags.contains("iOS")
+    order:
+      - title
+      - categories
+      - tags
+      - date
+  - type: table
+    name: AI 与 Agent
+    filters:
+      or:
+        - file.path.contains("AI")
+        - file.path.contains("mcp")
+        - tags.contains("AI")
+        - source_tags.contains("AI")
+    order:
+      - title
+      - categories
+      - tags
+      - date
+  - type: table
+    name: 项目实践与源码阅读
+    filters:
+      or:
+        - tags.contains("源码")
+        - source_tags.contains("源码")
+        - tags.contains("项目")
+        - source_tags.contains("项目")
+        - file.path.contains("SourceCode")
+        - file.path.contains("Practice")
+    order:
+      - title
+      - categories
+      - tags
+      - date
+  - type: table
+    name: 面试准备
+    filters:
+      or:
+        - file.path.contains("Interview")
+        - file.path.contains("interview")
+        - tags.contains("面试")
+        - source_tags.contains("面试")
+    order:
+      - title
+      - categories
+      - tags
+      - date

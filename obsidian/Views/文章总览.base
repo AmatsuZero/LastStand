@@ -1,0 +1,25 @@
+filters:
+  and:
+    - file.inFolder("Library")
+    - generated == true
+views:
+  - type: table
+    name: 全部文章
+    order:
+      - title
+      - categories
+      - tags
+      - date
+      - source_path
+    sort:
+      - property: date
+        direction: DESC
+  - type: cards
+    name: 最近更新
+    order:
+      - title
+      - date
+      - tags
+    sort:
+      - property: date
+        direction: DESC

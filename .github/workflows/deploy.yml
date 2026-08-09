@@ -30,6 +30,17 @@ jobs:
           hugo-version: 'latest'
           extended: true
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Test Obsidian exporter
+        run: |
+          python3 -m unittest scripts/obsidian-vault/test_export.py
+          python3 scripts/obsidian-vault/export.py --vault "$RUNNER_TEMP/obsidian"
+          python3 scripts/obsidian-vault/export.py --vault "$RUNNER_TEMP/obsidian" --check
+
       - name: Build
         run: hugo --minify
 
