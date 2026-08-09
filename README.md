@@ -19,7 +19,10 @@ LastStand/
 │   ├── _markup/          # 自定义 markdown 渲染钩子（如 mermaid）
 │   ├── partials/         # 局部模板（如 footer 注入 mermaid 脚本）
 │   └── shortcodes/       # 自定义 shortcode（如 details 折叠块）
+├── obsidian/             # Obsidian 知识层（Library 为本地生成镜像）
 ├── public/               # Hugo 构建产物（`hugo` 命令生成）
+├── scripts/
+│   └── obsidian-vault/   # 知识库导出器与测试
 ├── themes/PaperMod/      # PaperMod 主题
 └── hugo.toml             # 站点配置
 ```
@@ -40,6 +43,70 @@ hugo new content posts/MyArticle/index.md
 ```
 
 文章默认 `draft = true`，发布前请改为 `false`。
+
+---
+
+## 🧠 Obsidian 知识库
+
+仓库同时提供基于 Obsidian 核心功能的学习知识层。Hugo 的 `content/` 仍是博客原文的唯一事实源；`obsidian/Library/` 是由脚本生成的本地只读镜像。
+
+### 目录结构
+
+```text
+obsidian/
+├── Home.md               # 知识库首页
+├── MOCs/                 # 前端、iOS、AI、项目实践、面试等主题入口
+├── Notes/                # 个人理解、问题与总结
+├── Templates/            # 学习笔记模板
+├── Views/                # Obsidian Bases 视图
+├── .obsidian/            # 可复现的核心配置
+└── Library/              # 从 content/ 生成，不提交 Git
+```
+
+### 生成并打开知识库
+
+在仓库根目录运行：
+
+```bash
+python3 scripts/obsidian-vault/export.py
+```
+
+随后在 Obsidian 中将仓库里的 `obsidian/` 目录作为 Vault 打开，并从 `Home.md` 开始浏览。
+
+> `Library/` 会在重新导出时被替换，请勿直接修改。博客原文写入 `content/`，个人学习内容写入 `Notes/`。
+
+### 日常工作流
+
+1. 从 `Home.md` 或 `MOCs/` 选择主题和原文。
+2. 使用 `Templates/学习笔记.md` 在 `Notes/` 中创建笔记。
+3. 在笔记的 `source_notes` 属性中链接对应的 `Library/` 原文。
+4. 修改博客内容后重新运行导出命令。
+
+检查本地镜像是否最新且链接、资源完整：
+
+```bash
+python3 scripts/obsidian-vault/export.py --check
+```
+
+重新生成镜像并输出文章、资源、链接及兼容性统计：
+
+```bash
+python3 scripts/obsidian-vault/export.py --report
+```
+
+如需显式指定路径：
+
+```bash
+python3 scripts/obsidian-vault/export.py \
+  --source content \
+  --vault obsidian
+```
+
+导出器只依赖 Python 3 标准库。运行测试：
+
+```bash
+python3 scripts/obsidian-vault/test_export.py
+```
 
 ---
 
