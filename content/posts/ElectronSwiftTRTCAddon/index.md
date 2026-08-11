@@ -863,6 +863,98 @@ TRTC / 美颜 SDK -> GPU texture -> Electron [sharedTexture.importSharedTexture(
 
 因此，这条路线适合“必须在浏览器里画视频，但又想把性能尽量做高”的场景；不适合把它当成比原生 view 更优的通用方案。
 
+## 补充方案：C++ 共享内存 / mmap / SAB
+
+除了 `sharedTexture`，还有一类看起来也很高性能的方案：用 C++ addon、共享内存、`mmap` 或 `SharedArrayBuffer` 在 native 层和 Electron renderer 之间传视频帧。例如：
+
+- [`share-memory-win`](https://www.npmjs.com/package/share-memory-win)：偏 Windows 的共享内存 addon
+- [`mmap-io`](https://www.npmjs.com/package/mmap-io)：Node.js mmap 封装
+- [`electron-direct-ipc`](https://www.npmjs.com/package/electron-direct-ipc)：围绕 Electron IPC 和共享数据通道做封装
+- [`SharedArrayBuffer`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer)：浏览器侧可共享的二进制内存
+
+这类方案的价值是真实存在的，但要先分清楚它优化的是哪一段链路。
+
+共享内存优化的是 CPU memory 在进程之间的传递。它可以避免把一帧视频通过 Electron IPC 做结构化克隆，也可以让 renderer 只读取最新帧，减少 JS 对象分配和 GC 压力。但它并不会天然把 CPU buffer 变成 GPU texture。
+
+如果 native SDK 或美颜 SDK 给你的输出是 `NV12`、`I420`、`BGRA` 这类 CPU buffer，那么共享内存链路大概是：
+
+```text
+TRTC / 美颜 SDK
+  -> CPU frame buffer
+  -> C++ addon 写入 shared memory ring buffer
+  -> renderer 读取最新帧
+  -> WebGL / WebGPU 上传到 GPU texture
+  -> canvas 绘制
+```
+
+这比“每帧走 IPC Buffer”好很多，但最后仍然存在一次 CPU -> GPU upload。对于 1080p、60 fps 这种视频流，这一步依然是主要成本之一。
+
+因此，不要把“C++ 方案”直接等同于“只能拷贝 CPU Buffer”。C++ 既可以操作 CPU buffer，也可以操作 GPU texture。真正的分界线不是语言，而是共享对象：
+
+| 共享对象 | 典型实现 | 最后是否还要上传 GPU | 适合场景 |
+|---|---|---:|---|
+| CPU buffer | shared memory / mmap / SAB / ring buffer | 通常需要 | SDK 只能输出 CPU 帧，或者要避开 experimental API |
+| GPU texture | `sharedTexture` / `IOSurface` / D3D shared handle | 尽量避免 | SDK 或美颜链路能输出可共享 GPU texture |
+| JS object / ArrayBuffer | Electron IPC | 通常需要，且 JS 压力大 | demo、截图、低帧率、小画面 |
+
+更准确地说，C++ addon 可以同时支持两条路线：
+
+```mermaid
+flowchart TD
+    A[C++ Native Addon] --> B[CPU shared memory pipeline]
+    A --> C[GPU shared texture pipeline]
+
+    B --> B1[NV12 / I420 / BGRA]
+    B1 --> B2[shared memory ring buffer]
+    B2 --> B3[renderer 读取最新帧]
+    B3 --> B4[WebGL / WebGPU 上传]
+    B4 --> B5[canvas 显示]
+
+    C --> C1[IOSurface / D3D shared texture]
+    C1 --> C2[Electron sharedTexture]
+    C2 --> C3[VideoFrame]
+    C3 --> C4[video / WebGPU / WebGL]
+```
+
+如果追求最高性能，并且 SDK 能给到 GPU 资源，那么优先暴露 GPU texture handle，而不是暴露帧数据数组。
+
+macOS 上理想对象是带 `IOSurface` 的 `CVPixelBuffer`，或可以桥接到 Metal 的纹理资源。Windows 上理想对象是可共享的 `ID3D11Texture2D` handle。native addon 的职责不是把每帧转成 JS 能直接读的数组，而是把这些平台 GPU 句柄安全地交给 Electron 的 `sharedTexture` 或后续渲染管线。
+
+共享内存更适合作为非 experimental API 的兜底方案：
+
+- SDK 只能回调 CPU frame
+- Electron 当前版本不适合依赖 `sharedTexture`
+- 需要兼容较老运行环境
+- 可以接受 CPU -> GPU upload 的成本
+- 希望自己完全控制 ring buffer、丢帧策略和帧同步
+
+一个比较稳妥的 CPU shared memory 设计是：
+
+```text
+native producer
+  -> 固定数量 slot 的 ring buffer
+  -> 每个 slot 存 frameId、timestamp、format、width、height、stride、plane offsets
+  -> writer 永远覆盖最旧帧
+
+renderer consumer
+  -> 只读取最新完整 frameId
+  -> 渲染慢就丢帧
+  -> 用 WebGL / WebGPU shader 直接处理 NV12 或 I420
+```
+
+这里要避免把共享内存设计成“可靠消息队列”。视频渲染更看重实时性，而不是每一帧都必须显示。渲染进程跟不上时，正确做法通常是丢旧帧，只追最新帧。
+
+所以这几类方案可以这样排序：
+
+| 方案 | 性能 | 稳定性 | 复杂度 | 备注 |
+|---|---:|---:|---:|---|
+| TRTC SDK 原生 view | 最高 | 高 | 中 | 纯显示首选 |
+| C++/Swift addon 暴露 GPU texture + `sharedTexture` | 很高 | 中 | 高 | 浏览器渲染里的高性能路线 |
+| C++ addon + shared memory CPU buffer | 中高 | 中高 | 高 | 非 experimental 兜底，但仍要上传 GPU |
+| Electron IPC 传完整 frame | 低 | 中 | 低 | 只适合 demo 或低吞吐场景 |
+
+结论是：共享内存不是 `sharedTexture` 的替代品，而是另一条不同层级的优化路线。前者优化 CPU 帧跨进程传输，后者优化 GPU 纹理跨边界共享。如果目标是高性能视频渲染，优先看能不能拿到 GPU texture；只有拿不到时，再把 shared memory ring buffer 作为 CPU buffer 路线的优化手段。
+
 ## Buffer 优化思路
 
 如果某些场景必须处理 frame buffer，优先考虑以下策略：
