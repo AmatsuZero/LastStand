@@ -39,4 +39,4 @@ flowchart TB
 - KMP 不做业务热更主路径  
 - 图表用 Mermaid；Obsidian 副本在 `LastStand/obsidian/UGreen-Architecture/`，改文档双仓提交  
 
-**当前进度：** Plan 01 **就绪**（`validate:bridges` 绿；owner/god SSOT 已回链至 Spec §5.1）；可开 Plan 02。
+**当前进度：** Plan 01 文档 + RN 内部校验器就绪（`validate:bridges` 绿 = schema 示例 ↔ catalog ↔ JS facade 锁步；**不**证明 iOS/Android 原生模块已对齐；原生 parity 属 **Plan 03**）；owner/god SSOT 已回链至 Spec §5.1。**Plan 02 开工前须完成 Task 0**：核对 catalog / `DeviceSettingsBridge` JS 契约名与 feature 分支及 Android 上真实 host 模块名（`DeviceRNBridge` / `DeviceRuntimeRNBridge` / `DeviceHostRNBridge` 等）并决定 reconcile 策略。

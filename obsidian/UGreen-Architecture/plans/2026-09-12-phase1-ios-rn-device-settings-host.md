@@ -17,6 +17,7 @@
 - 双端方法名以 `ugreenhome-rn/contracts` + `bridge-capability-catalog.json` 为准
 - 源分支：`origin/feature/wangming/UgreenHome_ReactNative`（合入前先 `git fetch`）
 - Obsidian / Spec 变更双仓提交
+- 发布/验收须断言运行时存在真实 `NativeModules.DeviceSettingsBridge`（或 Task 0 reconcile 后的模块名）；JS mock/fallback 不得静默满足验收
 
 ---
 
@@ -250,6 +251,8 @@ EOF
 ```bash
 cd /Users/daubert/UGreen/ugreenhome-rn && npm run validate:bridges
 ```
+
+Expected: 退出码 0（RN 内部锁步）；另须手工或集成测试确认 `NativeModules.DeviceSettingsBridge`（或 reconcile 名）在宿主运行时存在，mock 回退不算通过。
 
 - [ ] **Step 2: 扫描 RN JS 不得出现 IoT/RTCX 关键字 import**
 

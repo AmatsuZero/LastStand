@@ -435,7 +435,7 @@ flowchart TB
 5. **H5 最小集：** Web 容器 + 鉴权 Bridge + 域白名单；不做设备写。  
 6. 列出 `device-biz` 进入 iOS umbrella 的前置条件（编译、Adapter、迁移切片）；阶段一只准备，不要求切完。  
 7. 维护「上帝点 / 粗模块」清单（Obsidian 或本仓库 docs），供后续宿主组件化子 Spec 使用。
-8. 阶段一 SSOT 文档：`docs/superpowers/phase1/owner-registry.md`、`docs/superpowers/phase1/god-surface-inventory.md`；RN Bridge 目录校验：`ugreenhome-rn` 中 `npm run validate:bridges`。
+8. 阶段一 SSOT 文档：`docs/superpowers/phase1/owner-registry.md`、`docs/superpowers/phase1/god-surface-inventory.md`；RN Bridge 目录校验：`ugreenhome-rn` 中 `npm run validate:bridges`（**仅** RN 仓内 schema 示例 ↔ catalog ↔ JS facade 三者锁步；**不**证明 iOS/Android 原生 `RCTBridgeModule` 已注册同名模块，原生双端 parity 属 Plan 03）。
 
 ### 5.2 阶段一明确不做
 
