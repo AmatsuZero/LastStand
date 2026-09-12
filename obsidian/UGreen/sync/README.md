@@ -13,10 +13,17 @@
 
 ## 发布规则（必须遵守）
 
-**绝不提交 `obsidian/UGreen/sources/`。** 该目录是本机同步生成、由机器维护的钉钉原料层，可能包含员工个人信息、共享凭据等敏感内容，只能保留在本地。可以发布的只有经过人工审阅的 curated 笔记（如 `domains/`、`features/`、`requirements/`、`ui/`）以及不含原文敏感内容的 `sync/inventory.yaml`。
+`sources/` **只允许产品 App 需求**（及同类产品 PRD）。禁止写入：
+
+- 个人说明书 / 成员通讯录
+- 入职须知、IT FAQ、共享 Wi‑Fi/账号密码
+- 固件文档（当前约定不整理）
+
+推送前自检：`rg -n '个人说明书|入职须知|UG123456|ugreen@123' obsidian/UGreen/sources` 应为无命中。
+
+`inventory.yaml` 同样只保留产品节点。curated 笔记（`domains/` 等）与产品 `sources/` 可一并同步。
 
 `inventory.yaml` 使用受限解析器；除 `enabled` 的 `true`/`false` 外，所有 scalar 值都必须保持为 JSON 双引号字符串（中文直接保留，不写成 `\uXXXX`）。
-
 ## MCP 通道
 
 同步脚本使用 `scripts/ugreen-kb/dingtalk_mcp.py`，通过 `~/.cursor/mcp.json` 中 `mcpServers.dingtalk-doc.url` 配置的 **HTTP MCP 网关**连接钉钉文档。**不使用** Cursor `CallDynamicTool`。
@@ -63,14 +70,12 @@ PY
 | 结构化笔记（`domains/`、`features/`、`requirements/`、`ui/`） | **Obsidian** | 同步**不会**自动覆盖 curated 笔记；需人工合并钉钉变更 |
 | `maps_to` | 人工维护 | 指向 curated 笔记路径；变更原料后人工检查是否需要更新笔记 |
 
-## MVP 上限与启用新节点
+## 启用新的产品 App 节点
 
-- 首批 bootstrap 最多启用 **15** 个子节点（不含根索引本身）；超出部分保持 `enabled: false`，`last_error: "deferred: mvp cap"`。
-- 当前 inventory 已发现更多节点；按需逐步启用：
-
-1. 在 `inventory.yaml` 中将目标节点的 `enabled` 改为 `true`，清除 `last_error`。
-2. 按下方「常规同步」导出该节点。
-3. 若原料对应 curated 笔记，更新 `maps_to` 并在笔记 frontmatter 中维护 `source_node_ids`。
+1. 确认文档是 **产品 App 需求**（不是成员/入职材料）。
+2. 在 `inventory.yaml` 增加节点，`enabled: true`（或暂 `false` + `last_error`）。
+3. 按「常规同步」导出到 `sources/<nodeId>/`。
+4. 更新 `maps_to` 与 curated 笔记的 `source_node_ids`。
 
 ## Bootstrap（Tasks 5–6 摘要）
 

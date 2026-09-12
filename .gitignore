@@ -14,8 +14,8 @@ __pycache__/
 # Obsidian's generated, read-only article mirror
 obsidian/Library/
 
-# UGreen raw DingTalk exports are local-only and may contain secrets/PII
-obsidian/UGreen/sources/
+# UGreen sources/ may be committed only when limited to product App PRDs
+# (no member bios, onboarding FAQ, or shared credentials). See sync/README.md.
 
 # Obsidian per-device/session state
 obsidian/.obsidian/workspace.json
