@@ -1,0 +1,12 @@
+来源: /private/tmp/ugreen-ios-architecture-20260912/logs/rn-bundle-tests-root.log
+仅保留结果/错误/耗时；完整原始日志位于上述本机临时路径。
+
+✖ detects current host bridge contract version (1.376708ms)
+ℹ tests 21
+ℹ pass 20
+ℹ fail 1
+    actual: '4.3.0',
+    expected: '4.2.0',
+real 0.07
+user 0.15
+sys 0.04

@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-09-12T17:19:31.513578+08:00",
+  "source": "/Users/daubert/UGreen/ugreenhome",
+  "snapshot": "/private/tmp/ugreen-ios-architecture-20260912-rerun2/source",
+  "head": "31e1af1aa23e893886153b91cb51d5cedb674ca0",
+  "status_before": "M iot/Podfile.lock\n M ugreenhome-shared\n?? .codebuddy/\n?? .mailmap\n?? .omx/\n?? .workbuddy/\n?? docs/\n?? iot/.env\n?? iot/Scripts/generate-kmp-dsym.swift\n?? iot/Scripts/upload-kmp-dsym.swift",
+  "project_sha256": "5b30c020bc6973f660123fcfeeeeab73e00e766100f1108f982d84739aa0192b",
+  "podfile_lock_sha256": "28d8720ffbf344f73f24002e879df3aa6da1318ba6a2cd4bd3882a875150850f",
+  "pods_manifest_sha256": "28d8720ffbf344f73f24002e879df3aa6da1318ba6a2cd4bd3882a875150850f",
+  "uhkit_project_sha256": "39753295e9d0a14a1c2ecaf9e7cb2bf1d289bc6f5205359386fd9d6e7155eeb0",
+  "prior_missing_reference_present": false
+}

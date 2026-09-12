@@ -1,0 +1,8 @@
+来源: /private/tmp/ugreen-ios-architecture-20260912/logs/kmm-jvm-test-sandbox.log
+仅保留结果/错误/耗时；完整原始日志位于上述本机临时路径。
+
+Exception in thread "main" java.io.FileNotFoundException: /Users/daubert/.gradle/wrapper/dists/gradle-9.4.1-bin/45w7kj7s8jzqenl33wrwa0aoj/gradle-9.4.1-bin.zip.lck (Operation not permitted)
+Caused by: java.nio.file.FileSystemException: /Users/daubert/.gradle/wrapper/dists/gradle-9.4.1-bin/45w7kj7s8jzqenl33wrwa0aoj/gradle-9.4.1-bin.zip.lck: Operation not permitted
+real 0.38
+user 0.08
+sys 0.03

@@ -1,0 +1,11 @@
+来源: /private/tmp/ugreen-ios-architecture-20260912-rerun2/logs/incremental-build.log
+
+BUILD SUCCESSFUL in 3s
+SwiftCompile normal arm64 Compiling\ UHHomeViewController.swift /tmp/ugreen-ios-architecture-20260912-rerun2/source/iot/iot/Modules/Home/Controller/UHHomeViewController.swift (in target 'UgreenHome' from project 'UgreenHome')
+SwiftCompile normal arm64 /tmp/ugreen-ios-architecture-20260912-rerun2/source/iot/iot/Modules/Home/Controller/UHHomeViewController.swift (in target 'UgreenHome' from project 'UgreenHome')
+ARCHITECTURE_SURVEY_SKIP_CRASHLYTICS_UPLOAD
+** BUILD SUCCEEDED **
+real 44.30
+user 2.38
+sys 0.75
+EXIT_CODE=0

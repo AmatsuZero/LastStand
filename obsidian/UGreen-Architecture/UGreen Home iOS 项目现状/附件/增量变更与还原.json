@@ -1,0 +1,9 @@
+{
+  "file": "iot/iot/Modules/Home/Controller/UHHomeViewController.swift",
+  "line": 218,
+  "change": "Add one print statement in viewDidLoad, isolated snapshot only; app will not be launched",
+  "original_sha256": "f3dee9e4a7292b558517e9b14b36dc09d8f0b5d1fba05f589280ec52ae4d6126",
+  "changed_sha256": "240c75ac1d29d0e990b2022512f984e10384269baa5af7a4eec367ff37dd3923",
+  "restored_sha256": "f3dee9e4a7292b558517e9b14b36dc09d8f0b5d1fba05f589280ec52ae4d6126",
+  "restored": true
+}

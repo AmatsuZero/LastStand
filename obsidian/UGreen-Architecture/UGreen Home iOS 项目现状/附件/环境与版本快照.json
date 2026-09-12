@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-12",
+  "source": "/Users/daubert/UGreen/ugreenhome",
+  "snapshot": "/private/tmp/ugreen-ios-architecture-20260912/source",
+  "head": "31e1af1aa23e893886153b91cb51d5cedb674ca0",
+  "branch": "release/1.7.0",
+  "status": "M ugreenhome-shared\n?? .codebuddy/\n?? .mailmap\n?? .omx/\n?? .workbuddy/\n?? docs/\n?? iot/.env\n?? iot/Scripts/generate-kmp-dsym.swift\n?? iot/Scripts/upload-kmp-dsym.swift",
+  "shared_head": "7abfcd0134c062f46c06b739a11f0cbeb69e1c0c",
+  "shared_status": "? ugreenhome-strings\n?? .omx/",
+  "pbx_original_sha256": "5b30c020bc6973f660123fcfeeeeab73e00e766100f1108f982d84739aa0192b",
+  "snapshot_adjustments": [
+    "Disable only Crashlytics upload build phase",
+    "Relink local UGStrings to snapshot source",
+    "Exclude .git .omx .codebuddy .workbuddy .build .gradle build .env"
+  ],
+  "xcode": "Xcode 26.6\nBuild version 17F113",
+  "cpu": "Apple M5 Pro",
+  "memory_bytes": 51539607552,
+  "logical_cpus": 18,
+  "macos": "26.6.2 (25G83)",
+  "sdk": "iphoneos26.5",
+  "architecture": "arm64"
+}

@@ -1,0 +1,153 @@
+source_path,counting_rule,static_test_count
+Tools/test_import_uhkit_images.py,Python def test,9
+Tools/国际化/l10n_tool/test_l10n_diff_tool.py,Python def test,8
+Tools/rn-bundle-tool/test/integration-smoke.test.js,Node test,5
+Tools/rn-bundle-tool/test/smoke.test.js,Node test,7
+Tools/rn-bundle-tool/test/xcode-resource.test.js,Node test,3
+Tools/rn-bundle-tool/test/target-discovery.test.js,Node test,6
+LocalPods/UHReactNativeRuntime/Tests/CoreTests/UgreenRNManifestValidatorTests.swift,Swift func test,5
+LocalPods/UHReactNativeRuntime/Tests/CoreTests/UgreenRNHostRegistryStateTests.swift,Swift func test,4
+iot/UgreenHomeTests/UHSecurityReportAttentionItemTests.swift,Swift func test,2
+iot/UgreenHomeTests/UGUUIDManagerTests.swift,Swift func test,14
+iot/UgreenHomeTests/IPCSettingRootPolicyTests.swift,Swift func test,4
+iot/UgreenHomeTests/QRCodeRNBridgeServiceTests.swift,Swift func test,2
+iot/UgreenHomeTests/IPCFeatureActionGuardTests.swift,Swift func test,4
+iot/UgreenHomeTests/UHCellularThingModelPolicyTests.swift,Swift func test,3
+iot/UgreenHomeTests/UHLoopVideoViewTests.swift,Swift func test,9
+iot/UgreenHomeTests/DeviceRelationRegistryTests.swift,Swift func test,19
+iot/UgreenHomeTests/DeviceRNBridgeShareErrorTests.swift,Swift func test,3
+iot/UgreenHomeTests/StorageRNBridgeServiceTests.swift,Swift func test,4
+iot/UgreenHomeTests/DeviceSettingsNavigationSwipePolicyTests.swift,Swift func test,4
+iot/UgreenHomeTests/PermissionManagerPolicyTests.swift,Swift func test,5
+iot/UgreenHomeTests/UHThemedFileResolverTests.swift,Swift func test,2
+iot/UgreenHomeTests/DeviceRuntimeFirmwareHostSnapshotTests.swift,Swift func test,8
+iot/UgreenHomeTests/UGProductCatalogTests.swift,Swift func test,5
+iot/UgreenHomeTests/DeviceRuntimePropertyEventIndexTests.swift,Swift func test,4
+iot/UgreenHomeTests/DeviceRuntimeTimeZoneAdapterTests.swift,Swift func test,4
+iot/UgreenHomeTests/DeviceHostRNBridgeServiceTests.swift,Swift func test,2
+iot/UgreenHomeTests/NetworkRNBridgeEnvelopeDecoderTests.swift,Swift func test,3
+iot/UgreenHomeTests/UGIPCRTCXImageProviderTests.swift,Swift func test,14
+iot/UgreenHomeTests/DeviceRuntimeRNBridgeValueCodecTests.swift,Swift func test,11
+iot/UgreenHomeTests/UHImageCompositionTests.swift,Swift func test,5
+iot/UgreenHomeTests/UgreenNativeLottieJSONParserTests.swift,Swift func test,4
+iot/UgreenHomeTests/UHIPCNetworkInfoPolicyTests.swift,Swift func test,15
+iot/UgreenHomeTests/DeviceSettingsSKUCapabilityPolicyTests.swift,Swift func test,4
+iot/UgreenHomeTests/UGIPCPersonChannelTests.swift,Swift func test,12
+iot/UgreenHomeTests/UGKmpPlaybackEventLegacyAdapterTests.swift,Swift func test,4
+iot/UgreenHomeTests/UHIPCNetworkConfigPolicyTests.swift,Swift func test,8
+iot/UgreenHomeTests/IPCLivePrivacyPolicyTests.swift,Swift func test,3
+iot/UgreenHomeTests/IPCFeaturePolicyCatalogTests.swift,Swift func test,16
+iot/UgreenHomeTests/UHVehiclePlateInputValidatorTests.swift,Swift func test,21
+iot/UgreenHomeTests/NetworkRNBridgeURLBuilderTests.swift,Swift func test,9
+iot/UgreenHomeTests/UHCommonOffLineHelperViewTests.swift,Swift func test,11
+iot/UgreenHomeTests/UgreenNativeIpcPreviewWakePolicyTests.swift,Swift func test,8
+iot/UgreenHomeTests/DeviceRuntimeReportedPropertyPolicyTests.swift,Swift func test,6
+iot/UgreenHomeTests/UHHomeCameraNetworkSignalPolicyTests.swift,Swift func test,7
+iot/UgreenHomeTests/UGProvisionSettingStepConfigTests.swift,Swift func test,5
+iot/UgreenHomeTests/UGIPCPersonDomainMappingTests.swift,Swift func test,3
+iot/UgreenHomeTests/UGAIVoiceCarouselVideoResourceTests.swift,Swift func test,1
+iot/UgreenHomeTests/UHDiscoverDevicePopupPolicyTests.swift,Swift func test,3
+iot/UgreenHomeTests/UHHomeCollectionOffsetPolicyTests.swift,Swift func test,4
+iot/UgreenHomeTests/UHReactNativeEmbeddedBundleValidatorTests.swift,Swift func test,4
+iot/UgreenHomeTests/IPCFeaturePolicyAcceptanceTests.swift,Swift func test,1
+iot/UgreenHomeTests/IPCFeaturePolicyResolverTests.swift,Swift func test,7
+iot/UgreenHomeTests/IPCDeviceInfoVisibilityPolicyTests.swift,Swift func test,4
+iot/UgreenHomeTests/DeviceRuntimeFaceCountsReaderTests.swift,Swift func test,7
+iot/UgreenHomeTests/UHMultiTrackTimelineSelectionTests.swift,Swift func test,40
+iot/UgreenHomeTests/UHIPCTrafficManagementPolicyTests.swift,Swift func test,9
+iot/UgreenHomeTests/UHAIBaseOverviewTests.swift,Swift func test,30
+iot/UgreenHomeTests/UGProductModelCodeResolveTests.swift,Swift func test,17
+iot/UgreenHomeTests/HDMISetting/UHHDMIPreviewPagingPolicyTests.swift,Swift func test,3
+iot/UgreenHomeTests/HDMISetting/UHHDMIDisplayDevicePayloadTests.swift,Swift func test,4
+iot/UgreenHomeTests/HDMISetting/UHHDMIProjectionRowsPolicyTests.swift,Swift func test,5
+iot/UgreenHomeTests/HDMISetting/UHHDMIConfigMergePolicyTests.swift,Swift func test,5
+iot/UgreenHomeTests/HDMISetting/UHHDMILoadHomeContentUseCaseTests.swift,Swift func test,4
+iot/UgreenHomeTests/HDMISetting/UHHDMIMutePolicyTests.swift,Swift func test,4
+ugreenhome-shared/device-biz/src/commonTest/kotlin/com/ugreen/home/device/model/DeviceUnifiedStateOtaContributionTest.kt,Kotlin @Test,4
+ugreenhome-shared/feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/ThirdPartyServicesViewModelTest.kt,Kotlin @Test,6
+ugreenhome-shared/feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/AlexaAuthorizationTestFixture.kt,Kotlin @Test,0
+ugreenhome-shared/feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/AlexaAuthorizationFlowsTest.kt,Kotlin @Test,7
+ugreenhome-shared/feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/AlexaAuthorizationRequestTest.kt,Kotlin @Test,3
+ugreenhome-shared/feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/ThirdPartyServiceLinkStatusTest.kt,Kotlin @Test,4
+ugreenhome-shared/feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/AlexaProactiveAuthorizationSessionCoordinatorTest.kt,Kotlin @Test,5
+ugreenhome-shared/feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/ThirdPartyServicesBackNavigationTest.kt,Kotlin @Test,2
+ugreenhome-shared/feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/ThirdPartyServiceLinkViewModelTest.kt,Kotlin @Test,11
+ugreenhome-shared/feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/ThirdPartyServicesHostRouterTest.kt,Kotlin @Test,1
+ugreenhome-shared/feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/ThirdPartyDeepLinkCoordinatorTest.kt,Kotlin @Test,9
+ugreenhome-shared/feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/ThirdPartyServiceDeepLinkTest.kt,Kotlin @Test,5
+ugreenhome-shared/feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/ThirdPartyServiceLinkRepositoryTest.kt,Kotlin @Test,3
+ugreenhome-shared/feature-home-management/src/commonTest/kotlin/com/ugreen/feature/home/management/data/InMemoryHomeManagementRepositoryTest.kt,Kotlin @Test,2
+ugreenhome-shared/feature-home-management/src/commonTest/kotlin/com/ugreen/feature/home/management/domain/HomeLocationDisplayNameTest.kt,Kotlin @Test,5
+ugreenhome-shared/feature-home-management/src/commonTest/kotlin/com/ugreen/feature/home/management/domain/HomeManagementNameValidatorTest.kt,Kotlin @Test,7
+ugreenhome-shared/core/core-navigation/src/commonTest/kotlin/com/ugreen/core/navigation/FakeAppNavigator.kt,Kotlin @Test,0
+ugreenhome-shared/core/core-navigation/src/commonTest/kotlin/com/ugreen/core/navigation/AppNavigatorTest.kt,Kotlin @Test,2
+ugreenhome-shared/core/core-util/src/jvmTest/kotlin/com/ugreen/core/util/crypto/AesUtilsJceInteropTest.kt,Kotlin @Test,4
+ugreenhome-shared/core/core-util/src/commonTest/kotlin/com/ugreen/core/util/ZlibUtilTest.kt,Kotlin @Test,9
+ugreenhome-shared/core/core-util/src/commonTest/kotlin/com/ugreen/core/util/ZipHelperTest.kt,Kotlin @Test,3
+ugreenhome-shared/core/core-util/src/commonTest/kotlin/com/ugreen/core/util/crypto/AssetEncryptorTest.kt,Kotlin @Test,2
+ugreenhome-shared/core/core-util/src/commonTest/kotlin/com/ugreen/core/util/crypto/AesUtilsVectorsTest.kt,Kotlin @Test,3
+ugreenhome-shared/core/core-util/src/commonTest/kotlin/com/ugreen/core/util/crypto/AesUtilsTest.kt,Kotlin @Test,9
+ugreenhome-shared/core/core-util/src/commonTest/kotlin/com/ugreen/core/util/crypto/CrcTest.kt,Kotlin @Test,4
+ugreenhome-shared/core/core-util/src/commonTest/kotlin/com/ugreen/core/util/crypto/Md5Test.kt,Kotlin @Test,3
+ugreenhome-shared/core/core-ui/src/commonTest/kotlin/com/ugreen/core/ui/MigratedUGComponentDefaultsTest.kt,Kotlin @Test,2
+ugreenhome-shared/core/core-ui/src/commonTest/kotlin/com/ugreen/core/ui/picker/UGWheelPickerTest.kt,Kotlin @Test,3
+ugreenhome-shared/core/core-ui/src/commonTest/kotlin/com/ugreen/core/ui/toast/UGToastHostStateTest.kt,Kotlin @Test,4
+ugreenhome-shared/core/core-ui/src/commonTest/kotlin/com/ugreen/core/ui/textfield/UGTextFieldCursorStateTest.kt,Kotlin @Test,3
+ugreenhome-shared/core/core-ui/src/commonTest/kotlin/com/ugreen/core/ui/slider/UGSliderValueTest.kt,Kotlin @Test,2
+ugreenhome-shared/core/core-ui/src/commonTest/kotlin/com/ugreen/core/ui/notice/UGNoticeBarStyleTest.kt,Kotlin @Test,4
+ugreenhome-shared/core/core-ui/src/commonTest/kotlin/com/ugreen/core/ui/button/UGProgressStateButtonTest.kt,Kotlin @Test,1
+ugreenhome-shared/core/core-ui/src/commonTest/kotlin/com/ugreen/core/ui/adaptive/UGAdaptiveLayoutTest.kt,Kotlin @Test,3
+ugreenhome-shared/core/core-net/src/commonTest/kotlin/com/ugreen/core/net/FileTransferTest.kt,Kotlin @Test,4
+ugreenhome-shared/core/core-net/src/commonTest/kotlin/com/ugreen/core/net/logging/NetLogSupportTest.kt,Kotlin @Test,4
+ugreenhome-shared/core/core-net/src/commonTest/kotlin/com/ugreen/core/net/logging/NetLogBodyTest.kt,Kotlin @Test,6
+ugreenhome-shared/core/core-logger/src/commonTest/kotlin/com/ugreen/core/logger/LoggerTest.kt,Kotlin @Test,3
+ugreenhome-shared/core/core-secure-package/src/commonTest/kotlin/com/ugreen/core/securepackage/SecurePackageEncryptorTest.kt,Kotlin @Test,7
+ugreenhome-shared/core/core-secure-package/src/iosTest/kotlin/com/ugreen/core/securepackage/IosAgeSecurePackageEngineTest.kt,Kotlin @Test,1
+ugreenhome-shared/feature-playback/src/commonTest/kotlin/com/ugreen/home/playback/PlaybackDayQuerySchedulerTest.kt,Kotlin @Test,6
+ugreenhome-shared/feature-playback/src/commonTest/kotlin/com/ugreen/home/playback/event/PlaybackEventQueryControllerTest.kt,Kotlin @Test,9
+ugreenhome-shared/feature-playback/src/commonTest/kotlin/com/ugreen/home/playback/event/PlaybackEventTimeListTest.kt,Kotlin @Test,5
+ugreenhome-shared/feature-playback/src/commonTest/kotlin/com/ugreen/home/playback/event/PlaybackEventLegacyProtocolTest.kt,Kotlin @Test,8
+ugreenhome-shared/device-thing-model/src/commonTest/kotlin/com/ugreen/home/iot/ThingJsonTest.kt,Kotlin @Test,8
+ugreenhome-shared/device-thing-model/src/commonTest/kotlin/com/ugreen/home/iot/ThingPropertyValueCodecTest.kt,Kotlin @Test,3
+ugreenhome-shared/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/ui/OtaUpgradeNavigationControllerTest.kt,Kotlin @Test,3
+ugreenhome-shared/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/ui/OtaUiContractTest.kt,Kotlin @Test,62
+ugreenhome-shared/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/ui/OtaUiTestData.kt,Kotlin @Test,0
+ugreenhome-shared/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/orchestration/OtaOrchestrationTest.kt,Kotlin @Test,10
+ugreenhome-shared/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/mvi/OtaRealtimeBatchResolverTest.kt,Kotlin @Test,13
+ugreenhome-shared/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/mvi/OtaHttpFactDrivenContractTest.kt,Kotlin @Test,6
+ugreenhome-shared/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/mvi/OtaRuntimeFactDrivenTest.kt,Kotlin @Test,45
+ugreenhome-shared/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/mvi/OtaMviTest.kt,Kotlin @Test,12
+ugreenhome-shared/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaMockDeviceOverlayTest.kt,Kotlin @Test,5
+ugreenhome-shared/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt,Kotlin @Test,48
+ugreenhome-shared/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaBatchPageProjectionTest.kt,Kotlin @Test,3
+ugreenhome-shared/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/data/OtaDtoMapperTest.kt,Kotlin @Test,10
+ugreenhome-shared/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/data/OtaRepositoryTest.kt,Kotlin @Test,10
+ugreenhome-shared/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/data/local/OtaTerminalSuppressionStoreTest.kt,Kotlin @Test,9
+ugreenhome-shared/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/data/remote/OtaMockTestEnvironment.kt,Kotlin @Test,0
+ugreenhome-shared/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/data/remote/OtaHttpMockControllerTest.kt,Kotlin @Test,78
+ugreenhome-shared/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/data/remote/OtaRemoteDataSourceLogTest.kt,Kotlin @Test,2
+ugreenhome-shared/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/domain/OtaProtocolTest.kt,Kotlin @Test,5
+ugreenhome-shared/feature-ota/src/iosTest/kotlin/com/ugreen/feature/ota/data/remote/OtaMockTestEnvironment.ios.kt,Kotlin @Test,0
+ugreenhome-shared/sample/src/commonTest/kotlin/com/ugreen/sample/demo/ota/OtaApiDebugVMTest.kt,Kotlin @Test,4
+ugreenhome-shared/ugreenhome-strings/generated/ios/Tests/UGStringsTests/UGStringsTests.swift,Swift func test,3
+ugreenhome-shared/ugreenhome-strings/string-sync/test_stringctl.py,Python def test,17
+ugreenhome-shared/ugreenhome-strings/string-sync/test_merge_tolgee_review.py,Python def test,12
+ugreenhome-shared/ugreenhome-strings/string-sync/test_push_key_to_tolgee.py,Python def test,2
+ugreenhome-shared/ugreenhome-strings/string-sync/test_normalize_strings_xml.py,Python def test,9
+ugreenhome-shared/ugreenhome-strings/string-sync/test_skill_contract.py,Python def test,3
+ugreenhome-shared/ugreenhome-strings/string-sync/test_sync_android_to_kmp.py,Python def test,3
+ugreenhome-shared/ugreenhome-strings/string-sync/test_pull_resources.py,Python def test,4
+ugreenhome-shared/ugreenhome-strings/string-sync/test_merge_android_xml.py,Python def test,3
+ugreenhome-shared/ugreenhome-strings/string-sync/test_review_batch.py,Python def test,2
+ugreenhome-shared/ugreenhome-strings/string-sync/test_scan_android_compatibility.py,Python def test,1
+ugreenhome-shared/ugreenhome-strings/string-sync/test_sync_android_to_ios.py,Python def test,1
+ugreenhome-shared/ugreenhome-strings/string-sync/test_git_sync.py,Python def test,2
+ugreenhome-shared/ugreenhome-strings/string-sync/test_format_xcstrings.py,Python def test,2
+ugreenhome-shared/feature-auth/src/commonTest/kotlin/com/ugreen/feature/auth/AppLogUploadManagerCancellationTest.kt,Kotlin @Test,5
+ugreenhome-shared/feature-auth/src/commonTest/kotlin/com/ugreen/feature/auth/AppLogTaskForegroundCheckerTest.kt,Kotlin @Test,11
+ugreenhome-shared/core/core-net/src/androidHostTest/kotlin/com/ugreen/core/net/ExampleUnitTest.kt,Kotlin @Test,1
+ugreenhome-shared/core/core-net/src/androidDeviceTest/kotlin/com/ugreen/core/net/ExampleInstrumentedTest.kt,Kotlin @Test,1
+ugreenhome-shared/core/core-database/src/androidHostTest/kotlin/com/ugreen/core/database/ExampleUnitTest.kt,Kotlin @Test,1
+ugreenhome-shared/core/core-database/src/androidDeviceTest/kotlin/com/ugreen/core/database/ExampleInstrumentedTest.kt,Kotlin @Test,1
+ugreenhome-shared/core/core-secure-package/src/androidHostTest/kotlin/com/ugreen/core/securepackage/AndroidAgeInteropTest.kt,Kotlin @Test,1
+ugreenhome-shared/feature-ota/src/androidHostTest/kotlin/com/ugreen/feature/ota/data/remote/OtaMockTestEnvironment.android.kt,Kotlin @Test,0

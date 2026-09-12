@@ -1,0 +1,9 @@
+suite,tests,failures,errors,skipped,seconds
+ZipHelperTest[jvm],3,0,0,0,0.074
+ZlibUtilTest[jvm],9,0,0,0,0.002
+AesUtilsJceInteropTest[jvm],4,0,0,0,0.017
+AesUtilsTest[jvm],9,0,0,0,0.004
+AesUtilsVectorsTest[jvm],3,0,0,0,0.001
+AssetEncryptorTest[jvm],2,0,0,0,0.001
+CrcTest[jvm],4,0,0,0,0.001
+Md5Test[jvm],3,0,0,0,0.001

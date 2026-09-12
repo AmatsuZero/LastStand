@@ -1,0 +1,9 @@
+来源: /private/tmp/ugreen-ios-architecture-20260912/logs/clean-build-sandbox.log
+仅保留结果/错误/耗时；完整原始日志位于上述本机临时路径。
+
+2026-09-12 16:32:42.957 xcodebuild[45567:21394647] Logging connecton invalid: <OS_xpc_error: <dictionary: 0x1fb72a080> { count = 1, transaction: 0, voucher = 0x0, contents =
+2026-09-12 16:32:42.958 xcodebuild[45567:21394647] Error opening log file (/Users/daubert/Library/Logs/CoreSimulator/CoreSimulator.com.apple.dt.xcodebuild.log): Operation not permitted
+xcodebuild: error: 'UgreenHome.xcworkspace' is not a workspace file.
+real 0.68
+user 0.33
+sys 0.20
