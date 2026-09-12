@@ -23,7 +23,7 @@ flowchart TB
 
 | 计划 | 文件 | 独立可验证交付 | 依赖 |
 |------|------|----------------|------|
-| **01 地基** | `2026-09-12-phase1-foundation-owner-bridge-catalog.md` | Owner SSOT + 上帝点清单 + Bridge 能力目录校验脚本绿 | 无 |
+| **01 地基** ✅ | `2026-09-12-phase1-foundation-owner-bridge-catalog.md` | Owner SSOT + 上帝点清单 + Bridge 能力目录校验脚本绿 | 无 |
 | **02 iOS RN Host** | `2026-09-12-phase1-ios-rn-device-settings-host.md` | develop 可打开 `DeviceSettings`；无 IoT SDK 进 JS | 01 |
 | 03 Bridge CI | （待写） | 双端 schema/方法名 CI | 02 |
 | 04 Composition Root | （待写） | Root 清单 + 禁止新单例门禁约定落地 | 01 |
@@ -39,4 +39,4 @@ flowchart TB
 - KMP 不做业务热更主路径  
 - 图表用 Mermaid；Obsidian 副本在 `LastStand/obsidian/UGreen-Architecture/`，改文档双仓提交  
 
-**当前进度：** 先完成 Plan 01，再开 Plan 02。
+**当前进度：** Plan 01 **就绪**（`validate:bridges` 绿；owner/god SSOT 已回链至 Spec §5.1）；可开 Plan 02。
