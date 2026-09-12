@@ -1,20 +1,54 @@
 # Ugreen Home 混合运行时架构宪法
 
-> **Status:** Draft for review  
+> **Status:** 组会讨论稿（Architecture Discussion Draft）  
 > **Date:** 2026-09-12  
+> **用途:** 完整调研后的 App 级架构设计，供组会对齐与拍板；**本次不交付业务/宿主代码实现**  
 > **Scope:** iOS (`ugreenhome`) + Android (`ugreen-home`) App 级拓扑  
 > **Related:** `ugreenhome-shared` (KMP), `ugreenhome-rn` (RN), `kmp-feature-developer-toolkit`  
 > **Vision ref:** 钉钉《平台架构设计与规划》(node `NZQYprEoWoe5dB1btqdld4zvJ1waOeDk`) — 愿景引用，非本 Spec 的 SSOT  
-> **图表：** 本文架构图 / 流程图统一使用 Mermaid
+> **图表:** 本文架构图 / 流程图统一使用 Mermaid  
+> **知识库:** `/Users/daubert/Github/LastStand/obsidian/UGreen-Architecture/`
+
+## 0. 组会阅读指南
+
+### 0.1 本次交付与非交付
+
+| 本次交付 | 本次不交付 |
+|----------|------------|
+| 混合运行时边界（Native / KMP·CMP / RN / H5） | iOS/Android 业务代码改动 |
+| 状态 Owner、导航、Bridge 红线（双视图） | RN Host 合入、`pod install`、功能联调 |
+| KMP 动态化可行性结论 | KMP/CMP 新 Feature 开发 |
+| 逻辑反上帝边界（非物理拆仓） | iOS Pod/SPM 组件化落地 |
+| 调研风险与待拍板议题 | 实施计划的编码执行（计划仅作附录可选） |
+
+### 0.2 建议议程（约 30–40 分钟）
+
+1. **背景与目标**（§1）— 为何要宪法、双视图含义（5 min）  
+2. **运行时拓扑**（§2）— 谁负责什么（5 min）  
+3. **状态与导航**（§3）— 阶段一 → 目标态 Owner 迁移（5 min）  
+4. **Bridge 与安置矩阵**（§4）+ **KMP 动态化**（§1.6）（8 min）  
+5. **风险专题：DeviceSettings Bridge 命名漂移**（§8）（7 min）  
+6. **待拍板清单**（§9）投票 / 记结论（10 min）
+
+### 0.3 调研范围（已覆盖）
+
+- iOS `ugreenhome` / Android `ugreen-home` / KMP `ugreenhome-shared` / RN `ugreenhome-rn`  
+- 钉钉《平台架构设计与规划》  
+- `kmp-feature-developer-toolkit`（Role / Golden Path，Android-first）  
+- KMP「动态化」网上常见方案 vs 本 App 可用性  
+- iOS 组件化：阶段一逻辑边界 vs 物理拆仓另议  
+
+---
 
 ## 1. 定位、目标与非目标
 
 ### 1.1 文档定位
 
-本文是 Ugreen Home **App 级混合架构宪法**：界定 Native / KMP·CMP / RN / H5 的职责边界、导航与状态所有权、跨栈通信红线，以及「目标态 / 阶段一」双视图约束。
+本文是 Ugreen Home **App 级混合架构宪法（组会讨论稿）**：界定 Native / KMP·CMP / RN / H5 的职责边界、导航与状态所有权、跨栈通信红线，以及「目标态 / 阶段一」双视图约束。
 
-- **KMP Feature 内部**施工（Code Role、依赖方向、物理布局、生成与校验）以 `kmp-feature-developer-toolkit` 为 SSOT。  
-- **不覆盖** Win / Mac / Web 客户端实现；平台愿景仅作引用。
+- **KMP Feature 内部**施工规范以 `kmp-feature-developer-toolkit` 为参考 SSOT（组会可确认是否采纳为强制）。  
+- **不覆盖** Win / Mac / Web 客户端实现；平台愿景仅作引用。  
+- **本文版本目标是对齐共识**；落地实施需组会拍板后再单独立项，不在本文「本次交付」范围内。
 
 ### 1.2 双视图
 
@@ -468,9 +502,11 @@ flowchart LR
 | Toolkit Android-first，iOS Adapter 证据不足 | 补 iOS Presentation Adapter 样板（auth/OTA） |
 | 与钉钉规划/白板漂移 | 本 Spec + Obsidian 为 App 运行时 SSOT；钉钉文档为组织愿景 |
 
-### 5.5 建议后续工作包（实施计划拆分）
+### 5.5 后续可选工作包（非本次组会交付）
 
-本宪法覆盖多个子系统，实施时应拆为独立计划，例如：
+> 以下仅为宪法落地时的**可选拆分参考**，**不构成本次调研交付物**，组会无需评审实施细节。
+
+本宪法覆盖多个子系统，若后续立项实施，可拆为独立计划，例如：
 
 ```mermaid
 flowchart TB
@@ -482,11 +518,13 @@ flowchart TB
   Spec --> P6[H5 容器最小可用]
 ```
 
+**实施前必须先拍板：** §9 中 Bridge 命名 reconcile（调研见 §8），否则 RN 设置页无法与双端宿主契约对齐。
+
 ---
 
 ## 6. 决策摘要
 
-| 项 | 决定 |
+| 项 | 建议决定（待组会确认） |
 |----|------|
 | 宪法写法 | Runtime 编排宪法（Host Orchestrator） |
 | 时间视图 | 目标态 + 阶段一双视图 |
@@ -509,3 +547,77 @@ flowchart TB
 | RN | `/Users/daubert/UGreen/ugreenhome-rn` |
 | Toolkit | `/Users/daubert/UGreen/kmp-feature-developer-toolkit` |
 | Obsidian KB | `/Users/daubert/Github/LastStand/obsidian/UGreen-Architecture/` |
+| 本讨论稿 | `docs/superpowers/specs/2026-09-12-ugreen-home-hybrid-runtime-constitution-design.md` |
+
+---
+
+## 8. 风险专题：DeviceSettings Bridge 命名漂移（调研结论）
+
+### 8.1 现象
+
+| 侧 | 事实 |
+|----|------|
+| `ugreenhome-rn` JS 契约 | `NativeModules.DeviceSettingsBridge` + 高层方法（如 `getDeviceSettingState` / `dispatchDeviceSettingAction` / page 级 API / `closePage`） |
+| iOS feature 分支 `UgreenHome_ReactNative` | 源文件名含 `DeviceSettingsBridge`，但 `RCT_EXPORT_MODULE(DeviceRNBridge)`，导出以**分享**等 API 为主 |
+| 同分支 | 另有 `DeviceRuntimeRNBridge`、`DeviceHostRNBridge` 等，更接近设备上下文 / 物模型能力 |
+| Android 现状 | 设置相关能力主要落在 `DeviceRuntimeRNBridge` / `DeviceHostRNBridge` / `DeviceRNBridge`；**未见**与 JS 同名的完整 `DeviceSettingsBridge` 七方法面 |
+
+```mermaid
+flowchart LR
+  JS["ugreenhome-rn<br/>DeviceSettingsBridge<br/>7 高层方法"]
+  iOS["iOS feature<br/>DeviceRNBridge / Runtime / Host"]
+  AND["Android<br/>Runtime / Host / DeviceRNBridge"]
+  JS -.->|名称与方法集不对齐| iOS
+  JS -.->|名称与方法集不对齐| AND
+```
+
+### 8.2 含义
+
+- 「RN 设置已在 Android 可用、iOS 差宿主」**不能**简化为「把 iOS feature 分支合进来即对齐 JS 契约」。  
+- Plan 01 的 `npm run validate:bridges` 只证明 **RN 仓内** schema 示例 ↔ catalog ↔ JS facade 锁步，**不证明**双端原生已实现同名模块。  
+- 若 JS 侧存在 `NativeModules.X \|\| Mock` 回退，联调时可能**静默走 mock**，违反 §4.4「禁止猜设备态」精神——验收必须断言真实模块。
+
+### 8.3 可选 reconcile 策略（供组会拍板，非本次实现）
+
+| 选项 | 做法 | 利 | 弊 |
+|------|------|----|----|
+| **A** | 宿主实现真正的 `DeviceSettingsBridge`（JS 七方法），内部组合 Runtime/Host/设备域 | JS/catalog 稳定；契约清晰 | iOS/Android 都要补 facade |
+| **B** | 改 RN：JS 改打现有 Runtime/Host API，并改 catalog/schema | 贴近现网 Android | RN 与文档大改；双端 API 需统一 |
+| **C** | 先只定容器/动态面原则；设置 Bridge 另立项 | 组会可先过宪法 | 设置 RN 短期仍不能双端同构 |
+
+**调研建议（可反对）：倾向 A**——把「设置页语义 API」固定为稳定契约，宿主用 Adapter 适配现有 Runtime，避免业务 JS 绑定物模型细节。
+
+---
+
+## 9. 组会待拍板清单
+
+请在会上对下列项给出 **同意 / 修改 / 另议**：
+
+| # | 议题 | 文档位置 | 建议默认 |
+|---|------|----------|----------|
+| 1 | 采纳「Runtime 编排宪法」作为 App 级混合架构表述 | §2 | 同意 |
+| 2 | 双视图：阶段一 Host 管设备域 → 目标态 KMP `device-biz` SSOT | §3 | 同意 |
+| 3 | 动态面 = RN 主 + H5 运营；KMP **不**作业务热更主路径 | §1.6 | 同意 |
+| 4 | RN/H5 禁止直连 IoT SDK，只经 Bridge | §4.1 | 同意 |
+| 5 | 阶段一不做 iOS 物理组件化，但执行逻辑反上帝边界 | §5.0 | 同意 |
+| 6 | Toolkit 是否作为新 KMP Feature **强制**规范 | §2.4 | 原则同意，强制范围另定 |
+| 7 | DeviceSettings Bridge reconcile：**A / B / C** | §8.3 | 建议 **A** |
+| 8 | 下一步是否单独立项「实施」还是先只固化本文为团队 SSOT | §0.1 | 先固化文档 SSOT |
+
+### 9.1 会后记录（会议填写）
+
+- 日期：__________  
+- 参会：__________  
+- 结论摘要：__________  
+- 反对/修改项：__________  
+- 跟进 Owner：__________  
+
+---
+
+## 10. 修订记录
+
+| 日期 | 说明 |
+|------|------|
+| 2026-09-12 | 初稿：摸底 + 宪法分节批准 |
+| 2026-09-12 | 增补 Mermaid、§1.6 KMP 动态化、§5.0 反上帝 |
+| 2026-09-12 | 转为**组会讨论稿**：§0 议程、§8 Bridge 风险、§9 待拍板；明确本次不交付代码 |
