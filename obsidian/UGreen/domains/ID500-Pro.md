@@ -16,11 +16,13 @@ source_paths:
 
 ## 职责与边界
 
+- **优先看 App 功能**：[[UGreen/features/ID500-App功能总览]]
 - App：配网、设备状态、直播拉流、回看、事件/消息、云存、分享、设置、本地 AI
-- 固件需求：索引有链接，当前 MCP 账号无权限（见 inventory `last_error`）
+- 固件：暂不整理
 
 ## 下属功能
 
+- [[UGreen/features/ID500-App功能总览]]（推荐入口）
 - [[UGreen/features/ID500-配网与设备状态]]
 - [[UGreen/features/ID500-直播回看与事件]]
 - [[UGreen/features/ID500-云存分享设置与本地AI]]

@@ -15,12 +15,13 @@ source_paths: []
 
 ## 职责与边界
 
+- **优先看 App 功能**：[[UGreen/features/OD600-App功能总览]]（待授权，仅线索）
 - App 需求文档当前 **MCP 无权限**，尚未落入 `sources/`
-- 仍可从索引使用 UX/UI Figma 与固件链接做导航
+- 固件：暂不整理；UX/UI 仍可走 Figma
 
 ## 下属功能
 
-- （待 App 需求授权后从正文拆分）
+- [[UGreen/features/OD600-App功能总览]]
 
 ## 需求与 UI
 

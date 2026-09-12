@@ -16,13 +16,14 @@ AI 中枢 / Base。App 需求与端侧显示屏需求在同一文档中。
 
 ## 职责与边界
 
-- App：配网添加、把未绑定/已绑定 IPC 纳入 Base、设备卡片与详情、存储管理、设置、智能化
-- Matter 设备接入 AI Base
-- 端侧显示屏需求（同文档后半）
-- 固件需求：索引有链接，当前 MCP 无权限
+- **优先看 App 功能**：[[UGreen/features/AI-Base-App功能总览]]
+- App：配网添加、把未绑定/已绑定 IPC 纳入 Base、设备卡片与详情、存储管理、设置、智能化、Matter
+- 端侧显示屏需求（同 App PRD 后半，非固件专章）
+- 固件：暂不整理
 
 ## 下属功能
 
+- [[UGreen/features/AI-Base-App功能总览]]（推荐入口）
 - [[UGreen/features/AI-Base-配网与IPC纳入]]
 - [[UGreen/features/AI-Base-卡片详情存储与智能化]]
 

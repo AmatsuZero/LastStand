@@ -16,11 +16,13 @@ source_paths:
 
 ## 职责与边界
 
+- **优先看 App 功能**：[[UGreen/features/OD800-App功能总览]]
 - App：配网、首页、直播、4G/电量、AOV、回看、事件、云存、分享、设置、AI、智能化，并 **接入 AI Base**
-- 固件需求：索引有链接，当前 MCP 无权限
+- 固件：暂不整理
 
 ## 下属功能
 
+- [[UGreen/features/OD800-App功能总览]]（推荐入口）
 - [[UGreen/features/OD800-配网首页与直播]]
 - [[UGreen/features/OD800-AOV电量与AI及AI-Base接入]]
 
