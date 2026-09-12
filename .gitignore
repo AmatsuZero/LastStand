@@ -14,6 +14,9 @@ __pycache__/
 # Obsidian's generated, read-only article mirror
 obsidian/Library/
 
+# UGreen raw DingTalk exports are local-only and may contain secrets/PII
+obsidian/UGreen/sources/
+
 # Obsidian per-device/session state
 obsidian/.obsidian/workspace.json
 obsidian/.obsidian/workspace-mobile.json
