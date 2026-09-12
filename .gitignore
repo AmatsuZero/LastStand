@@ -1,9 +1,13 @@
 .claude/*
 !.claude/skills/
+
+# MCP URLs contain access keys
+.cursor/mcp.json
 .omc/
 .codebuddy/
 .superpowers/
 .worktrees/
+.cursor/
 __pycache__/
 *.py[cod]
 
