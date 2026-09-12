@@ -49,8 +49,9 @@ flowchart LR
 ### 1.4 非目标
 
 - 不重写整 App；不规定具体业务字段或后端 API 合同。  
-- **KMP 不提供业务热更新运行时**（无下载替换 Kotlin/CMP UI 的交付模型）。  
+- **本宪法不把 KMP/KMM 选作业务动态化主路径**（详见 [1.6](#16-kmpkmm-与业务动态化)）；动态面默认 RN + H5。  
 - 不替代 Toolkit 的 Role/Recipe/生成细节；不设计「组件市场」产品本身。  
+- **不强制阶段一做 iOS 物理组件化**（Pod/SPM/Framework 拆仓）；另开宿主组件化子 Spec。阶段一必须做的是 [5.0](#50-阶段一反上帝边界逻辑组件化非物理拆仓) 的逻辑边界，避免上帝模块/上帝类继续膨胀。  
 - 阶段一不要求设备域一次性迁入 KMP，不要求 RN 生产环境远端热更全开。
 
 ### 1.5 五条硬原则
@@ -60,6 +61,33 @@ flowchart LR
 3. **Host 薄、Feature 厚**：随阶段加强；Composition Root 在双端 App 宿主，不在 Shared Feature 模块内。  
 4. **新 KMP Feature 默认遵循 Toolkit 契约**；iOS 默认单一 `UgreenHomeShared` XCFramework 交付（ADR-006 对齐）。  
 5. **安置看变更率与实时性**，不看团队习惯。
+
+### 1.6 KMP/KMM 与业务动态化
+
+网上讨论里的「KMP/KMM 动态化」通常不是一种现成能力，而是几类**不同问题**被混称：
+
+| 常见说法 | 实际含义 | 对本 App 的可用性 |
+|----------|----------|-------------------|
+| Android App Bundle / Dynamic Feature | 按需下载 **仍随商店分发的原生 split** | 仅 Android；不是热修业务；iOS 无对等「下载可执行代码」模型 |
+| 自研下载 `.so` / 动态 Framework | 运行时加载原生二进制 | **iOS 审核与安全红线极严**，商店分发 App 基本不可作为主方案 |
+| Kotlin/JS 或 Wasm 共享逻辑 + WebView | 用 KMP 编译到 JS/Wasm 做部分逻辑热更 | 与现网 `androidMain/iosMain`+CMP 主轴分叉；要另建 target、桥与性能模型；ROI 差 |
+| Server-Driven UI / 配置下发 | 原生壳 + 服务端描述 UI/流程 | 可做运营配置，**不是** KMP 热更；可归 H5/配置通道 |
+| KMP 共享域 + RN/H5 动态 UI | 编译期共享逻辑，动态面用已有容器 | **与本宪法一致，推荐** |
+
+**结论（宪法裁决）：**
+
+1. KMP/KMM **擅长**编译期双端复用（Domain/Data/MVI，及可选 CMP），产物是 AAR / XCFramework，**默认随 App 发版**。  
+2. 「用 KMP 做业务热更新」在工程上等于自建第四套动态运行时，且在 **iOS 上几乎无法合法下载执行原生码**；复杂度高于维护 RN/H5。  
+3. 因此：**动态业务 → RN（主）+ H5（运营）**；**稳定域与可发版共享 → KMP**。不将 KMP 动态化列入阶段一/目标态主路径；若未来出现可过审、双端对称的官方方案，再单独立项，不暗改本宪法。
+
+```mermaid
+flowchart TD
+  Q[需要动态下发?] --> A{改的是什么?}
+  A -->|易变 UI / 设备面板| RN[RN 模块 ZIP]
+  A -->|运营活动 / 弱交互| H5[H5]
+  A -->|稳定域逻辑 / 双端一致状态机| KMP[KMP 随 App 发版]
+  A -->|想热更 Kotlin/CMP 原生 UI| No["不采纳为主路径<br/>iOS 约束 + 自建运行时成本"]
+```
 
 ---
 
@@ -361,14 +389,52 @@ flowchart TD
 
 ## 5. 阶段一落地约束与风险
 
+### 5.0 阶段一反上帝边界（逻辑组件化，非物理拆仓）
+
+**目的：** 阶段一不强制 iOS Pod/SPM 拆仓，但必须用**逻辑边界**阻止上帝模块/上帝类继续长大，降低未来宿主组件化成本。
+
+**已知风险点（示例，非穷尽）：** iOS `UGDeviceManager`、根 Coordinator / App 入口装配扩散；Android 大型 `SessionRepositoryProvider` 式定位器与过胖 `base`/`app` 模块。此类点列入后续「宿主组件化」子 Spec 的迁移清单，**阶段一禁止再向其堆新职责**。
+
+**硬规则（阶段一即生效）：**
+
+1. **按能力分包，不按「方便」堆目录**：新代码落入明确能力区——`account` / `device` / `navigation` / `bridge` / `media` / `provisioning`（名称可本地化，边界必须可说清）。  
+2. **禁止扩大上帝面**：改动现有上帝类/上帝模块时，只允许「抽 Port、加 Adapter、外移职责」；禁止顺手新增无关业务方法或缓存。  
+3. **Composition Root 唯一新依赖入口**：新建服务/仓库/桥只从双端 Composition Root 装配；禁止新增全局可写单例。  
+4. **跨栈入口收口**：RN/H5/KMP 进入设备写路径必须走已登记 Bridge；禁止再开「临时 Manager 门面」。  
+5. **依赖方向（逻辑）**：UI / Bridge → 域接口 ← 基础设施；UI 与 Bridge 不直接依赖 RTCX/物模型实现类型。  
+6. **一域一 Owner 执行面**：与第 3 节一致；发现第二套可写设备缓存必须删除或降级为只读投影。
+
+```mermaid
+flowchart TB
+  subgraph Allowed["阶段一允许"]
+    Root[Composition Root 装配]
+    Port[抽 Port / Adapter]
+    Move[外移职责到能力区]
+  end
+
+  subgraph Forbidden["阶段一禁止"]
+    God[往上帝类加新业务]
+    Single[新全局可写单例]
+    Bypass[绕过 Bridge 碰 IoT SDK]
+    Dup[第二套可写设备缓存]
+  end
+
+  Change[改动存量 Host] --> Ask{是否在缩小上帝面?}
+  Ask -->|是| Allowed
+  Ask -->|否| Forbidden
+```
+
+**与未来物理组件化的关系：** 逻辑边界是物理拆仓的前置条件；宿主组件化子 Spec 负责 Pod/SPM/Gradle 映射与第一批组件清单，不在本文展开。
+
 ### 5.1 阶段一必须做
 
-1. 公布并执行第 3 节 Owner 表。  
+1. 公布并执行第 3 节 Owner 表，以及 **5.0 反上帝边界**。  
 2. **iOS RN 宿主**补齐到与 Android 同模块可运行（首模块 `device-settings`）；Bridge 按契约实现。  
 3. **Network 收敛：** 新 KMP / RN 走 `core-net`；Native Moya 仅存量，禁止新接口双栈并行扩张。  
 4. **Composition Root 显式化：** 双端各一处装配；存量单例用 Adapter 包裹，避免继续扩散。  
 5. **H5 最小集：** Web 容器 + 鉴权 Bridge + 域白名单；不做设备写。  
-6. 列出 `device-biz` 进入 iOS umbrella 的前置条件（编译、Adapter、迁移切片）；阶段一只准备，不要求切完。
+6. 列出 `device-biz` 进入 iOS umbrella 的前置条件（编译、Adapter、迁移切片）；阶段一只准备，不要求切完。  
+7. 维护「上帝点 / 粗模块」清单（Obsidian 或本仓库 docs），供后续宿主组件化子 Spec 使用。
 
 ### 5.2 阶段一明确不做
 
@@ -427,7 +493,8 @@ flowchart TB
 | 状态/导航 | 阶段一 Host 编排设备域 → 目标态 KMP 域 SSOT；导航栈始终 Host |
 | RN/H5 与设备 | 禁止直连 SDK；只经 Bridge |
 | KMP UI | 阶段一可域先共享；目标态新 Feature 默认 CMP |
-| 动态下发 | RN（主）+ H5（运营）；KMP 不做业务热发 |
+| 动态下发 | RN（主）+ H5（运营）；**不把 KMP 选作业务热更主路径**（见 1.6） |
+| iOS 组件化 | 阶段一不做物理拆仓；执行 **5.0 逻辑反上帝边界**；物理组件化另开子 Spec |
 
 ---
 
