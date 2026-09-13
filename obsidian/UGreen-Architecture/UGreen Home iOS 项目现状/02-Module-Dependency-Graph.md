@@ -28,7 +28,7 @@ flowchart TB
 
 - 主 Target 的 build phases 包含 Pods 校验、`Compile Kotlin Framework`、Sources/Frameworks/Resources、嵌入 Extension 与 Crashlytics 脚本。证据：`iot/UgreenHome.xcodeproj/project.pbxproj:421-450,574-692`。
 - Kotlin build phase 明确执行 `:app-shared:embedAndSignAppleFrameworkForXcode`，故本图把 `app-shared` 作为 iOS KMM 伞框架，而不是把每个 Gradle 子工程直接连到 Xcode Target。证据：`iot/UgreenHome.xcodeproj/project.pbxproj:631-648`。
-- Notification Service 与 Tests 是单独 Target；前者不在 Podfile Target 声明中，后者仅 `inherit! :search_paths`。证据：`iot/Podfile:29-107`。
+- Notification Service 与 Tests 是单独 Target；前者不在 Podfile Target 声明中，后者为 App 同级 Pod target，仅 `inherit! :search_paths`；不据此声称已获得主 App 的所有 Pod 搜索路径。证据：`iot/Podfile:29-107`。
 
 ## iOS 宿主编译声明
 
@@ -50,6 +50,7 @@ flowchart LR
   App --> KMP
   Test --> App
   Test --> PodsTest
+  Test -->|direct compile: 171 Swift files| AIBase[AIBase production sources]
 ```
 
 | 声明 | 关系 | 证据 |
@@ -62,6 +63,12 @@ flowchart LR
 | `UgreenHomeTests → Pods-UgreenHomeTests` | Test Target Frameworks 引用 Tests Pods framework。 | `iot/UgreenHome.xcodeproj/project.pbxproj:472-492` |
 
 > `iot/iot` 同步组的主 Target membership 只排除 `Supporting Files/Info.plist`；因此其中的源码按项目声明属于主 App 输入。证据：`iot/UgreenHome.xcodeproj/project.pbxproj:95-101,421-443`。这并不证明每个源文件都有一个可到达的用户路由。
+
+### 测试 Target 的实际编译边（2026-09-13 补测）
+
+真机架构测试构建生成的 [Swift 输入清单](附件/App-XCTest编译输入.txt) 有 227 项：56 项来自 `iot/UgreenHomeTests`，171 项来自 `iot/iot/Modules/AIBase`。项目同步组的 Tests membership 条目见 `iot/UgreenHome.xcodeproj/project.pbxproj:110-298`；实际输入清单证明这些产品源码被 Tests **直接编译**，不是仅通过 `TestTargetID` 引用 App。
+
+Tests Pod target 与 App 同级，当前生成的 `Pods-UgreenHomeTests.debug.xcconfig` 没有 Pod framework 搜索路径。实际编译 `UHAIAnalysisRepository.swift` 时 `import RxSwift` 失败。这条测试专属的源码/依赖边必须与 App-only 成功构建区分，见 [补测记录](附件/App-XCTest补测记录.md)。后续仅在副本移除 171 个产品源码的 Tests membership、修正测试源码兼容并将 Tests 嵌套到 App Pod target 后，测试构建通过；原工作区未应用修正，本文依赖图仍表示原配置。见 [真机调试记录](附件/App-XCTest真机调试记录.md)。
 
 ### CocoaPods 与 LocalPods
 

@@ -1,0 +1,193 @@
+{
+  "date": "2026-09-13",
+  "scope": "Temporary repaired test configuration and isolated host; original source unchanged",
+  "device": "USB iPhone 16 Pro Max / iOS 26.6.2 / developer mode enabled",
+  "configuration": "Debug",
+  "test_build_without_runtime_isolation": {
+    "result": "TEST BUILD SUCCEEDED",
+    "exit_code": 0,
+    "wall_seconds": 65.78
+  },
+  "signed_isolated_test_build": {
+    "result": "TEST BUILD SUCCEEDED",
+    "exit_code": 0,
+    "wall_seconds": 103.42
+  },
+  "test_execution": {
+    "result": "Failed",
+    "exit_code": 65,
+    "wall_seconds": 231.17,
+    "total": 419,
+    "passed": 396,
+    "failed": 23,
+    "assertion_failed_cases": 21,
+    "crashed_cases": 2,
+    "skipped": 0
+  },
+  "coverage_scope": "xccov instrumented targets for this isolated-host run, not whole business or cross-platform coverage; includes interrupted launches",
+  "coverage_targets": [
+    {
+      "coveredLines": 1837,
+      "executableLines": 35320,
+      "lineCoverage": 0.052010192525481315,
+      "name": "UHKit.framework"
+    },
+    {
+      "coveredLines": 8295,
+      "executableLines": 405194,
+      "lineCoverage": 0.020471675296277834,
+      "name": "UgreenHome.app"
+    },
+    {
+      "coveredLines": 8597,
+      "executableLines": 8727,
+      "lineCoverage": 0.9851037011573278,
+      "name": "UgreenHomeTests.xctest"
+    }
+  ],
+  "failures": [
+    {
+      "test": "UHVehiclePlateInputValidatorTests/testApplyPlateNumberChange_at8Characters_blocksAdditionalInput()",
+      "kind": "assertion",
+      "assertion": "XCTAssertNil"
+    },
+    {
+      "test": "UHImageCompositionTests/testComposedImageViewReloadsAfterThemeNotification()",
+      "kind": "assertion",
+      "assertion": "XCTAssertFalse"
+    },
+    {
+      "test": "UHMultiTrackTimelineSelectionTests/testCrossPersonEventListViewModelLoadsInitialAndPaginates()",
+      "kind": "assertion",
+      "assertion": "XCTAssertEqual"
+    },
+    {
+      "test": "QRCodeRNBridgeServiceTests/testDeviceShareImageRendererProducesCompleteShareCard()",
+      "kind": "assertion",
+      "assertion": "XCTAssertEqual"
+    },
+    {
+      "test": "UGIPCRTCXImageProviderTests/testEventFaceItemFallsBackToCachedChildSNWhenDeviceSnMissing()",
+      "kind": "assertion",
+      "assertion": "XCTAssertEqual"
+    },
+    {
+      "test": "UHIPCTrafficManagementPolicyTests/testExpiredActivatedPackage_isExpired()",
+      "kind": "assertion",
+      "assertion": "XCTAssertEqual"
+    },
+    {
+      "test": "UHIPCTrafficManagementPolicyTests/testExpiryNotices_useInclusiveRemainingDays()",
+      "kind": "assertion",
+      "assertion": "XCTAssertEqual"
+    },
+    {
+      "test": "UHLoopVideoViewTests/testExplicitLocalURLCreatesTheMatchingLoopingPlayer()",
+      "kind": "assertion",
+      "assertion": "XCTUnwrap"
+    },
+    {
+      "test": "DeviceRuntimeFirmwareHostSnapshotTests/testFirmwareEventIndexEmitsOnlyForRealFiveFieldChanges()",
+      "kind": "assertion",
+      "assertion": "XCTAssertTrue"
+    },
+    {
+      "test": "UHLoopVideoViewTests/testFollowingThemeReloadsTheMatchingVideoResource()",
+      "kind": "assertion",
+      "assertion": "XCTAssertEqual"
+    },
+    {
+      "test": "UHAIBaseOverviewTests/testHomeCardHeightChangesBetweenStorageAndSecurityReportModes()",
+      "kind": "assertion",
+      "assertion": "XCTAssertEqualWithAccuracy"
+    },
+    {
+      "test": "UHAIBaseOverviewTests/testHomeCardHeightUsesSecurityReportHeightWhenReportEnabled()",
+      "kind": "assertion",
+      "assertion": "XCTAssertEqualWithAccuracy"
+    },
+    {
+      "test": "UGKmpPlaybackEventLegacyAdapterTests/testInvalidPayloadThrowsInsteadOfReturningEmptyEvents()",
+      "kind": "assertion",
+      "assertion": "XCTAssertThrowsError"
+    },
+    {
+      "test": "UHHDMIConfigMergePolicyTests/testMerge_withoutRemote_selectsOnlineEntries()",
+      "kind": "assertion",
+      "assertion": "XCTAssertEqual"
+    },
+    {
+      "test": "UHIPCNetworkInfoPolicyTests/testModifyNetworkButtonPolicy_childUnderControllableSharedAIBaseInheritsManagerRole()",
+      "kind": "assertion",
+      "assertion": "XCTAssertEqual"
+    },
+    {
+      "test": "UGIPCRTCXImageProviderTests/testResolvedPictureIdFallsBackToResolvedDeviceUniqueCode()",
+      "kind": "assertion",
+      "assertion": "XCTAssertEqual"
+    },
+    {
+      "test": "UGIPCRTCXImageProviderTests/testResolvedPictureIdPrefixesPersonFaceIdDespiteNumericPrefixAmbiguity()",
+      "kind": "assertion",
+      "assertion": "XCTAssertEqual"
+    },
+    {
+      "test": "UGIPCRTCXImageProviderTests/testResolvedPictureIdUsesCachedAIBaseChildSN()",
+      "kind": "assertion",
+      "assertion": "XCTAssertEqual"
+    },
+    {
+      "test": "DeviceRuntimeFirmwareHostSnapshotTests/testRuntimeRouteRebindToSameDevicePreservesBinding()",
+      "kind": "assertion",
+      "assertion": "XCTAssertNil"
+    },
+    {
+      "test": "UHAIBaseOverviewTests/testSecurityReportCardHeightExpandsForTwoLineDescription()",
+      "kind": "assertion",
+      "assertion": "XCTAssertEqualWithAccuracy"
+    },
+    {
+      "test": "UHMultiTrackTimelineSelectionTests/testStartDeviceResolverUsesBoundDeviceTripleWithoutFetching()",
+      "kind": "crash",
+      "assertion": "UGDeviceModel.swift:138 nil unwrap"
+    },
+    {
+      "test": "UHMultiTrackTimelineSelectionTests/testStrangerPlaybackContextUsesBoundChildTripleWhileSessionDeviceRemainsGateway()",
+      "kind": "crash",
+      "assertion": "UGDeviceModel.swift:138 nil unwrap"
+    },
+    {
+      "test": "UHMultiTrackTimelineSelectionTests/testTrackBuilderKeepsAllSegmentsOnFirstSixteenTracks()",
+      "kind": "assertion",
+      "assertion": "XCTAssertEqual"
+    }
+  ],
+  "isolation_checks": {
+    "bundle_id": "com.ugreen.archsurvey.xctesthost",
+    "xctestrun_host_bundle_id_matches": true,
+    "scene_manifest_absent": true,
+    "url_schemes_absent": true,
+    "shared_app_groups_absent": true,
+    "signature_verified_outside_sandbox": true,
+    "debuggable": true,
+    "original_test_launched_pid_no_longer_running": true
+  },
+  "source_checks": {
+    "source_head_unchanged": true,
+    "source_status_unchanged": true,
+    "shared_status_unchanged": true,
+    "project_unchanged": true,
+    "podfile_lock_unchanged": true
+  },
+  "aborted_initial_attempt": {
+    "cause": "generated xctestrun retained original TestHostBundleIdentifier",
+    "action": "interrupted before XCTest execution; launched process confirmed exited",
+    "observed_side_effects": "existing app startup emitted automatic test-backend requests; server outcomes not verified",
+    "original_app_and_isolated_app_coexist": true,
+    "raw_logs_not_included": true
+  },
+  "test_app_cleanup": {
+    "uninstalled": true,
+    "original_app_still_installed": true
+  }
+}

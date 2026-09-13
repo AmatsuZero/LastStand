@@ -1,0 +1,740 @@
+[
+  {
+    "framework": "BVLinearGradient.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "CoreModules.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "DoubleConversion.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "JSITooling.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "NitroMmkv.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "NitroModules.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "Pods_Producer.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RCTAnimation.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RCTBlob.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RCTDeprecation.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RCTFabric.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RCTImage.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RCTLinking.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RCTNetwork.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RCTRuntime.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RCTSettings.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RCTText.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RCTTypeSafety.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RCTVibration.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RNCClipboard.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RNFS.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RNGestureHandler.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RNLocalize.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RNReanimated.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RNSVG.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RNScreens.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RNSound.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "RNWorklets.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "ReactAppDependencyProvider.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "ReactCodegen.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "ReactCommon.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "ReactNativePdfRenderer.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_Fabric.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_FabricComponents.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_FabricImage.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_ImageManager.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_Mapbuffer.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_NativeModulesApple.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_RCTAppDelegate.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_RCTFBReactNativeSpec.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_RuntimeApple.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_RuntimeCore.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_RuntimeHermes.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_defaultsnativemodule.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_domnativemodule.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_featureflags.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_featureflagsnativemodule.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_graphics.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_jserrorhandler.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_microtasksnativemodule.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_performancecdpmetrics.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_performancetimeline.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_rendererconsistency.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_renderercss.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_runtimeexecutor.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_runtimescheduler.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "React_utils.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "SocketRocket.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "cxxreact.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "fmt.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "folly.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "glog.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "hermesvm.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "idlecallbacksnativemodule.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "jsi.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "jsinspector_modern.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "jsinspector_moderncdp.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "jsinspector_modernnetwork.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "jsinspector_moderntracing.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "jsireact.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "logger.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "oscompat.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "react_native_blob_util.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "react_native_netinfo.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "react_native_pdf.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "react_native_safe_area_context.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "react_native_webview.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "reacthermes.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "reactperflogger.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "webperformancenativemodule.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  },
+  {
+    "framework": "yoga.xcframework",
+    "library_identifier": "ios-arm64",
+    "platform": "ios",
+    "variant": "device",
+    "architectures": [
+      "arm64"
+    ]
+  }
+]

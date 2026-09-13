@@ -1,0 +1,68 @@
+{
+  "date": "2026-09-13",
+  "head": "31e1af1aa23e893886153b91cb51d5cedb674ca0",
+  "shared_head": "7abfcd0134c062f46c06b739a11f0cbeb69e1c0c",
+  "project_sha256": "5b30c020bc6973f660123fcfeeeeab73e00e766100f1108f982d84739aa0192b",
+  "podfile_lock_sha256": "28d8720ffbf344f73f24002e879df3aa6da1318ba6a2cd4bd3882a875150850f",
+  "workspace": "iot/UgreenHome.xcworkspace",
+  "scheme": "UgreenHomeTests",
+  "configuration": "Debug",
+  "default_test_configuration": "Beta",
+  "code_signing_allowed": false,
+  "coverage_requested": true,
+  "runs": [
+    {
+      "platform": "iOS Simulator",
+      "action": "build-for-testing",
+      "status": "failed",
+      "exit_code": 65,
+      "wall_seconds": 50.28,
+      "xcresult_error_count": 1,
+      "xcresult_warning_count": 227,
+      "errors": [
+        {
+          "message": "Unable to resolve module dependency: 'React'\nimport React\n       ^",
+          "source": "LocalPods/UHReactNativeRuntime/Sources/Bridges/lottie-react-native/LottieReactNative/AnimationViewManagerModule.swift"
+        }
+      ],
+      "test_execution_reached": false,
+      "executed_test_cases": 0,
+      "coverage_percent": null
+    },
+    {
+      "platform": "iOS device (generic; build only)",
+      "action": "build-for-testing",
+      "status": "failed",
+      "exit_code": 65,
+      "wall_seconds": 226.84,
+      "xcresult_error_count": 1,
+      "xcresult_warning_count": 2904,
+      "errors": [
+        {
+          "message": "No such module 'RxSwift'",
+          "source": "iot/iot/Modules/AIBase/AIAnalysis/Repository/UHAIAnalysisRepository.swift"
+        }
+      ],
+      "test_execution_reached": false,
+      "executed_test_cases": 0,
+      "coverage_percent": null
+    }
+  ],
+  "test_compile_inputs": {
+    "total": 227,
+    "test_directory_swift_files": 56,
+    "production_aibase_swift_files": 171
+  },
+  "rn_xcframework_count": 82,
+  "rn_simulator_slice_count": 0,
+  "source_protection_checks": {
+    "source_status_unchanged": true,
+    "shared_status_unchanged": true,
+    "head_unchanged": true,
+    "shared_head_unchanged": true,
+    "project_sha256_unchanged": true,
+    "podfile_lock_sha256_unchanged": true,
+    "swift_source_files_compared": 1813,
+    "swift_source_mismatches": []
+  }
+}

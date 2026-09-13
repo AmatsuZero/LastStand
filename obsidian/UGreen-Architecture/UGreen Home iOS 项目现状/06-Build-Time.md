@@ -13,6 +13,12 @@
 
 证据：[Clean 复测摘要](附件/clean-build-复测摘要.log)、[Incremental 复测摘要](附件/incremental-build-复测摘要.log)、[复测环境](附件/构建复测环境.json)、[变更与还原](附件/增量变更与还原.json)、[保护校验](附件/构建复测保护校验.json)。App 产物确认为 arm64 Mach-O executable，NotificationService.appex 也已生成并嵌入；没有启动 App。
 
+### 2026-09-13 XCTest 补测边界
+
+上述 App-only 构建成功记录不变。新增 `UgreenHomeTests / Debug / build-for-testing` 实测：模拟器 50.28 秒因 `React` 模块不可解析失败；真机架构 226.84 秒在 **Tests target** 因 `RxSwift` 模块不可见失败，均退出 65。这是失败的测试构建耗时，不纳入成功 Clean/Incremental Build 基线，也不是案例执行耗时。详见 [Testing](07-Testing.md) 与 [补测记录](附件/App-XCTest补测记录.md)。
+
+随后在副本修正测试配置/源码兼容后，未替换启动宿主的 `build-for-testing` **65.78 秒通过**；独立测试宿主的签名构建 **103.42 秒通过**。真机最终执行 419 个案例、23 失败。这些是修正副本的验证，不改写原工作区状态，也不纳入此前 Clean/Incremental 性能基线，见 [真机记录](附件/App-XCTest真机调试记录.md)。
+
 ### 历史尝试（不作为当前失败结论）
 
 | 场景 | 结果 | Wall time |

@@ -1,0 +1,333 @@
+--- a/iot/UgreenHome.xcodeproj/project.pbxproj
++++ b/iot/UgreenHome.xcodeproj/project.pbxproj
+@@ -107,183 +107,6 @@
+ 			);
+ 			target = B36E3DD12EBD8B3100F215A8 /* NotificationService */;
+ 		};
+-		82DBD26E2FFF7B9200390EF8 /* Exceptions for "iot" folder in "UgreenHomeTests" target */ = {
+-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+-			membershipExceptions = (
+-				Modules/AIBase/AIAnalysis/Model/UHAIAnalysisModels.swift,
+-				Modules/AIBase/AIAnalysis/Repository/UHAIAnalysisRepository.swift,
+-				Modules/AIBase/AIAnalysis/View/UHAIAnalysisCapabilityAppearance.swift,
+-				Modules/AIBase/AIAnalysis/View/UHAIAnalysisCapabilityCardView.swift,
+-				Modules/AIBase/AIAnalysis/View/UHAIAnalysisCapabilityHelpIntroView.swift,
+-				Modules/AIBase/AIAnalysis/View/UHAIAnalysisCapabilityHelpRowView.swift,
+-				Modules/AIBase/AIAnalysis/View/UHAIAnalysisCapabilityHelpSectionView.swift,
+-				Modules/AIBase/AIAnalysis/View/UHAIAnalysisCapabilityNoticeView.swift,
+-				Modules/AIBase/AIAnalysis/View/UHAIAnalysisCapabilitySectionView.swift,
+-				Modules/AIBase/AIAnalysis/View/UHAIAnalysisDeviceEmptyView.swift,
+-				Modules/AIBase/AIAnalysis/View/UHAIAnalysisDeviceRowView.swift,
+-				Modules/AIBase/AIAnalysis/View/UHAIAnalysisFeatureBadgeView.swift,
+-				Modules/AIBase/AIAnalysis/ViewController/UHAIAnalysisCapabilityHelpViewController.swift,
+-				Modules/AIBase/AIAnalysis/ViewController/UHAIAnalysisCapabilityViewController.swift,
+-				Modules/AIBase/AIAnalysis/ViewController/UHAIAnalysisViewController.swift,
+-				Modules/AIBase/AIAnalysis/ViewModel/UHAIAnalysisCapabilityViewModel.swift,
+-				Modules/AIBase/AIAnalysis/ViewModel/UHAIAnalysisViewModel.swift,
+-				Modules/AIBase/AIVoiceControl/Handler/UHAIVoiceAssistantSpecHTMLRenderer.swift,
+-				Modules/AIBase/AIVoiceControl/Handler/UHAIVoiceControlEnableConsentPresenter.swift,
+-				Modules/AIBase/AIVoiceControl/Model/UHAIVoiceControlModels.swift,
+-				Modules/AIBase/AIVoiceControl/Repository/UHAIVoiceControlRepository.swift,
+-				Modules/AIBase/AIVoiceControl/View/UHAIVoiceControlFeatureIntroFooterView.swift,
+-				Modules/AIBase/AIVoiceControl/View/UHAIVoiceControlIntroIllustrationView.swift,
+-				Modules/AIBase/AIVoiceControl/View/UHAIVoiceControlScenarioIntroCarouselView.swift,
+-				Modules/AIBase/AIVoiceControl/View/UHAIVoiceEnableConsentView.swift,
+-				Modules/AIBase/AIVoiceControl/ViewController/UHAIVoiceAssistantFeatureDescriptionViewController.swift,
+-				Modules/AIBase/AIVoiceControl/ViewController/UHAIVoiceControlScenarioExampleViewController.swift,
+-				Modules/AIBase/AIVoiceControl/ViewController/UHAIVoiceControlViewController.swift,
+-				Modules/AIBase/AIVoiceControl/ViewModel/UHAIVoiceControlViewModel.swift,
+-				"Modules/AIBase/CrossCameraTracking(CCT)/Model/UHCCTModels.swift",
+-				"Modules/AIBase/CrossCameraTracking(CCT)/Repository/UHCCTRepository.swift",
+-				"Modules/AIBase/CrossCameraTracking(CCT)/View/UHCCTDeviceSelectionCell.swift",
+-				"Modules/AIBase/CrossCameraTracking(CCT)/ViewController/UHCCTDeviceSelectionViewController.swift",
+-				"Modules/AIBase/CrossCameraTracking(CCT)/ViewController/UHCCTScenarioExampleViewController.swift",
+-				"Modules/AIBase/CrossCameraTracking(CCT)/ViewController/UHCCTViewController.swift",
+-				"Modules/AIBase/CrossCameraTracking(CCT)/ViewModel/UHCCTViewModel.swift",
+-				Modules/AIBase/HDMISetting/Data/DTO/UHHDMThingsModels.swift,
+-				Modules/AIBase/HDMISetting/Data/Mapper/UHHDMIGatewaySnapshotMapper.swift,
+-				Modules/AIBase/HDMISetting/Data/Repository/UHHDMIRepository.swift,
+-				Modules/AIBase/HDMISetting/Domain/Entity/UHHDMIModels.swift,
+-				Modules/AIBase/HDMISetting/Domain/Policy/UHHDMIConfigMergePolicy.swift,
+-				Modules/AIBase/HDMISetting/Domain/Policy/UHHDMIMutePolicy.swift,
+-				Modules/AIBase/HDMISetting/Domain/Policy/UHHDMIPreviewPagingPolicy.swift,
+-				Modules/AIBase/HDMISetting/Domain/Policy/UHHDMIProjectionExpandPolicy.swift,
+-				Modules/AIBase/HDMISetting/Domain/Policy/UHHDMIProjectionRowsPolicy.swift,
+-				Modules/AIBase/HDMISetting/Domain/Repository/UHHDMIRepositoryProtocol.swift,
+-				Modules/AIBase/HDMISetting/Domain/UseCase/UHHDMILoadHomeContentUseCase.swift,
+-				Modules/AIBase/HDMISetting/Domain/UseCase/UHHDMILoadOptionPackUseCase.swift,
+-				Modules/AIBase/HDMISetting/Domain/UseCase/UHHDMILoadProjectionRowsUseCase.swift,
+-				Modules/AIBase/HDMISetting/Domain/UseCase/UHHDMIProjectionContextBuilder.swift,
+-				Modules/AIBase/HDMISetting/Domain/UseCase/UHHDMISaveProjectionRowsUseCase.swift,
+-				Modules/AIBase/HDMISetting/Domain/UseCase/UHHDMIStartObservingUseCase.swift,
+-				Modules/AIBase/HDMISetting/Domain/UseCase/UHHDMIUpdateSettingUseCase.swift,
+-				Modules/AIBase/HDMISetting/Presentation/Factory/UHHDMIComposer.swift,
+-				Modules/AIBase/HDMISetting/Presentation/Factory/UHHDMIHomeStateFactory.swift,
+-				Modules/AIBase/HDMISetting/Presentation/View/UHHDMIProjectionDeviceCell.swift,
+-				Modules/AIBase/HDMISetting/Presentation/ViewController/UHHDMIConnectionGuideViewController.swift,
+-				Modules/AIBase/HDMISetting/Presentation/ViewController/UHHDMILayoutBottomSheetViewController.swift,
+-				Modules/AIBase/HDMISetting/Presentation/ViewController/UHHDMIProjectionSettingsViewController.swift,
+-				Modules/AIBase/HDMISetting/Presentation/ViewController/UHHDMIProjectionSortViewController.swift,
+-				Modules/AIBase/HDMISetting/Presentation/ViewController/UHHDMIRotationBottomSheetViewController.swift,
+-				Modules/AIBase/HDMISetting/Presentation/ViewController/UHHDMIViewController.swift,
+-				Modules/AIBase/HDMISetting/Presentation/ViewModel/UHHDMIProjectionSettingsViewModel.swift,
+-				Modules/AIBase/HDMISetting/Presentation/ViewModel/UHHDMIViewModel.swift,
+-				Modules/AIBase/HomePage/AIBaseTheme.swift,
+-				Modules/AIBase/HomePage/Builder/UHAIBaseDeviceDetailViewBuilder.swift,
+-				Modules/AIBase/HomePage/Controllers/UHAIBaseEventViewController.swift,
+-				Modules/AIBase/HomePage/Controllers/UHAIBasePlaceholderViewController.swift,
+-				Modules/AIBase/HomePage/Controllers/UHAIBaseSetttingController.swift,
+-				Modules/AIBase/HomePage/Handler/UHAIBaseVoiceCallHandler.swift,
+-				Modules/AIBase/HomePage/Handler/UHAIBaseVoiceEnrollmentGuidePresenter.swift,
+-				Modules/AIBase/HomePage/Model/UHAIBaseAISectionModel.swift,
+-				Modules/AIBase/HomePage/Model/UHAIBaseDevicesModel.swift,
+-				Modules/AIBase/HomePage/Model/UHAIBaseStateModel.swift,
+-				Modules/AIBase/HomePage/Model/UHAIBaseStorageModel.swift,
+-				Modules/AIBase/HomePage/Model/UHAIBaseVoiceEnrollmentGuideStorage.swift,
+-				Modules/AIBase/HomePage/Repository/UHAIBaseHomeRepository.swift,
+-				Modules/AIBase/HomePage/Repository/UHAIBaseStorageRepository.swift,
+-				Modules/AIBase/HomePage/View/Cell/UHAIBaseAIFeatureCardCell.swift,
+-				"Modules/AIBase/HomePage/View/Cell/UHAIBaseCell+Extension.swift",
+-				Modules/AIBase/HomePage/View/Cell/UHAIBaseDevicesStripCell.swift,
+-				Modules/AIBase/HomePage/View/Cell/UHAIBaseGridTileCell.swift,
+-				Modules/AIBase/HomePage/View/Cell/UHAIBasePersonManagementCell.swift,
+-				Modules/AIBase/HomePage/View/Cell/UHAIBaseSectionHeaderView.swift,
+-				Modules/AIBase/HomePage/View/Cell/UHAIBaseStatusStateCell.swift,
+-				Modules/AIBase/HomePage/View/UHAIBaseVoiceCallStatusPanel.swift,
+-				Modules/AIBase/HomePage/ViewModel/UHAIBaseEventViewModel.swift,
+-				Modules/AIBase/HomePage/ViewModel/UHAIBaseHomeViewModel.swift,
+-				Modules/AIBase/HomePage/ViewModel/UHAIBaseSettingsViewModel.swift,
+-				Modules/AIBase/SecurityReport/Handler/UHSecurityReportEnableConsentPresenter.swift,
+-				Modules/AIBase/SecurityReport/Model/UHSecurityReportActivityEventMapping.swift,
+-				Modules/AIBase/SecurityReport/Model/UHSecurityReportActivityFaceJoin.swift,
+-				Modules/AIBase/SecurityReport/Model/UHSecurityReportActivityFaceSource.swift,
+-				Modules/AIBase/SecurityReport/Model/UHSecurityReportActivityFilterCategory.swift,
+-				Modules/AIBase/SecurityReport/Model/UHSecurityReportActivityMapper.swift,
+-				Modules/AIBase/SecurityReport/Model/UHSecurityReportCameraMapper.swift,
+-				Modules/AIBase/SecurityReport/Model/UHSecurityReportCrossPersonMapper.swift,
+-				Modules/AIBase/SecurityReport/Model/UHSecurityReportEventPlayBuilder.swift,
+-				Modules/AIBase/SecurityReport/Model/UHSecurityReportModels.swift,
+-				Modules/AIBase/SecurityReport/Model/UHSecurityReportObjPicIdParser.swift,
+-				Modules/AIBase/SecurityReport/Model/UHSecurityReportPresentationMapper.swift,
+-				Modules/AIBase/SecurityReport/Model/UHSecurityReportStatsMapper.swift,
+-				Modules/AIBase/SecurityReport/Model/UHSecurityReportThingModels.swift,
+-				Modules/AIBase/SecurityReport/Repository/UHSecurityReportActivityAvatarLoader.swift,
+-				Modules/AIBase/SecurityReport/Repository/UHSecurityReportRepository.swift,
+-				Modules/AIBase/SecurityReport/Repository/UHSecurityReportSettingsRepository.swift,
+-				Modules/AIBase/SecurityReport/View/UHSecurityReportActivityRowView.swift,
+-				Modules/AIBase/SecurityReport/View/UHSecurityReportAttentionCardView.swift,
+-				Modules/AIBase/SecurityReport/View/UHSecurityReportCameraRowView.swift,
+-				Modules/AIBase/SecurityReport/View/UHSecurityReportCrossPersonHeaderView.swift,
+-				Modules/AIBase/SecurityReport/View/UHSecurityReportEmptyView.swift,
+-				Modules/AIBase/SecurityReport/View/UHSecurityReportEnableConsentView.swift,
+-				Modules/AIBase/SecurityReport/View/UHSecurityReportHeroView.swift,
+-				Modules/AIBase/SecurityReport/View/UHSecurityReportSectionCardView.swift,
+-				Modules/AIBase/SecurityReport/View/UHSecurityReportStatsBarRowView.swift,
+-				Modules/AIBase/SecurityReport/ViewController/UHSecurityReportActivityListViewController.swift,
+-				Modules/AIBase/SecurityReport/ViewController/UHSecurityReportCrossPersonEventListViewController.swift,
+-				Modules/AIBase/SecurityReport/ViewController/UHSecurityReportCrossPersonPlayViewController.swift,
+-				Modules/AIBase/SecurityReport/ViewController/UHSecurityReportSettingsViewController.swift,
+-				Modules/AIBase/SecurityReport/ViewController/UHSecurityReportViewController.swift,
+-				Modules/AIBase/SecurityReport/ViewModel/UHSecurityReportActivityListViewModel.swift,
+-				Modules/AIBase/SecurityReport/ViewModel/UHSecurityReportCrossPersonEventListViewModel.swift,
+-				Modules/AIBase/SecurityReport/ViewModel/UHSecurityReportSettingsViewModel.swift,
+-				Modules/AIBase/SecurityReport/ViewModel/UHSecurityReportViewModel.swift,
+-				Modules/AIBase/Storage/Controllers/UHAIBaseStorageDeviceDetailViewController.swift,
+-				Modules/AIBase/Storage/Controllers/UHAIBaseStorageManageViewController.swift,
+-				Modules/AIBase/Storage/Model/UGDeviceDiskFormatter.swift,
+-				Modules/AIBase/Storage/Model/UGDeviceFileRecovery.swift,
+-				"Modules/AIBase/Storage/Model/UHAIBase+StorageBottomSheet.swift",
+-				Modules/AIBase/Storage/Model/UHAIBaseRequest.swift,
+-				Modules/AIBase/Storage/Model/UHAIBaseStorageCellItem.swift,
+-				Modules/AIBase/Storage/Model/UHAIBaseStorageDeviceModel.swift,
+-				Modules/AIBase/Storage/Model/UHAIBaseStorageDeviceWrapper.swift,
+-				"Modules/AIBase/Storage/Model/UHAIBaseStorageDeviceWrapper+NetQuery.swift",
+-				Modules/AIBase/Storage/Model/UHAIBaseStorageEventModel.swift,
+-				Modules/AIBase/Storage/Model/UHAIBaseStorageEventModelWrapper.swift,
+-				Modules/AIBase/Storage/Model/UHAIBaseStorageRecordParamModel.swift,
+-				Modules/AIBase/Storage/View/AIBaseHomeCell/UHAIBaseStorageCell.swift,
+-				Modules/AIBase/Storage/View/AIBaseHomeCell/UHAIBaseStorageCellContentView.swift,
+-				Modules/AIBase/Storage/View/AIStorageManagementCell/UHAIBaseStorageDeviceEventItemCell.swift,
+-				Modules/AIBase/Storage/View/AIStorageManagementCell/UHAIBaseStorageDeviceEventPercentCell.swift,
+-				Modules/AIBase/Storage/View/AIStorageManagementCell/UHAIBaseStorageDeviceNormalTitleCell.swift,
+-				Modules/AIBase/Storage/View/AIStorageManagementCell/UHAIBaseStorageDeviceSummaryView.swift,
+-				Modules/AIBase/Storage/View/AIStorageManagementCell/UHAIBaseStorageDeviceVideoModeCell.swift,
+-				Modules/AIBase/Storage/View/AIStorageManagementCell/UHAIBaseStorageMgtDeviceCell.swift,
+-				Modules/AIBase/Storage/View/AIStorageManagementCell/UHAIBaseStorageMgtDiskUsageCell.swift,
+-				Modules/AIBase/Storage/View/AIStorageManagementCell/UHAIBaseStorageMgtExpandCell.swift,
+-				Modules/AIBase/Storage/View/AIStorageManagementCell/UHAIBaseStorageMgtPercentCell.swift,
+-				Modules/AIBase/Storage/View/AIStorageManagementCell/UHAIBaseStorageMgtPlaceHolderCell.swift,
+-				Modules/AIBase/Storage/View/AIStorageManagementCell/UHAIBaseStorageMgtWarningCell.swift,
+-				Modules/AIBase/Storage/View/UHAIBaseStorageDiskUsageCell.swift,
+-				Modules/AIBase/Storage/View/UHAIBaseStorageProgressCircleView.swift,
+-				Modules/AIBase/Vehicle/Model/UHVehiclePlateActivityEventMapping.swift,
+-				Modules/AIBase/Vehicle/Model/UHVehiclePlateInputValidator.swift,
+-				Modules/AIBase/Vehicle/Model/UHVehiclePlateModels.swift,
+-				Modules/AIBase/Vehicle/Model/UHVehiclePlateOwnerNameMatcher.swift,
+-				Modules/AIBase/Vehicle/Repository/UHVehiclePlateRepository.swift,
+-				Modules/AIBase/Vehicle/View/UHVehiclePlateBadgeView.swift,
+-				Modules/AIBase/Vehicle/View/UHVehiclePlateDetailActivityTitleView.swift,
+-				Modules/AIBase/Vehicle/View/UHVehiclePlateDetailHeaderView.swift,
+-				Modules/AIBase/Vehicle/View/UHVehiclePlateDetailStatsView.swift,
+-				Modules/AIBase/Vehicle/View/UHVehiclePlateEmptyView.swift,
+-				Modules/AIBase/Vehicle/View/UHVehiclePlateFormRowView.swift,
+-				Modules/AIBase/Vehicle/View/UHVehiclePlateRowView.swift,
+-				Modules/AIBase/Vehicle/View/UHVehiclePlateSuggestionView.swift,
+-				Modules/AIBase/Vehicle/ViewController/UHVehiclePlateDetailViewController.swift,
+-				Modules/AIBase/Vehicle/ViewController/UHVehiclePlateEditViewController.swift,
+-				Modules/AIBase/Vehicle/ViewController/UHVehiclePlateListViewController.swift,
+-				Modules/AIBase/Vehicle/ViewModel/UHVehiclePlateDetailViewModel.swift,
+-				Modules/AIBase/Vehicle/ViewModel/UHVehiclePlateEditViewModel.swift,
+-				Modules/AIBase/Vehicle/ViewModel/UHVehiclePlateListViewModel.swift,
+-			);
+-			target = C1TEST032EBD8B3100F215A1 /* UgreenHomeTests */;
+-		};
+ /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+ 
+ /* Begin PBXFileSystemSynchronizedRootGroup section */
+@@ -291,7 +114,6 @@
+ 			isa = PBXFileSystemSynchronizedRootGroup;
+ 			exceptions = (
+ 				7418E4602F1F5B57002962C1 /* Exceptions for "iot" folder in "UgreenHome" target */,
+-				82DBD26E2FFF7B9200390EF8 /* Exceptions for "iot" folder in "UgreenHomeTests" target */,
+ 			);
+ 			path = iot;
+ 			sourceTree = "<group>";
+--- a/iot/Podfile
++++ b/iot/Podfile
+@@ -99,11 +99,10 @@
+   else
+     pod 'UGDeviceSetupSDK', '1.0.3'
+   end
+-end
+-
+-target 'UgreenHomeTests' do
+-  inherit! :search_paths
+-  use_frameworks! :linkage => :dynamic
++  target 'UgreenHomeTests' do
++    inherit! :search_paths
++    use_frameworks! :linkage => :dynamic
++  end
+ end
+ 
+ post_install do |installer|
+--- a/iot/Podfile.lock
++++ b/iot/Podfile.lock
+@@ -636,13 +636,13 @@
+   UHFoundation: bef789b4abce7c2e6db2ae38dec4bcd27b6198e6
+   UHKit: de97a117f053cb76fbcfc46610d2ea4b59dffbc0
+   UHPlayerSDK: 4c640693c45622fa5505b6d667f465ea6df65cce
+-  UHReactNativeRuntime: 5aca39b12e41708dd4108501141e202310b02eaa
++  UHReactNativeRuntime: 5e4279ecef06bcba2446e16fb9edf691aefa8299
+   UICKeyChainStore: 85db518bb1d294366d15ec9b92a416c4e670518f
+   "UITextView+Placeholder": d7b0c400921f66523f3a85d74f774512e14f6502
+   WCDB.swift: d9c65b12e4ca9c97387c75c2393a50d9649d99e0
+   WCDBOptimizedSQLCipher: 871994f7f620302fdf87a2729c099a1efa2223da
+   ZIPFoundation: dfd3d681c4053ff7e2f7350bc4e53b5dba3f5351
+ 
+-PODFILE CHECKSUM: 7962183bcd0e326727e18cd1e4d83e0bcfc000a4
++PODFILE CHECKSUM: 477d77c613be3c0a2b2c6c161e5fc839d0d0eead
+ 
+ COCOAPODS: 1.17.0
+--- a/iot/UgreenHomeTests/StorageRNBridgeServiceTests.swift
++++ b/iot/UgreenHomeTests/StorageRNBridgeServiceTests.swift
+@@ -57,7 +57,7 @@
+     }
+ 
+     private func setRawBoolean(key: String, value: Any) async throws {
+-        try await withCheckedThrowingContinuation { continuation in
++        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
+             StorageRNBridgeServiceObjC.shared.setBoolean(["key": key, "value": value]) { _, error in
+                 if let error { continuation.resume(throwing: error) }
+                 else { continuation.resume(returning: ()) }
+--- a/iot/UgreenHomeTests/UGIPCPersonChannelTests.swift
++++ b/iot/UgreenHomeTests/UGIPCPersonChannelTests.swift
+@@ -242,7 +242,9 @@
+ 
+         client.searchPersons { result in
+             XCTAssertTrue(Thread.isMainThread)
+-            XCTAssertNoThrow(try result.get())
++            if case let .failure(error) = result {
++                XCTFail("Expected successful search result: \(error)")
++            }
+             completionExpectation.fulfill()
+         }
+         client.addPerson(
+--- a/iot/UgreenHomeTests/UGKmpPlaybackEventLegacyAdapterTests.swift
++++ b/iot/UgreenHomeTests/UGKmpPlaybackEventLegacyAdapterTests.swift
+@@ -50,7 +50,8 @@
+         let endFlag = output["EndFlag"]
+         XCTAssertEqual(endFlag as? Bool, false)
+ 
+-        let models = try XCTUnwrap(UGIPCCardEventModel.parseArray(from: output["EventList"] as? [[String: Any]]))
++        let eventList = try XCTUnwrap(output["EventList"] as? [[String: Any]])
++        let models = try XCTUnwrap(UGIPCCardEventModel.parseArray(from: eventList))
+         XCTAssertEqual(models.last?.eventId, 217)
+     }
+ 
+--- a/iot/UgreenHomeTests/NetworkRNBridgeURLBuilderTests.swift
++++ b/iot/UgreenHomeTests/NetworkRNBridgeURLBuilderTests.swift
+@@ -4,6 +4,7 @@
+ //
+ 
+ import XCTest
++import UgreenHomeShared
+ @testable import UgreenHome
+ 
+ final class NetworkRNBridgeURLBuilderTests: XCTestCase {
+--- a/iot/UgreenHomeTests/DeviceRuntimeReportedPropertyPolicyTests.swift
++++ b/iot/UgreenHomeTests/DeviceRuntimeReportedPropertyPolicyTests.swift
+@@ -2,17 +2,17 @@
+ @testable import UgreenHome
+ 
+ final class DeviceRuntimePropertyWritePolicyTests: XCTestCase {
+-    func testNativeWriteTimeoutIsClampedToThirtySeconds() {
++    func testNativeWriteTimeoutIsClampedToThirtySeconds() throws {
+         XCTAssertEqual(
+-            DeviceRuntimeRNBridgeServiceObjC.nativeWriteTimeout(milliseconds: 60_000),
++            try XCTUnwrap(DeviceRuntimeRNBridgeServiceObjC.nativeWriteTimeout(60_000)),
+             30,
+             accuracy: 0.001
+         )
+     }
+ 
+-    func testNativeWriteTimeoutDefaultsToTwentySeconds() {
++    func testNativeWriteTimeoutDefaultsToTwentySeconds() throws {
+         XCTAssertEqual(
+-            DeviceRuntimeRNBridgeServiceObjC.nativeWriteTimeout(milliseconds: nil),
++            try XCTUnwrap(DeviceRuntimeRNBridgeServiceObjC.nativeWriteTimeout(nil)),
+             20,
+             accuracy: 0.001
+         )
+--- a/iot/UgreenHomeTests/UHMultiTrackTimelineSelectionTests.swift
++++ b/iot/UgreenHomeTests/UHMultiTrackTimelineSelectionTests.swift
+@@ -345,8 +345,8 @@
+             "SupCross": 1
+         ]
+         let face = dict.kj.model(UHReportActivityFaceItem.self)
+-        XCTAssertEqual(face?.faceId, largeFaceId)
+-        XCTAssertEqual(face?.faceId, 7_673_072_667_599_044_610)
++        XCTAssertEqual(face.faceId, largeFaceId)
++        XCTAssertEqual(face.faceId, 7_673_072_667_599_044_610)
+     }
+ 
+     func testActivityFaceItemParsesLargeFaceIdFromString() {
+@@ -357,7 +357,7 @@
+             "SupCross": 0
+         ]
+         let face = dict.kj.model(UHReportActivityFaceItem.self)
+-        XCTAssertEqual(face?.faceId, 7_673_072_667_599_044_610)
++        XCTAssertEqual(face.faceId, 7_673_072_667_599_044_610)
+     }
+ 
+     func testTrackBuilderDropsEventsWithoutDeviceSN() {
+--- a/iot/UgreenHomeTests/HDMISetting/UHHDMIProjectionRowsPolicyTests.swift
++++ b/iot/UgreenHomeTests/HDMISetting/UHHDMIProjectionRowsPolicyTests.swift
+@@ -40,7 +40,7 @@
+     private func makeChild(deviceId: String, productSerialNo: String) -> UGDeviceModel {
+         let child = UGDeviceModel()
+         child.deviceId = deviceId
+-        let product = UGProduct()
++        var product = UGProduct()
+         product.serialNo = productSerialNo
+         child.product = product
+         return child
