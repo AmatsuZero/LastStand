@@ -1,0 +1,114 @@
+{
+  "date": "2026-09-14",
+  "snapshot": {
+    "android": "5543c83e",
+    "shared": "4f36969b"
+  },
+  "command_count": 8,
+  "common_args": [
+    "-PugreenHomeSharedPath=/private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq",
+    "-PfirebaseCrashlyticsMappingUpload=false",
+    "--no-daemon",
+    "--console=plain"
+  ],
+  "results": {
+    "exit_code_0": 8,
+    "build_successful": 8,
+    "failed_markers": 0,
+    "unresolved_markers": 0
+  },
+  "queries": [
+    {
+      "configuration": "domesticDebugRuntimeClasspath",
+      "dependency": "com.tencent",
+      "resolved": {
+        "mmkv": "1.3.16",
+        "mars_xlog": "1.2.6",
+        "bugly_requested": "latest.release",
+        "bugly_selected": "4.1.9.3"
+      }
+    },
+    {
+      "configuration": "domesticDebugRuntimeClasspath",
+      "dependency": "androidx.room",
+      "resolved": "2.8.4 family",
+      "reason": "atomic group constraint"
+    },
+    {
+      "configuration": "domesticDebugRuntimeClasspath",
+      "dependency": "androidx.datastore",
+      "resolved": "1.2.1 family",
+      "requested_to_selected": [
+        "androidx.datastore:datastore-preferences:1.1.1 -> 1.2.1"
+      ],
+      "reason": "atomic group constraint/conflict resolution"
+    },
+    {
+      "configuration": "domesticDebugRuntimeClasspath",
+      "dependency": "androidx.media3",
+      "resolved": "1.8.0 family"
+    },
+    {
+      "configuration": "domesticDebugRuntimeClasspath",
+      "dependency": "io.ktor",
+      "resolved": "3.5.1 family",
+      "requested_to_selected": [
+        "io.ktor:ktor-client-core:3.1.0 -> 3.5.1"
+      ],
+      "reason": "conflict resolution between 3.5.1 and 3.1.0"
+    },
+    {
+      "configuration": "domesticDebugRuntimeClasspath",
+      "dependency": "com.ugreen.rn",
+      "resolved": {
+        "runtime": "0.1.4",
+        "gesture_handler": "2.29.1-ugreen.1",
+        "reanimated": "4.1.5-ugreen.1",
+        "safe_area": "5.6.2-ugreen.1",
+        "screens": "4.25.2-ugreen.1",
+        "svg": "15.15.5-ugreen.1",
+        "worklets": "0.6.1-ugreen.1"
+      }
+    },
+    {
+      "configuration": "domesticDebugRuntimeClasspath",
+      "dependency": "com.ugreen.home.shared",
+      "resolved": "1.0.0-SNAPSHOT -> composite project :shared-release-1.7.0-9q2u2wrq"
+    },
+    {
+      "configuration": "overseasDebugRuntimeClasspath",
+      "dependency": "com.google.firebase",
+      "resolved": {
+        "bom": "34.7.0",
+        "analytics": "23.0.0",
+        "messaging": "25.0.1",
+        "crashlytics": "20.0.3",
+        "crashlytics_ndk": "20.0.3",
+        "common": "22.0.1",
+        "components": "19.0.0",
+        "installations": "19.0.1",
+        "sessions": "3.0.3"
+      },
+      "reason": "Firebase BoM platform constraints plus Gradle conflict resolution"
+    }
+  ],
+  "coverage": {
+    "domestic": [
+      "com.tencent",
+      "androidx.room",
+      "androidx.datastore",
+      "androidx.media3",
+      "io.ktor",
+      "com.ugreen.rn",
+      "com.ugreen.home.shared"
+    ],
+    "overseas": [
+      "com.google.firebase"
+    ]
+  },
+  "not_run": [
+    "artifact runtime verification",
+    "APK build"
+  ],
+  "task": ":app:dependencyInsight"
+}

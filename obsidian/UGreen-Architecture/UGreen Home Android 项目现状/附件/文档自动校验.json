@@ -1,10 +1,10 @@
 {
-  "at": "2026-09-14T12:28:24.745965+08:00",
+  "at": "2026-09-14T14:53:07.732527+08:00",
   "topLevelDocuments": 9,
-  "relativeLinksChecked": 56,
+  "relativeLinksChecked": 83,
   "sourceReferencesChecked": 203,
   "mermaidBlocksStaticFenceChecked": 11,
-  "mermaidRendered": false,
+  "mermaidRendered": true,
   "actualJUnitCases": 253,
   "androidPassed": 214,
   "androidFailed": 2,
@@ -12,5 +12,31 @@
   "secretPatternMatches": [],
   "errors": [],
   "rerunAfterFinalEdits": true,
-  "finalCheckNotes": "01/02 line corrections and 08 title rechecked after dynamic integration"
+  "finalCheckNotes": "Dynamic supplement: dependency logs, task reports, instrumentation status, launch UI, Markdown links and JSON checked; 203 source refs inherited from prior unchanged static baseline.",
+  "mermaidRenderEngine": "Obsidian Mermaid 11.13.0",
+  "mermaidRenderPassed": 11,
+  "mermaidRenderEvidence": "Mermaid渲染验证.json",
+  "androidInstrumentation": {
+    "discovered": 3,
+    "passed": 1,
+    "failed": 2,
+    "environment": "API36 isolated emulator",
+    "evidence": "Android模拟器运行验证.json"
+  },
+  "dependencyInsight": {
+    "commands": 8,
+    "successful": 8,
+    "evidence": "依赖解析实测.json"
+  },
+  "taskEnumeration": {
+    "androidApp": 0,
+    "androidRoot": 0,
+    "sharedStandalone": 0,
+    "coverageNamedTasks": 0,
+    "evidence": "测试任务枚举.json"
+  },
+  "relativeLinkScope": "all Android top-level and attachment Markdown; percent-decoded relative paths including iOS links",
+  "jsonFilesParsed": 14,
+  "actualInstrumentationCases": 3,
+  "totalExecutedCasesAcrossScopes": 256
 }

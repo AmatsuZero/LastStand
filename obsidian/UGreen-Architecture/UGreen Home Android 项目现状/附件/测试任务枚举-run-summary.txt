@@ -1,0 +1,7 @@
+started_at=2026-09-14T14:25:35+08:00
+java_home=/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home
+android_home=/Users/daubert/Library/Android/sdk
+common_args=-PugreenHomeSharedPath=/private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq -PfirebaseCrashlyticsMappingUpload=false --no-daemon --console=plain
+:app:tasks --all|0|20|/private/tmp/ugreen-test-task-enumeration-20260914/_app_tasks_--all.log
+tasks --all|0|18|/private/tmp/ugreen-test-task-enumeration-20260914/tasks_--all.log
+tasks --all (shared standalone)|0|21|log=测试任务枚举-shared-tasks-all.log

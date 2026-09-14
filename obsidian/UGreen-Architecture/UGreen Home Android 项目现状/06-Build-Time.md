@@ -11,8 +11,9 @@
 | `./gradlew projects`（同名 Shared） | 成功；含 Shared Composite Build 与全部 Android modules | 65.51 秒 |
 | `clean :app:assembleDomesticDebug --no-build-cache` | **BUILD SUCCESSFUL**；954 actionable tasks，943 executed | **103.89 秒** |
 | 单文件变更后 `:app:assembleDomesticDebug --no-build-cache` | **BUILD SUCCESSFUL**；47 tasks executed；`compileDomesticDebugKotlin` 实际执行，文件已还原 | **33.24 秒** |
+| 还原源码后 `:app:assembleDomesticDebug :app:assembleDomesticDebugAndroidTest` | **BUILD SUCCESSFUL**；950 tasks，88 executed；用于模拟器验证，不作为 clean/增量性能样本 | **41.22 秒** |
 
-产物为未签名 `com.ugreen.home` domesticDebug APK（minSdk 28，arm64-v8a/armeabi-v7a），未安装、未启动。产物校验见 [APK产物校验](附件/APK产物校验.json)。
+产物为未签名 `com.ugreen.home` domesticDebug APK（minSdk 28，arm64-v8a/armeabi-v7a）；另以临时调研证书签名副本，在 API 36 隔离模拟器完成安装与启动冒烟。未使用生产签名、未发布。产物校验见 [APK产物校验](附件/APK产物校验.json)。
 
 ## 2. 分支与路径诊断
 
@@ -30,6 +31,6 @@ Gradle 9.4.1、AGP 9.2.1、Kotlin 2.4.0；Temurin 21.0.7 运行 Gradle；Android
 
 完整参数见[构建结果](附件/构建结果.json)。Clean 前删除隔离 Shared 生成目录的准备过程不计入103.89秒；Android clean + assemble均在该计时内。使用 `--no-build-cache` 禁止Gradle任务输出缓存恢复，但并未清除用户依赖缓存、Gradle守护进程/JIT影响或系统文件缓存；不与 iOS 数字直接作性能优劣比较。依赖下载准备耗时未单独测量（N/A）。
 
-第一次新复制源码装配228.00秒（915 tasks executed）发生在正式clean基线前；首次误指定Shared根clean task的10.01秒属于调研命令错误。两者均不混入正式clean/incremental基线。后续保留的APK属于增量实验产物，不安装、不发布；原业务文件已按字节还原。
+第一次新复制源码装配228.00秒（915 tasks executed）发生在正式clean基线前；首次误指定Shared根clean task的10.01秒属于调研命令错误。两者均不混入正式clean/incremental基线。该阶段 APK 属于增量实验产物；随后业务文件按字节还原，并重新装配 App 与 AndroidTest（41.22秒）。安装验证使用重新装配后的临时签名副本，不使用旧 marker 产物、不发布；见[Android运行实测](附件/Android运行实测.md)。
 
 证据：[构建环境](附件/构建环境.json)、[增量变更与还原](附件/增量变更与还原.json)、[隔离清理范围](附件/隔离清理范围.json)、[源工程保护校验](附件/源工程保护校验.json)。

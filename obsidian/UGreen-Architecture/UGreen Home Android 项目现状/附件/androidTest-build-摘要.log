@@ -1,0 +1,8 @@
+> Task :app:compileDomesticDebugKotlin
+> Task :app:assembleDomesticDebug
+> Task :app:assembleDomesticDebugAndroidTest
+BUILD SUCCESSFUL in 40s
+950 actionable tasks: 88 executed, 862 up-to-date
+real 41.22
+user 0.93
+sys 0.18

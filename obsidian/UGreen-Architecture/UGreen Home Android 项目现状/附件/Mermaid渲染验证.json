@@ -1,0 +1,142 @@
+{
+  "engine": "Mermaid 11.13.0 bundled in local Obsidian.app",
+  "method": "mermaid.parse and mermaid.render in existing headless Chromium via Playwright; no installation/network",
+  "engineSha256": "6ef73c979e4636b0724eb3b4ee505e53e3a117e4cae31914ec5b2d64f27ff603",
+  "before": [
+    {
+      "file": "01-Feature-Map.md",
+      "block": 1,
+      "ok": false,
+      "error": "Error: Parse error on line 4:\n... KRoot[UGRootScreen (KMP)]  KRoot --> D\n-----------------------^\nExpecting 'SQE', 'DOUBLECIRCLEEND', 'PE', '-)', 'STADIUMEND', 'SUBROUTINEEND', 'PIPE', 'CYLINDEREND', 'DIAMOND_STOP', 'TAGEND', 'TRAPEND', 'INVTRAPEND', 'UNICODE_TEXT', 'TEXT', 'TAGSTART', got 'PS'"
+    },
+    {
+      "file": "02-Module-Dependency-Graph.md",
+      "block": 1,
+      "ok": true,
+      "svgBytes": 34310
+    },
+    {
+      "file": "02-Module-Dependency-Graph.md",
+      "block": 2,
+      "ok": true,
+      "svgBytes": 21244
+    },
+    {
+      "file": "03-Core-Dependencies.md",
+      "block": 1,
+      "ok": true,
+      "svgBytes": 13268
+    },
+    {
+      "file": "03-Core-Dependencies.md",
+      "block": 2,
+      "ok": true,
+      "svgBytes": 16832
+    },
+    {
+      "file": "04-State-Ownership.md",
+      "block": 1,
+      "ok": true,
+      "svgBytes": 28003
+    },
+    {
+      "file": "04-State-Ownership.md",
+      "block": 2,
+      "ok": true,
+      "svgBytes": 25882
+    },
+    {
+      "file": "04-State-Ownership.md",
+      "block": 3,
+      "ok": true,
+      "svgBytes": 25745
+    },
+    {
+      "file": "05-Feature-Communication.md",
+      "block": 1,
+      "ok": true,
+      "svgBytes": 26929
+    },
+    {
+      "file": "05-Feature-Communication.md",
+      "block": 2,
+      "ok": true,
+      "svgBytes": 26835
+    },
+    {
+      "file": "05-Feature-Communication.md",
+      "block": 3,
+      "ok": true,
+      "svgBytes": 26929
+    }
+  ],
+  "after": [
+    {
+      "file": "01-Feature-Map.md",
+      "block": 1,
+      "ok": true,
+      "svgBytes": 19057
+    },
+    {
+      "file": "02-Module-Dependency-Graph.md",
+      "block": 1,
+      "ok": true,
+      "svgBytes": 34424
+    },
+    {
+      "file": "02-Module-Dependency-Graph.md",
+      "block": 2,
+      "ok": true,
+      "svgBytes": 21241
+    },
+    {
+      "file": "03-Core-Dependencies.md",
+      "block": 1,
+      "ok": true,
+      "svgBytes": 13293
+    },
+    {
+      "file": "03-Core-Dependencies.md",
+      "block": 2,
+      "ok": true,
+      "svgBytes": 16856
+    },
+    {
+      "file": "04-State-Ownership.md",
+      "block": 1,
+      "ok": true,
+      "svgBytes": 27987
+    },
+    {
+      "file": "04-State-Ownership.md",
+      "block": 2,
+      "ok": true,
+      "svgBytes": 25882
+    },
+    {
+      "file": "04-State-Ownership.md",
+      "block": 3,
+      "ok": true,
+      "svgBytes": 25745
+    },
+    {
+      "file": "05-Feature-Communication.md",
+      "block": 1,
+      "ok": true,
+      "svgBytes": 26929
+    },
+    {
+      "file": "05-Feature-Communication.md",
+      "block": 2,
+      "ok": true,
+      "svgBytes": 26835
+    },
+    {
+      "file": "05-Feature-Communication.md",
+      "block": 3,
+      "ok": true,
+      "svgBytes": 26929
+    }
+  ],
+  "svgDirectory": "/private/tmp/android-mermaid-check-5f4ordju"
+}

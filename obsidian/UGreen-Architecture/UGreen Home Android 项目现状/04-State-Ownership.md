@@ -105,4 +105,4 @@ sequenceDiagram
 
 ## 共享 KMP 交叉引用与未验证项
 
-共享 Auth/Env/HomeLocation 的通用实现和 iOS 已确认链路见 [iOS 04-State-Ownership](../UGreen%20Home%20iOS%20项目现状/04-State-Ownership.md)。本 Android 文档只记录 `AppInitializationManager` 的 callback adapter、`DeviceRuntimeFacade` 门面、Room 动态 user/environment key 及 Android lifecycle。以上均为静态调用证据；未执行构建、未连接真实 IoT 设备，未证明线上时序、并发调度或持久化加密实现。
+共享 Auth/Env/HomeLocation 的通用实现和 iOS 已确认链路见 [iOS 04-State-Ownership](../UGreen%20Home%20iOS%20项目现状/04-State-Ownership.md)。本 Android 文档只记录 `AppInitializationManager` 的 callback adapter、`DeviceRuntimeFacade` 门面、Room 动态 user/environment key 及 Android lifecycle。本轮已完成隔离 App 构建及 JVM/Android 单元测试（见06/07）；以上状态链仍以静态调用为证据，未连接真实 IoT 设备，未证明线上时序、并发调度或持久化加密实现。

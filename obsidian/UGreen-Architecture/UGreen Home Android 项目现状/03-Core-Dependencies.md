@@ -1,6 +1,6 @@
 # Core Dependencies
 
-> **静态快照**：2026-09-14。下述版本是 version catalog 或明确 Gradle 声明，不是 resolved dependency graph，也不等同线上可用性。Shared 通用实现细节见 [iOS Core Dependencies](../UGreen%20Home%20iOS%20项目现状/03-Core-Dependencies.md)；这里只记录 Android engine、宿主初始化与调用差异。
+> **解析快照**：2026-09-14。对本文列出的国内/海外 runtime classpath 已实际运行 `:app:dependencyInsight`；解析版本与选择路径见[依赖解析实测](附件/依赖解析实测.md)及同目录 `dependency-insight-*.log`。这仍不等同线上可用性或 artifact 运行验证。Shared 通用实现细节见 [iOS Core Dependencies](../UGreen%20Home%20iOS%20项目现状/03-Core-Dependencies.md)；这里只记录 Android engine、宿主初始化与调用差异。
 
 > **基线锁定**：Android `release/1.7.0` @ `5543c83e381e8af4676fe3ba22462992928afde6`（源根 `/Users/daubert/UGreen/ugreen-home`）；Shared 配套 `release/1.7.0` @ `4f36969b7894df90af09fe9ae3a2797c8cd117ed`（核对快照 `/private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq`）。文中 Android 路径均相对 Android 源根，`Shared@4f36969b` 路径均相对该 Shared 快照。
 
@@ -54,8 +54,8 @@ flowchart LR
 
 | 能力 | 版本 / flavor | 证据与限制 |
 |---|---|---|
-| Firebase Crashlytics / Analytics | Firebase BoM **34.7.0**；仅海外 `:crash-report-firebase`。 | catalog：`gradle/libs.versions.toml:28-29`；模块：`crash-report/crash-report-firebase/build.gradle:23-30`。BoM 管理的单组件 resolved version 未在本轮解析。 |
-| Bugly | catalog 指定 `latest.release`；仅国内 `:crash-report-bugly`。 | `gradle/libs.versions.toml:86-88`；`crash-report/crash-report-bugly/build.gradle:23-27`。不能从该动态声明推导确定版本。 |
+| Firebase Crashlytics / Analytics | Firebase BoM **34.7.0**；海外实际解析为 Analytics **23.0.0**、Crashlytics / NDK **20.0.3**、Messaging **25.0.1**。 | 仅 `overseasDebugRuntimeClasspath`；`crash-report-firebase` 与 `push-google` 引入 BoM。BoM 作为 platform constraint，组件版本还经 Gradle 冲突解析，不能将 BoM 号误作组件版本。详见[依赖解析实测](附件/依赖解析实测.md)。 |
+| Bugly | 国内 `latest.release -> 4.1.9.3`；仅 `:crash-report-bugly`。 | `domesticDebugRuntimeClasspath` 的本次解析值。动态版本并非永久锁定，后续仓库/缓存状态可能改变。详见[依赖解析实测](附件/依赖解析实测.md)。 |
 | Push | 国内 `push-getui`（GT SDK **3.3.15.0** / GTC **3.3.3.0**，并含多厂商适配）；海外 `push-google` 使用 Firebase Messaging BoM。 | `app/build.gradle:179-190`；`push/push-getui/build.gradle:24-39`；`push/push-google/build.gradle:23-29`；版本：`gradle/libs.versions.toml:48-50`。 |
 | 日志 | Android 初始化 `Logger`，安装 Shared `ILogger` adapter 和媒体 logger；KMP 日志具体实现不重复。 | `app/src/main/java/com/ugreen/home/base/AppInitializationManager.kt:189-243` |
 
@@ -79,18 +79,18 @@ flowchart TD
 - `SplashActivity` 特判 Alexa URL 给 KMP；其余解析保存到 `AppRouteManager`，然后启动 `RootActivity`。证据：`app/src/main/java/com/ugreen/home/ui/SplashActivity.kt:72-107,111-146`。
 - `RootActivity` 以 Compose host 承载 Shared root，再回注 Fragment，不应把传统 `MainFragment` 或某个目录存在误写为默认 window root。证据：`app/src/main/java/com/ugreen/home/ui/RootActivity.kt:83-110,126-141`。
 
-## 7. 版本快照
+## 7. 实际解析版本快照
 
-| 依赖 | 声明版本 | 来源 |
+| 依赖 | requested → selected / resolved | configuration 与选择证据 |
 |---|---:|---|
-| Kotlin / AGP / KSP | 2.4.0 / 9.2.1 / 2.3.9 | `gradle/libs.versions.toml:3-7` |
-| Ktor / Shared coroutines | 3.5.1 / 1.11.0 | `Shared@4f36969b/gradle/libs.versions.toml:6,10` |
-| Room / SQLite bundled | 2.8.4 / 2.6.2 | `gradle/libs.versions.toml:8-9`；`Shared@4f36969b/gradle/libs.versions.toml:15-16` |
-| MMKV / Android DataStore | 1.3.16 / 1.1.1 | `gradle/libs.versions.toml:62-63` |
-| Compose MP / Navigation | 1.11.1 / 2.9.1 | `Shared@4f36969b/gradle/libs.versions.toml:20-24` |
-| Firebase BoM | 34.7.0 | `gradle/libs.versions.toml:28-29` |
-| RN runtime Android | 0.1.4 | `gradle/libs.versions.toml:91-92` |
-| Media3 (播放器及 RN 引导 MP4) | 1.8.0 | `ugreen-media/player-runtime-android/build.gradle:87-90`；`rn-platform/build.gradle:24-27` |
-| AirTC Shared SDK | 1.6.2.233 | `Shared@4f36969b/gradle/libs.versions.toml:37-38,112-125` |
+| Bugly | `latest.release → 4.1.9.3` | domestic；动态版本在本次解析中选为 `4.1.9.3` |
+| MMKV / Mars Xlog | 1.3.16 / 1.2.6 | domestic |
+| Room family | 2.8.4 | domestic；Room atomic group 约束统一版本 |
+| DataStore family | `:net` 的 1.1.1 → 1.2.1 | domestic；atomic group 约束和冲突解析 |
+| Ktor client family | core 3.1.0 → 3.5.1；其余命中 3.5.1 | domestic；3.5.1 与 3.1.0 的 conflict resolution |
+| Media3 family | 1.8.0 | domestic |
+| RN runtime / internal packages | runtime 0.1.4；内部包版本见实测附件 | domestic |
+| Shared coordinates | `1.0.0-SNAPSHOT → project :shared-release-1.7.0-9q2u2wrq:*` | domestic；composite build substitution |
+| Firebase | BoM 34.7.0；Analytics 23.0.0；Messaging 25.0.1；Crashlytics/NDK 20.0.3 | overseas；BoM platform constraint + conflict resolution |
 
-未运行 dependency insight 或锁定解析；以上不能替代实际 variant 的解析版本与兼容性结论。
+覆盖范围仅为 `domesticDebugRuntimeClasspath` 的上述七组与 `overseasDebugRuntimeClasspath` 的 Firebase 组；完整命令、耗时、退出码和选择路径见[依赖解析实测](附件/依赖解析实测.md)。8/8 诊断成功且逐日志未出现 `FAILED` / `unresolved`，这些诊断本身不构建或运行 APK；另行完成的 App 构建和离线模拟器验证见06/07，不代表 SDK 服务端功能已验证。

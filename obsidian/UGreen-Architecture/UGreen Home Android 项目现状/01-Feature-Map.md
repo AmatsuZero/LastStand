@@ -27,7 +27,7 @@
 flowchart TD
   OS[Android launcher / deep link / push] --> Splash[SplashActivity]
   Splash --> Root[RootActivity]
-  Root --> KRoot[UGRootScreen (KMP)]
+  Root --> KRoot["UGRootScreen (KMP)"]
   KRoot --> Device[DevicesFragment]
   KRoot --> Event[KmpHomeEventListFragment]
   KRoot --> Mine[MineFragment]

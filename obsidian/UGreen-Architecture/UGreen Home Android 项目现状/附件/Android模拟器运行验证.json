@@ -1,0 +1,222 @@
+{
+  "serial": "emulator-5584",
+  "adbPort": 5052,
+  "avd": "UGreenSurveyApi36",
+  "api": 36,
+  "steps": [
+    {
+      "name": "avd-identity",
+      "exit": 0,
+      "evidence": "avd-identity.txt"
+    },
+    {
+      "name": "airplane",
+      "exit": 0,
+      "evidence": "airplane.txt"
+    },
+    {
+      "name": "wifi-off",
+      "exit": 0,
+      "evidence": "wifi-off.txt"
+    },
+    {
+      "name": "data-off",
+      "exit": 0,
+      "evidence": "data-off.txt"
+    },
+    {
+      "name": "airplane-state",
+      "exit": 0,
+      "evidence": "airplane-state.txt"
+    },
+    {
+      "name": "runtime-connectivity",
+      "exit": 0,
+      "evidence": "runtime-connectivity.txt"
+    },
+    {
+      "name": "install-app",
+      "exit": 0,
+      "evidence": "install-app.txt"
+    },
+    {
+      "name": "install-test",
+      "exit": 0,
+      "evidence": "install-test.txt"
+    },
+    {
+      "name": "clear-logcat",
+      "exit": 0,
+      "evidence": "clear-logcat.txt"
+    },
+    {
+      "name": "instrumentation-all",
+      "exit": 0,
+      "evidence": "instrumentation-all.txt"
+    },
+    {
+      "name": "instrumentation-logcat",
+      "exit": 0,
+      "evidence": "instrumentation-logcat.txt"
+    },
+    {
+      "name": "force-stop",
+      "exit": 0,
+      "evidence": "force-stop.txt"
+    },
+    {
+      "name": "launcher-component",
+      "exit": 0,
+      "evidence": "launcher-component.txt"
+    },
+    {
+      "name": "launch-smoke",
+      "exit": 0,
+      "evidence": "launch-smoke.txt"
+    },
+    {
+      "name": "activity-smoke",
+      "exit": 0,
+      "evidence": "activity-smoke.txt"
+    },
+    {
+      "name": "ui-dump",
+      "exit": 0,
+      "evidence": "ui-dump.txt"
+    },
+    {
+      "name": "ui-xml",
+      "exit": 0,
+      "evidence": "ui-xml.txt"
+    },
+    {
+      "name": "smoke-logcat",
+      "exit": 0,
+      "evidence": "smoke-logcat.txt"
+    }
+  ],
+  "command": [
+    "/Users/daubert/Library/Android/sdk/emulator/emulator",
+    "-avd",
+    "UGreenSurveyApi36",
+    "-port",
+    "5584",
+    "-no-window",
+    "-no-audio",
+    "-no-snapshot",
+    "-no-boot-anim",
+    "-gpu",
+    "swiftshader_indirect",
+    "-memory",
+    "2048",
+    "-cores",
+    "2",
+    "-dns-server",
+    "127.0.0.1"
+  ],
+  "bootSeconds": 18.22,
+  "offlineVerified": true,
+  "instrumentation": {
+    "okSummary": [],
+    "statusCodes": [
+      "1",
+      "0",
+      "1",
+      "-2",
+      "1",
+      "-2"
+    ],
+    "finalCodes": [
+      "-1"
+    ],
+    "failureSummary": [
+      "Tests run: 3,  Failures: 4"
+    ]
+  },
+  "launchOutput": "Starting: Intent { cmp=com.ugreen.home/.ui.SplashActivity }\nStatus: ok\nLaunchState: COLD\nActivity: com.ugreen.home/.ui.RootActivity\nTotalTime: 1313\nWaitTime: 1315\nComplete\n",
+  "screenshot": "launch-smoke.png",
+  "completed": true,
+  "cleanup": {
+    "emulatorExit": 0,
+    "adbServerStopExit": 0
+  },
+  "totalSeconds": 38.6,
+  "date": "2026-09-14",
+  "rawEvidenceRoot": "/private/tmp/ugreen-android-runtime-dccmjok9",
+  "snapshot": {
+    "android": "5543c83e381e8af4676fe3ba22462992928afde6",
+    "shared": "4f36969b7894df90af09fe9ae3a2797c8cd117ed"
+  },
+  "build": {
+    "tasks": [
+      ":app:assembleDomesticDebug",
+      ":app:assembleDomesticDebugAndroidTest"
+    ],
+    "exitCode": 0,
+    "wallSeconds": 41.22,
+    "executedTasks": 88,
+    "actionableTasks": 950,
+    "sourceRestoredBeforeRebuild": true,
+    "summary": "androidTest-build-摘要.log"
+  },
+  "signing": {
+    "type": "temporary local test certificate, not production",
+    "certificateSha256": "559ed38d4ce102dad876153b4fa9d48b0f4fae167acf359f3c62a1a3127f59ff",
+    "appAndTestCertificateMatch": true,
+    "apksignerVerifyExitCodes": [
+      0,
+      0
+    ]
+  },
+  "artifacts": [
+    {
+      "name": "app.apk",
+      "sha256": "5a33e19e01fd0fda0d2309071b9312c9d476e8eda3148a1062b26e5ae5f7109e"
+    },
+    {
+      "name": "test.apk",
+      "sha256": "8b069b5e92d5734e4e4784f6f174fcdded4aa248171b662fb93f0039d68d429f"
+    }
+  ],
+  "caseSummary": {
+    "discovered": 3,
+    "passed": 1,
+    "failedCases": 2,
+    "failureEvents": 4,
+    "reason": "DatabaseHolder not initialized in both @Before and @After; route assertions not reached",
+    "cases": [
+      {
+        "class": "ExampleInstrumentedTest",
+        "test": "useAppContext",
+        "status": "passed"
+      },
+      {
+        "class": "IPCDeviceSettingActivityBackStackTest",
+        "test": "trafficManagement_isRootPage_andOneBackFinishesActivity",
+        "status": "failed"
+      },
+      {
+        "class": "IPCDeviceSettingActivityBackStackTest",
+        "test": "networkConfig_isRootPage_andOneBackFinishesActivity",
+        "status": "failed"
+      }
+    ]
+  },
+  "launchScope": {
+    "observed": "RootActivity resumed; privacy terms visible 10s after am start",
+    "consentAccepted": false,
+    "backendLogin": false,
+    "physicalDeviceUsed": false,
+    "endToEndBusinessValidation": false
+  },
+  "archiveEvidence": {
+    "instrumentation": "instrumentation-all.log",
+    "launch": "Android启动冒烟.log",
+    "activity": "Android启动Activity.log",
+    "ui": "Android首次启动-UI.xml",
+    "screenshot": "Android首次启动.png",
+    "network": "Android网络状态.log",
+    "airplaneMode": "Android离线状态.txt",
+    "script": "Android模拟器验证脚本.py"
+  }
+}

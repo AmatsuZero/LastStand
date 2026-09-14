@@ -110,4 +110,4 @@ sequenceDiagram
 
 ## KMP 与 Android adapter 边界
 
-KMP Auth/Env/HomeLocation 的共用 producer-consumer 说明复用 iOS 文档；Android 只补 `AuthSessionCallback`、`DeviceRuntimeFacade`、Room user/environment key 和 RN/播放器宿主适配。`DeviceRuntimeFacade` 的 `syncNativeIpcDevices` 接受宿主 `NativeIpcDeviceDescriptor` 并转给 `AppDeviceModule`，见 `repository/src/main/kotlin/com/ugreen/care/repo/device/runtime/DeviceRuntimeFacade.kt:37-52`。本轮未在 Android 运行环境执行，不能把静态图升级为运行验证。
+KMP Auth/Env/HomeLocation 的共用 producer-consumer 说明复用 iOS 文档；Android 只补 `AuthSessionCallback`、`DeviceRuntimeFacade`、Room user/environment key 和 RN/播放器宿主适配。`DeviceRuntimeFacade` 的 `syncNativeIpcDevices` 接受宿主 `NativeIpcDeviceDescriptor` 并转给 `AppDeviceModule`，见 `repository/src/main/kotlin/com/ugreen/care/repo/device/runtime/DeviceRuntimeFacade.kt:37-52`。本轮已完成隔离 App 构建、JVM/Android 单元测试以及 API36 模拟器上的 App instrumentation 和启动观察（见06/07）。启动到隐私协议页，未同意协议或登录；返回栈测试因 DatabaseHolder 未初始化未进入业务断言。因此不能将整张静态通信图升级为运行验证。

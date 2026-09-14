@@ -1,0 +1,12 @@
+started_at=2026-09-14T13:38:35+08:00
+java_home=/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home
+android_home=/Users/daubert/Library/Android/sdk
+common_args=-PugreenHomeSharedPath=/private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq -PfirebaseCrashlyticsMappingUpload=false --no-daemon --console=plain
+domesticDebugRuntimeClasspath|com.tencent|task=:app:dependencyInsight|exit_code=0|elapsed_seconds=9|log=dependency-insight-domesticDebugRuntimeClasspath-com_tencent.log
+domesticDebugRuntimeClasspath|androidx.room|task=:app:dependencyInsight|exit_code=0|elapsed_seconds=10|log=dependency-insight-domesticDebugRuntimeClasspath-androidx_room.log
+domesticDebugRuntimeClasspath|androidx.datastore|task=:app:dependencyInsight|exit_code=0|elapsed_seconds=9|log=dependency-insight-domesticDebugRuntimeClasspath-androidx_datastore.log
+domesticDebugRuntimeClasspath|androidx.media3|task=:app:dependencyInsight|exit_code=0|elapsed_seconds=10|log=dependency-insight-domesticDebugRuntimeClasspath-androidx_media3.log
+domesticDebugRuntimeClasspath|io.ktor|task=:app:dependencyInsight|exit_code=0|elapsed_seconds=9|log=dependency-insight-domesticDebugRuntimeClasspath-io_ktor.log
+domesticDebugRuntimeClasspath|com.ugreen.rn|task=:app:dependencyInsight|exit_code=0|elapsed_seconds=10|log=dependency-insight-domesticDebugRuntimeClasspath-com_ugreen_rn.log
+domesticDebugRuntimeClasspath|com.ugreen.home.shared|task=:app:dependencyInsight|exit_code=0|elapsed_seconds=9|log=dependency-insight-domesticDebugRuntimeClasspath-com_ugreen_home_shared.log
+overseasDebugRuntimeClasspath|com.google.firebase|task=:app:dependencyInsight|exit_code=0|elapsed_seconds=9|log=dependency-insight-overseasDebugRuntimeClasspath-com_google_firebase.log

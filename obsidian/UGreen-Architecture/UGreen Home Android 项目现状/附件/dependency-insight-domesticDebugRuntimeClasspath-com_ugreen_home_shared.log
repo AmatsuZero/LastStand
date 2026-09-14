@@ -1,0 +1,1270 @@
+
+=== configuration=domesticDebugRuntimeClasspath dependency=com.ugreen.home.shared started_at=2026-09-14T13:41:06+08:00 ===
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+
+> Configure project :
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+
+> Configure project :app
+WARNING: The option setting 'android.enableR8.fullMode=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+========================================
+Version Info:
+  Version Name: 1.0.6.1
+  Version Code: 100513
+  Git Commits: 1
+  Git Hash: unknown
+========================================
+--W- Build Environment: AGConnect plugin version is: 1.9.6.300, Gradle version is: 9.4.1, Android Plugin version is: 9.2.1
+--I- Using the AGConnect-Config file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--I- Using the AGConnect-Config file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--I- Using the AGConnect-Config file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--I- Using the AGConnect-Config file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--I- Using the AGConnect-Config file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--I- Using the AGConnect-Config file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--I- Using the AGConnect-Config file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--I- Using the AGConnect-Config file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--W- The variant: domesticDebug, Use the json file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--W- The variant: overseasDebug, Use the json file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--W- The variant: domesticRelease, Use the json file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--W- The variant: overseasRelease, Use the json file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--W- The variant: domesticUat, Use the json file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--W- The variant: overseasUat, Use the json file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--W- The variant: domesticBeta, Use the json file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--W- The variant: overseasBeta, Use the json file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+
+> Configure project :player-core
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:build-logic:convention
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+
+> Task :shared-release-1.7.0-9q2u2wrq:build-logic:convention:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:build-logic:convention:compileKotlin UP-TO-DATE
+> Task :shared-release-1.7.0-9q2u2wrq:build-logic:convention:compileJava NO-SOURCE
+> Task :shared-release-1.7.0-9q2u2wrq:build-logic:convention:pluginDescriptors UP-TO-DATE
+> Task :shared-release-1.7.0-9q2u2wrq:build-logic:convention:processResources UP-TO-DATE
+> Task :shared-release-1.7.0-9q2u2wrq:build-logic:convention:classes UP-TO-DATE
+> Task :shared-release-1.7.0-9q2u2wrq:build-logic:convention:jar UP-TO-DATE
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:airtc-appsdk
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:app-shared
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:core-database
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:core-kv
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:core-logger
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:core-mvi
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:core-navigation
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+WARNING: The 'commonTest' source directory exists, but android host tests are not enabled. To enable android host tests, add `withHostTest {}` to your android target configuration in the Gradle build file.
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:core-net
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ iOS Source Set Used Without an iOS Target
+Accessed 'source set iosMain' without registering any ios target:
+kotlin {
+    /* Register at least one of the following targets */
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    /* Use convention */
+    sourceSets.iosMain.dependencies {
+
+    }
+}
+Solution: Please register at least one of the iOS targets.
+
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set iosMain was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:core-player
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:core-secure-package
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:core-ui
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:core-util
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:device-biz
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+WARNING: The 'commonTest' source directory exists, but android host tests are not enabled. To enable android host tests, add `withHostTest {}` to your android target configuration in the Gradle build file.
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:device-thing-model
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:domain-device
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:domain-env
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:domain-family
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:domain-product
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:feature-auth
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:feature-device-event
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:feature-home-management
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:feature-ota
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:feature-playback
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+WARNING: The 'commonTest' source directory exists, but android host tests are not enabled. To enable android host tests, add `withHostTest {}` to your android target configuration in the Gradle build file.
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:sample
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:ugreen-strings-kmp
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Task :app:dependencyInsight
+project :shared-release-1.7.0-9q2u2wrq:airtc-appsdk (by composite build)
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:airtc-appsdk
+\--- project :shared-release-1.7.0-9q2u2wrq:device-biz
+     \--- project :repository (requested com.ugreen.home.shared:device-biz:1.0.0-SNAPSHOT)
+          \--- project :base
+               \--- domesticDebugRuntimeClasspath
+
+project :shared-release-1.7.0-9q2u2wrq:core-database (by composite build)
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:core-database
++--- project :shared-release-1.7.0-9q2u2wrq:device-thing-model
+|    +--- project :base (requested com.ugreen.home.shared:device-thing-model:1.0.0-SNAPSHOT)
+|    |    \--- domesticDebugRuntimeClasspath
+|    +--- project :repository (requested com.ugreen.home.shared:device-thing-model:1.0.0-SNAPSHOT)
+|    |    \--- project :base (*)
+|    +--- project :domain (requested com.ugreen.home.shared:device-thing-model:1.0.0-SNAPSHOT)
+|    |    +--- project :base (*)
+|    |    \--- project :repository (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:device-biz
+|    |    \--- project :repository (requested com.ugreen.home.shared:device-biz:1.0.0-SNAPSHOT) (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:airtc-appsdk
+|         +--- project :base (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT) (*)
+|         +--- project :repository (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT) (*)
+|         +--- project :domain (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT) (*)
+|         +--- project :player-provider-airtc-android (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT)
+|         |    \--- project :player-sdk-android
+|         |         +--- domesticDebugRuntimeClasspath
+|         |         +--- project :base (*)
+|         |         +--- project :player-feature-ipc
+|         |         |    \--- domesticDebugRuntimeClasspath
+|         |         \--- project :repository (*)
+|         +--- project :core-messaging (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT)
+|         |    +--- project :base (*)
+|         |    \--- project :repository (*)
+|         \--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
++--- project :shared-release-1.7.0-9q2u2wrq:app-shared
+|    +--- domesticDebugRuntimeClasspath (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|    \--- project :repository (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT) (*)
+\--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
+
+project :shared-release-1.7.0-9q2u2wrq:core-kv
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:core-kv
++--- project :shared-release-1.7.0-9q2u2wrq:core-ui
+|    +--- project :core-ui (requested com.ugreen.home.shared:core-ui:1.0.0-SNAPSHOT)
+|    |    +--- project :base
+|    |    |    \--- domesticDebugRuntimeClasspath
+|    |    +--- project :rn-platform
+|    |    |    \--- domesticDebugRuntimeClasspath
+|    |    +--- project :net
+|    |    |    +--- project :base (*)
+|    |    |    \--- project :repository
+|    |    |         \--- project :base (*)
+|    |    \--- project :calendarview
+|    |         \--- project :base (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared
+|    |    +--- domesticDebugRuntimeClasspath (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|    |    \--- project :repository (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT) (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:device-biz
+|    |    \--- project :repository (requested com.ugreen.home.shared:device-biz:1.0.0-SNAPSHOT) (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-auth
+|    |    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    |    \--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services
+|    |    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-ota
+|    |    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-home-management
+|    |    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:feature-device-event
+|         +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|         \--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
++--- project :shared-release-1.7.0-9q2u2wrq:airtc-appsdk
+|    +--- project :base (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT) (*)
+|    +--- project :repository (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT) (*)
+|    +--- project :domain (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT)
+|    |    +--- project :base (*)
+|    |    \--- project :repository (*)
+|    +--- project :player-provider-airtc-android (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT)
+|    |    \--- project :player-sdk-android
+|    |         +--- domesticDebugRuntimeClasspath
+|    |         +--- project :base (*)
+|    |         +--- project :player-feature-ipc
+|    |         |    \--- domesticDebugRuntimeClasspath
+|    |         \--- project :repository (*)
+|    +--- project :core-messaging (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT)
+|    |    +--- project :base (*)
+|    |    \--- project :repository (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
++--- project :shared-release-1.7.0-9q2u2wrq:domain-env
+|    +--- project :domain (requested com.ugreen.home.shared:domain-env:1.0.0-SNAPSHOT) (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-auth (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services (*)
++--- project :shared-release-1.7.0-9q2u2wrq:domain-product
+|    +--- project :domain (requested com.ugreen.home.shared:domain-product:1.0.0-SNAPSHOT) (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
++--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-auth (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-ota (*)
+\--- project :shared-release-1.7.0-9q2u2wrq:feature-home-management (*)
+
+project :shared-release-1.7.0-9q2u2wrq:core-logger
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:core-logger
++--- project :shared-release-1.7.0-9q2u2wrq:core-net
+|    +--- project :rn-platform (requested com.ugreen.home.shared:core-net:1.0.0-SNAPSHOT)
+|    |    \--- domesticDebugRuntimeClasspath
+|    +--- project :repository (requested com.ugreen.home.shared:core-net:1.0.0-SNAPSHOT)
+|    |    \--- project :base
+|    |         \--- domesticDebugRuntimeClasspath
+|    +--- project :net (requested com.ugreen.home.shared:core-net:1.0.0-SNAPSHOT)
+|    |    +--- project :base (*)
+|    |    \--- project :repository (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared
+|    |    +--- domesticDebugRuntimeClasspath (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|    |    \--- project :repository (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT) (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:device-biz
+|    |    \--- project :repository (requested com.ugreen.home.shared:device-biz:1.0.0-SNAPSHOT) (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-auth
+|    |    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    |    \--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services
+|    |    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-ota
+|    |    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-home-management
+|    |    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-device-event
+|    |    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    |    \--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:core-ui
+|    |    +--- project :core-ui (requested com.ugreen.home.shared:core-ui:1.0.0-SNAPSHOT)
+|    |    |    +--- project :base (*)
+|    |    |    +--- project :rn-platform (*)
+|    |    |    +--- project :net (*)
+|    |    |    \--- project :calendarview
+|    |    |         \--- project :base (*)
+|    |    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    |    +--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
+|    |    +--- project :shared-release-1.7.0-9q2u2wrq:feature-auth (*)
+|    |    +--- project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services (*)
+|    |    +--- project :shared-release-1.7.0-9q2u2wrq:feature-ota (*)
+|    |    +--- project :shared-release-1.7.0-9q2u2wrq:feature-home-management (*)
+|    |    \--- project :shared-release-1.7.0-9q2u2wrq:feature-device-event (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:domain-env
+|    |    +--- project :domain (requested com.ugreen.home.shared:domain-env:1.0.0-SNAPSHOT)
+|    |    |    +--- project :base (*)
+|    |    |    \--- project :repository (*)
+|    |    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    |    +--- project :shared-release-1.7.0-9q2u2wrq:feature-auth (*)
+|    |    \--- project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:domain-product
+|         +--- project :domain (requested com.ugreen.home.shared:domain-product:1.0.0-SNAPSHOT) (*)
+|         \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
++--- project :shared-release-1.7.0-9q2u2wrq:core-ui (*)
++--- project :shared-release-1.7.0-9q2u2wrq:airtc-appsdk
+|    +--- project :base (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT) (*)
+|    +--- project :repository (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT) (*)
+|    +--- project :domain (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT) (*)
+|    +--- project :player-provider-airtc-android (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT)
+|    |    \--- project :player-sdk-android
+|    |         +--- domesticDebugRuntimeClasspath
+|    |         +--- project :base (*)
+|    |         +--- project :player-feature-ipc
+|    |         |    \--- domesticDebugRuntimeClasspath
+|    |         \--- project :repository (*)
+|    +--- project :core-messaging (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT)
+|    |    +--- project :base (*)
+|    |    \--- project :repository (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
++--- project :shared-release-1.7.0-9q2u2wrq:device-thing-model
+|    +--- project :base (requested com.ugreen.home.shared:device-thing-model:1.0.0-SNAPSHOT) (*)
+|    +--- project :repository (requested com.ugreen.home.shared:device-thing-model:1.0.0-SNAPSHOT) (*)
+|    +--- project :domain (requested com.ugreen.home.shared:device-thing-model:1.0.0-SNAPSHOT) (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:airtc-appsdk (*)
++--- project :shared-release-1.7.0-9q2u2wrq:domain-env (*)
++--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-auth (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-ota (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-home-management (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-device-event (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-playback
+|    +--- project :repository (requested com.ugreen.home.shared:feature-playback:1.0.0-SNAPSHOT) (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+\--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
+
+project :shared-release-1.7.0-9q2u2wrq:core-mvi
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:core-mvi
++--- project :shared-release-1.7.0-9q2u2wrq:app-shared
+|    +--- domesticDebugRuntimeClasspath (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|    \--- project :repository (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|         \--- project :base
+|              \--- domesticDebugRuntimeClasspath
++--- project :shared-release-1.7.0-9q2u2wrq:feature-auth
+|    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:device-biz
+|         \--- project :repository (requested com.ugreen.home.shared:device-biz:1.0.0-SNAPSHOT) (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services
+|    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-home-management
+|    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+\--- project :shared-release-1.7.0-9q2u2wrq:feature-device-event
+     +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+     \--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
+
+project :shared-release-1.7.0-9q2u2wrq:core-navigation
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:core-navigation
++--- project :shared-release-1.7.0-9q2u2wrq:app-shared
+|    +--- domesticDebugRuntimeClasspath (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|    \--- project :repository (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|         \--- project :base
+|              \--- domesticDebugRuntimeClasspath
++--- project :shared-release-1.7.0-9q2u2wrq:feature-auth
+|    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:device-biz
+|         \--- project :repository (requested com.ugreen.home.shared:device-biz:1.0.0-SNAPSHOT) (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services
+|    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-home-management
+|    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+\--- project :shared-release-1.7.0-9q2u2wrq:feature-device-event
+     +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+     \--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
+
+project :shared-release-1.7.0-9q2u2wrq:core-net (by composite build)
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:core-net
++--- project :shared-release-1.7.0-9q2u2wrq:core-ui
+|    +--- project :core-ui (requested com.ugreen.home.shared:core-ui:1.0.0-SNAPSHOT)
+|    |    +--- project :base
+|    |    |    \--- domesticDebugRuntimeClasspath
+|    |    +--- project :rn-platform
+|    |    |    \--- domesticDebugRuntimeClasspath
+|    |    +--- project :net
+|    |    |    +--- project :base (*)
+|    |    |    \--- project :repository
+|    |    |         \--- project :base (*)
+|    |    \--- project :calendarview
+|    |         \--- project :base (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared
+|    |    +--- domesticDebugRuntimeClasspath (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|    |    \--- project :repository (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT) (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:device-biz
+|    |    \--- project :repository (requested com.ugreen.home.shared:device-biz:1.0.0-SNAPSHOT) (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-auth
+|    |    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    |    \--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services
+|    |    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-ota
+|    |    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-home-management
+|    |    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:feature-device-event
+|         +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|         \--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
++--- project :shared-release-1.7.0-9q2u2wrq:domain-env
+|    +--- project :domain (requested com.ugreen.home.shared:domain-env:1.0.0-SNAPSHOT)
+|    |    +--- project :base (*)
+|    |    \--- project :repository (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-auth (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services (*)
++--- project :shared-release-1.7.0-9q2u2wrq:domain-product
+|    +--- project :domain (requested com.ugreen.home.shared:domain-product:1.0.0-SNAPSHOT) (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
++--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-auth (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-ota (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-home-management (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-device-event (*)
+\--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
+
+project :shared-release-1.7.0-9q2u2wrq:core-player
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:core-player
+\--- project :shared-release-1.7.0-9q2u2wrq:app-shared
+     +--- domesticDebugRuntimeClasspath (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+     \--- project :repository (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+          \--- project :base
+               \--- domesticDebugRuntimeClasspath
+
+project :shared-release-1.7.0-9q2u2wrq:core-secure-package
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:core-secure-package
++--- project :shared-release-1.7.0-9q2u2wrq:app-shared
+|    +--- domesticDebugRuntimeClasspath (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|    \--- project :repository (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|         \--- project :base
+|              \--- domesticDebugRuntimeClasspath
+\--- project :shared-release-1.7.0-9q2u2wrq:feature-auth
+     +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+     \--- project :shared-release-1.7.0-9q2u2wrq:device-biz
+          \--- project :repository (requested com.ugreen.home.shared:device-biz:1.0.0-SNAPSHOT) (*)
+
+project :shared-release-1.7.0-9q2u2wrq:core-ui (by composite build)
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:core-ui
++--- project :shared-release-1.7.0-9q2u2wrq:app-shared
+|    +--- domesticDebugRuntimeClasspath (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|    \--- project :repository (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|         \--- project :base
+|              \--- domesticDebugRuntimeClasspath
++--- project :shared-release-1.7.0-9q2u2wrq:feature-auth
+|    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:device-biz
+|         \--- project :repository (requested com.ugreen.home.shared:device-biz:1.0.0-SNAPSHOT) (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services
+|    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-ota
+|    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-home-management
+|    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-device-event
+|    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
+\--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
+
+project :shared-release-1.7.0-9q2u2wrq:core-util (by composite build)
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:core-util
++--- project :shared-release-1.7.0-9q2u2wrq:core-ui
+|    +--- project :core-ui (requested com.ugreen.home.shared:core-ui:1.0.0-SNAPSHOT)
+|    |    +--- project :base
+|    |    |    \--- domesticDebugRuntimeClasspath
+|    |    +--- project :rn-platform
+|    |    |    \--- domesticDebugRuntimeClasspath
+|    |    +--- project :net
+|    |    |    +--- project :base (*)
+|    |    |    \--- project :repository
+|    |    |         \--- project :base (*)
+|    |    \--- project :calendarview
+|    |         \--- project :base (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared
+|    |    +--- domesticDebugRuntimeClasspath (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|    |    \--- project :repository (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT) (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:device-biz
+|    |    \--- project :repository (requested com.ugreen.home.shared:device-biz:1.0.0-SNAPSHOT) (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-auth
+|    |    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    |    \--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services
+|    |    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-ota
+|    |    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-home-management
+|    |    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:feature-device-event
+|         +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|         \--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
++--- project :shared-release-1.7.0-9q2u2wrq:airtc-appsdk
+|    +--- project :base (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT) (*)
+|    +--- project :repository (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT) (*)
+|    +--- project :domain (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT)
+|    |    +--- project :base (*)
+|    |    \--- project :repository (*)
+|    +--- project :player-provider-airtc-android (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT)
+|    |    \--- project :player-sdk-android
+|    |         +--- domesticDebugRuntimeClasspath
+|    |         +--- project :base (*)
+|    |         +--- project :player-feature-ipc
+|    |         |    \--- domesticDebugRuntimeClasspath
+|    |         \--- project :repository (*)
+|    +--- project :core-messaging (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT)
+|    |    +--- project :base (*)
+|    |    \--- project :repository (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
++--- project :shared-release-1.7.0-9q2u2wrq:device-thing-model
+|    +--- project :base (requested com.ugreen.home.shared:device-thing-model:1.0.0-SNAPSHOT) (*)
+|    +--- project :repository (requested com.ugreen.home.shared:device-thing-model:1.0.0-SNAPSHOT) (*)
+|    +--- project :domain (requested com.ugreen.home.shared:device-thing-model:1.0.0-SNAPSHOT) (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:airtc-appsdk (*)
++--- project :shared-release-1.7.0-9q2u2wrq:domain-env
+|    +--- project :domain (requested com.ugreen.home.shared:domain-env:1.0.0-SNAPSHOT) (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-auth (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services (*)
++--- project :shared-release-1.7.0-9q2u2wrq:domain-product
+|    +--- project :domain (requested com.ugreen.home.shared:domain-product:1.0.0-SNAPSHOT) (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
++--- project :shared-release-1.7.0-9q2u2wrq:core-mvi
+|    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-auth (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services (*)
+|    +--- project :shared-release-1.7.0-9q2u2wrq:feature-home-management (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:feature-device-event (*)
++--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-auth (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-ota (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-home-management (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-device-event (*)
++--- project :shared-release-1.7.0-9q2u2wrq:feature-playback
+|    +--- project :repository (requested com.ugreen.home.shared:feature-playback:1.0.0-SNAPSHOT) (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+\--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
+
+project :shared-release-1.7.0-9q2u2wrq:device-thing-model (by composite build)
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:device-thing-model
++--- project :shared-release-1.7.0-9q2u2wrq:airtc-appsdk
+|    +--- project :base (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT)
+|    |    \--- domesticDebugRuntimeClasspath
+|    +--- project :repository (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT)
+|    |    \--- project :base (*)
+|    +--- project :domain (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT)
+|    |    +--- project :base (*)
+|    |    \--- project :repository (*)
+|    +--- project :player-provider-airtc-android (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT)
+|    |    \--- project :player-sdk-android
+|    |         +--- domesticDebugRuntimeClasspath
+|    |         +--- project :base (*)
+|    |         +--- project :player-feature-ipc
+|    |         |    \--- domesticDebugRuntimeClasspath
+|    |         \--- project :repository (*)
+|    +--- project :core-messaging (requested com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT)
+|    |    +--- project :base (*)
+|    |    \--- project :repository (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:device-biz
+|         \--- project :repository (requested com.ugreen.home.shared:device-biz:1.0.0-SNAPSHOT) (*)
+\--- project :shared-release-1.7.0-9q2u2wrq:device-biz (*)
+
+project :shared-release-1.7.0-9q2u2wrq:domain-env (by composite build)
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:domain-env
++--- project :shared-release-1.7.0-9q2u2wrq:app-shared
+|    +--- domesticDebugRuntimeClasspath (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|    \--- project :repository (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|         \--- project :base
+|              \--- domesticDebugRuntimeClasspath
++--- project :shared-release-1.7.0-9q2u2wrq:feature-auth
+|    +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+|    \--- project :shared-release-1.7.0-9q2u2wrq:device-biz
+|         \--- project :repository (requested com.ugreen.home.shared:device-biz:1.0.0-SNAPSHOT) (*)
+\--- project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services
+     \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+
+project :shared-release-1.7.0-9q2u2wrq:domain-product (by composite build)
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:domain-product
+\--- project :shared-release-1.7.0-9q2u2wrq:app-shared
+     +--- domesticDebugRuntimeClasspath (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+     \--- project :repository (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+          \--- project :base
+               \--- domesticDebugRuntimeClasspath
+
+project :shared-release-1.7.0-9q2u2wrq:feature-auth
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:feature-auth
++--- project :shared-release-1.7.0-9q2u2wrq:app-shared
+|    +--- domesticDebugRuntimeClasspath (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|    \--- project :repository (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|         \--- project :base
+|              \--- domesticDebugRuntimeClasspath
+\--- project :shared-release-1.7.0-9q2u2wrq:device-biz
+     \--- project :repository (requested com.ugreen.home.shared:device-biz:1.0.0-SNAPSHOT) (*)
+
+project :shared-release-1.7.0-9q2u2wrq:feature-device-event
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:feature-device-event
++--- project :shared-release-1.7.0-9q2u2wrq:app-shared
+|    +--- domesticDebugRuntimeClasspath (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|    \--- project :repository (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|         \--- project :base
+|              \--- domesticDebugRuntimeClasspath
+\--- project :shared-release-1.7.0-9q2u2wrq:device-biz
+     \--- project :repository (requested com.ugreen.home.shared:device-biz:1.0.0-SNAPSHOT) (*)
+
+project :shared-release-1.7.0-9q2u2wrq:feature-home-management
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:feature-home-management
+\--- project :shared-release-1.7.0-9q2u2wrq:app-shared
+     +--- domesticDebugRuntimeClasspath (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+     \--- project :repository (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+          \--- project :base
+               \--- domesticDebugRuntimeClasspath
+
+project :shared-release-1.7.0-9q2u2wrq:feature-ota
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:feature-ota
+\--- project :shared-release-1.7.0-9q2u2wrq:app-shared
+     +--- domesticDebugRuntimeClasspath (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+     \--- project :repository (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+          \--- project :base
+               \--- domesticDebugRuntimeClasspath
+
+project :shared-release-1.7.0-9q2u2wrq:feature-playback (by composite build)
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:feature-playback
+\--- project :shared-release-1.7.0-9q2u2wrq:app-shared
+     +--- domesticDebugRuntimeClasspath (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+     \--- project :repository (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+          \--- project :base
+               \--- domesticDebugRuntimeClasspath
+
+project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:feature-third-party-services
+\--- project :shared-release-1.7.0-9q2u2wrq:app-shared
+     +--- domesticDebugRuntimeClasspath (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+     \--- project :repository (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+          \--- project :base
+               \--- domesticDebugRuntimeClasspath
+
+project :shared-release-1.7.0-9q2u2wrq:ugreen-strings-kmp
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+project :shared-release-1.7.0-9q2u2wrq:ugreen-strings-kmp
++--- project :shared-release-1.7.0-9q2u2wrq:app-shared
+|    +--- domesticDebugRuntimeClasspath (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|    \--- project :repository (requested com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT)
+|         \--- project :base
+|              \--- domesticDebugRuntimeClasspath
++--- project :shared-release-1.7.0-9q2u2wrq:feature-ota
+|    \--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+\--- project :shared-release-1.7.0-9q2u2wrq:feature-device-event
+     +--- project :shared-release-1.7.0-9q2u2wrq:app-shared (*)
+     \--- project :shared-release-1.7.0-9q2u2wrq:device-biz
+          \--- project :repository (requested com.ugreen.home.shared:device-biz:1.0.0-SNAPSHOT) (*)
+
+com.ugreen.home.shared:airtc-appsdk:1.0.0-SNAPSHOT -> project :shared-release-1.7.0-9q2u2wrq:airtc-appsdk
++--- project :base
+|    \--- domesticDebugRuntimeClasspath
++--- project :core-messaging
+|    +--- project :base (*)
+|    \--- project :repository
+|         \--- project :base (*)
++--- project :domain
+|    +--- project :base (*)
+|    \--- project :repository (*)
++--- project :player-provider-airtc-android
+|    \--- project :player-sdk-android
+|         +--- domesticDebugRuntimeClasspath
+|         +--- project :base (*)
+|         +--- project :player-feature-ipc
+|         |    \--- domesticDebugRuntimeClasspath
+|         \--- project :repository (*)
+\--- project :repository (*)
+
+project :shared-release-1.7.0-9q2u2wrq:app-shared (by composite build)
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+com.ugreen.home.shared:app-shared:1.0.0-SNAPSHOT -> project :shared-release-1.7.0-9q2u2wrq:app-shared
++--- domesticDebugRuntimeClasspath
+\--- project :repository
+     \--- project :base
+          \--- domesticDebugRuntimeClasspath
+
+com.ugreen.home.shared:core-database:1.0.0-SNAPSHOT -> project :shared-release-1.7.0-9q2u2wrq:core-database
++--- project :base
+|    \--- domesticDebugRuntimeClasspath
+\--- project :repository
+     \--- project :base (*)
+
+com.ugreen.home.shared:core-net:1.0.0-SNAPSHOT -> project :shared-release-1.7.0-9q2u2wrq:core-net
++--- project :net
+|    +--- project :base
+|    |    \--- domesticDebugRuntimeClasspath
+|    \--- project :repository
+|         \--- project :base (*)
++--- project :repository (*)
+\--- project :rn-platform
+     \--- domesticDebugRuntimeClasspath
+
+com.ugreen.home.shared:core-ui:1.0.0-SNAPSHOT -> project :shared-release-1.7.0-9q2u2wrq:core-ui
+\--- project :core-ui
+     +--- project :base
+     |    \--- domesticDebugRuntimeClasspath
+     +--- project :rn-platform
+     |    \--- domesticDebugRuntimeClasspath
+     +--- project :net
+     |    +--- project :base (*)
+     |    \--- project :repository
+     |         \--- project :base (*)
+     \--- project :calendarview
+          \--- project :base (*)
+
+com.ugreen.home.shared:core-util:1.0.0-SNAPSHOT -> project :shared-release-1.7.0-9q2u2wrq:core-util
++--- project :base
+|    \--- domesticDebugRuntimeClasspath
+\--- project :core-util
+     +--- project :base (*)
+     +--- project :rn-platform
+     |    \--- domesticDebugRuntimeClasspath
+     +--- project :repository
+     |    \--- project :base (*)
+     +--- project :bluetooth
+     |    +--- domesticDebugRuntimeClasspath
+     |    \--- project :repository (*)
+     +--- project :net
+     |    +--- project :base (*)
+     |    \--- project :repository (*)
+     +--- project :core-ui
+     |    +--- project :base (*)
+     |    +--- project :rn-platform (*)
+     |    +--- project :net (*)
+     |    \--- project :calendarview
+     |         \--- project :base (*)
+     +--- project :domain
+     |    +--- project :base (*)
+     |    \--- project :repository (*)
+     +--- project :common
+     |    +--- project :base (*)
+     |    +--- project :rn-platform (*)
+     |    +--- project :repository (*)
+     |    +--- project :bluetooth (*)
+     |    +--- project :net (*)
+     |    +--- project :core-ui (*)
+     |    \--- project :domain (*)
+     +--- project :crash-report-bugly
+     |    \--- domesticDebugRuntimeClasspath
+     +--- project :push-core
+     |    +--- domesticDebugRuntimeClasspath
+     |    \--- project :push-getui
+     |         \--- domesticDebugRuntimeClasspath
+     +--- project :core-device
+     |    +--- project :base (*)
+     |    +--- project :repository (*)
+     |    \--- project :domain (*)
+     +--- project :core-messaging
+     |    +--- project :base (*)
+     |    \--- project :repository (*)
+     \--- project :core-log
+          +--- project :base (*)
+          +--- project :rn-platform (*)
+          +--- project :repository (*)
+          +--- project :bluetooth (*)
+          +--- project :core-ui (*)
+          +--- project :domain (*)
+          +--- project :common (*)
+          +--- project :push-getui (*)
+          +--- project :crash-report-bugly (*)
+          +--- project :push-core (*)
+          +--- project :crash-report-core
+          |    +--- domesticDebugRuntimeClasspath
+          |    +--- project :rn-platform (*)
+          |    \--- project :crash-report-bugly (*)
+          +--- project :core-device (*)
+          \--- project :core-messaging (*)
+
+project :shared-release-1.7.0-9q2u2wrq:device-biz (by composite build)
+  Variant androidRuntimeElements:
+    | Attribute Name                                        | Provided     | Requested    |
+    |-------------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                            | jar          |              |
+    | com.android.build.api.attributes.AgpVersionAttr       | 9.2.1        | 9.2.1        |
+    | org.gradle.category                                   | library      | library      |
+    | org.gradle.jvm.environment                            | android      | android      |
+    | org.gradle.usage                                      | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type                    | androidJvm   | androidJvm   |
+    | com.android.build.api.attributes.BuildTypeAttr        |              | debug        |
+    | com.android.build.api.attributes.ProductFlavor:market |              | domestic     |
+
+com.ugreen.home.shared:device-biz:1.0.0-SNAPSHOT -> project :shared-release-1.7.0-9q2u2wrq:device-biz
+\--- project :repository
+     \--- project :base
+          \--- domesticDebugRuntimeClasspath
+
+com.ugreen.home.shared:device-thing-model:1.0.0-SNAPSHOT -> project :shared-release-1.7.0-9q2u2wrq:device-thing-model
++--- project :base
+|    \--- domesticDebugRuntimeClasspath
++--- project :domain
+|    +--- project :base (*)
+|    \--- project :repository
+|         \--- project :base (*)
+\--- project :repository (*)
+
+com.ugreen.home.shared:domain-env:1.0.0-SNAPSHOT -> project :shared-release-1.7.0-9q2u2wrq:domain-env
+\--- project :domain
+     +--- project :base
+     |    \--- domesticDebugRuntimeClasspath
+     \--- project :repository
+          \--- project :base (*)
+
+com.ugreen.home.shared:domain-product:1.0.0-SNAPSHOT -> project :shared-release-1.7.0-9q2u2wrq:domain-product
+\--- project :domain
+     +--- project :base
+     |    \--- domesticDebugRuntimeClasspath
+     \--- project :repository
+          \--- project :base (*)
+
+com.ugreen.home.shared:feature-playback:1.0.0-SNAPSHOT -> project :shared-release-1.7.0-9q2u2wrq:feature-playback
+\--- project :repository
+     \--- project :base
+          \--- domesticDebugRuntimeClasspath
+
+(*) - Indicates repeated occurrences of a transitive dependency subtree. Gradle expands transitive dependency subtrees only once per project; repeat occurrences only display the root of the subtree, followed by this annotation.
+
+A web-based, searchable dependency report is available by adding the --scan option.
+
+[Incubating] Problems report is available at: file:///private/tmp/ugreen-android-architecture-20260914/android/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 8s
+5 actionable tasks: 1 executed, 4 up-to-date
+]9;4;0exit_code=0 elapsed_seconds=9 ended_at=2026-09-14T13:41:15+08:00

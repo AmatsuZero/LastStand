@@ -1,0 +1,1083 @@
+command=./gradlew :app:tasks --all -PugreenHomeSharedPath=/private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq -PfirebaseCrashlyticsMappingUpload=false --no-daemon --console=plain
+started_at=2026-09-14T14:25:35+08:00
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+
+> Configure project :
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+
+> Configure project :app
+WARNING: The option setting 'android.enableR8.fullMode=false' is deprecated.
+The current default is 'true'.
+It will be removed in version 10.0 of the Android Gradle plugin.
+========================================
+Version Info:
+  Version Name: 1.0.6.1
+  Version Code: 100513
+  Git Commits: 1
+  Git Hash: unknown
+========================================
+--W- Build Environment: AGConnect plugin version is: 1.9.6.300, Gradle version is: 9.4.1, Android Plugin version is: 9.2.1
+--I- Using the AGConnect-Config file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--I- Using the AGConnect-Config file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--I- Using the AGConnect-Config file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--I- Using the AGConnect-Config file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--I- Using the AGConnect-Config file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--I- Using the AGConnect-Config file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--I- Using the AGConnect-Config file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--I- Using the AGConnect-Config file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--W- The variant: domesticDebug, Use the json file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--W- The variant: overseasDebug, Use the json file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--W- The variant: domesticRelease, Use the json file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--W- The variant: overseasRelease, Use the json file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--W- The variant: domesticUat, Use the json file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--W- The variant: overseasUat, Use the json file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--W- The variant: domesticBeta, Use the json file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+--W- The variant: overseasBeta, Use the json file: /private/tmp/ugreen-android-architecture-20260914/android/app/agconnect-services.json
+
+> Configure project :player-core
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Task :app:tasks
+
+------------------------------------------------------------
+Tasks runnable from project ':app'
+------------------------------------------------------------
+
+Agcp tasks
+----------
+processDomesticBetaAGCPlugin - Generate AGC config for domesticBeta variant
+processDomesticDebugAGCPlugin - Generate AGC config for domesticDebug variant
+processDomesticReleaseAGCPlugin - Generate AGC config for domesticRelease variant
+processDomesticUatAGCPlugin - Generate AGC config for domesticUat variant
+processOverseasBetaAGCPlugin - Generate AGC config for overseasBeta variant
+processOverseasDebugAGCPlugin - Generate AGC config for overseasDebug variant
+processOverseasReleaseAGCPlugin - Generate AGC config for overseasRelease variant
+processOverseasUatAGCPlugin - Generate AGC config for overseasUat variant
+
+Android tasks
+-------------
+signingReport - Displays the signing info for the base and test modules
+
+Build tasks
+-----------
+assemble - Assemble main outputs for all the variants.
+assembleAndroidTest - Assembles all the Test applications.
+assembleBeta - Assembles main outputs for all Beta variants.
+assembleDebug - Assembles main outputs for all Debug variants.
+assembleDomestic - Assembles main outputs for all Domestic variants.
+assembleDomesticTest - 兼容别名：组装 Domestic test 包
+assembleOverseas - Assembles main outputs for all Overseas variants.
+assembleOverseasTest - 兼容别名：组装 Overseas test 包
+assembleRelease - Assembles main outputs for all Release variants.
+assembleUat - Assembles main outputs for all Uat variants.
+assembleUnitTest - Assembles all the unit test applications.
+build - Assembles and tests this project.
+buildDependents - Assembles and tests this project and all projects that depend on it.
+buildNeeded - Assembles and tests this project and all projects it depends on.
+bundle - Assemble bundles for all the variants.
+bundleBeta - Assembles bundles for all Beta variants.
+bundleDebug - Assembles bundles for all Debug variants.
+bundleDomestic - Assembles bundles for all Domestic variants.
+bundleDomesticTest - 兼容别名：打包 Domestic test AAB
+bundleOverseas - Assembles bundles for all Overseas variants.
+bundleOverseasTest - 兼容别名：打包 Overseas test AAB
+bundleRelease - Assembles bundles for all Release variants.
+bundleUat - Assembles bundles for all Uat variants.
+clean - Deletes the build directory.
+compileDomesticBetaSources
+compileDomesticDebugAndroidTestSources
+compileDomesticDebugSources
+compileDomesticDebugUnitTestSources
+compileDomesticReleaseSources
+compileDomesticUatSources
+compileOverseasBetaSources
+compileOverseasDebugAndroidTestSources
+compileOverseasDebugSources
+compileOverseasDebugUnitTestSources
+compileOverseasReleaseSources
+compileOverseasUatSources
+
+Firebase Crashlytics tasks
+--------------------------
+injectCrashlyticsMappingFileIdDomesticBeta - Generates and injects a mapping file id into the app, used by Crashlytics for deobfuscation.
+injectCrashlyticsMappingFileIdDomesticDebug - Generates and injects a mapping file id into the app, used by Crashlytics for deobfuscation.
+injectCrashlyticsMappingFileIdDomesticRelease - Generates and injects a mapping file id into the app, used by Crashlytics for deobfuscation.
+injectCrashlyticsMappingFileIdDomesticUat - Generates and injects a mapping file id into the app, used by Crashlytics for deobfuscation.
+injectCrashlyticsMappingFileIdOverseasBeta - Generates and injects a mapping file id into the app, used by Crashlytics for deobfuscation.
+injectCrashlyticsMappingFileIdOverseasDebug - Generates and injects a mapping file id into the app, used by Crashlytics for deobfuscation.
+injectCrashlyticsMappingFileIdOverseasRelease - Generates and injects a mapping file id into the app, used by Crashlytics for deobfuscation.
+injectCrashlyticsMappingFileIdOverseasUat - Generates and injects a mapping file id into the app, used by Crashlytics for deobfuscation.
+injectCrashlyticsVersionControlInfoDomesticBeta - Injects the version control info into the app. Used by App Quality Insights.
+injectCrashlyticsVersionControlInfoDomesticDebug - Injects the version control info into the app. Used by App Quality Insights.
+injectCrashlyticsVersionControlInfoDomesticRelease - Injects the version control info into the app. Used by App Quality Insights.
+injectCrashlyticsVersionControlInfoDomesticUat - Injects the version control info into the app. Used by App Quality Insights.
+injectCrashlyticsVersionControlInfoOverseasBeta - Injects the version control info into the app. Used by App Quality Insights.
+injectCrashlyticsVersionControlInfoOverseasDebug - Injects the version control info into the app. Used by App Quality Insights.
+injectCrashlyticsVersionControlInfoOverseasRelease - Injects the version control info into the app. Used by App Quality Insights.
+injectCrashlyticsVersionControlInfoOverseasUat - Injects the version control info into the app. Used by App Quality Insights.
+
+Help tasks
+----------
+artifactTransforms - Displays the Artifact Transforms that can be executed in project ':app'.
+buildEnvironment - Displays all buildscript dependencies declared in project ':app'.
+dependencies - Displays all dependencies declared in project ':app'.
+dependencyInsight - Displays the insight into a specific dependency in project ':app'.
+help - Displays a help message.
+javaToolchains - Displays the detected java toolchains.
+outgoingVariants - Displays the outgoing variants of project ':app'.
+projects - Displays the sub-projects of project ':app'.
+properties - Displays the properties of project ':app'.
+resolvableConfigurations - Displays the configurations that can be resolved in project ':app'.
+tasks - Displays the tasks runnable from project ':app'.
+
+Install tasks
+-------------
+uninstallAll - Uninstall all applications.
+uninstallDomesticBeta - Uninstalls the Beta build for flavor Domestic.
+uninstallDomesticDebug - Uninstalls the Debug build for flavor Domestic.
+uninstallDomesticDebugAndroidTest - Uninstalls the android (on device) tests for the DomesticDebug build.
+uninstallDomesticRelease - Uninstalls the Release build for flavor Domestic.
+uninstallDomesticUat - Uninstalls the Uat build for flavor Domestic.
+uninstallOverseasBeta - Uninstalls the Beta build for flavor Overseas.
+uninstallOverseasDebug - Uninstalls the Debug build for flavor Overseas.
+uninstallOverseasDebugAndroidTest - Uninstalls the android (on device) tests for the OverseasDebug build.
+uninstallOverseasRelease - Uninstalls the Release build for flavor Overseas.
+uninstallOverseasUat - Uninstalls the Uat build for flavor Overseas.
+
+Verification tasks
+------------------
+check - Runs all checks.
+checkJetifier - Checks whether Jetifier is needed for the current project
+connectedAndroidTest - Installs and runs instrumentation tests for all flavors on connected devices.
+connectedCheck - Runs all device checks on currently connected devices.
+connectedDomesticDebugAndroidTest - Installs and runs the tests for domesticDebug on connected devices.
+connectedOverseasDebugAndroidTest - Installs and runs the tests for overseasDebug on connected devices.
+deviceAndroidTest - Installs and runs instrumentation tests using all Device Providers.
+deviceCheck - Runs all device checks using Device Providers and Test Servers.
+lint - Runs lint on the default variant.
+lintDomesticBeta - Print text output from the corresponding lint report task
+lintDomesticDebug - Print text output from the corresponding lint report task
+lintDomesticRelease - Print text output from the corresponding lint report task
+lintDomesticUat - Print text output from the corresponding lint report task
+lintFix - Runs lint on the default variant and applies any safe suggestions to the source code.
+lintOverseasBeta - Print text output from the corresponding lint report task
+lintOverseasDebug - Print text output from the corresponding lint report task
+lintOverseasRelease - Print text output from the corresponding lint report task
+lintOverseasUat - Print text output from the corresponding lint report task
+test - Run unit tests for all variants.
+testDomesticDebugUnitTest - Run unit tests for the domesticDebug build.
+testOverseasDebugUnitTest - Run unit tests for the overseasDebug build.
+updateLintBaseline - Updates the lint baseline using the default variant.
+validateRnArtifacts - Validates packaged RN bundles using only the JDK; Node.js is not required.
+
+Other tasks
+-----------
+analyzeDomesticBetaDependencies
+analyzeDomesticDebugAndroidTestDependencies
+analyzeDomesticDebugDependencies
+analyzeDomesticDebugUnitTestDependencies
+analyzeDomesticReleaseDependencies
+analyzeDomesticUatDependencies
+analyzeOverseasBetaDependencies
+analyzeOverseasDebugAndroidTestDependencies
+analyzeOverseasDebugDependencies
+analyzeOverseasDebugUnitTestDependencies
+analyzeOverseasReleaseDependencies
+analyzeOverseasUatDependencies
+assembleDomesticBeta - Assembles main output for variant domesticBeta
+assembleDomesticDebug - Assembles main output for variant domesticDebug
+assembleDomesticDebugAndroidTest - Assembles main output for variant domesticDebugAndroidTest
+assembleDomesticDebugUnitTest - Assembles main output for variant domesticDebugUnitTest
+assembleDomesticRelease - Assembles main output for variant domesticRelease
+assembleDomesticUat - Assembles main output for variant domesticUat
+assembleOverseasBeta - Assembles main output for variant overseasBeta
+assembleOverseasDebug - Assembles main output for variant overseasDebug
+assembleOverseasDebugAndroidTest - Assembles main output for variant overseasDebugAndroidTest
+assembleOverseasDebugUnitTest - Assembles main output for variant overseasDebugUnitTest
+assembleOverseasRelease - Assembles main output for variant overseasRelease
+assembleOverseasUat - Assembles main output for variant overseasUat
+buildDomesticBetaPreBundle
+buildDomesticDebugPreBundle
+buildDomesticReleasePreBundle
+buildDomesticUatPreBundle
+buildOverseasBetaPreBundle
+buildOverseasDebugPreBundle
+buildOverseasReleasePreBundle
+buildOverseasUatPreBundle
+bundleDomesticBeta - Assembles bundle for variant domesticBeta
+bundleDomesticBetaClassesToCompileJar
+bundleDomesticBetaClassesToRuntimeJar
+bundleDomesticBetaResources
+bundleDomesticDebug - Assembles bundle for variant domesticDebug
+bundleDomesticDebugClassesToCompileJar
+bundleDomesticDebugClassesToRuntimeJar
+bundleDomesticDebugResources
+bundleDomesticRelease - Assembles bundle for variant domesticRelease
+bundleDomesticReleaseClassesToCompileJar
+bundleDomesticReleaseClassesToRuntimeJar
+bundleDomesticReleaseResources
+bundleDomesticUat - Assembles bundle for variant domesticUat
+bundleDomesticUatClassesToCompileJar
+bundleDomesticUatClassesToRuntimeJar
+bundleDomesticUatResources
+bundleOverseasBeta - Assembles bundle for variant overseasBeta
+bundleOverseasBetaClassesToCompileJar
+bundleOverseasBetaClassesToRuntimeJar
+bundleOverseasBetaResources
+bundleOverseasDebug - Assembles bundle for variant overseasDebug
+bundleOverseasDebugClassesToCompileJar
+bundleOverseasDebugClassesToRuntimeJar
+bundleOverseasDebugResources
+bundleOverseasRelease - Assembles bundle for variant overseasRelease
+bundleOverseasReleaseClassesToCompileJar
+bundleOverseasReleaseClassesToRuntimeJar
+bundleOverseasReleaseResources
+bundleOverseasUat - Assembles bundle for variant overseasUat
+bundleOverseasUatClassesToCompileJar
+bundleOverseasUatClassesToRuntimeJar
+bundleOverseasUatResources
+checkDomesticBetaAarMetadata
+checkDomesticBetaDuplicateClasses
+checkDomesticBetaManifest
+checkDomesticDebugAarMetadata
+checkDomesticDebugAndroidTestAarMetadata
+checkDomesticDebugAndroidTestDuplicateClasses
+checkDomesticDebugDuplicateClasses
+checkDomesticDebugManifest
+checkDomesticReleaseAarMetadata
+checkDomesticReleaseDuplicateClasses
+checkDomesticReleaseManifest
+checkDomesticUatAarMetadata
+checkDomesticUatDuplicateClasses
+checkDomesticUatManifest
+checkOverseasBetaAarMetadata
+checkOverseasBetaDuplicateClasses
+checkOverseasBetaManifest
+checkOverseasDebugAarMetadata
+checkOverseasDebugAndroidTestAarMetadata
+checkOverseasDebugAndroidTestDuplicateClasses
+checkOverseasDebugDuplicateClasses
+checkOverseasDebugManifest
+checkOverseasReleaseAarMetadata
+checkOverseasReleaseDuplicateClasses
+checkOverseasReleaseManifest
+checkOverseasUatAarMetadata
+checkOverseasUatDuplicateClasses
+checkOverseasUatManifest
+collectDomesticBetaDependencies
+collectDomesticReleaseDependencies
+collectDomesticUatDependencies
+collectOverseasBetaDependencies
+collectOverseasReleaseDependencies
+collectOverseasUatDependencies
+compileDomesticBetaArtProfile
+compileDomesticBetaJavaWithJavac
+compileDomesticBetaKotlin
+compileDomesticBetaNavigationResources
+compileDomesticDebugAndroidTestJavaWithJavac
+compileDomesticDebugAndroidTestKotlin
+compileDomesticDebugAndroidTestNavigationResources
+compileDomesticDebugArtProfile
+compileDomesticDebugJavaWithJavac
+compileDomesticDebugKotlin
+compileDomesticDebugNavigationResources
+compileDomesticDebugUnitTestJavaWithJavac
+compileDomesticDebugUnitTestKotlin
+compileDomesticReleaseArtProfile
+compileDomesticReleaseJavaWithJavac
+compileDomesticReleaseKotlin
+compileDomesticReleaseNavigationResources
+compileDomesticUatArtProfile
+compileDomesticUatJavaWithJavac
+compileDomesticUatKotlin
+compileDomesticUatNavigationResources
+compileLint
+compileLintChecks
+compileOverseasBetaArtProfile
+compileOverseasBetaJavaWithJavac
+compileOverseasBetaKotlin
+compileOverseasBetaNavigationResources
+compileOverseasDebugAndroidTestJavaWithJavac
+compileOverseasDebugAndroidTestKotlin
+compileOverseasDebugAndroidTestNavigationResources
+compileOverseasDebugArtProfile
+compileOverseasDebugJavaWithJavac
+compileOverseasDebugKotlin
+compileOverseasDebugNavigationResources
+compileOverseasDebugUnitTestJavaWithJavac
+compileOverseasDebugUnitTestKotlin
+compileOverseasReleaseArtProfile
+compileOverseasReleaseJavaWithJavac
+compileOverseasReleaseKotlin
+compileOverseasReleaseNavigationResources
+compileOverseasUatArtProfile
+compileOverseasUatJavaWithJavac
+compileOverseasUatKotlin
+compileOverseasUatNavigationResources
+compressDomesticBetaAssets
+compressDomesticDebugAndroidTestAssets
+compressDomesticDebugAssets
+compressDomesticReleaseAssets
+compressDomesticUatAssets
+compressOverseasBetaAssets
+compressOverseasDebugAndroidTestAssets
+compressOverseasDebugAssets
+compressOverseasReleaseAssets
+compressOverseasUatAssets
+configureDomesticBetaDependencies
+configureDomesticReleaseDependencies
+configureDomesticUatDependencies
+configureOverseasBetaDependencies
+configureOverseasReleaseDependencies
+configureOverseasUatDependencies
+consumeConfigAttr
+convertLinkedResourcesToBinaryDomesticBeta
+convertLinkedResourcesToBinaryDomesticRelease
+convertLinkedResourcesToBinaryDomesticUat
+convertLinkedResourcesToBinaryOverseasBeta
+convertLinkedResourcesToBinaryOverseasRelease
+convertLinkedResourcesToBinaryOverseasUat
+convertShrunkResourcesToBinaryDomesticBeta
+convertShrunkResourcesToBinaryDomesticRelease
+convertShrunkResourcesToBinaryDomesticUat
+convertShrunkResourcesToBinaryOverseasBeta
+convertShrunkResourcesToBinaryOverseasRelease
+convertShrunkResourcesToBinaryOverseasUat
+copyRenamedAabDomesticBeta
+copyRenamedAabDomesticDebug
+copyRenamedAabDomesticRelease
+copyRenamedAabDomesticUat
+copyRenamedAabOverseasBeta
+copyRenamedAabOverseasDebug
+copyRenamedAabOverseasRelease
+copyRenamedAabOverseasUat
+copyRenamedApkDomesticBeta
+copyRenamedApkDomesticDebug
+copyRenamedApkDomesticRelease
+copyRenamedApkDomesticUat
+copyRenamedApkOverseasBeta
+copyRenamedApkOverseasDebug
+copyRenamedApkOverseasRelease
+copyRenamedApkOverseasUat
+createDomesticBetaApkListingFileRedirect
+createDomesticBetaApksFromBundleListingFileRedirect
+createDomesticBetaBundleListingFileRedirect
+createDomesticBetaCompatibleScreenManifests
+createDomesticDebugAndroidTestApkListingFileRedirect
+createDomesticDebugApkListingFileRedirect
+createDomesticDebugApksFromBundleListingFileRedirect
+createDomesticDebugBundleListingFileRedirect
+createDomesticDebugCompatibleScreenManifests
+createDomesticReleaseApkListingFileRedirect
+createDomesticReleaseApksFromBundleListingFileRedirect
+createDomesticReleaseBundleListingFileRedirect
+createDomesticReleaseCompatibleScreenManifests
+createDomesticUatApkListingFileRedirect
+createDomesticUatApksFromBundleListingFileRedirect
+createDomesticUatBundleListingFileRedirect
+createDomesticUatCompatibleScreenManifests
+createMockableJar
+createOverseasBetaApkListingFileRedirect
+createOverseasBetaApksFromBundleListingFileRedirect
+createOverseasBetaBundleListingFileRedirect
+createOverseasBetaCompatibleScreenManifests
+createOverseasDebugAndroidTestApkListingFileRedirect
+createOverseasDebugApkListingFileRedirect
+createOverseasDebugApksFromBundleListingFileRedirect
+createOverseasDebugBundleListingFileRedirect
+createOverseasDebugCompatibleScreenManifests
+createOverseasReleaseApkListingFileRedirect
+createOverseasReleaseApksFromBundleListingFileRedirect
+createOverseasReleaseBundleListingFileRedirect
+createOverseasReleaseCompatibleScreenManifests
+createOverseasUatApkListingFileRedirect
+createOverseasUatApksFromBundleListingFileRedirect
+createOverseasUatBundleListingFileRedirect
+createOverseasUatCompatibleScreenManifests
+dataBindingGenBaseClassesDomesticBeta
+dataBindingGenBaseClassesDomesticDebug
+dataBindingGenBaseClassesDomesticDebugAndroidTest
+dataBindingGenBaseClassesDomesticRelease
+dataBindingGenBaseClassesDomesticUat
+dataBindingGenBaseClassesOverseasBeta
+dataBindingGenBaseClassesOverseasDebug
+dataBindingGenBaseClassesOverseasDebugAndroidTest
+dataBindingGenBaseClassesOverseasRelease
+dataBindingGenBaseClassesOverseasUat
+dataBindingMergeDependencyArtifactsDomesticBeta
+dataBindingMergeDependencyArtifactsDomesticDebug
+dataBindingMergeDependencyArtifactsDomesticDebugAndroidTest
+dataBindingMergeDependencyArtifactsDomesticRelease
+dataBindingMergeDependencyArtifactsDomesticUat
+dataBindingMergeDependencyArtifactsOverseasBeta
+dataBindingMergeDependencyArtifactsOverseasDebug
+dataBindingMergeDependencyArtifactsOverseasDebugAndroidTest
+dataBindingMergeDependencyArtifactsOverseasRelease
+dataBindingMergeDependencyArtifactsOverseasUat
+desugarDomesticDebugAndroidTestFileDependencies
+desugarDomesticDebugFileDependencies
+desugarOverseasDebugAndroidTestFileDependencies
+desugarOverseasDebugFileDependencies
+dexBuilderDomesticDebug
+dexBuilderDomesticDebugAndroidTest
+dexBuilderOverseasDebug
+dexBuilderOverseasDebugAndroidTest
+expandDomesticBetaArtProfileWildcards
+expandDomesticBetaL8ArtProfileWildcards
+expandDomesticReleaseArtProfileWildcards
+expandDomesticReleaseL8ArtProfileWildcards
+expandDomesticUatArtProfileWildcards
+expandDomesticUatL8ArtProfileWildcards
+expandOverseasBetaArtProfileWildcards
+expandOverseasBetaL8ArtProfileWildcards
+expandOverseasReleaseArtProfileWildcards
+expandOverseasReleaseL8ArtProfileWildcards
+expandOverseasUatArtProfileWildcards
+expandOverseasUatL8ArtProfileWildcards
+extractApksForDomesticBeta
+extractApksForDomesticDebug
+extractApksForDomesticRelease
+extractApksForDomesticUat
+extractApksForOverseasBeta
+extractApksForOverseasDebug
+extractApksForOverseasRelease
+extractApksForOverseasUat
+extractApksFromBundleForDomesticBeta
+extractApksFromBundleForDomesticDebug
+extractApksFromBundleForDomesticRelease
+extractApksFromBundleForDomesticUat
+extractApksFromBundleForOverseasBeta
+extractApksFromBundleForOverseasDebug
+extractApksFromBundleForOverseasRelease
+extractApksFromBundleForOverseasUat
+extractDeepLinksDomesticBeta
+extractDeepLinksDomesticDebug
+extractDeepLinksDomesticRelease
+extractDeepLinksDomesticUat
+extractDeepLinksOverseasBeta
+extractDeepLinksOverseasDebug
+extractDeepLinksOverseasRelease
+extractDeepLinksOverseasUat
+extractDomesticBetaNativeDebugMetadata
+extractDomesticBetaNativeSymbolTables
+extractDomesticBetaVersionControlInfo
+extractDomesticDebugNativeDebugMetadata
+extractDomesticDebugNativeSymbolTables
+extractDomesticReleaseNativeDebugMetadata
+extractDomesticReleaseNativeSymbolTables
+extractDomesticReleaseVersionControlInfo
+extractDomesticUatNativeDebugMetadata
+extractDomesticUatNativeSymbolTables
+extractDomesticUatVersionControlInfo
+extractOverseasBetaNativeDebugMetadata
+extractOverseasBetaNativeSymbolTables
+extractOverseasBetaVersionControlInfo
+extractOverseasDebugNativeDebugMetadata
+extractOverseasDebugNativeSymbolTables
+extractOverseasReleaseNativeDebugMetadata
+extractOverseasReleaseNativeSymbolTables
+extractOverseasReleaseVersionControlInfo
+extractOverseasUatNativeDebugMetadata
+extractOverseasUatNativeSymbolTables
+extractOverseasUatVersionControlInfo
+extractProguardFiles
+generateDomesticBetaAssets
+generateDomesticBetaBuildConfig
+generateDomesticBetaFeatureMetadata
+generateDomesticBetaFeatureTransitiveDeps
+generateDomesticBetaLintModel
+generateDomesticBetaLintReportModel
+generateDomesticBetaManifestClass
+generateDomesticBetaResources
+generateDomesticBetaResValues
+generateDomesticBetaRFile
+generateDomesticBetaSources
+generateDomesticDebugAndroidTestAssets
+generateDomesticDebugAndroidTestBuildConfig
+generateDomesticDebugAndroidTestGlobalSynthetics
+generateDomesticDebugAndroidTestLintModel
+generateDomesticDebugAndroidTestResources
+generateDomesticDebugAndroidTestResValues
+generateDomesticDebugAndroidTestRFile
+generateDomesticDebugAndroidTestSources
+generateDomesticDebugAssets
+generateDomesticDebugBuildConfig
+generateDomesticDebugFeatureMetadata
+generateDomesticDebugFeatureTransitiveDeps
+generateDomesticDebugGlobalSynthetics
+generateDomesticDebugLintModel
+generateDomesticDebugLintReportModel
+generateDomesticDebugManifestClass
+generateDomesticDebugResources
+generateDomesticDebugResValues
+generateDomesticDebugRFile
+generateDomesticDebugSources
+generateDomesticDebugUnitTestAssets
+generateDomesticDebugUnitTestLintModel
+generateDomesticDebugUnitTestResources
+generateDomesticDebugUnitTestSources
+generateDomesticReleaseAssets
+generateDomesticReleaseBuildConfig
+generateDomesticReleaseFeatureMetadata
+generateDomesticReleaseFeatureTransitiveDeps
+generateDomesticReleaseLintModel
+generateDomesticReleaseLintReportModel
+generateDomesticReleaseManifestClass
+generateDomesticReleaseResources
+generateDomesticReleaseResValues
+generateDomesticReleaseRFile
+generateDomesticReleaseSources
+generateDomesticUatAssets
+generateDomesticUatBuildConfig
+generateDomesticUatFeatureMetadata
+generateDomesticUatFeatureTransitiveDeps
+generateDomesticUatLintModel
+generateDomesticUatLintReportModel
+generateDomesticUatManifestClass
+generateDomesticUatResources
+generateDomesticUatResValues
+generateDomesticUatRFile
+generateDomesticUatSources
+generateOverseasBetaAssets
+generateOverseasBetaBuildConfig
+generateOverseasBetaFeatureMetadata
+generateOverseasBetaFeatureTransitiveDeps
+generateOverseasBetaLintModel
+generateOverseasBetaLintReportModel
+generateOverseasBetaManifestClass
+generateOverseasBetaResources
+generateOverseasBetaResValues
+generateOverseasBetaRFile
+generateOverseasBetaSources
+generateOverseasDebugAndroidTestAssets
+generateOverseasDebugAndroidTestBuildConfig
+generateOverseasDebugAndroidTestGlobalSynthetics
+generateOverseasDebugAndroidTestLintModel
+generateOverseasDebugAndroidTestResources
+generateOverseasDebugAndroidTestResValues
+generateOverseasDebugAndroidTestRFile
+generateOverseasDebugAndroidTestSources
+generateOverseasDebugAssets
+generateOverseasDebugBuildConfig
+generateOverseasDebugFeatureMetadata
+generateOverseasDebugFeatureTransitiveDeps
+generateOverseasDebugGlobalSynthetics
+generateOverseasDebugLintModel
+generateOverseasDebugLintReportModel
+generateOverseasDebugManifestClass
+generateOverseasDebugResources
+generateOverseasDebugResValues
+generateOverseasDebugRFile
+generateOverseasDebugSources
+generateOverseasDebugUnitTestAssets
+generateOverseasDebugUnitTestLintModel
+generateOverseasDebugUnitTestResources
+generateOverseasDebugUnitTestSources
+generateOverseasReleaseAssets
+generateOverseasReleaseBuildConfig
+generateOverseasReleaseFeatureMetadata
+generateOverseasReleaseFeatureTransitiveDeps
+generateOverseasReleaseLintModel
+generateOverseasReleaseLintReportModel
+generateOverseasReleaseManifestClass
+generateOverseasReleaseResources
+generateOverseasReleaseResValues
+generateOverseasReleaseRFile
+generateOverseasReleaseSources
+generateOverseasUatAssets
+generateOverseasUatBuildConfig
+generateOverseasUatFeatureMetadata
+generateOverseasUatFeatureTransitiveDeps
+generateOverseasUatLintModel
+generateOverseasUatLintReportModel
+generateOverseasUatManifestClass
+generateOverseasUatResources
+generateOverseasUatResValues
+generateOverseasUatRFile
+generateOverseasUatSources
+javaPreCompileDomesticBeta
+javaPreCompileDomesticDebug
+javaPreCompileDomesticDebugAndroidTest
+javaPreCompileDomesticDebugUnitTest
+javaPreCompileDomesticRelease
+javaPreCompileDomesticUat
+javaPreCompileOverseasBeta
+javaPreCompileOverseasDebug
+javaPreCompileOverseasDebugAndroidTest
+javaPreCompileOverseasDebugUnitTest
+javaPreCompileOverseasRelease
+javaPreCompileOverseasUat
+kspDomesticBetaKotlin
+kspDomesticDebugAndroidTestKotlin
+kspDomesticDebugKotlin
+kspDomesticDebugUnitTestKotlin
+kspDomesticReleaseKotlin
+kspDomesticUatKotlin
+kspOverseasBetaKotlin
+kspOverseasDebugAndroidTestKotlin
+kspOverseasDebugKotlin
+kspOverseasDebugUnitTestKotlin
+kspOverseasReleaseKotlin
+kspOverseasUatKotlin
+l8DexDesugarLibDomesticBeta
+l8DexDesugarLibDomesticDebug
+l8DexDesugarLibDomesticRelease
+l8DexDesugarLibDomesticUat
+l8DexDesugarLibOverseasBeta
+l8DexDesugarLibOverseasDebug
+l8DexDesugarLibOverseasRelease
+l8DexDesugarLibOverseasUat
+lintAnalyzeDomesticBeta - Run lint analysis on the domesticBeta component
+lintAnalyzeDomesticDebug - Run lint analysis on the domesticDebug component
+lintAnalyzeDomesticDebugAndroidTest - Run lint analysis on the domesticDebugAndroidTest component
+lintAnalyzeDomesticDebugUnitTest - Run lint analysis on the domesticDebugUnitTest component
+lintAnalyzeDomesticRelease - Run lint analysis on the domesticRelease component
+lintAnalyzeDomesticUat - Run lint analysis on the domesticUat component
+lintAnalyzeOverseasBeta - Run lint analysis on the overseasBeta component
+lintAnalyzeOverseasDebug - Run lint analysis on the overseasDebug component
+lintAnalyzeOverseasDebugAndroidTest - Run lint analysis on the overseasDebugAndroidTest component
+lintAnalyzeOverseasDebugUnitTest - Run lint analysis on the overseasDebugUnitTest component
+lintAnalyzeOverseasRelease - Run lint analysis on the overseasRelease component
+lintAnalyzeOverseasUat - Run lint analysis on the overseasUat component
+lintFixDomesticBeta - Fix lint on the domesticBeta variant
+lintFixDomesticDebug - Fix lint on the domesticDebug variant
+lintFixDomesticRelease - Fix lint on the domesticRelease variant
+lintFixDomesticUat - Fix lint on the domesticUat variant
+lintFixOverseasBeta - Fix lint on the overseasBeta variant
+lintFixOverseasDebug - Fix lint on the overseasDebug variant
+lintFixOverseasRelease - Fix lint on the overseasRelease variant
+lintFixOverseasUat - Fix lint on the overseasUat variant
+lintReportDomesticBeta - Run lint on the domesticBeta variant
+lintReportDomesticDebug - Run lint on the domesticDebug variant
+lintReportDomesticRelease - Run lint on the domesticRelease variant
+lintReportDomesticUat - Run lint on the domesticUat variant
+lintReportOverseasBeta - Run lint on the overseasBeta variant
+lintReportOverseasDebug - Run lint on the overseasDebug variant
+lintReportOverseasRelease - Run lint on the overseasRelease variant
+lintReportOverseasUat - Run lint on the overseasUat variant
+makeApkFromBundleForDomesticBeta
+makeApkFromBundleForDomesticDebug
+makeApkFromBundleForDomesticRelease
+makeApkFromBundleForDomesticUat
+makeApkFromBundleForOverseasBeta
+makeApkFromBundleForOverseasDebug
+makeApkFromBundleForOverseasRelease
+makeApkFromBundleForOverseasUat
+mapDomesticBetaSourceSetPaths
+mapDomesticDebugAndroidTestSourceSetPaths
+mapDomesticDebugSourceSetPaths
+mapDomesticReleaseSourceSetPaths
+mapDomesticUatSourceSetPaths
+mapOverseasBetaSourceSetPaths
+mapOverseasDebugAndroidTestSourceSetPaths
+mapOverseasDebugSourceSetPaths
+mapOverseasReleaseSourceSetPaths
+mapOverseasUatSourceSetPaths
+mergeDomesticBetaArtProfile
+mergeDomesticBetaAssets
+mergeDomesticBetaComposeMapping
+mergeDomesticBetaGeneratedProguardFiles
+mergeDomesticBetaJavaResource
+mergeDomesticBetaJniLibFolders
+mergeDomesticBetaNativeDebugMetadata
+mergeDomesticBetaNativeLibs
+mergeDomesticBetaResources
+mergeDomesticBetaStartupProfile
+mergeDomesticDebugAndroidTestAssets
+mergeDomesticDebugAndroidTestGeneratedProguardFiles
+mergeDomesticDebugAndroidTestJavaResource
+mergeDomesticDebugAndroidTestJniLibFolders
+mergeDomesticDebugAndroidTestNativeLibs
+mergeDomesticDebugAndroidTestResources
+mergeDomesticDebugArtProfile
+mergeDomesticDebugAssets
+mergeDomesticDebugGeneratedProguardFiles
+mergeDomesticDebugJavaResource
+mergeDomesticDebugJniLibFolders
+mergeDomesticDebugNativeDebugMetadata
+mergeDomesticDebugNativeLibs
+mergeDomesticDebugResources
+mergeDomesticDebugStartupProfile
+mergeDomesticReleaseArtProfile
+mergeDomesticReleaseAssets
+mergeDomesticReleaseComposeMapping
+mergeDomesticReleaseGeneratedProguardFiles
+mergeDomesticReleaseJavaResource
+mergeDomesticReleaseJniLibFolders
+mergeDomesticReleaseNativeDebugMetadata
+mergeDomesticReleaseNativeLibs
+mergeDomesticReleaseResources
+mergeDomesticReleaseStartupProfile
+mergeDomesticUatArtProfile
+mergeDomesticUatAssets
+mergeDomesticUatComposeMapping
+mergeDomesticUatGeneratedProguardFiles
+mergeDomesticUatJavaResource
+mergeDomesticUatJniLibFolders
+mergeDomesticUatNativeDebugMetadata
+mergeDomesticUatNativeLibs
+mergeDomesticUatResources
+mergeDomesticUatStartupProfile
+mergeExtDexDomesticDebug
+mergeExtDexDomesticDebugAndroidTest
+mergeExtDexOverseasDebug
+mergeExtDexOverseasDebugAndroidTest
+mergeLibDexDomesticDebug
+mergeLibDexDomesticDebugAndroidTest
+mergeLibDexOverseasDebug
+mergeLibDexOverseasDebugAndroidTest
+mergeOverseasBetaArtProfile
+mergeOverseasBetaAssets
+mergeOverseasBetaComposeMapping
+mergeOverseasBetaGeneratedProguardFiles
+mergeOverseasBetaJavaResource
+mergeOverseasBetaJniLibFolders
+mergeOverseasBetaNativeDebugMetadata
+mergeOverseasBetaNativeLibs
+mergeOverseasBetaResources
+mergeOverseasBetaStartupProfile
+mergeOverseasDebugAndroidTestAssets
+mergeOverseasDebugAndroidTestGeneratedProguardFiles
+mergeOverseasDebugAndroidTestJavaResource
+mergeOverseasDebugAndroidTestJniLibFolders
+mergeOverseasDebugAndroidTestNativeLibs
+mergeOverseasDebugAndroidTestResources
+mergeOverseasDebugArtProfile
+mergeOverseasDebugAssets
+mergeOverseasDebugGeneratedProguardFiles
+mergeOverseasDebugJavaResource
+mergeOverseasDebugJniLibFolders
+mergeOverseasDebugNativeDebugMetadata
+mergeOverseasDebugNativeLibs
+mergeOverseasDebugResources
+mergeOverseasDebugStartupProfile
+mergeOverseasReleaseArtProfile
+mergeOverseasReleaseAssets
+mergeOverseasReleaseComposeMapping
+mergeOverseasReleaseGeneratedProguardFiles
+mergeOverseasReleaseJavaResource
+mergeOverseasReleaseJniLibFolders
+mergeOverseasReleaseNativeDebugMetadata
+mergeOverseasReleaseNativeLibs
+mergeOverseasReleaseResources
+mergeOverseasReleaseStartupProfile
+mergeOverseasUatArtProfile
+mergeOverseasUatAssets
+mergeOverseasUatComposeMapping
+mergeOverseasUatGeneratedProguardFiles
+mergeOverseasUatJavaResource
+mergeOverseasUatJniLibFolders
+mergeOverseasUatNativeDebugMetadata
+mergeOverseasUatNativeLibs
+mergeOverseasUatResources
+mergeOverseasUatStartupProfile
+mergeProjectDexDomesticDebug
+mergeProjectDexDomesticDebugAndroidTest
+mergeProjectDexOverseasDebug
+mergeProjectDexOverseasDebugAndroidTest
+minifyDomesticBetaWithR8
+minifyDomesticReleaseWithR8
+minifyDomesticUatWithR8
+minifyOverseasBetaWithR8
+minifyOverseasReleaseWithR8
+minifyOverseasUatWithR8
+optimizeDomesticBetaResources
+optimizeDomesticReleaseResources
+optimizeDomesticUatResources
+optimizeOverseasBetaResources
+optimizeOverseasReleaseResources
+optimizeOverseasUatResources
+packageDomesticBeta
+packageDomesticBetaBundle
+packageDomesticBetaResources
+packageDomesticBetaUniversalApk
+packageDomesticDebug
+packageDomesticDebugAndroidTest
+packageDomesticDebugAndroidTestResources
+packageDomesticDebugBundle
+packageDomesticDebugResources
+packageDomesticDebugUniversalApk
+packageDomesticRelease
+packageDomesticReleaseBundle
+packageDomesticReleaseResources
+packageDomesticReleaseUniversalApk
+packageDomesticUat
+packageDomesticUatBundle
+packageDomesticUatResources
+packageDomesticUatUniversalApk
+packageOverseasBeta
+packageOverseasBetaBundle
+packageOverseasBetaResources
+packageOverseasBetaUniversalApk
+packageOverseasDebug
+packageOverseasDebugAndroidTest
+packageOverseasDebugAndroidTestResources
+packageOverseasDebugBundle
+packageOverseasDebugResources
+packageOverseasDebugUniversalApk
+packageOverseasRelease
+packageOverseasReleaseBundle
+packageOverseasReleaseResources
+packageOverseasReleaseUniversalApk
+packageOverseasUat
+packageOverseasUatBundle
+packageOverseasUatResources
+packageOverseasUatUniversalApk
+parseDomesticBetaIntegrityConfig
+parseDomesticBetaLocalResources
+parseDomesticDebugAndroidTestLocalResources
+parseDomesticDebugIntegrityConfig
+parseDomesticDebugLocalResources
+parseDomesticReleaseIntegrityConfig
+parseDomesticReleaseLocalResources
+parseDomesticUatIntegrityConfig
+parseDomesticUatLocalResources
+parseOverseasBetaIntegrityConfig
+parseOverseasBetaLocalResources
+parseOverseasDebugAndroidTestLocalResources
+parseOverseasDebugIntegrityConfig
+parseOverseasDebugLocalResources
+parseOverseasReleaseIntegrityConfig
+parseOverseasReleaseLocalResources
+parseOverseasUatIntegrityConfig
+parseOverseasUatLocalResources
+preBuild
+preDomesticBetaBuild
+preDomesticDebugAndroidTestBuild
+preDomesticDebugBuild
+preDomesticDebugUnitTestBuild
+preDomesticReleaseBuild
+preDomesticUatBuild
+preOverseasBetaBuild
+preOverseasDebugAndroidTestBuild
+preOverseasDebugBuild
+preOverseasDebugUnitTestBuild
+preOverseasReleaseBuild
+preOverseasUatBuild
+prepareLintJarForPublish
+processApplicationManifestDomesticBetaForBundle
+processApplicationManifestDomesticDebugForBundle
+processApplicationManifestDomesticReleaseForBundle
+processApplicationManifestDomesticUatForBundle
+processApplicationManifestOverseasBetaForBundle
+processApplicationManifestOverseasDebugForBundle
+processApplicationManifestOverseasReleaseForBundle
+processApplicationManifestOverseasUatForBundle
+processDomesticBetaGoogleServices
+processDomesticBetaJavaRes
+processDomesticBetaMainManifest
+processDomesticBetaManifest
+processDomesticBetaManifestForPackage
+processDomesticBetaNavigationResources
+processDomesticBetaResources
+processDomesticDebugAndroidTestJavaRes
+processDomesticDebugAndroidTestManifest
+processDomesticDebugAndroidTestNavigationResources
+processDomesticDebugAndroidTestResources
+processDomesticDebugGoogleServices
+processDomesticDebugJavaRes
+processDomesticDebugMainManifest
+processDomesticDebugManifest
+processDomesticDebugManifestForPackage
+processDomesticDebugNavigationResources
+processDomesticDebugResources
+processDomesticDebugUnitTestJavaRes
+processDomesticReleaseGoogleServices
+processDomesticReleaseJavaRes
+processDomesticReleaseMainManifest
+processDomesticReleaseManifest
+processDomesticReleaseManifestForPackage
+processDomesticReleaseNavigationResources
+processDomesticReleaseResources
+processDomesticUatGoogleServices
+processDomesticUatJavaRes
+processDomesticUatMainManifest
+processDomesticUatManifest
+processDomesticUatManifestForPackage
+processDomesticUatNavigationResources
+processDomesticUatResources
+processManifestDomesticBetaForFeature
+processManifestDomesticDebugForFeature
+processManifestDomesticReleaseForFeature
+processManifestDomesticUatForFeature
+processManifestOverseasBetaForFeature
+processManifestOverseasDebugForFeature
+processManifestOverseasReleaseForFeature
+processManifestOverseasUatForFeature
+processOverseasBetaGoogleServices
+processOverseasBetaJavaRes
+processOverseasBetaMainManifest
+processOverseasBetaManifest
+processOverseasBetaManifestForPackage
+processOverseasBetaNavigationResources
+processOverseasBetaResources
+processOverseasDebugAndroidTestJavaRes
+processOverseasDebugAndroidTestManifest
+processOverseasDebugAndroidTestNavigationResources
+processOverseasDebugAndroidTestResources
+processOverseasDebugGoogleServices
+processOverseasDebugJavaRes
+processOverseasDebugMainManifest
+processOverseasDebugManifest
+processOverseasDebugManifestForPackage
+processOverseasDebugNavigationResources
+processOverseasDebugResources
+processOverseasDebugUnitTestJavaRes
+processOverseasReleaseGoogleServices
+processOverseasReleaseJavaRes
+processOverseasReleaseMainManifest
+processOverseasReleaseManifest
+processOverseasReleaseManifestForPackage
+processOverseasReleaseNavigationResources
+processOverseasReleaseResources
+processOverseasUatGoogleServices
+processOverseasUatJavaRes
+processOverseasUatMainManifest
+processOverseasUatManifest
+processOverseasUatManifestForPackage
+processOverseasUatNavigationResources
+processOverseasUatResources
+produceDomesticBetaBundleIdeListingFile
+produceDomesticBetaComposeMapping
+produceDomesticDebugBundleIdeListingFile
+produceDomesticReleaseBundleIdeListingFile
+produceDomesticReleaseComposeMapping
+produceDomesticUatBundleIdeListingFile
+produceDomesticUatComposeMapping
+produceOverseasBetaBundleIdeListingFile
+produceOverseasBetaComposeMapping
+produceOverseasDebugBundleIdeListingFile
+produceOverseasReleaseBundleIdeListingFile
+produceOverseasReleaseComposeMapping
+produceOverseasUatBundleIdeListingFile
+produceOverseasUatComposeMapping
+reportDomesticBetaComposeMappingErrors
+reportDomesticReleaseComposeMappingErrors
+reportDomesticUatComposeMappingErrors
+reportOverseasBetaComposeMappingErrors
+reportOverseasReleaseComposeMappingErrors
+reportOverseasUatComposeMappingErrors
+resolveConfigAttr
+sdkDomesticBetaDependencyData
+sdkDomesticReleaseDependencyData
+sdkDomesticUatDependencyData
+sdkOverseasBetaDependencyData
+sdkOverseasReleaseDependencyData
+sdkOverseasUatDependencyData
+signDomesticBetaBundle
+signDomesticDebugBundle
+signDomesticReleaseBundle
+signDomesticUatBundle
+signingConfigWriterDomesticBeta
+signingConfigWriterDomesticDebug
+signingConfigWriterDomesticDebugAndroidTest
+signingConfigWriterDomesticRelease
+signingConfigWriterDomesticUat
+signingConfigWriterOverseasBeta
+signingConfigWriterOverseasDebug
+signingConfigWriterOverseasDebugAndroidTest
+signingConfigWriterOverseasRelease
+signingConfigWriterOverseasUat
+signOverseasBetaBundle
+signOverseasDebugBundle
+signOverseasReleaseBundle
+signOverseasUatBundle
+stripDomesticBetaDebugSymbols
+stripDomesticDebugAndroidTestDebugSymbols
+stripDomesticDebugDebugSymbols
+stripDomesticReleaseDebugSymbols
+stripDomesticUatDebugSymbols
+stripOverseasBetaDebugSymbols
+stripOverseasDebugAndroidTestDebugSymbols
+stripOverseasDebugDebugSymbols
+stripOverseasReleaseDebugSymbols
+stripOverseasUatDebugSymbols
+updateLintBaselineDomesticBeta - Update the lint baseline using the domesticBeta variant
+updateLintBaselineDomesticDebug - Update the lint baseline using the domesticDebug variant
+updateLintBaselineDomesticRelease - Update the lint baseline using the domesticRelease variant
+updateLintBaselineDomesticUat - Update the lint baseline using the domesticUat variant
+updateLintBaselineOverseasBeta - Update the lint baseline using the overseasBeta variant
+updateLintBaselineOverseasDebug - Update the lint baseline using the overseasDebug variant
+updateLintBaselineOverseasRelease - Update the lint baseline using the overseasRelease variant
+updateLintBaselineOverseasUat - Update the lint baseline using the overseasUat variant
+writeDomesticBetaApplicationId
+writeDomesticBetaAppMetadata
+writeDomesticBetaModuleMetadata
+writeDomesticBetaSigningConfigVersions
+writeDomesticDebugAndroidTestSigningConfigVersions
+writeDomesticDebugApplicationId
+writeDomesticDebugAppMetadata
+writeDomesticDebugModuleMetadata
+writeDomesticDebugSigningConfigVersions
+writeDomesticReleaseApplicationId
+writeDomesticReleaseAppMetadata
+writeDomesticReleaseModuleMetadata
+writeDomesticReleaseSigningConfigVersions
+writeDomesticUatApplicationId
+writeDomesticUatAppMetadata
+writeDomesticUatModuleMetadata
+writeDomesticUatSigningConfigVersions
+writeOverseasBetaApplicationId
+writeOverseasBetaAppMetadata
+writeOverseasBetaModuleMetadata
+writeOverseasBetaSigningConfigVersions
+writeOverseasDebugAndroidTestSigningConfigVersions
+writeOverseasDebugApplicationId
+writeOverseasDebugAppMetadata
+writeOverseasDebugModuleMetadata
+writeOverseasDebugSigningConfigVersions
+writeOverseasReleaseApplicationId
+writeOverseasReleaseAppMetadata
+writeOverseasReleaseModuleMetadata
+writeOverseasReleaseSigningConfigVersions
+writeOverseasUatApplicationId
+writeOverseasUatAppMetadata
+writeOverseasUatModuleMetadata
+writeOverseasUatSigningConfigVersions
+zipApksForDomesticBeta
+zipApksForDomesticDebug
+zipApksForDomesticRelease
+zipApksForDomesticUat
+zipApksForOverseasBeta
+zipApksForOverseasDebug
+zipApksForOverseasRelease
+zipApksForOverseasUat
+
+Rules
+-----
+Pattern: clean<TaskName>: Cleans the output files of a task.
+Pattern: build<ConfigurationName>: Assembles the artifacts of a configuration.
+
+[Incubating] Problems report is available at: file:///private/tmp/ugreen-android-architecture-20260914/android/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 19s
+1 actionable task: 1 executed
+]9;4;0exit_code=0
+elapsed_seconds=20
+ended_at=2026-09-14T14:25:55+08:00

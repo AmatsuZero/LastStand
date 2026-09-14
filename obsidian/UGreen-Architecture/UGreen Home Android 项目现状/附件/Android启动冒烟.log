@@ -1,0 +1,8 @@
+Starting: Intent { cmp=com.ugreen.home/.ui.SplashActivity }
+Status: ok
+LaunchState: COLD
+Activity: com.ugreen.home/.ui.RootActivity
+TotalTime: 1313
+WaitTime: 1315
+Complete
+

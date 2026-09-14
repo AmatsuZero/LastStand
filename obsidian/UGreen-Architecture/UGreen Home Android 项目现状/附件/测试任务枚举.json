@@ -1,0 +1,15 @@
+{
+  "date": "2026-09-14",
+  "mode": "read-only Gradle task enumeration",
+  "snapshots": {"android": "5543c83e", "shared": "4f36969b"},
+  "commands": [
+    {"working_tree": "isolated Android", "task": ":app:tasks --all", "exit_code": 0, "elapsed_seconds": 20},
+    {"working_tree": "isolated Android", "task": "tasks --all", "exit_code": 0, "elapsed_seconds": 18},
+    {"working_tree": "isolated Shared", "task": "tasks --all", "exit_code": 0, "elapsed_seconds": 21}
+  ],
+  "app_instrumentation_tasks": ["connectedAndroidTest", "connectedCheck", "connectedDomesticDebugAndroidTest", "connectedOverseasDebugAndroidTest", "deviceAndroidTest"],
+  "shared_device_tasks_found": ["core-database:connectedAndroidDeviceTest", "core-net:connectedAndroidDeviceTest", "core-database:deviceAndroidTest", "core-net:deviceAndroidTest", "*:androidDeviceCheck"],
+  "shared_host_tasks_found": ["*:testAndroidHostTest", "*:compileAndroidHostTest", "*:assembleAndroidHostTest"],
+  "coverage_named_tasks_found": [],
+  "scope_limits": ["No test, build, install, or dependency download was executed.", "An absent name in tasks output does not prove no coverage configuration or 0% coverage.", "Task registration does not prove a device, test source, or runtime outcome."]
+}

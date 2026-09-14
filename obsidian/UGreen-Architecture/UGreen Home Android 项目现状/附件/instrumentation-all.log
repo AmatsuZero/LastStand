@@ -1,0 +1,217 @@
+INSTRUMENTATION_STATUS: class=com.ugreen.home.ExampleInstrumentedTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=
+com.ugreen.home.ExampleInstrumentedTest:
+INSTRUMENTATION_STATUS: test=useAppContext
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.ugreen.home.ExampleInstrumentedTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=useAppContext
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=
+com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest:
+INSTRUMENTATION_STATUS: test=trafficManagement_isRootPage_andOneBackFinishesActivity
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stack=java.lang.IllegalStateException: DatabaseHolder not initialized
+	at com.ugreen.core.database.DatabaseHolder.getDao(DatabaseProvider.kt:32)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.deviceDao_delegate$lambda$0(IPCDeviceSettingActivityBackStackTest.kt:28)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest$$ExternalSyntheticLambda1.invoke(D8$$SyntheticClass:0)
+	at kotlin.SynchronizedLazyImpl.getValue(LazyJVM.kt:86)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.getDeviceDao(IPCDeviceSettingActivityBackStackTest.kt:28)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.access$getDeviceDao(IPCDeviceSettingActivityBackStackTest.kt:25)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest$removeDebugOd800$1.invokeSuspend(IPCDeviceSettingActivityBackStackTest.kt:62)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:256)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:54)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlockingImpl(Builders.kt:30)
+	at kotlinx.coroutines.BuildersKt.runBlockingImpl(Unknown Source:1)
+	at kotlinx.coroutines.BuildersKt__Builders_concurrentKt.runBlockingK(Builders.concurrent.kt:172)
+	at kotlinx.coroutines.BuildersKt.runBlockingK(Unknown Source:1)
+	at kotlinx.coroutines.BuildersKt__Builders_concurrentKt.runBlockingK$default(Builders.concurrent.kt:157)
+	at kotlinx.coroutines.BuildersKt.runBlockingK$default(Unknown Source:1)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.removeDebugOd800(IPCDeviceSettingActivityBackStackTest.kt:61)
+
+INSTRUMENTATION_STATUS: stream=
+Error in trafficManagement_isRootPage_andOneBackFinishesActivity(com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest):
+java.lang.IllegalStateException: DatabaseHolder not initialized
+	at com.ugreen.core.database.DatabaseHolder.getDao(DatabaseProvider.kt:32)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.deviceDao_delegate$lambda$0(IPCDeviceSettingActivityBackStackTest.kt:28)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest$$ExternalSyntheticLambda1.invoke(D8$$SyntheticClass:0)
+	at kotlin.SynchronizedLazyImpl.getValue(LazyJVM.kt:86)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.getDeviceDao(IPCDeviceSettingActivityBackStackTest.kt:28)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.access$getDeviceDao(IPCDeviceSettingActivityBackStackTest.kt:25)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest$removeDebugOd800$1.invokeSuspend(IPCDeviceSettingActivityBackStackTest.kt:62)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:256)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:54)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlockingImpl(Builders.kt:30)
+	at kotlinx.coroutines.BuildersKt.runBlockingImpl(Unknown Source:1)
+	at kotlinx.coroutines.BuildersKt__Builders_concurrentKt.runBlockingK(Builders.concurrent.kt:172)
+	at kotlinx.coroutines.BuildersKt.runBlockingK(Unknown Source:1)
+	at kotlinx.coroutines.BuildersKt__Builders_concurrentKt.runBlockingK$default(Builders.concurrent.kt:157)
+	at kotlinx.coroutines.BuildersKt.runBlockingK$default(Unknown Source:1)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.removeDebugOd800(IPCDeviceSettingActivityBackStackTest.kt:61)
+
+INSTRUMENTATION_STATUS: test=trafficManagement_isRootPage_andOneBackFinishesActivity
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=networkConfig_isRootPage_andOneBackFinishesActivity
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=3
+INSTRUMENTATION_STATUS: stack=java.lang.IllegalStateException: DatabaseHolder not initialized
+	at com.ugreen.core.database.DatabaseHolder.getDao(DatabaseProvider.kt:32)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.deviceDao_delegate$lambda$0(IPCDeviceSettingActivityBackStackTest.kt:28)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest$$ExternalSyntheticLambda1.invoke(D8$$SyntheticClass:0)
+	at kotlin.SynchronizedLazyImpl.getValue(LazyJVM.kt:86)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.getDeviceDao(IPCDeviceSettingActivityBackStackTest.kt:28)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.access$getDeviceDao(IPCDeviceSettingActivityBackStackTest.kt:25)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest$removeDebugOd800$1.invokeSuspend(IPCDeviceSettingActivityBackStackTest.kt:62)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:256)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:54)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlockingImpl(Builders.kt:30)
+	at kotlinx.coroutines.BuildersKt.runBlockingImpl(Unknown Source:1)
+	at kotlinx.coroutines.BuildersKt__Builders_concurrentKt.runBlockingK(Builders.concurrent.kt:172)
+	at kotlinx.coroutines.BuildersKt.runBlockingK(Unknown Source:1)
+	at kotlinx.coroutines.BuildersKt__Builders_concurrentKt.runBlockingK$default(Builders.concurrent.kt:157)
+	at kotlinx.coroutines.BuildersKt.runBlockingK$default(Unknown Source:1)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.removeDebugOd800(IPCDeviceSettingActivityBackStackTest.kt:61)
+
+INSTRUMENTATION_STATUS: stream=
+Error in networkConfig_isRootPage_andOneBackFinishesActivity(com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest):
+java.lang.IllegalStateException: DatabaseHolder not initialized
+	at com.ugreen.core.database.DatabaseHolder.getDao(DatabaseProvider.kt:32)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.deviceDao_delegate$lambda$0(IPCDeviceSettingActivityBackStackTest.kt:28)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest$$ExternalSyntheticLambda1.invoke(D8$$SyntheticClass:0)
+	at kotlin.SynchronizedLazyImpl.getValue(LazyJVM.kt:86)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.getDeviceDao(IPCDeviceSettingActivityBackStackTest.kt:28)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.access$getDeviceDao(IPCDeviceSettingActivityBackStackTest.kt:25)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest$removeDebugOd800$1.invokeSuspend(IPCDeviceSettingActivityBackStackTest.kt:62)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:256)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:54)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlockingImpl(Builders.kt:30)
+	at kotlinx.coroutines.BuildersKt.runBlockingImpl(Unknown Source:1)
+	at kotlinx.coroutines.BuildersKt__Builders_concurrentKt.runBlockingK(Builders.concurrent.kt:172)
+	at kotlinx.coroutines.BuildersKt.runBlockingK(Unknown Source:1)
+	at kotlinx.coroutines.BuildersKt__Builders_concurrentKt.runBlockingK$default(Builders.concurrent.kt:157)
+	at kotlinx.coroutines.BuildersKt.runBlockingK$default(Unknown Source:1)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.removeDebugOd800(IPCDeviceSettingActivityBackStackTest.kt:61)
+
+INSTRUMENTATION_STATUS: test=networkConfig_isRootPage_andOneBackFinishesActivity
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: stream=
+
+Time: 0.02
+There were 4 failures:
+1) trafficManagement_isRootPage_andOneBackFinishesActivity(com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest)
+java.lang.IllegalStateException: DatabaseHolder not initialized
+	at com.ugreen.core.database.DatabaseHolder.getDao(DatabaseProvider.kt:32)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.deviceDao_delegate$lambda$0(IPCDeviceSettingActivityBackStackTest.kt:28)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest$$ExternalSyntheticLambda1.invoke(D8$$SyntheticClass:0)
+	at kotlin.SynchronizedLazyImpl.getValue(LazyJVM.kt:86)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.getDeviceDao(IPCDeviceSettingActivityBackStackTest.kt:28)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.access$getDeviceDao(IPCDeviceSettingActivityBackStackTest.kt:25)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest$seedDebugOd800$1.invokeSuspend(IPCDeviceSettingActivityBackStackTest.kt:32)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:256)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:54)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlockingImpl(Builders.kt:30)
+	at kotlinx.coroutines.BuildersKt.runBlockingImpl(Unknown Source:1)
+	at kotlinx.coroutines.BuildersKt__Builders_concurrentKt.runBlockingK(Builders.concurrent.kt:172)
+	at kotlinx.coroutines.BuildersKt.runBlockingK(Unknown Source:1)
+	at kotlinx.coroutines.BuildersKt__Builders_concurrentKt.runBlockingK$default(Builders.concurrent.kt:157)
+	at kotlinx.coroutines.BuildersKt.runBlockingK$default(Unknown Source:1)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.seedDebugOd800(IPCDeviceSettingActivityBackStackTest.kt:31)
+2) trafficManagement_isRootPage_andOneBackFinishesActivity(com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest)
+java.lang.IllegalStateException: DatabaseHolder not initialized
+	at com.ugreen.core.database.DatabaseHolder.getDao(DatabaseProvider.kt:32)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.deviceDao_delegate$lambda$0(IPCDeviceSettingActivityBackStackTest.kt:28)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest$$ExternalSyntheticLambda1.invoke(D8$$SyntheticClass:0)
+	at kotlin.SynchronizedLazyImpl.getValue(LazyJVM.kt:86)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.getDeviceDao(IPCDeviceSettingActivityBackStackTest.kt:28)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.access$getDeviceDao(IPCDeviceSettingActivityBackStackTest.kt:25)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest$removeDebugOd800$1.invokeSuspend(IPCDeviceSettingActivityBackStackTest.kt:62)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:256)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:54)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlockingImpl(Builders.kt:30)
+	at kotlinx.coroutines.BuildersKt.runBlockingImpl(Unknown Source:1)
+	at kotlinx.coroutines.BuildersKt__Builders_concurrentKt.runBlockingK(Builders.concurrent.kt:172)
+	at kotlinx.coroutines.BuildersKt.runBlockingK(Unknown Source:1)
+	at kotlinx.coroutines.BuildersKt__Builders_concurrentKt.runBlockingK$default(Builders.concurrent.kt:157)
+	at kotlinx.coroutines.BuildersKt.runBlockingK$default(Unknown Source:1)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.removeDebugOd800(IPCDeviceSettingActivityBackStackTest.kt:61)
+3) networkConfig_isRootPage_andOneBackFinishesActivity(com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest)
+java.lang.IllegalStateException: DatabaseHolder not initialized
+	at com.ugreen.core.database.DatabaseHolder.getDao(DatabaseProvider.kt:32)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.deviceDao_delegate$lambda$0(IPCDeviceSettingActivityBackStackTest.kt:28)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest$$ExternalSyntheticLambda1.invoke(D8$$SyntheticClass:0)
+	at kotlin.SynchronizedLazyImpl.getValue(LazyJVM.kt:86)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.getDeviceDao(IPCDeviceSettingActivityBackStackTest.kt:28)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.access$getDeviceDao(IPCDeviceSettingActivityBackStackTest.kt:25)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest$seedDebugOd800$1.invokeSuspend(IPCDeviceSettingActivityBackStackTest.kt:32)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:256)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:54)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlockingImpl(Builders.kt:30)
+	at kotlinx.coroutines.BuildersKt.runBlockingImpl(Unknown Source:1)
+	at kotlinx.coroutines.BuildersKt__Builders_concurrentKt.runBlockingK(Builders.concurrent.kt:172)
+	at kotlinx.coroutines.BuildersKt.runBlockingK(Unknown Source:1)
+	at kotlinx.coroutines.BuildersKt__Builders_concurrentKt.runBlockingK$default(Builders.concurrent.kt:157)
+	at kotlinx.coroutines.BuildersKt.runBlockingK$default(Unknown Source:1)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.seedDebugOd800(IPCDeviceSettingActivityBackStackTest.kt:31)
+4) networkConfig_isRootPage_andOneBackFinishesActivity(com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest)
+java.lang.IllegalStateException: DatabaseHolder not initialized
+	at com.ugreen.core.database.DatabaseHolder.getDao(DatabaseProvider.kt:32)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.deviceDao_delegate$lambda$0(IPCDeviceSettingActivityBackStackTest.kt:28)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest$$ExternalSyntheticLambda1.invoke(D8$$SyntheticClass:0)
+	at kotlin.SynchronizedLazyImpl.getValue(LazyJVM.kt:86)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.getDeviceDao(IPCDeviceSettingActivityBackStackTest.kt:28)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.access$getDeviceDao(IPCDeviceSettingActivityBackStackTest.kt:25)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest$removeDebugOd800$1.invokeSuspend(IPCDeviceSettingActivityBackStackTest.kt:62)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.EventLoopImplBase.processNextEvent(EventLoop.common.kt:256)
+	at kotlinx.coroutines.BlockingCoroutine.joinBlocking(Builders.kt:54)
+	at kotlinx.coroutines.BuildersKt__BuildersKt.runBlockingImpl(Builders.kt:30)
+	at kotlinx.coroutines.BuildersKt.runBlockingImpl(Unknown Source:1)
+	at kotlinx.coroutines.BuildersKt__Builders_concurrentKt.runBlockingK(Builders.concurrent.kt:172)
+	at kotlinx.coroutines.BuildersKt.runBlockingK(Unknown Source:1)
+	at kotlinx.coroutines.BuildersKt__Builders_concurrentKt.runBlockingK$default(Builders.concurrent.kt:157)
+	at kotlinx.coroutines.BuildersKt.runBlockingK$default(Unknown Source:1)
+	at com.ugreen.home.ui.dev.IPCDeviceSettingActivityBackStackTest.removeDebugOd800(IPCDeviceSettingActivityBackStackTest.kt:61)
+
+FAILURES!!!
+Tests run: 3,  Failures: 4
+
+
+INSTRUMENTATION_CODE: -1
+

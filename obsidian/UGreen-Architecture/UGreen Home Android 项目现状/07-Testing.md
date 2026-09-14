@@ -11,7 +11,7 @@
 - Shared `release/1.7.0` 快照有 **74** 个 Kotlin 测试 source-set 文件、**545** 个静态 `@Test`；Android 有关的 `commonTest`、`jvmTest`、`androidHostTest`、`androidDeviceTest` 合计 **72 / 544**。其余 `iosTest` 为 **2 / 1**，只作为 iOS 共用层交叉引用，不在本 Android 正文重复展开。
 - Android README 要求主工程与 Shared 分支名称一致（`README.md:75-82`）；故本页以主线程创建的隔离导出 `/private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq`（含严格 pin 的 strings）作为 Shared 静态基线；不引用旧 iOS 工作树的行号。Shared 仍是主工程的 Composite Build 候选来源而不是 Android 仓库子模块；原工程配置路径状态和替代接入边界见 [调研方案与执行记录](附件/调研方案与执行记录.md)。本节的 Shared 数据只描述该只读提交，**本身不证明原配置路径或可执行性**；同名分支的 Composite Build 配置及具体任务执行证据另见第6节和 Build Time。
 
-静态计数与第6节实际执行结果分开记录。构建/测试命令、退出码和JUnit报告已经取得；无设备测试或覆盖率产物，不填写相关通过率。
+静态计数与第6节实际执行结果分开记录。构建/测试命令、退出码和JUnit报告已经取得；App instrumentation 已在隔离模拟器执行，逐案例结果另列；覆盖率报告仍未取得。
 
 ## 2. 主工程测试分布
 
@@ -61,18 +61,18 @@
 | 层级 | 静态配置证据 | 可执行面与限制 |
 |---|---|---|
 | Android 本地单元测试 | 通用 library 约定注入 `testImplementation libs.junit`、`testImplementation libs.kotlinx.coroutines.test`（`baseModuleBuild.gradle:35-42`） | 标准 AGP variant 的 `test<Variant>UnitTest` 任务应由配置生成；App 有 `domestic`、`overseas` 两个 flavor（`app/build.gradle:61-93`），本轮实际执行 App domesticDebug 与 library debug unit test；具体调用和结果见第6节 |
-| Android instrumentation | 通用约定使用 `androidx.test.runner.AndroidJUnitRunner`、AndroidX JUnit/Espresso（`baseModuleBuild.gradle:6-11,39-42`）；个别未采用通用脚本的模块也显式配置 runner，例如播放器 runtime（`ugreen-media/player-runtime-android/build.gradle:13-18,93-95`） | 标准 AGP 的 `connected<Variant>AndroidTest` / install + instrumentation task 需真实 device/emulator、已配置 variant 与依赖；未发现也未运行任务图 |
+| Android instrumentation | 通用约定使用 `androidx.test.runner.AndroidJUnitRunner`、AndroidX JUnit/Espresso（`baseModuleBuild.gradle:6-11,39-42`）；个别未采用通用脚本的模块也显式配置 runner，例如播放器 runtime（`ugreen-media/player-runtime-android/build.gradle:13-18,93-95`） | 已枚举到 `connectedDomesticDebugAndroidTest` 等任务；本轮采用 assemble + adb install + `am instrument` 在 API36 模拟器运行 App 案例，而非通过 connected task 调度；见[任务枚举](附件/测试任务枚举.md)与第6节 |
 | App variant | App 打包 artifact hook 显式跳过名以 `AndroidTest`、`UnitTest` 结尾的 variant（`app/build.gradle:298-302`） | 该跳过仅说明不为测试 variant 注册重命名拷贝任务；不等于禁用测试 |
 | Shared KMP public/common | `commonTest` 依赖 `kotlin.test`（如 `core/core-net/build.gradle.kts:38-42`）；`core-util` 开启 JVM | KMP task 名称与 host/target 由实际 Gradle/Kotlin 插件配置决定；本轮仅实际执行 `:core-util:jvmTest`，不把其他 source set 的存在写成执行通过 |
-| Shared Android device/host | `core-net`、`core-database` 选择 device source set；secure-package 有可选 host JNI 前置任务 | device/host测试未运行；JDK/SDK与主App构建已验证，不代表这些测试任务通过 |
+| Shared Android device/host | `core-net`、`core-database` 选择 device source set；secure-package 有可选 host JNI 前置任务 | device/host 测试未运行；本轮 App instrumentation 已在 API 36 隔离模拟器执行，但因 `DatabaseHolder not initialized` 导致 2 个 back-stack 案例失败；JDK/SDK与主App构建已验证，不代表 Shared device/host 测试任务通过 |
 
 主工程还直接纳入已初始化的 `ugreen-media` 模块；其 `player-runtime-android` 贡献 **6 文件 / 11 `@Test`**（`test` 5 / 10、`androidTest` 1 / 1），纳入上表 Android 合计。是否能构建这些 native/播放器依赖，不能由该静态清单推断。
 
 ## 5. UI、集成与覆盖率
 
-- **UI/instrumentation：** `app` 的 back-stack 测试使用 `AndroidJUnit4`、`InstrumentationRegistry` 和 `startActivitySync`，有真实测试宿主、数据库状态和 Activity 生命周期需求；`qrcode`、`calendarview` 等也含 `androidTest`。这证明源码层存在 instrumentation 资产，**不证明存在独立 UI 自动化 suite、设备可用或案例执行成功**。
+- **UI/instrumentation：** `app` 的 back-stack 测试使用 `AndroidJUnit4`、`InstrumentationRegistry` 和 `startActivitySync`，有真实测试宿主、数据库状态和 Activity 生命周期需求；`qrcode`、`calendarview` 等也含 `androidTest`。本轮已运行 App 的全部3个 instrumentation 案例（1通过、2初始化失败），并观察首次启动 UI；不代表其他模块或完整 UI 自动化通过。
 - **集成：** 文件名中的 `Acceptance`、`Bridge`、`Runtime`、`Policy`、`Flow` 只能说明测试意图，不能自动证明已连接账号、IoT 设备、网络后端或 RN runtime。当前未另发现命名清晰的 Android end-to-end/integration test source set 或报告。
-- **覆盖率：** 在两个工程的 Gradle 构建脚本与 properties 中，未静态发现 `jacoco`、`kover`、`testCoverageEnabled`、`enableUnitTestCoverage` 或 `enableAndroidTestCoverage` 配置。本轮未执行覆盖率任务枚举、也未取得报告，故覆盖率为 **未取得**，而非0%。
+- **覆盖率：** 在两个工程的 Gradle 构建脚本与 properties 中，未静态发现 `jacoco`、`kover`、`testCoverageEnabled`、`enableUnitTestCoverage` 或 `enableAndroidTestCoverage` 配置。本轮执行 Android App、Android root、Shared standalone 三份 `tasks --all`，均退出0，未枚举到任务名以 `jacoco` / `kover` 开头或包含 `coverage` 的任务（见[任务枚举](附件/测试任务枚举.md)）。未新增覆盖率插件或取得报告，覆盖率仍为 **未取得**，而非0%。
 - **非 Gradle 测试：** 静态扫描 Android 主工程（排除 `.git`、`.gradle`、`build`、`node_modules`）未发现已跟踪的 Node (`*.test.js`/`*.mjs`) 或 Python (`test_*.py`/`*_test.py`) 测试文件，也未发现 `package.json`、`pyproject.toml`、`pytest.ini`、`tox.ini` 测试入口。因此没有可在不运行 Gradle 的现有纯 Node/Python Android 主工程测试可移交；此结论不外推到 iOS 仓库 Tools。
 
 ## 6. 本轮实际执行结果
@@ -81,9 +81,10 @@
 |---|---:|---:|---|
 | Android `:app:testDomesticDebugUnitTest` + `testDebugUnitTest --continue` 聚合 | **216 / 214 / 2** | 41.32 秒 | `IpcSettingPageUiTest`：期望 `OD600_SERIES`、实际 `ID500_SERIES`；`OtaCmpDebugScenariosTest`：期望 `FAILED`、实际 `PROGRESSING`。App 自身70个案例（68通过、2失败）；其他14个模块合计146个全通过。持久证据见下方CSV/JSON，原临时报告在后续clean前已提取。 |
 | Shared `:core-util:jvmTest`（release/1.7.0@4f36969b） | **37 / 37 / 0** | 15.08 秒 | 8 suites，0 skipped；只代表 core-util JVM 测试。 |
+| App AndroidJUnitRunner，API36 arm64 模拟器 | **3 / 1 / 2** | runner报告0.02秒（非含启动wall time） | 示例 `useAppContext` 通过；两个 back-stack 案例在 `@Before` 和 `@After` 均触发 `DatabaseHolder not initialized`，共4条失败事件，未执行路由断言。 |
 
-未执行 instrumentation、Android device test、UI 真机或覆盖率任务；未安装/启动 APK，不连接真实 IoT 设备。逐案例摘要见 [JUnit执行案例.csv](附件/JUnit执行案例.csv)，套件汇总见 [JUnit套件汇总.json](附件/JUnit套件汇总.json)。静态清单仍为 Android 93 文件/254 注解、Shared 74 文件/545 注解，不替代实际执行结果。
+App instrumentation 已执行：API 36 隔离模拟器安装临时签名 APK 后运行 3 个案例，1 通过、2 因 `DatabaseHolder not initialized` 失败；同时完成离线启动冒烟（`SplashActivity` → `RootActivity`，`am start -W` 返回成功，等待10秒后仍在 RootActivity 并显示隐私协议页，未点击同意，已归档 UI dump/截图）。Shared Android device/host test、真机、真实账号/IoT 设备及覆盖率仍未执行。过程与边界见[Android运行实测](附件/Android运行实测.md)；证据见 [Android模拟器运行验证](附件/Android模拟器运行验证.json)、[instrumentation 输出](附件/instrumentation-all.log)。逐案例摘要见 [JUnit执行案例.csv](附件/JUnit执行案例.csv)，套件汇总见 [JUnit套件汇总.json](附件/JUnit套件汇总.json)。静态清单仍为 Android 93 文件/254 注解、Shared 74 文件/545 注解，不替代实际执行结果。
 
 ## 7. 复核边界
 
-测试失败保留原样，不修改业务或测试源码来制造通过；没有取得 coverage report；仅静态未发现相关配置，未执行覆盖率任务枚举，覆盖率记为未取得而非0%。
+测试失败保留原样，不修改业务或测试源码来制造通过；没有取得 coverage report；静态配置扫描与实际任务枚举都未发现相应入口，覆盖率记为未取得而非0%。`adb shell` 退出0及 `INSTRUMENTATION_CODE: -1` 均不代表测试通过；本轮以逐案例状态和 runner 失败报告为准。
