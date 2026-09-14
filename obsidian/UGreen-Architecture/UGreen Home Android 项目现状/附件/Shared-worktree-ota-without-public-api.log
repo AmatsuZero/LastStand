@@ -1,0 +1,518 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+
+> Configure project :build-logic:convention
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+
+> Task :build-logic:convention:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :build-logic:convention:compileKotlin UP-TO-DATE
+> Task :build-logic:convention:compileJava NO-SOURCE
+> Task :build-logic:convention:pluginDescriptors UP-TO-DATE
+> Task :build-logic:convention:processResources UP-TO-DATE
+> Task :build-logic:convention:classes UP-TO-DATE
+> Task :build-logic:convention:jar UP-TO-DATE
+
+> Configure project :airtc-appsdk
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :app-shared
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :core-database
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :core-kv
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :core-logger
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :core-mvi
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :core-navigation
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+WARNING: The 'commonTest' source directory exists, but android host tests are not enabled. To enable android host tests, add `withHostTest {}` to your android target configuration in the Gradle build file.
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :core-net
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :core-player
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :core-secure-package
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :core-ui
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :core-util
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :device-biz
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+WARNING: The 'commonTest' source directory exists, but android host tests are not enabled. To enable android host tests, add `withHostTest {}` to your android target configuration in the Gradle build file.
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :device-thing-model
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :domain-device
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :domain-env
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :domain-family
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :domain-product
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :feature-auth
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :feature-device-event
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :feature-home-management
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :feature-ota
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :feature-playback
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :feature-third-party-services
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+WARNING: The 'commonTest' source directory exists, but android host tests are not enabled. To enable android host tests, add `withHostTest {}` to your android target configuration in the Gradle build file.
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :sample
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :ugreen-strings-kmp
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Task :core-kv:kmpPartiallyResolvedDependenciesChecker
+> Task :core-kv:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-kv:compileAndroidMain UP-TO-DATE
+> Task :core-kv:androidPreBuild UP-TO-DATE
+> Task :core-kv:preAndroidMainBuild UP-TO-DATE
+> Task :core-kv:bundleAndroidMainClassesToRuntimeJar UP-TO-DATE
+> Task :core-kv:processAndroidMainJavaRes UP-TO-DATE
+> Task :core-logger:kmpPartiallyResolvedDependenciesChecker
+> Task :core-logger:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-logger:compileAndroidMain UP-TO-DATE
+> Task :core-logger:androidPreBuild UP-TO-DATE
+> Task :core-logger:preAndroidMainBuild UP-TO-DATE
+> Task :core-logger:bundleAndroidMainClassesToRuntimeJar UP-TO-DATE
+> Task :core-logger:processAndroidMainJavaRes UP-TO-DATE
+> Task :core-logger:bundleAndroidMainClassesToCompileJar UP-TO-DATE
+> Task :core-net:kmpPartiallyResolvedDependenciesChecker
+> Task :core-net:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-net:compileAndroidMain UP-TO-DATE
+> Task :core-net:androidPreBuild UP-TO-DATE
+> Task :core-net:preAndroidMainBuild UP-TO-DATE
+> Task :core-net:bundleAndroidMainClassesToRuntimeJar UP-TO-DATE
+> Task :core-net:processAndroidMainJavaRes UP-TO-DATE
+> Task :core-kv:bundleAndroidMainClassesToCompileJar UP-TO-DATE
+> Task :core-net:bundleAndroidMainClassesToCompileJar UP-TO-DATE
+> Task :core-ui:kmpPartiallyResolvedDependenciesChecker
+> Task :core-ui:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-ui:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :core-ui:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :core-ui:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :core-ui:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :core-ui:syncCoreUiComposeResources UP-TO-DATE
+> Task :core-ui:convertXmlValueResourcesForCommonMain UP-TO-DATE
+> Task :core-ui:copyNonXmlValueResourcesForCommonMain UP-TO-DATE
+> Task :core-ui:prepareComposeResourcesTaskForCommonMain UP-TO-DATE
+> Task :core-ui:generateResourceAccessorsForCommonMain UP-TO-DATE
+> Task :core-ui:generateActualResourceCollectorsForAndroidMain UP-TO-DATE
+> Task :core-ui:androidPreBuild UP-TO-DATE
+> Task :core-ui:preAndroidMainBuild UP-TO-DATE
+> Task :core-ui:generateAndroidMainEmptyResourceFiles UP-TO-DATE
+> Task :core-ui:copyAndroidMainComposeResourcesToAndroidAssets UP-TO-DATE
+> Task :core-ui:packageAndroidMainResources UP-TO-DATE
+> Task :core-ui:parseAndroidMainLocalResources UP-TO-DATE
+> Task :core-ui:generateAndroidMainRFile UP-TO-DATE
+> Task :core-ui:generateComposeResClass UP-TO-DATE
+> Task :core-ui:generateExpectResourceCollectorsForCommonMain UP-TO-DATE
+> Task :core-util:kmpPartiallyResolvedDependenciesChecker
+> Task :core-util:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-util:compileAndroidMain UP-TO-DATE
+> Task :core-util:androidPreBuild UP-TO-DATE
+> Task :core-util:preAndroidMainBuild UP-TO-DATE
+> Task :core-util:bundleAndroidMainClassesToCompileJar UP-TO-DATE
+> Task :core-ui:compileAndroidMain UP-TO-DATE
+> Task :core-ui:bundleAndroidMainClassesToRuntimeJar UP-TO-DATE
+> Task :core-ui:processAndroidMainJavaRes UP-TO-DATE
+> Task :core-util:bundleAndroidMainClassesToRuntimeJar UP-TO-DATE
+> Task :core-util:processAndroidMainJavaRes UP-TO-DATE
+> Task :core-ui:bundleAndroidMainClassesToCompileJar UP-TO-DATE
+> Task :feature-ota:kmpPartiallyResolvedDependenciesChecker
+> Task :feature-ota:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :feature-ota:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature-ota:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature-ota:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :feature-ota:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :feature-ota:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :feature-ota:copyNonXmlValueResourcesForCommonMain UP-TO-DATE
+> Task :feature-ota:prepareComposeResourcesTaskForCommonMain UP-TO-DATE
+> Task :feature-ota:generateResourceAccessorsForCommonMain UP-TO-DATE
+> Task :feature-ota:generateActualResourceCollectorsForAndroidMain UP-TO-DATE
+> Task :feature-ota:androidPreBuild UP-TO-DATE
+> Task :feature-ota:preAndroidMainBuild UP-TO-DATE
+> Task :feature-ota:generateAndroidMainEmptyResourceFiles UP-TO-DATE
+> Task :feature-ota:copyAndroidMainComposeResourcesToAndroidAssets UP-TO-DATE
+> Task :feature-ota:packageAndroidMainResources UP-TO-DATE
+> Task :feature-ota:parseAndroidMainLocalResources UP-TO-DATE
+> Task :feature-ota:generateAndroidMainRFile UP-TO-DATE
+> Task :feature-ota:generateComposeResClass UP-TO-DATE
+> Task :feature-ota:generateExpectResourceCollectorsForCommonMain UP-TO-DATE
+> Task :ugreen-strings-kmp:kmpPartiallyResolvedDependenciesChecker
+> Task :ugreen-strings-kmp:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :ugreen-strings-kmp:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :ugreen-strings-kmp:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :ugreen-strings-kmp:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :ugreen-strings-kmp:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :ugreen-strings-kmp:convertXmlValueResourcesForCommonMain UP-TO-DATE
+> Task :ugreen-strings-kmp:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :ugreen-strings-kmp:prepareComposeResourcesTaskForCommonMain UP-TO-DATE
+> Task :ugreen-strings-kmp:generateResourceAccessorsForCommonMain UP-TO-DATE
+> Task :ugreen-strings-kmp:generateActualResourceCollectorsForAndroidMain UP-TO-DATE
+> Task :ugreen-strings-kmp:androidPreBuild UP-TO-DATE
+> Task :ugreen-strings-kmp:preAndroidMainBuild UP-TO-DATE
+> Task :ugreen-strings-kmp:generateAndroidMainEmptyResourceFiles UP-TO-DATE
+> Task :ugreen-strings-kmp:copyAndroidMainComposeResourcesToAndroidAssets UP-TO-DATE
+> Task :ugreen-strings-kmp:packageAndroidMainResources UP-TO-DATE
+> Task :ugreen-strings-kmp:parseAndroidMainLocalResources UP-TO-DATE
+> Task :ugreen-strings-kmp:generateAndroidMainRFile UP-TO-DATE
+> Task :ugreen-strings-kmp:generateComposeResClass UP-TO-DATE
+> Task :ugreen-strings-kmp:generateExpectResourceCollectorsForCommonMain UP-TO-DATE
+> Task :ugreen-strings-kmp:compileAndroidMain UP-TO-DATE
+> Task :ugreen-strings-kmp:bundleAndroidMainClassesToCompileJar UP-TO-DATE
+> Task :feature-ota:compileAndroidMain UP-TO-DATE
+> Task :feature-ota:bundleAndroidMainClassesToRuntimeJar UP-TO-DATE
+> Task :feature-ota:androidJar
+> Task :feature-ota:bundleAndroidMainClassesToCompileJar UP-TO-DATE
+> Task :core-ui:generateAndroidMainAssets UP-TO-DATE
+> Task :core-ui:mergeAndroidMainAssets UP-TO-DATE
+> Task :feature-ota:generateAndroidHostTestAssets UP-TO-DATE
+> Task :feature-ota:generateAndroidMainAssets UP-TO-DATE
+> Task :feature-ota:mergeAndroidMainAssets UP-TO-DATE
+> Task :feature-ota:preAndroidHostTestBuild UP-TO-DATE
+> Task :ugreen-strings-kmp:generateAndroidMainAssets UP-TO-DATE
+> Task :ugreen-strings-kmp:mergeAndroidMainAssets UP-TO-DATE
+> Task :feature-ota:mergeAndroidHostTestAssets
+> Task :core-ui:mapAndroidMainSourceSetPaths UP-TO-DATE
+> Task :core-ui:compileAndroidMainLibraryResources UP-TO-DATE
+> Task :core-kv:writeAndroidMainAarMetadata UP-TO-DATE
+> Task :core-logger:writeAndroidMainAarMetadata UP-TO-DATE
+> Task :core-net:writeAndroidMainAarMetadata UP-TO-DATE
+> Task :core-ui:writeAndroidMainAarMetadata UP-TO-DATE
+> Task :core-util:writeAndroidMainAarMetadata UP-TO-DATE
+> Task :feature-ota:writeAndroidMainAarMetadata UP-TO-DATE
+> Task :ugreen-strings-kmp:writeAndroidMainAarMetadata UP-TO-DATE
+> Task :feature-ota:mapAndroidMainSourceSetPaths UP-TO-DATE
+> Task :feature-ota:compileAndroidMainLibraryResources UP-TO-DATE
+> Task :feature-ota:mapAndroidHostTestSourceSetPaths
+> Task :core-kv:generateAndroidMainEmptyResourceFiles UP-TO-DATE
+> Task :core-logger:generateAndroidMainEmptyResourceFiles UP-TO-DATE
+> Task :core-net:generateAndroidMainEmptyResourceFiles UP-TO-DATE
+> Task :core-util:generateAndroidMainEmptyResourceFiles UP-TO-DATE
+> Task :feature-ota:generateAndroidHostTestResources
+> Task :feature-ota:checkAndroidHostTestAarMetadata
+> Task :core-kv:processAndroidMainManifest UP-TO-DATE
+> Task :core-logger:processAndroidMainManifest UP-TO-DATE
+> Task :core-net:processAndroidMainManifest UP-TO-DATE
+> Task :core-ui:processAndroidMainManifest UP-TO-DATE
+> Task :core-util:processAndroidMainManifest UP-TO-DATE
+> Task :feature-ota:processAndroidMainManifest UP-TO-DATE
+> Task :ugreen-strings-kmp:processAndroidMainManifest UP-TO-DATE
+> Task :feature-ota:mergeAndroidHostTestResources
+> Task :feature-ota:processAndroidHostTestManifest
+> Task :ugreen-strings-kmp:mapAndroidMainSourceSetPaths UP-TO-DATE
+> Task :ugreen-strings-kmp:compileAndroidMainLibraryResources UP-TO-DATE
+> Task :feature-ota:convertXmlValueResourcesForAndroidHostTest NO-SOURCE
+> Task :feature-ota:copyNonXmlValueResourcesForAndroidHostTest NO-SOURCE
+> Task :feature-ota:prepareComposeResourcesTaskForAndroidHostTest NO-SOURCE
+> Task :feature-ota:generateResourceAccessorsForAndroidHostTest NO-SOURCE
+> Task :feature-ota:convertXmlValueResourcesForCommonTest NO-SOURCE
+> Task :feature-ota:copyNonXmlValueResourcesForCommonTest NO-SOURCE
+> Task :feature-ota:prepareComposeResourcesTaskForCommonTest NO-SOURCE
+> Task :feature-ota:generateResourceAccessorsForCommonTest NO-SOURCE
+> Task :feature-ota:processAndroidHostTestJavaRes NO-SOURCE
+> Task :feature-ota:processAndroidMainJavaRes UP-TO-DATE
+> Task :ugreen-strings-kmp:bundleAndroidMainClassesToRuntimeJar UP-TO-DATE
+> Task :ugreen-strings-kmp:processAndroidMainJavaRes UP-TO-DATE
+> Task :feature-ota:processAndroidHostTestResources
+> Task :feature-ota:packageAndroidHostTestForUnitTest
+> Task :feature-ota:generateAndroidHostTestConfig
+
+> Task :feature-ota:compileAndroidHostTest
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/mvi/OtaMviTest.kt:186:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/orchestration/OtaOrchestrationTest.kt:17:22 'constructor(): FakeAiBaseAllUpgradeOrchestrator' is deprecated. Fake/Sample fixture only; production AiBase queue is server-owned.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/orchestration/OtaOrchestrationTest.kt:40:22 'constructor(): FakeAiBaseAllUpgradeOrchestrator' is deprecated. Fake/Sample fixture only; production AiBase queue is server-owned.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/orchestration/OtaOrchestrationTest.kt:54:9 'constructor(): FakeAiBaseAllUpgradeOrchestrator' is deprecated. Fake/Sample fixture only; production AiBase queue is server-owned.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/orchestration/OtaOrchestrationTest.kt:70:22 'constructor(): FakeAiBaseAllUpgradeOrchestrator' is deprecated. Fake/Sample fixture only; production AiBase queue is server-owned.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/orchestration/OtaOrchestrationTest.kt:82:22 'constructor(): FakeAiBaseAllUpgradeOrchestrator' is deprecated. Fake/Sample fixture only; production AiBase queue is server-owned.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaBatchPageProjectionTest.kt:85:35 Unnecessary non-null assertion (!!) on a non-null receiver of type 'OtaPageSnapshot'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaBatchPageProjectionTest.kt:86:52 Unnecessary non-null assertion (!!) on a non-null receiver of type 'OtaPageSnapshot'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaBatchPageProjectionTest.kt:91:35 Unnecessary non-null assertion (!!) on a non-null receiver of type 'OtaPageSnapshot'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaBatchPageProjectionTest.kt:92:25 Unnecessary non-null assertion (!!) on a non-null receiver of type 'OtaPageSnapshot'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaBatchPageProjectionTest.kt:96:26 Unnecessary non-null assertion (!!) on a non-null receiver of type 'OtaPageSnapshot'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaBatchPageProjectionTest.kt:101:24 Unnecessary non-null assertion (!!) on a non-null receiver of type 'OtaPageSnapshot'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaBatchPageProjectionTest.kt:102:24 Unnecessary non-null assertion (!!) on a non-null receiver of type 'OtaPageSnapshot'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaBatchPageProjectionTest.kt:107:24 Unnecessary non-null assertion (!!) on a non-null receiver of type 'OtaPageSnapshot'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaBatchPageProjectionTest.kt:111:24 Unnecessary non-null assertion (!!) on a non-null receiver of type 'OtaPageSnapshot'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:148:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:151:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:156:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:160:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:161:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:169:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:246:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:271:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:291:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:295:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:321:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:324:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:349:26 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:353:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:539:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:546:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:547:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:589:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:625:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:668:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:700:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:729:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:741:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:755:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:775:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:804:26 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:809:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:846:26 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:852:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:890:26 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:896:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:898:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:918:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:923:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:925:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:928:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:929:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:931:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:963:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:968:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:969:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:971:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1048:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1078:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1080:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1109:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1113:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1114:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1116:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1145:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1174:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1209:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1211:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1216:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1220:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1221:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1224:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1225:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1262:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1264:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1269:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1271:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1276:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1278:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1311:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt:1313:9 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/ui/OtaUiContractTest.kt:722:59 Unnecessary safe call on a non-null receiver of type 'OtaUiSubDeviceSummary'.
+
+> Task :feature-ota:testAndroidHostTest
+
+OtaRepositoryTest > repository_prefersActiveSnapshotWhenConflictingSameSnFramesHaveNoReportTime FAILED
+    org.junit.ComparisonFailure at OtaRepositoryTest.kt:135
+
+OtaUiContractTest > mainSuccessWithFailedChildShowsChildAndOverallFailure FAILED
+    java.lang.AssertionError at OtaUiContractTest.kt:813
+
+273 tests completed, 2 failed
+
+> Task :feature-ota:testAndroidHostTest FAILED
+
+[Incubating] Problems report is available at: file:///private/tmp/ugreenhome-shared-release-1.7.0/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':feature-ota:testAndroidHostTest'.
+> There were failing tests. See the report at: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/build/reports/tests/testAndroidHostTest/index.html
+
+* Try:
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+BUILD FAILED in 22s
+113 actionable tasks: 19 executed, 94 up-to-date

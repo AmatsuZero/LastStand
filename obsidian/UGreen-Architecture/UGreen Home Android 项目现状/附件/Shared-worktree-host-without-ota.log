@@ -1,0 +1,1035 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+
+> Configure project :build-logic:convention
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+
+> Task :build-logic:convention:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :build-logic:convention:compileKotlin UP-TO-DATE
+> Task :build-logic:convention:compileJava NO-SOURCE
+> Task :build-logic:convention:pluginDescriptors UP-TO-DATE
+> Task :build-logic:convention:processResources UP-TO-DATE
+> Task :build-logic:convention:classes UP-TO-DATE
+> Task :build-logic:convention:jar UP-TO-DATE
+
+> Configure project :airtc-appsdk
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :app-shared
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :core-database
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :core-kv
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :core-logger
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :core-mvi
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :core-navigation
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+WARNING: The 'commonTest' source directory exists, but android host tests are not enabled. To enable android host tests, add `withHostTest {}` to your android target configuration in the Gradle build file.
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :core-net
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :core-player
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :core-secure-package
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :core-ui
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :core-util
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :device-biz
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+WARNING: The 'commonTest' source directory exists, but android host tests are not enabled. To enable android host tests, add `withHostTest {}` to your android target configuration in the Gradle build file.
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :device-thing-model
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :domain-device
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :domain-env
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :domain-family
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :domain-product
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :feature-auth
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :feature-device-event
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :feature-home-management
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :feature-ota
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :feature-playback
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :feature-third-party-services
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+WARNING: The 'commonTest' source directory exists, but android host tests are not enabled. To enable android host tests, add `withHostTest {}` to your android target configuration in the Gradle build file.
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :sample
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :ugreen-strings-kmp
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Task :airtc-appsdk:kmpPartiallyResolvedDependenciesChecker
+> Task :airtc-appsdk:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-kv:kmpPartiallyResolvedDependenciesChecker
+> Task :core-kv:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-kv:androidPreBuild UP-TO-DATE
+> Task :core-kv:preAndroidMainBuild UP-TO-DATE
+> Task :core-logger:kmpPartiallyResolvedDependenciesChecker
+> Task :core-logger:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-logger:androidPreBuild UP-TO-DATE
+> Task :core-logger:preAndroidMainBuild UP-TO-DATE
+> Task :core-util:kmpPartiallyResolvedDependenciesChecker
+> Task :core-util:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-util:compileAndroidMain UP-TO-DATE
+> Task :core-util:androidPreBuild UP-TO-DATE
+> Task :core-util:preAndroidMainBuild UP-TO-DATE
+> Task :core-util:bundleAndroidMainClassesToCompileJar UP-TO-DATE
+> Task :core-database:kmpPartiallyResolvedDependenciesChecker
+> Task :core-database:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-database:androidPreBuild UP-TO-DATE
+> Task :core-database:preAndroidMainBuild UP-TO-DATE
+> Task :device-thing-model:kmpPartiallyResolvedDependenciesChecker
+> Task :device-thing-model:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :device-thing-model:androidPreBuild UP-TO-DATE
+> Task :device-thing-model:preAndroidMainBuild UP-TO-DATE
+> Task :airtc-appsdk:androidPreBuild UP-TO-DATE
+> Task :airtc-appsdk:preAndroidMainBuild UP-TO-DATE
+> Task :airtc-appsdk:androidJar
+> Task :airtc-appsdk:preAndroidHostTestBuild UP-TO-DATE
+> Task :airtc-appsdk:processAndroidHostTestJavaRes NO-SOURCE
+> Task :core-util:bundleAndroidMainClassesToRuntimeJar UP-TO-DATE
+> Task :core-util:processAndroidMainJavaRes UP-TO-DATE
+> Task :core-database:androidJar
+> Task :core-database:preAndroidHostTestBuild UP-TO-DATE
+> Task :core-database:processAndroidHostTestJavaRes NO-SOURCE
+> Task :core-kv:androidJar
+> Task :core-kv:preAndroidHostTestBuild UP-TO-DATE
+> Task :core-kv:processAndroidHostTestJavaRes NO-SOURCE
+> Task :core-logger:androidJar
+> Task :core-logger:preAndroidHostTestBuild UP-TO-DATE
+> Task :core-logger:processAndroidHostTestJavaRes NO-SOURCE
+> Task :core-net:kmpPartiallyResolvedDependenciesChecker
+> Task :core-net:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-net:androidPreBuild UP-TO-DATE
+> Task :core-net:preAndroidMainBuild UP-TO-DATE
+> Task :core-net:androidJar
+> Task :core-net:preAndroidHostTestBuild UP-TO-DATE
+> Task :core-net:processAndroidHostTestJavaRes NO-SOURCE
+> Task :core-secure-package:kmpPartiallyResolvedDependenciesChecker
+> Task :core-secure-package:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-secure-package:verifyAndroidNativeArtifacts
+> Task :core-database:kspAndroidMain
+> Task :core-logger:compileAndroidMain
+> Task :core-secure-package:compileAndroidMain
+> Task :core-kv:compileAndroidMain
+> Task :core-logger:bundleAndroidMainClassesToCompileJar
+> Task :core-kv:bundleAndroidMainClassesToCompileJar
+> Task :core-kv:bundleAndroidMainClassesToRuntimeJar
+> Task :core-kv:processAndroidMainJavaRes
+> Task :core-logger:bundleAndroidMainClassesToRuntimeJar
+> Task :core-logger:processAndroidMainJavaRes
+> Task :core-kv:compileAndroidHostTest NO-SOURCE
+> Task :core-kv:testAndroidHostTest NO-SOURCE
+
+> Task :core-database:compileAndroidMain
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/core/core-database/src/commonMain/kotlin/com/ugreen/core/database/Converters.kt:23:38 'class Instant : Comparable<Instant>' is deprecated. Use kotlin.time.Instant instead.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/core/core-database/src/commonMain/kotlin/com/ugreen/core/database/Converters.kt:24:29 'class Instant : Comparable<Instant>' is deprecated. Use kotlin.time.Instant instead.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/core/core-database/src/commonMain/kotlin/com/ugreen/core/database/Converters.kt:28:37 'class Instant : Comparable<Instant>' is deprecated. Use kotlin.time.Instant instead.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/core/core-database/src/commonMain/kotlin/com/ugreen/core/database/Converters.kt:29:25 'fun toEpochMilliseconds(): Long' is deprecated. kotlinx.datetime.Instant is superseded by kotlin.time.Instant.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/core/core-database/src/commonMain/kotlin/com/ugreen/core/database/entity/EntityFields.kt:42:41 'interface Clock : Any' is deprecated. Use kotlin.time.Clock instead.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/core/core-database/src/commonMain/kotlin/com/ugreen/core/database/entity/EntityFields.kt:42:60 'fun toEpochMilliseconds(): Long' is deprecated. kotlinx.datetime.Instant is superseded by kotlin.time.Instant.
+
+> Task :core-database:bundleAndroidMainClassesToCompileJar
+> Task :core-database:kspAndroidHostTest SKIPPED
+> Task :core-database:bundleAndroidMainClassesToRuntimeJar
+> Task :core-database:copyRoomSchemas NO-SOURCE
+> Task :core-database:processAndroidMainJavaRes
+> Task :core-logger:compileAndroidHostTest
+> Task :core-database:compileAndroidHostTest
+> Task :core-logger:testAndroidHostTest
+> Task :core-database:testAndroidHostTest
+> Task :core-secure-package:androidPreBuild UP-TO-DATE
+> Task :core-secure-package:preAndroidMainBuild UP-TO-DATE
+> Task :core-secure-package:androidJar
+> Task :core-secure-package:bundleAndroidMainClassesToRuntimeJar
+> Task :core-secure-package:preAndroidHostTestBuild UP-TO-DATE
+> Task :core-secure-package:processAndroidHostTestJavaRes NO-SOURCE
+> Task :core-secure-package:bundleAndroidMainClassesToCompileJar
+> Task :core-secure-package:processAndroidMainJavaRes
+> Task :core-ui:kmpPartiallyResolvedDependenciesChecker
+> Task :core-ui:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-ui:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :core-ui:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :core-ui:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :core-ui:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :core-ui:syncCoreUiComposeResources
+> Task :core-ui:convertXmlValueResourcesForCommonMain
+> Task :core-ui:copyNonXmlValueResourcesForCommonMain
+> Task :core-ui:prepareComposeResourcesTaskForCommonMain
+> Task :core-ui:generateResourceAccessorsForCommonMain
+> Task :core-ui:generateActualResourceCollectorsForAndroidMain
+> Task :core-ui:androidPreBuild UP-TO-DATE
+> Task :core-ui:preAndroidMainBuild UP-TO-DATE
+> Task :core-ui:generateAndroidMainEmptyResourceFiles
+> Task :core-ui:copyAndroidMainComposeResourcesToAndroidAssets
+> Task :core-secure-package:compileAndroidHostTest
+> Task :core-ui:packageAndroidMainResources
+> Task :core-secure-package:testAndroidHostTest
+> Task :core-ui:generateComposeResClass
+> Task :core-ui:generateExpectResourceCollectorsForCommonMain
+> Task :core-ui:androidJar
+> Task :core-ui:generateAndroidHostTestAssets UP-TO-DATE
+> Task :core-ui:generateAndroidMainAssets UP-TO-DATE
+> Task :core-ui:parseAndroidMainLocalResources
+> Task :core-ui:mergeAndroidMainAssets
+> Task :core-ui:preAndroidHostTestBuild UP-TO-DATE
+> Task :core-ui:generateAndroidMainRFile
+> Task :core-net:compileAndroidMain
+> Task :core-ui:mergeAndroidHostTestAssets
+> Task :core-net:processAndroidMainJavaRes
+> Task :core-net:bundleAndroidMainClassesToRuntimeJar
+> Task :core-net:bundleAndroidMainClassesToCompileJar
+> Task :core-kv:writeAndroidMainAarMetadata
+
+> Task :device-thing-model:compileAndroidMain
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/device-thing-model/src/commonMain/kotlin/com/ugreen/home/thing/internal/controller/DefaultDeviceThingModel.kt:114:74 Unnecessary safe call on a non-null receiver of type 'Throwable'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/device-thing-model/src/commonMain/kotlin/com/ugreen/home/thing/internal/provider/DefaultHostThingDevice.kt:68:80 Unnecessary safe call on a non-null receiver of type 'Throwable'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/device-thing-model/src/commonMain/kotlin/com/ugreen/home/thing/internal/serialization/ThingJson.kt:22:38 Unchecked cast of 'Any?' to 'Map<String, Any?>'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/device-thing-model/src/commonMain/kotlin/com/ugreen/home/thing/internal/serialization/ThingJsonDynamic.kt:63:9 'when' is exhaustive so 'else' is redundant here.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/device-thing-model/src/commonMain/kotlin/com/ugreen/home/thing/internal/serialization/ThingJsonDynamic.kt:64:7 No cast needed.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/device-thing-model/src/commonMain/kotlin/com/ugreen/home/thing/internal/source/LocalThingPropertyDataSource.kt:43:23 'interface Clock : Any' is deprecated. Use kotlin.time.Clock instead.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/device-thing-model/src/commonMain/kotlin/com/ugreen/home/thing/internal/source/LocalThingPropertyDataSource.kt:43:42 'fun toEpochMilliseconds(): Long' is deprecated. kotlinx.datetime.Instant is superseded by kotlin.time.Instant.
+
+> Task :device-thing-model:bundleAndroidMainClassesToCompileJar
+> Task :device-thing-model:bundleAndroidMainClassesToRuntimeJar
+> Task :device-thing-model:processAndroidMainJavaRes
+> Task :core-logger:writeAndroidMainAarMetadata
+> Task :core-net:writeAndroidMainAarMetadata
+> Task :core-ui:writeAndroidMainAarMetadata
+> Task :core-util:writeAndroidMainAarMetadata
+> Task :core-net:compileAndroidHostTest
+> Task :core-ui:checkAndroidHostTestAarMetadata
+> Task :core-net:testAndroidHostTest
+> Task :core-ui:mapAndroidMainSourceSetPaths
+> Task :core-ui:mapAndroidHostTestSourceSetPaths
+> Task :core-ui:compileAndroidMainLibraryResources
+> Task :core-kv:generateAndroidMainEmptyResourceFiles
+> Task :core-logger:generateAndroidMainEmptyResourceFiles
+> Task :core-net:generateAndroidMainEmptyResourceFiles
+> Task :core-ui:generateAndroidHostTestResources
+> Task :core-util:generateAndroidMainEmptyResourceFiles
+> Task :core-ui:mergeAndroidHostTestResources
+> Task :core-logger:processAndroidMainManifest
+> Task :core-kv:processAndroidMainManifest
+> Task :core-net:processAndroidMainManifest
+> Task :core-ui:processAndroidMainManifest
+> Task :core-ui:convertXmlValueResourcesForAndroidHostTest NO-SOURCE
+> Task :core-ui:copyNonXmlValueResourcesForAndroidHostTest NO-SOURCE
+> Task :core-ui:prepareComposeResourcesTaskForAndroidHostTest NO-SOURCE
+> Task :core-util:processAndroidMainManifest
+> Task :core-ui:processAndroidHostTestManifest
+> Task :core-ui:generateResourceAccessorsForAndroidHostTest NO-SOURCE
+> Task :core-ui:convertXmlValueResourcesForCommonTest NO-SOURCE
+> Task :core-ui:copyNonXmlValueResourcesForCommonTest NO-SOURCE
+> Task :core-ui:prepareComposeResourcesTaskForCommonTest NO-SOURCE
+> Task :core-ui:generateResourceAccessorsForCommonTest NO-SOURCE
+> Task :core-ui:processAndroidHostTestJavaRes NO-SOURCE
+> Task :core-util:androidJar UP-TO-DATE
+> Task :core-util:compileAndroidHostTest UP-TO-DATE
+> Task :core-util:preAndroidHostTestBuild UP-TO-DATE
+> Task :core-util:processAndroidHostTestJavaRes NO-SOURCE
+> Task :core-util:testAndroidHostTest UP-TO-DATE
+> Task :device-thing-model:androidJar
+> Task :core-ui:processAndroidHostTestResources
+> Task :core-ui:packageAndroidHostTestForUnitTest
+> Task :core-ui:generateAndroidHostTestConfig
+> Task :device-thing-model:preAndroidHostTestBuild UP-TO-DATE
+> Task :device-thing-model:processAndroidHostTestJavaRes NO-SOURCE
+> Task :domain-device:kmpPartiallyResolvedDependenciesChecker
+> Task :domain-device:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :device-thing-model:compileAndroidHostTest
+> Task :airtc-appsdk:compileAndroidMain
+> Task :device-thing-model:testAndroidHostTest
+> Task :airtc-appsdk:bundleAndroidMainClassesToCompileJar
+> Task :airtc-appsdk:bundleAndroidMainClassesToRuntimeJar
+> Task :airtc-appsdk:compileAndroidHostTest NO-SOURCE
+> Task :airtc-appsdk:processAndroidMainJavaRes
+> Task :airtc-appsdk:testAndroidHostTest NO-SOURCE
+> Task :domain-device:androidPreBuild UP-TO-DATE
+> Task :domain-device:preAndroidMainBuild UP-TO-DATE
+> Task :domain-device:androidJar
+> Task :domain-device:generateAndroidHostTestAssets UP-TO-DATE
+> Task :domain-device:preAndroidHostTestBuild UP-TO-DATE
+> Task :domain-device:mergeAndroidHostTestAssets
+> Task :domain-device:writeAndroidMainAarMetadata
+> Task :domain-device:mapAndroidHostTestSourceSetPaths
+> Task :domain-device:checkAndroidHostTestAarMetadata
+> Task :domain-device:generateAndroidHostTestResources
+> Task :domain-device:generateAndroidMainEmptyResourceFiles
+> Task :domain-device:mergeAndroidHostTestResources
+> Task :domain-device:processAndroidHostTestJavaRes NO-SOURCE
+> Task :domain-device:processAndroidMainManifest
+
+> Task :domain-env:generateEncryptedBuiltinAsset
+[EncryptedBuiltinAsset] env.json -> /private/tmp/ugreenhome-shared-release-1.7.0/domain/domain-env/build/generated/encryptedBuiltinAsset/com/ugreen/domain/env/data/asset/EnvBuiltinAsset.kt (60548 B plain -> 60581 B)
+
+> Task :domain-device:processAndroidHostTestManifest
+> Task :domain-env:kmpPartiallyResolvedDependenciesChecker
+> Task :domain-env:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :domain-device:processAndroidHostTestResources
+> Task :domain-device:packageAndroidHostTestForUnitTest
+> Task :domain-device:generateAndroidHostTestConfig
+> Task :domain-env:androidPreBuild UP-TO-DATE
+> Task :domain-env:preAndroidMainBuild UP-TO-DATE
+> Task :domain-env:androidJar
+> Task :domain-env:generateAndroidHostTestAssets UP-TO-DATE
+> Task :domain-env:preAndroidHostTestBuild UP-TO-DATE
+> Task :domain-env:mergeAndroidHostTestAssets
+> Task :domain-env:writeAndroidMainAarMetadata
+> Task :domain-env:checkAndroidHostTestAarMetadata
+> Task :domain-env:mapAndroidHostTestSourceSetPaths
+> Task :domain-env:generateAndroidHostTestResources
+> Task :domain-env:generateAndroidMainEmptyResourceFiles
+> Task :domain-env:mergeAndroidHostTestResources
+> Task :domain-env:processAndroidMainManifest
+> Task :domain-env:processAndroidHostTestManifest
+> Task :domain-device:compileAndroidMain
+> Task :domain-device:bundleAndroidMainClassesToRuntimeJar
+> Task :domain-device:bundleAndroidMainClassesToCompileJar
+> Task :domain-device:compileAndroidHostTest NO-SOURCE
+> Task :domain-device:processAndroidMainJavaRes
+> Task :domain-device:testAndroidHostTest NO-SOURCE
+> Task :domain-env:processAndroidHostTestJavaRes NO-SOURCE
+> Task :core-mvi:kmpPartiallyResolvedDependenciesChecker
+> Task :core-mvi:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :domain-env:processAndroidHostTestResources
+> Task :domain-env:packageAndroidHostTestForUnitTest
+> Task :domain-env:generateAndroidHostTestConfig
+> Task :core-mvi:androidPreBuild UP-TO-DATE
+> Task :core-mvi:preAndroidMainBuild UP-TO-DATE
+> Task :core-navigation:kmpPartiallyResolvedDependenciesChecker
+> Task :core-navigation:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-navigation:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :core-navigation:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :core-navigation:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :core-navigation:generateResourceAccessorsForAndroidMain SKIPPED
+> Task :core-navigation:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :core-navigation:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :core-navigation:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :core-navigation:generateResourceAccessorsForCommonMain SKIPPED
+> Task :core-navigation:generateActualResourceCollectorsForAndroidMain SKIPPED
+> Task :core-navigation:generateComposeResClass SKIPPED
+> Task :core-navigation:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :core-mvi:compileAndroidMain
+> Task :core-mvi:bundleAndroidMainClassesToRuntimeJar
+> Task :core-mvi:processAndroidMainJavaRes
+> Task :core-navigation:androidPreBuild UP-TO-DATE
+> Task :core-navigation:preAndroidMainBuild UP-TO-DATE
+> Task :core-mvi:bundleAndroidMainClassesToCompileJar
+> Task :feature-auth:kmpPartiallyResolvedDependenciesChecker
+> Task :feature-auth:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :feature-auth:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature-auth:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature-auth:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :feature-auth:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :feature-auth:syncFeatureAuthComposeResources
+> Task :feature-auth:convertXmlValueResourcesForCommonMain
+> Task :feature-auth:copyNonXmlValueResourcesForCommonMain
+> Task :feature-auth:prepareComposeResourcesTaskForCommonMain
+> Task :feature-auth:generateResourceAccessorsForCommonMain
+> Task :feature-auth:generateActualResourceCollectorsForAndroidMain
+> Task :feature-auth:androidPreBuild UP-TO-DATE
+> Task :feature-auth:preAndroidMainBuild UP-TO-DATE
+> Task :feature-auth:generateAndroidMainEmptyResourceFiles
+> Task :feature-auth:copyAndroidMainComposeResourcesToAndroidAssets
+> Task :feature-auth:packageAndroidMainResources
+> Task :feature-auth:parseAndroidMainLocalResources
+> Task :feature-auth:generateAndroidMainRFile
+> Task :feature-auth:generateComposeResClass
+> Task :feature-auth:generateExpectResourceCollectorsForCommonMain
+> Task :feature-auth:androidJar
+> Task :feature-auth:generateAndroidHostTestAssets UP-TO-DATE
+> Task :feature-auth:generateAndroidMainAssets UP-TO-DATE
+> Task :feature-auth:mergeAndroidMainAssets
+> Task :feature-auth:preAndroidHostTestBuild UP-TO-DATE
+> Task :core-navigation:compileAndroidMain
+> Task :feature-auth:mergeAndroidHostTestAssets
+> Task :core-navigation:bundleAndroidMainClassesToRuntimeJar
+> Task :core-navigation:processAndroidMainJavaRes
+> Task :core-navigation:bundleAndroidMainClassesToCompileJar
+> Task :core-mvi:writeAndroidMainAarMetadata
+> Task :core-navigation:writeAndroidMainAarMetadata
+> Task :core-secure-package:writeAndroidMainAarMetadata
+> Task :feature-auth:writeAndroidMainAarMetadata
+> Task :feature-auth:mapAndroidMainSourceSetPaths
+> Task :feature-auth:compileAndroidMainLibraryResources
+> Task :feature-auth:mapAndroidHostTestSourceSetPaths
+> Task :feature-auth:checkAndroidHostTestAarMetadata
+> Task :core-mvi:generateAndroidMainEmptyResourceFiles
+> Task :core-navigation:generateAndroidMainEmptyResourceFiles
+> Task :core-secure-package:generateAndroidMainEmptyResourceFiles
+> Task :feature-auth:generateAndroidHostTestResources
+> Task :domain-env:compileAndroidMain
+> Task :domain-env:bundleAndroidMainClassesToRuntimeJar
+> Task :domain-env:bundleAndroidMainClassesToCompileJar
+> Task :domain-env:processAndroidMainJavaRes
+> Task :domain-env:compileAndroidHostTest NO-SOURCE
+> Task :domain-env:testAndroidHostTest NO-SOURCE
+> Task :core-mvi:processAndroidMainManifest
+> Task :core-navigation:processAndroidMainManifest
+> Task :core-secure-package:processAndroidMainManifest
+> Task :feature-auth:convertXmlValueResourcesForAndroidHostTest NO-SOURCE
+> Task :feature-auth:copyNonXmlValueResourcesForAndroidHostTest NO-SOURCE
+> Task :feature-auth:prepareComposeResourcesTaskForAndroidHostTest NO-SOURCE
+> Task :feature-auth:processAndroidMainManifest
+> Task :feature-auth:processAndroidHostTestManifest
+> Task :feature-auth:generateResourceAccessorsForAndroidHostTest NO-SOURCE
+> Task :feature-auth:convertXmlValueResourcesForCommonTest NO-SOURCE
+> Task :feature-auth:copyNonXmlValueResourcesForCommonTest NO-SOURCE
+> Task :feature-auth:prepareComposeResourcesTaskForCommonTest NO-SOURCE
+> Task :feature-auth:generateResourceAccessorsForCommonTest NO-SOURCE
+> Task :feature-auth:processAndroidHostTestJavaRes NO-SOURCE
+> Task :feature-home-management:kmpPartiallyResolvedDependenciesChecker
+> Task :feature-home-management:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :feature-auth:mergeAndroidHostTestResources
+> Task :feature-home-management:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature-home-management:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature-home-management:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :feature-home-management:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :feature-home-management:convertXmlValueResourcesForCommonMain
+> Task :feature-home-management:copyNonXmlValueResourcesForCommonMain
+> Task :feature-home-management:prepareComposeResourcesTaskForCommonMain
+> Task :feature-home-management:generateResourceAccessorsForCommonMain
+> Task :feature-home-management:generateActualResourceCollectorsForAndroidMain
+> Task :feature-home-management:androidPreBuild UP-TO-DATE
+> Task :feature-home-management:preAndroidMainBuild UP-TO-DATE
+> Task :feature-home-management:generateAndroidMainEmptyResourceFiles
+> Task :feature-home-management:copyAndroidMainComposeResourcesToAndroidAssets
+> Task :feature-home-management:packageAndroidMainResources
+> Task :feature-home-management:generateComposeResClass
+> Task :feature-home-management:parseAndroidMainLocalResources
+> Task :feature-home-management:generateExpectResourceCollectorsForCommonMain
+> Task :feature-home-management:androidJar
+> Task :feature-home-management:generateAndroidHostTestAssets UP-TO-DATE
+> Task :feature-home-management:generateAndroidMainAssets UP-TO-DATE
+> Task :feature-home-management:generateAndroidMainRFile
+> Task :feature-home-management:mergeAndroidMainAssets
+> Task :feature-home-management:preAndroidHostTestBuild UP-TO-DATE
+> Task :feature-auth:processAndroidHostTestResources
+> Task :feature-home-management:mergeAndroidHostTestAssets
+> Task :feature-auth:packageAndroidHostTestForUnitTest
+> Task :feature-auth:generateAndroidHostTestConfig
+> Task :feature-home-management:writeAndroidMainAarMetadata
+> Task :feature-home-management:mapAndroidMainSourceSetPaths
+> Task :feature-home-management:compileAndroidMainLibraryResources
+> Task :feature-home-management:checkAndroidHostTestAarMetadata
+> Task :feature-home-management:mapAndroidHostTestSourceSetPaths
+> Task :feature-home-management:generateAndroidHostTestResources
+> Task :feature-home-management:convertXmlValueResourcesForAndroidHostTest NO-SOURCE
+> Task :feature-home-management:copyNonXmlValueResourcesForAndroidHostTest NO-SOURCE
+> Task :feature-home-management:prepareComposeResourcesTaskForAndroidHostTest NO-SOURCE
+> Task :feature-home-management:generateResourceAccessorsForAndroidHostTest NO-SOURCE
+> Task :feature-home-management:convertXmlValueResourcesForCommonTest NO-SOURCE
+> Task :feature-home-management:processAndroidMainManifest
+> Task :feature-home-management:processAndroidHostTestManifest
+> Task :feature-home-management:copyNonXmlValueResourcesForCommonTest NO-SOURCE
+> Task :feature-home-management:prepareComposeResourcesTaskForCommonTest NO-SOURCE
+> Task :feature-home-management:generateResourceAccessorsForCommonTest NO-SOURCE
+> Task :feature-home-management:processAndroidHostTestJavaRes NO-SOURCE
+> Task :feature-playback:kmpPartiallyResolvedDependenciesChecker
+> Task :feature-playback:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :feature-playback:androidPreBuild UP-TO-DATE
+> Task :feature-playback:preAndroidMainBuild UP-TO-DATE
+> Task :feature-playback:androidJar
+> Task :feature-playback:generateAndroidHostTestAssets UP-TO-DATE
+> Task :feature-playback:preAndroidHostTestBuild UP-TO-DATE
+> Task :feature-home-management:mergeAndroidHostTestResources
+> Task :feature-playback:mergeAndroidHostTestAssets
+> Task :feature-playback:writeAndroidMainAarMetadata
+> Task :feature-playback:checkAndroidHostTestAarMetadata
+> Task :feature-playback:mapAndroidHostTestSourceSetPaths
+> Task :feature-playback:generateAndroidHostTestResources
+> Task :feature-playback:generateAndroidMainEmptyResourceFiles
+> Task :feature-playback:mergeAndroidHostTestResources
+> Task :feature-playback:processAndroidMainManifest
+> Task :feature-playback:processAndroidHostTestManifest
+> Task :feature-home-management:processAndroidHostTestResources
+> Task :feature-playback:processAndroidHostTestResources
+> Task :feature-home-management:packageAndroidHostTestForUnitTest
+> Task :feature-home-management:generateAndroidHostTestConfig
+> Task :feature-playback:packageAndroidHostTestForUnitTest
+> Task :feature-playback:processAndroidHostTestJavaRes NO-SOURCE
+> Task :feature-playback:generateAndroidHostTestConfig
+> Task :app-shared:kmpPartiallyResolvedDependenciesChecker
+> Task :app-shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app-shared:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :app-shared:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :app-shared:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :app-shared:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :app-shared:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :app-shared:copyNonXmlValueResourcesForCommonMain
+> Task :app-shared:prepareComposeResourcesTaskForCommonMain
+> Task :app-shared:generateResourceAccessorsForCommonMain
+> Task :app-shared:generateActualResourceCollectorsForAndroidMain
+> Task :app-shared:androidPreBuild UP-TO-DATE
+> Task :app-shared:preAndroidMainBuild UP-TO-DATE
+> Task :app-shared:generateAndroidMainEmptyResourceFiles
+> Task :app-shared:copyAndroidMainComposeResourcesToAndroidAssets
+> Task :app-shared:packageAndroidMainResources
+> Task :app-shared:generateComposeResClass
+> Task :app-shared:generateExpectResourceCollectorsForCommonMain
+> Task :core-player:kmpPartiallyResolvedDependenciesChecker
+> Task :core-player:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app-shared:parseAndroidMainLocalResources
+> Task :core-player:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :core-player:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :core-player:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :core-player:generateResourceAccessorsForAndroidMain SKIPPED
+> Task :core-player:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :core-player:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :app-shared:generateAndroidMainRFile
+> Task :core-player:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :core-player:generateResourceAccessorsForCommonMain SKIPPED
+> Task :core-player:generateActualResourceCollectorsForAndroidMain SKIPPED
+> Task :core-player:generateComposeResClass SKIPPED
+> Task :core-player:generateExpectResourceCollectorsForCommonMain SKIPPED
+> Task :core-player:androidPreBuild UP-TO-DATE
+> Task :core-player:preAndroidMainBuild UP-TO-DATE
+> Task :domain-product:kmpPartiallyResolvedDependenciesChecker
+> Task :domain-product:checkKotlinGradlePluginConfigurationErrors SKIPPED
+
+> Task :core-player:compileAndroidMain
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/core/core-player/src/androidMain/kotlin/com/ugreen/core/player/Mp4Player.android.kt:1:13 Annotation 'androidx.media3.common.util.UnstableApi' is not annotated with '@RequiresOptIn'. '@OptIn' has no effect.
+
+> Task :core-player:bundleAndroidMainClassesToCompileJar
+> Task :domain-product:androidPreBuild UP-TO-DATE
+> Task :domain-product:preAndroidMainBuild UP-TO-DATE
+> Task :feature-device-event:kmpPartiallyResolvedDependenciesChecker
+> Task :feature-device-event:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :feature-device-event:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature-device-event:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature-device-event:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :feature-device-event:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :feature-device-event:convertXmlValueResourcesForCommonMain
+> Task :feature-device-event:copyNonXmlValueResourcesForCommonMain
+> Task :feature-device-event:prepareComposeResourcesTaskForCommonMain
+> Task :feature-device-event:generateResourceAccessorsForCommonMain
+> Task :feature-device-event:generateActualResourceCollectorsForAndroidMain
+> Task :feature-device-event:androidPreBuild UP-TO-DATE
+> Task :feature-device-event:preAndroidMainBuild UP-TO-DATE
+> Task :feature-device-event:generateAndroidMainEmptyResourceFiles
+> Task :feature-device-event:copyAndroidMainComposeResourcesToAndroidAssets
+> Task :feature-device-event:packageAndroidMainResources
+> Task :feature-device-event:parseAndroidMainLocalResources
+> Task :feature-device-event:generateAndroidMainRFile
+> Task :feature-device-event:generateComposeResClass
+> Task :feature-device-event:generateExpectResourceCollectorsForCommonMain
+> Task :ugreen-strings-kmp:kmpPartiallyResolvedDependenciesChecker
+> Task :ugreen-strings-kmp:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :ugreen-strings-kmp:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :ugreen-strings-kmp:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :ugreen-strings-kmp:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :ugreen-strings-kmp:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :ugreen-strings-kmp:convertXmlValueResourcesForCommonMain
+> Task :ugreen-strings-kmp:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :ugreen-strings-kmp:prepareComposeResourcesTaskForCommonMain
+> Task :feature-playback:compileAndroidMain
+> Task :ugreen-strings-kmp:generateResourceAccessorsForCommonMain
+> Task :feature-playback:bundleAndroidMainClassesToRuntimeJar
+> Task :feature-playback:bundleAndroidMainClassesToCompileJar
+> Task :feature-playback:processAndroidMainJavaRes
+> Task :ugreen-strings-kmp:generateActualResourceCollectorsForAndroidMain
+> Task :ugreen-strings-kmp:androidPreBuild UP-TO-DATE
+> Task :ugreen-strings-kmp:preAndroidMainBuild UP-TO-DATE
+> Task :ugreen-strings-kmp:generateAndroidMainEmptyResourceFiles
+> Task :ugreen-strings-kmp:copyAndroidMainComposeResourcesToAndroidAssets
+> Task :ugreen-strings-kmp:packageAndroidMainResources
+> Task :ugreen-strings-kmp:parseAndroidMainLocalResources
+> Task :ugreen-strings-kmp:generateAndroidMainRFile
+> Task :ugreen-strings-kmp:generateComposeResClass
+> Task :ugreen-strings-kmp:generateExpectResourceCollectorsForCommonMain
+> Task :domain-product:compileAndroidMain
+> Task :domain-product:bundleAndroidMainClassesToCompileJar
+> Task :feature-ota:kmpPartiallyResolvedDependenciesChecker
+> Task :feature-ota:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :feature-ota:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature-ota:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature-ota:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :feature-ota:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :feature-ota:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :feature-ota:copyNonXmlValueResourcesForCommonMain
+> Task :feature-ota:prepareComposeResourcesTaskForCommonMain
+> Task :feature-ota:generateResourceAccessorsForCommonMain
+> Task :feature-ota:generateActualResourceCollectorsForAndroidMain
+> Task :feature-ota:androidPreBuild UP-TO-DATE
+> Task :feature-ota:preAndroidMainBuild UP-TO-DATE
+> Task :feature-ota:generateAndroidMainEmptyResourceFiles
+> Task :feature-ota:copyAndroidMainComposeResourcesToAndroidAssets
+> Task :feature-ota:packageAndroidMainResources
+> Task :feature-ota:parseAndroidMainLocalResources
+> Task :feature-ota:generateAndroidMainRFile
+> Task :feature-ota:generateComposeResClass
+> Task :feature-ota:generateExpectResourceCollectorsForCommonMain
+> Task :feature-third-party-services:kmpPartiallyResolvedDependenciesChecker
+> Task :feature-third-party-services:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :feature-third-party-services:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature-third-party-services:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature-third-party-services:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :feature-third-party-services:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :feature-third-party-services:syncThirdPartyServicesComposeResources
+> Task :feature-third-party-services:convertXmlValueResourcesForCommonMain
+> Task :feature-third-party-services:copyNonXmlValueResourcesForCommonMain
+> Task :feature-third-party-services:prepareComposeResourcesTaskForCommonMain
+> Task :feature-third-party-services:generateResourceAccessorsForCommonMain
+> Task :feature-third-party-services:generateActualResourceCollectorsForAndroidMain
+> Task :feature-third-party-services:androidPreBuild UP-TO-DATE
+> Task :feature-third-party-services:preAndroidMainBuild UP-TO-DATE
+> Task :feature-third-party-services:generateAndroidMainEmptyResourceFiles
+> Task :feature-third-party-services:copyAndroidMainComposeResourcesToAndroidAssets
+> Task :feature-third-party-services:packageAndroidMainResources
+> Task :feature-third-party-services:parseAndroidMainLocalResources
+> Task :feature-third-party-services:generateAndroidMainRFile
+> Task :feature-third-party-services:generateComposeResClass
+> Task :feature-third-party-services:generateExpectResourceCollectorsForCommonMain
+> Task :core-player:bundleAndroidMainClassesToRuntimeJar
+> Task :core-player:processAndroidMainJavaRes
+> Task :device-biz:kmpPartiallyResolvedDependenciesChecker
+> Task :device-biz:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :device-biz:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :device-biz:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :device-biz:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :device-biz:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :device-biz:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :device-biz:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :device-biz:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :device-biz:generateResourceAccessorsForCommonMain NO-SOURCE
+> Task :device-biz:generateActualResourceCollectorsForAndroidMain
+> Task :device-biz:generateComposeResClass
+> Task :device-biz:generateExpectResourceCollectorsForCommonMain
+> Task :device-biz:androidPreBuild UP-TO-DATE
+> Task :device-biz:preAndroidMainBuild UP-TO-DATE
+> Task :domain-product:bundleAndroidMainClassesToRuntimeJar
+> Task :domain-product:processAndroidMainJavaRes
+> Task :sample:kmpPartiallyResolvedDependenciesChecker
+> Task :sample:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :sample:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :sample:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :sample:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :sample:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :sample:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :sample:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :sample:prepareComposeResourcesTaskForCommonMain NO-SOURCE
+> Task :sample:generateResourceAccessorsForCommonMain NO-SOURCE
+> Task :sample:generateActualResourceCollectorsForAndroidMain
+> Task :sample:androidPreBuild UP-TO-DATE
+> Task :sample:preAndroidMainBuild UP-TO-DATE
+> Task :sample:generateAndroidMainEmptyResourceFiles
+> Task :sample:copyAndroidMainComposeResourcesToAndroidAssets
+> Task :sample:packageAndroidMainResources
+> Task :sample:parseAndroidMainLocalResources
+> Task :sample:generateAndroidMainRFile
+> Task :sample:generateComposeResClass
+> Task :sample:generateExpectResourceCollectorsForCommonMain
+> Task :sample:convertXmlValueResourcesForAndroidHostTest NO-SOURCE
+> Task :sample:copyNonXmlValueResourcesForAndroidHostTest NO-SOURCE
+> Task :sample:prepareComposeResourcesTaskForAndroidHostTest NO-SOURCE
+> Task :sample:generateResourceAccessorsForAndroidHostTest NO-SOURCE
+> Task :sample:convertXmlValueResourcesForCommonTest NO-SOURCE
+> Task :sample:copyNonXmlValueResourcesForCommonTest NO-SOURCE
+> Task :sample:prepareComposeResourcesTaskForCommonTest NO-SOURCE
+> Task :sample:generateResourceAccessorsForCommonTest NO-SOURCE
+> Task :app-shared:mapAndroidMainSourceSetPaths
+> Task :app-shared:compileAndroidMainLibraryResources
+> Task :feature-device-event:mapAndroidMainSourceSetPaths
+> Task :feature-device-event:compileAndroidMainLibraryResources
+> Task :feature-ota:mapAndroidMainSourceSetPaths
+> Task :feature-ota:compileAndroidMainLibraryResources
+> Task :feature-third-party-services:mapAndroidMainSourceSetPaths
+> Task :feature-third-party-services:compileAndroidMainLibraryResources
+> Task :airtc-appsdk:writeAndroidMainAarMetadata
+> Task :app-shared:writeAndroidMainAarMetadata
+> Task :core-database:writeAndroidMainAarMetadata
+> Task :core-player:writeAndroidMainAarMetadata
+> Task :device-biz:writeAndroidMainAarMetadata
+> Task :device-thing-model:writeAndroidMainAarMetadata
+> Task :domain-product:writeAndroidMainAarMetadata
+> Task :feature-device-event:writeAndroidMainAarMetadata
+> Task :feature-ota:writeAndroidMainAarMetadata
+> Task :feature-third-party-services:writeAndroidMainAarMetadata
+> Task :sample:preAndroidHostTestBuild UP-TO-DATE
+> Task :sample:writeAndroidMainAarMetadata
+> Task :ugreen-strings-kmp:writeAndroidMainAarMetadata
+> Task :sample:checkAndroidHostTestAarMetadata
+> Task :sample:mapAndroidMainSourceSetPaths
+> Task :sample:compileAndroidMainLibraryResources
+> Task :sample:mapAndroidHostTestSourceSetPaths
+> Task :airtc-appsdk:generateAndroidMainEmptyResourceFiles
+> Task :core-database:generateAndroidMainEmptyResourceFiles
+> Task :core-player:generateAndroidMainEmptyResourceFiles
+> Task :device-biz:generateAndroidMainEmptyResourceFiles
+> Task :device-thing-model:generateAndroidMainEmptyResourceFiles
+> Task :domain-product:generateAndroidMainEmptyResourceFiles
+> Task :sample:generateAndroidHostTestResources
+> Task :feature-playback:compileAndroidHostTest
+> Task :sample:mergeAndroidHostTestResources
+> Task :feature-playback:testAndroidHostTest
+> Task :airtc-appsdk:processAndroidMainManifest
+> Task :app-shared:processAndroidMainManifest
+> Task :core-database:processAndroidMainManifest
+> Task :core-player:processAndroidMainManifest
+> Task :device-biz:processAndroidMainManifest
+> Task :device-thing-model:processAndroidMainManifest
+> Task :domain-product:processAndroidMainManifest
+> Task :feature-device-event:processAndroidMainManifest
+> Task :feature-ota:processAndroidMainManifest
+> Task :feature-third-party-services:processAndroidMainManifest
+> Task :sample:processAndroidMainManifest
+> Task :ugreen-strings-kmp:mapAndroidMainSourceSetPaths
+> Task :ugreen-strings-kmp:processAndroidMainManifest
+> Task :sample:processAndroidHostTestManifest
+> Task :ugreen-strings-kmp:compileAndroidMainLibraryResources
+> Task :sample:androidJar
+> Task :app-shared:generateAndroidMainAssets UP-TO-DATE
+> Task :app-shared:mergeAndroidMainAssets
+> Task :feature-device-event:generateAndroidMainAssets UP-TO-DATE
+> Task :feature-device-event:mergeAndroidMainAssets
+> Task :feature-ota:generateAndroidMainAssets UP-TO-DATE
+> Task :feature-ota:mergeAndroidMainAssets
+> Task :feature-third-party-services:generateAndroidMainAssets UP-TO-DATE
+> Task :feature-third-party-services:mergeAndroidMainAssets
+> Task :sample:generateAndroidHostTestAssets UP-TO-DATE
+> Task :sample:generateAndroidMainAssets UP-TO-DATE
+> Task :sample:mergeAndroidMainAssets
+> Task :ugreen-strings-kmp:generateAndroidMainAssets UP-TO-DATE
+> Task :ugreen-strings-kmp:mergeAndroidMainAssets
+> Task :sample:processAndroidHostTestResources
+> Task :sample:mergeAndroidHostTestAssets
+> Task :sample:packageAndroidHostTestForUnitTest
+> Task :sample:processAndroidHostTestJavaRes NO-SOURCE
+> Task :sample:generateAndroidHostTestConfig
+> Task :ugreen-strings-kmp:androidJar
+> Task :ugreen-strings-kmp:generateAndroidHostTestAssets UP-TO-DATE
+> Task :ugreen-strings-kmp:preAndroidHostTestBuild UP-TO-DATE
+> Task :ugreen-strings-kmp:mergeAndroidHostTestAssets
+> Task :ugreen-strings-kmp:mapAndroidHostTestSourceSetPaths
+> Task :ugreen-strings-kmp:generateAndroidHostTestResources
+> Task :ugreen-strings-kmp:checkAndroidHostTestAarMetadata
+> Task :ugreen-strings-kmp:processAndroidHostTestManifest
+> Task :ugreen-strings-kmp:convertXmlValueResourcesForAndroidHostTest NO-SOURCE
+> Task :ugreen-strings-kmp:copyNonXmlValueResourcesForAndroidHostTest NO-SOURCE
+> Task :ugreen-strings-kmp:prepareComposeResourcesTaskForAndroidHostTest NO-SOURCE
+> Task :ugreen-strings-kmp:generateResourceAccessorsForAndroidHostTest NO-SOURCE
+> Task :ugreen-strings-kmp:convertXmlValueResourcesForCommonTest NO-SOURCE
+> Task :ugreen-strings-kmp:copyNonXmlValueResourcesForCommonTest NO-SOURCE
+> Task :ugreen-strings-kmp:prepareComposeResourcesTaskForCommonTest NO-SOURCE
+> Task :ugreen-strings-kmp:generateResourceAccessorsForCommonTest NO-SOURCE
+> Task :ugreen-strings-kmp:processAndroidHostTestJavaRes NO-SOURCE
+> Task :ugreen-strings-kmp:mergeAndroidHostTestResources
+> Task :ugreen-strings-kmp:processAndroidHostTestResources
+> Task :ugreen-strings-kmp:packageAndroidHostTestForUnitTest
+> Task :ugreen-strings-kmp:generateAndroidHostTestConfig
+
+> Task :core-ui:compileAndroidMain
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/core/core-ui/src/commonMain/kotlin/com/ugreen/core/ui/navigation/UGFloatingBottomNavigationBar.kt:76:17 Experimental Haze API
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/core/core-ui/src/commonMain/kotlin/com/ugreen/core/ui/navigation/UGFloatingBottomNavigationBar.kt:76:30 Experimental Haze API
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/core/core-ui/src/commonMain/kotlin/com/ugreen/core/ui/navigation/UGFloatingBottomNavigationBar.kt:76:45 Experimental Haze API
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/core/core-ui/src/commonMain/kotlin/com/ugreen/core/ui/selector/UGSelector.kt:64:34 Condition is always 'true'.
+
+> Task :core-ui:processAndroidMainJavaRes
+> Task :core-ui:bundleAndroidMainClassesToRuntimeJar
+> Task :core-ui:bundleAndroidMainClassesToCompileJar
+> Task :core-ui:compileAndroidHostTest
+> Task :core-ui:testAndroidHostTest
+> Task :feature-home-management:compileAndroidMain
+> Task :feature-home-management:bundleAndroidMainClassesToRuntimeJar
+> Task :feature-home-management:bundleAndroidMainClassesToCompileJar
+> Task :feature-home-management:compileAndroidHostTest
+> Task :feature-home-management:processAndroidMainJavaRes
+> Task :feature-third-party-services:compileAndroidMain
+> Task :feature-home-management:testAndroidHostTest
+> Task :feature-third-party-services:bundleAndroidMainClassesToCompileJar
+> Task :feature-third-party-services:bundleAndroidMainClassesToRuntimeJar
+> Task :feature-third-party-services:processAndroidMainJavaRes
+> Task :ugreen-strings-kmp:compileAndroidMain
+> Task :ugreen-strings-kmp:processAndroidMainJavaRes
+> Task :ugreen-strings-kmp:bundleAndroidMainClassesToCompileJar
+> Task :ugreen-strings-kmp:bundleAndroidMainClassesToRuntimeJar
+> Task :ugreen-strings-kmp:compileAndroidHostTest NO-SOURCE
+> Task :ugreen-strings-kmp:testAndroidHostTest NO-SOURCE
+> Task :feature-auth:compileAndroidMain
+> Task :feature-auth:bundleAndroidMainClassesToCompileJar
+> Task :feature-auth:bundleAndroidMainClassesToRuntimeJar
+> Task :feature-auth:processAndroidMainJavaRes
+> Task :feature-auth:compileAndroidHostTest
+> Task :feature-auth:testAndroidHostTest
+
+> Task :feature-ota:compileAndroidMain
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonMain/kotlin/com/ugreen/feature/ota/data/remote/OtaHttpMockController.kt:1214:68 'enum entry LOOP_FAILED: OtaHttpMockController.ProcessMode' is deprecated. Use DYNAMIC; retained for source compatibility.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/src/commonMain/kotlin/com/ugreen/feature/ota/publicapi/OtaFeature.kt:842:17 Expression is unused.
+
+> Task :feature-ota:processAndroidMainJavaRes
+> Task :feature-ota:bundleAndroidMainClassesToCompileJar
+> Task :feature-ota:bundleAndroidMainClassesToRuntimeJar
+
+> Task :feature-device-event:compileAndroidMain
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-device-event/src/commonMain/kotlin/com/ugreen/feature/device/event/collapse/DualLensCollapseScroll.kt:27:24 'val Fling: NestedScrollSource' is deprecated. This has been replaced by SideEffect.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-device-event/src/commonMain/kotlin/com/ugreen/feature/device/event/collapse/DualLensCollapseScroll.kt:28:24 'val Relocate: NestedScrollSource' is deprecated. Do not use. Will be removed in the future.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-device-event/src/commonMain/kotlin/com/ugreen/feature/device/event/collapse/DualLensCollapseScroll.kt:29:24 'val Wheel: NestedScrollSource' is deprecated. This has been replaced by UserInput.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-device-event/src/commonMain/kotlin/com/ugreen/feature/device/event/collapse/DualLensCollapseScroll.kt:118:51 'val Fling: NestedScrollSource' is deprecated. This has been replaced by SideEffect.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-device-event/src/commonMain/kotlin/com/ugreen/feature/device/event/collapse/DualLensCollapseScroll.kt:119:51 'val Fling: NestedScrollSource' is deprecated. This has been replaced by SideEffect.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-device-event/src/commonMain/kotlin/com/ugreen/feature/device/event/data/mapper/EventRowMapper.kt:188:24 'class Instant : Comparable<Instant>' is deprecated. Use kotlin.time.Instant instead.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-device-event/src/commonMain/kotlin/com/ugreen/feature/device/event/data/mapper/EventRowMapper.kt:189:14 'fun Instant.toLocalDateTime(timeZone: TimeZone): LocalDateTime' is deprecated. kotlinx.datetime.Instant is superseded by kotlin.time.Instant.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-device-event/src/commonMain/kotlin/com/ugreen/feature/device/event/detail/EventDetailMapper.kt:74:17 'class Instant : Comparable<Instant>' is deprecated. Use kotlin.time.Instant instead.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-device-event/src/commonMain/kotlin/com/ugreen/feature/device/event/detail/EventDetailMapper.kt:74:52 'fun Instant.toLocalDateTime(timeZone: TimeZone): LocalDateTime' is deprecated. kotlinx.datetime.Instant is superseded by kotlin.time.Instant.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-device-event/src/commonMain/kotlin/com/ugreen/feature/device/event/list/EventDisplayFormat.kt:26:20 'class Instant : Comparable<Instant>' is deprecated. Use kotlin.time.Instant instead.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-device-event/src/commonMain/kotlin/com/ugreen/feature/device/event/list/EventDisplayFormat.kt:27:10 'fun Instant.toLocalDateTime(timeZone: TimeZone): LocalDateTime' is deprecated. kotlinx.datetime.Instant is superseded by kotlin.time.Instant.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-device-event/src/commonMain/kotlin/com/ugreen/feature/device/event/multidevice/batchedit/domain/BatchEditSnapshotMapper.kt:9:47 Redundant call of conversion method.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-device-event/src/commonMain/kotlin/com/ugreen/feature/device/event/multidevice/domain/EventFilterState.kt:19:94 Redundant call of conversion method.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-device-event/src/commonMain/kotlin/com/ugreen/feature/device/event/multidevice/domain/policy/DefaultFilterFactory.kt:15:44 Redundant call of conversion method.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-device-event/src/commonMain/kotlin/com/ugreen/feature/device/event/multidevice/presentation/MultiDeviceEventListViewModel.kt:911:26 'val monthNumber: Int' is deprecated. Use the 'month' property instead.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-device-event/src/commonMain/kotlin/com/ugreen/feature/device/event/ui/download/EventDownloadFormat.kt:11:20 'class Instant : Comparable<Instant>' is deprecated. Use kotlin.time.Instant instead.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-device-event/src/commonMain/kotlin/com/ugreen/feature/device/event/ui/download/EventDownloadFormat.kt:12:10 'fun Instant.toLocalDateTime(timeZone: TimeZone): LocalDateTime' is deprecated. kotlinx.datetime.Instant is superseded by kotlin.time.Instant.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-device-event/src/commonMain/kotlin/com/ugreen/feature/device/event/ui/hourgroup/EventHourGroupController.kt:107:80 Redundant call of conversion method.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-device-event/src/commonMain/kotlin/com/ugreen/feature/device/event/ui/hourgroup/EventHourGroupController.kt:124:43 Redundant call of conversion method.
+
+> Task :feature-device-event:processAndroidMainJavaRes
+> Task :feature-device-event:bundleAndroidMainClassesToCompileJar
+> Task :feature-device-event:bundleAndroidMainClassesToRuntimeJar
+> Task :app-shared:compileAndroidMain
+> Task :app-shared:processAndroidMainJavaRes
+> Task :app-shared:bundleAndroidMainClassesToRuntimeJar
+> Task :app-shared:bundleAndroidMainClassesToCompileJar
+> Task :device-biz:kspAndroidMain
+> Task :device-biz:copyRoomSchemas NO-SOURCE
+
+> Task :device-biz:compileAndroidMain
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/device-biz/build/generated/ksp/android/androidMain/kotlin/com/ugreen/home/device/db/UgreenDeviceDao_Impl.kt:58:13 Condition is always 'false'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/device-biz/build/generated/ksp/android/androidMain/kotlin/com/ugreen/home/device/db/UgreenDeviceDao_Impl.kt:111:13 Condition is always 'false'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/device-biz/build/generated/ksp/android/androidMain/kotlin/com/ugreen/home/device/db/UgreenDeviceDao_Impl.kt:171:13 Condition is always 'false'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/device-biz/build/generated/ksp/android/androidMain/kotlin/com/ugreen/home/device/db/UgreenDeviceDao_Impl.kt:225:13 Condition is always 'false'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/device-biz/build/generated/ksp/android/androidMain/kotlin/com/ugreen/home/device/db/UgreenDeviceDao_Impl.kt:277:13 Condition is always 'false'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/device-biz/build/generated/ksp/android/androidMain/kotlin/com/ugreen/home/device/runtime/AppDeviceDatabaseConstructor.kt:5:8 'expect'/'actual' classes (including interfaces, objects, annotations, enums, and 'actual' typealiases) are in Beta. Consider using the '-Xexpect-actual-classes' flag to suppress this warning. Also see: https://youtrack.jetbrains.com/issue/KT-61573
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/device-biz/src/commonMain/kotlin/com/ugreen/home/device/model/DeviceUnifiedState.kt:94:67 Unnecessary safe call on a non-null receiver of type 'OtaUpdateResult'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/device-biz/src/commonMain/kotlin/com/ugreen/home/device/model/DeviceUnifiedState.kt:102:52 Unnecessary safe call on a non-null receiver of type 'OtaUpdateProcess'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/device-biz/src/commonMain/kotlin/com/ugreen/home/device/runtime/AppDeviceDatabase.kt:35:1 'expect'/'actual' classes (including interfaces, objects, annotations, enums, and 'actual' typealiases) are in Beta. Consider using the '-Xexpect-actual-classes' flag to suppress this warning. Also see: https://youtrack.jetbrains.com/issue/KT-61573
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/device-biz/src/commonMain/kotlin/com/ugreen/home/device/runtime/event/EventDeviceInfoProviderImpl.kt:36:5 This class or interface requires opt-in to be implemented: Inheriting from this kotlinx.coroutines API is unstable. Either new methods may be added in the future, which would break the inheritance, or correctly inheriting from it requires fulfilling contracts that may change in the future.
+
+> Task :device-biz:processAndroidMainJavaRes
+> Task :device-biz:bundleAndroidMainClassesToRuntimeJar
+> Task :device-biz:bundleAndroidMainClassesToCompileJar
+> Task :sample:kspAndroidMain
+
+> Task :sample:compileAndroidMain
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/sample/src/commonMain/kotlin/com/ugreen/sample/demo/device/PtzServiceDebugDemoScreen.kt:142:53 Elvis operator (?:) always returns the left operand of non-nullable type 'PTZStatus'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/sample/src/commonMain/kotlin/com/ugreen/sample/demo/device/PtzServiceDebugDemoScreen.kt:147:50 Elvis operator (?:) always returns the left operand of non-nullable type 'PTZFreezeSwitchType'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/sample/src/commonMain/kotlin/com/ugreen/sample/demo/device/PtzServiceDebugDemoScreen.kt:147:94 Elvis operator (?:) always returns the left operand of non-nullable type 'Int'.
+w: file:///private/tmp/ugreenhome-shared-release-1.7.0/sample/src/commonMain/kotlin/com/ugreen/sample/demo/ota/OtaSampleScenarios.kt:10:50 'constructor(): FakeAiBaseAllUpgradeOrchestrator' is deprecated. Fake/Sample fixture only; production AiBase queue is server-owned.
+
+> Task :sample:processAndroidMainJavaRes
+> Task :sample:bundleAndroidMainClassesToRuntimeJar
+> Task :sample:bundleAndroidMainClassesToCompileJar
+> Task :sample:kspAndroidHostTest SKIPPED
+> Task :sample:copyRoomSchemas NO-SOURCE
+
+> Task :sample:compileAndroidHostTest FAILED
+e: file:///private/tmp/ugreenhome-shared-release-1.7.0/sample/src/commonTest/kotlin/com/ugreen/sample/demo/ota/OtaApiDebugVMTest.kt:62:47 No parameter with name 'allupgrade' found.
+
+[Incubating] Problems report is available at: file:///private/tmp/ugreenhome-shared-release-1.7.0/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':sample:compileAndroidHostTest'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.btapi.BuildToolsApiCompilationWork
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 40s
+443 actionable tasks: 432 executed, 11 up-to-date

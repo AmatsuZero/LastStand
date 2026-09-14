@@ -87,8 +87,12 @@ App instrumentation 已执行：API 36 隔离模拟器安装临时签名 APK 后
 
 ## 7. 追加实测：Shared host 与库模块 instrumentation
 
-补充结果见[补充验证与未完成项](附件/补充验证与未完成项.md)：Shared 非 OTA/sample host 聚合退出0，但仅计入已生成报告的 151 个案例（150/1）；全量 host 聚合约15分钟超时，且 sample 编译存在 unresolved reference。OTA 单例因 host JVM 缺少 `Dispatchers.Main` 失败。Android library instrumentation 仅6个测试 APK 构建成功，API36 模拟器运行9个案例，6通过、3因模板包名断言失败；其余模块因资源/JNI冲突未生成 APK。
+补充结果见[补充验证与未完成项](附件/补充验证与未完成项.md)：Shared 非 OTA/sample host 聚合退出0，但仅计入已生成报告的 151 个通过案例；另行 OTA 单例1个失败，两组合计152个（151/1）；全量 host 聚合约15分钟超时，且 sample 编译存在 unresolved reference。OTA 单例因 host JVM 缺少 `Dispatchers.Main` 失败。Android library instrumentation 仅6个测试 APK 构建成功，API36 模拟器运行9个案例，6通过、3因模板包名断言失败；其余模块因资源/JNI冲突未生成 APK。
 
-## 7. 复核边界
+## 8. Shared worktree 新基线复测
+
+`release/1.7.0@3737bbe7`（strings `313160d8`）仅 Shared worktree，不含 iOS Pods，源码未改；不替代前文 `4f36969b` 历史快照。实际报告：非OTA模块151/151通过（含core-util的33个），但同一调用的sample测试源码编译失败；OTA排除 `OtaFeatureApiTest` 后273个中271通过/2失败；单独public API探针1个失败。去重合计 **425个报告案例：422通过、3失败**，不是完整host套件通过；其中JNI互操作用例的开关未启用，runner记录通过不代表JNI实际验证。见[Shared worktree host 实测](附件/Shared-worktree-host实测.md)。
+
+## 9. 复核边界
 
 测试失败保留原样，不修改业务或测试源码来制造通过；没有取得 coverage report；静态配置扫描与实际任务枚举都未发现相应入口，覆盖率记为未取得而非0%。`adb shell` 退出0及 `INSTRUMENTATION_CODE: -1` 均不代表测试通过；本轮以逐案例状态和 runner 失败报告为准。

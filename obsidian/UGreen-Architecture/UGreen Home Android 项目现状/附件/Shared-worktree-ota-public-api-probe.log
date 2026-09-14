@@ -1,0 +1,432 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+[aliyun-mirror] Google: https://dl.google.com/dl/android/maven2/ -> https://maven.aliyun.com/repository/google
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+[aliyun-mirror] MavenRepo: https://repo.maven.apache.org/maven2/ -> https://maven.aliyun.com/repository/central
+
+> Configure project :build-logic:convention
+[aliyun-mirror] Gradle Central Plugin Repository: https://plugins.gradle.org/m2 -> https://maven.aliyun.com/repository/gradle-plugin
+
+> Task :build-logic:convention:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :build-logic:convention:compileKotlin UP-TO-DATE
+> Task :build-logic:convention:compileJava NO-SOURCE
+> Task :build-logic:convention:pluginDescriptors UP-TO-DATE
+> Task :build-logic:convention:processResources UP-TO-DATE
+> Task :build-logic:convention:classes UP-TO-DATE
+> Task :build-logic:convention:jar UP-TO-DATE
+
+> Configure project :airtc-appsdk
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :app-shared
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :core-database
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :core-kv
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :core-logger
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :core-mvi
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :core-navigation
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+WARNING: The 'commonTest' source directory exists, but android host tests are not enabled. To enable android host tests, add `withHostTest {}` to your android target configuration in the Gradle build file.
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :core-net
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :core-player
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :core-secure-package
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :core-ui
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :core-util
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :device-biz
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+WARNING: The 'commonTest' source directory exists, but android host tests are not enabled. To enable android host tests, add `withHostTest {}` to your android target configuration in the Gradle build file.
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :device-thing-model
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :domain-device
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :domain-env
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :domain-family
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :domain-product
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :feature-auth
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :feature-device-event
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :feature-home-management
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :feature-ota
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :feature-playback
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :feature-third-party-services
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+WARNING: The 'commonTest' source directory exists, but android host tests are not enabled. To enable android host tests, add `withHostTest {}` to your android target configuration in the Gradle build file.
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :sample
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :ugreen-strings-kmp
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Task :core-kv:kmpPartiallyResolvedDependenciesChecker
+> Task :core-kv:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-kv:compileAndroidMain UP-TO-DATE
+> Task :core-kv:androidPreBuild UP-TO-DATE
+> Task :core-kv:preAndroidMainBuild UP-TO-DATE
+> Task :core-kv:bundleAndroidMainClassesToRuntimeJar UP-TO-DATE
+> Task :core-kv:processAndroidMainJavaRes UP-TO-DATE
+> Task :core-logger:kmpPartiallyResolvedDependenciesChecker
+> Task :core-logger:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-logger:compileAndroidMain UP-TO-DATE
+> Task :core-logger:androidPreBuild UP-TO-DATE
+> Task :core-logger:preAndroidMainBuild UP-TO-DATE
+> Task :core-logger:bundleAndroidMainClassesToRuntimeJar UP-TO-DATE
+> Task :core-logger:processAndroidMainJavaRes UP-TO-DATE
+> Task :core-logger:bundleAndroidMainClassesToCompileJar UP-TO-DATE
+> Task :core-net:kmpPartiallyResolvedDependenciesChecker
+> Task :core-net:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-net:compileAndroidMain UP-TO-DATE
+> Task :core-net:androidPreBuild UP-TO-DATE
+> Task :core-net:preAndroidMainBuild UP-TO-DATE
+> Task :core-net:bundleAndroidMainClassesToRuntimeJar UP-TO-DATE
+> Task :core-net:processAndroidMainJavaRes UP-TO-DATE
+> Task :core-kv:bundleAndroidMainClassesToCompileJar UP-TO-DATE
+> Task :core-net:bundleAndroidMainClassesToCompileJar UP-TO-DATE
+> Task :core-ui:kmpPartiallyResolvedDependenciesChecker
+> Task :core-ui:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-ui:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :core-ui:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :core-ui:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :core-ui:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :core-ui:syncCoreUiComposeResources UP-TO-DATE
+> Task :core-ui:convertXmlValueResourcesForCommonMain UP-TO-DATE
+> Task :core-ui:copyNonXmlValueResourcesForCommonMain UP-TO-DATE
+> Task :core-ui:prepareComposeResourcesTaskForCommonMain UP-TO-DATE
+> Task :core-ui:generateResourceAccessorsForCommonMain UP-TO-DATE
+> Task :core-ui:generateActualResourceCollectorsForAndroidMain UP-TO-DATE
+> Task :core-ui:androidPreBuild UP-TO-DATE
+> Task :core-ui:preAndroidMainBuild UP-TO-DATE
+> Task :core-ui:generateAndroidMainEmptyResourceFiles UP-TO-DATE
+> Task :core-ui:copyAndroidMainComposeResourcesToAndroidAssets UP-TO-DATE
+> Task :core-ui:packageAndroidMainResources UP-TO-DATE
+> Task :core-ui:parseAndroidMainLocalResources UP-TO-DATE
+> Task :core-ui:generateAndroidMainRFile UP-TO-DATE
+> Task :core-ui:generateComposeResClass UP-TO-DATE
+> Task :core-ui:generateExpectResourceCollectorsForCommonMain UP-TO-DATE
+> Task :core-util:kmpPartiallyResolvedDependenciesChecker
+> Task :core-util:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-util:compileAndroidMain UP-TO-DATE
+> Task :core-util:androidPreBuild UP-TO-DATE
+> Task :core-util:preAndroidMainBuild UP-TO-DATE
+> Task :core-util:bundleAndroidMainClassesToCompileJar UP-TO-DATE
+> Task :core-ui:compileAndroidMain UP-TO-DATE
+> Task :core-ui:bundleAndroidMainClassesToRuntimeJar UP-TO-DATE
+> Task :core-ui:processAndroidMainJavaRes UP-TO-DATE
+> Task :core-util:bundleAndroidMainClassesToRuntimeJar UP-TO-DATE
+> Task :core-util:processAndroidMainJavaRes UP-TO-DATE
+> Task :core-ui:bundleAndroidMainClassesToCompileJar UP-TO-DATE
+> Task :feature-ota:kmpPartiallyResolvedDependenciesChecker
+> Task :feature-ota:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :feature-ota:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature-ota:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :feature-ota:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :feature-ota:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :feature-ota:convertXmlValueResourcesForCommonMain NO-SOURCE
+> Task :feature-ota:copyNonXmlValueResourcesForCommonMain UP-TO-DATE
+> Task :feature-ota:prepareComposeResourcesTaskForCommonMain UP-TO-DATE
+> Task :feature-ota:generateResourceAccessorsForCommonMain UP-TO-DATE
+> Task :feature-ota:generateActualResourceCollectorsForAndroidMain UP-TO-DATE
+> Task :feature-ota:androidPreBuild UP-TO-DATE
+> Task :feature-ota:preAndroidMainBuild UP-TO-DATE
+> Task :feature-ota:generateAndroidMainEmptyResourceFiles UP-TO-DATE
+> Task :feature-ota:copyAndroidMainComposeResourcesToAndroidAssets UP-TO-DATE
+> Task :feature-ota:packageAndroidMainResources UP-TO-DATE
+> Task :feature-ota:parseAndroidMainLocalResources UP-TO-DATE
+> Task :feature-ota:generateAndroidMainRFile UP-TO-DATE
+> Task :feature-ota:generateComposeResClass UP-TO-DATE
+> Task :feature-ota:generateExpectResourceCollectorsForCommonMain UP-TO-DATE
+> Task :ugreen-strings-kmp:kmpPartiallyResolvedDependenciesChecker
+> Task :ugreen-strings-kmp:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :ugreen-strings-kmp:convertXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :ugreen-strings-kmp:copyNonXmlValueResourcesForAndroidMain NO-SOURCE
+> Task :ugreen-strings-kmp:prepareComposeResourcesTaskForAndroidMain NO-SOURCE
+> Task :ugreen-strings-kmp:generateResourceAccessorsForAndroidMain NO-SOURCE
+> Task :ugreen-strings-kmp:convertXmlValueResourcesForCommonMain UP-TO-DATE
+> Task :ugreen-strings-kmp:copyNonXmlValueResourcesForCommonMain NO-SOURCE
+> Task :ugreen-strings-kmp:prepareComposeResourcesTaskForCommonMain UP-TO-DATE
+> Task :ugreen-strings-kmp:generateResourceAccessorsForCommonMain UP-TO-DATE
+> Task :ugreen-strings-kmp:generateActualResourceCollectorsForAndroidMain UP-TO-DATE
+> Task :ugreen-strings-kmp:androidPreBuild UP-TO-DATE
+> Task :ugreen-strings-kmp:preAndroidMainBuild UP-TO-DATE
+> Task :ugreen-strings-kmp:generateAndroidMainEmptyResourceFiles UP-TO-DATE
+> Task :ugreen-strings-kmp:copyAndroidMainComposeResourcesToAndroidAssets UP-TO-DATE
+> Task :ugreen-strings-kmp:packageAndroidMainResources UP-TO-DATE
+> Task :ugreen-strings-kmp:parseAndroidMainLocalResources UP-TO-DATE
+> Task :ugreen-strings-kmp:generateAndroidMainRFile UP-TO-DATE
+> Task :ugreen-strings-kmp:generateComposeResClass UP-TO-DATE
+> Task :ugreen-strings-kmp:generateExpectResourceCollectorsForCommonMain UP-TO-DATE
+> Task :ugreen-strings-kmp:compileAndroidMain UP-TO-DATE
+> Task :ugreen-strings-kmp:bundleAndroidMainClassesToCompileJar UP-TO-DATE
+> Task :feature-ota:compileAndroidMain UP-TO-DATE
+> Task :feature-ota:bundleAndroidMainClassesToRuntimeJar UP-TO-DATE
+> Task :feature-ota:androidJar UP-TO-DATE
+> Task :feature-ota:bundleAndroidMainClassesToCompileJar UP-TO-DATE
+> Task :core-ui:generateAndroidMainAssets UP-TO-DATE
+> Task :core-ui:mergeAndroidMainAssets UP-TO-DATE
+> Task :feature-ota:generateAndroidHostTestAssets UP-TO-DATE
+> Task :feature-ota:generateAndroidMainAssets UP-TO-DATE
+> Task :feature-ota:mergeAndroidMainAssets UP-TO-DATE
+> Task :feature-ota:preAndroidHostTestBuild UP-TO-DATE
+> Task :ugreen-strings-kmp:generateAndroidMainAssets UP-TO-DATE
+> Task :ugreen-strings-kmp:mergeAndroidMainAssets UP-TO-DATE
+> Task :feature-ota:mergeAndroidHostTestAssets UP-TO-DATE
+> Task :core-ui:mapAndroidMainSourceSetPaths UP-TO-DATE
+> Task :core-ui:compileAndroidMainLibraryResources UP-TO-DATE
+> Task :core-kv:writeAndroidMainAarMetadata UP-TO-DATE
+> Task :core-logger:writeAndroidMainAarMetadata UP-TO-DATE
+> Task :core-net:writeAndroidMainAarMetadata UP-TO-DATE
+> Task :core-ui:writeAndroidMainAarMetadata UP-TO-DATE
+> Task :core-util:writeAndroidMainAarMetadata UP-TO-DATE
+> Task :feature-ota:writeAndroidMainAarMetadata UP-TO-DATE
+> Task :ugreen-strings-kmp:writeAndroidMainAarMetadata UP-TO-DATE
+> Task :feature-ota:checkAndroidHostTestAarMetadata UP-TO-DATE
+> Task :feature-ota:mapAndroidMainSourceSetPaths UP-TO-DATE
+> Task :feature-ota:compileAndroidMainLibraryResources UP-TO-DATE
+> Task :feature-ota:mapAndroidHostTestSourceSetPaths UP-TO-DATE
+> Task :core-kv:generateAndroidMainEmptyResourceFiles UP-TO-DATE
+> Task :core-logger:generateAndroidMainEmptyResourceFiles UP-TO-DATE
+> Task :core-net:generateAndroidMainEmptyResourceFiles UP-TO-DATE
+> Task :core-util:generateAndroidMainEmptyResourceFiles UP-TO-DATE
+> Task :feature-ota:generateAndroidHostTestResources UP-TO-DATE
+> Task :feature-ota:mergeAndroidHostTestResources UP-TO-DATE
+> Task :core-kv:processAndroidMainManifest UP-TO-DATE
+> Task :core-logger:processAndroidMainManifest UP-TO-DATE
+> Task :core-net:processAndroidMainManifest UP-TO-DATE
+> Task :core-ui:processAndroidMainManifest UP-TO-DATE
+> Task :core-util:processAndroidMainManifest UP-TO-DATE
+> Task :feature-ota:processAndroidMainManifest UP-TO-DATE
+> Task :ugreen-strings-kmp:processAndroidMainManifest UP-TO-DATE
+> Task :feature-ota:processAndroidHostTestManifest UP-TO-DATE
+> Task :ugreen-strings-kmp:mapAndroidMainSourceSetPaths UP-TO-DATE
+> Task :ugreen-strings-kmp:compileAndroidMainLibraryResources UP-TO-DATE
+> Task :feature-ota:processAndroidHostTestResources UP-TO-DATE
+> Task :feature-ota:packageAndroidHostTestForUnitTest UP-TO-DATE
+> Task :feature-ota:generateAndroidHostTestConfig UP-TO-DATE
+> Task :feature-ota:convertXmlValueResourcesForAndroidHostTest NO-SOURCE
+> Task :feature-ota:copyNonXmlValueResourcesForAndroidHostTest NO-SOURCE
+> Task :feature-ota:prepareComposeResourcesTaskForAndroidHostTest NO-SOURCE
+> Task :feature-ota:generateResourceAccessorsForAndroidHostTest NO-SOURCE
+> Task :feature-ota:convertXmlValueResourcesForCommonTest NO-SOURCE
+> Task :feature-ota:copyNonXmlValueResourcesForCommonTest NO-SOURCE
+> Task :feature-ota:prepareComposeResourcesTaskForCommonTest NO-SOURCE
+> Task :feature-ota:generateResourceAccessorsForCommonTest NO-SOURCE
+> Task :feature-ota:compileAndroidHostTest UP-TO-DATE
+> Task :feature-ota:processAndroidHostTestJavaRes NO-SOURCE
+> Task :feature-ota:processAndroidMainJavaRes UP-TO-DATE
+> Task :ugreen-strings-kmp:bundleAndroidMainClassesToRuntimeJar UP-TO-DATE
+> Task :ugreen-strings-kmp:processAndroidMainJavaRes UP-TO-DATE
+
+> Task :feature-ota:testAndroidHostTest FAILED
+
+OtaFeatureApiTest > childPageSnapshot_usesExistingKmpParentCheckFactWithoutAnotherRequest FAILED
+    java.lang.IllegalStateException at OtaFeatureApiTest.kt:209
+        Caused by: java.lang.IllegalStateException at OtaFeatureApiTest.kt:209
+            Caused by: java.lang.RuntimeException at OtaFeatureApiTest.kt:209
+
+1 test completed, 1 failed
+
+[Incubating] Problems report is available at: file:///private/tmp/ugreenhome-shared-release-1.7.0/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':feature-ota:testAndroidHostTest'.
+> There were failing tests. See the report at: file:///private/tmp/ugreenhome-shared-release-1.7.0/feature-ota/build/reports/tests/testAndroidHostTest/index.html
+
+* Try:
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+BUILD FAILED in 7s
+113 actionable tasks: 8 executed, 105 up-to-date

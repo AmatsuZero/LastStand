@@ -1,7 +1,7 @@
 {
-  "at": "2026-09-14T14:53:07.732527+08:00",
+  "at": "2026-09-14T18:12:46.528528+08:00",
   "topLevelDocuments": 9,
-  "relativeLinksChecked": 83,
+  "relativeLinksChecked": 94,
   "sourceReferencesChecked": 203,
   "mermaidBlocksStaticFenceChecked": 11,
   "mermaidRendered": true,
@@ -12,7 +12,7 @@
   "secretPatternMatches": [],
   "errors": [],
   "rerunAfterFinalEdits": true,
-  "finalCheckNotes": "Dynamic supplement: dependency logs, task reports, instrumentation status, launch UI, Markdown links and JSON checked; 203 source refs inherited from prior unchanged static baseline.",
+  "finalCheckNotes": "Shared worktree update: unique case counts, all relative Markdown links, JSON and credential patterns checked. Static source-reference count and Mermaid results inherited; diagrams unchanged.",
   "mermaidRenderEngine": "Obsidian Mermaid 11.13.0",
   "mermaidRenderPassed": 11,
   "mermaidRenderEvidence": "Mermaid渲染验证.json",
@@ -36,7 +36,15 @@
     "evidence": "测试任务枚举.json"
   },
   "relativeLinkScope": "all Android top-level and attachment Markdown; percent-decoded relative paths including iOS links",
-  "jsonFilesParsed": 14,
+  "jsonFilesParsed": 21,
   "actualInstrumentationCases": 3,
-  "totalExecutedCasesAcrossScopes": 256
+  "totalExecutedCasesAcrossScopes": 256,
+  "sharedWorktreeHost": {
+    "head": "3737bbe7",
+    "reportedCases": 425,
+    "passed": 422,
+    "failed": 3,
+    "completeSuite": false,
+    "evidence": "Shared-worktree-host实测.json"
+  }
 }
