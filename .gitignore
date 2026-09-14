@@ -24,6 +24,7 @@ obsidian/.obsidian/cache/
 obsidian/.obsidian/plugins/
 obsidian/.obsidian/themes/
 obsidian/.trash/
+obsidian/.obsidian/community-plugins.json
 
 # Hugo build output
 public/
