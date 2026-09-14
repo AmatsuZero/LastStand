@@ -1,0 +1,704 @@
+[
+  {
+    "origin": "Android",
+    "report": "app/build/test-results/testDomesticDebugUnitTest/TEST-com.ugreen.home.ExampleUnitTest.xml",
+    "suite": "com.ugreen.home.ExampleUnitTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "app/build/test-results/testDomesticDebugUnitTest/TEST-com.ugreen.home.messaging.handlers.OtaUpgradeMessageHandlerTest.xml",
+    "suite": "com.ugreen.home.messaging.handlers.OtaUpgradeMessageHandlerTest",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "app/build/test-results/testDomesticDebugUnitTest/TEST-com.ugreen.home.messaging.handlers.ShareDeviceUnbindMessageHandlerTest.xml",
+    "suite": "com.ugreen.home.messaging.handlers.ShareDeviceUnbindMessageHandlerTest",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "app/build/test-results/testDomesticDebugUnitTest/TEST-com.ugreen.home.rn.DetectZoneNativeRouteTest.xml",
+    "suite": "com.ugreen.home.rn.DetectZoneNativeRouteTest",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "app/build/test-results/testDomesticDebugUnitTest/TEST-com.ugreen.home.rn.DeviceRNBridgeShareTargetTest.xml",
+    "suite": "com.ugreen.home.rn.DeviceRNBridgeShareTargetTest",
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "app/build/test-results/testDomesticDebugUnitTest/TEST-com.ugreen.home.rn.DeviceRuntimePropertyWriteRecoveryTest.xml",
+    "suite": "com.ugreen.home.rn.DeviceRuntimePropertyWriteRecoveryTest",
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "app/build/test-results/testDomesticDebugUnitTest/TEST-com.ugreen.home.rn.DeviceRuntimeWritePolicyTest.xml",
+    "suite": "com.ugreen.home.rn.DeviceRuntimeWritePolicyTest",
+    "tests": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "app/build/test-results/testDomesticDebugUnitTest/TEST-com.ugreen.home.rn.DeviceSettingAvailabilityAdapterTest.xml",
+    "suite": "com.ugreen.home.rn.DeviceSettingAvailabilityAdapterTest",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "app/build/test-results/testDomesticDebugUnitTest/TEST-com.ugreen.home.rn.DeviceSettingDebugEntryVisibilityTest.xml",
+    "suite": "com.ugreen.home.rn.DeviceSettingDebugEntryVisibilityTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "app/build/test-results/testDomesticDebugUnitTest/TEST-com.ugreen.home.rn.DeviceSettingProfilePolicyTest.xml",
+    "suite": "com.ugreen.home.rn.DeviceSettingProfilePolicyTest",
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "app/build/test-results/testDomesticDebugUnitTest/TEST-com.ugreen.home.rn.NativeIpcPlayerStatePolicyTest.xml",
+    "suite": "com.ugreen.home.rn.NativeIpcPlayerStatePolicyTest",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "app/build/test-results/testDomesticDebugUnitTest/TEST-com.ugreen.home.rn.Od800ManagementDestinationTest.xml",
+    "suite": "com.ugreen.home.rn.Od800ManagementDestinationTest",
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "app/build/test-results/testDomesticDebugUnitTest/TEST-com.ugreen.home.rn.PrivacyZoneNativeRouteTest.xml",
+    "suite": "com.ugreen.home.rn.PrivacyZoneNativeRouteTest",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "app/build/test-results/testDomesticDebugUnitTest/TEST-com.ugreen.home.rn.device.settings.IpcSettingPageUiTest.xml",
+    "suite": "com.ugreen.home.rn.device.settings.IpcSettingPageUiTest",
+    "tests": 3,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "app/build/test-results/testDomesticDebugUnitTest/TEST-com.ugreen.home.rn.host.AppRNModuleLifecycleHostTest.xml",
+    "suite": "com.ugreen.home.rn.host.AppRNModuleLifecycleHostTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "app/build/test-results/testDomesticDebugUnitTest/TEST-com.ugreen.home.rn.host.DeviceSettingsKeepAliveCoordinatorTest.xml",
+    "suite": "com.ugreen.home.rn.host.DeviceSettingsKeepAliveCoordinatorTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "app/build/test-results/testDomesticDebugUnitTest/TEST-com.ugreen.home.ui.dev.OtaCmpDebugScenariosTest.xml",
+    "suite": "com.ugreen.home.ui.dev.OtaCmpDebugScenariosTest",
+    "tests": 5,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "app/build/test-results/testDomesticDebugUnitTest/TEST-com.ugreen.home.ui.dev.OtaOverallFlowFinishedTest.xml",
+    "suite": "com.ugreen.home.ui.dev.OtaOverallFlowFinishedTest",
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "app/build/test-results/testDomesticDebugUnitTest/TEST-com.ugreen.home.util.KeepAliveManagerTest.xml",
+    "suite": "com.ugreen.home.util.KeepAliveManagerTest",
+    "tests": 8,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "bluetooth/build/test-results/testDebugUnitTest/TEST-com.ugreen.bluetooth.ExampleUnitTest.xml",
+    "suite": "com.ugreen.bluetooth.ExampleUnitTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "calendarview/build/test-results/testDebugUnitTest/TEST-com.haibin.calendarview.ExampleUnitTest.xml",
+    "suite": "com.haibin.calendarview.ExampleUnitTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "camera/build/test-results/testDebugUnitTest/TEST-com.ugreen.camera.ExampleUnitTest.xml",
+    "suite": "com.ugreen.camera.ExampleUnitTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "core/core-device/build/test-results/testDebugUnitTest/TEST-com.ugreen.device.ExampleUnitTest.xml",
+    "suite": "com.ugreen.device.ExampleUnitTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "core/core-device-setup/build/test-results/testDebugUnitTest/TEST-com.ugreen.device.BleAdvParserTest.xml",
+    "suite": "com.ugreen.device.BleAdvParserTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "core/core-device-setup/build/test-results/testDebugUnitTest/TEST-com.ugreen.device.BleParserTest.xml",
+    "suite": "com.ugreen.device.BleParserTest",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "core/core-device-setup/build/test-results/testDebugUnitTest/TEST-com.ugreen.device.DeviceSNParserTest.xml",
+    "suite": "com.ugreen.device.DeviceSNParserTest",
+    "tests": 8,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "core/core-device-setup/build/test-results/testDebugUnitTest/TEST-com.ugreen.device.ExampleUnitTest.xml",
+    "suite": "com.ugreen.device.ExampleUnitTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "core/core-messaging/build/test-results/testDebugUnitTest/TEST-com.ugreen.core.messaging.ExampleUnitTest.xml",
+    "suite": "com.ugreen.core.messaging.ExampleUnitTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "core/core-ui/build/test-results/testDebugUnitTest/TEST-com.ugreen.ui.ExampleUnitTest.xml",
+    "suite": "com.ugreen.ui.ExampleUnitTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "core/core-util/build/test-results/testDebugUnitTest/TEST-com.ugreen.core.crypto.AssetEncryptorTest.xml",
+    "suite": "com.ugreen.core.crypto.AssetEncryptorTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "core/core-util/build/test-results/testDebugUnitTest/TEST-com.ugreen.core_util.ExampleUnitTest.xml",
+    "suite": "com.ugreen.core_util.ExampleUnitTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "domain/build/test-results/testDebugUnitTest/TEST-com.ugreen.care.domain.ExampleUnitTest.xml",
+    "suite": "com.ugreen.care.domain.ExampleUnitTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "domain/build/test-results/testDebugUnitTest/TEST-com.ugreen.care.domain.device.properties.model.DeviceUnifiedStateTest.xml",
+    "suite": "com.ugreen.care.domain.device.properties.model.DeviceUnifiedStateTest",
+    "tests": 11,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "domain/build/test-results/testDebugUnitTest/TEST-com.ugreen.care.domain.device.properties.model.EventThingModelParsingTest.xml",
+    "suite": "com.ugreen.care.domain.device.properties.model.EventThingModelParsingTest",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "domain/build/test-results/testDebugUnitTest/TEST-com.ugreen.care.domain.device.properties.model.MainFirmwareVersionResolverTest.xml",
+    "suite": "com.ugreen.care.domain.device.properties.model.MainFirmwareVersionResolverTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "domain/build/test-results/testDebugUnitTest/TEST-com.ugreen.care.domain.device.properties.model.OtaUpgradeResultDetectorTest.xml",
+    "suite": "com.ugreen.care.domain.device.properties.model.OtaUpgradeResultDetectorTest",
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "domain/build/test-results/testDebugUnitTest/TEST-com.ugreen.care.domain.device.properties.model.OtaUpgradeResultEventFlowTest.xml",
+    "suite": "com.ugreen.care.domain.device.properties.model.OtaUpgradeResultEventFlowTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "net/build/test-results/testDebugUnitTest/TEST-com.ugreen.net.ExampleUnitTest.xml",
+    "suite": "com.ugreen.net.ExampleUnitTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "qrcode/build/test-results/testDebugUnitTest/TEST-com.ugreen.qrcode.ExampleUnitTest.xml",
+    "suite": "com.ugreen.qrcode.ExampleUnitTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "repository/build/test-results/testDebugUnitTest/TEST-com.ugreen.care.repo.ExampleUnitTest.xml",
+    "suite": "com.ugreen.care.repo.ExampleUnitTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "repository/build/test-results/testDebugUnitTest/TEST-com.ugreen.care.repo.device.downloader.PlaybackDownloadOutputNameTest.xml",
+    "suite": "com.ugreen.care.repo.device.downloader.PlaybackDownloadOutputNameTest",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "repository/build/test-results/testDebugUnitTest/TEST-com.ugreen.care.repo.device.properties.DeviceSettingOperationNotifierTest.xml",
+    "suite": "com.ugreen.care.repo.device.properties.DeviceSettingOperationNotifierTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "repository/build/test-results/testDebugUnitTest/TEST-com.ugreen.care.repo.device.properties.model.EventDonateBodyTest.xml",
+    "suite": "com.ugreen.care.repo.device.properties.model.EventDonateBodyTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "repository/build/test-results/testDebugUnitTest/TEST-com.ugreen.care.repo.device.record.event.PlaybackEventTimeListParserTest.xml",
+    "suite": "com.ugreen.care.repo.device.record.event.PlaybackEventTimeListParserTest",
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "repository/build/test-results/testDebugUnitTest/TEST-com.ugreen.care.repo.device.search.AISearchRepositoryImplTest.xml",
+    "suite": "com.ugreen.care.repo.device.search.AISearchRepositoryImplTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "repository/build/test-results/testDebugUnitTest/TEST-com.ugreen.data.UnbindDeviceBodyTest.xml",
+    "suite": "com.ugreen.data.UnbindDeviceBodyTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "rn-platform/build/test-results/testDebugUnitTest/TEST-com.ugreen.home.rn.DevicePropertyWriteConfirmationTest.xml",
+    "suite": "com.ugreen.home.rn.DevicePropertyWriteConfirmationTest",
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "rn-platform/build/test-results/testDebugUnitTest/TEST-com.ugreen.home.rn.DeviceSettingAvailabilityPolicyTest.xml",
+    "suite": "com.ugreen.home.rn.DeviceSettingAvailabilityPolicyTest",
+    "tests": 6,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "rn-platform/build/test-results/testDebugUnitTest/TEST-com.ugreen.home.rn.DeviceSettingInputPolicyTest.xml",
+    "suite": "com.ugreen.home.rn.DeviceSettingInputPolicyTest",
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "rn-platform/build/test-results/testDebugUnitTest/TEST-com.ugreen.home.rn.MediaShareTempFileStoreTest.xml",
+    "suite": "com.ugreen.home.rn.MediaShareTempFileStoreTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "rn-platform/build/test-results/testDebugUnitTest/TEST-com.ugreen.home.rn.NativeGuideVideoViewManagerTest.xml",
+    "suite": "com.ugreen.home.rn.NativeGuideVideoViewManagerTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "rn-platform/build/test-results/testDebugUnitTest/TEST-com.ugreen.home.rn.NativeLottieViewManagerTest.xml",
+    "suite": "com.ugreen.home.rn.NativeLottieViewManagerTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "rn-platform/build/test-results/testDebugUnitTest/TEST-com.ugreen.home.rn.NetworkRNRequestPolicyTest.xml",
+    "suite": "com.ugreen.home.rn.NetworkRNRequestPolicyTest",
+    "tests": 12,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "rn-platform/build/test-results/testDebugUnitTest/TEST-com.ugreen.home.rn.StorageRNKeyPolicyTest.xml",
+    "suite": "com.ugreen.home.rn.StorageRNKeyPolicyTest",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "rn-platform/build/test-results/testDebugUnitTest/TEST-com.ugreen.home.rn.container.RNContainerRuntimeResolverTest.xml",
+    "suite": "com.ugreen.home.rn.container.RNContainerRuntimeResolverTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "rn-platform/build/test-results/testDebugUnitTest/TEST-com.ugreen.home.rn.device.DeviceSettingsRNEntryCoordinatorTest.xml",
+    "suite": "com.ugreen.home.rn.device.DeviceSettingsRNEntryCoordinatorTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "rn-platform/build/test-results/testDebugUnitTest/TEST-com.ugreen.home.rn.platform.bundle.RNBundleManagerTest.xml",
+    "suite": "com.ugreen.home.rn.platform.bundle.RNBundleManagerTest",
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "rn-platform/build/test-results/testDebugUnitTest/TEST-com.ugreen.home.rn.platform.update.RNBundleAssignmentAcceptancePolicyTest.xml",
+    "suite": "com.ugreen.home.rn.platform.update.RNBundleAssignmentAcceptancePolicyTest",
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "rn-platform/build/test-results/testDebugUnitTest/TEST-com.ugreen.home.rn.platform.update.RNBundleDownloadFileStoreTest.xml",
+    "suite": "com.ugreen.home.rn.platform.update.RNBundleDownloadFileStoreTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "rn-platform/build/test-results/testDebugUnitTest/TEST-com.ugreen.home.rn.platform.update.RNBundleDownloadedArtifactCoordinatorTest.xml",
+    "suite": "com.ugreen.home.rn.platform.update.RNBundleDownloadedArtifactCoordinatorTest",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "rn-platform/build/test-results/testDebugUnitTest/TEST-com.ugreen.home.rn.platform.update.RNBundleDownloadedFileVerifierTest.xml",
+    "suite": "com.ugreen.home.rn.platform.update.RNBundleDownloadedFileVerifierTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "rn-platform/build/test-results/testDebugUnitTest/TEST-com.ugreen.home.rn.platform.update.RNBundleInstallationIdTest.xml",
+    "suite": "com.ugreen.home.rn.platform.update.RNBundleInstallationIdTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "rn-platform/build/test-results/testDebugUnitTest/TEST-com.ugreen.home.rn.platform.update.RNBundleLaunchSessionStoreTest.xml",
+    "suite": "com.ugreen.home.rn.platform.update.RNBundleLaunchSessionStoreTest",
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "rn-platform/build/test-results/testDebugUnitTest/TEST-com.ugreen.home.rn.platform.update.RNBundleManifestCompatibilityVerifierTest.xml",
+    "suite": "com.ugreen.home.rn.platform.update.RNBundleManifestCompatibilityVerifierTest",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "rn-platform/build/test-results/testDebugUnitTest/TEST-com.ugreen.home.rn.platform.update.RNBundleSignatureVerifierTest.xml",
+    "suite": "com.ugreen.home.rn.platform.update.RNBundleSignatureVerifierTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "ugreen-media/player-runtime-android/build/test-results/testDebugUnitTest/TEST-com.ugreen.media.ExampleUnitTest.xml",
+    "suite": "com.ugreen.media.ExampleUnitTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "ugreen-media/player-runtime-android/build/test-results/testDebugUnitTest/TEST-com.ugreen.media.muxer.AovRawSegmentSplitterTest.xml",
+    "suite": "com.ugreen.media.muxer.AovRawSegmentSplitterTest",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "ugreen-media/player-runtime-android/build/test-results/testDebugUnitTest/TEST-com.ugreen.media.muxer.AovVideoTimestampMapperTest.xml",
+    "suite": "com.ugreen.media.muxer.AovVideoTimestampMapperTest",
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "ugreen-media/player-runtime-android/build/test-results/testDebugUnitTest/TEST-com.ugreen.media.muxer.VideoModeClassifierTest.xml",
+    "suite": "com.ugreen.media.muxer.VideoModeClassifierTest",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Android",
+    "report": "ugreen-media/player-runtime-android/build/test-results/testDebugUnitTest/TEST-com.ugreen.media.muxer.VideoSegmentModeTrackerTest.xml",
+    "suite": "com.ugreen.media.muxer.VideoSegmentModeTrackerTest",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Shared@4f36969b",
+    "report": "core/core-util/build/test-results/jvmTest/TEST-com.ugreen.core.util.ZipHelperTest.xml",
+    "suite": "ZipHelperTest[jvm]",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Shared@4f36969b",
+    "report": "core/core-util/build/test-results/jvmTest/TEST-com.ugreen.core.util.ZlibUtilTest.xml",
+    "suite": "ZlibUtilTest[jvm]",
+    "tests": 9,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Shared@4f36969b",
+    "report": "core/core-util/build/test-results/jvmTest/TEST-com.ugreen.core.util.crypto.AesUtilsJceInteropTest.xml",
+    "suite": "AesUtilsJceInteropTest[jvm]",
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Shared@4f36969b",
+    "report": "core/core-util/build/test-results/jvmTest/TEST-com.ugreen.core.util.crypto.AesUtilsTest.xml",
+    "suite": "AesUtilsTest[jvm]",
+    "tests": 9,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Shared@4f36969b",
+    "report": "core/core-util/build/test-results/jvmTest/TEST-com.ugreen.core.util.crypto.AesUtilsVectorsTest.xml",
+    "suite": "AesUtilsVectorsTest[jvm]",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Shared@4f36969b",
+    "report": "core/core-util/build/test-results/jvmTest/TEST-com.ugreen.core.util.crypto.AssetEncryptorTest.xml",
+    "suite": "AssetEncryptorTest[jvm]",
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Shared@4f36969b",
+    "report": "core/core-util/build/test-results/jvmTest/TEST-com.ugreen.core.util.crypto.CrcTest.xml",
+    "suite": "CrcTest[jvm]",
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  {
+    "origin": "Shared@4f36969b",
+    "report": "core/core-util/build/test-results/jvmTest/TEST-com.ugreen.core.util.crypto.Md5Test.xml",
+    "suite": "Md5Test[jvm]",
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  }
+]

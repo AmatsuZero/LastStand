@@ -1,0 +1,50 @@
+Source log: /private/tmp/ugreen-android-architecture-20260914/clean-build.log
+Excerpt only; diagnostic/task lines and tail retained.
+
+> Task :shared-release-1.7.0-9q2u2wrq:build-logic:convention:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:build-logic:convention:compileKotlin UP-TO-DATE
+enableIos=false
+WARNING: The 'commonTest' source directory exists, but android host tests are not enabled. To enable android host tests, add `withHostTest {}` to your android target configuration in the Gradle build file.
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:sample
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :shared-release-1.7.0-9q2u2wrq:ugreen-strings-kmp
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+[Incubating] Problems report is available at: file:///private/tmp/ugreen-android-architecture-20260914/android/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Cannot locate tasks that match ':shared-release-1.7.0-9q2u2wrq:clean' as task 'clean' not found in project ':shared-release-1.7.0-9q2u2wrq'.
+
+* Try:
+> Run gradlew tasks to get a list of available tasks.
+> For more on name expansion, please refer to https://docs.gradle.org/9.4.1/userguide/command_line_interface.html#sec:name_abbreviation in the Gradle documentation.
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 9s
+4 actionable tasks: 4 up-to-date

@@ -1,0 +1,48 @@
+Source log: /private/tmp/ugreen-android-architecture-20260914/projects-matching-branch.log
+Excerpt only; diagnostic/task lines and tail retained.
+
+project ':crash-report-core' - /crash-report/crash-report-core
+project ':crash-report-firebase' - /crash-report/crash-report-firebase
+project ':domain' - /domain
+project ':dsbridge' - /dsbridge
+project ':net' - /net
+project ':permissionx' - /permissionx
+project ':player-core' - /ugreen-media/player-core
+project ':player-feature-ipc' - /ugreen-media/player-feature-ipc
+project ':player-provider-airtc-android' - /ugreen-media/player-provider-airtc-android
+project ':player-provider-ugrtc-android' - /ugreen-media/player-provider-ugrtc-android
+project ':player-runtime-android' - /ugreen-media/player-runtime-android
+project ':player-sdk-android' - /ugreen-media/player-sdk-android
+project ':push-core' - /push/push-core
+project ':push-getui' - /push/push-getui
+project ':push-google' - /push/push-google
+project ':push-honor' - /push/push-honor
+project ':push-huawei' - /push/push-huawei
+project ':push-oppo' - /push/push-oppo
+project ':push-vivo' - /push/push-vivo
+project ':push-xiaomi' - /push/push-xiaomi
+project ':qrcode' - /qrcode
+project ':repository' - /repository
+project ':rn-platform' - /rn-platform
+
+Included builds:
+
++--- Included build ':shared-release-1.7.0-9q2u2wrq'
+\--- Included build ':shared-release-1.7.0-9q2u2wrq:build-logic'
+
+To see a list of the tasks of a project, run gradlew <project-path>:tasks
+For example, try running gradlew :app:tasks
+
+[Incubating] Problems report is available at: file:///private/tmp/ugreen-android-architecture-20260914/android/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1m 5s
+1 actionable task: 1 executed
+real 65.51
+user 76.50
+sys 10.34

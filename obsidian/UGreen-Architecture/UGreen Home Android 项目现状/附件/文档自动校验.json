@@ -1,0 +1,16 @@
+{
+  "at": "2026-09-14T12:28:24.745965+08:00",
+  "topLevelDocuments": 9,
+  "relativeLinksChecked": 56,
+  "sourceReferencesChecked": 203,
+  "mermaidBlocksStaticFenceChecked": 11,
+  "mermaidRendered": false,
+  "actualJUnitCases": 253,
+  "androidPassed": 214,
+  "androidFailed": 2,
+  "sharedPassed": 37,
+  "secretPatternMatches": [],
+  "errors": [],
+  "rerunAfterFinalEdits": true,
+  "finalCheckNotes": "01/02 line corrections and 08 title rechecked after dynamic integration"
+}

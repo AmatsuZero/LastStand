@@ -1,0 +1,144 @@
+{
+  "snapshotAt": "2026-09-14T10:26:00+08:00",
+  "scope": "Read-only pre-research snapshot; no source project files were modified and no builds or tests were run.",
+  "androidProject": {
+    "path": "/Users/daubert/UGreen/ugreen-home",
+    "branch": "release/1.7.0",
+    "upstream": "origin/release/1.7.0",
+    "head": "5543c83e381e8af4676fe3ba22462992928afde6",
+    "headSubject": "feat: 单设备事件页底部虚拟工具栏色系风格处理；",
+    "headCommittedAt": "2026-09-12T18:53:06+08:00",
+    "worktree": {
+      "trackedChanges": [],
+      "untrackedTopLevel": [],
+      "status": "clean"
+    },
+    "build": {
+      "gradleWrapper": "9.4.1 (Tencent mirror)",
+      "agp": "9.2.1",
+      "kotlin": "2.4.0",
+      "compileSdk": 36,
+      "targetSdk": 36,
+      "minSdk": 28,
+      "ndk": "27.0.12077973",
+      "javaTarget": 17,
+      "gradleJvmArgs": "-Xmx4096m -Dfile.encoding=UTF-8"
+    },
+    "sharedCompositeBuild": {
+      "enabled": true,
+      "configuredPath": "../UgreenHome-Shared",
+      "resolvedConfiguredPath": "/Users/daubert/UGreen/UgreenHome-Shared",
+      "configuredPathExists": false,
+      "settingsDefaultPath": "../ugreenhome-shared",
+      "resolvedDefaultPath": "/Users/daubert/UGreen/ugreenhome-shared",
+      "defaultPathExists": false,
+      "impact": "Static configuration finding only: root build.gradle validates the selected path as a directory during Gradle configuration. No original-configuration Gradle invocation was run in this Task 1 snapshot, so this does not claim a reproduced build failure."
+    },
+    "submodules": {
+      "ugreen-media": {
+        "path": "ugreen-media",
+        "configuredBranch": "develop-rn",
+        "head": "0ffe35a3c02dfa5f0b9d21fcece3e7725f7c1d0e",
+        "checkedOutBranch": null,
+        "status": "initialized, detached HEAD, clean",
+        "headSubject": "feat: 新增获取直播区域"
+      }
+    }
+  },
+  "sharedProject": {
+    "path": "/Users/daubert/UGreen/ugreenhome/ugreenhome-shared",
+    "repositoryForm": "Git submodule checkout (gitdir indirection)",
+    "branch": "feature/samzhjiang/explore",
+    "upstream": "origin/feature/samzhjiang/explore",
+    "head": "96785f44747753468fc18a8b07405f695cbfbebb",
+    "headSubject": "fix：统一 airtc-appsdk 与 sample 的 RTCXSDK 版本为 1.6.2.25",
+    "headCommittedAt": "2026-09-08T15:31:51+08:00",
+    "worktree": {
+      "trackedChanges": [],
+      "untrackedTopLevel": [],
+      "nestedSubmoduleOrUntrackedState": "? ugreenhome-strings",
+      "status": "top-level tracked files clean; nested ugreenhome-strings has untracked state"
+    },
+    "build": {
+      "gradleWrapper": "9.4.1 (Tencent mirror)",
+      "agp": "9.2.1",
+      "kotlin": "2.4.0",
+      "sampleAndroidCompileSdk": 36,
+      "sampleAndroidTargetSdk": 36,
+      "sampleAndroidMinSdk": 24,
+      "javaTarget": 17,
+      "gradleJvmArgs": "-Xmx8192m -XX:MaxMetaspaceSize=2048m -Dfile.encoding=UTF-8",
+      "localProperties": {
+        "androidSdkConfigured": true,
+        "iosTargetsEnabled": true,
+        "sdkPath": "[REDACTED_PATH]"
+      }
+    },
+    "submodules": {
+      "ugreenhome-strings": {
+        "path": "ugreenhome-strings",
+        "head": "5df203b28676923977f4757217c55f594c9a54e0",
+        "status": "initialized; no top-level tracked or untracked change reported"
+      }
+    }
+  },
+  "hostEnvironment": {
+    "java": {
+      "pathJavaProbe": {
+        "command": "/usr/bin/java",
+        "vendor": "TencentKonaJDK",
+        "version": "17.0.20+1-LTS",
+        "javaHome": "/opt/homebrew/Cellar/sdkman-cli/5.19.0/libexec/candidates/java/17.0.20-kona",
+        "note": "Observed only as PATH resolution; /usr/libexec/java_home -V reports no Apple-registered Java runtime, so this is not a stable execution-JDK selection."
+      },
+      "plannedVerificationJdk": {
+        "path": "/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home",
+        "vendor": "Eclipse Temurin",
+        "version": "21.0.7+6-LTS",
+        "verifiedExecutable": true,
+        "usedForThisSnapshot": false,
+        "note": "Specified by the lead for subsequent real measurement; no Gradle command was run with it in this Task 1 snapshot."
+      },
+      "appleJavaHomeProbe": "No Java runtime located by /usr/libexec/java_home -V"
+    },
+    "androidSdk": {
+      "environmentVariables": {
+        "ANDROID_HOME": null,
+        "ANDROID_SDK_ROOT": null
+      },
+      "discoveredPath": "/Users/daubert/Library/Android/sdk",
+      "installedPlatforms": [
+        "android-36",
+        "android-37.0"
+      ],
+      "installedBuildTools": [
+        "36.0.0",
+        "37.0.0"
+      ]
+    },
+    "gradleWrapperProbe": {
+      "executed": true,
+      "command": "./gradlew --version",
+      "result": "blocked before Gradle startup: sandbox denied creation of ~/.gradle/wrapper/dists/.../gradle-9.4.1-bin.zip.lck",
+      "note": "This was an environment probe, not a project build or test; it did not enter Gradle configuration."
+    }
+  },
+  "evidence": [
+    "ugreen-home: git status --short --branch; git rev-parse HEAD; git log -1",
+    "ugreenhome-shared: git status --short --branch; git rev-parse HEAD; git log -1",
+    "both gradle/wrapper/gradle-wrapper.properties and gradle/libs.versions.toml",
+    "ugreen-home: build.gradle, gradle.properties, settings.gradle",
+    "ugreenhome-shared: build.gradle.kts, gradle.properties, settings.gradle.kts, sample/sample-android/build.gradle.kts, local.properties",
+    "git submodule status and ugreen-media git status --short --branch"
+  ],
+  "verificationBaseline": {
+    "source": "existing local refs/heads/release/1.7.0 exported from iOS Shared git object database; no original branch checkout",
+    "head": "4f36969b7894df90af09fe9ae3a2797c8cd117ed",
+    "branch": "release/1.7.0",
+    "stringsHead": "313160d89cd6985e9bc7ef3d0a976da233feaa25",
+    "path": "/private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq",
+    "matchingBranchRule": "Android README.md:75-85",
+    "originalIosSharedCheckoutUnchanged": true,
+    "originNote": "local remote-tracking ref matches local branch; no fetch, not a server freshness claim"
+  }
+}

@@ -1,0 +1,50 @@
+Source log: /private/tmp/ugreen-android-architecture-20260914/shared-jvm-tests.log
+Excerpt only; diagnostic/task lines and tail retained.
+
+> Task :build-logic:convention:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :build-logic:convention:compileKotlin UP-TO-DATE
+WARNING: The 'commonTest' source directory exists, but android host tests are not enabled. To enable android host tests, add `withHostTest {}` to your android target configuration in the Gradle build file.
+w: ⚠️ Unused Kotlin Source Sets
+The Kotlin source set commonTest was configured but not added to any Kotlin compilation.
+Solution: You can add a source set to a target's compilation by connecting it with the compilation's default source set using 'dependsOn'.
+See https://kotl.in/connecting-source-sets
+
+
+> Configure project :sample
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Configure project :ugreen-strings-kmp
+cocoaPodsInstalled=true
+xcodeToolsInstalled=true
+iosToolchainAvailable=true
+explicitEnableIos=false
+enableIos=false
+
+> Task :core-util:kmpPartiallyResolvedDependenciesChecker
+> Task :core-util:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-util:jvmProcessResources NO-SOURCE
+> Task :core-util:processJvmMainResources SKIPPED
+> Task :core-util:jvmTestProcessResources NO-SOURCE
+> Task :core-util:processJvmTestResources SKIPPED
+
+> Task :core-util:compileKotlinJvm
+w: file:///private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq/core/core-util/src/commonMain/kotlin/com/ugreen/core/paging/MultiSourcePagingStrategy.kt:317:26 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq/core/core-util/src/commonMain/kotlin/com/ugreen/core/util/MappedStateFlow.kt:15:5 This class or interface requires opt-in to be implemented: Inheriting from this kotlinx.coroutines API is unstable. Either new methods may be added in the future, which would break the inheritance, or correctly inheriting from it requires fulfilling contracts that may change in the future.
+
+> Task :core-util:compileJvmMainJava NO-SOURCE
+> Task :core-util:jvmMainClasses
+> Task :core-util:jvmJar
+> Task :core-util:compileTestKotlinJvm
+> Task :core-util:compileJvmTestJava NO-SOURCE
+> Task :core-util:jvmTestClasses
+> Task :core-util:jvmTest
+
+[Incubating] Problems report is available at: file:///private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 14s
+9 actionable tasks: 5 executed, 4 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.1/userguide/configuration_cache_enabling.html

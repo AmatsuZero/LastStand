@@ -1,0 +1,352 @@
+Source log: /private/tmp/ugreen-android-architecture-20260914/android-unit-tests.log
+Excerpt only; diagnostic/task lines and tail retained.
+
+> Task :shared-release-1.7.0-9q2u2wrq:build-logic:convention:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:build-logic:convention:compileKotlin UP-TO-DATE
+> Task :shared-release-1.7.0-9q2u2wrq:core-util:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-kv:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-logger:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-net:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-ui:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:airtc-appsdk:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-database:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:device-thing-model:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:domain-product:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:domain-env:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-mvi:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-navigation:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-secure-package:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:feature-auth:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:feature-playback:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:feature-third-party-services:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-player:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:feature-home-management:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:ugreen-strings-kmp:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:feature-device-event:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:device-biz:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:app-shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:feature-ota:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-util:compileDebugKotlin UP-TO-DATE
+> Task :core-log:compileDebugKotlin UP-TO-DATE
+> Task :permissionx:compileDebugKotlin UP-TO-DATE
+> Task :common:compileDebugKotlin UP-TO-DATE
+> Task :core-ui:compileDebugKotlin UP-TO-DATE
+> Task :calendarview:compileDebugKotlin NO-SOURCE
+> Task :core-device:compileDebugKotlin UP-TO-DATE
+> Task :core-device-setup:compileDebugKotlin UP-TO-DATE
+> Task :core-messaging:compileDebugKotlin UP-TO-DATE
+> Task :domain:compileDebugKotlin UP-TO-DATE
+> Task :net:compileDebugKotlin UP-TO-DATE
+> Task :player-core:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :player-runtime-android:compileDebugKotlin UP-TO-DATE
+> Task :player-provider-airtc-android:compileDebugKotlin UP-TO-DATE
+> Task :player-sdk-android:compileDebugKotlin NO-SOURCE
+> Task :qrcode:compileDebugKotlin UP-TO-DATE
+> Task :bluetooth:compileDebugKotlin UP-TO-DATE
+> Task :repository:compileDebugKotlin UP-TO-DATE
+> Task :base:kspDebugKotlin UP-TO-DATE
+> Task :base:compileDebugKotlin UP-TO-DATE
+> Task :camera:compileDebugKotlin UP-TO-DATE
+> Task :crash-report-core:compileDebugKotlin UP-TO-DATE
+> Task :crash-report-bugly:compileDebugKotlin UP-TO-DATE
+> Task :dsbridge:compileDebugKotlin NO-SOURCE
+> Task :player-feature-ipc:compileDebugKotlin UP-TO-DATE
+> Task :push-core:compileDebugKotlin UP-TO-DATE
+> Task :push-getui:compileDebugKotlin UP-TO-DATE
+> Task :rn-platform:compileDebugKotlin UP-TO-DATE
+> Task :app:preDomesticDebugUnitTestBuild
+> Task :app:javaPreCompileDomesticDebugUnitTest
+> Task :base:preDebugUnitTestBuild
+> Task :base:kspDebugUnitTestKotlin NO-SOURCE
+> Task :bluetooth:preDebugUnitTestBuild UP-TO-DATE
+> Task :base:javaPreCompileDebugUnitTest
+> Task :calendarview:preDebugUnitTestBuild UP-TO-DATE
+> Task :bluetooth:javaPreCompileDebugUnitTest
+> Task :camera:preDebugUnitTestBuild UP-TO-DATE
+> Task :calendarview:javaPreCompileDebugUnitTest
+> Task :bluetooth:generateDebugUnitTestStubRFile
+> Task :calendarview:generateDebugUnitTestStubRFile
+> Task :base:generateDebugUnitTestStubRFile
+> Task :base:compileDebugUnitTestKotlin NO-SOURCE
+> Task :base:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :base:processDebugUnitTestJavaRes NO-SOURCE
+> Task :base:testDebugUnitTest NO-SOURCE
+> Task :camera:generateDebugUnitTestStubRFile
+> Task :calendarview:compileDebugUnitTestKotlin NO-SOURCE
+> Task :calendarview:compileDebugUnitTestJavaWithJavac
+> Task :calendarview:processDebugUnitTestJavaRes NO-SOURCE
+> Task :calendarview:testDebugUnitTest
+> Task :bluetooth:compileDebugUnitTestKotlin
+> Task :bluetooth:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :bluetooth:processDebugUnitTestJavaRes
+> Task :camera:compileDebugUnitTestKotlin
+> Task :bluetooth:testDebugUnitTest
+> Task :camera:javaPreCompileDebugUnitTest
+> Task :camera:processDebugUnitTestJavaRes
+> Task :camera:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :camera:testDebugUnitTest
+> Task :common:preDebugUnitTestBuild UP-TO-DATE
+> Task :core-device:preDebugUnitTestBuild UP-TO-DATE
+> Task :common:javaPreCompileDebugUnitTest
+> Task :core-device-setup:preDebugUnitTestBuild UP-TO-DATE
+> Task :core-device:javaPreCompileDebugUnitTest
+> Task :core-log:preDebugUnitTestBuild UP-TO-DATE
+> Task :core-device-setup:javaPreCompileDebugUnitTest
+> Task :core-messaging:preDebugUnitTestBuild UP-TO-DATE
+> Task :core-log:javaPreCompileDebugUnitTest
+> Task :core-device:generateDebugUnitTestStubRFile
+> Task :common:generateDebugUnitTestStubRFile
+> Task :core-device-setup:generateDebugUnitTestStubRFile
+> Task :core-log:generateDebugUnitTestStubRFile
+> Task :core-messaging:generateDebugUnitTestStubRFile
+> Task :common:compileDebugUnitTestKotlin NO-SOURCE
+> Task :common:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :common:processDebugUnitTestJavaRes NO-SOURCE
+> Task :common:testDebugUnitTest NO-SOURCE
+> Task :core-log:compileDebugUnitTestKotlin NO-SOURCE
+> Task :core-log:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :core-log:processDebugUnitTestJavaRes NO-SOURCE
+> Task :core-log:testDebugUnitTest NO-SOURCE
+> Task :core-ui:preDebugUnitTestBuild UP-TO-DATE
+> Task :core-messaging:javaPreCompileDebugUnitTest
+> Task :core-util:preDebugUnitTestBuild UP-TO-DATE
+> Task :core-ui:javaPreCompileDebugUnitTest
+> Task :crash-report-bugly:preDebugUnitTestBuild UP-TO-DATE
+> Task :core-util:javaPreCompileDebugUnitTest
+> Task :crash-report-core:preDebugUnitTestBuild UP-TO-DATE
+> Task :crash-report-bugly:javaPreCompileDebugUnitTest
+> Task :crash-report-core:javaPreCompileDebugUnitTest
+> Task :core-util:generateDebugUnitTestStubRFile
+> Task :crash-report-bugly:generateDebugUnitTestStubRFile
+> Task :crash-report-core:generateDebugUnitTestStubRFile
+> Task :core-device:compileDebugUnitTestKotlin
+> Task :core-ui:generateDebugUnitTestStubRFile
+> Task :core-device:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :core-device:processDebugUnitTestJavaRes
+> Task :core-messaging:compileDebugUnitTestKotlin
+> Task :app:kspDomesticDebugKotlin
+> Task :core-device:testDebugUnitTest
+> Task :core-util:compileDebugUnitTestKotlin
+> Task :core-device-setup:compileDebugUnitTestKotlin
+> Task :core-device-setup:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :core-device-setup:processDebugUnitTestJavaRes
+> Task :core-device-setup:testDebugUnitTest
+> Task :core-messaging:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :core-messaging:processDebugUnitTestJavaRes
+> Task :core-messaging:testDebugUnitTest
+> Task :core-util:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :core-util:processDebugUnitTestJavaRes
+> Task :core-ui:compileDebugUnitTestKotlin
+> Task :core-util:testDebugUnitTest
+> Task :core-ui:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :core-ui:processDebugUnitTestJavaRes
+> Task :core-ui:testDebugUnitTest
+> Task :crash-report-bugly:compileDebugUnitTestKotlin NO-SOURCE
+> Task :crash-report-bugly:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :crash-report-bugly:processDebugUnitTestJavaRes NO-SOURCE
+> Task :crash-report-bugly:testDebugUnitTest NO-SOURCE
+> Task :crash-report-core:compileDebugUnitTestKotlin NO-SOURCE
+> Task :crash-report-core:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :crash-report-core:processDebugUnitTestJavaRes NO-SOURCE
+> Task :crash-report-core:testDebugUnitTest NO-SOURCE
+> Task :crash-report-firebase:preDebugUnitTestBuild UP-TO-DATE
+> Task :domain:preDebugUnitTestBuild UP-TO-DATE
+> Task :crash-report-firebase:javaPreCompileDebugUnitTest
+> Task :dsbridge:preDebugUnitTestBuild UP-TO-DATE
+> Task :domain:javaPreCompileDebugUnitTest
+> Task :dsbridge:javaPreCompileDebugUnitTest
+> Task :net:preDebugUnitTestBuild UP-TO-DATE
+> Task :dsbridge:generateDebugUnitTestStubRFile
+> Task :domain:generateDebugUnitTestStubRFile
+> Task :net:generateDebugUnitTestStubRFile
+> Task :crash-report-firebase:generateDebugUnitTestStubRFile
+> Task :crash-report-firebase:compileDebugKotlin
+> Task :crash-report-firebase:compileDebugUnitTestKotlin NO-SOURCE
+> Task :crash-report-firebase:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :crash-report-firebase:processDebugUnitTestJavaRes NO-SOURCE
+> Task :crash-report-firebase:testDebugUnitTest NO-SOURCE
+> Task :dsbridge:compileDebugUnitTestKotlin NO-SOURCE
+> Task :dsbridge:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :dsbridge:processDebugUnitTestJavaRes NO-SOURCE
+> Task :dsbridge:testDebugUnitTest NO-SOURCE
+> Task :permissionx:preDebugUnitTestBuild UP-TO-DATE
+> Task :net:javaPreCompileDebugUnitTest
+> Task :player-feature-ipc:preDebugUnitTestBuild UP-TO-DATE
+> Task :permissionx:javaPreCompileDebugUnitTest
+> Task :player-provider-airtc-android:preDebugUnitTestBuild UP-TO-DATE
+> Task :player-feature-ipc:javaPreCompileDebugUnitTest
+> Task :permissionx:generateDebugUnitTestStubRFile
+> Task :permissionx:compileDebugUnitTestKotlin NO-SOURCE
+> Task :permissionx:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :permissionx:processDebugUnitTestJavaRes NO-SOURCE
+> Task :permissionx:testDebugUnitTest NO-SOURCE
+> Task :player-provider-airtc-android:javaPreCompileDebugUnitTest
+> Task :player-feature-ipc:generateDebugUnitTestStubRFile
+> Task :player-provider-airtc-android:generateDebugUnitTestStubRFile
+> Task :player-feature-ipc:compileDebugUnitTestKotlin NO-SOURCE
+> Task :player-feature-ipc:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :player-feature-ipc:processDebugUnitTestJavaRes NO-SOURCE
+> Task :player-feature-ipc:testDebugUnitTest NO-SOURCE
+> Task :player-provider-airtc-android:compileDebugUnitTestKotlin NO-SOURCE
+> Task :player-provider-airtc-android:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :player-provider-airtc-android:processDebugUnitTestJavaRes NO-SOURCE
+> Task :player-provider-airtc-android:testDebugUnitTest NO-SOURCE
+> Task :player-provider-ugrtc-android:preDebugUnitTestBuild UP-TO-DATE
+> Task :player-runtime-android:preDebugUnitTestBuild UP-TO-DATE
+> Task :player-provider-ugrtc-android:javaPreCompileDebugUnitTest
+> Task :player-sdk-android:preDebugUnitTestBuild UP-TO-DATE
+> Task :player-runtime-android:javaPreCompileDebugUnitTest
+> Task :player-runtime-android:generateDebugUnitTestStubRFile
+> Task :player-sdk-android:generateDebugUnitTestStubRFile
+> Task :player-provider-ugrtc-android:generateDebugUnitTestStubRFile
+> Task :player-sdk-android:compileDebugUnitTestKotlin NO-SOURCE
+> Task :player-sdk-android:javaPreCompileDebugUnitTest
+> Task :player-sdk-android:processDebugUnitTestJavaRes NO-SOURCE
+> Task :player-sdk-android:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :player-sdk-android:testDebugUnitTest NO-SOURCE
+> Task :push-core:preDebugUnitTestBuild UP-TO-DATE
+> Task :push-getui:preDebugUnitTestBuild UP-TO-DATE
+> Task :push-core:javaPreCompileDebugUnitTest
+> Task :push-getui:javaPreCompileDebugUnitTest
+> Task :push-core:generateDebugUnitTestStubRFile
+> Task :push-core:compileDebugUnitTestKotlin NO-SOURCE
+> Task :push-core:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :push-core:processDebugUnitTestJavaRes NO-SOURCE
+> Task :push-core:testDebugUnitTest NO-SOURCE
+> Task :push-getui:generateDebugUnitTestStubRFile
+> Task :push-getui:compileDebugUnitTestKotlin NO-SOURCE
+> Task :push-getui:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :push-getui:processDebugUnitTestJavaRes NO-SOURCE
+> Task :push-getui:testDebugUnitTest NO-SOURCE
+> Task :push-google:preDebugUnitTestBuild UP-TO-DATE
+> Task :push-google:javaPreCompileDebugUnitTest
+> Task :net:compileDebugUnitTestKotlin
+> Task :player-provider-ugrtc-android:compileDebugKotlin
+> Task :net:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :net:processDebugUnitTestJavaRes
+> Task :push-google:generateDebugUnitTestStubRFile
+> Task :net:testDebugUnitTest
+> Task :player-provider-ugrtc-android:compileDebugUnitTestKotlin NO-SOURCE
+> Task :player-provider-ugrtc-android:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :player-runtime-android:compileDebugUnitTestKotlin
+> Task :domain:compileDebugUnitTestKotlin
+> Task :player-provider-ugrtc-android:processDebugUnitTestJavaRes NO-SOURCE
+> Task :domain:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :domain:processDebugUnitTestJavaRes
+> Task :push-google:compileDebugKotlin
+> Task :domain:testDebugUnitTest
+> Task :player-provider-ugrtc-android:testDebugUnitTest NO-SOURCE
+> Task :player-runtime-android:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :player-runtime-android:processDebugUnitTestJavaRes
+> Task :player-runtime-android:testDebugUnitTest
+> Task :push-google:compileDebugUnitTestKotlin NO-SOURCE
+> Task :push-google:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :push-google:processDebugUnitTestJavaRes NO-SOURCE
+> Task :push-google:testDebugUnitTest NO-SOURCE
+> Task :push-honor:preDebugUnitTestBuild UP-TO-DATE
+> Task :push-honor:javaPreCompileDebugUnitTest
+> Task :push-huawei:preDebugUnitTestBuild UP-TO-DATE
+> Task :push-huawei:javaPreCompileDebugUnitTest
+> Task :push-honor:generateDebugUnitTestStubRFile
+> Task :push-oppo:preDebugUnitTestBuild UP-TO-DATE
+> Task :push-oppo:javaPreCompileDebugUnitTest
+> Task :push-huawei:generateDebugUnitTestStubRFile
+> Task :push-vivo:preDebugUnitTestBuild UP-TO-DATE
+> Task :push-vivo:javaPreCompileDebugUnitTest
+> Task :push-oppo:generateDebugUnitTestStubRFile
+> Task :push-xiaomi:preDebugUnitTestBuild UP-TO-DATE
+> Task :push-vivo:generateDebugUnitTestStubRFile
+> Task :push-xiaomi:javaPreCompileDebugUnitTest
+> Task :qrcode:preDebugUnitTestBuild UP-TO-DATE
+> Task :qrcode:generateDebugUnitTestStubRFile
+> Task :push-xiaomi:generateDebugUnitTestStubRFile
+> Task :repository:preDebugUnitTestBuild UP-TO-DATE
+> Task :qrcode:javaPreCompileDebugUnitTest
+> Task :rn-platform:preDebugUnitTestBuild
+> Task :repository:javaPreCompileDebugUnitTest
+> Task :push-honor:compileDebugKotlin
+> Task :rn-platform:javaPreCompileDebugUnitTest
+> Task :push-honor:compileDebugUnitTestKotlin NO-SOURCE
+> Task :push-honor:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :push-honor:processDebugUnitTestJavaRes NO-SOURCE
+> Task :push-honor:testDebugUnitTest NO-SOURCE
+> Task :repository:generateDebugUnitTestStubRFile
+> Task :push-huawei:compileDebugKotlin
+> Task :rn-platform:generateDebugUnitTestStubRFile
+> Task :push-vivo:compileDebugKotlin
+> Task :push-oppo:compileDebugKotlin
+> Task :push-huawei:compileDebugUnitTestKotlin NO-SOURCE
+> Task :push-huawei:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :push-huawei:processDebugUnitTestJavaRes NO-SOURCE
+> Task :push-huawei:testDebugUnitTest NO-SOURCE
+> Task :qrcode:compileDebugUnitTestKotlin
+> Task :push-oppo:compileDebugUnitTestKotlin NO-SOURCE
+> Task :push-oppo:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :push-oppo:processDebugUnitTestJavaRes NO-SOURCE
+> Task :push-oppo:testDebugUnitTest NO-SOURCE
+> Task :push-vivo:compileDebugUnitTestKotlin NO-SOURCE
+> Task :push-vivo:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :push-vivo:processDebugUnitTestJavaRes NO-SOURCE
+> Task :push-vivo:testDebugUnitTest NO-SOURCE
+> Task :qrcode:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :qrcode:processDebugUnitTestJavaRes
+> Task :push-xiaomi:compileDebugKotlin
+> Task :qrcode:testDebugUnitTest
+> Task :push-xiaomi:compileDebugUnitTestKotlin NO-SOURCE
+> Task :push-xiaomi:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :push-xiaomi:processDebugUnitTestJavaRes NO-SOURCE
+> Task :push-xiaomi:testDebugUnitTest NO-SOURCE
+> Task :repository:compileDebugUnitTestKotlin
+> Task :repository:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :repository:processDebugUnitTestJavaRes
+> Task :repository:testDebugUnitTest
+> Task :rn-platform:compileDebugUnitTestKotlin
+> Task :rn-platform:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :rn-platform:processDebugUnitTestJavaRes
+> Task :rn-platform:testDebugUnitTest
+> Task :app:compileDomesticDebugKotlin
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/user/captcha/CaptchaWallActivity.kt:118:28 Unnecessary safe call on a non-null receiver of type 'CaptchaWallActivity.CaptchaJsPayload'.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/user/captcha/CaptchaWallActivity.kt:126:41 Unnecessary non-null assertion (!!) on a non-null receiver of type 'CaptchaWallActivity.CaptchaJsPayload'.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/user/captcha/CaptchaWallActivity.kt:126:50 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/user/captcha/CaptchaWallActivity.kt:127:50 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/user/ui/ConnectUsActivity.kt:51:37 No cast needed.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/webview/UnifiedAccountWebViewActivity.kt:101:30 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+
+> Task :app:compileDomesticDebugJavaWithJavac
+> Task :app:processDomesticDebugJavaRes UP-TO-DATE
+> Task :app:bundleDomesticDebugClassesToCompileJar
+> Task :app:bundleDomesticDebugClassesToRuntimeJar
+> Task :app:kspDomesticDebugUnitTestKotlin
+> Task :app:compileDomesticDebugUnitTestKotlin
+> Task :app:compileDomesticDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processDomesticDebugUnitTestJavaRes
+
+> Task :app:testDomesticDebugUnitTest FAILED
+
+IpcSettingPageUiTest > every known IPC variant has an explicit setting profile FAILED
+    java.lang.AssertionError at IpcSettingPageUiTest.kt:50
+
+OtaCmpDebugScenariosTest > 场景15和16的IPC终态均发生在AiBase成功之后 FAILED
+    java.lang.AssertionError at OtaCmpDebugScenariosTest.kt:45
+
+70 tests completed, 2 failed
+
+[Incubating] Problems report is available at: file:///private/tmp/ugreen-android-architecture-20260914/android/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:testDomesticDebugUnitTest'.
+> There were failing tests. See the report at: file:///private/tmp/ugreen-android-architecture-20260914/android/app/build/reports/tests/testDomesticDebugUnitTest/index.html
+
+* Try:
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 40s
+947 actionable tasks: 280 executed, 667 up-to-date

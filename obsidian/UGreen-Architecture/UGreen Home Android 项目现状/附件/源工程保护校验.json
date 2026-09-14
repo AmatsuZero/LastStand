@@ -1,0 +1,34 @@
+{
+  "android": {
+    "path": "/Users/daubert/UGreen/ugreen-home",
+    "head": "5543c83e381e8af4676fe3ba22462992928afde6",
+    "branch": "release/1.7.0",
+    "status": ""
+  },
+  "sharedOriginal": {
+    "path": "/Users/daubert/UGreen/ugreenhome/ugreenhome-shared",
+    "head": "96785f44747753468fc18a8b07405f695cbfbebb",
+    "branch": "feature/samzhjiang/explore",
+    "status": "? ugreenhome-strings"
+  },
+  "media": {
+    "path": "/Users/daubert/UGreen/ugreen-home/ugreen-media",
+    "head": "0ffe35a3c02dfa5f0b9d21fcece3e7725f7c1d0e",
+    "branch": "",
+    "status": ""
+  },
+  "stringsOriginal": {
+    "path": "/Users/daubert/UGreen/ugreenhome/ugreenhome-shared/ugreenhome-strings",
+    "head": "5df203b28676923977f4757217c55f594c9a54e0",
+    "branch": "",
+    "status": "?? generated/ios/.swiftpm/xcode/xcuserdata/daubert.xcuserdatad/"
+  },
+  "note": "Original Shared branch restored to feature/samzhjiang/explore; nested strings pointer restored to recorded 5df203b2. Existing nested generated/untracked state preserved.",
+  "comparison": {
+    "androidHeadAndWorktreeMatchInitial": true,
+    "mediaHeadAndWorktreeMatchInitial": true,
+    "sharedHeadBranchAndStatusMatchInitialAfterApprovedRestoration": true,
+    "stringsHeadMatchInitialAfterApprovedRestoration": true,
+    "causality": "The intervening original-worktree change was observed, not attributed to the isolated build. Approved git switch/checkout performed only for restoration; preexisting untracked content retained."
+  }
+}

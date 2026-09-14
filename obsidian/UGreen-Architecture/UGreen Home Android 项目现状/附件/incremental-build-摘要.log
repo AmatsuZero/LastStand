@@ -1,0 +1,103 @@
+Source log: /private/tmp/ugreen-android-architecture-20260914/incremental-build.log
+Excerpt only; diagnostic/task lines and tail retained.
+
+> Task :shared-release-1.7.0-9q2u2wrq:build-logic:convention:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:build-logic:convention:compileKotlin UP-TO-DATE
+> Task :shared-release-1.7.0-9q2u2wrq:core-util:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-kv:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-logger:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-net:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-ui:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:airtc-appsdk:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-database:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:device-thing-model:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:domain-env:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:domain-product:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-secure-package:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-navigation:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-mvi:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:feature-home-management:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:ugreen-strings-kmp:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:feature-playback:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:app-shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-player:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:feature-auth:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:feature-device-event:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:feature-ota:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:feature-third-party-services:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:device-biz:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core-util:compileDebugKotlin UP-TO-DATE
+> Task :core-log:compileDebugKotlin UP-TO-DATE
+> Task :permissionx:compileDebugKotlin UP-TO-DATE
+> Task :common:compileDebugKotlin UP-TO-DATE
+> Task :core-ui:compileDebugKotlin UP-TO-DATE
+> Task :calendarview:compileDebugKotlin NO-SOURCE
+> Task :core-device:compileDebugKotlin UP-TO-DATE
+> Task :core-device-setup:compileDebugKotlin UP-TO-DATE
+> Task :core-messaging:compileDebugKotlin UP-TO-DATE
+> Task :domain:compileDebugKotlin UP-TO-DATE
+> Task :net:compileDebugKotlin UP-TO-DATE
+> Task :player-core:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :player-runtime-android:compileDebugKotlin UP-TO-DATE
+> Task :player-provider-airtc-android:compileDebugKotlin UP-TO-DATE
+> Task :player-sdk-android:compileDebugKotlin NO-SOURCE
+> Task :qrcode:compileDebugKotlin UP-TO-DATE
+> Task :bluetooth:compileDebugKotlin UP-TO-DATE
+> Task :repository:compileDebugKotlin UP-TO-DATE
+> Task :base:kspDebugKotlin UP-TO-DATE
+> Task :base:compileDebugKotlin UP-TO-DATE
+> Task :camera:compileDebugKotlin UP-TO-DATE
+> Task :crash-report-core:compileDebugKotlin UP-TO-DATE
+> Task :crash-report-bugly:compileDebugKotlin UP-TO-DATE
+> Task :dsbridge:compileDebugKotlin NO-SOURCE
+> Task :player-feature-ipc:compileDebugKotlin UP-TO-DATE
+> Task :push-core:compileDebugKotlin UP-TO-DATE
+> Task :push-getui:compileDebugKotlin UP-TO-DATE
+> Task :rn-platform:compileDebugKotlin UP-TO-DATE
+> Task :app:kspDomesticDebugKotlin
+> Task :app:compileDomesticDebugKotlin
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/base/AppInitializationManager.kt:388:57 Elvis operator (?:) always returns the left operand of non-nullable type 'String'.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/base/AppInitializationManager.kt:397:9 This is a delicate API and its use requires care. Make sure you fully read and understand documentation of the declaration that is marked as a delicate API.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/base/MyApplication.kt:162:35 'class ReactNativeHost : Any' is deprecated. Deprecated in Java.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/base/MyApplication.kt:175:26 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/base/MyApplication.kt:180:18 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/dev/FirmwareUpgradeActivity.kt:1168:16 'var navigationBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/dev/OtaUpgradeHostActivity.kt:122:16 'var navigationBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/dev/share/PlaybackAndEventActivity.kt:617:39 No cast needed.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/dev/share/PlaybackAndEventActivity.kt:1309:62 No cast needed.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/face/FaceDetectFragment.kt:52:25 'fun bundleOf(vararg pairs: Pair<String, Any?>): Bundle' is deprecated. This method does not provide type safety at compile time. Use the platform `Bundle` class directly instead.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/face/FaceDetectFragment.kt:74:36 'fun <T : Parcelable!> getParcelable(p0: String?): T?' is deprecated. Deprecated in Java.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/fragment/live/BaseEventListFragment.kt:952:52 Unnecessary safe call on a non-null receiver of type 'String'.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/fragment/live/BaseEventListFragment.kt:2011:49 Redundant call of conversion method.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/fragment/live/BaseEventListFragment.kt:2036:65 Redundant call of conversion method.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/player/IpcPlayerZoneFragment.kt:1118:53 Elvis operator (?:) always returns the left operand of non-nullable type 'Device.IPC'.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/user/captcha/CaptchaWallActivity.kt:118:28 Unnecessary safe call on a non-null receiver of type 'CaptchaWallActivity.CaptchaJsPayload'.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/user/captcha/CaptchaWallActivity.kt:126:41 Unnecessary non-null assertion (!!) on a non-null receiver of type 'CaptchaWallActivity.CaptchaJsPayload'.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/user/captcha/CaptchaWallActivity.kt:126:50 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/user/captcha/CaptchaWallActivity.kt:127:50 Unnecessary non-null assertion (!!) on a non-null receiver of type 'String'.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/user/ui/ConnectUsActivity.kt:51:37 No cast needed.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/util/MediaStoreSaver.kt:199:27 'enum entry WEBP: Bitmap.CompressFormat' is deprecated. Deprecated in Java.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/webview/UnifiedAccountWebViewActivity.kt:101:30 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+
+> Task :app:compileDomesticDebugJavaWithJavac
+> Task :app:processDomesticDebugJavaRes UP-TO-DATE
+> Task :app:mergeDomesticDebugJavaResource UP-TO-DATE
+> Task :app:dexBuilderDomesticDebug
+> Task :app:mergeProjectDexDomesticDebug
+> Task :app:packageDomesticDebug
+> Task :app:createDomesticDebugApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleDomesticDebug
+
+> Task :app:copyRenamedApkDomesticDebug
+APK copied: /private/tmp/ugreen-android-architecture-20260914/android/app/build/outputs/dist/domesticDebug/UgreenHome_cn_v1.0.6.1_202609141135_debug.apk
+
+[Incubating] Problems report is available at: file:///private/tmp/ugreen-android-architecture-20260914/android/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 32s
+915 actionable tasks: 47 executed, 868 up-to-date

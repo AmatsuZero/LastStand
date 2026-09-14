@@ -1,0 +1,55 @@
+{
+  "capturedAt": "2026-09-14T11:24:36.112145+08:00",
+  "os": {
+    "exitCode": 0,
+    "stdout": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.2\nBuildVersion:\t\t25G83",
+    "stderr": ""
+  },
+  "cpu": {
+    "exitCode": 1,
+    "stdout": "",
+    "stderr": "sysctl: sysctl fmt -1 1024 1: Operation not permitted"
+  },
+  "memoryBytes": {
+    "exitCode": 1,
+    "stdout": "",
+    "stderr": "sysctl: sysctl fmt -1 1024 1: Operation not permitted"
+  },
+  "java": {
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": "openjdk version \"21.0.7\" 2025-04-15 LTS\nOpenJDK Runtime Environment Temurin-21.0.7+6 (build 21.0.7+6-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.7+6 (build 21.0.7+6-LTS, mixed mode, sharing)"
+  },
+  "sdk": "/Users/daubert/Library/Android/sdk",
+  "jdkHome": "/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home",
+  "androidSourceHead": "5543c83e381e8af4676fe3ba22462992928afde6",
+  "shared": {
+    "source": "existing local refs/heads/release/1.7.0 exported from iOS Shared git object database; no original branch checkout",
+    "head": "4f36969b7894df90af09fe9ae3a2797c8cd117ed",
+    "branch": "release/1.7.0",
+    "stringsHead": "313160d89cd6985e9bc7ef3d0a976da233feaa25",
+    "path": "/private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq",
+    "matchingBranchRule": "Android README.md:75-85",
+    "originalIosSharedCheckoutUnchanged": true,
+    "originNote": "local remote-tracking ref matches local branch; no fetch, not a server freshness claim"
+  },
+  "gradleUserHome": "/Users/daubert/.gradle",
+  "gradleInitScripts": [
+    "aliyun-mirror.gradle"
+  ],
+  "cacheBoundary": "Fresh copied source trees, original project .gradle/build caches excluded. Existing Gradle user cache and configured init scripts reused; global mirror rewrite observed. Not a dependency-cold benchmark.",
+  "isolation": {
+    "removedSensitiveFiles": [
+      "android/push-keys.properties",
+      "android/captcha-keys.properties",
+      "android/app/ugreen-home.keystore"
+    ],
+    "symlinksToReview": [],
+    "adjustments": [
+      "Android signingConfigs removed; all buildTypes unsigned",
+      "local.properties sets existing SDK and disables Shared iOS targets",
+      "Shared selected via -P; original configurations unchanged"
+    ],
+    "javaHome": "/Users/daubert/.gradle/jdks/eclipse_adoptium-21-aarch64-os_x.2/jdk-21.0.7+6/Contents/Home"
+  }
+}

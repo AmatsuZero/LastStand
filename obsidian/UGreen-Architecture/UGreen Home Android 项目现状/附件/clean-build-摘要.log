@@ -1,0 +1,140 @@
+Source log: /private/tmp/ugreen-android-architecture-20260914/clean-build-corrected.log
+Excerpt only; diagnostic/task lines and tail retained.
+
+> Task :shared-release-1.7.0-9q2u2wrq:build-logic:convention:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:build-logic:convention:compileKotlin
+> Task :shared-release-1.7.0-9q2u2wrq:core-util:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-kv:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-logger:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-net:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-ui:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:airtc-appsdk:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-database:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:device-thing-model:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:domain-product:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:domain-env:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-mvi:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-navigation:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:feature-home-management:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:ugreen-strings-kmp:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:feature-ota:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:core-player:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:feature-third-party-services:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:feature-device-event:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :app:clean
+> Task :shared-release-1.7.0-9q2u2wrq:core-secure-package:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:device-biz:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:feature-auth:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :base:clean
+> Task :shared-release-1.7.0-9q2u2wrq:app-shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :shared-release-1.7.0-9q2u2wrq:feature-playback:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :bluetooth:clean
+> Task :calendarview:clean
+> Task :camera:clean
+> Task :common:clean
+> Task :core-device:clean
+> Task :core-device-setup:clean
+> Task :core-log:clean
+> Task :core-messaging:clean
+> Task :core-ui:clean
+> Task :core-util:clean
+> Task :crash-report-bugly:clean
+> Task :crash-report-core:clean
+> Task :crash-report-firebase:clean
+> Task :domain:clean
+> Task :dsbridge:clean
+> Task :net:clean
+> Task :permissionx:clean
+> Task :player-core:clean
+> Task :player-feature-ipc:clean
+> Task :player-provider-airtc-android:clean
+> Task :player-provider-ugrtc-android:clean
+> Task :player-runtime-android:clean
+> Task :player-sdk-android:clean
+> Task :push-core:clean
+> Task :push-getui:clean
+> Task :push-google:clean
+> Task :push-honor:clean
+> Task :push-huawei:clean
+> Task :push-oppo:clean
+> Task :push-vivo:clean
+> Task :push-xiaomi:clean
+> Task :qrcode:clean
+> Task :repository:clean
+> Task :rn-platform:clean
+> Task :core-ui:lint:clean UP-TO-DATE
+> Task :player-core:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :dsbridge:compileDebugKotlin NO-SOURCE
+> Task :camera:compileDebugKotlin
+> Task :qrcode:compileDebugKotlin
+> Task :permissionx:compileDebugKotlin
+> Task :core-util:compileDebugKotlin
+> Task :core-log:compileDebugKotlin
+> Task :core-device-setup:compileDebugKotlin
+> Task :crash-report-core:compileDebugKotlin
+> Task :core-messaging:compileDebugKotlin
+> Task :core-device:compileDebugKotlin
+> Task :push-core:compileDebugKotlin
+> Task :crash-report-bugly:compileDebugKotlin
+> Task :push-getui:compileDebugKotlin
+> Task :common:compileDebugKotlin
+> Task :bluetooth:compileDebugKotlin
+> Task :player-runtime-android:compileDebugKotlin
+> Task :domain:compileDebugKotlin
+> Task :player-provider-airtc-android:compileDebugKotlin
+> Task :player-sdk-android:compileDebugKotlin NO-SOURCE
+> Task :player-feature-ipc:compileDebugKotlin
+> Task :core-ui:compileDebugKotlin
+> Task :calendarview:compileDebugKotlin NO-SOURCE
+> Task :net:compileDebugKotlin
+> Task :rn-platform:compileDebugKotlin
+> Task :repository:compileDebugKotlin
+> Task :base:kspDebugKotlin UP-TO-DATE
+> Task :base:compileDebugKotlin
+> Task :app:kspDomesticDebugKotlin
+> Task :app:compileDomesticDebugKotlin
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/view/player/CommonPlayerStateResolver.kt:245:17 'when' is exhaustive so 'else' is redundant here.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/view/player/PlayerProgressView.kt:124:13 'lateinit' is unnecessary: definitely initialized in constructors.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/view/player/PlayerProgressView.kt:125:13 'lateinit' is unnecessary: definitely initialized in constructors.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/view/player/PlayerProgressView.kt:126:13 'lateinit' is unnecessary: definitely initialized in constructors.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/ui/view/player/PlayerProgressView.kt:474:22 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/util/AiBaseStorageTaskProgressCoordinator.kt:176:17 'when' is exhaustive so 'else' is redundant here.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/util/AiBaseStorageTaskProgressCoordinator.kt:236:13 'when' is exhaustive so 'else' is redundant here.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/util/BillingManager.kt:37:14 'fun enablePendingPurchases(): BillingClient.Builder' is deprecated. Deprecated in Java.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/util/IpcSDCardPictureFetcher.kt:179:55 'enum entry WEBP: Bitmap.CompressFormat' is deprecated. Deprecated in Java.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/util/MediaStoreSaver.kt:199:27 'enum entry WEBP: Bitmap.CompressFormat' is deprecated. Deprecated in Java.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/util/validator/EditTextValidator.kt:320:44 Redundant call of conversion method.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/util/validator/EditTextValidator.kt:321:48 Redundant call of conversion method.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/view/BallZoomFeature.kt:111:18 'when' is exhaustive so 'else' is redundant here.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/view/CustomZoomView.kt:549:45 'static field FLAG_IGNORE_GLOBAL_SETTING: Int' is deprecated. Deprecated in Java.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/view/GunZoomFeature.kt:90:17 'when' is exhaustive so 'else' is redundant here.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/viewModel/AiBaseSecurityReportViewModel.kt:112:14 This declaration needs opt-in. Its usage should be marked with '@kotlinx.coroutines.ExperimentalCoroutinesApi' or '@OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)'
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/viewModel/ChoseAIFunctionViewModel.kt:168:53 Elvis operator (?:) always returns the left operand of non-nullable type 'Set<AIEnhancedAbility>'.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/viewModel/DeviceSetupViewModel.kt:265:78 No cast needed.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/viewModel/FirmwareUpgradeViewModel.kt:92:13 'object OtaLegacyUpgradeBridge : Any' is deprecated. Legacy renderer compatibility only; use the CMP OTA page.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/viewModel/peopleManage/PeopleDetailViewModel.kt:100:68 Unnecessary safe call on a non-null receiver of type 'Person'.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/viewModel/player/BasePlaybackViewModel.kt:185:36 Unnecessary safe call on a non-null receiver of type 'List<LocalDate>'.
+w: file:///private/tmp/ugreen-android-architecture-20260914/android/app/src/main/java/com/ugreen/home/webview/UnifiedAccountWebViewActivity.kt:101:30 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+
+> Task :app:compileDomesticDebugJavaWithJavac
+> Task :app:processDomesticDebugJavaRes
+> Task :app:mergeDomesticDebugJavaResource
+> Task :app:dexBuilderDomesticDebug
+> Task :app:mergeProjectDexDomesticDebug
+> Task :app:packageDomesticDebug
+> Task :app:createDomesticDebugApkListingFileRedirect
+> Task :app:assembleDomesticDebug
+
+> Task :app:copyRenamedApkDomesticDebug
+APK copied: /private/tmp/ugreen-android-architecture-20260914/android/app/build/outputs/dist/domesticDebug/UgreenHome_cn_v1.0.6.1_202609141134_debug.apk
+
+[Incubating] Problems report is available at: file:///private/tmp/ugreen-android-architecture-20260914/android/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.4.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1m 43s
+954 actionable tasks: 943 executed, 11 up-to-date

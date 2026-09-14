@@ -1,0 +1,49 @@
+[
+  {
+    "name": "clean-build",
+    "command": [
+      "/private/tmp/ugreen-android-architecture-20260914/android/gradlew",
+      "clean",
+      ":shared-release-1.7.0-9q2u2wrq:clean",
+      ":app:assembleDomesticDebug",
+      "--no-build-cache",
+      "--no-daemon",
+      "--console=plain",
+      "-PugreenHomeSharedPath=/private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq",
+      "-PfirebaseCrashlyticsMappingUpload=false"
+    ],
+    "cwd": "/private/tmp/ugreen-android-architecture-20260914/android",
+    "exitCode": 1,
+    "wallSeconds": 10.01
+  },
+  {
+    "name": "android-unit-tests",
+    "command": [
+      "/private/tmp/ugreen-android-architecture-20260914/android/gradlew",
+      ":app:testDomesticDebugUnitTest",
+      "testDebugUnitTest",
+      "--continue",
+      "--no-daemon",
+      "--console=plain",
+      "-PugreenHomeSharedPath=/private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq",
+      "-PfirebaseCrashlyticsMappingUpload=false"
+    ],
+    "cwd": "/private/tmp/ugreen-android-architecture-20260914/android",
+    "exitCode": 1,
+    "wallSeconds": 41.32
+  },
+  {
+    "name": "shared-jvm-tests",
+    "command": [
+      "/private/tmp/ugreen-android-architecture-20260914/android/gradlew",
+      ":core-util:jvmTest",
+      "--no-daemon",
+      "--console=plain",
+      "-PugreenHomeSharedPath=/private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq",
+      "-PfirebaseCrashlyticsMappingUpload=false"
+    ],
+    "cwd": "/private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq",
+    "exitCode": 0,
+    "wallSeconds": 15.08
+  }
+]

@@ -1,0 +1,168 @@
+﻿来源,平台相关性,模块,source set,相对路径,语言,静态 @Test 数,分类
+Android 主工程,Android instrumented/device,app,androidTest,app/src/androidTest/java/com/ugreen/home/ExampleInstrumentedTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android instrumented/device,app,androidTest,app/src/androidTest/java/com/ugreen/home/ui/dev/IPCDeviceSettingActivityBackStackTest.kt,kt,2,测试源码
+Android 主工程,Android local unit,app,test,app/src/test/java/com/ugreen/home/ExampleUnitTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android local unit,app,test,app/src/test/java/com/ugreen/home/messaging/handlers/OtaUpgradeMessageHandlerTest.kt,kt,3,测试源码
+Android 主工程,Android local unit,app,test,app/src/test/java/com/ugreen/home/messaging/handlers/ShareDeviceUnbindMessageHandlerTest.kt,kt,3,测试源码
+Android 主工程,Android local unit,app,test,app/src/test/java/com/ugreen/home/rn/DetectZoneNativeRouteTest.kt,kt,3,测试源码
+Android 主工程,Android local unit,app,test,app/src/test/java/com/ugreen/home/rn/DeviceRNBridgeShareTargetTest.kt,kt,7,测试源码
+Android 主工程,Android local unit,app,test,app/src/test/java/com/ugreen/home/rn/DeviceRuntimePropertyWriteRecoveryTest.kt,kt,4,测试源码
+Android 主工程,Android local unit,app,test,app/src/test/java/com/ugreen/home/rn/DeviceRuntimeWritePolicyTest.kt,kt,6,测试源码
+Android 主工程,Android local unit,app,test,app/src/test/java/com/ugreen/home/rn/DeviceSettingAvailabilityAdapterTest.kt,kt,3,测试源码
+Android 主工程,Android local unit,app,test,app/src/test/java/com/ugreen/home/rn/DeviceSettingDebugEntryVisibilityTest.kt,kt,2,测试源码
+Android 主工程,Android local unit,app,test,app/src/test/java/com/ugreen/home/rn/DeviceSettingProfilePolicyTest.kt,kt,4,测试源码
+Android 主工程,Android local unit,app,test,app/src/test/java/com/ugreen/home/rn/NativeIpcPlayerStatePolicyTest.kt,kt,3,测试源码
+Android 主工程,Android local unit,app,test,app/src/test/java/com/ugreen/home/rn/Od800ManagementDestinationTest.kt,kt,4,测试源码
+Android 主工程,Android local unit,app,test,app/src/test/java/com/ugreen/home/rn/PrivacyZoneNativeRouteTest.kt,kt,3,测试源码
+Android 主工程,Android local unit,app,test,app/src/test/java/com/ugreen/home/rn/device/settings/IpcSettingPageUiTest.kt,kt,3,测试源码
+Android 主工程,Android local unit,app,test,app/src/test/java/com/ugreen/home/rn/host/AppRNModuleLifecycleHostTest.kt,kt,2,测试源码
+Android 主工程,Android local unit,app,test,app/src/test/java/com/ugreen/home/rn/host/DeviceSettingsKeepAliveCoordinatorTest.kt,kt,2,测试源码
+Android 主工程,Android local unit,app,test,app/src/test/java/com/ugreen/home/ui/dev/OtaCmpDebugScenariosTest.kt,kt,5,测试源码
+Android 主工程,Android local unit,app,test,app/src/test/java/com/ugreen/home/ui/dev/OtaOverallFlowFinishedTest.kt,kt,4,测试源码
+Android 主工程,Android local unit,app,test,app/src/test/java/com/ugreen/home/util/KeepAliveManagerTest.kt,kt,8,测试源码
+Android 主工程,Android instrumented/device,bluetooth,androidTest,bluetooth/src/androidTest/java/com/ugreen/bluetooth/ExampleInstrumentedTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android local unit,bluetooth,test,bluetooth/src/test/java/com/ugreen/bluetooth/ExampleUnitTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android instrumented/device,calendarview,androidTest,calendarview/src/androidTest/java/com/haibin/calendarview/CalendarUtilTest.java,java,12,测试源码
+Android 主工程,Android instrumented/device,calendarview,androidTest,calendarview/src/androidTest/java/com/haibin/calendarview/ExampleInstrumentedTest.java,java,1,AGP/KMP 示例模板
+Android 主工程,Android instrumented/device,calendarview,androidTest,calendarview/src/androidTest/java/com/haibin/calendarview/LunarCalendarTest.java,java,4,测试源码
+Android 主工程,Android instrumented/device,calendarview,androidTest,calendarview/src/androidTest/java/com/haibin/calendarview/LunarUtilTest.java,java,1,测试源码
+Android 主工程,Android instrumented/device,calendarview,androidTest,calendarview/src/androidTest/java/com/haibin/calendarview/SolarTermUtilTest.java,java,1,测试源码
+Android 主工程,Android local unit,calendarview,test,calendarview/src/test/java/com/haibin/calendarview/ExampleUnitTest.java,java,1,AGP/KMP 示例模板
+Android 主工程,Android instrumented/device,camera,androidTest,camera/src/androidTest/java/com/ugreen/camera/ExampleInstrumentedTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android local unit,camera,test,camera/src/test/java/com/ugreen/camera/ExampleUnitTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android instrumented/device,common,androidTest,common/src/androidTest/java/com/ugreen/common/ExampleInstrumentedTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android instrumented/device,core/core-device,androidTest,core/core-device/src/androidTest/java/com/ugreen/device/ExampleInstrumentedTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android local unit,core/core-device,test,core/core-device/src/test/java/com/ugreen/device/ExampleUnitTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android instrumented/device,core/core-device-setup,androidTest,core/core-device-setup/src/androidTest/java/com/ugreen/device/ExampleInstrumentedTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android local unit,core/core-device-setup,test,core/core-device-setup/src/test/java/com/ugreen/device/BleAdvParserTest.kt,kt,1,测试源码
+Android 主工程,Android local unit,core/core-device-setup,test,core/core-device-setup/src/test/java/com/ugreen/device/BleParserTest.kt,kt,3,测试源码
+Android 主工程,Android local unit,core/core-device-setup,test,core/core-device-setup/src/test/java/com/ugreen/device/DeviceSNParserTest.kt,kt,8,测试源码
+Android 主工程,Android local unit,core/core-device-setup,test,core/core-device-setup/src/test/java/com/ugreen/device/ExampleUnitTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android local unit,core/core-device-setup,test,core/core-device-setup/src/test/java/com/ugreen/device/VersionTest.kt,kt,0,测试辅助/fixture（无静态 @Test）
+Android 主工程,Android instrumented/device,core/core-messaging,androidTest,core/core-messaging/src/androidTest/java/com/ugreen/core/messaging/ExampleInstrumentedTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android local unit,core/core-messaging,test,core/core-messaging/src/test/java/com/ugreen/core/messaging/ExampleUnitTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android instrumented/device,core/core-ui,androidTest,core/core-ui/src/androidTest/java/com/ugreen/ui/ExampleInstrumentedTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android local unit,core/core-ui,test,core/core-ui/src/test/java/com/ugreen/ui/ExampleUnitTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android instrumented/device,core/core-util,androidTest,core/core-util/src/androidTest/java/com/ugreen/core_util/ExampleInstrumentedTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android local unit,core/core-util,test,core/core-util/src/test/java/com/ugreen/core/crypto/AssetEncryptorTest.kt,kt,2,测试源码
+Android 主工程,Android local unit,core/core-util,test,core/core-util/src/test/java/com/ugreen/core_util/ExampleUnitTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android instrumented/device,domain,androidTest,domain/src/androidTest/java/com/ugreen/care/domain/ExampleInstrumentedTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android local unit,domain,test,domain/src/test/java/com/ugreen/care/domain/ExampleUnitTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android local unit,domain,test,domain/src/test/java/com/ugreen/care/domain/device/properties/model/DeviceUnifiedStateTest.kt,kt,11,测试源码
+Android 主工程,Android local unit,domain,test,domain/src/test/java/com/ugreen/care/domain/device/properties/model/EventThingModelParsingTest.kt,kt,3,测试源码
+Android 主工程,Android local unit,domain,test,domain/src/test/java/com/ugreen/care/domain/device/properties/model/MainFirmwareVersionResolverTest.kt,kt,2,测试源码
+Android 主工程,Android local unit,domain,test,domain/src/test/java/com/ugreen/care/domain/device/properties/model/OtaUpgradeResultDetectorTest.kt,kt,7,测试源码
+Android 主工程,Android local unit,domain,test,domain/src/test/java/com/ugreen/care/domain/device/properties/model/OtaUpgradeResultEventFlowTest.kt,kt,1,测试源码
+Android 主工程,Android instrumented/device,net,androidTest,net/src/androidTest/java/com/ugreen/net/ExampleInstrumentedTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android local unit,net,test,net/src/test/java/com/ugreen/net/ExampleUnitTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android instrumented/device,qrcode,androidTest,qrcode/src/androidTest/java/com/ugreen/qrcode/ExampleInstrumentedTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android instrumented/device,qrcode,androidTest,qrcode/src/androidTest/java/com/ugreen/qrcode/QRCodeRenderingTest.kt,kt,3,测试源码
+Android 主工程,Android local unit,qrcode,test,qrcode/src/test/java/com/ugreen/qrcode/ExampleUnitTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android instrumented/device,repository,androidTest,repository/src/androidTest/java/com/ugreen/care/repo/ExampleInstrumentedTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android local unit,repository,test,repository/src/test/java/com/ugreen/care/repo/ExampleUnitTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android local unit,repository,test,repository/src/test/java/com/ugreen/care/repo/device/downloader/PlaybackDownloadOutputNameTest.kt,kt,3,测试源码
+Android 主工程,Android local unit,repository,test,repository/src/test/java/com/ugreen/care/repo/device/properties/DeviceSettingOperationNotifierTest.kt,kt,1,测试源码
+Android 主工程,Android local unit,repository,test,repository/src/test/java/com/ugreen/care/repo/device/properties/model/EventDonateBodyTest.kt,kt,2,测试源码
+Android 主工程,Android local unit,repository,test,repository/src/test/java/com/ugreen/care/repo/device/record/event/PlaybackEventTimeListParserTest.kt,kt,7,测试源码
+Android 主工程,Android local unit,repository,test,repository/src/test/java/com/ugreen/care/repo/device/search/AISearchRepositoryImplTest.kt,kt,2,测试源码
+Android 主工程,Android local unit,repository,test,repository/src/test/java/com/ugreen/data/UnbindDeviceBodyTest.kt,kt,1,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/DevicePropertyWriteConfirmationTest.kt,kt,7,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/DeviceSettingAvailabilityPolicyTest.kt,kt,6,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/DeviceSettingInputPolicyTest.kt,kt,4,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/MediaShareTempFileStoreTest.kt,kt,2,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/NativeGuideVideoViewManagerTest.kt,kt,2,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/NativeLottieViewManagerTest.kt,kt,2,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/NetworkRNRequestPolicyTest.kt,kt,12,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/StorageRNKeyPolicyTest.kt,kt,3,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/container/RNContainerRuntimeResolverTest.kt,kt,2,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/device/DeviceSettingsRNEntryCoordinatorTest.kt,kt,2,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/platform/bundle/RNBundleManagerTest.kt,kt,5,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/platform/update/RNBundleAssignmentAcceptancePolicyTest.kt,kt,7,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/platform/update/RNBundleDownloadFileStoreTest.kt,kt,2,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/platform/update/RNBundleDownloadedArtifactCoordinatorTest.kt,kt,3,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/platform/update/RNBundleDownloadedFileVerifierTest.kt,kt,1,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/platform/update/RNBundleInstallationIdTest.kt,kt,1,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/platform/update/RNBundleLaunchSessionStoreTest.kt,kt,4,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/platform/update/RNBundleManifestCompatibilityVerifierTest.kt,kt,3,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/platform/update/RNBundleSignatureVerifierTest.kt,kt,2,测试源码
+Android 主工程,Android local unit,rn-platform,test,rn-platform/src/test/java/com/ugreen/home/rn/platform/update/RNBundleUpdateTestFixtures.kt,kt,0,测试辅助/fixture（无静态 @Test）
+Android 主工程,Android instrumented/device,ugreen-media/player-runtime-android,androidTest,ugreen-media/player-runtime-android/src/androidTest/java/com/ugreen/media/ExampleInstrumentedTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android local unit,ugreen-media/player-runtime-android,test,ugreen-media/player-runtime-android/src/test/java/com/ugreen/media/ExampleUnitTest.kt,kt,1,AGP/KMP 示例模板
+Android 主工程,Android local unit,ugreen-media/player-runtime-android,test,ugreen-media/player-runtime-android/src/test/java/com/ugreen/media/muxer/AovRawSegmentSplitterTest.kt,kt,2,测试源码
+Android 主工程,Android local unit,ugreen-media/player-runtime-android,test,ugreen-media/player-runtime-android/src/test/java/com/ugreen/media/muxer/AovVideoTimestampMapperTest.kt,kt,1,测试源码
+Android 主工程,Android local unit,ugreen-media/player-runtime-android,test,ugreen-media/player-runtime-android/src/test/java/com/ugreen/media/muxer/VideoModeClassifierTest.kt,kt,3,测试源码
+Android 主工程,Android local unit,ugreen-media/player-runtime-android,test,ugreen-media/player-runtime-android/src/test/java/com/ugreen/media/muxer/VideoSegmentModeTrackerTest.kt,kt,3,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-database,androidDeviceTest,core/core-database/src/androidDeviceTest/kotlin/com/ugreen/core/database/ExampleInstrumentedTest.kt,kt,1,AGP/KMP 示例模板
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-database,androidHostTest,core/core-database/src/androidHostTest/kotlin/com/ugreen/core/database/ExampleUnitTest.kt,kt,1,AGP/KMP 示例模板
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-logger,commonTest,core/core-logger/src/commonTest/kotlin/com/ugreen/core/logger/LoggerTest.kt,kt,3,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-navigation,commonTest,core/core-navigation/src/commonTest/kotlin/com/ugreen/core/navigation/AppNavigatorTest.kt,kt,2,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-navigation,commonTest,core/core-navigation/src/commonTest/kotlin/com/ugreen/core/navigation/FakeAppNavigator.kt,kt,0,测试辅助/fixture（无静态 @Test）
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-net,androidDeviceTest,core/core-net/src/androidDeviceTest/kotlin/com/ugreen/core/net/ExampleInstrumentedTest.kt,kt,1,AGP/KMP 示例模板
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-net,androidHostTest,core/core-net/src/androidHostTest/kotlin/com/ugreen/core/net/ExampleUnitTest.kt,kt,1,AGP/KMP 示例模板
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-net,commonTest,core/core-net/src/commonTest/kotlin/com/ugreen/core/net/FileTransferTest.kt,kt,4,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-net,commonTest,core/core-net/src/commonTest/kotlin/com/ugreen/core/net/logging/NetLogBodyTest.kt,kt,6,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-net,commonTest,core/core-net/src/commonTest/kotlin/com/ugreen/core/net/logging/NetLogSupportTest.kt,kt,4,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-secure-package,androidHostTest,core/core-secure-package/src/androidHostTest/kotlin/com/ugreen/core/securepackage/AndroidAgeInteropTest.kt,kt,1,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-secure-package,commonTest,core/core-secure-package/src/commonTest/kotlin/com/ugreen/core/securepackage/SecurePackageEncryptorTest.kt,kt,7,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,iOS-only Shared source set；仅交叉引用,core/core-secure-package,iosTest,core/core-secure-package/src/iosTest/kotlin/com/ugreen/core/securepackage/IosAgeSecurePackageEngineTest.kt,kt,1,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-ui,commonTest,core/core-ui/src/commonTest/kotlin/com/ugreen/core/ui/MigratedUGComponentDefaultsTest.kt,kt,2,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-ui,commonTest,core/core-ui/src/commonTest/kotlin/com/ugreen/core/ui/adaptive/UGAdaptiveLayoutTest.kt,kt,3,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-ui,commonTest,core/core-ui/src/commonTest/kotlin/com/ugreen/core/ui/button/UGProgressStateButtonTest.kt,kt,1,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-ui,commonTest,core/core-ui/src/commonTest/kotlin/com/ugreen/core/ui/notice/UGNoticeBarStyleTest.kt,kt,4,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-ui,commonTest,core/core-ui/src/commonTest/kotlin/com/ugreen/core/ui/picker/UGWheelPickerTest.kt,kt,3,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-ui,commonTest,core/core-ui/src/commonTest/kotlin/com/ugreen/core/ui/slider/UGSliderValueTest.kt,kt,2,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-ui,commonTest,core/core-ui/src/commonTest/kotlin/com/ugreen/core/ui/textfield/UGTextFieldCursorStateTest.kt,kt,3,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-ui,commonTest,core/core-ui/src/commonTest/kotlin/com/ugreen/core/ui/toast/UGToastHostStateTest.kt,kt,4,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-util,commonTest,core/core-util/src/commonTest/kotlin/com/ugreen/core/util/ZipHelperTest.kt,kt,3,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-util,commonTest,core/core-util/src/commonTest/kotlin/com/ugreen/core/util/ZlibUtilTest.kt,kt,9,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-util,commonTest,core/core-util/src/commonTest/kotlin/com/ugreen/core/util/crypto/AesUtilsTest.kt,kt,9,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-util,commonTest,core/core-util/src/commonTest/kotlin/com/ugreen/core/util/crypto/AesUtilsVectorsTest.kt,kt,3,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-util,commonTest,core/core-util/src/commonTest/kotlin/com/ugreen/core/util/crypto/AssetEncryptorTest.kt,kt,2,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-util,commonTest,core/core-util/src/commonTest/kotlin/com/ugreen/core/util/crypto/CrcTest.kt,kt,4,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-util,commonTest,core/core-util/src/commonTest/kotlin/com/ugreen/core/util/crypto/Md5Test.kt,kt,3,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,core/core-util,jvmTest,core/core-util/src/jvmTest/kotlin/com/ugreen/core/util/crypto/AesUtilsJceInteropTest.kt,kt,4,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,device-biz,commonTest,device-biz/src/commonTest/kotlin/com/ugreen/home/device/model/DeviceUnifiedStateOtaContributionTest.kt,kt,4,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,device-thing-model,commonTest,device-thing-model/src/commonTest/kotlin/com/ugreen/home/iot/ThingJsonTest.kt,kt,8,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,device-thing-model,commonTest,device-thing-model/src/commonTest/kotlin/com/ugreen/home/iot/ThingPropertyValueCodecTest.kt,kt,3,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-auth,commonTest,feature-auth/src/commonTest/kotlin/com/ugreen/feature/auth/AppLogTaskForegroundCheckerTest.kt,kt,11,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-auth,commonTest,feature-auth/src/commonTest/kotlin/com/ugreen/feature/auth/AppLogUploadManagerCancellationTest.kt,kt,5,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-home-management,commonTest,feature-home-management/src/commonTest/kotlin/com/ugreen/feature/home/management/data/InMemoryHomeManagementRepositoryTest.kt,kt,2,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-home-management,commonTest,feature-home-management/src/commonTest/kotlin/com/ugreen/feature/home/management/domain/HomeLocationDisplayNameTest.kt,kt,5,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-home-management,commonTest,feature-home-management/src/commonTest/kotlin/com/ugreen/feature/home/management/domain/HomeManagementNameValidatorTest.kt,kt,7,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-ota,androidHostTest,feature-ota/src/androidHostTest/kotlin/com/ugreen/feature/ota/data/remote/OtaMockTestEnvironment.android.kt,kt,0,测试辅助/fixture（无静态 @Test）
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-ota,commonTest,feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/data/OtaDtoMapperTest.kt,kt,10,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-ota,commonTest,feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/data/OtaRepositoryTest.kt,kt,10,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-ota,commonTest,feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/data/local/OtaTerminalSuppressionStoreTest.kt,kt,9,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-ota,commonTest,feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/data/remote/OtaHttpMockControllerTest.kt,kt,78,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-ota,commonTest,feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/data/remote/OtaMockTestEnvironment.kt,kt,0,测试辅助/fixture（无静态 @Test）
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-ota,commonTest,feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/data/remote/OtaRemoteDataSourceLogTest.kt,kt,2,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-ota,commonTest,feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/domain/OtaProtocolTest.kt,kt,5,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-ota,commonTest,feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/mvi/OtaHttpFactDrivenContractTest.kt,kt,6,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-ota,commonTest,feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/mvi/OtaMviTest.kt,kt,12,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-ota,commonTest,feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/mvi/OtaRealtimeBatchResolverTest.kt,kt,13,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-ota,commonTest,feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/mvi/OtaRuntimeFactDrivenTest.kt,kt,45,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-ota,commonTest,feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/orchestration/OtaOrchestrationTest.kt,kt,10,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-ota,commonTest,feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaBatchPageProjectionTest.kt,kt,3,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-ota,commonTest,feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaFeatureApiTest.kt,kt,48,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-ota,commonTest,feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/publicapi/OtaMockDeviceOverlayTest.kt,kt,5,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-ota,commonTest,feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/ui/OtaUiContractTest.kt,kt,62,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-ota,commonTest,feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/ui/OtaUiTestData.kt,kt,0,测试辅助/fixture（无静态 @Test）
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-ota,commonTest,feature-ota/src/commonTest/kotlin/com/ugreen/feature/ota/ui/OtaUpgradeNavigationControllerTest.kt,kt,3,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,iOS-only Shared source set；仅交叉引用,feature-ota,iosTest,feature-ota/src/iosTest/kotlin/com/ugreen/feature/ota/data/remote/OtaMockTestEnvironment.ios.kt,kt,0,测试辅助/fixture（无静态 @Test）
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-playback,commonTest,feature-playback/src/commonTest/kotlin/com/ugreen/home/playback/PlaybackDayQuerySchedulerTest.kt,kt,6,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-playback,commonTest,feature-playback/src/commonTest/kotlin/com/ugreen/home/playback/event/PlaybackEventLegacyProtocolTest.kt,kt,8,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-playback,commonTest,feature-playback/src/commonTest/kotlin/com/ugreen/home/playback/event/PlaybackEventQueryControllerTest.kt,kt,9,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-playback,commonTest,feature-playback/src/commonTest/kotlin/com/ugreen/home/playback/event/PlaybackEventTimeListTest.kt,kt,5,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-third-party-services,commonTest,feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/AlexaAuthorizationFlowsTest.kt,kt,7,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-third-party-services,commonTest,feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/AlexaAuthorizationRequestTest.kt,kt,3,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-third-party-services,commonTest,feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/AlexaAuthorizationTestFixture.kt,kt,0,测试辅助/fixture（无静态 @Test）
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-third-party-services,commonTest,feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/AlexaProactiveAuthorizationSessionCoordinatorTest.kt,kt,5,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-third-party-services,commonTest,feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/ThirdPartyDeepLinkCoordinatorTest.kt,kt,9,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-third-party-services,commonTest,feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/ThirdPartyServiceDeepLinkTest.kt,kt,5,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-third-party-services,commonTest,feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/ThirdPartyServiceLinkRepositoryTest.kt,kt,3,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-third-party-services,commonTest,feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/ThirdPartyServiceLinkStatusTest.kt,kt,4,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-third-party-services,commonTest,feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/ThirdPartyServiceLinkViewModelTest.kt,kt,11,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-third-party-services,commonTest,feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/ThirdPartyServicesBackNavigationTest.kt,kt,2,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-third-party-services,commonTest,feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/ThirdPartyServicesHostRouterTest.kt,kt,1,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,feature-third-party-services,commonTest,feature-third-party-services/src/commonTest/kotlin/com/ugreen/feature/thirdpartyservices/ThirdPartyServicesViewModelTest.kt,kt,6,测试源码
+Shared release/1.7.0 4f36969b（只读导出）,Android 相关（common/JVM/host/device）,sample,commonTest,sample/src/commonTest/kotlin/com/ugreen/sample/demo/ota/OtaApiDebugVMTest.kt,kt,4,测试源码

@@ -1,0 +1,33 @@
+[
+  {
+    "name": "clean-build-corrected",
+    "command": [
+      "/private/tmp/ugreen-android-architecture-20260914/android/gradlew",
+      "clean",
+      ":app:assembleDomesticDebug",
+      "--no-build-cache",
+      "--no-daemon",
+      "--console=plain",
+      "-PugreenHomeSharedPath=/private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq",
+      "-PfirebaseCrashlyticsMappingUpload=false"
+    ],
+    "cwd": "/private/tmp/ugreen-android-architecture-20260914/android",
+    "exitCode": 0,
+    "wallSeconds": 103.89
+  },
+  {
+    "name": "incremental-build",
+    "command": [
+      "/private/tmp/ugreen-android-architecture-20260914/android/gradlew",
+      ":app:assembleDomesticDebug",
+      "--no-build-cache",
+      "--no-daemon",
+      "--console=plain",
+      "-PugreenHomeSharedPath=/private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq",
+      "-PfirebaseCrashlyticsMappingUpload=false"
+    ],
+    "cwd": "/private/tmp/ugreen-android-architecture-20260914/android",
+    "exitCode": 0,
+    "wallSeconds": 33.24
+  }
+]

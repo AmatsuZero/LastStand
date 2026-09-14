@@ -1,0 +1,31 @@
+{
+  "root": "/private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq",
+  "removedGeneratedBuildDirectories": [
+    "build",
+    "device-biz/build",
+    "feature-third-party-services/build",
+    "feature-home-management/build",
+    "feature-playback/build",
+    "device-thing-model/build",
+    "feature-ota/build",
+    "feature-device-event/build",
+    "app-shared/build",
+    "airtc-appsdk/build",
+    "feature-auth/build",
+    "domain/domain-product/build",
+    "domain/domain-env/build",
+    "build-logic/convention/build",
+    "core/core-kv/build",
+    "core/core-navigation/build",
+    "core/core-util/build",
+    "core/core-ui/build",
+    "core/core-net/build",
+    "core/core-player/build",
+    "core/core-database/build",
+    "core/core-logger/build",
+    "core/core-mvi/build",
+    "core/core-secure-package/build",
+    "ugreenhome-strings/generated/kmp/build"
+  ],
+  "timing": "Preparation outside timed Android clean+assemble; user dependency cache retained; test reports archived first"
+}
