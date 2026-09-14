@@ -1,0 +1,259 @@
+{
+  "serial": "emulator-5586",
+  "adbPort": 5054,
+  "avd": "UGreenSurveyApi36",
+  "api": 36,
+  "steps": [
+    {
+      "name": "avd-identity",
+      "exit": 0,
+      "evidence": "avd-identity.txt"
+    },
+    {
+      "name": "airplane",
+      "exit": 0,
+      "evidence": "airplane.txt"
+    },
+    {
+      "name": "wifi-off",
+      "exit": 0,
+      "evidence": "wifi-off.txt"
+    },
+    {
+      "name": "data-off",
+      "exit": 0,
+      "evidence": "data-off.txt"
+    },
+    {
+      "name": "airplane-state",
+      "exit": 0,
+      "evidence": "airplane-state.txt"
+    },
+    {
+      "name": "runtime-connectivity",
+      "exit": 0,
+      "evidence": "runtime-connectivity.txt"
+    },
+    {
+      "name": "install-camera",
+      "exit": 0,
+      "evidence": "install-camera.txt"
+    },
+    {
+      "name": "instrumentation-camera",
+      "exit": 0,
+      "evidence": "instrumentation-camera.txt"
+    },
+    {
+      "name": "stop-camera",
+      "exit": 0,
+      "evidence": "stop-camera.txt"
+    },
+    {
+      "name": "install-core_core-device",
+      "exit": 0,
+      "evidence": "install-core_core-device.txt"
+    },
+    {
+      "name": "instrumentation-core_core-device",
+      "exit": 0,
+      "evidence": "instrumentation-core_core-device.txt"
+    },
+    {
+      "name": "stop-core_core-device",
+      "exit": 0,
+      "evidence": "stop-core_core-device.txt"
+    },
+    {
+      "name": "install-core_core-device-setup",
+      "exit": 0,
+      "evidence": "install-core_core-device-setup.txt"
+    },
+    {
+      "name": "instrumentation-core_core-device-setup",
+      "exit": 0,
+      "evidence": "instrumentation-core_core-device-setup.txt"
+    },
+    {
+      "name": "stop-core_core-device-setup",
+      "exit": 0,
+      "evidence": "stop-core_core-device-setup.txt"
+    },
+    {
+      "name": "install-core_core-util",
+      "exit": 0,
+      "evidence": "install-core_core-util.txt"
+    },
+    {
+      "name": "instrumentation-core_core-util",
+      "exit": 0,
+      "evidence": "instrumentation-core_core-util.txt"
+    },
+    {
+      "name": "stop-core_core-util",
+      "exit": 0,
+      "evidence": "stop-core_core-util.txt"
+    },
+    {
+      "name": "install-qrcode",
+      "exit": 0,
+      "evidence": "install-qrcode.txt"
+    },
+    {
+      "name": "instrumentation-qrcode",
+      "exit": 0,
+      "evidence": "instrumentation-qrcode.txt"
+    },
+    {
+      "name": "stop-qrcode",
+      "exit": 0,
+      "evidence": "stop-qrcode.txt"
+    },
+    {
+      "name": "install-ugreen-media_player-runtime-android",
+      "exit": 0,
+      "evidence": "install-ugreen-media_player-runtime-android.txt"
+    },
+    {
+      "name": "instrumentation-ugreen-media_player-runtime-android",
+      "exit": 0,
+      "evidence": "instrumentation-ugreen-media_player-runtime-android.txt"
+    },
+    {
+      "name": "stop-ugreen-media_player-runtime-android",
+      "exit": 0,
+      "evidence": "stop-ugreen-media_player-runtime-android.txt"
+    }
+  ],
+  "command": [
+    "/Users/daubert/Library/Android/sdk/emulator/emulator",
+    "-avd",
+    "UGreenSurveyApi36",
+    "-port",
+    "5586",
+    "-no-window",
+    "-no-audio",
+    "-no-snapshot",
+    "-no-boot-anim",
+    "-gpu",
+    "swiftshader_indirect",
+    "-memory",
+    "2048",
+    "-cores",
+    "2",
+    "-dns-server",
+    "127.0.0.1"
+  ],
+  "bootSeconds": 16.13,
+  "offlineVerified": true,
+  "modules": [
+    {
+      "module": "camera",
+      "package": "com.ugreen.camera.test",
+      "okSummary": [
+        "OK (1 test)"
+      ],
+      "statusCodes": [
+        "1",
+        "0"
+      ],
+      "finalCodes": [
+        "-1"
+      ],
+      "failureSummary": [],
+      "evidence": "instrumentation-camera.txt"
+    },
+    {
+      "module": "core/core-device",
+      "package": "com.ugreen.core.device.test",
+      "okSummary": [],
+      "statusCodes": [
+        "1",
+        "-2"
+      ],
+      "finalCodes": [
+        "-1"
+      ],
+      "failureSummary": [
+        "Tests run: 1,  Failures: 1"
+      ],
+      "evidence": "instrumentation-core_core-device.txt"
+    },
+    {
+      "module": "core/core-device-setup",
+      "package": "com.ugreen.home.device.setup.test",
+      "okSummary": [],
+      "statusCodes": [
+        "1",
+        "-2"
+      ],
+      "finalCodes": [
+        "-1"
+      ],
+      "failureSummary": [
+        "Tests run: 1,  Failures: 1"
+      ],
+      "evidence": "instrumentation-core_core-device-setup.txt"
+    },
+    {
+      "module": "core/core-util",
+      "package": "com.ugreen.core.test",
+      "okSummary": [],
+      "statusCodes": [
+        "1",
+        "-2"
+      ],
+      "finalCodes": [
+        "-1"
+      ],
+      "failureSummary": [
+        "Tests run: 1,  Failures: 1"
+      ],
+      "evidence": "instrumentation-core_core-util.txt"
+    },
+    {
+      "module": "qrcode",
+      "package": "com.ugreen.qrcode.test",
+      "okSummary": [
+        "OK (4 tests)"
+      ],
+      "statusCodes": [
+        "1",
+        "0",
+        "1",
+        "0",
+        "1",
+        "0",
+        "1",
+        "0"
+      ],
+      "finalCodes": [
+        "-1"
+      ],
+      "failureSummary": [],
+      "evidence": "instrumentation-qrcode.txt"
+    },
+    {
+      "module": "ugreen-media/player-runtime-android",
+      "package": "com.ugreen.media.test",
+      "okSummary": [
+        "OK (1 test)"
+      ],
+      "statusCodes": [
+        "1",
+        "0"
+      ],
+      "finalCodes": [
+        "-1"
+      ],
+      "failureSummary": [],
+      "evidence": "instrumentation-ugreen-media_player-runtime-android.txt"
+    }
+  ],
+  "completed": true,
+  "cleanup": {
+    "emulatorExit": 0,
+    "adbServerStopExit": 0
+  },
+  "totalSeconds": 25.57
+}

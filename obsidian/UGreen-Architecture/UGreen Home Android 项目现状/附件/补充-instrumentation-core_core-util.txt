@@ -1,0 +1,42 @@
+INSTRUMENTATION_STATUS: class=com.ugreen.core_util.ExampleInstrumentedTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.ugreen.core_util.ExampleInstrumentedTest:
+INSTRUMENTATION_STATUS: test=useAppContext
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.ugreen.core_util.ExampleInstrumentedTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stack=org.junit.ComparisonFailure: expected:<com.ugreen.core[_util]> but was:<com.ugreen.core[.test]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at com.ugreen.core_util.ExampleInstrumentedTest.useAppContext(ExampleInstrumentedTest.kt:22)
+
+INSTRUMENTATION_STATUS: stream=
+Error in useAppContext(com.ugreen.core_util.ExampleInstrumentedTest):
+org.junit.ComparisonFailure: expected:<com.ugreen.core[_util]> but was:<com.ugreen.core[.test]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at com.ugreen.core_util.ExampleInstrumentedTest.useAppContext(ExampleInstrumentedTest.kt:22)
+
+INSTRUMENTATION_STATUS: test=useAppContext
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: stream=
+
+Time: 0.002
+There was 1 failure:
+1) useAppContext(com.ugreen.core_util.ExampleInstrumentedTest)
+org.junit.ComparisonFailure: expected:<com.ugreen.core[_util]> but was:<com.ugreen.core[.test]>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at com.ugreen.core_util.ExampleInstrumentedTest.useAppContext(ExampleInstrumentedTest.kt:22)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1
+

@@ -1,0 +1,56 @@
+[
+  {
+    "module": "camera",
+    "apk": "/private/tmp/ugreen-android-architecture-20260914/android/camera/build/outputs/apk/androidTest/debug/camera-debug-androidTest.apk",
+    "sha256": "4c37d043781e909f971de396d3a6203df5fdfda5e5e4cf0c4af004f9798be356",
+    "package": "com.ugreen.camera.test",
+    "targetPackage": "com.ugreen.camera.test",
+    "runner": "androidx.test.runner.AndroidJUnitRunner",
+    "signatureVerifyExit": 0
+  },
+  {
+    "module": "core/core-device",
+    "apk": "/private/tmp/ugreen-android-architecture-20260914/android/core/core-device/build/outputs/apk/androidTest/debug/core-device-debug-androidTest.apk",
+    "sha256": "a2e7cba2711ec9b109cca1a05b868376c96d72c3cc47574fa2318f84a112d67a",
+    "package": "com.ugreen.core.device.test",
+    "targetPackage": "com.ugreen.core.device.test",
+    "runner": "androidx.test.runner.AndroidJUnitRunner",
+    "signatureVerifyExit": 0
+  },
+  {
+    "module": "core/core-device-setup",
+    "apk": "/private/tmp/ugreen-android-architecture-20260914/android/core/core-device-setup/build/outputs/apk/androidTest/debug/core-device-setup-debug-androidTest.apk",
+    "sha256": "d7c7574eacce620cbd21b4e47c435226042da00647b0bef7684378f9b504b7a9",
+    "package": "com.ugreen.home.device.setup.test",
+    "targetPackage": "com.ugreen.home.device.setup.test",
+    "runner": "androidx.test.runner.AndroidJUnitRunner",
+    "signatureVerifyExit": 0
+  },
+  {
+    "module": "core/core-util",
+    "apk": "/private/tmp/ugreen-android-architecture-20260914/android/core/core-util/build/outputs/apk/androidTest/debug/core-util-debug-androidTest.apk",
+    "sha256": "d33ed7dc3117a0dfc6d30fce483d26e706870b86b23c169e713d2c2fb8826e26",
+    "package": "com.ugreen.core.test",
+    "targetPackage": "com.ugreen.core.test",
+    "runner": "androidx.test.runner.AndroidJUnitRunner",
+    "signatureVerifyExit": 0
+  },
+  {
+    "module": "qrcode",
+    "apk": "/private/tmp/ugreen-android-architecture-20260914/android/qrcode/build/outputs/apk/androidTest/debug/qrcode-debug-androidTest.apk",
+    "sha256": "8ab670d78ca6a82eaac805d405bdcfef06ab1cf8e96d3808e44934e44770b4ab",
+    "package": "com.ugreen.qrcode.test",
+    "targetPackage": "com.ugreen.qrcode.test",
+    "runner": "androidx.test.runner.AndroidJUnitRunner",
+    "signatureVerifyExit": 0
+  },
+  {
+    "module": "ugreen-media/player-runtime-android",
+    "apk": "/private/tmp/ugreen-android-architecture-20260914/android/ugreen-media/player-runtime-android/build/outputs/apk/androidTest/debug/player-runtime-android-debug-androidTest.apk",
+    "sha256": "0c86ebc7010135f6ee889fb5dfeeb9b322867db1705ba945f0f0c3d1937196ce",
+    "package": "com.ugreen.media.test",
+    "targetPackage": "com.ugreen.media.test",
+    "runner": "androidx.test.runner.AndroidJUnitRunner",
+    "signatureVerifyExit": 0
+  }
+]

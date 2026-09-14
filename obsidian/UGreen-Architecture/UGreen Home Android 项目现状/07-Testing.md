@@ -83,7 +83,11 @@
 | Shared `:core-util:jvmTest`（release/1.7.0@4f36969b） | **37 / 37 / 0** | 15.08 秒 | 8 suites，0 skipped；只代表 core-util JVM 测试。 |
 | App AndroidJUnitRunner，API36 arm64 模拟器 | **3 / 1 / 2** | runner报告0.02秒（非含启动wall time） | 示例 `useAppContext` 通过；两个 back-stack 案例在 `@Before` 和 `@After` 均触发 `DatabaseHolder not initialized`，共4条失败事件，未执行路由断言。 |
 
-App instrumentation 已执行：API 36 隔离模拟器安装临时签名 APK 后运行 3 个案例，1 通过、2 因 `DatabaseHolder not initialized` 失败；同时完成离线启动冒烟（`SplashActivity` → `RootActivity`，`am start -W` 返回成功，等待10秒后仍在 RootActivity 并显示隐私协议页，未点击同意，已归档 UI dump/截图）。Shared Android device/host test、真机、真实账号/IoT 设备及覆盖率仍未执行。过程与边界见[Android运行实测](附件/Android运行实测.md)；证据见 [Android模拟器运行验证](附件/Android模拟器运行验证.json)、[instrumentation 输出](附件/instrumentation-all.log)。逐案例摘要见 [JUnit执行案例.csv](附件/JUnit执行案例.csv)，套件汇总见 [JUnit套件汇总.json](附件/JUnit套件汇总.json)。静态清单仍为 Android 93 文件/254 注解、Shared 74 文件/545 注解，不替代实际执行结果。
+App instrumentation 已执行：API 36 隔离模拟器安装临时签名 APK 后运行 3 个案例，1 通过、2 因 `DatabaseHolder not initialized` 失败；同时完成离线启动冒烟（`SplashActivity` → `RootActivity`，`am start -W` 返回成功，等待10秒后仍在 RootActivity 并显示隐私协议页，未点击同意，已归档 UI dump/截图）。Shared Android device test、真机、真实账号/IoT 设备及覆盖率仍未执行。Shared host 已补充执行，结果含失败/超时；其他模块 instrumentation 仅完成可构建的6个 APK。过程与边界见[Android运行实测](附件/Android运行实测.md)；证据见 [Android模拟器运行验证](附件/Android模拟器运行验证.json)、[instrumentation 输出](附件/instrumentation-all.log)。逐案例摘要见 [JUnit执行案例.csv](附件/JUnit执行案例.csv)，套件汇总见 [JUnit套件汇总.json](附件/JUnit套件汇总.json)。静态清单仍为 Android 93 文件/254 注解、Shared 74 文件/545 注解，不替代实际执行结果。
+
+## 7. 追加实测：Shared host 与库模块 instrumentation
+
+补充结果见[补充验证与未完成项](附件/补充验证与未完成项.md)：Shared 非 OTA/sample host 聚合退出0，但仅计入已生成报告的 151 个案例（150/1）；全量 host 聚合约15分钟超时，且 sample 编译存在 unresolved reference。OTA 单例因 host JVM 缺少 `Dispatchers.Main` 失败。Android library instrumentation 仅6个测试 APK 构建成功，API36 模拟器运行9个案例，6通过、3因模板包名断言失败；其余模块因资源/JNI冲突未生成 APK。
 
 ## 7. 复核边界
 

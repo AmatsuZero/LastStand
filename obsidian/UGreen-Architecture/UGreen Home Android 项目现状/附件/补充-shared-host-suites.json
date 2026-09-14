@@ -1,0 +1,68 @@
+{
+  "feature-home-management": [
+    14,
+    0,
+    0,
+    0
+  ],
+  "feature-playback": [
+    28,
+    0,
+    0,
+    0
+  ],
+  "device-thing-model": [
+    11,
+    0,
+    0,
+    0
+  ],
+  "feature-ota": [
+    1,
+    1,
+    0,
+    0
+  ],
+  "feature-auth": [
+    16,
+    0,
+    0,
+    0
+  ],
+  "core/core-util": [
+    33,
+    0,
+    0,
+    0
+  ],
+  "core/core-ui": [
+    22,
+    0,
+    0,
+    0
+  ],
+  "core/core-net": [
+    15,
+    0,
+    0,
+    0
+  ],
+  "core/core-database": [
+    1,
+    0,
+    0,
+    0
+  ],
+  "core/core-logger": [
+    3,
+    0,
+    0,
+    0
+  ],
+  "core/core-secure-package": [
+    8,
+    0,
+    0,
+    0
+  ]
+}

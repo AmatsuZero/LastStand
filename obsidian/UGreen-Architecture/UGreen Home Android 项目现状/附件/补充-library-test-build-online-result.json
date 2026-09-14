@@ -1,0 +1,30 @@
+{
+  "name": "library-test-build-online",
+  "command": [
+    "/private/tmp/ugreen-android-architecture-20260914/android/gradlew",
+    ":bluetooth:assembleDebugAndroidTest",
+    ":calendarview:assembleDebugAndroidTest",
+    ":camera:assembleDebugAndroidTest",
+    ":common:assembleDebugAndroidTest",
+    ":core-device:assembleDebugAndroidTest",
+    ":core-device-setup:assembleDebugAndroidTest",
+    ":core-messaging:assembleDebugAndroidTest",
+    ":core-ui:assembleDebugAndroidTest",
+    ":core-util:assembleDebugAndroidTest",
+    ":domain:assembleDebugAndroidTest",
+    ":net:assembleDebugAndroidTest",
+    ":qrcode:assembleDebugAndroidTest",
+    ":repository:assembleDebugAndroidTest",
+    ":player-runtime-android:assembleDebugAndroidTest",
+    "--continue",
+    "--no-daemon",
+    "--max-workers=4",
+    "--console=plain",
+    "-PugreenHomeSharedPath=/private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq",
+    "-PfirebaseCrashlyticsMappingUpload=false"
+  ],
+  "cwd": "/private/tmp/ugreen-android-architecture-20260914/android",
+  "exitCode": 1,
+  "timedOut": false,
+  "seconds": 52.89
+}

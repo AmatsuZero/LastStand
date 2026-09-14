@@ -1,0 +1,20 @@
+{
+  "name": "ota-host-single",
+  "command": [
+    "/private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq/gradlew",
+    ":feature-ota:testAndroidHostTest",
+    "--tests",
+    "com.ugreen.feature.ota.publicapi.OtaFeatureApiTest.childPageSnapshot_usesExistingKmpParentCheckFactWithoutAnotherRequest",
+    "--offline",
+    "--continue",
+    "--no-daemon",
+    "--max-workers=4",
+    "--console=plain",
+    "-PugreenHomeSharedPath=/private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq",
+    "-PfirebaseCrashlyticsMappingUpload=false"
+  ],
+  "cwd": "/private/tmp/ugreen-android-architecture-20260914/shared-release-1.7.0-9q2u2wrq",
+  "exitCode": 1,
+  "timedOut": false,
+  "seconds": 7.67
+}
