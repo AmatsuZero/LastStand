@@ -7,7 +7,7 @@
 .codebuddy/*
 .superpowers/
 .worktrees/
-.cursor/
+.cursor/*
 __pycache__/
 *.py[cod]
 
@@ -39,3 +39,4 @@ kb.db
 
 # 允许跟踪 AI 技能（与 .claude/skills/ 处理一致）
 !.codebuddy/skills/
+!.cursor/rules/
