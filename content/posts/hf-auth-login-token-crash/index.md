@@ -1,7 +1,6 @@
 ---
 title: "hf auth login 粘贴 token 崩溃排查与修复"
 date: 2026-10-25T21:39:07+08:00
-draft: true
 categories: ["绿联工作笔记"]
 tags: ["CLI", "Python", "代理", "排障"]
 ---\n

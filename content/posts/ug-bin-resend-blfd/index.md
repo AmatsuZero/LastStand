@@ -1,7 +1,6 @@
 ---
 title: "UG *-bin 重发与 BLFD 踩坑总结"
 date: 2026-10-18T13:42:37+08:00
-draft: true
 categories: ["绿联工作笔记"]
 tags: ["iOS", "CocoaPods", "BLFD", "LibraryEvolution", "GitLabCI"]
 ---\n

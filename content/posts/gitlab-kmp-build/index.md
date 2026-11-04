@@ -1,7 +1,6 @@
 ---
 title: "GitLab 上 KMP 二进制的发布链路与踩坑"
 date: 2026-09-22T14:12:53+08:00
-draft: true
 tags: ["Kotlin Multiplatform", "iOS", "CocoaPods", "GitLab", "XCFramework", "CI/CD"]
 categories: ["绿联工作笔记"]
 ---

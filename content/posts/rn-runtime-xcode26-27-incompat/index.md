@@ -1,7 +1,6 @@
 ---
 title: "RN Runtime：Xcode 26 ↔ 27 二进制不兼容的原因"
 date: 2026-09-15T19:33:46+08:00
-draft: true
 categories: ["绿联工作笔记"]
 tags: ["iOS", "Swift", "ReactNative", "ABI", "NitroModules"]
 ---

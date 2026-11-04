@@ -1,7 +1,6 @@
 ---
 title: "iOS MR 包体积分析实践：APPAnalyze、Link Map 与跨项目接入"
 date: 2026-11-02T18:24:53+08:00
-draft: true
 categories: ["绿联工作笔记"]
 tags: ["iOS", "CI", "包体积", "APPAnalyze", "LinkMap"]
 ---

@@ -1,7 +1,6 @@
 ---
 title: "UgreenHome 共享库 CI：依赖安全扫描与内网构建复盘"
 date: 2026-11-04T08:56:35+08:00
-draft: true
 tags: ["CI/CD", "Gradle", "Kotlin Multiplatform", "SCA", "SBOM", "依赖管理", "Nexus"]
 categories: ["绿联工作笔记"]
 ---

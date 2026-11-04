@@ -1,7 +1,6 @@
 ---
 title: "把 GitHub 依赖迁移到内网 GitLab 的踩坑总结"
 date: 2026-10-12T10:13:41+08:00
-draft: true
 categories: ["绿联工作笔记"]
 tags: ["GitLab", "迁移", "CocoaPods", "LFS", "PackageRegistry"]
 ---\n

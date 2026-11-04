@@ -1,7 +1,6 @@
 ---
 title: "cc-switch 切 Codex 供应商「不生效」的排查"
 date: 2026-10-22T16:51:13+08:00
-draft: true
 categories: ["绿联工作笔记"]
 tags: ["Codex", "CLI", "daemon", "配置"]
 ---\n

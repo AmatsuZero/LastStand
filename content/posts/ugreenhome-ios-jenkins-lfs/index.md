@@ -1,7 +1,6 @@
 ---
 title: "Jenkins iOS Agent 的 Git LFS Checkout 失败排查"
 date: 2026-10-22T15:22:27+08:00
-draft: true
 tags: ["Jenkins", "Git LFS", "iOS", "CI/CD", "launchd", "凭证"]
 categories: ["绿联工作笔记"]
 ---

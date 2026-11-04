@@ -1,7 +1,6 @@
 ---
 title: "GitLab SAST 在 ARM64 Runner 上的故障复盘"
 date: 2026-10-16T15:32:18+08:00
-draft: true
 tags: ["GitLab", "SAST", "Semgrep", "CI/CD", "ARM64", "安全扫描"]
 categories: ["绿联工作笔记"]
 ---

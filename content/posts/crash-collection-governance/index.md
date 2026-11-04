@@ -1,7 +1,6 @@
 ---
 title: "Crash 收集治理：从吞异常到 iOS 27 CrashReportExtension"
 date: 2026-09-17T17:33:05+08:00
-draft: true
 categories: ["绿联工作笔记"]
 tags: ["iOS", "Crashlytics", "Bugly", "崩溃", "CrashReportExtension"]
 ---\n

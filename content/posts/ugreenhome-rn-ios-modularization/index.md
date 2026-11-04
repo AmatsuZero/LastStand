@@ -1,7 +1,6 @@
 ---
 title: "UgreenHome RN iOS 组件化与调试能力重建（阶段总结）"
 date: 2026-11-02T18:12:04+08:00
-draft: true
 categories: ["绿联工作笔记"]
 tags: ["iOS", "ReactNative", "CocoaPods", "组件化", "Metro"]
 ---

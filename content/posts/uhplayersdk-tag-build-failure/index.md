@@ -1,7 +1,6 @@
 ---
 title: "UHPlayerSDK 打 tag 打包失败复盘"
 date: 2026-10-26T10:17:32+08:00
-draft: true
 categories: ["绿联工作笔记"]
 tags: ["iOS", "CI", "Xcode", "CompilationCache", "GitLabRunner"]
 ---

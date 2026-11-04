@@ -1,7 +1,6 @@
 ---
 title: "UgreenHome CocoaPods Specs / 镜像 tag 故障复盘"
 date: 2026-10-21T14:06:24+08:00
-draft: true
 tags: ["CocoaPods", "iOS", "Specs", "镜像", "依赖管理"]
 categories: ["绿联工作笔记"]
 ---

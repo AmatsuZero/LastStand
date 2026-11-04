@@ -1,7 +1,6 @@
 ---
 title: "UDC 镜像仓库迁移踩坑记录"
 date: 2026-10-21T13:55:41+08:00
-draft: true
 tags: ["GitLab", "镜像", "CI/CD", "Nexus", "CocoaPods", "同步"]
 categories: ["绿联工作笔记"]
 ---

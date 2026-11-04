@@ -1,7 +1,6 @@
 ---
 title: "网络 / 代理 / Gradle 问题修复记录"
 date: 2026-09-07T23:14:45+08:00
-draft: true
 categories: ["绿联工作笔记"]
 tags: ["网络", "代理", "Gradle", "Clash", "排障"]
 ---\n

@@ -1,7 +1,6 @@
 ---
 title: "rn-runtime-ios Runtime 发布与接入踩坑复盘"
 date: 2026-10-07T23:28:30+08:00
-draft: true
 categories: ["绿联工作笔记"]
 tags: ["iOS", "ReactNative", "CocoaPods", "Specs", "GitLabCI"]
 ---

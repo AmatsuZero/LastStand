@@ -1,7 +1,6 @@
 ---
 title: "GitLab macOS Runner 构建成功后卡死 27 分钟排查"
 date: 2026-10-19T16:48:13+08:00
-draft: true
 tags: ["GitLab", "CI/CD", "macOS", "Runner", "性能排查"]
 categories: ["绿联工作笔记"]
 ---

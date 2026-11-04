@@ -1,7 +1,6 @@
 ---
 title: "IoT 设备通信基础：配网、MQTT 与 P2P 穿透"
 date: 2026-09-10T09:14:06+08:00
-draft: true
 categories: ["绿联工作笔记"]
 tags: ["IoT", "配网", "MQTT", "P2P", "NAT穿透"]
 ---\n
