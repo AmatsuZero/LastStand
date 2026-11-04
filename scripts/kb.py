@@ -23,9 +23,12 @@ import subprocess
 
 
 def repo_root():
-    # 锚定到脚本自身所在仓库（scripts/ 的上一级 LastStand），
-    # 即使从其他仓库的工作目录调用也能正确定位知识库。
-    return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # 允许通过环境变量 KB_HOME 覆盖仓库位置（可配置，不硬编码）。
+    env = os.environ.get("KB_HOME")
+    if env:
+        return os.path.abspath(env)
+    # 否则锚定到脚本自身所在仓库；realpath 解析软链，支持把 kb 软链到 PATH。
+    return os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
 
 ROOT = repo_root()
@@ -368,6 +371,33 @@ def cmd_init():
     return 0
 
 
+def cmd_install():
+    """把 kb 软链安装到 PATH 目录（唯一可配置点）。"""
+    candidates = [os.path.expanduser("~/bin"), "/usr/local/bin"]
+    chosen = None
+    for d in candidates:
+        if os.path.isdir(d) and os.access(d, os.W_OK):
+            chosen = d
+            break
+    if not chosen:
+        print("未找到可写的 PATH 目录（~/bin 或 /usr/local/bin）。", file=sys.stderr)
+        print("请手动创建 ~/bin 并加入 PATH，再运行：python3 scripts/kb.py install", file=sys.stderr)
+        return 1
+    script = os.path.realpath(__file__)
+    link = os.path.join(chosen, "kb")
+    try:
+        if os.path.islink(link) or os.path.exists(link):
+            os.remove(link)
+        os.symlink(script, link)
+        print(f"已创建软链：{link} -> {script}")
+        print('请确保 ' + chosen + ' 在 PATH 中（如 ~/bin 需 export PATH="$HOME/bin:$PATH"）。')
+        print("以后若移动 LastStand，重跑此命令或设置环境变量 KB_HOME 即可。")
+        return 0
+    except OSError as e:
+        print(f"创建软链失败：{e}", file=sys.stderr)
+        return 1
+
+
 def main(argv):
     if not argv:
         print(__doc__)
@@ -397,6 +427,8 @@ def main(argv):
         return cmd_stats()
     if cmd in ("init",):
         return cmd_init()
+    if cmd in ("install",):
+        return cmd_install()
     print(f"未知子命令：{cmd}\n", file=sys.stderr)
     print(__doc__)
     return 1
