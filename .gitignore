@@ -4,7 +4,7 @@
 # MCP URLs contain access keys
 .cursor/mcp.json
 .omc/
-.codebuddy/
+.codebuddy/*
 .superpowers/
 .worktrees/
 .cursor/
@@ -33,3 +33,9 @@ resources/_gen/
 
 # 本地备忘录原始导出（由 scripts/sync-ugreen-notes.sh 重新生成，不入库）
 scripts/.ugreen-raw/
+
+# 知识库索引（本地增量生成，gitignore）
+kb.db
+
+# 允许跟踪 AI 技能（与 .claude/skills/ 处理一致）
+!.codebuddy/skills/

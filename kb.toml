@@ -1,0 +1,18 @@
+# 知识库纳入范围配置
+#
+# 两个列表都为空  => 纳入 content/posts 下的全部文章。
+# 任一列表非空    => 只纳入「分类命中 或 标签命中」的笔记（取并集）。
+# 想扩大到全部，把下面两个列表清空即可。
+
+[scope]
+include_categories = ["绿联工作笔记"]
+
+include_tags = [
+  "凭证", "CocoaPods", "CI/CD", "GitLab", "GitLabCI", "GitLabRunner",
+  "GitLFS", "LFS", "Nexus", "PackageRegistry", "Gradle", "SwiftPM",
+  "Semgrep", "SAST", "SCA", "SBOM", "Jenkins", "Xcode", "Electron",
+  "NodeAddon", "NitroModules", "Crashlytics", "Bugly", "CompilationCache",
+  "LinkMap", "ABI", "LibraryEvolution", "XCFramework", "迁移", "踩坑",
+  "debug", "故障", "构建", "依赖", "CLI", "macOS", "ReactNative",
+  "KotlinMultiplatform", "IoT", "MQTT", "NAT穿透", "P2P", "TRTC", "RTC"
+]

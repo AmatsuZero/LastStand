@@ -1,0 +1,7 @@
+#!/bin/sh
+# 拉取他人笔记后自动增量重建知识库索引（post-merge hook）
+# 安装方式：python3 scripts/kb.py init
+ROOT="$(git rev-parse --show-toplevel 2>/dev/null)"
+if [ -n "$ROOT" ]; then
+  python3 "$ROOT/scripts/kb.py" build --quiet || true
+fi
