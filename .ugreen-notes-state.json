@@ -4,147 +4,147 @@
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p582",
       "title": "UgreenHome 共享库 CI：依赖安全扫描与内网构建 — 复盘（2026-11-03～04，11-04 晚更新）",
       "modified": "2026年11月4日 星期三 09:15:13",
-      "postPath": "content/posts/ugreenhome-shared-ci-sca",
+      "postPath": "content/posts/ugreen-notes/ugreenhome-shared-ci-sca",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p481": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p481",
       "title": "Gitlab KMP 打包踩坑总结",
       "modified": "2026年9月22日 星期二 14:23:50",
-      "postPath": "content/posts/gitlab-kmp-build",
+      "postPath": "content/posts/ugreen-notes/gitlab-kmp-build",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p514": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p514",
       "title": "GitLab macOS Runner「构建成功后卡死 27 分钟」排查与修复纪要",
       "modified": "2026年10月19日 星期一 16:50:08",
-      "postPath": "content/posts/gitlab-macos-runner-hang",
+      "postPath": "content/posts/ugreen-notes/gitlab-macos-runner-hang",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p503": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p503",
       "title": "GitLab SAST ARM64 Runner 故障复盘",
       "modified": "2026年10月16日 星期五 17:41:53",
-      "postPath": "content/posts/gitlab-sast-arm64-runner",
+      "postPath": "content/posts/ugreen-notes/gitlab-sast-arm64-runner",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p526": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p526",
       "title": "UgreenHome iOS Jenkins Agent LFS Checkout 失败 — 排查与修复 (2026-10-22…",
       "modified": "2026年10月22日 星期四 15:26:24",
-      "postPath": "content/posts/ugreenhome-ios-jenkins-lfs",
+      "postPath": "content/posts/ugreen-notes/ugreenhome-ios-jenkins-lfs",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p522": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p522",
       "title": "UgreenHome CocoaPods spec / 镜像 tag 故障复盘",
       "modified": "2026年10月22日 星期四 15:18:48",
-      "postPath": "content/posts/ugreenhome-cocoapods-spec-mirror",
+      "postPath": "content/posts/ugreen-notes/ugreenhome-cocoapods-spec-mirror",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p519": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p519",
       "title": "UDC 镜像仓库迁移踩坑记录",
       "modified": "2026年10月21日 星期三 13:59:00",
-      "postPath": "content/posts/udc-mirror-migration",
+      "postPath": "content/posts/ugreen-notes/udc-mirror-migration",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p538": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p538",
       "title": "2026-10-26 UHPlayerSDK 打 tag 打包失败复盘",
       "modified": "2026年10月26日 星期一 10:17:32",
-      "postPath": "content/posts/uhplayersdk-tag-build-failure",
+      "postPath": "content/posts/ugreen-notes/uhplayersdk-tag-build-failure",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p558": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p558",
       "title": "UgreenHome RN iOS 组件化与调试能力重建｜阶段总结（2026-11-02）",
       "modified": "2026年11月2日 星期一 18:12:04",
-      "postPath": "content/posts/ugreenhome-rn-ios-modularization",
+      "postPath": "content/posts/ugreen-notes/ugreenhome-rn-ios-modularization",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p484": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p484",
       "title": "rn-runtime-ios Runtime 发布与接入踩坑复盘",
       "modified": "2026年10月7日 星期三 23:28:30",
-      "postPath": "content/posts/rn-runtime-ios-publish",
+      "postPath": "content/posts/ugreen-notes/rn-runtime-ios-publish",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p458": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p458",
       "title": "【RN Runtime】Xcode 26 ↔ 27 二进制不兼容原因记录",
       "modified": "2026年9月15日 星期二 19:33:46",
-      "postPath": "content/posts/rn-runtime-xcode26-27-incompat",
+      "postPath": "content/posts/ugreen-notes/rn-runtime-xcode26-27-incompat",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p506": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p506",
       "title": "UG *-bin 重发 & BLFD 踩坑总结",
       "modified": "2026年10月18日 星期日 13:42:37",
-      "postPath": "content/posts/ug-bin-resend-blfd",
+      "postPath": "content/posts/ugreen-notes/ug-bin-resend-blfd",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p535": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p535",
       "title": "hf auth login 粘贴 token 崩溃排查与修复（2026-10-25）",
       "modified": "2026年10月25日 星期日 21:39:07",
-      "postPath": "content/posts/hf-auth-login-token-crash",
+      "postPath": "content/posts/ugreen-notes/hf-auth-login-token-crash",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p523": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p523",
       "title": "=== 踩坑记录：cc-switch 切 Codex 供应商「不生效」 ===",
       "modified": "2026年10月22日 星期四 16:51:13",
-      "postPath": "content/posts/cc-switch-codex-provider",
+      "postPath": "content/posts/ugreen-notes/cc-switch-codex-provider",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p571": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p571",
       "title": "iOS MR 包体积分析实践：APPAnalyze、Link Map 与跨项目接入",
       "modified": "2026年11月2日 星期一 18:24:53",
-      "postPath": "content/posts/ios-mr-app-size-analysis",
+      "postPath": "content/posts/ugreen-notes/ios-mr-app-size-analysis",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p473": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p473",
       "title": "Crash 收集治理",
       "modified": "2026年9月17日 星期四 17:33:05",
-      "postPath": "content/posts/crash-collection-governance",
+      "postPath": "content/posts/ugreen-notes/crash-collection-governance",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p479": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p479",
       "title": "Gitlab 踩坑",
       "modified": "2026年10月12日 星期一 10:13:41",
-      "postPath": "content/posts/gitlab-migration-pitfalls",
+      "postPath": "content/posts/ugreen-notes/gitlab-migration-pitfalls",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p350": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p350",
       "title": "网络/代理/Gradle 问题修复记录",
       "modified": "2026年9月7日 星期一 23:14:45",
-      "postPath": "content/posts/network-proxy-gradle-troubleshooting",
+      "postPath": "content/posts/ugreen-notes/network-proxy-gradle-troubleshooting",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p415": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p415",
       "title": "硬件设备主流配网方式",
       "modified": "2026年9月10日 星期四 09:14:09",
-      "postPath": "content/posts/iot-communication-basics",
+      "postPath": "content/posts/ugreen-notes/iot-communication-basics",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p417": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p417",
       "title": "MQTT",
       "modified": "2026年9月10日 星期四 09:13:54",
-      "postPath": "content/posts/iot-communication-basics",
+      "postPath": "content/posts/ugreen-notes/iot-communication-basics",
       "status": "done"
     },
     "x_coredata___D719D0BA_336C_4F81_9E42_E6A536934131_ICNote_p419": {
       "id": "x-coredata://D719D0BA-336C-4F81-9E42-E6A536934131/ICNote/p419",
       "title": "P2P",
       "modified": "2026年9月10日 星期四 09:14:06",
-      "postPath": "content/posts/iot-communication-basics",
+      "postPath": "content/posts/ugreen-notes/iot-communication-basics",
       "status": "done"
     }
   }

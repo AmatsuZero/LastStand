@@ -735,9 +735,20 @@ connectWebSocket();
 
         // 或者精细化控制允许的源
         // app.use(cors({
-        //   origin: [\'http://localhost:8080\', \'https://www.yourfrontend.com\'],\n        //   methods: \'GET,HEAD,PUT,PATCH,POST,DELETE\',\n        //   allowedHeaders: [\'Content-Type\', \'Authorization\'],\n        //   credentials: true // 允许发送Cookie\n        // }));\n
-        // app.get('/api/data', (req, res) => {\n        //   res.json({ message: 'This is cross-origin data!' });\n        // });\n
-        // app.listen(3000, () => {\n        //   console.log('Backend server running on port 3000');\n        // });\n        ```
+        //   origin: ['http://localhost:8080', 'https://www.yourfrontend.com'],
+        //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        //   allowedHeaders: ['Content-Type', 'Authorization'],
+        //   credentials: true // 允许发送Cookie
+        // }));
+
+        // app.get('/api/data', (req, res) => {
+        //   res.json({ message: 'This is cross-origin data!' });
+        // });
+
+        // app.listen(3000, () => {
+        //   console.log('Backend server running on port 3000');
+        // });
+        ```
 
 2.  **JSONP (仅作为CORS不可用时的备选)**
     *   **优点**：
