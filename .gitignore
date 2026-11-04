@@ -30,3 +30,6 @@ obsidian/.obsidian/community-plugins.json
 public/
 resources/_gen/
 .hugo_build.lock
+
+# 本地备忘录原始导出（由 scripts/sync-ugreen-notes.sh 重新生成，不入库）
+scripts/.ugreen-raw/
