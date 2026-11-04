@@ -380,7 +380,7 @@ def main(argv):
     cmd = argv[0]
     rest = argv[1:]
     if cmd in ("build", "b"):
-        return cmd_build()
+        return cmd_build(quiet='--quiet' in rest)
     if cmd in ("search", "s"):
         if not rest:
             print("用法：kb search \"<关键词>\"", file=sys.stderr)
