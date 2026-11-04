@@ -23,14 +23,9 @@ import subprocess
 
 
 def repo_root():
-    try:
-        out = subprocess.run(
-            ["git", "rev-parse", "--show-toplevel"],
-            capture_output=True, text=True, check=True,
-        )
-        return out.stdout.strip()
-    except Exception:
-        return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # 锚定到脚本自身所在仓库（scripts/ 的上一级 LastStand），
+    # 即使从其他仓库的工作目录调用也能正确定位知识库。
+    return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 ROOT = repo_root()
