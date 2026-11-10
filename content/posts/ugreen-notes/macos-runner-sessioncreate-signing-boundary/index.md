@@ -40,5 +40,5 @@ Git checkout 的凭据助手与代码签名钥匙串是两个边界：若后台 
 ## 证据
 
 失败 job 的 xcresult 含扩展动态库 CodeSign 错误；两个签名探针分别返回 0 和 1。
-修正后服务状态为 running，完整 CI 重试已发起，结果尚需单独核验。
+修正后服务状态为 running，完整 CI 签名构建与真机重试通过：5 tests、0 failures、0 skips；JUnit 与下载的 xcresult 一致，8 张截图可导出，报告制品上传成功。该结果仅覆盖本次设备与登录会话配置。
 笔记不包含认证 token、签名身份指纹、设备标识或内部地址。
