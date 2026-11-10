@@ -163,7 +163,7 @@ def cmd_build(quiet=False):
         return 1
     inc_cats, inc_tags = load_scope()
     conn = connect()
-    existing = {r[0]: r[1] for r in conn.execute("SELECT id, path FROM posts")}
+    existing = {r[0] for r in conn.execute("SELECT path FROM posts")}
     meta_map = {r[0]: (r[1], r[2]) for r in conn.execute("SELECT path, mtime, hash FROM meta")}
     current = set()
     changed = 0

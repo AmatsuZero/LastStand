@@ -36,7 +36,7 @@ python3 "$KB_HOME/scripts/kb.py" tags --tag 凭证
 
 - 索引 `kb.db` 为本地生成（gitignore），首次或缺失时 `search` 会自动构建。
 - 纳入范围由根目录 `kb.toml` 的 `include_categories` / `include_tags` 控制。
-- 安装自动重建 hook：`python3 "$KB_HOME/scripts/kb.py" init`（commit / pull 后自动增量重建索引）。
+- 安装自动重建 hook：`python3 "$KB_HOME/scripts/kb.py" init`（实际触发条件与验证方法见下文）。
 
 ## 新增与修订经验文章
 
@@ -59,3 +59,4 @@ tags: ["踩坑", "构建"]
 - 写完后仅暂存本轮文章及约定文件，执行本地 commit，保留其他人的改动；不要只留下大量未跟踪文章。push 是单独的远端同步/发布动作，不是本地索引生效的前提。
 - `kb.db` 是被 Git 忽略的本地生成物，索引纳入范围不按 `draft` 过滤，草稿也可被经验检索使用。已安装且生效的 `post-commit` 在 commit 后重建，`post-merge` 在合并后重建（包括产生合并或快进的 pull）。仅 fetch、push、无需更新的 pull 或 rebase 路径不保证触发这些钩子。
 - 钩子未安装、被 `core.hooksPath` 改道，或尚未 commit 时，执行 `python3 "$KB_HOME/scripts/kb.py" build`。已有索引不会在每次 search 时自动刷新；缺失时才自动构建。钩子为避免阻断 Git 会忽略构建失败，commit 后仍需检索新文章确认命中。
+- 索引更新回归：`python3 -m unittest discover -s scripts -p test_kb.py`，覆盖已索引草稿修改、移出纳入范围以及真实 commit 钩子；不要仅用空数据库首建成功判断增量更新可用。
