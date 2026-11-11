@@ -48,3 +48,16 @@ pipeline/job 链接与时间；经既有 CLI 权限更新后读回全文核对�
 网络回归覆盖 TLS EOF 恢复、三次上限、永久错误与 POST 不重试。
 GitLab 在线 CI lint 通过并包含新的发布 job；完整脚本测试 411 项通过，Runner
 所用 Python 3.9 的 Wiki 网络测试通过。新 job 的实际 Runner 验收需合入后另记。
+
+## 补充：控制台截断不等于构建终止
+
+另一轮重试在控制台出现 `Job's log exceeded limit of 4194304 bytes`，随后
+不再收集输出。此提示明确表示 job 仍会继续，不能把最后可见的编译行当作失败位置。
+下载的 artifact 中完整编译日志包含 `BUILD SUCCEEDED`，报告 ZIP 含 issues、
+体积数据和 HTML；但 job 状态为 script failure，线上结果仍指向上一轮。
+这只能证明编译、分析和打包完成，不能在缺失尾部日志时断言最终是 TLS 错误。
+允许失败的 job 还可能让整个 pipeline 显示成功，需逐个核对 job 状态。
+
+修复将完整脱敏编译输出写入 artifact，控制台只输出编译阶段状态；失败时显示
+末尾 80 行诊断并保留原退出码。超过 4 MiB 的真实脚本 fixture 验证成功与失败
+两种路径，确保控制台仍可看到最终状态。生产 Runner 的后续验收仍单独记录。
