@@ -61,3 +61,13 @@ GitLab 在线 CI lint 通过并包含新的发布 job；完整脚本测试 411 �
 修复将完整脱敏编译输出写入 artifact，控制台只输出编译阶段状态；失败时显示
 末尾 80 行诊断并保留原退出码。超过 4 MiB 的真实脚本 fixture 验证成功与失败
 两种路径，确保控制台仍可看到最终状态。生产 Runner 的后续验收仍单独记录。
+
+## 同步验证时的 Python 夹具边界
+
+某些 macOS 脚本测试通过 `#!/usr/bin/env python3` 启动假的构建命令，同时
+将 `DEVELOPER_DIR` 设为测试专用的 `/Fake/Xcode.app/Contents/Developer`。
+如果 PATH 命中系统的 Xcode Python shim，假命令也可能在执行 Python 正文前
+就被 `xcrun` 拒绝，报 missing DEVELOPER_DIR path。
+本次同步前后有完全相同的 11 个夹具失败；仅把 Homebrew Python 放到本轮命令
+PATH 前面，同一测试文件 12 项和完整套件 431 项均通过，未修改测试或生产脚本。
+此修正只适用于隔离的脚本夹具验证，不是让真实 Xcode 构建使用无效路径的办法。
