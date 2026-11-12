@@ -18,6 +18,8 @@ tags: ["Xcode", "CI/CD", "踩坑"]
 
 真机 TOC 的目标进程 name 还可能使用 App 显示名称，而不是可执行文件名。因此名称检查和最终二进制 UUID 检查要分别处理。
 
+同构建优化包的真实 Link Map 中还观察到 617 行含非法 UTF-8 字节，检查到的行均为符号记录。直接用严格 UTF-8 解码会在进入地址归因前抛出 `UnicodeDecodeError`；这不是 trace、UUID 或构建失败。
+
 ## 有效恢复（effective recovery）
 
 - 先导出 TOC，再精确选择 schema 和表属性。CPU 采样查询限定 `context-switch-sampling=0`、`record-waiting-threads=0`；不把上下文切换表合进 CPU 热点。
@@ -25,6 +27,7 @@ tags: ["Xcode", "CI/CD", "踩坑"]
 - Points of Interest 也可能有多张 os-signpost 表。按 category、目标范围及动态 tracing 属性选择所需表；App 发出的 signpost category 必须与采集配置匹配。
 - 函数排名明确写采样权重；任务实际持续时间用配对 signpost 区间或系统区间。线程状态单独报告，静态代码字节数不换算成耗时。
 - iOS 接受经实际验证的 App 显示名称，同时继续校验唯一启动目标、构建、dSYM UUID 与同构建 Link Map，不能只凭名字认定身份。
+- Link Map 读取使用 `errors="backslashreplace"` 保留非 UTF-8 字节为转义；归因依据数字地址、长度和对象索引，不能依赖解码后的符号名。重叠或折叠区间保留 unknown，也不能因转义处理便认为所有对象路径都已可信。
 
 ## 边界（boundaries）
 
@@ -37,3 +40,5 @@ tags: ["Xcode", "CI/CD", "踩坑"]
 先用定向 macOS sleep 录制确认两类 time-profile 表；再用小型 Swift signpost 程序验证 category、样本关联和成对区间。最后在空闲真机上对已安装测试包做短时启动录制，导出 CPU 采样、dyld 区间、生命周期和线程状态，验证实际 iOS 表结构及显示名称。原始 TOC/导出保留本地，脱敏切片用于解析回归。
 
 上述证据仅证明采集与解析边界，不构成生产性能结论、优化效果证明或全新安装基线。
+
+另一次优化包校验先复现 Link Map 的严格解码失败，再增加含非法字节的符号回归；修复后复用原 trace 成功完成同构建地址归因，无需重复采集。已用 Instruments 界面核对 dyld 区间和符号化调用树。静态对象贡献与运行时镜像来源分别保留，采样权重仍不解释为逐库加载耗时。
