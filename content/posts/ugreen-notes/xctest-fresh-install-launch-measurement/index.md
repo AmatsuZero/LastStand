@@ -77,3 +77,7 @@ MetricKit 的 `addSubscriber` 订阅和扩展启动 API 是两种行为。只有
 当前安装工具链的公开 `XCTMetric.h` 将 `willBeginMeasuring` 和 `didStopMeasuring` 声明在 `@optional` 下。Swift 对具体 `XCTApplicationLaunchMetric` 类型接受直接调用，并不保证运行时对象实现了该 selector。将系统指标保存为 `any XCTMetric`，使用 `metric.willBeginMeasuring?()` 和 `metric.didStopMeasuring?()` 转发，才能保留协议的可选调用语义。必需的 `reportMeasurements` 仍原样转发，未替换、合成或修改系统测量值。
 
 回归从实际交付源码提取包装类，链接本机真实 XCTest 运行库，执行生命周期调用及复制实例调用。修复前重现同一个 Objective-C 异常，修复后通过。该回归证明本工具链上的生命周期兼容性；不代替真机新安装、启动次数、页面可交互或系统首帧验收。不同 XCTest 版本仍需运行验证。
+
+后续签名真机验证证明了上述边界：可选调用异常消失，App 已启动且找到设备卡片，但包装层转发 `reportMeasurements` 时，系统指标报 `Bad date range to search archive`，并因 `_startDate` 为空触发 `MXMOSSignpostMetric` 内部断言。因此，这个生命周期回归通过不能证明公开协议包装器能完整复用内置指标；具体内部日期设置机制尚未证实，不应调用私有方法补齐。
+
+最终候选改为将原始 `XCTApplicationLaunchMetric` 直接传给 XCTest，再对同一个 `.xcresult` 使用公开的 `xcresulttool get test-results metrics --schema-version 0.5.0 --test-id <exact-test>` 读取原始指标。用同结果包内的 sample 回执、测试、配置、设备和单次测量建立关联；系统指标自身不携带业务 sample 或 PID。缺失、重复或身份不符一律拒绝，不能以聚合平均值、日志时间或另一轮结果补齐。本次公开工具 schema 与解析回归已验证，新的完整真机验收仍需另行确认。
