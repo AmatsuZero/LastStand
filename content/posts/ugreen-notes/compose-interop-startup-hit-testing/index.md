@@ -52,3 +52,13 @@ Apple 文档：[UIView.hitTest](https://developer.apple.com/documentation/uikit/
 审查进一步发现，记录器的 `mark` 若返回 Void，容量耗尽或停用时会静默拒绝；探针随后仍可能错误发布 ready。已通过真实 UIKit 运行库回归复现：容量一的记录器被 data-bound 占满后，旧实现仍点亮 ready。恢复方式是让 `mark` 只在实际 append 后返回 true；探针收到 false 时保持 pending，并输出固定的 recording_rejected/event_recording_rejected。修复后该回归通过，同时覆盖 disabled/finished 拒绝。最新独立 UIKit 检查十四项、原生记录器等检查三十八项通过。
 
 这个确认协议只证明 ready 信号与事件写入一致，不证明原来那次漏报的生命周期成因已解决；仍需新的签名设备及每日任务证据。报告只发布白名单字段，不上传任意视图 payload。
+
+## 补充：高层窗口存在不等于覆盖目标点
+
+后续一次真实每日采样中，两个失败样本都是唯一启动、卡片 exists/hittable 为真，App 探针却因 `covering_window` 没有发布 ready。原始诊断指向 level 10 的 `UITextEffectsWindow`。旧代码只按同 scene 窗口可见性、alpha 和层级筛选，随后要求候选列表为空，根本没有检查这些窗口是否接收卡片中心的命中。这个证据确认了被拒绝的分支，但尚不能单独证明该系统窗口在目标点实际透传。
+
+通用恢复边界是对每个候选窗口调用 `candidate.hitTest(candidate.convert(point, from: targetWindow), with: nil)`：只有返回 nil 才继续原有目标窗口与 Compose 检查；返回任何视图都仍视为遮挡。不按系统私有类名放行、不隐藏窗口、不发送触摸。坐标必须先转换，不能把目标窗口中的点直接交给另一个窗口。公开查询可被自定义实现重写，不能承诺其内部绝无副作用；nil 查询仍不同于派发真实触摸。
+
+真实 UIKit 回归还揭示一个容易写错的测试前置：普通 UIWindow 即使 root view 的 hit-test 返回 nil，也可能回退返回窗口自身。这不是真正透传，必须继续拒绝；透传窗口测试应使用确实将窗口自身结果转换为 nil 的公开 UIWindow 子类，同时保留“返回窗口自身仍拒绝”的负例。完整干净回归在旧代码上为17项通过、2项失败（目标点透传和窗口位于目标点之外），修复后19项通过；偏移窗口真实拦截、hidden/alpha/equal-level 和原 Compose 门禁均覆盖。第一次小型 harness 缺少新源码依赖造成零测试构建失败，不计作 RED。
+
+报告只发布有界且一致的候选/透传窗口数量，要求整数类型并满足 `0 <= passthrough <= candidate <= 16`；原始窗口查询数组不发布。新增过滤回归先失败、随后全量672项通过。这些是通用 UIKit 与报告契约证据；仍需签名真机实际观察该系统窗口返回值及完整每日复验，不能用单元测试代替自然失败成因的确认。
