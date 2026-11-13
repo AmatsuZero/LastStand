@@ -26,6 +26,8 @@ tags: ["Xcode", "CI/CD", "踩坑"]
 
 等待原因分析还可能出现另一种误判：把 thread-state 表中的 Blocked 区间直接当成 time-profile 表的筛选条件。本次真实 context-switch 表中，部分行的 state 和 stack 均为 sentinel；仅取 Blocked 区间内的行会得到空栈，但相邻恢复运行的同线程记录仍有 `mach_msg2_trap → mach_msg → __CFRunLoopServiceMachPort → __CFRunLoopRun`。空标记行不等于整份 trace 没有等待相关栈，也不能仅凭空行断定采集配置或系统权限不足。
 
+实际唤醒还可能经过 `Blocked → Runnable → Running`。同份导出的一段等待结束后，先有约 6 微秒 Runnable，再进入 Running；若只允许 Blocked 后直接 Running，会漏掉其恢复附近的调用栈。Runnable 的调度等待不能算进 Blocked，也不能跳过另一段 Blocked 去拿更远的栈。
+
 ## 有效恢复（effective recovery）
 
 - 先导出 TOC，再精确选择 schema 和表属性。CPU 采样查询限定 `context-switch-sampling=0`、`record-waiting-threads=0`；不把上下文切换表合进 CPU 热点。
@@ -39,6 +41,7 @@ tags: ["Xcode", "CI/CD", "踩坑"]
 - 脱敏 XML 时保留主线程与不同工作线程的身份关系；把所有线程都替换成 Main Thread 会制造重叠区间和错误归因。重叠状态不重复计时，缺失数据不显示为零。
 - main 入口探针和业务就绪事件独立校验。缺少业务终点时保留已匹配的 main 边界；原始导出没有事件时，重新解析无法补齐，报告应解释缺项对哪些指标的影响。
 - 检查等待栈时分别检查原始 sentinel、引用解析后的 stack、相邻上下文切换记录及采集表属性。以同进程、同线程和 trace 时钟关联，保留时间差；不要要求不同表在同一时刻都有完整栈。邻近栈只提供定位线索，不自动证明整个等待区间的原因，更不能把采样 weight 当成等待持续时间。
+- 沿同数值 PID/TID 的连续 Blocked → Runnable → Running 唤醒链关联，分别保留等待时长、调度间隔和采样时间差；本次工具采用等待结束后 100 微秒内且位于该 Running 区间的样本作为保守线索。这是报告策略，不是系统保证。遇到其他状态、第二段等待、时间断层或冲突栈便拒绝；可选等待表缺失不应丢弃已取得的系统阶段和 CPU 数据。
 
 ## 边界（boundaries）
 
@@ -59,3 +62,5 @@ tags: ["Xcode", "CI/CD", "踩坑"]
 同日新诊断的预检复现模板误判；命令行分别查询两个目录确认分类。按真实分类编写回归后，原实现出现四项断言失败；分开检查后 38 项解析/采集边界测试通过。失败的设备尝试原样保留，预检通过本身仍不等于 trace 或业务事件采集完成。
 
 随后对已有 trace 只读导出 context-switch / waiting 表，确认最长一段主线程等待结束约 7 微秒后的同线程记录包含上述 RunLoop 栈；等待区间内的部分行则是原始 sentinel。该复核纠正了“等待栈为空”的过度结论，没有重新录制，也没有据此将全部 Blocked 时间判为正常或完成逐段等待归因。
+
+进一步加入连续 Runnable 唤醒链的回归，先观察到仅匹配直接 Running 的实现无法关联，再补齐有界关联。对同一冻结 trace 离线复验后，782 段等待中 75 段保留相邻栈线索，其余仍为证据不足；启动窗口、CPU 样本、各阶段耗时和线程状态总量逐项保持一致。此结果只证明关联与计时边界，不证明全部等待的原因。
