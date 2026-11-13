@@ -69,3 +69,11 @@ MetricKit 的 `addSubscriber` 订阅和扩展启动 API 是两种行为。只有
 2026-11-13 再次读取 Apple 上述两个 initializer 的 DocC JSON，确认默认值与 `waitUntilResponsive=false` 的扩展任务语义。用同一工具链优化编译旧 Objective-C 和新 Swift API 探针，两种调用均可在编译产物中检出对应标识；这是扫描机制验证，尚不能代替真实新安装首帧验收。
 
 同轮两次 UI 测试在执行用例前报 `Timed out while enabling automation mode.`。设备截图直接显示“为 XCTest 输入设备密码 / Enable UI Automation”，确认本次阻塞为系统等待设备持有人授权。仅看 CoreDevice 连接正常及 `passcodeRequired=false` 不足以排除该授权页。应由持有人直接在设备输入密码；日志只保留脱敏错误码，不收集密码、不绕过系统确认。尚未观察授权后的恢复结果，不将重试、重启或锁定状态查询写成已验证修复。
+
+### 可选指标生命周期不能无条件转发
+
+后续同日，设备持有人完成密码授权后，三次精确范围状态准备均实际通过。但启动测量用例在测试 runner 内崩溃，原始错误为 `-[XCTApplicationLaunchMetric willBeginMeasuring]: unrecognized selector sent to instance`。这是指标包装层错误，与设备授权超时属于两个不同阶段，不能继续归因为设备未授权。
+
+当前安装工具链的公开 `XCTMetric.h` 将 `willBeginMeasuring` 和 `didStopMeasuring` 声明在 `@optional` 下。Swift 对具体 `XCTApplicationLaunchMetric` 类型接受直接调用，并不保证运行时对象实现了该 selector。将系统指标保存为 `any XCTMetric`，使用 `metric.willBeginMeasuring?()` 和 `metric.didStopMeasuring?()` 转发，才能保留协议的可选调用语义。必需的 `reportMeasurements` 仍原样转发，未替换、合成或修改系统测量值。
+
+回归从实际交付源码提取包装类，链接本机真实 XCTest 运行库，执行生命周期调用及复制实例调用。修复前重现同一个 Objective-C 异常，修复后通过。该回归证明本工具链上的生命周期兼容性；不代替真机新安装、启动次数、页面可交互或系统首帧验收。不同 XCTest 版本仍需运行验证。
