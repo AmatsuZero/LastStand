@@ -22,11 +22,14 @@ tags: ["Xcode", "CI/CD", "踩坑"]
 
 线程状态还可能出现“报告几乎都是 Blocked”的展示偏差：实测导出包含从 trace 零点开始的启动前等待，而分析窗口从系统初始化开始。只裁剪终点、按最长若干片段排序，会把启动前等待算入启动，并让大量较短的 Running 区间从表中消失。对原始导出同时裁剪起终点、完整累计后，状态分布与原报告显著不同；不能据原来的片段榜单断言主线程全程阻塞。
 
+另一次新录制在设备变更之前被误报为缺少模板。实查同版本 `xctrace list templates` 包含 `App Launch`，但不包含 `Points of Interest`；后者列在 `xctrace list instruments` 中。把 instrument 和 template 当作同一目录检查，会拒绝本来具备采集能力的环境。手写测试若把两者同时塞进 templates 输出，会掩盖这项错误。
+
 ## 有效恢复（effective recovery）
 
 - 先导出 TOC，再精确选择 schema 和表属性。CPU 采样查询限定 `context-switch-sampling=0`、`record-waiting-threads=0`；不把上下文切换表合进 CPU 热点。
 - 验证列 mnemonic、engineering-type 和引用关系；遇到新结构保留原始 trace，标记人工分析，不能猜列或默默返回零。
 - Points of Interest 也可能有多张 os-signpost 表。按 category、目标范围及动态 tracing 属性选择所需表；App 发出的 signpost category 必须与采集配置匹配。
+- 模板与 instrument 分别查询对应目录，按完整行匹配 `App Launch` 与 `Points of Interest`；回归测试保留真实目录的分类，缺少 instrument 时仍须在安装/启动前拒绝。
 - 函数排名明确写采样权重；任务实际持续时间用配对 signpost 区间或系统区间。线程状态单独报告，静态代码字节数不换算成耗时。
 - iOS 接受经实际验证的 App 显示名称，同时继续校验唯一启动目标、构建、dSYM UUID 与同构建 Link Map，不能只凭名字认定身份。
 - Link Map 读取使用 `errors="backslashreplace"` 保留非 UTF-8 字节为转义；归因依据数字地址、长度和对象索引，不能依赖解码后的符号名。重叠或折叠区间保留 unknown，也不能因转义处理便认为所有对象路径都已可信。
@@ -49,3 +52,5 @@ tags: ["Xcode", "CI/CD", "踩坑"]
 另一次优化包校验先复现 Link Map 的严格解码失败，再增加含非法字节的符号回归；修复后复用原 trace 成功完成同构建地址归因，无需重复采集。已用 Instruments 界面核对 dyld 区间和符号化调用树。静态对象贡献与运行时镜像来源分别保留，采样权重仍不解释为逐库加载耗时。
 
 2026-11-13 对同一份原始 thread-state 导出复核，确认报告包含分析起点之前的长等待，并且最长区间排序遗漏大量短运行区间。增加覆盖窗口两端、工作线程排除、状态完整累计、重叠拒绝与缺失事件独立性的回归测试；同时根据原始导出修正脱敏样本的主线程/工作线程标记。修正仅重新解析既有证据，没有重新启动 App 或把校验改称全新安装基线。
+
+同日新诊断的预检复现模板误判；命令行分别查询两个目录确认分类。按真实分类编写回归后，原实现出现四项断言失败；分开检查后 38 项解析/采集边界测试通过。失败的设备尝试原样保留，预检通过本身仍不等于 trace 或业务事件采集完成。
