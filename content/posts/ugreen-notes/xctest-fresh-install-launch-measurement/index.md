@@ -91,3 +91,13 @@ MetricKit 的 `addSubscriber` 订阅和扩展启动 API 是两种行为。只有
 同包另外执行的 Instruments 诊断成功捕获进程初始化、main 探针、首帧和业务就绪边界，并给出热点、dyld 操作及主线程区间。该诊断保留前序 App 数据且受到插桩，必须和普通 fresh 样本分别报告；不同来源的计时值不能相减来补齐 pre-main。普通新安装仍保留明确声明的设备标识 Keychain，并不表示全 Keychain 或系统缓存已清空。
 
 此验收只证明本地签名设备流程。定时任务的功能套件、自动 Wiki 发布、制品上传和默认删除仍需单独核对 CI 结果；不能用本地六项用例通过替代每日任务完成证明。原始 trace、XML、符号和结果包在分析与发布完成后删除，结构化小报告保留。
+
+## 失败取证：立即终止 XCTest 会绕过 Swift defer
+
+每日采样有一次在等待 App ready 时超时。精确状态准备通过，同次 xcresult 保留了 XCTest 自动截图和控件调试信息，却没有测试主动添加的启动回执、UI 与事件 JSON。报告只能看到 missing_attachment，无法取得探针的具体拒绝原因。
+
+已验证的控制流边界是 `continueAfterFailure=false`：断言失败会立即终止用例，Swift 的 defer 不保证执行，不能把关键失败取证只寄托在该 defer。用真实 Apple XCTest 运行库、同一等待 helper 和始终 pending 的 NSObject 查询复现，旧实现仍是 failed，但 defer 哨兵缺失。
+
+有界恢复是让等待返回 Bool，超时时先将 continueAfterFailure 设为 true，再记录 XCTFail；两个调用方通过 guard 正常返回，不执行详情导航。这样保留失败结果，同时允许原 defer 执行 JSON 导出和终止。不要在外层 defer 前恢复立即中止策略，否则导出中的后续断言仍可能打断剩余清理。修复后同一运行库仍返回失败，导出哨兵存在，导航哨兵不存在。
+
+这是等待失败路径的取证修复，不说明 App ready 缺失的具体生命周期或遮挡成因已解决。该小型运行库探针也不替代新签名真机的完整 App 导出验证；缺少事件时仍拒绝基线，不能靠放宽遮挡判断或把失败改成通过来恢复指标。
