@@ -20,7 +20,11 @@ tags: ["Xcode", "CI/CD", "踩坑"]
 
 因此，`iterationCount = 1` 不能保证测量块只调用一次。如果块内调用 `app.launch()`，就不能把这个配置当作“恰好一次 App 启动”的证明。后续启动也可能受到首次运行创建的状态影响；具体进程和缓存行为仍要用运行证据确认。
 
-这是本次工具链头文件证明的调用契约，尚没有本项目真机运行轨迹来量化额外调用的耗时或影响。其他 XCTest 版本应核对其文档和实际行为，不能把本次发现扩大为所有性能 API 的固定实现。
+这是本次工具链头文件证明的调用契约，首次审计时尚无真机轨迹量化额外调用的耗时或影响。其他 XCTest 版本应核对其文档和实际行为，不能把本次发现扩大为所有性能 API 的固定实现。
+
+后续保留数据的有界试验将首个 block 留空，只在第二个 block 显式 launch 一次。实际观察到 block 调用两次、launch 调用一次，且 xcresult 成功导出单个 `com.apple.dt.XCTMetric_ApplicationLaunch-AppLaunch.duration` 值。空预热块在该工具链上没有导致测量报错，但这只是候选来源：测试日志在 launch 时仍有已有目标进程，metrics 行只提供测试、设备、配置身份，没有 App PID 或业务 sample。
+
+[Apple 的默认 initializer 文档](https://developer.apple.com/documentation/xctest/xctapplicationlaunchmetric/init()) 还说明它包含 extended launch tasks；仅当没有通过 MetricKit 扩展启动测量时，才只测到首帧。因此，指标名字里含 AppLaunch 及单个非空数值，均不能独立证明 non-extended 首帧语义或全新安装状态。
 
 还要区分命令行的测试重复与性能块迭代：Xcode 27.2 的真实 `xcodebuild test-without-building -test-iterations 1` 在启动前报错 `Must specify -test-iterations with more than 1 iteration.`。该参数用于重复测试；运行唯一所选用例一次时使用默认值，不传这个参数，也不启用失败重试。
 
@@ -53,5 +57,7 @@ tags: ["Xcode", "CI/CD", "踩坑"]
 调整后的 App 与 UI test target 已完成 unsigned `StartupProfile build-for-testing`。记录器、readiness 和精确范围准备逻辑的 macOS 源码测试 harness 31 项通过，但这类单元证据不证明真机启动次数、首帧指标或 Keychain 重置已经通过。
 
 本文归档的是测量契约纠正与当前验证边界，没有给出真实设备启动速度、劣化阈值或真机成功结论。
+
+2026-11-13 的空预热块试验完成签名优化构建及 1 项真机用例。原始 metrics 与计数附件验证了上述候选行为；没有执行状态重置或全新安装，也未将候选值接入普通首帧解析器。临时用例已精确撤回，结论保留为候选已观察、验收未通过。
 
 2026-11-13 在新优化构建的有界 UI 验收中复现 `-test-iterations 1` 的启动前错误，移除后实际运行 1 项测试。该测试捕获了卡片已可点击而 App readiness 缺失的失败，继而观察到 Xcode 的整机诊断子进程。只停止本次任务精确归属的该子进程后，结果包完成并成功导出附件；未停止其他会话或设备进程。适配器回归分别验证默认单次执行和关闭附加整机诊断，均先失败再通过。
