@@ -121,6 +121,15 @@ Swift 叶子文件任务按签名、起止时间、duration、文件 URL 与缓�
 这是固定源码与真实日志吻合的解释，但尚未用同一 Apple Runner 编译器做最小对照，
 不要宣称已验证恢复表达式输出，也不要将告警阈值直接加到正式构建中。
 
+后续用 Xcode 27.2 / 27B52、Swift 6.4.2 做最小真实 iOS Framework Release
+Archive 对照，固定同一个官方 0.2.50 binary。两个 debug 参数单独启用，以及再加
+`-warn-long-expression-type-checking=200`，两种配置均构建成功，原始日志均有
+3 行函数计时和 6 行表达式计时。JSON、Flat JSON、HTML 均生成成功，但解析后的
+函数/表达式条数均为零，两个 `SwiftCompile` 记录仍为 `other`。
+这证明在这个真实最小工程中，单独升级 Xcode 27.2 不能恢复这些指标；它不是宿主
+App 或另一台 Runner 的验收。27.2 不加告警阈值也产生表达式输出，前述 Swift 6.3.2
+源码线索不能泛化到 Swift 6.4.2。保留原始输入和报告，未据此升级 Runner。
+
 该样本原始压缩日志约 4.06 MB，层级 JSON 约 1.20 GB、Flat JSON 约 1.20 GB、
 HTML 约 1.62 GB。跨物理 Mac 的分析生成成功后，常规 Artifact 上传返回 413。
 生成成功、上传成功和指标正确性是三项不同验收，不按输入 gzip 大小预算输出容量。
