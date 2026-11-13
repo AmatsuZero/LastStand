@@ -101,3 +101,5 @@ MetricKit 的 `addSubscriber` 订阅和扩展启动 API 是两种行为。只有
 有界恢复是让等待返回 Bool，超时时先将 continueAfterFailure 设为 true，再记录 XCTFail；两个调用方通过 guard 正常返回，不执行详情导航。这样保留失败结果，同时允许原 defer 执行 JSON 导出和终止。不要在外层 defer 前恢复立即中止策略，否则导出中的后续断言仍可能打断剩余清理。修复后同一运行库仍返回失败，导出哨兵存在，导航哨兵不存在。
 
 这是等待失败路径的取证修复，不说明 App ready 缺失的具体生命周期或遮挡成因已解决。该小型运行库探针也不替代新签名真机的完整 App 导出验证；缺少事件时仍拒绝基线，不能靠放宽遮挡判断或把失败改成通过来恢复指标。
+
+后续独立 iOS XCTest 运行时验证：用相同等待 helper 和始终 pending 的控件查询故意触发超时，xcodebuild 返回测试失败；同次 xcresult 的 summary 为 failed=1/passed=0，并成功导出 defer 中添加的 JSON 附件，未出现导航附件。该探针只验证失败控制流和附件导出，不代表完整 App 已支持模拟器。另一个签名优化 App 的六次独立重装和同包 retained 正常路径均通过，仍没有复现原来的偶发 ready 超时。
