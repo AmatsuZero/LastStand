@@ -42,3 +42,13 @@ Compose Multiplatform **1.11.1** 的 `InputViews.ios.kt` 第 639–672 行对 ni
 上游源码：[Compose 1.11.1 InputViews.ios.kt](https://github.com/JetBrains/compose-multiplatform-core/blob/v1.11.1/compose/ui/ui/src/iosMain/kotlin/androidx/compose/ui/window/InputViews.ios.kt#L639)。
 
 Apple 文档：[UIView.hitTest](https://developer.apple.com/documentation/uikit/uiview/hittest(_:with:)) 允许在非事件处理代码中传入 nil，但具体容器仍可能为不同事件类型实现不同路由。
+
+## 补充：就绪信号必须确认事件已写入
+
+后续定时执行出现一次 App ready 事件缺失：同次样本的卡片和真实详情导航均通过，App 探针最后仍报告遮挡。仅凭这个组合不能确定是生命周期竞争还是具体命中分支；相同视图类名也不是根因证据。应保留具体拒绝原因、路由层数量和观察器停止原因，再从新证据定位，不能放宽遮挡规则。
+
+为避免测试在 App 探针完成之前离开首页，专项 UI 在原计时结束后、点击详情前等待同一样本的 `ready:<sample>`，最多十秒。该等待不延长原 UI 耗时，不充当性能事件。
+
+审查进一步发现，记录器的 `mark` 若返回 Void，容量耗尽或停用时会静默拒绝；探针随后仍可能错误发布 ready。已通过真实 UIKit 运行库回归复现：容量一的记录器被 data-bound 占满后，旧实现仍点亮 ready。恢复方式是让 `mark` 只在实际 append 后返回 true；探针收到 false 时保持 pending，并输出固定的 recording_rejected/event_recording_rejected。修复后该回归通过，同时覆盖 disabled/finished 拒绝。最新独立 UIKit 检查十四项、原生记录器等检查三十八项通过。
+
+这个确认协议只证明 ready 信号与事件写入一致，不证明原来那次漏报的生命周期成因已解决；仍需新的签名设备及每日任务证据。报告只发布白名单字段，不上传任意视图 payload。
