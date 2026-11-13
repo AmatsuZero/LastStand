@@ -102,6 +102,25 @@ Swift 叶子文件任务按签名、起止时间、duration、文件 URL 与缓�
 数组仍为空，38 个 SwiftCompile 步骤仍为 other；文件记录还存在空路径和合成
 条目，不能直接拿记录条数当独立文件数。新版工具链实测没有解除能力验收缺口。
 
+进一步用官方 `dump` 解码同一原始日志，得到 8,221 个 section。计时文本中有
+93,321 行三列函数输出，其中 88,868 行包含 Swift 文件位置，4,453 行为无效位置；
+这些是诊断输出行数，不是唯一函数数或已通过验收的指标。它们分布在 34 个
+`SwiftCompile` 和 18 个 `SwiftEmitModule` section，这些 section 的
+`commandDetailDesc` 均没有诊断参数；参数位于另外 102 个 `SwiftDriver` section，
+其中 101 个 section 的 `text` 为空，另一个只有告警文本，没有计时行。
+0.2.50 除分类入口不兼容外，
+`SwiftCompilerParser.findRawSwiftTimes()` 还要求参数和输出在同一 section。
+因此仅补任务名称分类仍不足以恢复这份输入的函数数据关联。
+
+表达式方面，原始文本没有找到解析器预期的两列计时行；不能称为单纯解析丢失。
+固定 Swift 6.3.2 上游源码还提供了一条可验证线索：
+[`startExpressionTimer()`](https://github.com/swiftlang/swift/blob/cd8d8ad0019e4e291906b311e0d25d7039cddc9c/lib/Sema/ConstraintSystem.cpp#L179)
+仅在表达式超时阈值或慢表达式告警阈值非零时创建计时器，创建时没有检查
+`DebugTimeExpressions`；debug 开关只在已有计时器析构时决定是否打印。
+两个阈值默认均为零，本次实际命令也未设置对应阈值参数。
+这是固定源码与真实日志吻合的解释，但尚未用同一 Apple Runner 编译器做最小对照，
+不要宣称已验证恢复表达式输出，也不要将告警阈值直接加到正式构建中。
+
 该样本原始压缩日志约 4.06 MB，层级 JSON 约 1.20 GB、Flat JSON 约 1.20 GB、
 HTML 约 1.62 GB。跨物理 Mac 的分析生成成功后，常规 Artifact 上传返回 413。
 生成成功、上传成功和指标正确性是三项不同验收，不按输入 gzip 大小预算输出容量。
