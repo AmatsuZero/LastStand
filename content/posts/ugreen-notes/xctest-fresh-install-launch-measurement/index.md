@@ -103,3 +103,7 @@ MetricKit 的 `addSubscriber` 订阅和扩展启动 API 是两种行为。只有
 这是等待失败路径的取证修复，不说明 App ready 缺失的具体生命周期或遮挡成因已解决。该小型运行库探针也不替代新签名真机的完整 App 导出验证；缺少事件时仍拒绝基线，不能靠放宽遮挡判断或把失败改成通过来恢复指标。
 
 后续独立 iOS XCTest 运行时验证：用相同等待 helper 和始终 pending 的控件查询故意触发超时，xcodebuild 返回测试失败；同次 xcresult 的 summary 为 failed=1/passed=0，并成功导出 defer 中添加的 JSON 附件，未出现导航附件。该探针只验证失败控制流和附件导出，不代表完整 App 已支持模拟器。另一个签名优化 App 的六次独立重装和同包 retained 正常路径均通过，仍没有复现原来的偶发 ready 超时。
+
+取证还必须覆盖比 ready 等待更早的断言：另一次自然失败出现在测量前 `.state != .notRunning`，旧代码没有保存原始枚举值，因此错误文本不能区分 unknown 和真实运行。仅在 ready 超时分支打开 continueAfterFailure 无法修补这条较早路径。后续将失败记录策略放到方法入口，并为所有后续 App 操作添加明确的 guard-return；原始状态只记录，不修改门禁。
+
+真实签名设备的单独预期失败验收主动启动 App，再进入实际采样方法：同次结果包只记录一条预期的启动前门禁失败，四类 JSON（回执、UI、事件、沙盒）均导出；原始状态为4，stopped=false，blocks=0、launches=0，导航false。该主动造出的运行状态不说明前次自然失败也是4。负向验收后，另外三次独立 fresh 与同包 retained 正常路径通过。预期失败用例默认跳过，不加入普通性能样本。
