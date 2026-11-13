@@ -22,6 +22,10 @@ tags: ["Xcode", "CI/CD", "踩坑"]
 
 这是本次工具链头文件证明的调用契约，尚没有本项目真机运行轨迹来量化额外调用的耗时或影响。其他 XCTest 版本应核对其文档和实际行为，不能把本次发现扩大为所有性能 API 的固定实现。
 
+还要区分命令行的测试重复与性能块迭代：Xcode 27.2 的真实 `xcodebuild test-without-building -test-iterations 1` 在启动前报错 `Must specify -test-iterations with more than 1 iteration.`。该参数用于重复测试；运行唯一所选用例一次时使用默认值，不传这个参数，也不启用失败重试。
+
+有意让设备断言失败时，还观察到 Xcode 派生 `devicectl diagnose` 收集整机诊断，用例已结束但结果包迟迟未完成。尚未落盘 `Info.plist` 的 `.xcresult` 不能由 xcresulttool 正常读取；不能据此误判导出 schema 无效。
+
 ## 有效恢复（effective recovery）
 
 专项用例暂时直接调用一次 `app.launch()`，由外部编排为每个样本执行独立的准备、卸载和安装。计时起点使用 UI 测试进程的单调时钟，在固定卡片可见、可点击时停止；详情导航在停止计时后单独验证。
@@ -31,6 +35,8 @@ tags: ["Xcode", "CI/CD", "踩坑"]
 `system_first_frame_ms` 暂记为 unavailable。待找到并验证“与该次唯一启动对应”的系统采集来源后，再补齐首帧指标；不能用 UI 等待时间改名代替，不能把缺失指标填成 0，也不能把缺失系统指标的样本标成完整首帧基线。
 
 后续接入采集来源时，需要保存原始指标身份、单位、样本映射和启动次数证据。只看到一个非空数字，不足以判断它属于哪次启动或是否包含预热。
+
+有明确样本超时预算的采集任务可传 `-collect-test-diagnostics never`，保留主动添加的截图、事件及控件树附件，避免失败时额外收集整机 sysdiagnose。该选项及其 `on-failure|never` 取值已用本机 `xcodebuild -help` 核对；这不改变测试失败结果，也不能使缺少事件的样本有效。
 
 ## 边界（boundaries）
 
@@ -47,3 +53,5 @@ tags: ["Xcode", "CI/CD", "踩坑"]
 调整后的 App 与 UI test target 已完成 unsigned `StartupProfile build-for-testing`。记录器、readiness 和精确范围准备逻辑的 macOS 源码测试 harness 31 项通过，但这类单元证据不证明真机启动次数、首帧指标或 Keychain 重置已经通过。
 
 本文归档的是测量契约纠正与当前验证边界，没有给出真实设备启动速度、劣化阈值或真机成功结论。
+
+2026-11-13 在新优化构建的有界 UI 验收中复现 `-test-iterations 1` 的启动前错误，移除后实际运行 1 项测试。该测试捕获了卡片已可点击而 App readiness 缺失的失败，继而观察到 Xcode 的整机诊断子进程。只停止本次任务精确归属的该子进程后，结果包完成并成功导出附件；未停止其他会话或设备进程。适配器回归分别验证默认单次执行和关闭附加整机诊断，均先失败再通过。
