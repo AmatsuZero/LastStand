@@ -1,7 +1,7 @@
 ---
 title: "「抓不到」不是一个结论：一次 iOS App 抓包排障复盘"
 date: 2026-11-15T13:13:00+08:00
-draft: true
+draft: false
 description: "从 Charles 到 mitmproxy，再到 WireGuard 引流：记录一次未越狱 iOS App 抓包里，四次被自己推翻的否定结论，以及最终让业务接口浮出水面的那次换维度分析。"
 summary: "一次移动端抓包复盘。真正卡住过程的从来不是加密，而是采集通道的边界、损坏的自采数据，以及把局部观察当成全集的习惯。"
 tags: ["抓包", "代理", "mitmproxy", "WireGuard", "iOS", "debug", "复盘"]
