@@ -230,3 +230,26 @@ xcresulttool 导出步骤仍留在 macOS，不能声称该二进制能直接在 
   列明 Xcode 16 引入 `get log` 等新命令；具体 schema 与行为以实际工具链验证为准。
 - 已保存两份完整导出、schema、输入来源和输出摘要；不将含原始路径的 JSON 放入
   公开知识库。下一步应优先验证该入口，再决定是否承担第三方解析器 fork 的维护。
+
+## 2026-11-16：官方 App JSON 仍需按任务上下文解释
+
+**现象与已验证成因：** 同版本官方工具导出一个真实完整 App 后，发现某些
+`SwiftCompile` section 嵌套在 `SwiftEmitModule` 内，它们的标题实际是
+`Emit Swift module (arm64)`。另一些则是外层 SwiftCompile 的子观察，计时区间包含
+于父任务。只按命令前缀收集文件编译时间会把模块生成、父子任务混在一起。
+
+命令字符串也不是可按后缀简单过滤的文件清单：shell 解码后的描述 token
+`Compiling A.swift` 同样以 `.swift` 结尾，但它不是绝对源码路径。真实多文件任务
+里既有这种描述，也有实际路径。该输入的官方日志还没有独立的 Target 总耗时
+section，不能凭任务携带 Target 名称就宣称存在官方 Target wall time。
+
+**有效恢复：** 保留原 section 层级、命令类型和完整路径，先区分外层编译任务、
+模块生成和嵌套观察，再解释 duration。源码身份来自实际路径 token 与 Target/
+project/architecture 上下文，不能使用展示标题或只有 basename 的匹配。需要 Target
+趋势时，可另定义“已观测任务区间跨度”，标注为派生指标，不冒充原生总耗时。
+
+**边界与证据：** 真实输入有 34 项外层 SwiftCompile 和 4 项嵌套观察；其中 32 项
+外层任务包含多个源码，不能复制任务时间给每个文件。34 个 Swift 源码 Target 均有
+函数和表达式原始诊断，源码位置、section 与原始输出行应保留；重复位置不代表同一
+编译调用，Compile 与 EmitModule 也不能不加区分地求和。官方导出与独立恢复包的
+校验均已通过，尚未以此证明唯一指标、真实 Linux 回放或诊断额外开销。
