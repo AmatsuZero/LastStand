@@ -155,6 +155,36 @@ Registry 包不会自动随 Artifact 到期，推广前必须设计独立保留/
 `79edfe6de7d221b888c0df11ad45343aacbe2c25b35184b4e78452589f72ebae`。
 本文仅记录脱敏结构和公开源码，不发布内部原始日志、路径或报告。
 
+## 2026-11-16：多文件任务时间不能复制成每个文件的编译时间
+
+### 现象与已验证成因
+
+在 Xcode 27.2 / 27B52 的真实最小 Release Archive 中，两个 Framework Target
+各有两个 Swift 文件，两个目录存在同名源码。WMO 的官方构建日志包含
+`Compiling Probe.swift, Helpers.swift` section；实际命令同时包含两个完整源码路径。
+一个 section 的 duration 对应这项多文件任务，不能复制成两个文件各自的实测耗时。
+嵌套的单文件 Compile section 只有约 0.1 毫秒，不能未经验证当作独立编译总时间。
+
+### 有效恢复
+
+保存 section 层级、真实命令、Target、完整源码路径和 duration，标记多文件计时口径。
+函数与表达式诊断另外保存原始行和 section 来源，不与任务时间求和，不按文件名合并。
+这个两 Target 样本得到 6 行函数与 12 行表达式输出，均能关联源码；这些是原始行数，
+并非已经去重或完成验收的唯一指标。
+
+batch 覆盖也要检查实际输出：只开启 `SWIFT_ENABLE_BATCH_MODE=YES` 并关闭 WMO，
+这个小工程仍被驱动动态分成单文件任务。本机 `swiftc -help-hidden` 说明
+`-driver-batch-count` 控制 batch 分区数量。仅在受控 batch case 加
+`-driver-batch-count 1` 后，真实命令和官方日志才形成每 Target 两文件的任务。
+这只是人为构造 batch 边界的 probe 参数，不建议直接改日常构建调度。
+
+### 边界与证据
+
+证据为真实两 Target、四源码的最小工程 Archive、原始 xcresult、官方 JSON/schema
+和逐 section 观测；没有使用二进制日志解析器。此处只证明本机 27.2 的任务和诊断
+结构，不替代 26.5 Runner、完整 App、独立文件耗时或诊断开销验收。原始内部路径
+和日志不公开发布。
+
 ## 2026-11-16：官方 xcresulttool 构建日志导出是独立候选入口
 
 ### 现象与已验证成因
