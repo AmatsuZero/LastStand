@@ -154,3 +154,43 @@ Registry 包不会自动随 Artifact 到期，推广前必须设计独立保留/
 四个 reporter 均退出 0。原始日志 SHA256：
 `79edfe6de7d221b888c0df11ad45343aacbe2c25b35184b4e78452589f72ebae`。
 本文仅记录脱敏结构和公开源码，不发布内部原始日志、路径或报告。
+
+## 2026-11-16：官方 xcresulttool 构建日志导出是独立候选入口
+
+### 现象与已验证成因
+
+评估替代方案时，容易只查看 `xcresulttool get build-results`，因其输出主要是
+构建概况而判断官方工具无法提供细粒度日志。实际本机 Xcode 27.2 的
+`xcresulttool get log --type build` 是另一个独立入口。`--schema` 明确包含递归
+section、duration、可选 startTime/location，以及 commandInvocationDetails 下的
+commandDetails 和 emittedOutput。不能把一个子命令的字段限制泛化到整个工具。
+
+### 有效恢复
+
+复用先前保留的两份真实最小 iOS Framework Release Archive 的 xcresult，不新增
+构建，分别执行：
+
+```bash
+xcrun xcresulttool get log --type build --path <archive.xcresult> --compact
+```
+
+两组 JSON 分别为 157,088 和 159,239 bytes，均含 95 个 section。直接检查
+emittedOutput，各取得 3 行函数、6 行表达式原始计时，与此前官方 dump 的行数一致。
+每份还有一个 `Compiling Probe.swift` 任务，duration 分别约 0.149 和 0.133 秒，
+带真实编译命令及输出。这里没有经过 XCLogParser，也没有实现二进制日志解码器。
+
+一种值得进一步验证的架构是在构建 Mac 上使用同版本官方工具导出 JSON，再只将
+导出 JSON 和构建元数据传到分析 Runner。Linux 可处理 JSON 和诊断文本；官方
+xcresulttool 导出步骤仍留在 macOS，不能声称该二进制能直接在 Linux 运行。
+
+### 边界与证据
+
+- 这是 Xcode 27.2 / 27B52 最小 Framework 的真实回放，不是宿主 App、Xcode 26.5
+  Runner 或跨 Runner 全指标验收。旧有研究结论不因这项新入口自动通过。
+- 3 / 6 是原始诊断行数，不是已去重的唯一函数/表达式指标。任务/文件身份、Target
+  关联、batch/WMO 语义、失败构建和大日志资源消耗仍需验证。
+- 原始诊断未输出的数据仍无法恢复；更换导出工具不会修复编译器参数覆盖缺口。
+- Apple 的 [Xcode 16.3 Release Notes](https://developer.apple.com/documentation/xcode-release-notes/xcode-16_3-release-notes)
+  列明 Xcode 16 引入 `get log` 等新命令；具体 schema 与行为以实际工具链验证为准。
+- 已保存两份完整导出、schema、输入来源和输出摘要；不将含原始路径的 JSON 放入
+  公开知识库。下一步应优先验证该入口，再决定是否承担第三方解析器 fork 的维护。
