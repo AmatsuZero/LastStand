@@ -18,22 +18,24 @@ macOS 自带的 `assetutil --info <Assets.car>` 输出 JSON 数组，每个 rend
 
 ## 有效恢复
 
-1. 解包 IPA 后，对 `.app` 内 ≥2 MiB 的 `.car` 跑 `assetutil --info`，按 `Name` 聚合 `SizeOnDisk`，结果写回包分析 JSON 对应 bundle 的 `carImages`（含 size / renditions / sha1s）。
+1. 解包 IPA 后，对 `.app` 内**所有** `.car`（不按 car 体积、也不按单图大小过滤）跑 `assetutil --info`，按 `Name` 聚合 `SizeOnDisk`，**全量**写回包分析 JSON 对应 bundle 的 `carImages`（含 size / renditions / sha1s）。
 2. 当前分支与目标分支基线在**同一处**生成该字段，报告就能按图片名比对大小增长，定位"哪张变大"。
-3. 关键实现点：
+3. **采集全量、告警按变化**：数据层全量入库（实测 5 个 car / 上千张图），保证任一资源日后变大都可检出；告警判定只在「相对基线新增或变大且 ≥2 MiB」时触发，稳定的大资源不重复报。否则用「当前体积 Top N」代替变化判定，会让稳定的大图每次 MR 都出现在报告里，等于「大于阈值就报」的噪音。阈值是噪音过滤，不是告警依据。
+4. 关键实现点：
    - 从 `.bundle` 路径取 bundle 名要用 `stem` 而非带后缀的 `name`，否则与包分析 JSON 里的 bundle 名匹配不上，展开会**静默失效**（本地测试捕获到这个坑）。
-   - `assetutil` 不在 PATH 时跳过展开、不阻塞主流程；只落库 ≥ 阈值的图片条目，避免 JSON 膨胀。
+   - `assetutil` 不在 PATH 时跳过展开、不阻塞主流程。
    - 重复执行要按图片名去重，保证幂等。
 
 ## 边界
 
 - `SizeOnDisk` 是 rendition **解包后的落盘字节数**，不是入包体积：car 有压缩与去重，不能拿它解释 IPA 增量。
 - 同一 `Name` 的多个 scale / idiom / appearance 变体会合并成一条，这是"一张图"的合理粒度，但不是单个 rendition 的大小。
-- 历史基线没有 `carImages` 时，当前图片只能展示体积、不能判"新增"，需重建一次基线才能完整比对。
+- 历史基线没有 `carImages` 时，**不应把当前所有图片当成"新增"告警**（否则又变成一次性噪音洪流）；此时跳过图片告警，重建一次基线后才能按图判定新增/变大。
+- 图片名是编译后的 imageset 名（源文件常为 pdf/png，如 `cct_home_small` ← `cct_home_small_light.pdf`），来自二进制 Pod bundle，主工程源码里 grep 不到，要报出来源提示，避免开发者白找。
 - `assetutil` 仅 macOS 自带；非 macOS 环境需另找解析手段（如第三方 car 解包库）。
 
 ## 证据
 
-- 实测 `assetutil --info`：6295 rendition / 808 唯一 Name / `SizeOnDisk` 总和 125.5 MiB vs car 文件 126 MB。
-- 真实 car 端到端跑通后，报告从单行整体大小变成列出十余张具体图片及各自大小。
-- 聚合单测、注入幂等测试、真实 car 解析测试均通过；bundle 名后缀导致注入失败的问题由测试捕获并修复。
+- 实测 `assetutil --info`：6295 rendition / 808 唯一 Name / `SizeOnDisk` 总和 125.5 MiB vs car 文件 126 MB；真机包共 5 个 car（`UHCommonImages` 126 MiB / `UHCareImages` 3.5 MiB / 3 个小 car），全量展开约 1300 张图。
+- 端到端验证告警语义：全量入库后，稳定不变 → 0 告警；新增 9 MB json → 报出；某图变大 5 MB → 报出该图；基线无 car 明细 → 0 图片告警。
+- 聚合单测、全量注入（含小图）幂等测试、真实 car 解析测试均通过；bundle 名后缀导致注入失败的问题由测试捕获并修复。
