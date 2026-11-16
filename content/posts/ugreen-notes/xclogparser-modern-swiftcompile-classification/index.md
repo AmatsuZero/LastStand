@@ -172,6 +172,12 @@ Registry 包不会自动随 Artifact 到期，推广前必须设计独立保留/
 这个两 Target 样本得到 6 行函数与 12 行表达式输出，均能关联源码；这些是原始行数，
 并非已经去重或完成验收的唯一指标。
 
+随后在 Xcode 26.5 / 17F42、Apple Swift 6.3.2 的真实 Runner 上执行同一小工程：
+原两个 debug 参数产生6行函数、0行表达式；加
+`-Xfrontend -warn-long-expression-type-checking=200` 后产生6/12行，官方导出均成功。
+同名文件和两个Target的完整路径均可关联，WMO仍只有多文件任务时间。这验证了
+阈值对该26.5小工程表达式输出的影响，未证明完整App覆盖、唯一指标或额外开销。
+
 batch 覆盖也要检查实际输出：只开启 `SWIFT_ENABLE_BATCH_MODE=YES` 并关闭 WMO，
 这个小工程仍被驱动动态分成单文件任务。本机 `swiftc -help-hidden` 说明
 `-driver-batch-count` 控制 batch 分区数量。仅在受控 batch case 加
