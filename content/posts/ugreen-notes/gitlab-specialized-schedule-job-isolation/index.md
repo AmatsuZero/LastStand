@@ -77,4 +77,9 @@ UI 流水线中的无用代码扫描当次显示 skipped，只因前序测试失
 
 普通 MR、develop push、已有 MR 的分支 push、beta/release tag 的修复前后 Job 图相同；
 混合开关、无模式与非 develop 专项被 workflow 拒绝。宿主 Tools/ios-ci 完整测试执行
-771 项，770 通过、1 项跳过。修复仍需通过 MR 合入，并由后续实际定时执行确认运行结果。
+771 项，770 通过、1 项跳过。
+
+后续修复已合入目标分支，手动执行同一个 disabled Schedule，真实 Job 图确认为
+Build、Analyze 两个 Job，没有安全扫描或无用代码 Job，任务隔离由此获得运行态验证。
+该次执行仍因 checkout 网络错误和分析容器缺少 curl 而失败，没有完成 App 编译。
+因此这里只确认 Job 选择正确，采集和分析成功仍需独立验收。
