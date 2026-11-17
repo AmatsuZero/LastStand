@@ -52,6 +52,35 @@ xcresult、截图、符号文件和编译中间目录，保留 JSON、Markdown�
 释放约 40.57 GiB。源码、依赖缓存、签名配置及其他工作区均不属于此次清理范围。
 不应把故障调查时临时保留原始证据，误写成长期默认保留所有大制品。
 
+## 补充：Instruments 保存失败也可能来自宿主磁盘耗尽
+
+**现象与已验证成因：** 后续一次每日真机任务中，编译、三次启动基线和五项功能
+UI 测试均通过，最后独立 Instruments 诊断返回 `trace_record_failed`，Job 以
+`script_failure` 和退出码 2 结束。仅凭此状态不能归因为超时。
+
+按失败时间查询宿主统一日志，定位到同一 `xctrace` 进程在报告失败的同一秒连续
+记录 `Error saving`：`NSCocoaErrorDomain Code=640`，底层为
+`NSPOSIXErrorDomain Code=28`。所用 SDK 的 Foundation 头文件将 640 定义为
+`NSFileWriteOutOfSpaceError`；本机 `errno.ENOSPC` 为 28，对应
+`No space left on device`。同时段系统缓存服务多次报告紧急磁盘压力，其他服务
+的临时文件分配也返回 ENOSPC，交叉确认了宿主存储问题。
+
+**有效排查与恢复边界：** 项目包装器将原生 stdout/stderr 写入临时文件，命令
+非零退出后仅保留分类错误码，因此已上传的小报告不一定含底层原因。可用
+`log show --start '<local-start>' --end '<local-end>' --style compact
+--predicate 'process == "xctrace"'` 读取失败窗口，再以 PID 和报告时间关联。
+统一日志也可能按系统策略脱敏或过期，应及时保存局部证据并限制访问范围。
+该路径补回了本例的失败原因，不要求重新运行整套测试。
+
+仍应按前述精确清单、活跃引用和所有权检查回收空间。事后 `df` 显示有可用空间
+不能反证录制保存时未耗尽；任务结束清理中间资料后，空间可能已经回升。增加
+Job 超时不能解决保存 trace 的 ENOSPC。此例没有删除额外资料、重启服务或
+重新录制，因此只确认故障原因，不声称容量治理或修复后的真机验收已经完成。
+
+**证据：** 2026-11-17 本地只读核验了 GitLab 阶段产物、失败提交的命令包装器、
+宿主统一日志与 SDK 错误常量。前两次重试的功能分支确实曾超时，而本次重试
+的三项前置分支通过、仅诊断失败；不同尝试须分别读取结果，不能沿用旧失败原因。
+
 ## 证据（evidence）
 
 保留了首个任务的 ENOSPC traceback、重试任务本地失败和日志缓冲错误、服务端 stale
