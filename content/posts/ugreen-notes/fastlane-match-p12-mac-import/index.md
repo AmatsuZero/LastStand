@@ -24,6 +24,14 @@ Fastlane Match `readonly` 解密成功，定向安装了 App 和扩展的描述�
 
 本结论针对实测的 P12 和 macOS 环境，不推断所有 OpenSSL 导出的 P12 都不兼容。内层空口令是这里 Match 导入的兼容约定，私钥文件仍必须以独立口令加密存储并做访问控制。重新封装不等于重新签发或吊销证书，也不需要改描述文件。本地文件镜像不证明 Runner 有仓库访问权限；真实 Runner、Archive、IPA 导出和分发分别验证。
 
+## 后续归档：不要把 Match 的临时 HOME 直接传给 Xcode
+
+同一个非交互 `codesign` 探针通过后，把 `HOME` 指向 Match 的一次性目录再启动 `xcodebuild archive`，主 App 和扩展均提示找不到 Distribution 证书。对同一个已解锁的临时钥匙串、显式指定同一路径，`security find-identity -v -p codesigning <keychain>` 在原用户 `HOME` 中可见目标身份，在临时 `HOME` 中不可见；单独替换 `TMPDIR` 不复现。此对照只说明实测 macOS 环境的可见性差异，不推断系统实现，也不等于 P12 损坏。
+
+本地受控验证中，Match 继续使用隔离目录、只读模式和独立钥匙串；归档单独使用实际构建用户 `HOME`，不继承仓库凭据。只在短期验证窗口将临时钥匙串加入原搜索列表并加上显式 `--keychain`，按 UUID 临时补齐该用户 Xcode 目录中缺失的描述文件，既有同名文件只做字节比较、不覆盖。此时两个 target 通过 Xcode 的签名准备，通知扩展进入实际签名。结束时仅移除本轮创建且未变化的文件和临时钥匙串，核对原列表，不改变旧身份的 ACL。
+
+此操作不适用于不可信共享账号或并发构建环境。要证明制品使用了指定资产，还须检查实际导出的主 App 和扩展上的签名证书及内嵌 profile UUID。
+
 ## 证据
 
 旧 P12：OpenSSL 解析成功，系统导入退出 1，目标签名身份不存在。重新导出后：系统导入、目标身份检查、partition 设置及实际 `codesign` 均退出 0。随后用加密本地镜像运行锁定 Match，从空的一次性钥匙串完成 App Store/Ad Hoc 双目标同步及签名探针。没有修改 Apple Portal、既有钥匙串或正式发布流程。
