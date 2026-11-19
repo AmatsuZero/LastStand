@@ -51,6 +51,20 @@ iOS 自动化测试中主线程崩溃 `EXC_BAD_ACCESS / SIGSEGV`，访问地址�
 - `:core-ui:compileAndroidMain`、`:core-navigation:compileAndroidMain` 均 BUILD SUCCESSFUL（证明新版本 API 与现有源码兼容）。
 - 新版本构件在 Maven Central / Google Maven 均返回 HTTP 200。
 
+## Android 端连锁：compileSdk 必须升到 37
+
+- 现象：CI `verify-android-main` 编译失败，AGP 报 `Dependency 'androidx.compose.ui:ui-android:1.12.1' requires ... compileSdk 37 or later`，而项目当前 `android-36`。Compose 1.12.1 / lifecycle 2.11.0 的 Android 构件硬性要求 compileSdk≥37。
+- 恢复：`gradle/kmp-library.gradle` 两处都改——`useAndroidLibraryApi` 分支的 `compileSdk = 36` 改 37；else 分支的 `compileSdk { version = release(36) }` 改 `release(37)`。默认 `useAndroidLibraryApi=false`，所以两处都要改。
+- CI 配套：固定 SDK Docker 镜像只含 android-36，需在 job 的 before_script 按需 `yes | sdkmanager "platforms;android-37.0"`。注意 sdkmanager 的包名是 `platforms;android-37.0`（不是 `android-37`），装出的目录是 `platforms/android-37.0`；AGP 9.x 的 `release(37)` / 数值 37 能识别该目录，`android.jar` 校验也要同步从 android-36 改 android-37.0。
+- 验证：`./gradlew :app-shared:assembleAndroidMain -Pugreen.enableIos=false` BUILD SUCCESSFUL（CI 同款命令，本地用 android-37.0 目录）。
+- 规则边界：该仓库的 `.gitlab-ci.yml` / `scripts/tests/**/*` 属于 `release_ci_infra_changes`，改动它们会命中 verify-android-main 的 `when: never`——含 CI infra 改动的 MR，其 pipeline 不跑重型 Android 编译 job，只跑契约测试。因此这类 MR 的 Android 编译只能靠本地按 CI 同款命令验证。
+
+## iOS 端 CI：Nexus 冷缓存超时
+
+- 现象：`verify-ios-release` 下载 `ui-iossimulatorarm64:1.12.1.klib` / `material3-iosarm64:1.12.0-alpha03.klib` 从内网 Nexus `maven-public` 报 `Read timed out`，而 Maven Central 同名构件 HTTP 200。
+- 成因：新版本 klib 首次进入 Nexus 代理需回源，实测首次回源耗时约 46s，超过 Runner 的 HTTP 读超时；构件落缓存后续请求 0.4s。
+- 恢复：确认构件在 Nexus 已缓存（重试 200）后重跑 job 即可，无需改代码或版本。判定方法是分别测 Nexus 与 Maven Central 的同坐标 HTTP 状态——Central 200 而 Nexus 000/超时即冷缓存，不是缺件。
+
 ## 边界（boundaries）
 
 - **本地无法验证崩溃消失**：该崩溃是 AXServer 异步查询与节点析构的竞态，本机无法确定性复现；修复有效性依赖官方 release notes 与 PR diff，合入后须在真机开启 VoiceOver 做回归。
