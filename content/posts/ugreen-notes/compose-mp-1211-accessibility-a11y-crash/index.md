@@ -64,6 +64,7 @@ iOS 自动化测试中主线程崩溃 `EXC_BAD_ACCESS / SIGSEGV`，访问地址�
 - 现象：`verify-ios-release` 下载 `ui-iossimulatorarm64:1.12.1.klib` / `material3-iosarm64:1.12.0-alpha03.klib` 从内网 Nexus `maven-public` 报 `Read timed out`，而 Maven Central 同名构件 HTTP 200。
 - 成因：新版本 klib 首次进入 Nexus 代理需回源，实测首次回源耗时约 46s，超过 Runner 的 HTTP 读超时；构件落缓存后续请求 0.4s。
 - 恢复：确认构件在 Nexus 已缓存（重试 200）后重跑 job 即可，无需改代码或版本。判定方法是分别测 Nexus 与 Maven Central 的同坐标 HTTP 状态——Central 200 而 Nexus 000/超时即冷缓存，不是缺件。
+- 冷缓存解决后，重跑可能再暴露另一个**既有偶发**失败：`:domain-device:downloadKotlinNativeDistribution` 报 `java.io.IOException: Resource deadlock avoided`。成因是双 slice 并发进程冷启动时多个模块同时下载/解压 K/N 发行版到同一 `KONAN_DATA_DIR`（macOS APFS 文件锁竞争）；仓库 `scripts/build-ios-xcframework.sh` 已有单进程预热防护，但模拟器 slice 在独立 worktree、缓存未命中时仍可能触发。这与 compose 版本无关，retry job 通常可过。判定改动是否相关：看本 MR diff 是否碰 iOS 脚本 / KONAN 配置——没碰就不是升级引入的。
 
 ## 边界（boundaries）
 
