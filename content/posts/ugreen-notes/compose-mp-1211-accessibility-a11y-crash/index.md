@@ -56,6 +56,8 @@ iOS 自动化测试中主线程崩溃 `EXC_BAD_ACCESS / SIGSEGV`，访问地址�
 - 现象：CI `verify-android-main` 编译失败，AGP 报 `Dependency 'androidx.compose.ui:ui-android:1.12.1' requires ... compileSdk 37 or later`，而项目当前 `android-36`。Compose 1.12.1 / lifecycle 2.11.0 的 Android 构件硬性要求 compileSdk≥37。
 - 恢复：`gradle/kmp-library.gradle` 两处都改——`useAndroidLibraryApi` 分支的 `compileSdk = 36` 改 37；else 分支的 `compileSdk { version = release(36) }` 改 `release(37)`。默认 `useAndroidLibraryApi=false`，所以两处都要改。
 - CI 配套：固定 SDK Docker 镜像只含 android-36，需在 job 的 before_script 按需 `yes | sdkmanager "platforms;android-37.0"`。注意 sdkmanager 的包名是 `platforms;android-37.0`（不是 `android-37`），装出的目录是 `platforms/android-37.0`；AGP 9.x 的 `release(37)` / 数值 37 能识别该目录，`android.jar` 校验也要同步从 android-36 改 android-37.0。
+- 在启用 `pipefail` 的 Bash Runner 中，两个同提交的作业都在 SDK 解压到 100% 后以 141 退出，均未启动 Gradle。`sdkmanager` 完成后关闭输入管道，持续写入的 `yes` 收到 SIGPIPE。可用 `yes | head -n 1 >/dev/null` 在 Bash 中复现，立即读取 `PIPESTATUS` 可见生产者为 141、消费者为 0。
+- 在安装分支中临时 `set +e`，运行管道后立即保存 `sdkmanager_status="${PIPESTATUS[1]}"`，随后恢复 `set -e`，要求安装进程退出码为 0 并检查实际平台目录中存在 `android.jar`。该写法依赖 Bash。对整个管道加 `|| true` 会掩盖真正的安装错误。
 - 验证：`./gradlew :app-shared:assembleAndroidMain -Pugreen.enableIos=false` BUILD SUCCESSFUL（CI 同款命令，本地用 android-37.0 目录）。
 - 规则边界：该仓库的 `.gitlab-ci.yml` / `scripts/tests/**/*` 属于 `release_ci_infra_changes`，改动它们会命中 verify-android-main 的 `when: never`——含 CI infra 改动的 MR，其 pipeline 不跑重型 Android 编译 job，只跑契约测试。因此这类 MR 的 Android 编译只能靠本地按 CI 同款命令验证。
 
