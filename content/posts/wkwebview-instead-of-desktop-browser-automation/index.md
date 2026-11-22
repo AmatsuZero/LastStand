@@ -2,7 +2,7 @@
 title: "我们是怎么在 iOS 上用 WKWebView 嗅探资源的？"
 date: 2026-11-22T12:16:00+08:00
 lastmod: 2026-11-22T12:55:58+08:00
-draft: true
+draft: false
 description: "桌面猫抓能列出网页加载的媒体，在 iPhone 上能否做到？从三条 WebKit 拦截路线的实测，讲到最终用公开 API 发现并验证资源的做法。"
 summary: "为了在 iPhone 上找到播放器使用的资源，我们先测试能否接管 WebView 的 HTTP 请求。一份到站时变空的 POST 说明了这种做法的代价，也让我们重新考虑：只为找到资源，需要接管请求吗？"
 categories: ["工程化", "网络"]
