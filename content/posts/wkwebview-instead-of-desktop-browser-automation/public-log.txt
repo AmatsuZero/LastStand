@@ -1,0 +1,48 @@
+公开 API 在设备端实际看到什么：历史运行摘录（2026-11-21 至 22）
+LOG 与 Live counts 为当次测试原文；XCTest 及 JSON 栏位按标出的字段摘录，不是远端 CDN 的访问日志。
+
+[Apple Advanced Stream HEVC · iOS 27.2 模拟器 · 独立 SwiftPM 宿主]
+结果包：xcode-build/public-site-final.9z8YtQ/tests.xcresult
+来源：xcresulttool get log --type action / get test-results tests。下列两行是日志文本；重复出现的文本只摘一次。
+  Live counts: native player manifest response events 0
+    action JSON pointer: /subsections/1/subsections/0/subsections/1/subsections/0/subsections/0/subsections/0/testDetails/emittedOutput
+  Live counts: HLS status 200, variants 54, distinct bandwidths 54
+    action JSON pointer: /subsections/1/subsections/0/subsections/1/subsections/0/subsections/0/subsections/0/testDetails/emittedOutput
+  XCTest {"nodeIdentifier":"PublicSiteAcceptanceTests/testApplePublicHLS()","result":"Passed"}
+
+[WWDC 演讲页 · 显式选定 360p · 独立原生读取]
+以下两行每次运行分别摘出播放器状态及首片读取结果；前者记录页面当时的尺寸，后者是显式选档。
+  simulator-20261121-215643-19403-baseline-ProbeHandoffTests.log
+  原始 .log SHA-256: 31eb62ee97d4905a130d5277ff95df01df614bec50b89b38d30039749d4017c7
+  LOG 137: PROBE_RESULT stage=player page=developer.apple.com state=playing dimensions=3840x2160 progress=0.439370408 sourceScheme=blob mediaError=0
+  LOG 140: PROBE_RESULT stage=first-segment mode=explicit-360p variant=200 segment=206 bytes=2048 sha256=314bc728385b06d6fe12704a9ae7b6bf46c5669b46c2a40694115a8db74145ad
+  device-20261121-215740-21124-baseline-ProbeHandoffTests.log
+  原始 .log SHA-256: cbc5b48433aba88716a3ddaa920073c30763da7b6338c5909f27fa1884b18de5
+  LOG 177: PROBE_RESULT stage=player page=developer.apple.com state=playing dimensions=3840x2160 progress=0.357907588 sourceScheme=blob mediaError=0
+  LOG 180: PROBE_RESULT stage=first-segment mode=explicit-360p variant=200 segment=206 bytes=2048 sha256=314bc728385b06d6fe12704a9ae7b6bf46c5669b46c2a40694115a8db74145ad
+  这里没有 Mac 下载器的逐帧日志，不用这两行证明完整下载或解码帧数。
+
+[漫画：iOS 27.2.1 真机 · Example 重启后从本地书架读两章]
+结果包：manhuaren/device.X0FZY1/tests.xcresult；来源：xcresulttool get test-results tests。
+  XCTest {"nodeIdentifier":"ManhuarenOfflineReaderUITests/testDownloadsAndReadsEightPageChapterOffline()","result":"Passed"}
+  XCTest {"nodeIdentifier":"ManhuarenOfflineReaderUITests/testDownloadsAndReadsSevenPageChapterOffline()","result":"Passed"}
+
+[Example 公开对照 · iOS 26.0 模拟器]
+来源：ios/Example/evidence/proxy-browser-ios26.json；这里只取用例名与结果，不含设备标识。
+源文件 SHA-256: 84b803b5ab8cfedc59489acac599e485e80019f35af62eada03951cae900ee85
+  XCTest {"nodeIdentifier":"ExampleProxyBrowserLiveTests/testW3CVideo()","result":"Passed"}
+
+[代理路径：独立原型的公开对照和访问受阻样本]
+来源：prototypes/wkwebview-interception/evidence/2026-11-22/simulator-results.json；不是上面那个 Example 用例。
+源文件 SHA-256: 0974c6d04016729a8f4fec6f498f445a2e4732bab5f09fa2b063d0adbf14570b
+  {"site":"control","run":"site-simulator-control.L5eaop","target_proxy_connect":200,"xctest":"Passed","reason":null}
+  {"site":"spankbang","run":"site-simulator-spankbang.8fUau1","target_proxy_connect":200,"xctest":"Skipped","reason":"Test skipped - SITE_PROBE site=spankbang stage=candidate state=verification http=403 navError=0 video=false"}
+  {"site":"missav","run":"site-simulator-missav.7QaqPL","target_proxy_connect":200,"xctest":"Skipped","reason":"Test skipped - SITE_PROBE site=missav stage=candidate state=verification http=403 navError=0 video=false"}
+
+[XPTV 荐片：第一条线路和显式选择的第三条线路]
+以下选自 ios/Example/evidence/xptv-ios26-phase2.json 的 runs[].onlineCold.observations；源文件 SHA-256: 3afd86f8d7a788fc17a57618b0b727e5a99f81a69d6ab72c817fad584901e1b7
+这是手机或模拟器自身的请求计数和出帧观测。符号 null 表示原观察没有这个字段。
+  {"destination":"simulator","selectedLine":1,"stage":"start media","error":"NSURLErrorDomain/-1003","firstFrameSeconds":null,"afterSeekSeconds":null,"advancedSeconds":null,"mediaDiagnostics":{"upstreamRequests":1,"playlists":0,"otherBodies":0}}
+  {"destination":"simulator","selectedLine":3,"stage":"passed","error":null,"firstFrameSeconds":0.007505833,"afterSeekSeconds":7.0148665,"advancedSeconds":7.531216,"mediaDiagnostics":{"upstreamRequests":8,"playlists":2,"otherBodies":5}}
+  {"destination":"physical","selectedLine":1,"stage":"start media","error":"NSURLErrorDomain/-1003","firstFrameSeconds":null,"afterSeekSeconds":null,"advancedSeconds":null,"mediaDiagnostics":{"upstreamRequests":1,"playlists":0,"otherBodies":0}}
+  {"destination":"physical","selectedLine":3,"stage":"passed","error":null,"firstFrameSeconds":0.010509667,"afterSeekSeconds":7.014557543,"advancedSeconds":7.526608126,"mediaDiagnostics":{"upstreamRequests":9,"playlists":3,"otherBodies":5}}

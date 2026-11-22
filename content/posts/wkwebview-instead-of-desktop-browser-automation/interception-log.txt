@@ -1,0 +1,242 @@
+WebView 底层拦截实验：XCTest 输出与受控 HTTP 服务器访问记录（节选）
+实验日期：2026-11-21。模拟器 iOS 27.2、真机 iOS 27.2.1。baseline＝没有安装拦截器。
+来源：CrawlerBot 快照 6a121640，prototypes/wkwebview-interception/evidence/2026-11-21/runs.tsv、observations.tsv、origin.tsv。
+每段按 runID 标出原始 .log 和 -origin.jsonl 的 SHA-256，与 runs.tsv 核对。行号从 1 起。
+LOG 为 XCTest 输出中从 PROBE_RESULT 起的原文；KVC 只摘异常名和原因，已去掉对象地址。
+ORIGIN 为服务器 JSONL 的字段投影，保持原行序；viaProbe 是转发标记，bodyLength 单位是字节。
+只保留指定用例；没有原始请求头、Cookie 值、查询串或用户媒体。此摘录不是整场抓包。
+
+simulator-20261121-211558-31903-kvc-ProbeForwardingTests
+  Forwarding; simulator; kvc; XCTest: 0 passed, 0 failed, 4 skipped
+  原始 .log SHA-256: 1f730babf020fabaf3b5437ca87884c6d3b686ffa98ea36a21cd2f7b66f3d746
+  原始 -origin.jsonl SHA-256: -
+  LOG 47 (同一行两段): NSUnknownKeyException | this class is not key value coding-compliant for the key _urlSchemeHandlers.
+
+simulator-20261121-211604-32564-legacy-ProbeForwardingTests
+  Forwarding; simulator; legacy; XCTest: 3 passed, 2 failed, 0 skipped
+  原始 .log SHA-256: ef832be2351777217febdf663f95b3e04884a294c2dbf2cb874351e9565ff025
+  原始 -origin.jsonl SHA-256: 384e6559ba5773bab8b243c48eec508f0e8380b2019075755f16913cd36efc9c
+  LOG 115: PROBE_RESULT caseID=legacy-navigate-stop stages=["start:/slow", "response", "data", "finish", "stop"]
+  LOG 137: PROBE_RESULT caseID=legacy-close-stop stages=["start:/slow", "response", "data", "finish", "stop"]
+  LOG 169: PROBE_RESULT caseID=legacy-stop stages=["start:/slow", "response", "data", "finish", "stop"]
+
+simulator-20261121-211613-32794-swizzle-ProbeForwardingTests
+  Forwarding; simulator; swizzle; XCTest: 3 passed, 1 failed, 0 skipped
+  原始 .log SHA-256: cd9ea7a06c460baf5b0ab09f5a0cdb878e8cc80863c3008f1fc7ccdd57c2e40f
+  原始 -origin.jsonl SHA-256: f77faf0bed39d7d1822b36add36b20f490d6865bf069112b67013ac435b4cfba
+  LOG 98: PROBE_RESULT caseID=swizzle-navigate-stop stages=["start:/slow", "stop"]
+  LOG 117: PROBE_RESULT caseID=swizzle-close-stop stages=["start:/slow", "response", "data", "finish"]
+  LOG 149: PROBE_RESULT caseID=swizzle-stop stages=["start:/slow", "stop"]
+
+simulator-20261121-211621-32991-baseline-ProbeNetworkMatrixTests
+  NetworkMatrix; simulator; baseline; XCTest: 3 passed, 0 failed, 0 skipped
+  原始 .log SHA-256: 261b89013cd9808e79928465f1525d89a77843eecef44c8498367a470506f28c
+  原始 -origin.jsonl SHA-256: 2ef663243cc1d981754b5a2f266ac6eef4646f8db4d58615450ff887d13990b4
+  LOG 79: PROBE_RESULT route=baseline caseID=baseline-cookie-cookie status=pass starts=0 detail=webKitJarOK=true,regular=true,httpOnly=true
+  LOG 105: PROBE_RESULT route=baseline caseID=baseline-policy-cors-preflight status=pass starts=0 detail=response=cors-allowed,preflightObserved=true,methods=["OPTIONS", "POST"]
+  LOG 125: PROBE_RESULT route=baseline caseID=baseline-post-post status=pass starts=0 detail=method=POST,bodyLength=24,bodySHA256=d26455913f6e662f7b17f8d483555f37e951fb4e8b1811018e1a5bf4dd89f62d
+  LOG 126: PROBE_RESULT route=baseline caseID=baseline-post-307 status=pass starts=0 detail=finalMethod=POST,finalBodyLength=27,finalBodySHA256=b398f47649cc47546b9a2805037e6bdbf15c322eb3b330c02d80699c254dea44
+  LOG 128: PROBE_RESULT route=baseline caseID=baseline-post-form status=pass starts=0 detail=method=POST,bodyLength=18,bodySHA256=6ac9f1572099ed27e22b3f2d7fcd2730322c609cc430962d69a5d6a14f8304a8
+  LOG 129: PROBE_RESULT route=baseline caseID=baseline-post-binary status=pass starts=0 detail=method=POST,bodyLength=7,bodySHA256=1c22434a2049cb4cf03a99f25fad24a820246485815293b0607620f78f6923e6
+  ORIGIN 19: {"caseID":"baseline-policy-cors-preflight","method":"OPTIONS","path":"/cors-allow","status":204,"viaProbe":false,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 20: {"caseID":"baseline-policy-cors-preflight","method":"POST","path":"/cors-allow","status":200,"viaProbe":false,"bodyLength":9,"bodySHA256":"4215b21af8d5e7eb674834129564ca0ccf0e516478b612f71ddfe94aa2e1b45b"}
+  ORIGIN 26: {"caseID":"baseline-post-post","method":"POST","path":"/echo","status":200,"viaProbe":false,"bodyLength":24,"bodySHA256":"d26455913f6e662f7b17f8d483555f37e951fb4e8b1811018e1a5bf4dd89f62d"}
+  ORIGIN 27: {"caseID":"baseline-post-307","method":"POST","path":"/redirect","status":307,"viaProbe":false,"bodyLength":27,"bodySHA256":"b398f47649cc47546b9a2805037e6bdbf15c322eb3b330c02d80699c254dea44"}
+  ORIGIN 28: {"caseID":"baseline-post-307","method":"POST","path":"/echo","status":200,"viaProbe":false,"bodyLength":27,"bodySHA256":"b398f47649cc47546b9a2805037e6bdbf15c322eb3b330c02d80699c254dea44"}
+
+simulator-20261121-211625-33229-legacy-ProbeNetworkMatrixTests
+  NetworkMatrix; simulator; legacy; XCTest: 1 passed, 2 failed, 0 skipped
+  原始 .log SHA-256: 8f12773c7a5a47df39b0cb145d72ca515b328d19675655b80e0d44373961a90b
+  原始 -origin.jsonl SHA-256: 28677bb8879b7bd94febcd7313d338780bd1dc6202c786035a3b284122687bf2
+  LOG 102: PROBE_RESULT route=legacy caseID=legacy-policy-cors-preflight status=pass starts=2 detail=response=cors-allowed,preflightObserved=true,methods=["OPTIONS", "POST"]
+  LOG 126: PROBE_RESULT route=legacy caseID=legacy-cookie-cookie status=fail starts=0 detail=webKitJarOK=false,regular=false,httpOnly=false
+  LOG 145: PROBE_RESULT route=legacy caseID=legacy-post-post status=fail starts=1 detail=method=POST,bodyLength=0,bodySHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  LOG 147: PROBE_RESULT route=legacy caseID=legacy-post-307 status=fail starts=1 detail=finalMethod=POST,finalBodyLength=0,finalBodySHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  LOG 151: PROBE_RESULT route=legacy caseID=legacy-post-form status=fail starts=1 detail=method=POST,bodyLength=0,bodySHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  LOG 153: PROBE_RESULT route=legacy caseID=legacy-post-binary status=fail starts=1 detail=method=POST,bodyLength=0,bodySHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  ORIGIN 15: {"caseID":"legacy-policy-cors-preflight","method":"OPTIONS","path":"/cors-allow","status":204,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 16: {"caseID":"legacy-policy-cors-preflight","method":"POST","path":"/cors-allow","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 26: {"caseID":"legacy-post-post","method":"POST","path":"/echo","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 27: {"caseID":"legacy-post-307","method":"POST","path":"/redirect","status":307,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 28: {"caseID":"legacy-post-307","method":"POST","path":"/echo","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+
+simulator-20261121-211630-33415-swizzle-ProbeNetworkMatrixTests
+  NetworkMatrix; simulator; swizzle; XCTest: 1 passed, 2 failed, 0 skipped
+  原始 .log SHA-256: 3906708170e7e56976331f402a4b3f22a71b54f004b63afd0d127fe92cc9b0ab
+  原始 -origin.jsonl SHA-256: 953c2839d4688e1270db38adaf73af86bba78d3187cd8f0552b77fab8b24c68f
+  LOG 96: PROBE_RESULT route=swizzle caseID=swizzle-policy-cors-preflight status=fail starts=1 detail=response=cors-allowed,preflightObserved=false,methods=["POST"]
+  LOG 115: PROBE_RESULT route=swizzle caseID=swizzle-cookie-cookie status=fail starts=0 detail=webKitJarOK=false,regular=true,httpOnly=true
+  LOG 134: PROBE_RESULT route=swizzle caseID=swizzle-post-post status=pass starts=1 detail=method=POST,bodyLength=24,bodySHA256=d26455913f6e662f7b17f8d483555f37e951fb4e8b1811018e1a5bf4dd89f62d
+  LOG 135: PROBE_RESULT route=swizzle caseID=swizzle-post-307 status=pass starts=1 detail=finalMethod=POST,finalBodyLength=26,finalBodySHA256=65d7e752ec82374bf6ac42add6c13647fc22cf4d1db10e3779aa2660b92110f9
+  LOG 137: PROBE_RESULT route=swizzle caseID=swizzle-post-form status=pass starts=1 detail=method=POST,bodyLength=18,bodySHA256=6ac9f1572099ed27e22b3f2d7fcd2730322c609cc430962d69a5d6a14f8304a8
+  LOG 138: PROBE_RESULT route=swizzle caseID=swizzle-post-binary status=pass starts=1 detail=method=POST,bodyLength=7,bodySHA256=1c22434a2049cb4cf03a99f25fad24a820246485815293b0607620f78f6923e6
+  ORIGIN 15: {"caseID":"swizzle-policy-cors-preflight","method":"POST","path":"/cors-allow","status":200,"viaProbe":true,"bodyLength":9,"bodySHA256":"4215b21af8d5e7eb674834129564ca0ccf0e516478b612f71ddfe94aa2e1b45b"}
+  ORIGIN 25: {"caseID":"swizzle-post-post","method":"POST","path":"/echo","status":200,"viaProbe":true,"bodyLength":24,"bodySHA256":"d26455913f6e662f7b17f8d483555f37e951fb4e8b1811018e1a5bf4dd89f62d"}
+  ORIGIN 26: {"caseID":"swizzle-post-307","method":"POST","path":"/redirect","status":307,"viaProbe":true,"bodyLength":26,"bodySHA256":"65d7e752ec82374bf6ac42add6c13647fc22cf4d1db10e3779aa2660b92110f9"}
+  ORIGIN 27: {"caseID":"swizzle-post-307","method":"POST","path":"/echo","status":200,"viaProbe":true,"bodyLength":26,"bodySHA256":"65d7e752ec82374bf6ac42add6c13647fc22cf4d1db10e3779aa2660b92110f9"}
+
+simulator-20261121-211641-34127-legacy-ProbeMediaTests
+  Media; simulator; legacy; XCTest: 3 passed, 0 failed, 0 skipped
+  原始 .log SHA-256: 43a9682765cae26c1e6d972b656c2e154809b1b61f7f3597cde51c7fbaecd93d
+  原始 -origin.jsonl SHA-256: a98fa390f12306466171b1dbd7c485dba9a8b2912c16bb903f82c2c46b3bb88d
+  LOG 111: PROBE_RESULT route=legacy caseID=legacy-worker-ded status=pass pageOK=true origin/tagged/starts=["/dedicated.js=1/1/1", "/worker-cache=1/1/1"]
+  LOG 112: PROBE_RESULT route=legacy caseID=legacy-worker-cache controlled=true originFirst=1 originSecond=0
+  LOG 113: PROBE_RESULT route=legacy caseID=legacy-worker-net status=pass pageOK=true origin/tagged/starts=["/worker-cache=1/1/1"]
+  LOG 134: PROBE_RESULT route=legacy caseID=legacy-hls status=pass pageOK=true origin/tagged/starts=["/hls/master.m3u8=1/1/1", "/hls/variant.m3u8=1/1/1", "/hls/segment-0.ts=4/4/4", "/hls/segment-1.ts=2/2/2"]
+  ORIGIN 10: {"caseID":"legacy-hls","method":"GET","path":"/hls/master.m3u8","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 11: {"caseID":"legacy-hls","method":"GET","path":"/hls/variant.m3u8","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 12: {"caseID":"legacy-hls","method":"GET","path":"/hls/segment-0.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 13: {"caseID":"legacy-hls","method":"GET","path":"/hls/segment-1.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 14: {"caseID":"legacy-hls","method":"GET","path":"/hls/segment-0.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 15: {"caseID":"legacy-hls","method":"GET","path":"/hls/segment-0.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 16: {"caseID":"legacy-hls","method":"GET","path":"/hls/segment-0.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 17: {"caseID":"legacy-hls","method":"GET","path":"/hls/segment-1.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+
+simulator-20261121-211647-34786-swizzle-ProbeMediaTests
+  Media; simulator; swizzle; XCTest: 2 passed, 1 failed, 0 skipped
+  原始 .log SHA-256: 12eaaf3daeb22b017820932bc0d2d6a65efc6641a35748703d6d2a2dfc0f0e79
+  原始 -origin.jsonl SHA-256: 33221e7db34002226e9180442a44e7c12ad27a749aa14bc8791b9b5142d7cf4d
+  LOG 111: PROBE_RESULT route=swizzle caseID=swizzle-worker-ded status=pass pageOK=true origin/tagged/starts=["/dedicated.js=1/1/1", "/worker-cache=1/1/1"]
+  LOG 112: PROBE_RESULT route=swizzle caseID=swizzle-worker status=fail activation=activating controlled=false
+  LOG 136: PROBE_RESULT route=swizzle caseID=swizzle-hls status=pass pageOK=true origin/tagged/starts=["/hls/master.m3u8=1/1/1", "/hls/variant.m3u8=1/1/1", "/hls/segment-0.ts=4/4/4", "/hls/segment-1.ts=2/2/2"]
+  ORIGIN 9: {"caseID":"swizzle-hls","method":"GET","path":"/hls/master.m3u8","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 10: {"caseID":"swizzle-hls","method":"GET","path":"/hls/variant.m3u8","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 11: {"caseID":"swizzle-hls","method":"GET","path":"/hls/segment-0.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 12: {"caseID":"swizzle-hls","method":"GET","path":"/hls/segment-1.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 13: {"caseID":"swizzle-hls","method":"GET","path":"/hls/segment-0.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 14: {"caseID":"swizzle-hls","method":"GET","path":"/hls/segment-0.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 15: {"caseID":"swizzle-hls","method":"GET","path":"/hls/segment-0.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 16: {"caseID":"swizzle-hls","method":"GET","path":"/hls/segment-1.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+
+simulator-20261121-211657-35206-legacy-ProbeMediaTests
+  DefaultMedia; simulator; legacy; XCTest: 2 passed, 0 failed, 1 skipped
+  原始 .log SHA-256: 97b34a261873fa961b1799935f2ccbf8bb4890b2ac95dc4c029c4cc3da07a233
+  原始 -origin.jsonl SHA-256: ecae331d73712f41374f54007802631628a200662b7c4021535967ed96e9fd14
+  LOG 109: PROBE_RESULT route=legacy caseID=legacy-worker-ded status=pass pageOK=true origin/tagged/starts=["/dedicated.js=1/1/1", "/worker-cache=1/1/1"]
+  LOG 110: PROBE_RESULT route=legacy caseID=legacy-worker status=blocked secure:API=true:false
+  LOG 137: PROBE_RESULT route=legacy caseID=legacy-hls status=pass pageOK=true origin/tagged/starts=["/hls/master.m3u8=1/1/1", "/hls/variant.m3u8=1/1/1", "/hls/segment-0.ts=4/4/4", "/hls/segment-1.ts=2/2/2"]
+
+simulator-20261121-211702-35504-swizzle-ProbeMediaTests
+  DefaultMedia; simulator; swizzle; XCTest: 2 passed, 0 failed, 1 skipped
+  原始 .log SHA-256: 4e0db20c4f7fe1b3489e1acdcc0ec121a81a1e712c868d8e7ee5315d88da8324
+  原始 -origin.jsonl SHA-256: 5961649f18403532fe69f6bfc1fd9c4a1f4325a4813db122a3058f0079d13308
+  LOG 80: PROBE_RESULT route=swizzle caseID=swizzle-worker-ded status=pass pageOK=true origin/tagged/starts=["/dedicated.js=1/1/1", "/worker-cache=1/1/1"]
+  LOG 81: PROBE_RESULT route=swizzle caseID=swizzle-worker status=blocked secure:API=true:false
+  LOG 108: PROBE_RESULT route=swizzle caseID=swizzle-hls status=pass pageOK=true origin/tagged/starts=["/hls/master.m3u8=1/1/1", "/hls/variant.m3u8=1/1/1", "/hls/segment-0.ts=3/3/4", "/hls/segment-1.ts=2/2/2"]
+
+device-20261121-211737-38512-kvc-ProbeForwardingTests
+  Forwarding; device; kvc; XCTest: 0 passed, 0 failed, 4 skipped
+  原始 .log SHA-256: 96aef1137db46a32ca0fdd78f0743e1370caa699c748b00a789da49724bcac86
+  原始 -origin.jsonl SHA-256: -
+  LOG 104 (同一行两段): NSUnknownKeyException | this class is not key value coding-compliant for the key _urlSchemeHandlers.
+
+device-20261121-211741-38614-legacy-ProbeForwardingTests
+  Forwarding; device; legacy; XCTest: 3 passed, 2 failed, 0 skipped
+  原始 .log SHA-256: 0c3e75792fdafc2504f4af79a1fceea3b9c4f4976500549507b225a7c99617f7
+  原始 -origin.jsonl SHA-256: 384e6559ba5773bab8b243c48eec508f0e8380b2019075755f16913cd36efc9c
+  LOG 154: PROBE_RESULT caseID=legacy-navigate-stop stages=["start:/slow", "response", "data", "finish", "stop"]
+  LOG 171: PROBE_RESULT caseID=legacy-close-stop stages=["start:/slow", "response", "data", "finish", "stop"]
+  LOG 203: PROBE_RESULT caseID=legacy-stop stages=["start:/slow", "response", "data", "finish", "stop"]
+
+device-20261121-211751-38911-swizzle-ProbeForwardingTests
+  Forwarding; device; swizzle; XCTest: 3 passed, 1 failed, 0 skipped
+  原始 .log SHA-256: 182aa33544cb3e2e370b441964f1331c3978a3a736ae9b6c914d207a22d582d1
+  原始 -origin.jsonl SHA-256: f77faf0bed39d7d1822b36add36b20f490d6865bf069112b67013ac435b4cfba
+  LOG 137: PROBE_RESULT caseID=swizzle-navigate-stop stages=["start:/slow", "stop"]
+  LOG 165: PROBE_RESULT caseID=swizzle-close-stop stages=["start:/slow", "response", "data", "finish"]
+  LOG 199: PROBE_RESULT caseID=swizzle-stop stages=["start:/slow", "stop"]
+
+device-20261121-211759-39173-baseline-ProbeNetworkMatrixTests
+  NetworkMatrix; device; baseline; XCTest: 3 passed, 0 failed, 0 skipped
+  原始 .log SHA-256: a78a2cbd5bdca319d3c5f4e13c4e2944e9eecdaa89c540967ec0ce2f87c731bf
+  原始 -origin.jsonl SHA-256: 2ef663243cc1d981754b5a2f266ac6eef4646f8db4d58615450ff887d13990b4
+  LOG 109: PROBE_RESULT route=baseline caseID=baseline-cookie-cookie status=pass starts=0 detail=webKitJarOK=true,regular=true,httpOnly=true
+  LOG 148: PROBE_RESULT route=baseline caseID=baseline-policy-cors-preflight status=pass starts=0 detail=response=cors-allowed,preflightObserved=true,methods=["OPTIONS", "POST"]
+  LOG 181: PROBE_RESULT route=baseline caseID=baseline-post-post status=pass starts=0 detail=method=POST,bodyLength=24,bodySHA256=d26455913f6e662f7b17f8d483555f37e951fb4e8b1811018e1a5bf4dd89f62d
+  LOG 182: PROBE_RESULT route=baseline caseID=baseline-post-307 status=pass starts=0 detail=finalMethod=POST,finalBodyLength=27,finalBodySHA256=b398f47649cc47546b9a2805037e6bdbf15c322eb3b330c02d80699c254dea44
+  LOG 184: PROBE_RESULT route=baseline caseID=baseline-post-form status=pass starts=0 detail=method=POST,bodyLength=18,bodySHA256=6ac9f1572099ed27e22b3f2d7fcd2730322c609cc430962d69a5d6a14f8304a8
+  LOG 185: PROBE_RESULT route=baseline caseID=baseline-post-binary status=pass starts=0 detail=method=POST,bodyLength=7,bodySHA256=1c22434a2049cb4cf03a99f25fad24a820246485815293b0607620f78f6923e6
+  ORIGIN 19: {"caseID":"baseline-policy-cors-preflight","method":"OPTIONS","path":"/cors-allow","status":204,"viaProbe":false,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 20: {"caseID":"baseline-policy-cors-preflight","method":"POST","path":"/cors-allow","status":200,"viaProbe":false,"bodyLength":9,"bodySHA256":"4215b21af8d5e7eb674834129564ca0ccf0e516478b612f71ddfe94aa2e1b45b"}
+  ORIGIN 26: {"caseID":"baseline-post-post","method":"POST","path":"/echo","status":200,"viaProbe":false,"bodyLength":24,"bodySHA256":"d26455913f6e662f7b17f8d483555f37e951fb4e8b1811018e1a5bf4dd89f62d"}
+  ORIGIN 27: {"caseID":"baseline-post-307","method":"POST","path":"/redirect","status":307,"viaProbe":false,"bodyLength":27,"bodySHA256":"b398f47649cc47546b9a2805037e6bdbf15c322eb3b330c02d80699c254dea44"}
+  ORIGIN 28: {"caseID":"baseline-post-307","method":"POST","path":"/echo","status":200,"viaProbe":false,"bodyLength":27,"bodySHA256":"b398f47649cc47546b9a2805037e6bdbf15c322eb3b330c02d80699c254dea44"}
+
+device-20261121-211806-39334-legacy-ProbeNetworkMatrixTests
+  NetworkMatrix; device; legacy; XCTest: 1 passed, 2 failed, 0 skipped
+  原始 .log SHA-256: c44d2d8a32150dcc8aa07d4a0e597434a7d452baead0f9d17e2b2737a842ff41
+  原始 -origin.jsonl SHA-256: 28677bb8879b7bd94febcd7313d338780bd1dc6202c786035a3b284122687bf2
+  LOG 162: PROBE_RESULT route=legacy caseID=legacy-policy-cors-preflight status=pass starts=2 detail=response=cors-allowed,preflightObserved=true,methods=["OPTIONS", "POST"]
+  LOG 192: PROBE_RESULT route=legacy caseID=legacy-cookie-cookie status=fail starts=0 detail=webKitJarOK=false,regular=false,httpOnly=false
+  LOG 210: PROBE_RESULT route=legacy caseID=legacy-post-post status=fail starts=1 detail=method=POST,bodyLength=0,bodySHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  LOG 213: PROBE_RESULT route=legacy caseID=legacy-post-307 status=fail starts=1 detail=finalMethod=POST,finalBodyLength=0,finalBodySHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  LOG 219: PROBE_RESULT route=legacy caseID=legacy-post-form status=fail starts=1 detail=method=POST,bodyLength=0,bodySHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  LOG 224: PROBE_RESULT route=legacy caseID=legacy-post-binary status=fail starts=1 detail=method=POST,bodyLength=0,bodySHA256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  ORIGIN 15: {"caseID":"legacy-policy-cors-preflight","method":"OPTIONS","path":"/cors-allow","status":204,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 16: {"caseID":"legacy-policy-cors-preflight","method":"POST","path":"/cors-allow","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 26: {"caseID":"legacy-post-post","method":"POST","path":"/echo","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 27: {"caseID":"legacy-post-307","method":"POST","path":"/redirect","status":307,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 28: {"caseID":"legacy-post-307","method":"POST","path":"/echo","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+
+device-20261121-211809-39415-swizzle-ProbeNetworkMatrixTests
+  NetworkMatrix; device; swizzle; XCTest: 1 passed, 2 failed, 0 skipped
+  原始 .log SHA-256: a7e80c015e92438bb80a09c687536c827a2f5f281d607e178153fd9822ee849e
+  原始 -origin.jsonl SHA-256: 953c2839d4688e1270db38adaf73af86bba78d3187cd8f0552b77fab8b24c68f
+  LOG 138: PROBE_RESULT route=swizzle caseID=swizzle-policy-cors-preflight status=fail starts=1 detail=response=cors-allowed,preflightObserved=false,methods=["POST"]
+  LOG 161: PROBE_RESULT route=swizzle caseID=swizzle-cookie-cookie status=fail starts=0 detail=webKitJarOK=false,regular=true,httpOnly=true
+  LOG 182: PROBE_RESULT route=swizzle caseID=swizzle-post-post status=pass starts=1 detail=method=POST,bodyLength=24,bodySHA256=d26455913f6e662f7b17f8d483555f37e951fb4e8b1811018e1a5bf4dd89f62d
+  LOG 183: PROBE_RESULT route=swizzle caseID=swizzle-post-307 status=pass starts=1 detail=finalMethod=POST,finalBodyLength=26,finalBodySHA256=65d7e752ec82374bf6ac42add6c13647fc22cf4d1db10e3779aa2660b92110f9
+  LOG 185: PROBE_RESULT route=swizzle caseID=swizzle-post-form status=pass starts=1 detail=method=POST,bodyLength=18,bodySHA256=6ac9f1572099ed27e22b3f2d7fcd2730322c609cc430962d69a5d6a14f8304a8
+  LOG 186: PROBE_RESULT route=swizzle caseID=swizzle-post-binary status=pass starts=1 detail=method=POST,bodyLength=7,bodySHA256=1c22434a2049cb4cf03a99f25fad24a820246485815293b0607620f78f6923e6
+  ORIGIN 15: {"caseID":"swizzle-policy-cors-preflight","method":"POST","path":"/cors-allow","status":200,"viaProbe":true,"bodyLength":9,"bodySHA256":"4215b21af8d5e7eb674834129564ca0ccf0e516478b612f71ddfe94aa2e1b45b"}
+  ORIGIN 25: {"caseID":"swizzle-post-post","method":"POST","path":"/echo","status":200,"viaProbe":true,"bodyLength":24,"bodySHA256":"d26455913f6e662f7b17f8d483555f37e951fb4e8b1811018e1a5bf4dd89f62d"}
+  ORIGIN 26: {"caseID":"swizzle-post-307","method":"POST","path":"/redirect","status":307,"viaProbe":true,"bodyLength":26,"bodySHA256":"65d7e752ec82374bf6ac42add6c13647fc22cf4d1db10e3779aa2660b92110f9"}
+  ORIGIN 27: {"caseID":"swizzle-post-307","method":"POST","path":"/echo","status":200,"viaProbe":true,"bodyLength":26,"bodySHA256":"65d7e752ec82374bf6ac42add6c13647fc22cf4d1db10e3779aa2660b92110f9"}
+
+device-20261121-211822-39817-legacy-ProbeMediaTests
+  Media; device; legacy; XCTest: 3 passed, 0 failed, 0 skipped
+  原始 .log SHA-256: 70843583c7370c354c3900044318ce2c57a7fa9f3beb7b46c3a657a71901441c
+  原始 -origin.jsonl SHA-256: 965c6f194efaf6c2cc2a8461d1b2c0a11df471542a4eac06b3e82ea2c78af19f
+  LOG 228: PROBE_RESULT route=legacy caseID=legacy-worker-ded status=pass pageOK=true origin/tagged/starts=["/dedicated.js=1/1/1", "/worker-cache=1/1/1"]
+  LOG 232: PROBE_RESULT route=legacy caseID=legacy-worker-cache controlled=true originFirst=1 originSecond=0
+  LOG 233: PROBE_RESULT route=legacy caseID=legacy-worker-net status=pass pageOK=true origin/tagged/starts=["/worker-cache=1/1/1"]
+  LOG 263: PROBE_RESULT route=legacy caseID=legacy-hls status=pass pageOK=true origin/tagged/starts=["/hls/master.m3u8=1/1/1", "/hls/variant.m3u8=1/1/1", "/hls/segment-0.ts=4/4/4", "/hls/segment-1.ts=2/2/2"]
+  ORIGIN 10: {"caseID":"legacy-hls","method":"GET","path":"/hls/master.m3u8","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 11: {"caseID":"legacy-hls","method":"GET","path":"/hls/variant.m3u8","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 12: {"caseID":"legacy-hls","method":"GET","path":"/hls/segment-0.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 13: {"caseID":"legacy-hls","method":"GET","path":"/hls/segment-1.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 14: {"caseID":"legacy-hls","method":"GET","path":"/hls/segment-0.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 15: {"caseID":"legacy-hls","method":"GET","path":"/hls/segment-0.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 16: {"caseID":"legacy-hls","method":"GET","path":"/hls/segment-0.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 17: {"caseID":"legacy-hls","method":"GET","path":"/hls/segment-1.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+
+device-20261121-211827-40013-swizzle-ProbeMediaTests
+  Media; device; swizzle; XCTest: 2 passed, 1 failed, 0 skipped
+  原始 .log SHA-256: f4d39ec78851aa95b5fc2bb81cafd036bf5a554c1dcda4b84d72f476d677629d
+  原始 -origin.jsonl SHA-256: 031e0fa5813dbf74900500f4d97bcf86cef87c4339ceade61f8455445b59ef79
+  LOG 107: PROBE_RESULT route=swizzle caseID=swizzle-worker-ded status=pass pageOK=true origin/tagged/starts=["/dedicated.js=1/1/1", "/worker-cache=1/1/1"]
+  LOG 109: PROBE_RESULT route=swizzle caseID=swizzle-worker status=fail activation=activating controlled=false
+  LOG 139: PROBE_RESULT route=swizzle caseID=swizzle-hls status=pass pageOK=true origin/tagged/starts=["/hls/master.m3u8=1/1/1", "/hls/variant.m3u8=1/1/1", "/hls/segment-0.ts=3/3/4", "/hls/segment-1.ts=2/2/2"]
+  ORIGIN 9: {"caseID":"swizzle-hls","method":"GET","path":"/hls/master.m3u8","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 10: {"caseID":"swizzle-hls","method":"GET","path":"/hls/variant.m3u8","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 11: {"caseID":"swizzle-hls","method":"GET","path":"/hls/segment-0.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 12: {"caseID":"swizzle-hls","method":"GET","path":"/hls/segment-1.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 13: {"caseID":"swizzle-hls","method":"GET","path":"/hls/segment-0.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 14: {"caseID":"swizzle-hls","method":"GET","path":"/hls/segment-0.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+  ORIGIN 15: {"caseID":"swizzle-hls","method":"GET","path":"/hls/segment-1.ts","status":200,"viaProbe":true,"bodyLength":0,"bodySHA256":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"}
+
+device-20261121-211836-40374-legacy-ProbeMediaTests
+  DefaultMedia; device; legacy; XCTest: 2 passed, 0 failed, 1 skipped
+  原始 .log SHA-256: 0737cebefabf7ea9ba18d72348d96c75acad532a3a7108e49a052357a64976e0
+  原始 -origin.jsonl SHA-256: ecae331d73712f41374f54007802631628a200662b7c4021535967ed96e9fd14
+  LOG 155: PROBE_RESULT route=legacy caseID=legacy-worker-ded status=pass pageOK=true origin/tagged/starts=["/dedicated.js=1/1/1", "/worker-cache=1/1/1"]
+  LOG 156: PROBE_RESULT route=legacy caseID=legacy-worker status=blocked secure:API=true:false
+  LOG 194: PROBE_RESULT route=legacy caseID=legacy-hls status=pass pageOK=true origin/tagged/starts=["/hls/master.m3u8=1/1/1", "/hls/variant.m3u8=1/1/1", "/hls/segment-0.ts=4/4/4", "/hls/segment-1.ts=2/2/2"]
+
+device-20261121-211842-40564-swizzle-ProbeMediaTests
+  DefaultMedia; device; swizzle; XCTest: 2 passed, 0 failed, 1 skipped
+  原始 .log SHA-256: c64b65361b6b2acf806d3595ff199eed02bc1238976ed59d90667eed9384e70f
+  原始 -origin.jsonl SHA-256: 05a4ab9dbbc5a63d4833123fb6cbe37deb4164de33f1cdc17b2a58a03a8006ac
+  LOG 111: PROBE_RESULT route=swizzle caseID=swizzle-worker-ded status=pass pageOK=true origin/tagged/starts=["/dedicated.js=1/1/1", "/worker-cache=1/1/1"]
+  LOG 112: PROBE_RESULT route=swizzle caseID=swizzle-worker status=blocked secure:API=true:false
+  LOG 148: PROBE_RESULT route=swizzle caseID=swizzle-hls status=pass pageOK=true origin/tagged/starts=["/hls/master.m3u8=1/1/1", "/hls/variant.m3u8=1/1/1", "/hls/segment-0.ts=4/4/4", "/hls/segment-1.ts=2/2/2"]

@@ -1,7 +1,7 @@
 ---
 title: "我们是怎么在 iOS 上用 WKWebView 嗅探资源的？"
 date: 2026-11-22T12:16:00+08:00
-lastmod: 2026-11-22T12:44:08+08:00
+lastmod: 2026-11-22T12:55:58+08:00
 draft: true
 description: "桌面猫抓能列出网页加载的媒体，在 iPhone 上能否做到？从三条 WebKit 拦截路线的实测，讲到最终用公开 API 发现并验证资源的做法。"
 summary: "为了在 iPhone 上找到播放器使用的资源，我们先测试能否接管 WebView 的 HTTP 请求。一份到站时变空的 POST 说明了这种做法的代价，也让我们重新考虑：只为找到资源，需要接管请求吗？"
@@ -27,7 +27,33 @@ tags: ["iOS", "WKWebView", "资源嗅探", "WebKit", "HLS", "迁移"]
 | 私有注册 + `NSURLProtocol` | `NSURLProtocol` 是 Foundation 的公开类；让 WebKit 把这类请求交给它，依赖私有类方法 `+[WKBrowsingContextController registerSchemeForCustomProtocol:]` | 回调里的方法仍写着 POST，但 JSON、表单、二进制原应有的 24、18、7 字节，到服务器全是 **0 字节**。307 重定向后的请求体也为空 |
 | 运行时替换方法（swizzle） | 改写公开的 `+[WKWebView handlesURLScheme:]` 对 HTTP(S) 的判断，再测试 `WKURLSchemeHandler` 是否能承担转发 | 页面普通 POST 和 307 的字节这次正确了。但服务器收到 Cookie，并不代表 WebKit 的 Cookie 存储和网页可见值都正确；跨域测试里，页面读到了结果，服务器却没收到基线有的 OPTIONS 预检 |
 
+**只看 HTTP 200，会漏掉什么？** 我们让同一段网页代码向测试服务器的 `/echo` 发送一份 24 字节的 JSON。下面是 iOS 27.2 模拟器三次独立运行的**服务器访问记录**，只选了六列。第一行数据是没装拦截器的对照；`marked=1` 表示服务器收到了原型转发时添加的标记。
+
+```text
+caseID method path status marked bodyBytes
+baseline-post-post POST /echo 200 0 24
+legacy-post-post POST /echo 200 1 0
+swizzle-post-post POST /echo 200 1 24
+```
+
+三个请求都是 `POST /echo`，服务器也都回了 200。区别在最后一列：`NSURLProtocol` 转发的那次，服务器实际收到 **0 字节**。同一个 `caseID=legacy-post-post` 的 XCTest 输出是 `status=fail starts=1`：回调确实开始过一次，请求体也确实丢了。两份原件可对读：运行 `simulator-20261121-211625-33229-legacy-ProbeNetworkMatrixTests` 的 `.log:145` 和 `-origin.jsonl:26`。
+
+swizzle 保住了这 24 字节，却没通过另一项对照。下面两行是测试宿主根据页面结果和服务器日志打印的原文。基线的服务器先收到 `OPTIONS`（204），再收到 `POST`（200）；swizzle 的同一用例只收到 `POST`（200），页面却依然读到了 `cors-allowed`：
+
+```text
+PROBE_RESULT route=baseline caseID=baseline-policy-cors-preflight status=pass starts=0 detail=response=cors-allowed,preflightObserved=true,methods=["OPTIONS", "POST"]
+PROBE_RESULT route=swizzle caseID=swizzle-policy-cors-preflight status=fail starts=1 detail=response=cors-allowed,preflightObserved=false,methods=["POST"]
+```
+
+[查看实验日志摘录：XCTest 与服务器逐条记录](interception-log.txt)。按上面的 caseID 就能找到匹配的请求。附件也保留了 KVC 的安装异常：模拟器 `simulator-20261121-211558-31903-kvc-ProbeForwardingTests.log:47` 报 `NSUnknownKeyException`，说明是取不到 `_urlSchemeHandlers`；该组 4 项跳过，未生成源站日志。附件列出了模拟器和真机的运行编号、原始行号，以及原日志的 SHA-256。
+
 为什么不满足于“安装成功”？一张静态图片太容易让错误实现看起来能用。**取消**慢请求时，`NSURLProtocol` 路线先发完数据，才收到停止；swizzle 在显式停止时有效，但仅释放 WebView 时请求仍会跑完。**原生 HLS** 则给出了正例。HLS 把视频拆成许多短片段，由清单告诉播放器去哪里取。在本地两秒、未加密的样本里，两条能安装的路线都观察到了主清单、变体清单和分片，服务器日志也能对上。这个正例只覆盖这段素材，不能推到直播、加密内容或任意 CDN。
+
+这次 HLS 的成功也有网络记录。模拟器 `legacy-hls` 用例的日志原文里有下面这个字段；三个数依次是**服务器实际收到的次数 / 带转发标记的次数 / App 开始处理的次数**。这里能说“两个分片都经过了转发”，依据是每个路径的三项计数能对上，而不只是视频画面动了。
+
+```text
+origin/tagged/starts=["/hls/master.m3u8=1/1/1", "/hls/variant.m3u8=1/1/1", "/hls/segment-0.ts=4/4/4", "/hls/segment-1.ts=2/2/2"]
+```
 
 **Worker** 还要分清是谁在发请求。Dedicated Worker 是页面启动的独立脚本，测试中可以加载并联网。Service Worker 则可以接管页面请求、自己用缓存回答：默认实验配置没有这个能力，记作 `blocked`；把测试域名加入 App-Bound 范围后，基线和 `NSURLProtocol` 路线都观测到首次到站、第二次命中缓存，而 swizzle 路线上 Worker 注册后始终未在测试时限内接管页面，这项是 `fail`。没有到站可能只是缓存命中；反过来，只有源站确实收到某个请求、相应回调却没出现，才有依据把它记为 `bypass`。
 
@@ -97,9 +123,18 @@ let webView = WKWebView(frame: .zero, configuration: config)
 1. **在网页里点播放。** 时间向前走，但页面 Fetch/XHR 观察器没有报告清单响应。原生播放可以由系统媒体栈取数据，不必调用页面的 `window.fetch`。这一次的“0”描述的是观察器，不能解释为网络上没有请求。
 2. **让页面主动 Fetch 已知的清单地址。** 这次观察器收到 HTTP 200，并从响应生成了 HLS 候选。主清单列出 **54 个变体**。这是一次新请求；54 是可选项数，既不是拦下了 54 次请求，也不是测出了播放器当前的码率。
 
+这是 `testApplePublicHLS()` 留在 Xcode 结果包里的两行输出。第一行数的是**观察器收到的响应**；第二行数的是**主动 Fetch 拿到的那份清单里的选项**。这是客户端证据，我们没有 Apple CDN 的服务器访问日志。
+
+```text
+Live counts: native player manifest response events 0
+Live counts: HLS status 200, variants 54, distinct bandwidths 54
+```
+
 如果问题变成“播放器刚才实际选了哪一档”，该看什么？我们换了一段 [Apple WWDC 演讲视频](https://developer.apple.com/videos/play/wwdc2021/10036/)。模拟器里视频的 `currentSrc` 已变成 `blob:`，但之前记录的 HTTPS 视频地址与页面声明的 `og:video` 一致。沿这个地址取得的主清单有 **12 个**视频变体。资源计时里实际出现的一条变体 URL 与播放器报告的 3840 × 2160 相符，这次才有证据判断它播了哪条。单看尺寸仍区分不了相同分辨率的不同码率。
 
 在 WWDC 页，我们又**单独指定了 360p**：`URLSession` 成功读取清单，再用 Range 请求拿到首片前 2048 字节（HTTP 206）。Mac 上的独立下载器随后取回初始化段和第一个视频分片，解出 180 帧 640 × 360 的画面。这样既证实了候选能交给另一个客户端，也划出了实验的终点：没下载整段演讲，更没有把手选的 360p 当成播放器刚刚自动选中的线路。
+
+可以在[公开方案的客户端日志摘录](public-log.txt)里找到显式选档那次的 `stage=first-segment`：模拟器与真机都记录了 `variant=200 segment=206 bytes=2048`，两端那 2048 字节的 SHA-256 也相同。这两行证明的是首片前缀；180 帧是当时 Mac 下载器的另一次验证，见文末的交接记录。
 
 交接时，URL 往往只够描述一半。网站可能还需要来源页请求头（Referer）或会话 Cookie。我们的原生读取默认不带 Cookie；显式开启时，只带 App 导入当前会话、仍有效且与目标匹配的值。重定向换了目标，就重新判断该带哪些头。**网页上能播、复制出来却读不到**，应先核对这两次请求的上下文，不能靠导出整份网页登录状态来补。
 
@@ -107,17 +142,27 @@ let webView = WKWebView(frame: .zero, configuration: config)
 
 对视频有用的是播放器和清单；对漫画有用的是阅读器维护的**页序**。直接收集屏幕上所有 `<img>`，会把封面和占位图算进去，还可能漏掉尚未滚入视口的后半章。我们让 WebView 等到章节数据就绪，用页面解析规则生成图片列表，再和阅读器自己的有序数组逐项比对。两份列表一致且非空，才交给原生下载器逐页解码；整章成功才替换旧章。
 
-在真机上，我们从 Example 首页下载《读西游记》和《卖火柴的毛毛》，结束 App，再从只读本地文件的书架逐页翻到 **8/8 和 7/7**。没有切换飞行模式，也没有据此推断整站都能下载。这个例子解释了为什么要为每类资源单独定验收条件：视频的首片能解码，不能证明整章图片找齐；拿到八个 URL，也不能证明重开 App 还能读。
+在真机上，我们从 Example 首页下载《读西游记》和《卖火柴的毛毛》，结束 App，再从只读本地文件的书架逐页翻到 **8/8 和 7/7**。[真机 XCTest 摘录](public-log.txt)里，对应的 `testDownloadsAndReadsEightPageChapterOffline()` 和 `testDownloadsAndReadsSevenPageChapterOffline()` 都是 `Passed`。没有切换飞行模式，也没有据此推断整站都能下载。这个例子解释了为什么要为每类资源单独定验收条件：视频的首片能解码，不能证明整章图片找齐；拿到八个 URL，也不能证明重开 App 还能读。
 
 ## 遇到空结果，先看页面走到了哪一步
 
 在 Example 的代理浏览页里，W3C 的公开样例能加载，点击扫描后也能看到候选；同一台模拟器上的另外两个站点却返回 HTTP 403，显示人工验证页。代理接受了连接，只能说明隧道建成；这一轮应记作“页面访问受阻”。
 
-在 XPTV 视频订阅里，有的源直接返回 JSON 和线路地址，根本不需要嗅探。需要运行已审核规则的源才用网页里的 Dedicated Worker；线路是否可播，再交给手机上的 `AVPlayer` 验证。同一来源的第一条线路没拿到清单，第三条却能在跳播后继续出帧，两条结果分别保留。
+在 XPTV 视频订阅里，有的源直接返回 JSON 和线路地址，根本不需要嗅探。需要运行已审核规则的源才用网页里的 Dedicated Worker；线路是否可播，再交给手机上的 `AVPlayer` 验证。以荐片为例，[真机端的记录](public-log.txt)里，第一条线路报 `NSURLErrorDomain/-1003`，1 次上游请求、0 份清单。单独选第三条后收到了 3 份清单，跳播后取到了帧，播放时钟从 7.015 秒走到 7.527 秒。两条结果分别保留。
 
 这次迁移留下来的一条判断标准是：**先问用户点完按钮后要得到什么，再选观察点。** 要列出可选画质，就读清单；要指出当时播放的线路，就核对播放器和实际加载记录；要做离线阅读，就重新打开本地成品。过去用 Puppeteer 或 Playwright 时，这几件事都围着桌面浏览器的 `page` 对象做。到了手机上，让网页提供它知道的地址，再让原生客户端验证读者真正要用的资源，就够完成这些任务了。
 
 ## 想对照实现或复验
+
+两份随文附件都可以直接打开：[受控 HTTP 实验的回调和源站记录](interception-log.txt)、[公开站点的设备端日志与 XCTest 结果](public-log.txt)。它们摘自 2026 年 11 月 21–22 日留存的原件；这次补文重新读取了日志和结果包，没有重新访问这些站点。自建服务器的请求可以两端对账；第三方站点只能给出客户端看见的事实。
+
+如果手边有 CrawlerBot 仓库，在快照 `6a121640` 的根目录运行下面一条命令，能从已入库的服务器记录重做上面的 POST 对照，不需要启动模拟器：
+
+```sh
+awk -F '\t' 'NR==1 || ($1 ~ /^simulator-/ && $2 ~ /^(baseline|legacy|swizzle)-post-post$/) {
+  print $2, $3, $4, $5, $6, $7
+}' prototypes/wkwebview-interception/evidence/2026-11-21/origin.tsv
+```
 
 - Apple 的公开接口：[WKUserScript](https://developer.apple.com/documentation/webkit/wkuserscript)、[WKContentWorld](https://developer.apple.com/documentation/webkit/wkcontentworld)、[WKScriptMessageHandlerWithReply](https://developer.apple.com/documentation/webkit/wkscriptmessagehandlerwithreply)、[自定义 scheme 的注册限制](https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/seturlschemehandler%28_%3Aforurlscheme%3A%29)。
 - 在 CrawlerBot 快照 `6a121640` 中，从 `ios/CrawlerBot/Classes/Resources/CrawlerBotScriptLoader.swift:25` 看注入位置，从 `ios/CrawlerBot/Assets/Runtime/CrawlerBotFetchXHR.js:78` 看一次真实的 Fetch，再到 `ios/CrawlerBot/Classes/Resources/CrawlerBotResourceEvent.swift:147` 看候选的最低门槛。
