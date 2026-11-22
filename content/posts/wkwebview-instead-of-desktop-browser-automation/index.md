@@ -1,116 +1,114 @@
 ---
-title: "视频在播，清单请求去哪了？用 WKWebView 替代 Puppeteer 和 Playwright 的一次实践"
+title: "我们是怎么在 iOS 上用 WKWebView 嗅探资源的？"
 date: 2026-11-22T12:16:00+08:00
+lastmod: 2026-11-22T12:31:00+08:00
 draft: true
-description: "从一次没有网络事件的成功播放说起：在 iPhone 上运行网页脚本，把可验证的资源交给 URLSession 和 AVPlayer，以及哪些桌面浏览器能力没有搬过来。"
-summary: "一次个人 iOS 项目复盘。用两章离线漫画、一段苹果公开视频和一次失败的 POST，说明如何在 iPhone 上完成原来依赖桌面浏览器的任务。"
+description: "从一次播放正常、清单响应却为零的实验出发，看页面脚本怎样发现媒体、Swift 怎样验证候选，以及三条私有拦截路线各在哪里失效。"
+summary: "在文档开始时观察 Fetch、XHR 和页面元素，通过 WebKit 消息桥把证据送给 Swift。同一段视频，为什么播放器能播、嗅探器却可能什么也看不见？"
 categories: ["工程化", "网络"]
-tags: ["iOS", "WKWebView", "Playwright", "Puppeteer", "HLS", "迁移"]
+tags: ["iOS", "WKWebView", "资源嗅探", "WebKit", "HLS", "迁移"]
 ---
 
-我们在 iPhone 模拟器上打开苹果的 [Advanced Stream HEVC 视频样例](https://developer.apple.com/streaming/examples/advanced-stream-hevc.html)，点播放，画面和播放进度都动了。翻开自己写的网络事件面板：**HLS 清单响应，0 条。** 接着让同一个页面用 `fetch` 主动读取播放器指向的清单。面板立刻多了一条 HTTP 200，响应里列着 54 个可选的视频变体。
+在 iPhone 模拟器里打开苹果的 [Advanced Stream HEVC 样例](https://developer.apple.com/streaming/examples/advanced-stream-hevc.html)，点播放。画面在动，播放时间也在走，我们写的嗅探器却报告：**清单响应 0 条**。视频明明在播，请求去哪儿了？
 
-第一次播放没有失败。第二次请求也没有“补抓”到第一次：那是我们自己刚发出的、新的一次请求。这个区别改变了整个迁移的做法。
+要回答它，先看嗅探器装在哪儿。我们在一个个人项目 CrawlerBot 里，让 `WKWebView` 打开网页，在**网页脚本能看见的地方**记录资源线索，再让 Swift 判断哪条线索值得发起一次独立请求。它替代了桌面上原本用 Puppeteer、Playwright 做的部分工作：等页面运行、找出资源、交给下载器。普通 Example 的这条路径只用公开 API。我们也试过往更低层接管 HTTP 请求，下文会讲具体用了什么，以及为什么没有把那个原型并进来。
 
-起因是一个个人项目 CrawlerBot。它在电脑上用 Puppeteer 或 Playwright 控制浏览器，做一些很具体的事：搜一本漫画、拿到一章按顺序排列的图片，或者看网页播放器究竟提供哪些播放线路。我想把这些操作放进 iPhone App，不用在 Mac 上常驻一个浏览器进程。下面说的“替代”，指的是用户可以在手机上办成同一件事；要看哪些事情真的办成了，我们给每一步留了不同的证据。
+## 一条媒体地址怎样从网页走到 Swift？
 
-## 先拆开桌面上的那个 `page`
+图里有两种箭头：实线连起嗅探和验证的步骤；虚线是**网页点播放之后，系统媒体栈自己走的路**。两边可以访问同一台服务器，却不是同一次请求。
 
-Puppeteer 和 Playwright 都是从程序里控制浏览器的工具。桌面脚本中的 `page` 看起来像一个对象，却同时承担了几种差异很大的工作：打开网页、让站点的 JavaScript 执行、等待数据出现、接收浏览器报告的网络事件。把 `page.goto` 改成 `webView.load` 很容易，最容易丢的是后面几步的含义。
-
-| 桌面脚本原来在做什么 | iPhone 上我们怎么做 | 什么才算做成 |
-|---|---|---|
-| 打开页面，等搜索或章节准备好 | 用 `WKWebView` 运行页面；等指定元素或页面数据满足条件 | 得到这次搜索的结果，或当前章节的有序图片列表 |
-| 读页面状态，判断可能的媒体地址 | 执行少量 JavaScript，结合视频元素、页面可见的请求和播放器报告的信息 | 能说明候选来自哪里，是页面给出的选项，还是正在播放的线路 |
-| 请求图片、清单或有明确接口的目录 | 把已知目标交给 `URLSession`，逐个验证响应 | 图片可解码，清单内容符合预期；状态码本身不够 |
-| 验证某条线路真的能看 | 用 `AVPlayer` 播放，取解码后的视频帧，再跳到后面继续取帧 | 首帧可取、跳播后还有帧，播放时间继续前进 |
-
-这也决定了哪些代码值得复用。桌面上“从页面里挑出章节图片并保留顺序”的 JavaScript 可以留下；启动 Chrome、监听桌面浏览器协议、把文件写到 Mac 的部分，换成 iOS 自己的实现。有现成 JSON 目录接口时，我们甚至不创建网页。
-
-## 给网页一个运行环境，也给等待一个结束条件
-
-我们在前台 App 的 `UIWindowScene` 里承载真正的 `WKWebView`，让站点照常运行。自动提取时可以不占用用户正在看的区域；遇到必须由用户操作的页面，则显示浏览器界面。这里没有获得一个能在 iOS 后台无限运行的无头浏览器。
-
-最初很容易把 `WKNavigationDelegate` 的 `didFinish` 理解为“可以取结果了”。它能告诉你一次导航结束，却不知道哪一个网络响应才会填满漫画列表。更可靠的顺序是：**先装观察脚本，或先订阅要等的事件，再触发搜索、点击或播放；最后等待业务条件，并设置超时。** 等章节时关心的是“这章的图片数组已经出现”，而不是“页面已经安静两秒”。翻页、关闭 WebView 或网页进程终止时，结束旧等待，否则上一章迟到的回调可能被当成下一章的结果。
-
-具体到 WebKit，有两处设置很管用：
-
-- 在创建 WebView 前，把 `WKUserScript` 加到配置里，选择 `.atDocumentStart`。需要观察页面脚本用 Fetch 或 XMLHttpRequest（XHR）发起的请求时，让这部分脚本运行在页面的 JavaScript 环境（`.page`）；等 `didFinish` 再装，最早的请求可能已经过去了。
-- 仅需要读页面元素时，可以在独立的 `WKContentWorld` 里运行。不同 world 看得到同一棵 DOM，也就是同一组页面元素，但不共享 JavaScript 全局变量。独立 world 读得到 `<video>`，却不能指望在那里直接读到页面给 `window` 加的播放器对象。我们的消息接收端还核对消息属于哪个 WebView、哪一帧和哪一份文档；网页传来的字符串不直接变成原生下载指令。
-
-下面这个小函数只用公开 WebKit API。把它放进已有的 `WKWebView` 页面，在视频开始显示后调用，就能看到当前视频元素报告的尺寸，不需要 CrawlerBot：
-
-```swift
-import WebKit
-
-@MainActor
-func videoDimensions(in webView: WKWebView) async throws -> [Int]? {
-    let value = try await webView.callAsyncJavaScript("""
-        const video = document.querySelector(selector);
-        if (!video || !video.videoWidth || !video.videoHeight) return null;
-        return [video.videoWidth, video.videoHeight];
-        """, arguments: ["selector": "video"], in: nil, contentWorld: .defaultClient)
-    return value as? [Int]
-}
+```mermaid
+flowchart TD
+    subgraph W["WKWebView · 网页里"]
+        P["网页脚本与视频元素"]
+        O["页面观察脚本<br/>Fetch / XHR、元素变化、资源计时"]
+        B["隔离脚本环境<br/>按文档分批发送事件"]
+        P --> O --> B
+    end
+    subgraph A["iOS App · Swift 里"]
+        E["WebKit 消息接收端<br/>记录页面、文档和证据来源"]
+        C["筛选媒体候选"]
+        V["URLSession 独立读取<br/>核对清单或媒体字节"]
+        E --> C --> V
+    end
+    B -->|"postMessage"| E
+    P -.->|"网页播放原生 HLS"| M["系统媒体栈"]
+    M -.->|"播放器取清单和分片"| S["媒体服务器"]
+    V -->|"验证器另发请求"| S
 ```
 
-这里特意只读主文档里第一个视频元素。`nil` 可以表示元数据还没就绪，也可能是播放器在另一个 frame 里。即使拿到了 `[1920, 1080]`，也只知道视频尺寸；两条码率不同的线路完全可能有相同尺寸。要判断选中了哪一条，还得对照播放器或请求记录。
+**先把脚本放对位置。** 创建 WebView 之前，我们把 `WKUserScript` 加入配置，同时覆盖主文档和嵌套的子页面（frame）。假设 `observerSource` 是观察脚本的源码，决定它能否看见网页调用的，是下面这几行：
 
-## 一个成功的例子：把漫画完整存进手机
+```swift
+let config = WKWebViewConfiguration()
+let observer = WKUserScript(source: observerSource,
+                            injectionTime: .atDocumentStart,
+                            forMainFrameOnly: false,
+                            in: .page)
+config.userContentController.addUserScript(observer)
+let webView = WKWebView(frame: .zero, configuration: config)
+```
 
-漫画阅读页最容易写出一个“看起来成功”的版本：遍历页面上所有 `img`，把地址交给下载器。问题是里面可能有封面和占位图，懒加载的后半章却还没出现在页面上。数组不为空，不能拿来向读者承诺“已下载”。
+`.atDocumentStart` 让脚本在文档刚开始时就位；等 `WKNavigationDelegate.didFinish` 再装，会错过页面启动时的请求。`.page` 同样关键：两个脚本环境虽然看到同一棵 DOM（页面元素树），却各自有一份 JavaScript 全局变量。在隔离环境里包装自己的 `window.fetch`，网页调用的仍是它原来的那个函数。
 
-我们保留了桌面的页面解析规则，再用阅读器自己维护的有序图片数组核对它。只有两份顺序一致且非空，才由原生层下载。每一页都要实际解码成图片；整章完成才替换旧章。这样用户取消一次重试，原来可读的章节还在。网站如果没给出可靠的完整列表，这次就不显示“已保存”。
+**再看页面实际做了什么。** 以一次 Fetch 为例：包装函数先把调用交给浏览器原来的 `fetch`，记下请求地址和方法；等响应回来，读出页面本来就能读到的状态码、最终 URL 和内容类型，再把原响应交还给网页。我们默认不读正文。明确开启清单文本采集时才限量读取响应的副本；直接读取原响应的流，会把留给网页的数据提前消费掉。XHR（`XMLHttpRequest`）走另一条观察路径，所以只包装 Fetch 会漏掉用 XHR 的播放器。
 
-真机验收从 App 首页开始：《读西游记》下载了 8 页，《卖火柴的毛毛》下载了 7 页。然后结束 App，重新启动，让书架只从本地文件读取，逐页翻到了 8/8 和 7/7。这里验证的是这两章和本地重开，没有切换飞行模式，也没有由此推断整站都能下载。对读者来说，这个终点比“收到了 15 个 URL”有用得多。
+同一个视频可能留下几种记录。我们给每条记录标明来源，因为它们能回答的问题不同：
 
-## 一段视频，三种观察位置
-
-回到开头的 HLS。可以把它想成一张节目单：主清单列出可选的画质，每个变体的清单再列出要播放的短片段。网页发出的 `fetch` 经过我们装在页面里的观察器；原生媒体栈为了播放而取清单、取分片，不保证经过它。DevTools 里的网络面板和注入网页的一段 JavaScript，观察位置不同。
-
-我们用另一个苹果公开样例（WWDC 演讲页）做了三个刻意分开的实验：
-
-1. **看网页。** 模拟器里视频元素的 `currentSrc` 是 `blob:`。它是浏览器里对象的引用，不能复制给另一个进程当下载地址。这个页面最初设置的 HTTPS 媒体地址与它公开声明的视频元数据一致，才有了可独立读取的主清单。
-2. **认出正在播的线路。** 这份主清单列了 12 个视频变体。页面的资源计时记录里出现了一个实际请求的变体，且与视频报告的 3840 × 2160 相符，这次才认定观察到了该线路。开头 Advanced Stream HEVC 样例里的 54 个变体，只证明那份清单有 54 个选项；它和这份 WWDC 清单不是同一个样本。没有选择证据时，就把结果留作“未知”。
-3. **验证交接。** 另做一次明确选择 360p 的测试：用独立的 `URLSession` 读取清单（HTTP 200）和首片的前 2048 字节（HTTP 206，表示部分内容）。再让 **Mac 上的独立下载器**取该档的初始化段和首个视频分片，解出 180 帧 640 × 360 的画面。这证明提取结果能交给另一个客户端；没有下载整段演讲，也没有宣称播放器自动选了 360p。
-
-交接时还有一个容易漏掉的参数：**谁在发下一次请求？** `URLSession` 和 WebView 不是同一个会话。网页上能看的资源，换个客户端可能因 Cookie、来源页请求头（Referer）或地址过期而被拒绝。我们默认不从网页导出 Cookie；需要时，只带本会话由 App 明确导入、仍有效且与目标匹配的值。重定向换了目标，就重新判断。存书架或订阅时也不把临时媒体地址当作永久标识。
-
-## 为什么没用私有接口把所有请求一把接走？
-
-这个想法我们真的试过。`WKNavigationDelegate` 管导航，而公开的 `WKURLSchemeHandler` 用来处理 WebKit 尚未处理的 scheme；不能用它给普通 `https` 注册一个通用处理器。因此我们把三种非公开方案放到单独的实验 App，每条路线用新进程运行，免得上一轮的全局改动影响下一轮。测试用自己的服务器：同一个请求同时看**网页读到了什么、App 回调收到了什么、服务器最终收到了什么**。
-
-| 实验路线 | 单看哪个现象会以为成功 | 真正暴露问题的证据 |
+| 线索从哪里来 | 它能告诉我们什么 | 单凭它还不知道什么 |
 |---|---|---|
-| 通过 KVC（按键名访问对象属性）安装处理器 | 公开的自定义 scheme 对照能回调 | 访问实验所依赖的内部键就抛出了异常。安装失败，后面的 POST 和媒体测试在这条路线上根本没跑 |
-| 让 WebKit 请求进入 `URLProtocol` | 回调写着 POST，本地短视频也能播 | JSON、表单、二进制请求本该分别有 24、18、7 字节，服务器收到的却全是 **0 字节**。HTTP 307 重定向本应保留方法和请求体，结果下一跳收到的也是空请求体 |
-| 在运行时替换方法（swizzle） | 普通网页 POST 和 307 的字节都对了 | 在原本需要先用 OPTIONS 询问服务器是否允许跨域请求的用例里，网页读到了结果，服务器却只见 POST；Cookie 在服务器、网页和 WebKit 存储中的表现也没能同时对上 |
+| Fetch / XHR 的响应 | 网页读到了哪个最终地址、什么状态和类型 | 换成原生客户端能否取得相同内容 |
+| DOM 的元素或属性发生变化（`MutationObserver`） | 例如播放器刚给 `<source>` 填了地址，或阅读页把占位图换成了正文图 | 浏览器是否真的请求过它；图片列表是否完整 |
+| 浏览器的资源计时（`PerformanceObserver`） | 浏览器为某个 URL 留下了加载记录，可用来和播放器报告的尺寸相互核对 | 完整的请求头、响应体，或所有媒体分片 |
+| 媒体源扩展（MSE）和 `blob:` | 页面创建了一个本地媒体对象，可能还能知道缓冲区使用的编码 | 不能从 `blob:` 反推出 CDN 地址，也不能把这个字符串交给 `URLSession` 下载 |
 
-还有两笔账容易记错。其一，取消慢请求后，若回调依然发完数据才报告停止，对调用者来说取消没有生效。其二，Service Worker 是能处理页面请求并从缓存应答的脚本。一次读取没有新增服务器请求，有可能是命中缓存；若 Worker 还没接管页面，则连缓存测试的前提都不成立。
+**最后才把观察结果变成候选。** 页面把资源事件交给隔离环境里的桥接脚本，由它分批调用 WebKit 的 `postMessage`。Swift 端用 `WKScriptMessageHandlerWithReply` 接收，核对 WebView、frame 和当前文档，再把事件交给订阅者。发起播放前先订阅，翻页或关闭时结束旧等待。否则很容易漏掉第一个响应，或者把上一页迟到的请求记到下一页。队列有上限；发生丢弃时，空列表也不能用来证明页面没发请求。
 
-这组私有实验实际跑在 iOS 27.2 模拟器和 27.2.1 真机上。本地两秒钟、未加密的 HLS 样本中，两条能安装的路线确实观察到了主清单、变体和分片；不能把这个正例抹掉，也不能推广到直播、加密内容或任意网站。项目后来在 iOS 26.0 模拟器跑通的是**公开 API 的业务流程**，没有据此补签私有方案的 26.0 兼容性。最终交付的 Example 没有采用这些私有拦截路线。
+通用媒体选择器的门槛很具体：**HTTP(S) 地址、页面脚本可见的 2xx 响应、能识别的媒体类型**。它按最终地址或内容类型识别 HLS、MP4、FLV，把 HLS 分片排除在入口候选之外。比如 DOM 里有 `film.m3u8`，此时只记“页面提到它”；若随后 Fetch 返回 200，它才可能进通用候选列表。站点适配器也可以读取播放器明确提供的线路，但要保留这份证据的来源，不能补造一条从未看见的网络响应。
 
-## 视频订阅真正跑在谁的机器上？
+## 同一段视频，为什么第一次是 0，第二次是 54？
 
-最后我们迁了一段更接近日常使用的流程：在手机导入视频源订阅，搜索，选线路，然后播放。这里有两类源，刚好说明什么时候该用 WebView、什么时候可以省掉它。
+HLS 是一种分段播放协议。可以把主清单想成节目单：它列出不同分辨率、码率的**变体**；每个变体又有自己的清单，告诉播放器到哪里取接下来几秒的音视频分片。在开头的 Apple 样例中，我们做了三个不同的观察：
 
-一类源直接返回 JSON。手机用 `URLSession` 读分类、分页和详情，把用户选定的线路交给 `AVPlayer`。另一类源把规则写成 JavaScript。我们在普通 `WKWebView` 页面中启动一个 **Dedicated Worker**，让已审核、校验过文件摘要的原脚本在里面运行。它是页面专用、可以单独终止的 JavaScript 执行环境，不负责拦截网页请求。如果脚本卡在同步计算里，可以结束 Worker，再打开下一个源。脚本需要的网络能力由手机按源提供；不会因为用户粘贴了订阅地址就运行任意脚本。
+1. **在网页里点播放。** 时间向前走，但页面 Fetch/XHR 观察器没有报告清单响应。原生播放可以由系统媒体栈取数据，不必调用页面的 `window.fetch`。这一次的“0”描述的是观察器，不能解释为网络上没有请求。
+2. **让页面主动 Fetch 已知的清单地址。** 这次观察器收到 HTTP 200，并从响应生成了 HLS 候选。主清单列出 **54 个变体**。这是一次新请求；54 是可选项数，既不是拦下了 54 次请求，也不是测出了播放器当前的码率。
+3. **换一个问题：另一客户端能用这个结果吗？** 我们另用 [Apple WWDC 演讲页](https://developer.apple.com/videos/play/wwdc2021/10036/) 做交接验证。模拟器里视频的 `currentSrc` 已变成 `blob:`，但之前记录的 HTTPS 视频地址与页面声明的 `og:video` 一致。沿这个地址取得的主清单有 **12 个**视频变体。资源计时里实际出现的一条变体 URL 与播放器报告的 3840 × 2160 相符，这次才有证据判断它播了哪条。单看尺寸仍区分不了相同分辨率的不同码率。
 
-一处意外是：同一份规则在桌面能列出六条线路，到手机上却卡在详情。原因藏在脚本的错误处理里：它遇到一组残缺数据，捕获异常后调用宿主提供的日志函数 `$print(error)`。桌面有这个函数，所以能返回之前已经读到的六条；iOS 起初缺了它，错误处理本身又抛了异常。补齐这个小接口后，两端才得到相同的结果。**搬过相同的 JS 文件，不等于搬过了它赖以工作的运行环境。**
+在 WWDC 页，我们又**单独指定了 360p**：`URLSession` 成功读取清单，再用 Range 请求拿到首片前 2048 字节（HTTP 206）。Mac 上的独立下载器随后取回初始化段和第一个视频分片，解出 180 帧 640 × 360 的画面。这样既证实了候选能交给另一个客户端，也划出了实验的终点：没下载整段演讲，更没有把手选的 360p 当成播放器刚刚自动选中的线路。
 
-对于需要特定 Referer 的已审核 HLS 线路，App 在**手机自己的回环地址**上做有限转发：播放器向本机取清单和片段，转发器只向允许的来源请求该次播放需要的资源。它不代理整台手机。订阅列表和上次选源存在手机 SQLite；播放时重新向源取地址。
+交接时，URL 往往只够描述一半。网站可能还需要来源页请求头（Referer）或会话 Cookie。我们的原生读取默认不带 Cookie；显式开启时，只带 App 导入当前会话、仍有效且与目标匹配的值。重定向换了目标，就重新判断该带哪些头。**网页上能播、复制出来却读不到**，应先核对这两次请求的上下文，不能靠导出整份网页登录状态来补。
 
-两端实测分别是 iOS 26.0 模拟器和 iOS 27.2.1 真机。360 点播取到了首帧，跳到第 6 秒后继续出帧；另一来源“荐片”的第一条线路连首层清单也没取到，第三条单独选择后才通过首帧和跳播。两台设备的在线用例都是 **6 通过、1 失败**。前面 WWDC 的 360p 实验确实用过 Mac 下载器，而这两条点播流程的请求、脚本、转发和播放都在手机上。真机测试里的 Mac 负责启动 XCTest、收集结果，不充当媒体后端。
+## 为了看见更底层的请求，我们试过哪三条路？
 
-## 下次迁一个站点，我会先做这三个判断
+如果读过 `WKURLSchemeHandler` 的文档，很自然会想：给 `https` 安装一个处理器，是不是清单和分片都会进入 App？Apple 的公开接口允许注册 WebKit 尚未处理的 scheme。实验里，自定义 scheme 能回调；用同一公开接口给 `https` 注册，则抛出 `NSInvalidArgumentException`。而 `WKNavigationDelegate` 告诉我们的是一次导航的进展，也不是每个子资源的响应。
 
-1. **必须运行网页吗？** 有正式接口或现成的专用实现，先用它。比如红果的一个样本能在模拟器起播，真机却拿不到首帧；业务继续走已有的 openhongguo，通用播放器测试改用 W3C 的公开短片。只有关键信息要等网页执行后才出现时，才为这一步维护 WebView。桌面上碰巧用过浏览器，不是手机上也需要它的理由。
-2. **失败发生在哪一层？** 一次代理测试里，代理接受隧道连接，返回 200；通过同一路径，公开视频对照能加载，两个目标页面却都返回 403 验证页。那一轮应记“页面访问受阻”，不是“解析器坏了”，更不是“已支持该站”。同理，服务器收到请求而实验回调没有收到，才能据此说这次请求绕过了回调；光看不到事件，还不能下结论。
-3. **用户的终点是什么？** 如果是读漫画，就结束进程再打开最后一页；如果是点播，就取到像素帧再跳播；如果是离线下载，就用本地成品验收，不能拿在线播放代替。先把这句话写进测试，再决定需要监听哪个事件。往往这时才发现，原本打算移植的半套浏览器根本用不上。
+下面三条路只存在于独立的实验 App。**前两条依赖 WebKit 私有入口；第三条改写的是一个公开方法，改写后的行为没有公开兼容保证。** 每条路线都在新进程里运行；对同一个测试请求，同时比对页面读到的结果、App 的回调和我们自己服务器的日志。
 
-### 延伸阅读与实测出处
+| 路线 | 具体碰了什么，原本想得到什么 | 实际看见了什么 |
+|---|---|---|
+| KVC（按名字访问内部属性） | 尝试读取 `WKWebViewConfiguration` 的私有键 `_urlSchemeHandlers`，让 HTTP(S) 也进入 scheme handler | 读取时抛出 `NSUnknownKeyException`。**安装失败**；依赖它的 POST、媒体等用例都被阻塞，没有换路线算通过 |
+| 私有注册 + `NSURLProtocol` | `NSURLProtocol` 是 Foundation 的公开类；让 WebKit 把这类请求交给它，依赖私有类方法 `+[WKBrowsingContextController registerSchemeForCustomProtocol:]` | 回调里的方法仍写着 POST，但 JSON、表单、二进制原应有的 24、18、7 字节，到服务器全是 **0 字节**。307 重定向后的请求体也为空 |
+| 运行时替换方法（swizzle） | 改写公开的 `+[WKWebView handlesURLScheme:]` 对 HTTP(S) 的判断，再测试 `WKURLSchemeHandler` 是否能承担转发 | 页面普通 POST 和 307 的字节这次正确了。但服务器收到 Cookie，并不代表 WebKit 的 Cookie 存储和网页可见值都正确；跨域测试里，页面读到了结果，服务器却没收到基线有的 OPTIONS 预检 |
 
-- 桌面端的观察面：[Playwright 网络事件](https://playwright.dev/docs/network)、[Puppeteer 网络日志](https://pptr.dev/guides/network-logging)。
-- Apple 的公开契约：[WKNavigationDelegate](https://developer.apple.com/documentation/webkit/wknavigationdelegate)、[WKContentWorld](https://developer.apple.com/documentation/webkit/wkcontentworld)、[自定义 URL scheme 的注册限制](https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/seturlschemehandler%28_%3Aforurlscheme%3A%29)、[从播放器读取视频帧](https://developer.apple.com/documentation/avfoundation/avplayeritemvideooutput)。
-- 可直接打开的公开样例：[苹果 WWDC 演讲页](https://developer.apple.com/videos/play/wwdc2021/10036/)。网页和可选画质会变化，文中的数量是本轮观测值。
-- 本文数字来自 2026 年 11 月 21–22 日的 CrawlerBot 记录（代码快照 `6a12164`）。可在该版本按文件名复核：`docs/ios-wkwebview-automation.md`（54 个变体）、`prototypes/wkwebview-interception/evidence/2026-11-21/public-page-handoff.md`（WWDC 首片）、`docs/2026-11-21-wkwebview-private-interception-validation.md`（私有实验）、`ios/Example/Manhuaren.md`、`ios/Example/ProxyBrowser.md` 和 `ios/Example/XPTVSubscriptions.md`（业务验收）。
+为什么不满足于“安装成功”？一张静态图片太容易让错误实现看起来能用。**取消**慢请求时，`NSURLProtocol` 路线先发完数据，才收到停止；swizzle 在显式停止时有效，但仅释放 WebView 时请求仍会跑完。**原生 HLS** 则给出了正例：在本地两秒、未加密的样本里，两条能安装的路线都观察到了主清单、变体和分片，服务器日志也能对上。这个正例只覆盖这段素材，不能推到直播、加密内容或任意 CDN。
+
+**Worker** 还要分清是谁在发请求。Dedicated Worker 是页面启动的独立脚本，测试中可以加载并联网。Service Worker 则可以接管页面请求、自己用缓存回答：默认实验配置没有这个能力，记作 `blocked`；把测试域名加入 App-Bound 范围后，基线和 `NSURLProtocol` 路线都观测到首次到站、第二次命中缓存，而 swizzle 路线上 Worker 注册后始终未在测试时限内接管页面，这项是 `fail`。没有到站可能只是缓存命中；反过来，只有源站确实收到某个请求、相应回调却没出现，才有依据把它记为 `bypass`。
+
+这组私有实验跑在 **iOS 27.2 模拟器和 27.2.1 真机**；最低部署目标为 26.0，私有路线在 26.x 上的运行结果、以及受信任 HTTPS 夹具的结果都仍是未知。后来跑通的 iOS 26.0 模拟器 Example 用的是公开 API。两套结果不能互相补签。
+
+## 换一类资源：怎么知道一章漫画真的找齐了？
+
+对视频有用的是播放器和清单；对漫画有用的是阅读器维护的**页序**。直接收集屏幕上所有 `<img>`，会把封面和占位图算进去，还可能漏掉尚未滚入视口的后半章。我们让 WebView 等到章节数据就绪，用页面解析规则生成图片列表，再和阅读器自己的有序数组逐项比对。两份列表一致且非空，才交给原生下载器逐页解码；整章成功才替换旧章。
+
+在真机上，我们从 Example 首页下载《读西游记》和《卖火柴的毛毛》，结束 App，再从只读本地文件的书架逐页翻到 **8/8 和 7/7**。没有切换飞行模式，也没有据此推断整站都能下载。这个例子解释了为什么要为每类资源单独定验收条件：视频的首片能解码，不能证明整章图片找齐；拿到八个 URL，也不能证明重开 App 还能读。
+
+还有两种看起来像“嗅探失败”的情况。在 Example 的代理浏览页里，W3C 的公开样例能加载，点击扫描后也能看到候选；同一台模拟器上的另外两个站点却返回 HTTP 403，显示人工验证页。代理接受了连接，只能说明隧道建成；这一轮应记作“页面访问受阻”。而在 XPTV 视频订阅里，有的源直接返回 JSON 和线路地址，根本不需要嗅探。需要运行已审核规则的源才用网页里的 Dedicated Worker；线路是否可播，再交给手机上的 `AVPlayer` 验证。同一来源的第一条线路没拿到清单，第三条却能在跳播后继续出帧，两条结果分别保留。
+
+这次迁移留下来的一条判断标准是：**先问用户点完按钮后要得到什么，再选观察点。** 要列出可选画质，就读清单；要指出当时播放的线路，就核对播放器和实际加载记录；要做离线阅读，就重新打开本地成品。桌面端的 `page` 对象把这些能力放在一起，到了手机上，每一项都要找到能回答它的那份证据。
+
+### 想对照实现或复验
+
+- Apple 的公开接口：[WKUserScript](https://developer.apple.com/documentation/webkit/wkuserscript)、[WKContentWorld](https://developer.apple.com/documentation/webkit/wkcontentworld)、[WKScriptMessageHandlerWithReply](https://developer.apple.com/documentation/webkit/wkscriptmessagehandlerwithreply)、[自定义 scheme 的注册限制](https://developer.apple.com/documentation/webkit/wkwebviewconfiguration/seturlschemehandler%28_%3Aforurlscheme%3A%29)。
+- 在 CrawlerBot 快照 `6a121640` 中，从 `ios/CrawlerBot/Classes/Resources/CrawlerBotScriptLoader.swift:25` 看注入位置，从 `ios/CrawlerBot/Assets/Runtime/CrawlerBotFetchXHR.js:78` 看一次真实的 Fetch，再到 `ios/CrawlerBot/Classes/Resources/CrawlerBotResourceEvent.swift:147` 看候选的最低门槛。
+- 同一快照中，`docs/ios-wkwebview-automation.md` 记录了 HEVC 样例的 0 条响应与 54 个变体；`prototypes/wkwebview-interception/evidence/2026-11-21/public-page-handoff.md` 保留了 WWDC 交接结果；`docs/2026-11-21-wkwebview-private-interception-validation.md` 列出私有实验的逐项结果、源站记录和复现命令；两章漫画重开后的验收见 `ios/Example/Manhuaren.md`。
+- 代理浏览与订阅点播的对照分别见 `ios/Example/ProxyBrowser.md` 和 `ios/Example/XPTVSubscriptions.md`。
