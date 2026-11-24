@@ -13,7 +13,7 @@ summary: "一台 macOS Runner 的可用空间跌破 60 GB，定时维护都跑�
 
 ## 为什么选 SeaweedFS 和 GitLab Runner
 
-我们先看了 Tuist 的远程缓存。它能把 Xcode 的编译结果提供给其他构建机，符合跨机复用的目标。但按官方文档，**在自己的基础设施上运行 Tuist 缓存节点需要付费的 Enterprise 方案**。本次迁移的约束是用现有内网设备、不新增订阅，因此没有采用这条路线。[Tuist 自托管缓存文档](https://tuist.dev/en/docs/guides/cache/self-host) · [Tuist 定价](https://tuist.dev/pricing)
+我们先看了 Tuist 的远程缓存。它的缓存节点可以跑在自己的 NAS 上，编译产物也可以留在内网，但节点仍要连接 Tuist 服务端来注册和验证访问权限。接入托管服务端时，生成自托管节点的凭据需要 Enterprise。连服务端也一起部署到内网，则需要单独的付费服务端许可。我们原本想借现有设备搭一套无新增订阅的共享缓存，这项授权要求让我们放弃了 Tuist 方案。[Tuist 自托管缓存文档](https://tuist.dev/en/docs/guides/cache/self-host) · [Tuist 服务端自托管文档](https://tuist.dev/en/docs/guides/server/self-host/server)
 
 最终方案是在 NAS 的 Docker 环境里跑 **SeaweedFS**。它是一个开源存储系统，这里用它提供与 S3 兼容的接口。可以把 S3 理解为一个通过网络按名称存取文件的服务。我们的缓存压缩包就是其中的对象，数据实际落在 NAS 的磁盘上。[SeaweedFS 项目](https://github.com/seaweedfs/seaweedfs) · [S3 对象存储简介](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
 
