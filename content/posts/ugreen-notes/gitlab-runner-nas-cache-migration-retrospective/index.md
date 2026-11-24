@@ -1,5 +1,5 @@
 ---
-title: "多台 macOS Runner 怎样共享缓存：一次从本机到 NAS 的技术选型"
+title: "两台 Mac 怎样共享构建缓存：一次 NAS 迁移的取舍"
 date: 2026-11-24T15:55:25+08:00
 draft: true
 categories: ["绿联工作笔记"]
@@ -7,31 +7,23 @@ tags: ["CI/CD", "GitLabRunner", "CocoaPods", "Gradle", "KotlinMultiplatform", "X
 summary: "一台 macOS Runner 的可用空间跌破 60 GB，定时维护都跑不起来了。我们用现有 NAS 分担长期留存，再用跨机实测决定哪些缓存值得共享。"
 ---
 
-一台负责 iOS 构建的 Mac，只剩不到 **60 GB** 的可用空间。构建缓存越积越多，连定时维护任务都跑不起来了。我们还有另一台 Mac 可以接构建，但两台机器各存一份缓存。作业换台机器跑，有些依赖要重新下载，原本能复用的编译结果也得重新生成。
+一台跑 iOS 构建的 Mac 可用空间跌到了 **60 GB 以下**。缓存越积越多，定时维护任务都跑不起来了。我们还有另一台 Mac 能接构建，但两台机器的缓存各自存放。任务换台跑，有些依赖要重新下载，能复用的编译结果也可能得再生成一遍。
 
-当时内网刚接入一台 NAS。我们想用它存放能跨机复用的缓存，让两台 Mac 都能取到同一份，同时减少各自长期保留的副本。构建仍在本地执行，所以我们得分别算清本机能少留多少缓存，以及从 NAS 下载、解包之后，一次构建到底能省多久。
+正好内网接入了一台 NAS。我们想把可共享的缓存留在 NAS 上，让两台 Mac 都能取到，同时少在本机存一些副本。这里有两个问题。把文件取回来要花时间，构建能省回多少？作业仍在本地执行，做完以后又有多少缓存留在磁盘上？
 
-## 这个 iOS 工程是怎么构建的
+## 缓存里到底装了什么
 
-我们的 App 以 Swift 和 Objective-C 写成的原生 iOS 工程为宿主，部分页面和功能由 React Native 实现，还有一部分业务代码放在 Kotlin Multiplatform（KMP）共享模块里，供 iOS 和 Android 共用。宿主用 CocoaPods 安装和集成原生依赖、React Native 的 iOS 运行时，以及 KMP 发布的二进制 Pod，最后由 Xcode 编译和归档整个 App。
+我们的 App 有一个 Swift 和 Objective-C 的原生 iOS 宿主，部分页面用 React Native，另有 Kotlin Multiplatform（KMP）模块供 iOS 和 Android 共享代码。宿主通过 CocoaPods 集成原生依赖、React Native 的 iOS 运行时，以及 KMP 发布的二进制 Pod，然后用 Xcode 编译和归档。KMP 有自己的发布流水线。Gradle 准备依赖和工具链，Kotlin/Native 分别为真机和模拟器产出 framework，再把它们装进同一个 XCFramework 交给宿主。日常 App 构建直接消费已经发布的 Pod。
 
-KMP 模块有自己的流水线。Gradle 准备依赖和工具链，Kotlin/Native 把 Kotlin 代码编译、链接成面向真机和模拟器的 framework，再合成 XCFramework，作为 Pod 发布给宿主。日常的 App 流水线直接消费已发布的版本，通常不用从源码重编 KMP。也就是说，这次迁移同时涉及两条构建链。**App 流水线**里的 CocoaPods 下载缓存和 Xcode 编译缓存，以及 **KMP 流水线**里的 Gradle 缓存和链接产物缓存。
+这次要判断的是四类缓存。CocoaPods 和 Gradle 的目录可以先整体恢复，里面既有下载过的依赖，也可能有任务输出。等轮到 **Xcode 编译缓存**和 **KMP 链接缓存**，光把文件搬过去就不够了。构建工具还要判断这份产物是否匹配当下的输入。迁移于是从最容易确认的一层开始。让另一台 Mac 用上已经下载的文件，再去测它能不能少做一次编译或链接。
 
-## 为什么选 SeaweedFS 和 GitLab Runner
+## 归档怎么从一台 Mac 到另一台
 
-我们先看了 Tuist 的远程缓存。它的缓存节点可以跑在自己的 NAS 上，编译产物也可以留在内网，但节点仍要连接 Tuist 服务端来注册和验证访问权限。接入托管服务端时，生成自托管节点的凭据需要 Enterprise。连服务端也一起部署到内网，则需要单独的付费服务端许可。我们原本想借现有设备搭一套无新增订阅的共享缓存，这项授权要求让我们放弃了 Tuist 方案。[Tuist 自托管缓存文档](https://tuist.dev/en/docs/guides/cache/self-host) · [Tuist 服务端自托管文档](https://tuist.dev/en/docs/guides/server/self-host/server)
+我们看过 Tuist 的远程缓存。它允许把缓存节点放在自己的 NAS 上，但仍需要 Tuist 服务端来注册节点和验证访问权限。使用托管服务端，生成自托管节点凭据需要 Enterprise。连服务端也放进内网，则需要单独的付费许可。我们打算利用已有设备，避免新增订阅，因此没有采用这条路线。[Tuist 自托管缓存](https://tuist.dev/en/docs/guides/cache/self-host) · [Tuist 服务端许可](https://tuist.dev/en/docs/guides/server/self-host/server)
 
-最终方案是在 NAS 的 Docker 环境里跑 **SeaweedFS**。它是一个开源存储系统，这里用它提供与 S3 兼容的接口。可以把 S3 理解为一个通过网络按名称存取文件的服务。我们的缓存压缩包就是其中的对象，数据实际落在 NAS 的磁盘上。[SeaweedFS 项目](https://github.com/seaweedfs/seaweedfs) · [S3 对象存储简介](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
+最终是在 NAS 上用 Docker 运行开源存储系统 **SeaweedFS**，提供兼容 S3 的接口。S3 可以理解为通过网络按名称存取文件，归档作为对象保存，数据落在 NAS 磁盘上。GitLab Runner 已经支持用 S3 做分布式缓存，构建仍在本机工作目录里执行，两台 Mac 无需挂载 SMB 或 NFS 共享目录。[SeaweedFS 项目](https://github.com/seaweedfs/seaweedfs) · [S3 对象存储简介](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
 
-**GitLab Runner 的分布式缓存，本质上是把作业目录里的文件按键搬到共享存储。** 作业开始时，Runner 用 CI 配置算出缓存键，在本项目的 S3 路径下找对应的归档，找到就下载并解包。允许写回的作业结束后，再把指定目录的当前内容打包上传。同一个项目的另一个 Runner 只要算出相同的键，就能取到同一份归档。Runner 负责搬文件，解包后哪些文件可以复用，由 CocoaPods 或 Gradle 各自判断。构建仍在本机磁盘上执行，省去了给每台 Mac 挂载 SMB 或 NFS 共享目录。[GitLab CI 缓存机制](https://docs.gitlab.com/ci/caching/) · [GitLab Runner 分布式缓存](https://docs.gitlab.com/runner/configuration/speed_up_job_execution/#use-a-distributed-cache)
-
-连通性验证也要走这条真实路径。试运行时，作业里的 `curl` 已经能收到 S3 的 `403 AccessDenied`，Runner 恢复缓存却仍报 `no route to host`。给 macOS 上的 GitLab Runner 进程授予本地网络权限后，两台机器才都能通过 Runner 的缓存机制下载、解包并校验同一个测试文件。
-
-## 从改配置到跨机命中
-
-这次改动分两处。**Runner 的 `config.toml` 决定缓存发到哪里，项目的 CI YAML 决定哪些目录可以归档、用什么键，以及哪些作业有权写回。** 只改 Runner 配置，流水线还不知道该共享哪些文件。只写 CI 规则，归档也只会留在原有的缓存后端。
-
-在两台 Mac 上，我们按实际运行的 Runner 注册条目修改 `config.toml`。有一台 Mac 同时运行 Shell 和 Docker 两个 executor，两个服务各读自己的配置文件，需要分别核对。下面是去掉地址和凭据后的配置结构。两台 Runner 指向同一个 bucket 和前缀，并设置 `Shared = true`。
+接入要改两处。**Runner 的 `config.toml` 决定归档发到哪里。项目的 `.gitlab-ci.yml` 决定归档里放什么、键是怎么来的，以及谁可以回写。** 两台 Mac 指向同一个 bucket 和共享前缀。一台 Mac 同时有 Shell 和 Docker 两套 Runner 服务，我们也分别检查了它们实际读取的配置文件。下面省略了注册信息和真实凭据。[GitLab Runner 分布式缓存](https://docs.gitlab.com/runner/configuration/speed_up_job_execution/#use-a-distributed-cache)
 
 ```toml
 [[runners]]
@@ -50,7 +42,7 @@ KMP 模块有自己的流水线。Gradle 准备依赖和工具链，Kotlin/Nativ
       SecretKey = "<从安全配置注入>"
 ```
 
-主工程和 KMP 子模块都修改了各自的 `.gitlab-ci.yml`。CocoaPods 用锁文件给归档分组，Gradle 用 Wrapper 配置和依赖版本表给归档分组。两边都明确列出要打包的目录，普通构建使用 `pull` 只读，允许预热和写回的任务使用 `pull-push`。两个项目共用 S3 后端，归档仍按项目和缓存键隔离。S3 凭据由 Runner 配置管理。
+CI 规则把需要保留的目录列出来。CocoaPods 用锁文件给归档分组，Gradle 用 Wrapper 配置和依赖版本表分组。读任务用 `pull`，可回写的任务用 `pull-push`。Runner 会在作业开始时用键查找并解包归档，允许写回的作业结束后再上传。对象仍按项目和缓存键隔离。[GitLab CI 缓存机制](https://docs.gitlab.com/ci/caching/)
 
 ```mermaid
 flowchart TB
@@ -75,55 +67,53 @@ flowchart TB
     MISS --> CLEAN
 ```
 
-上图是 CocoaPods 和 Gradle 共用的归档传输路径。两类编译产物另有匹配逻辑。Xcode CAS 通过手动流水线试验跨机恢复，KMP 链接缓存则由构建流程主动向 S3 请求对应的二进制。两者目前都保留原来的正式构建路径。
+验证这条路径时，我们踩过一个容易漏掉的坑。作业里的 `curl` 能收到 S3 的 `403 AccessDenied`，Runner 自己去恢复缓存却报 `no route to host`。给 macOS 上的 GitLab Runner 进程授予本地网络权限后，两端才都能通过正式的缓存机制下载、解包并校验同一个测试文件。到这里确认的是归档能跨机搬运，接下来才看构建能用上什么。
 
-## CocoaPods 下载缓存，省掉重复下载
+## 先从重复下载下手
 
-CocoaPods 安装依赖时，先根据锁文件确定版本，再查找本地是否已有对应的下载内容。我们把下载目录和对应的 podspec，也就是依赖的规格文件，打包到 NAS。换一台 Mac 执行 `pod install`，CocoaPods 可以直接使用恢复下来的依赖，再照常完成安装和工程集成。GitLab 的归档键由 `Podfile.lock` 与 `Gemfile.lock` 决定，合并请求和受保护分支使用不同前缀。锁文件变化时触发预热，预热任务串行写入。[CocoaPods 安装与锁文件](https://guides.cocoapods.org/using/pod-install-vs-update.html)
+### CocoaPods 可以直接使用下载过的依赖
 
-第一次跨机验收时，读取任务恰好被调到了写入的同一台 Mac。我们重新调度，用日志里的 Runner ID 确认换了机器。另一台 Mac 花约 **13 秒**下载并解包 **1.03 GiB** 的归档。安装前，用项目的实际安装逻辑确认 **24 个锁定的 Git Pod 全部命中**，随后的 **120 个 Pods** 安装完成，锁文件检查通过。这组结果证明换机后能复用下载过的依赖。安装一共快了多少，还需要同机的冷、热对照。
+CocoaPods 根据锁文件确定版本，再查本地是否已经下载过对应依赖。我们把下载目录和规格文件（podspec）放进归档，用 `Podfile.lock` 和 `Gemfile.lock` 生成键。合并请求与受保护分支使用不同前缀，锁文件变化时由串行的预热任务写入。另一台 Mac 恢复缓存后，`pod install` 仍会照常安装和集成依赖，省掉的是命中条目的下载。[CocoaPods 安装与锁文件](https://guides.cocoapods.org/using/pod-install-vs-update.html)
 
-## Gradle 缓存，先恢复依赖，再看任务能否跳过
+首次验证的读写任务被调到了同一台 Mac。重新调度后，我们用 Runner ID 确认两端是不同机器。读取端花约 **13 秒**下载并解包 **1.03 GiB** 的归档。按项目实际的安装逻辑检查，**24 个锁定的 Git Pod 全部命中**，随后安装完 **120 个 Pods**，锁文件也通过检查。这已经能说明跨机复用确实发生了。至于安装总共快了多少，还缺消费端同机的冷、热对照。
 
-在 KMP 流水线里，GitLab Runner 打包的是 Gradle 的依赖目录和 Wrapper 下载的 Gradle 发行包，以及 Kotlin/Native 工具链目录。另一台 Mac 花约 **28 秒**恢复了 **1.66 GiB** 的归档。这样，构建可以使用已经下载的依赖和工具链。日志里的 `Successfully extracted cache` 证明了归档恢复，到这里还不知道哪些编译任务被省掉。
+### Gradle 恢复目录以后，还要逐个判断任务
 
-Gradle Build Cache 的判断粒度是**单个任务**。对支持缓存的任务，Gradle 会根据任务的实现和声明的输入生成一个键。以编译任务为例，输入可以包括源码、编译选项和依赖。只要键相同，Gradle 就能取回之前生成的输出，省去重新执行任务，日志会显示 `FROM-CACHE`。`UP-TO-DATE` 表示当前工作目录里已有可用输出。这次用 GitLab 的归档搬运 Gradle 本地缓存目录，任务输出仍由 Gradle 自己查找。跨机恢复已验证，Kotlin 编译任务的命中数量和耗时收益还未测定。[Gradle Build Cache](https://docs.gradle.org/current/userguide/build_cache.html)
+KMP 流水线搬的是 Gradle 依赖、Wrapper 下载的 Gradle 发行包，以及 Kotlin/Native 工具链目录。另一台 Mac 花约 **28 秒**恢复了 **1.66 GiB** 的归档，日志中能看到 `Successfully extracted cache`。它能说明归档已解到本地，下一条要查的日志来自 Gradle。
 
-## Xcode CAS，复用单个编译动作
+对支持缓存的任务，Gradle Build Cache 会根据任务实现和声明的输入计算键。比如编译任务的输入可以包括源码、编译选项和依赖。找到了相同键的结果，就直接用以前的输出，标为 `FROM-CACHE`。`UP-TO-DATE` 则表示当前工作目录已经有可用结果。这次是用 GitLab 归档搬运 Gradle 的本地缓存，具体输出依然由 Gradle 查找。跨机恢复已有证据，Kotlin 编译任务省下了多少工作仍待测量。[Gradle Build Cache](https://docs.gradle.org/current/userguide/build_cache.html)
 
-打开 Xcode 的 Compilation Cache 后，编译器会给一次编译动作的输入计算指纹。后续构建遇到相同的动作时，可以从 CAS 取回复用的编译结果，例如目标文件或模块。CAS 是内容寻址存储，内部用内容摘要引用数据。把整份 CAS 复制到另一台 Mac，只是把这些结果带了过去。那台 Mac 仍要根据自己的有效编译输入找到匹配项，找不到就重新编译。[Xcode 26 编译缓存说明](https://developer.apple.com/documentation/Xcode-Release-Notes/xcode-26-release-notes?changes=la_5__7_1)
+## 再看能不能少做编译或链接
 
-我们在同一台消费 Mac 上两次恢复同一份 CAS，用相同提交、依赖和工具链做无签名归档。每轮都用新的 DerivedData，也就是 Xcode 保存构建中间产物的目录。两组之间只改了源码 checkout 的物理路径。
+下载缓存恢复后，安装和编译仍继续。要跳过编译或链接，取回来的得是已经算好的结果，而且当前构建愿意接受它。Xcode 和 KMP 在这一步用的判断粒度不同。
 
-下表只统计归档构建阶段，缓存的读写开销另计。
+### Xcode CAS，命中率要和归档耗时一起看
+
+Xcode 的 Compilation Cache 会给一次编译动作的输入算出指纹，再把编译结果放到内容寻址存储（CAS）中。同样的动作再次出现时，可以取回对应的目标文件或模块。把 CAS 快照搬到另一台 Mac 后，编译器仍以这台机器的有效输入查找匹配项。[Xcode 26 编译缓存说明](https://developer.apple.com/documentation/Xcode-Release-Notes/xcode-26-release-notes?changes=la_5__7_1)
+
+我们在同一台消费 Mac 上恢复同一份快照，固定源码、依赖和工具链，每轮使用新的 DerivedData，也就是 Xcode 存放构建中间产物的目录。两组的区别是源码 checkout 的物理路径。下表记录无签名归档阶段的耗时，缓存读写另计。
 
 | 消费端 checkout | 空 CAS | 本机热 CAS | NAS 恢复的 CAS |
 | --- | ---: | ---: | ---: |
 | 与写入端同路径 | 0/2793，363.17 秒 | 2793/2793，66.28 秒 | 2283/2793，294.68 秒 |
 | 与写入端不同路径 | 0/2793，361.34 秒 | 2793/2793，71.26 秒 | 1199/2793，362.42 秒 |
 
-不同路径组命中了 1199 项，归档还是花了 362 秒。路径对齐后多命中的 1084 项中，有 1068 项是 Clang 源码编译。两组的 Swift 编译和模块产出仍都是 0/62。这里总命中数涨了多少只是第一层信息，更要紧的是哪些编译任务被省掉了。
+不同路径组虽然命中了 **1199 项**，归档还是花了 **362 秒**。路径对齐后多命中的 **1084 项**里，有 **1068 项**是 Clang 源码编译。两组的 Swift 编译和模块产出均为 **0/62**。同一份归档搬得过去，能换回多少时间，还得看究竟是哪一批任务命中。
 
-同路径组花 **9.73 秒**恢复缓存，写入端另花 **13.93 秒**压缩并上传。假设写入端本来就要归档，从消费端冷构建里扣掉热构建时间和一写一读的开销，约省 **45 秒**。再把两端约 **15 秒**的路径准备算进去，单轮估算净省 **30 秒**。这次无签名归档只测了一轮，顺序固定，同机热缓存又明显更快。因此，正式构建继续使用本机 CAS，NAS 回放留在实验入口里。
+同路径组恢复耗时 **9.73 秒**，写入端另花 **13.93 秒**压缩并上传。假设写入端本来就要归档，一写一读比消费端冷构建约省 **45 秒**。再扣掉两端约 **15 秒**的路径准备，单轮估算净省 **30 秒**。这个结果来自固定顺序的一次无签名归档对照。相比之下，本机热缓存只用了约一分钟，所以日常构建继续用本机 CAS，跨机回放放在实验入口里。
 
-这也解释了为什么迁移后还要做本机清理。约 **1.99 GiB** 的 CAS 在试验中额外产生了三份约 **0.88 GiB** 的压缩包，写端、读端和 NAS 各一份。作业结束可以回收解开的目录，Runner 缓存目录里的 ZIP 仍需单独处理。我们验收时分别核对工作目录、Runner 缓存目录和 NAS 上的对象。那台可用空间跌破 60 GB 的机器究竟能长期省下多少磁盘，仍需要看日常构建的峰值和留存数据。
+### KMP 链接缓存，从固定槽位改成按键存放
 
-## KMP 链接缓存，直接复用已链接的二进制
+KMP 要交付的是 XCFramework，其中真机和模拟器对应的两份二进制各称为一个 slice。我们原先就把已经链接好的 slice 放进 Nexus 制品仓库。每次构建先计算键，再取键的部分哈希值对 **50** 取余，决定去哪个槽位查找。两个 slice 的归档分别保存在同一槽位下，并各有小文件记录完整键和 SHA-256。[Kotlin/Native 编译和链接](https://kotlinlang.org/docs/native-improving-compilation-time.html)
 
-依赖和工具链都准备好之后，Kotlin/Native 还要链接出 iOS framework。一个 XCFramework 可以打包多个目标的二进制，我们把真机和模拟器的那两份分别称为 slice.[Kotlin/Native 编译和链接](https://kotlinlang.org/docs/native-improving-compilation-time.html)
+如果提交 A 和提交 B 都落在 12 号槽，B 后写的真机归档就会覆盖 A 的。再打包 A 时，虽然看见槽位里有文件，完整键也会告诉我们该文件属于 B，A 只能重新链接。固定槽位控制了归档的留存规模，同时也可能把很快就要复用的产物提前挤掉。
 
-### 原来在 Nexus 上怎样复用
+换到 NAS 后，完整构建键和目标平台成为对象名的一部分，例如 `v1/<build-key>/ios-arm64.tar.gz`。A 和 B 可以并存。构建流程会在链接前按提交、锁定的子模块、工具链和构建模式算出键，分别寻找两个 slice。找到的归档经 SHA-256 校验后直接用于打包，缺哪份才链接哪份，新归档只在同名对象不存在时上传。预发布 tag 和正式 tag 若指向同一提交且键一致，能够共享 framework，再各自生成带版本号的 Pod 发布包。启用后，对象按留存规则过期，容量按写入量和单对象大小管理。
 
-我们原先就会缓存已经链接好的 framework。每次构建先算出一个键，再取键的部分哈希值对 **50** 取余数，决定该去 Nexus 制品仓库里的哪个槽位找。真机和模拟器归档分别存放在同一个槽位下，另附一个小文件，记录完整的构建键和归档 SHA-256。
+隔离的 SeaweedFS 已验证签名读写、不同键共存和重复上传保护。代码已合入，正式打包仍默认使用 Nexus。切换前要在真实 NAS 上对比冷构建、Nexus 命中和 NAS 命中。确认不同 Runner 之间两个 slice 都能命中，再把传输算进构建耗时。
 
-举个例子，假如提交 A 和提交 B 都算到了 12 号槽，B 后写入的真机归档就会覆盖 A 的真机归档。之后再打包 A，虽说 12 号槽里有文件，但查到的归属是 B，只能当作缓存未命中，重新链接。固定槽位让缓存占用的范围容易预估，代价是一个构建可能在下次复用前就把另一个构建的缓存挤掉。
+## NAS 有了缓存，本机还会留下什么
 
-### 换到 NAS 后怎样复用
+磁盘这一笔很容易漏算。Xcode 实验里的原始 CAS 约 **1.99 GiB**。为跨机复用生成的归档约 **0.88 GiB**，在写入端、读取端和 NAS 各出现了一份。作业结束可以清理展开的工作目录，Runner 缓存目录里的 ZIP 和 NAS 上的对象却要分别维护。实验收尾时，我们按这三处逐一核对。日常作业的峰值和长期留存还要另测，才能回答当初那台 Mac 究竟腾出了多少空间。
 
-NAS 空间更充裕，我们改用**完整构建键和目标平台来命名对象**，例如 `v1/<build-key>/ios-arm64.tar.gz`。上面的 A 和 B 会各自占一个对象，彼此独立。到期对象由留存规则回收，容量则按写入量和对象大小管理。
-
-链接前，构建流程根据源码提交、锁定的子模块、工具链和构建模式生成键，再分别查找真机与模拟器归档。找到就核对 SHA-256 并解包，直接使用已链接的 framework。只命中真机时，就只需重新链接模拟器。构建出的归档只在同名对象尚不存在时上传。预发布 tag 和正式 tag 如果指向同一提交、算出同一个键，就可以共用 framework，再各自生成带版本号的 Pod 发布包。
-
-这个后端在隔离的 SeaweedFS 上已验证签名读写、不同键共存和重复上传的保护。代码已合入，正式打包仍默认用 Nexus。切过去前，我们要用真实 NAS 做冷构建、Nexus 命中和 NAS 命中的对照，确认两台 Runner 之间两个 slice 都能命中，再用包括归档传输在内的耗时决定是否启用。
-
-对于也想用 NAS 缓解 Runner 空间压力的团队，建议先挑一类常用的下载缓存做小范围验证。让读取作业换机，核对它取回了哪份归档、构建日志里少了哪些工作，以及作业退出后本机还有几份副本。这样既能知道哪块 SSD 真的能腾出空间，也能判断下一层缓存值不值得过网。
+如果从头做一次，我仍会先挑一种能凭锁文件识别的下载缓存。让读的任务换台机器跑，先确认它取回的是哪份归档、实际少做了什么，最后看退出后本机还有几份副本。这三个观察结果，比一条缓存恢复成功的日志更能说明下一类缓存值不值得迁移。
