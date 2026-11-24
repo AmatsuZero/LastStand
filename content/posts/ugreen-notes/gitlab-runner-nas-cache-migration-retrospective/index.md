@@ -17,7 +17,7 @@ summary: "一台 macOS Runner 的可用空间跌破 60 GB，定时维护都跑�
 
 最终方案是在 NAS 的 Docker 环境里跑 **SeaweedFS**。它是一个开源存储系统，这里用它提供与 S3 兼容的接口。可以把 S3 理解为一个通过网络按名称存取文件的服务。我们的缓存压缩包就是其中的对象，数据实际落在 NAS 的磁盘上。[SeaweedFS 项目](https://github.com/seaweedfs/seaweedfs) · [S3 对象存储简介](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
 
-打包、上传和恢复则交给 **GitLab Runner 自带的分布式缓存**。作业结束时，写入端把约定的目录打包上传。下一次作业调度到另一台 Mac，Runner 用相同的缓存键找到压缩包，再解到自己的工作目录。这个方案能沿用现有流水线的 `cache` 配置，构建还是在本机磁盘上进行，也省去了给每台 Mac 配置 SMB 或 NFS 挂载。[GitLab Runner 分布式缓存](https://docs.gitlab.com/runner/configuration/speed_up_job_execution/#use-a-distributed-cache)
+**GitLab Runner 的分布式缓存，本质上是把作业目录里的文件按键搬到共享存储。** 作业开始时，Runner 用 CI 配置算出缓存键，在本项目的 S3 路径下找对应的归档，找到就下载并解包。允许写回的作业结束后，再把指定目录的当前内容打包上传。同一个项目的另一个 Runner 只要算出相同的键，就能取到同一份归档。Runner 负责搬文件，解包后哪些文件可以复用，由 CocoaPods 或 Gradle 各自判断。构建仍在本机磁盘上执行，省去了给每台 Mac 挂载 SMB 或 NFS 共享目录。[GitLab CI 缓存机制](https://docs.gitlab.com/ci/caching/) · [GitLab Runner 分布式缓存](https://docs.gitlab.com/runner/configuration/speed_up_job_execution/#use-a-distributed-cache)
 
 连通性验证也要走这条真实路径。试运行时，作业里的 `curl` 已经能收到 S3 的 `403 AccessDenied`，Runner 恢复缓存却仍报 `no route to host`。给 macOS 上的 GitLab Runner 进程授予本地网络权限后，两台机器才都能通过 Runner 的缓存机制下载、解包并校验同一个测试文件。
 
@@ -44,7 +44,7 @@ summary: "一台 macOS Runner 的可用空间跌破 60 GB，定时维护都跑�
       SecretKey = "<从安全配置注入>"
 ```
 
-主工程的 `.gitlab-ci.yml` 引入 `.gitlab/ci/cocoapods-cache.yml`。这份文件用锁文件生成缓存键，列出允许归档的 CocoaPods 下载目录，为读写任务分别设置 `pull` 和 `pull-push`。合并请求和受保护分支分开用键，锁文件变化时才自动预热。KMP 子模块自己的 `.gitlab-ci.yml` 另外声明 Gradle 和 Kotlin/Native 缓存目录，也由 Runner 上传到同一个 S3 后端，归档仍按项目和缓存键隔离。项目 YAML 里只放规则，S3 凭据由 Runner 配置管理。
+主工程和 KMP 子模块都修改了各自的 `.gitlab-ci.yml`。CocoaPods 用锁文件给归档分组，Gradle 用 Wrapper 配置和依赖版本表给归档分组。两边都明确列出要打包的目录，普通构建使用 `pull` 只读，允许预热和写回的任务使用 `pull-push`。两个项目共用 S3 后端，归档仍按项目和缓存键隔离。S3 凭据由 Runner 配置管理。
 
 ```mermaid
 flowchart TB
@@ -69,22 +69,25 @@ flowchart TB
     MISS --> CLEAN
 ```
 
-图中是**已接入的 CocoaPods 和 Gradle 缓存**。作业目录可以随作业结束回收，Runner 留下的 ZIP 与 NAS 对象则分别维护。两类编译产物的改动放在独立入口里。
+上图是 CocoaPods 和 Gradle 共用的归档传输路径。两类编译产物另有匹配逻辑。Xcode CAS 通过手动流水线试验跨机恢复，KMP 链接缓存则由构建流程主动向 S3 请求对应的二进制。两者目前都保留原来的正式构建路径。
 
-- **Xcode CAS** 的跨机实验写在 `.gitlab/ci/xcode-cas-nas-experiment.yml`。显式触发后，写入作业把 CAS 快照作为实验归档上传，两个读取作业分别用相同和不同的 checkout 路径验证。正式构建继续用本机 CAS。
-- **KMP iOS 链接产物**通过新增的 `scripts/ios-link-cache-s3.py` 直接读写独立 bucket。构建脚本通过 `IOS_LINK_CACHE_BACKEND=s3` 选择这个后端，正式打包目前仍默认使用 Nexus。
+## CocoaPods 下载缓存，省掉重复下载
 
-## 第一批迁移的是依赖下载
-
-CocoaPods 是 iOS 项目的依赖管理工具。我们缓存的是它下载过的依赖和对应的规格文件，缓存键由 `Podfile.lock` 和 `Gemfile.lock` 决定。锁文件变化会触发预热，负责写入的任务串行执行，普通构建只读。合并请求与受保护分支使用独立的缓存前缀，缺少缓存的作业照常安装依赖。[CocoaPods 安装与锁文件](https://guides.cocoapods.org/using/pod-install-vs-update.html)
+CocoaPods 安装依赖时，先根据锁文件确定版本，再查找本地是否已有对应的下载内容。我们把下载目录和对应的 podspec，也就是依赖的规格文件，打包到 NAS。换一台 Mac 执行 `pod install`，CocoaPods 可以直接使用恢复下来的依赖，再照常完成安装和工程集成。GitLab 的归档键由 `Podfile.lock` 与 `Gemfile.lock` 决定，合并请求和受保护分支使用不同前缀。锁文件变化时触发预热，预热任务串行写入。[CocoaPods 安装与锁文件](https://guides.cocoapods.org/using/pod-install-vs-update.html)
 
 第一次跨机验收时，读取任务恰好被调到了写入的同一台 Mac。我们重新调度，用日志里的 Runner ID 确认换了机器。另一台 Mac 花约 **13 秒**下载并解包 **1.03 GiB** 的归档。安装前，用项目的实际安装逻辑确认 **24 个锁定的 Git Pod 全部命中**，随后的 **120 个 Pods** 安装完成，锁文件检查通过。这组结果证明换机后能复用下载过的依赖。安装一共快了多少，还需要同机的冷、热对照。
 
-Kotlin Multiplatform（KMP）模块也通过 GitLab Runner 共享 Gradle 下载和 Kotlin/Native 工具链。另一台 Mac 花约 **28 秒**恢复了 **1.66 GiB** 的归档。看到 `Successfully extracted cache` 后，想继续往下算收益，要看 Gradle 的任务级日志。标记为 `FROM-CACHE` 的任务恢复了已有输出，`UP-TO-DATE` 则说明当前工作目录已有可用输出。我们当时验证到了跨机恢复这一步，尚未测出省了多少 Kotlin 编译。[Gradle Build Cache](https://docs.gradle.org/current/userguide/build_cache.html)
+## Gradle 缓存，先恢复依赖，再看任务能否跳过
 
-## Xcode 编译缓存搬过去，能用上多少？
+在 Kotlin Multiplatform（KMP）流水线里，GitLab Runner 打包的是 Gradle 的依赖目录和 Wrapper 下载的 Gradle 发行包，以及 Kotlin/Native 工具链目录。另一台 Mac 花约 **28 秒**恢复了 **1.66 GiB** 的归档。这样，构建可以使用已经下载的依赖和工具链。日志里的 `Successfully extracted cache` 证明了归档恢复，到这里还不知道哪些编译任务被省掉。
 
-Xcode 的 Compilation Cache 会把可复用的编译结果保存在内容寻址存储中，下面简称 CAS。我们把一台 Mac 生成的 CAS 快照交给另一台，再用同一份源码、依赖和工具链做无签名归档。消费端固定在同一台机器，每轮都用新的 DerivedData，也就是 Xcode 保存构建中间产物的目录。两组之间只改了 checkout 的物理路径。[Xcode 26 编译缓存说明](https://developer.apple.com/documentation/xcode-release-notes/xcode-26-release-notes)
+Gradle Build Cache 的判断粒度是**单个任务**。对支持缓存的任务，Gradle 会根据任务的实现和声明的输入生成一个键。以编译任务为例，输入可以包括源码、编译选项和依赖。只要键相同，Gradle 就能取回之前生成的输出，省去重新执行任务，日志会显示 `FROM-CACHE`。`UP-TO-DATE` 表示当前工作目录里已有可用输出。这次用 GitLab 的归档搬运 Gradle 本地缓存目录，任务输出仍由 Gradle 自己查找。跨机恢复已验证，Kotlin 编译任务的命中数量和耗时收益还未测定。[Gradle Build Cache](https://docs.gradle.org/current/userguide/build_cache.html)
+
+## Xcode CAS，复用单个编译动作
+
+打开 Xcode 的 Compilation Cache 后，编译器会给一次编译动作的输入计算指纹。后续构建遇到相同的动作时，可以从 CAS 取回复用的编译结果，例如目标文件或模块。CAS 是内容寻址存储，内部用内容摘要引用数据。把整份 CAS 复制到另一台 Mac，只是把这些结果带了过去。那台 Mac 仍要根据自己的有效编译输入找到匹配项，找不到就重新编译。[Xcode 26 编译缓存说明](https://developer.apple.com/documentation/Xcode-Release-Notes/xcode-26-release-notes?changes=la_5__7_1)
+
+我们在同一台消费 Mac 上两次恢复同一份 CAS，用相同提交、依赖和工具链做无签名归档。每轮都用新的 DerivedData，也就是 Xcode 保存构建中间产物的目录。两组之间只改了源码 checkout 的物理路径。
 
 下表只统计归档构建阶段，缓存的读写开销另计。
 
@@ -99,11 +102,11 @@ Xcode 的 Compilation Cache 会把可复用的编译结果保存在内容寻址�
 
 这也解释了为什么迁移后还要做本机清理。约 **1.99 GiB** 的 CAS 在试验中额外产生了三份约 **0.88 GiB** 的压缩包，写端、读端和 NAS 各一份。作业结束可以回收解开的目录，Runner 缓存目录里的 ZIP 仍需单独处理。我们验收时分别核对工作目录、Runner 缓存目录和 NAS 上的对象。那台可用空间跌破 60 GB 的机器究竟能长期省下多少磁盘，仍需要看日常构建的峰值和留存数据。
 
-## KMP 的链接缓存为什么另做一个后端
+## KMP 链接缓存，直接复用已链接的二进制
 
 依赖和工具链都准备好之后，Kotlin/Native 还要链接出 iOS framework。一个 XCFramework 可以打包多个目标的二进制，我们把真机和模拟器的那两份分别称为 slice。旧方案把它们存进 Nexus 制品仓库的固定槽位，不同构建算到同一个槽位时，新产物会覆盖旧产物。[Kotlin/Native 编译和链接](https://kotlinlang.org/docs/native-improving-compilation-time.html)
 
-新方案在 NAS 上为每个构建键和 slice 存一个对象，例如 `v1/<build-key>/ios-arm64.tar.gz`。构建键包含源码、锁定的子模块、工具链和构建配置。下载时核对对象里记录的 SHA-256，再解压使用。上传时要求该对象不存在，避免两个作业互相覆盖。真机与模拟器分别判断命中，命中哪一个，就跳过哪一个的链接。预发布 tag 和正式 tag 指向同一提交且键一致时，可以复用二进制，仍分别生成各自版本的 Pod 发布包。
+新方案在 NAS 上为每个构建键和 slice 存一个对象，例如 `v1/<build-key>/ios-arm64.tar.gz`。构建脚本在启动链接前，用源码提交、锁定的子模块、工具链、构建模式和目标平台算出键。找到归档后，核对 SHA-256 再解包，将已链接的 framework 直接交给打包步骤。真机与模拟器分别查询，命中哪一个，就跳过哪一个的链接。缺哪个才构建哪个，新产物通过条件上传保护已有对象。预发布 tag 和正式 tag 指向同一提交且键一致时，可以复用二进制，仍分别生成各自版本的 Pod 发布包。
 
 这个后端在隔离的 SeaweedFS 上已验证签名读写、不同键共存和重复上传的保护。代码已合入，正式打包仍默认用 Nexus。切过去前，我们要用真实 NAS 做冷构建、Nexus 命中和 NAS 命中的对照，确认两台 Runner 之间两个 slice 都能命中，再用包括归档传输在内的耗时决定是否启用。
 
