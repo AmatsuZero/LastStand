@@ -6,6 +6,7 @@ theme = 'PaperMod'
 [params]
 ShowToc = true
 TocOpen = true
+comments = true
 
 [params.assets]
 favicon = 'favicon.svg'
