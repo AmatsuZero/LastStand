@@ -21,6 +21,59 @@ summary: "一台 macOS Runner 的可用空间跌破 60 GB，定时维护都跑�
 
 连通性验证也要走这条真实路径。试运行时，作业里的 `curl` 已经能收到 S3 的 `403 AccessDenied`，Runner 恢复缓存却仍报 `no route to host`。给 macOS 上的 GitLab Runner 进程授予本地网络权限后，两台机器才都能通过 Runner 的缓存机制下载、解包并校验同一个测试文件。
 
+## 从改配置到跨机命中
+
+这次改动分两处。**Runner 的 `config.toml` 决定缓存发到哪里，项目的 CI YAML 决定哪些目录可以归档、用什么键，以及哪些作业有权写回。** 只改 Runner 配置，流水线还不知道该共享哪些文件。只写 CI 规则，归档也只会留在原有的缓存后端。
+
+在两台 Mac 上，我们按实际运行的 Runner 注册条目修改 `config.toml`。有一台 Mac 同时运行 Shell 和 Docker 两个 executor，两个服务各读自己的配置文件，需要分别核对。下面是去掉地址和凭据后的配置结构。两台 Runner 指向同一个 bucket 和前缀，并设置 `Shared = true`。
+
+```toml
+[[runners]]
+  # 合入已有 Runner 条目，其余注册配置省略。
+  [runners.cache]
+    Type = "s3"
+    Path = "runner"
+    Shared = true
+
+    [runners.cache.s3]
+      ServerAddress = "<NAS 的 S3 endpoint>"
+      BucketName = "<CI 缓存 bucket>"
+      BucketLocation = "us-east-1"
+      AuthenticationType = "access-key"
+      AccessKey = "<从安全配置注入>"
+      SecretKey = "<从安全配置注入>"
+```
+
+主工程的 `.gitlab-ci.yml` 引入 `.gitlab/ci/cocoapods-cache.yml`。这份文件用锁文件生成缓存键，列出允许归档的 CocoaPods 下载目录，为读写任务分别设置 `pull` 和 `pull-push`。合并请求和受保护分支分开用键，锁文件变化时才自动预热。KMP 子模块自己的 `.gitlab-ci.yml` 另外声明 Gradle 和 Kotlin/Native 缓存目录，也由 Runner 上传到同一个 S3 后端，归档仍按项目和缓存键隔离。项目 YAML 里只放规则，S3 凭据由 Runner 配置管理。
+
+```mermaid
+flowchart TB
+    CI["项目 CI YAML<br/>选缓存目录、计算 key、指定读写策略"]
+    TOML["两台 Mac 的 config.toml<br/>配置同一 S3 bucket 和共享前缀"]
+    A["Mac A 上的预热或构建作业<br/>下载并准备缓存目录"]
+    NAS[("NAS 上的 SeaweedFS<br/>按项目和 key 存缓存归档")]
+    B["Mac B 上的构建作业<br/>Runner 按 key 请求缓存"]
+    HIT["解包到 Mac B 的工作目录<br/>构建工具检查可以复用的内容"]
+    MISS["缓存缺失时<br/>按原路径下载依赖并构建"]
+    CLEAN["作业结束<br/>回收本次作业的临时目录"]
+
+    CI --> A
+    CI --> B
+    TOML -.-> A
+    TOML -.-> B
+    A -->|Runner 打包上传| NAS
+    B -->|按 key 查询| NAS
+    NAS -->|命中后下载| HIT
+    NAS -->|对象不存在| MISS
+    HIT --> CLEAN
+    MISS --> CLEAN
+```
+
+图中是**已接入的 CocoaPods 和 Gradle 缓存**。作业目录可以随作业结束回收，Runner 留下的 ZIP 与 NAS 对象则分别维护。两类编译产物的改动放在独立入口里。
+
+- **Xcode CAS** 的跨机实验写在 `.gitlab/ci/xcode-cas-nas-experiment.yml`。显式触发后，写入作业把 CAS 快照作为实验归档上传，两个读取作业分别用相同和不同的 checkout 路径验证。正式构建继续用本机 CAS。
+- **KMP iOS 链接产物**通过新增的 `scripts/ios-link-cache-s3.py` 直接读写独立 bucket。构建脚本通过 `IOS_LINK_CACHE_BACKEND=s3` 选择这个后端，正式打包目前仍默认使用 Nexus。
+
 ## 第一批迁移的是依赖下载
 
 CocoaPods 是 iOS 项目的依赖管理工具。我们缓存的是它下载过的依赖和对应的规格文件，缓存键由 `Podfile.lock` 和 `Gemfile.lock` 决定。锁文件变化会触发预热，负责写入的任务串行执行，普通构建只读。合并请求与受保护分支使用独立的缓存前缀，缺少缓存的作业照常安装依赖。[CocoaPods 安装与锁文件](https://guides.cocoapods.org/using/pod-install-vs-update.html)
