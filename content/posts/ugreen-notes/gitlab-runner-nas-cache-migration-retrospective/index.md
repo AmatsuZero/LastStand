@@ -11,6 +11,12 @@ summary: "一台 macOS Runner 的可用空间跌破 60 GB，定时维护都跑�
 
 当时内网刚接入一台 NAS。我们想用它存放能跨机复用的缓存，让两台 Mac 都能取到同一份，同时减少各自长期保留的副本。构建仍在本地执行，所以我们得分别算清本机能少留多少缓存，以及从 NAS 下载、解包之后，一次构建到底能省多久。
 
+## 这个 iOS 工程是怎么构建的
+
+我们的 App 以 Swift 和 Objective-C 写成的原生 iOS 工程为宿主，部分页面和功能由 React Native 实现，还有一部分业务代码放在 Kotlin Multiplatform（KMP）共享模块里，供 iOS 和 Android 共用。宿主用 CocoaPods 安装和集成原生依赖、React Native 的 iOS 运行时，以及 KMP 发布的二进制 Pod，最后由 Xcode 编译和归档整个 App。
+
+KMP 模块有自己的流水线。Gradle 准备依赖和工具链，Kotlin/Native 把 Kotlin 代码编译、链接成面向真机和模拟器的 framework，再合成 XCFramework，作为 Pod 发布给宿主。日常的 App 流水线直接消费已发布的版本，通常不用从源码重编 KMP。也就是说，这次迁移同时涉及两条构建链。**App 流水线**里的 CocoaPods 下载缓存和 Xcode 编译缓存，以及 **KMP 流水线**里的 Gradle 缓存和链接产物缓存。
+
 ## 为什么选 SeaweedFS 和 GitLab Runner
 
 我们先看了 Tuist 的远程缓存。它的缓存节点可以跑在自己的 NAS 上，编译产物也可以留在内网，但节点仍要连接 Tuist 服务端来注册和验证访问权限。接入托管服务端时，生成自托管节点的凭据需要 Enterprise。连服务端也一起部署到内网，则需要单独的付费服务端许可。我们原本想借现有设备搭一套无新增订阅的共享缓存，这项授权要求让我们放弃了 Tuist 方案。[Tuist 自托管缓存文档](https://tuist.dev/en/docs/guides/cache/self-host) · [Tuist 服务端自托管文档](https://tuist.dev/en/docs/guides/server/self-host/server)
@@ -79,7 +85,7 @@ CocoaPods 安装依赖时，先根据锁文件确定版本，再查找本地是�
 
 ## Gradle 缓存，先恢复依赖，再看任务能否跳过
 
-在 Kotlin Multiplatform（KMP）流水线里，GitLab Runner 打包的是 Gradle 的依赖目录和 Wrapper 下载的 Gradle 发行包，以及 Kotlin/Native 工具链目录。另一台 Mac 花约 **28 秒**恢复了 **1.66 GiB** 的归档。这样，构建可以使用已经下载的依赖和工具链。日志里的 `Successfully extracted cache` 证明了归档恢复，到这里还不知道哪些编译任务被省掉。
+在 KMP 流水线里，GitLab Runner 打包的是 Gradle 的依赖目录和 Wrapper 下载的 Gradle 发行包，以及 Kotlin/Native 工具链目录。另一台 Mac 花约 **28 秒**恢复了 **1.66 GiB** 的归档。这样，构建可以使用已经下载的依赖和工具链。日志里的 `Successfully extracted cache` 证明了归档恢复，到这里还不知道哪些编译任务被省掉。
 
 Gradle Build Cache 的判断粒度是**单个任务**。对支持缓存的任务，Gradle 会根据任务的实现和声明的输入生成一个键。以编译任务为例，输入可以包括源码、编译选项和依赖。只要键相同，Gradle 就能取回之前生成的输出，省去重新执行任务，日志会显示 `FROM-CACHE`。`UP-TO-DATE` 表示当前工作目录里已有可用输出。这次用 GitLab 的归档搬运 Gradle 本地缓存目录，任务输出仍由 Gradle 自己查找。跨机恢复已验证，Kotlin 编译任务的命中数量和耗时收益还未测定。[Gradle Build Cache](https://docs.gradle.org/current/userguide/build_cache.html)
 
