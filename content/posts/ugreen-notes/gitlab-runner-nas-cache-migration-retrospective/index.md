@@ -1,7 +1,7 @@
 ---
 title: "两台 Mac 怎样共享构建缓存：一次 NAS 迁移的取舍"
 date: 2026-11-24T15:55:25+08:00
-draft: true
+draft: false
 categories: ["绿联工作笔记"]
 tags: ["CI/CD", "GitLabRunner", "CocoaPods", "Gradle", "KotlinMultiplatform", "Xcode", "迁移"]
 summary: "一台 macOS Runner 的可用空间跌破 60 GB，定时维护都跑不起来了。我们用现有 NAS 分担长期留存，再用跨机实测决定哪些缓存值得共享。"

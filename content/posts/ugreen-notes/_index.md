@@ -14,6 +14,7 @@ categories = ["绿联工作笔记"]
 
 按时间倒序：
 
+- 2026-11-24 · [两台 Mac 怎样共享构建缓存：一次 NAS 迁移的取舍](./gitlab-runner-nas-cache-migration-retrospective/)
 - 2026-11-04 · [UgreenHome 共享库 CI：依赖安全扫描与内网构建复盘](./ugreenhome-shared-ci-sca/)
 - 2026-11-02 · [iOS MR 包体积分析实践：APPAnalyze、Link Map 与跨项目接入](./ios-mr-app-size-analysis/)
 - 2026-11-02 · [UgreenHome RN iOS 组件化与调试能力重建（阶段总结）](./ugreenhome-rn-ios-modularization/)
