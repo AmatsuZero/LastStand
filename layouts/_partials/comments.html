@@ -13,3 +13,37 @@
         data-lang="zh-CN"
         crossorigin="anonymous"
         async></script>
+<script>
+  (function () {
+    function giscusTheme() {
+      return document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+    }
+    function sendTheme() {
+      var iframe = document.querySelector('iframe.giscus-frame');
+      if (!iframe || !iframe.contentWindow) return;
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: giscusTheme() } } },
+        'https://giscus.app'
+      );
+    }
+    // PaperMod 切换按钮改的是 <html data-theme>，监听它即可跟随
+    new MutationObserver(sendTheme).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme']
+    });
+    // giscus iframe 异步创建：等它出现并 load 完成后再同步，避免首帧错主题
+    var tries = 0;
+    var timer = setInterval(function () {
+      var iframe = document.querySelector('iframe.giscus-frame');
+      if (!iframe) {
+        if (++tries > 40) clearInterval(timer);
+        return;
+      }
+      clearInterval(timer);
+      iframe.addEventListener('load', function () {
+        sendTheme();
+        setTimeout(sendTheme, 600); // 兜底：iframe 内部应用就绪后重发
+      });
+    }, 250);
+  })();
+</script>
