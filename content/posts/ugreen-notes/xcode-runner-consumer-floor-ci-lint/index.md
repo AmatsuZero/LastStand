@@ -24,3 +24,11 @@ Runner 提供 Developer 目录，组件发布配置另外声明最低支持的 X
 ## 边界与证据
 
 同一台 Runner、同一份最小 Swift 产物，声明 26.5 时校验退出 1，声明 27.2 时接口导入成功。真机与模拟器 SDK 的依赖导入回归也通过。性能预检要求 `17F42` 时退出 1，要求 `27B52` 时退出 0。以上验证覆盖工具链选择与接口导入，完整 App 链接和组件正式发布各自需要流水线记录。
+
+## Xcode 升级后，模拟器和 Metal 还要分别验一次
+
+两台构建机运行同一版 Xcode 时，一台同时注册了通用 iOS runtime 和特定设备变体。原脚本取 `simctl list runtimes` 的最后一行，再用只接受数字和连字符的正则截取标识。遇到带设备名称的后缀时，`simctl create` 收到被截断的标识，随即报 `Invalid runtime`。即使完整保留了后缀，变体也可能不支持测试使用的设备。
+
+改为读取 `xcrun simctl list runtimes --json`，筛选可用的 iOS runtime，在 `supportedDeviceTypes` 中匹配实际设备，从候选中按数值版本取最新，原样传入 `identifier`。两台构建机均选中支持 iPhone 16 的通用 iOS 27.2 runtime，一台实测完成创建、启动与删除本次任务的临时设备。
+
+另一个组件在真机 archive 编译着色器时提示 `cannot execute tool 'metal' due to missing Metal Toolchain`。在两台构建机所选 Xcode 下执行 `xcodebuild -downloadComponent MetalToolchain`，随后 `xcrun metal --version` 均可执行。原失败组件的 archive 验证作业重跑成功。最低消费 Xcode、模拟器系统及设备兼容性、Metal 编译器分别由上述命令验证。
