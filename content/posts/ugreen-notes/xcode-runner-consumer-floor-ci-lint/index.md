@@ -32,3 +32,7 @@ Runner 提供 Developer 目录，组件发布配置另外声明最低支持的 X
 改为读取 `xcrun simctl list runtimes --json`，筛选可用的 iOS runtime，在 `supportedDeviceTypes` 中匹配实际设备，从候选中按数值版本取最新，原样传入 `identifier`。两台构建机均选中支持 iPhone 16 的通用 iOS 27.2 runtime，一台实测完成创建、启动与删除本次任务的临时设备。
 
 另一个组件在真机 archive 编译着色器时提示 `cannot execute tool 'metal' due to missing Metal Toolchain`。在两台构建机所选 Xcode 下执行 `xcodebuild -downloadComponent MetalToolchain`，随后 `xcrun metal --version` 均可执行。原失败组件的 archive 验证作业重跑成功。最低消费 Xcode、模拟器系统及设备兼容性、Metal 编译器分别由上述命令验证。
+
+## 模拟器 lint 的 iOS 版本与 Swift 消费 Xcode 分开核对
+
+Xcode 27.2 的模拟器构建拒绝了 CocoaPods 生成项目中的 iOS 9、10 和 12 deployment target。组件交付给最低 iOS 15.1 的宿主时，可以在 CocoaPods lint 使用的 `XCODE_XCCONFIG_FILE` 中设置 `IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator*] = 15.1`，让生成工程按宿主目标编译。用声明 iOS 12 的工程读取实际 build settings，模拟器得到 15.1，真机 SDK 仍得到 12.0。原先因 iOS 10 而失败的组件在同一提交重跑，source lint 通过。这个结果覆盖宿主 iOS 15.1 的编译；组件若另有更低系统的支持承诺，需要能覆盖该版本的环境独立验收。
