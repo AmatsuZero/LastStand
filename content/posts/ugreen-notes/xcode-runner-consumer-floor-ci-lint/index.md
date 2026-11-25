@@ -36,3 +36,9 @@ Runner 提供 Developer 目录，组件发布配置另外声明最低支持的 X
 ## 模拟器 lint 的 iOS 版本与 Swift 消费 Xcode 分开核对
 
 Xcode 27.2 的模拟器构建拒绝了 CocoaPods 生成项目中的 iOS 9、10 和 12 deployment target。组件交付给最低 iOS 15.1 的宿主时，可以在 CocoaPods lint 使用的 `XCODE_XCCONFIG_FILE` 中设置 `IPHONEOS_DEPLOYMENT_TARGET[sdk=iphonesimulator*] = 15.1`，让生成工程按宿主目标编译。用声明 iOS 12 的工程读取实际 build settings，模拟器得到 15.1，真机 SDK 仍得到 12.0。原先因 iOS 10 而失败的组件在同一提交重跑，source lint 通过。这个结果覆盖宿主 iOS 15.1 的编译；组件若另有更低系统的支持承诺，需要能覆盖该版本的环境独立验收。
+
+## XCTest 在连接前退出时检查测试宿主
+
+把相同的模拟器部署目标用于独立 `build-for-testing` 与实际 XCTest 后，一个旧 storyboard 宿主已成功链接，启动时却出现 `The test runner crashed before establishing connection`。在构建机上核对同一作业时间和进程名对应的 `.ips`，主线程停在 UIKit 的 `UIApplicationEvaluateRuntimeIssueForNoSceneLifecycleAdoption`，异常为 `EXC_BREAKPOINT`。因此继续调整 podspec 或编译设置都没有解决启动问题。
+
+在 Example 的 `Info.plist` 注册单场景 `UIApplicationSceneManifest`，通过 `UISceneStoryboardFile` 指向原有 Main storyboard，提供带 `window` 属性的 `UIWindowSceneDelegate`。保留原有宿主功能与测试断言。修复后，同一套测试在 iOS 27.2 模拟器执行 30 项，0 失败；独立的测试 bundle 编译也通过。
