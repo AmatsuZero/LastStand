@@ -40,6 +40,8 @@ git status --short
 
 公共 `config` 和其他 worktree 继续使用原有设置。若合并已经写错位置，先逐个确认本次合并生成的文件和真实 checkout 的原始内容，再恢复对应结果。验证时同时检查公共 gitdir 中的残留和主 checkout 的未提交状态。本次修复后，发布测试能正确读取 checkout 的忽略规则，脚本测试套件通过。
 
+补充边界：该症状可以在 `git worktree add` 完成后立刻出现，不必等到合并——新建的 linked worktree 里所有文件都显示为 ` D`，但磁盘上文件齐全，`git rev-parse --show-toplevel` 指向子模块的公共 gitdir。若公共配置尚未启用 `extensions.worktreeConfig`，先执行 `git config extensions.worktreeConfig true`（写入公共 config，其它 worktree 仍沿用原值），再执行上面的 `git --work-tree="$PWD" config --worktree core.worktree "$PWD"`；随后 `git rev-parse --show-toplevel` 应指向新 worktree、`git status --short` 恢复干净。修复只改工作目录解析，不触碰原子模块的在途改动（podspec 修改、未跟踪文件）；修复前后分别核对原子模块的 `--show-toplevel` 与 porcelain 状态，确认完全未受影响。
+
 ## 宿主切分支时的失效子模块 gitfile
 
 另一种现象是宿主 linked worktree 的子模块目录只剩 `.git` 文件，该文件仍指向已不存在的模块 gitdir。启用了 `submodule.recurse=true` 时，`git switch` 可在宿主文件已部分更新后报 `could not reset submodule index`，但 HEAD 仍停在旧分支。此时不要把所有差异当作用户原有修改，也不要认为切换失败就没有文件变更。
