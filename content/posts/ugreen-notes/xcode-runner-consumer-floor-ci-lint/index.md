@@ -42,3 +42,15 @@ Xcode 27.2 的模拟器构建拒绝了 CocoaPods 生成项目中的 iOS 9、10 �
 把相同的模拟器部署目标用于独立 `build-for-testing` 与实际 XCTest 后，一个旧 storyboard 宿主已成功链接，启动时却出现 `The test runner crashed before establishing connection`。在构建机上核对同一作业时间和进程名对应的 `.ips`，主线程停在 UIKit 的 `UIApplicationEvaluateRuntimeIssueForNoSceneLifecycleAdoption`，异常为 `EXC_BREAKPOINT`。因此继续调整 podspec 或编译设置都没有解决启动问题。
 
 在 Example 的 `Info.plist` 注册单场景 `UIApplicationSceneManifest`，通过 `UISceneStoryboardFile` 指向原有 Main storyboard，提供带 `window` 属性的 `UIWindowSceneDelegate`。保留原有宿主功能与测试断言。修复后，同一套测试在 iOS 27.2 模拟器执行 30 项，0 失败；独立的测试 bundle 编译也通过。
+
+## 回退 Xcode 也要核对独立选择器和 Metal 组件
+
+回退到 Xcode 26.6 / 17F113 时，实际定时性能任务已经使用旧编译器，但共享模板仍要求 27B52，环境报告因此得到 `capable=false`。这个失败发生在构建前，不能通过清空编译缓存解决。固定模板 SHA 的消费仓库还要更新引用；只改共享模板默认分支不会改变旧 SHA 的行为。
+
+另一台构建机并行安装旧版时，`DEVELOPER_DIR` 和 `UG_COMPONENT_OLDEST_CONSUMER_DEVELOPER_DIR` 是两个独立的 Runner 环境项。组件测试脚本会用后者覆盖前者，因此只改主选择器会使组件测试继续使用新版。应分别核对实际调用链，调整路径后仍保留最低消费版本的精确校验，让模板中的版本策略也能被检查出来。
+
+旧版 Xcode 的 Swift、真机 SDK 和模拟器 SDK 均可用，不代表 Metal 可用。真实探针中，首次启动检查、Swift 编译执行、UIKit 真机和模拟器类型检查均成功，而 Metal 报 `missing Metal Toolchain`。在明确设置旧版 `DEVELOPER_DIR` 的环境中运行 `xcodebuild -downloadComponent MetalToolchain` 后，`xcrun metal --version` 和实际 `.metal` 编译均通过。下载资产显示 17F109，而 Xcode 本体仍为 17F113；组件资产的标识不能代替本体版本核验，也不应据此擅自重装为候选版。
+
+SSH 下的 xcodes 下载还曾返回 `OSStatus -25308: User interaction is not allowed`，随后附带账号密码错误提示。这只能证明当前调用没有完成钥匙串交互，不能据此认定账号密码错误或用户未登录。本次没有改动钥匙串或获取密码，而是复用另一台授权构建机上已经安装的同版 Xcode：通过既有 SSH 连接传输到独立目录，不复制凭证。目标完整 `codesign --verify --deep --strict`、版本核验、首次启动检查及实际编译探针通过后，才备份并修改 Runner 配置。
+
+验证边界：Runner 配置只改两个工具链路径，TOML 结构对比通过；重载后服务 PID 保持不变，服务在线。使用实际 Runner 环境执行性能能力检查并要求 17F113，结果通过。这里的能力与探针检查不代表完整 App archive、签名分发或后续正式流水线已验收。保留较新 Xcode 时，系统级 `xcode-select` 可以继续指向它；报告必须明确 Runner 的显式路径，避免把 SSH 默认工具链当成 Job 工具链。
