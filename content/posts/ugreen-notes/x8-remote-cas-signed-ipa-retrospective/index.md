@@ -20,6 +20,53 @@ Xcode 26 已经为 Swift 和 C 系语言引入了可选的编译缓存。开启 
 
 本轮还有一个直接的版本约束：**x8 0.1.0 官方可执行文件要求 Xcode 27 或更高版本。** 我们选择具体的 27.2，是为了让两台 Mac 用同一 Xcode build 和 SDK 重放同一份输入。一台机器回退到 26.6 后，它仍能做原生缓存构建，但已不符合这组 x8 对照的条件。[x8 0.1.0 的运行要求](https://github.com/Ryu0118/x8/blob/0.1.0/README.md#installation)
 
+### 本地例子：两个 Git worktree，各用一份 DerivedData，共用一份 CAS
+
+假设你在 worktree A 开发功能，又在 worktree B 修一个 bug。两边可能同时构建，索引、构建数据库和中间产物各自放在自己的 DerivedData；编译缓存则放在两个工作区以外的同一个本机目录。A 先编译过的动作，B 遇到相同输入时就有机会直接复用。这个例子只用 Xcode 的本机编译缓存，离线也能运行。
+
+我们用 Xcode 27.2（27B52）做了一个小实验：同一台 Mac 上，从同一 Git 提交检出两个 worktree。Swift 源码和 `.xcodeproj` 放在 `App/`，另有一份 Objective-C 源码放在同级的 `Shared/`。这样可以专门检验一个常被忽略的路径：项目级映射覆盖 `App/`，还需要把**每个 worktree 的 Git 根目录映射到同一个逻辑前缀**，才能覆盖 `Shared/`。
+
+| 构建 | 起始状态 | Xcode 报告的编译命中 |
+|---|---|---|
+| A 首次构建 | 空 DerivedData、空本机 CAS | 0 / 4 |
+| B 构建相同提交 | B 的全新 DerivedData，复用 A 写入的 CAS | **4 / 4（100%）** |
+| B 只改一个 Swift 常量 | 再换一份空 DerivedData，沿用同一 CAS | **3 / 4（75%）** |
+
+下面的命令可以在两个 worktree 中原样执行。示例按 worktree 的绝对路径派生 DerivedData 目录名，让同名分支或同名目录也能隔离；`LOCAL_CAS_DIR` 则在两个工作区指向同一位置。套用到其他项目时，替换最后一行调用中的工程、scheme 和构建参数，并给该项目选一个固定的 CAS 目录。示例使用不含空格的 checkout 和 DerivedData 路径。
+
+```bash
+worktree_build() (
+  set -eu
+  wt=$(cd "$(git rev-parse --show-toplevel)" && pwd -P)
+  id=$(printf '%s' "$wt" | shasum -a 256 | cut -c1-16)
+  dd=${WORKTREE_DD:-"$HOME/Library/Developer/Xcode/DerivedData/Smoke-$id"}
+  cas=${LOCAL_CAS_DIR:-"$HOME/Library/Caches/Xcode/LocalCAS/Smoke"}
+  mkdir -p "$dd" "$cas"
+  dd=$(cd "$dd" && pwd -P)
+
+  maps='$(inherited) $(PROJECT_TEMP_DIR)=/^derived $(BUILT_PRODUCTS_DIR)=/^built'
+  maps="$maps $dd=/^dd $wt=/^workspace"
+  case "$wt" in /private/tmp/*) maps="$maps ${wt#/private}=/^workspace" ;; esac
+  case "$dd" in /private/tmp/*) maps="$maps ${dd#/private}=/^dd" ;; esac
+
+  cd "$wt"
+  xcodebuild "$@" -derivedDataPath "$dd" build \
+    COMPILATION_CACHE_ENABLE_CACHING=YES \
+    COMPILATION_CACHE_ENABLE_DIAGNOSTIC_REMARKS=YES \
+    "COMPILATION_CACHE_CAS_PATH=$cas" \
+    SWIFT_ENABLE_PREFIX_MAPPING=YES SWIFT_ENABLE_PROJECT_PREFIX_MAPPING=YES \
+    CLANG_ENABLE_PREFIX_MAPPING=YES CLANG_ENABLE_PROJECT_PREFIX_MAPPING=YES \
+    "SWIFT_OTHER_PREFIX_MAPPINGS=$maps" "CLANG_OTHER_PREFIX_MAPPINGS=$maps" \
+    CLANG_MODULES_BUILD_SESSION_FILE=
+)
+worktree_build -project App/Smoke.xcodeproj -scheme Smoke -configuration Release \
+  -sdk iphoneos -destination 'generic/platform=iOS' CODE_SIGNING_ALLOWED=NO
+```
+
+复测时让 A 和 B **依次**构建，让 A 先完成预热；用一个新的 `LOCAL_CAS_DIR` 跑 A，再分别用新的 `WORKTREE_DD` 跑 B 的两种输入，无需清理开发中的目录。查看构建日志末尾的 `hits / cacheable tasks`。这个分母只含 Xcode 判定可缓存的编译动作，不含链接、签名和脚本。两个 worktree 同时冷启动时，先到的动作可能还没写入，不能用上表预测第一次并行构建的命中率。
+
+还有一条来自实测的路径细节：实验目录实际位于 `/private/tmp`，Clang 在编译命令中把同一目录写成了 `/tmp`。只映射物理路径时，B 命中 3/4，项目目录外的 Objective-C 文件 miss；把日志中出现的路径别名也映射到相同前缀后达到 4/4。排查大型项目时，可以先找出 miss 的那个编译动作，核对它实际使用的源码和产物路径，再看生成文件、宏插件、编译参数或 SDK 是否发生变化。**100% 是这个小工程在输入相同且已预热时的实测值。**
+
 ## x8 是什么，一次远端命中怎样发生
 
 x8 是一个开源的 **Xcode 远端编译缓存代理**。Xcode 负责计算编译动作的键、决定要复用哪些结果，以及在未命中时调用编译器。每台 Mac 上的 x8 负责把 Xcode 的缓存查询和对象读写转给同一个 S3 兼容存储。这里的 CAS（Content-Addressable Storage，内容寻址存储）用内容标识引用编译结果对象。NAS 只需保存这些记录和对象；编译、链接和 IPA 签名都在 Runner 上执行。[x8 0.1.0 的架构图与协议说明](https://github.com/Ryu0118/x8/blob/0.1.0/README.md#how-it-works)
@@ -65,7 +112,20 @@ flowchart LR
 
 为验证传输协议是否影响复现，我们用相同的 S3 客户端发送 256 个不同对象，并发 64，共享限速 8 MiB/s。自动协商到 HTTP/2 的一轮有 12 次请求超时；写端固定 HTTP/1.1 后，256 个对象全部通过内容校验。另一次在本地 TLS 反代后接同版本 SeaweedFS，取消限速后，两种协议都完整写入了 256 个对象。这组对照说明在给定负载和限速下切换协议能避开超时，尚不能把现场故障归因于 HTTP/2 本身或某个组件。
 
-据此，x8 fork 给签名 S3 写端增加可选配置 `s3.api.httpVersion: http1Only`；读端继续自动协商，Xcode 到本机 socket 的 gRPC 继续使用 HTTP/2。候选包在真实 NAS 上完成了一次签名构建，写端记录 7,350 次内容保存、5,323 次动作结果写入，完整事件流中没有写入 RPC 错误。**目前验证的是写端规避措施有效，现场超时的具体根因仍未定位。** 若再次出现，需要对齐同一个 PUT 在客户端的截止时间、反代的上下游传输记录和存储端的读入结果，才能判断谁先中止。[传输对照与存储端取证](../x8-010-cache-socket-grpc/)
+#### x8 fork !2 给签名 S3 客户端增加可选的协议设置
+
+我们把这项改动提交到了 x8 的内部 fork（MR !2）。它从配置文件读取 `s3.api.httpVersion`，接受 `automatic` 和 `http1Only` 两个值。省略该字段时沿用原有的自动协商。只有显式选 `http1Only` 的配置才会让签名 S3 客户端用 HTTP/1.1。这一项可以独立合入 fork；哪一个作业使用它，由消费项目的配置决定。
+
+```yaml
+# 加到写端已有的 S3 配置，保留原来的 endpoint、bucket 和身份设置
+s3:
+  api:
+    httpVersion: http1Only
+```
+
+实验只给写端设置了这个字段。读端沿用自动协商，Xcode 到本机 socket 的 gRPC 继续使用 HTTP/2。本地 worktree 共享 CAS 的例子完全走本机磁盘，也用不到这个设置。
+
+MR 当前提交的测试与通用 macOS 包构建均通过。同一提交打出的候选包在真实 NAS 上完成了一次签名构建，写端记录 7,350 次内容保存、5,323 次动作结果写入，完整事件流中没有写入 RPC 错误。**目前验证的是写端规避措施有效，现场超时的具体根因仍未定位。** 若再次出现，需要对齐同一个 PUT 在客户端的截止时间、反代的上下游传输记录和存储端的读入结果，才能判断谁先中止。[传输对照与存储端取证](../x8-010-cache-socket-grpc/)
 
 读端还有一个容易混淆的计数：当配置为只读，Xcode 要保存刚在本机编译的对象时，x8 也可能记一条 `cas.save/remoteError`。旧 pilot 中有 3,004 次此类拒写，传输字节为零，同时有 4,287 次对象读取命中。判断服务质量时应同时看角色、RPC、结果和字节数。
 
