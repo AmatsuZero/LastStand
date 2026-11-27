@@ -54,3 +54,5 @@ Xcode 27.2 的模拟器构建拒绝了 CocoaPods 生成项目中的 iOS 9、10 �
 SSH 下的 xcodes 下载还曾返回 `OSStatus -25308: User interaction is not allowed`，随后附带账号密码错误提示。这只能证明当前调用没有完成钥匙串交互，不能据此认定账号密码错误或用户未登录。本次没有改动钥匙串或获取密码，而是复用另一台授权构建机上已经安装的同版 Xcode：通过既有 SSH 连接传输到独立目录，不复制凭证。目标完整 `codesign --verify --deep --strict`、版本核验、首次启动检查及实际编译探针通过后，才备份并修改 Runner 配置。
 
 验证边界：Runner 配置只改两个工具链路径，TOML 结构对比通过；重载后服务 PID 保持不变，服务在线。使用实际 Runner 环境执行性能能力检查并要求 17F113，结果通过。这里的能力与探针检查不代表完整 App archive、签名分发或后续正式流水线已验收。保留较新 Xcode 时，系统级 `xcode-select` 可以继续指向它；报告必须明确 Runner 的显式路径，避免把 SSH 默认工具链当成 Job 工具链。
+
+已授权的临时回退也可以在原性能 Schedule 增加 `BP_REQUIRE_XCODE_BUILD=17F113`，覆盖固定模板中的旧期望值；先保存并对比任务分支、cron、启用状态和相关变量，不改动其他设置，再通过原 Schedule 的 play 接口触发，保留 `CI_PIPELINE_SOURCE=schedule` 的工作流条件。真实重跑的环境报告得到 `capable=true`，要求值与实际 build 均为 17F113，unsigned Beta Archive 返回 0、官方 JSON 导出为 PASS。随后 GitLab Artifact 上传发生 connection reset，下游 checkout 也发生 TLS EOF，因此构建与导出通过不能写成整条性能流水线通过；采集、传输、分析和发布要分别报告。

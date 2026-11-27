@@ -143,6 +143,14 @@ GitLab 官方文档明确：`after_script` 在新的 shell 执行，不继承 `s
 5. 消费者提交推到主分支后，远端 SHA 一致；流水线状态 `skipped`，`jobs=[]`。这不属于真实 Runner/Xcode 构建通过证明。
 6. 两台 Runner 的清理统计已确认；本次模板修复后的真实 Runner 构建、强杀/掉电下残留治理仍未完成验证。独立复核代理遇到限流，本次没有独立复核完成证据。
 
+### 后续磁盘盘点：关机不等于回收设备数据
+
+后续一次只读盘点发现，166 台旧版 iOS runtime 设备全部处于 Shutdown，`simctl list devices --json` 的 `dataPathSize` 合计约 323 GiB。其中 154 台沿用旧 helper 的同一设备名，133 台有 `lastUsedAt`，最后使用均早于生命周期修复提交；这些有日期的旧设备报告数据合计约 319 GiB。此前维护明确采用 shutdown 并保留数据，因此这个快照支持历史残留解释，不能直接称为新版本流水线仍持续泄露。`dataPathSize` 是设备报告值，未完成整树 `du` 时不要承诺删除后必定释放等量物理空间。
+
+同一次盘点还发现一台新命名规则的单测设备。精确对应的失败 Job 显示，任务内 finally 和 after_script 均已尝试清理，但 `simctl list devices --json` 都因 Xcode license 检查返回 69 而失败。另一条之后的真实单测完成 161 项、零失败，并打印了精确 UDID 的清理成功记录。历史保留数据、异常环境阻断清理、正常路径是否仍在泄露，要分别用设备时间、原 Job trace 和后续真实清理记录判断。
+
+维护清单应冻结精确 UDID、设备名、runtime、状态及最后使用时间，复核当前任务和所有权后再逐台删除；不要按同名模式批量删除，也不要用 `delete unavailable` 推断已回收全部旧 CI 设备，因为有 runtime 的旧设备仍可处于 available。该盘点只生成候选清单，没有删除设备或验证实际释放量。
+
 ### 参考资料
 
 - 本机 macOS `man 2 getrlimit`（`RLIMIT_NPROC` 与限制继承）、`man 2 fork`；Xcode 的 `xcrun simctl help`。
