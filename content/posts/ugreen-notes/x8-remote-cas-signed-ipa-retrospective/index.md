@@ -10,9 +10,25 @@ tags: ["踩坑", "构建", "CI/CD", "Xcode"]
 
 截至 2026-11-27，新候选版已经在真实对象存储上完成完整 App 的签名写入，另一台 Mac 也从这批对象里读出了编译结果。旧版本跑过完整 App 的读端试验，观察到远端命中，也观察到更长的交付时间。候选版的完整读端对照还要等两台正式实验机重新对齐工具链；日常 MR 的 x8 灰度仍未开启。
 
-## 一个命中怎样变成一次编译复用
+## 为什么选 Xcode 27
 
-一次可缓存的编译动作有两个问题要回答。先用动作的键查找此前的结果，再取回该结果引用的内容对象。x8 的事件里分别能看到 `kv.getValue/hit` 和 `cas.load/hit`。一个动作可以引用多个对象，所以四次动作命中可以伴随十次对象读取。只数请求量，很难判断编译器究竟跳过了哪些工作。
+Xcode 26 已经为 Swift 和 C 系语言引入了可选的编译缓存。开启 `Enable Compilation Caching` 后，切回旧分支，或清理 DerivedData 后重新构建，只要本机编译缓存还在、编译输入一致，编译器就能取回上次的结果。我们此前在 Xcode 26.5 上做过跨机快照实验：把一台 Mac 的缓存整体搬到另一台，再从恢复好的本机缓存构建。这给了本轮实验一个可比较的起点。[Apple 的 Xcode 26 发布说明](https://developer.apple.com/documentation/xcode-release-notes/xcode-26-release-notes) · [跨机快照实验](../xcode-cas-cross-machine-replay/)
+
+**27 对这个实验最有用的变化，是 Swift 和 Clang 都有了项目级路径前缀映射。** 假设同一份 `Parser.swift` 在写端位于 `/build/a/App/Sources/`，在读端位于 `/build/b/App/Sources/`。源文件的字节相同，编译器看到的绝对路径却不同。路径参与依赖扫描和编译动作的键计算；一旦动作键不同，即使 NAS 上存着可复用的结果，读端也找不到它。
+
+我们直接对照了 Xcode 26.6 和 27.2 随包的 `Swift.xcspec`、`Clang.xcspec`。两版都有通用前缀映射；27.2 还定义了 `SWIFT_ENABLE_PROJECT_PREFIX_MAPPING` 和 `CLANG_ENABLE_PROJECT_PREFIX_MAPPING`。开启后，编译器扫描时会把项目根目录、项目临时目录、构建产物目录分别映射到 `/^src`、`/^derived`、`/^built`。上例的两个 checkout 因而可以用同一个逻辑路径 `/^src/Sources/Parser.swift` 描述这个输入。工具链、SDK、编译参数和生成文件仍会影响动作键。我们在原生组和 x8 组都启用相同映射，才能单独测量接入远端存储的影响。[x8 0.1.0 的路径映射说明](https://github.com/Ryu0118/x8/blob/0.1.0/Sources/X8CLI/X8CLI.docc/PrefixMapping.md)
+
+本轮还有一个直接的版本约束：**x8 0.1.0 官方可执行文件要求 Xcode 27 或更高版本。** 我们选择具体的 27.2，是为了让两台 Mac 用同一 Xcode build 和 SDK 重放同一份输入。一台机器回退到 26.6 后，它仍能做原生缓存构建，但已不符合这组 x8 对照的条件。[x8 0.1.0 的运行要求](https://github.com/Ryu0118/x8/blob/0.1.0/README.md#installation)
+
+## x8 是什么，一次远端命中怎样发生
+
+x8 是一个开源的 **Xcode 远端编译缓存代理**。Xcode 负责计算编译动作的键、决定要复用哪些结果，以及在未命中时调用编译器。每台 Mac 上的 x8 负责把 Xcode 的缓存查询和对象读写转给同一个 S3 兼容存储。这里的 CAS（Content-Addressable Storage，内容寻址存储）用内容标识引用编译结果对象。NAS 只需保存这些记录和对象；编译、链接和 IPA 签名都在 Runner 上执行。[x8 0.1.0 的架构图与协议说明](https://github.com/Ryu0118/x8/blob/0.1.0/README.md#how-it-works)
+
+以改动一个 Swift 文件的 MR 为例：
+
+1. **写端预热父提交。** Xcode 编译父提交，x8 把可缓存动作的结果记录和引用的内容对象写入 S3。记录回答“这个动作以前产出了什么”，对象才是复用时需要取回的数据。
+2. **读端查询未改动的模块。** 换一台 Mac 构建 MR 时，如果本机还缺该结果，Xcode 插件经私有 Unix socket 向本机 x8 查询动作键。找到远端记录后，插件再请求它引用的对象。两步分别能看到 `kv.getValue/hit` 和 `cas.load/hit`；对象取回后，编译器可以跳过这次编译。一次动作可引用多个对象，因此下文热构建的 4 次动作命中对应 10 次对象读取。
+3. **读端编译有变化的输入。** 改过的文件或受影响的依赖会产生新的动作键。远端查不到时，Xcode 在读端实际编译，再与复用的结果一起完成后续构建。旧 NAS 快照方案在冷启动时恢复整份归档；x8 允许一台已有部分本机缓存的 Mac 按对象补齐。少编译的时间能否抵过网络查询和下载，正是签名 IPA 对照要测的量。
 
 ```mermaid
 flowchart LR
