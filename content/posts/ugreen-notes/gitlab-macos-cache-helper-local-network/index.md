@@ -37,6 +37,25 @@ cache helper 的路径已经可用。
 网络。授权后使用新的随机 marker 重新跑同一探针，并在两台 macOS Runner 上分别检查
 下载、解压和 marker 摘要，避免把一次上传成功误判为两台节点都能恢复缓存。
 
+### 编译缓存子进程的权限归属
+
+一次 x8 读取跨机编译缓存时，终端里的匿名 HTTPS 请求通过了证书校验，对象服务返回
+`403`。同一台 Mac 上，真实 CI 作业里的 x8 却报告 `Local network prohibited`。
+用作业时间和 x8 的 PID 对齐系统日志，再查进程的负责方（responsible process），
+可以看到从终端启动时负责方是终端应用，而由 LaunchAgent 接单时负责方是
+`gitlab-runner`。需要为真实作业使用的负责方确认本地网络权限。
+
+定位可执行文件时，先用 `launchctl print` 找到服务 PID，再用
+`lsof -a -p <PID> -d txt` 核对已经载入的二进制。一次 Homebrew 升级后，启动路径的
+符号链接已指向新版本，驻留进程仍运行已从磁盘移除的旧版本。同版本的 Homebrew
+构建和供应商签名构建也可能具有不同的 Mach-O UUID。这次切换到供应商版本时，系统
+记录了新的 UUID 并为它单独请求授权。
+
+在桌面确认权限并恢复到已授权的 Homebrew 版本后，使用同一缓存输入重跑真实 CI
+作业。热构建记录了 4 次 Xcode 命中、0 次未命中，远端同时出现
+`kv.getValue/hit` 和 `cas.load/hit`。修改一个输入后，Xcode 记录了 1 次未命中。
+这组结果验证了编译器能读取远端缓存。完整 App 的归档耗时需要单独测量。
+
 ## 边界
 
 - 普通 `curl` 能收到匿名 `403`，只能证明请求抵达对象服务，不能证明 cache helper
